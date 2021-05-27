@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                           :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/24 11:09:14 by ngasco            #+#    #+#             */
-/*   Updated: 2021/05/24 12:45:01 by ngasco           ###   ########.fr       */
+/*   Created: 2021/05/26 08:25:52 by ngasco            #+#    #+#             */
+/*   Updated: 2021/05/26 08:52:56 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
+
 #include <stdio.h>
 
-void *ft_memset(char *str, int c, size_t n) {
-	unsigned int	i;
-
-	char 			*dest;
-
-	dest = str;
+void	ft_bzero(void *s, size_t nbyte)
+{
+	int	i;
 	i = 0;
-	while (i < n)
+
+	char *dest = s;
+
+	while (i < nbyte)
 	{
-		dest[i] = c;
+		dest[i] = '\0';
 		i++;
 	}
-	return dest;	
 }
