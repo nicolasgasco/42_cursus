@@ -10,23 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 int	ft_atoi(const char *str)
 {
 	int	i;
 	int	result;
+	int	negative;
 
 	i = 0;
 	result = 0;
+	negative = 1;
 	while (str[i] != '\0')
 	{
-		while (str[i] < 48 && str[i] > 57)
+		while (str[i] >= 9 && str[i] <= 13 || str[i] == 32)
 		{
-			if (str[i] < 9 && str[i] > 13)
-			{
-				return (result);
-			}
+			i++;
+		}
+		if (str[i] == '-')
+		{
+			negative = -1;
 			i++;
 		}
 		while (str[i] >= 48 && str[i] <= 57)
@@ -34,7 +35,7 @@ int	ft_atoi(const char *str)
 			result = (result * 10) + (str[i] - '0');
 			i++;
 		}
-		i++;
+		break;
 	}
-	return (result);
+	return (result * negative);
 }

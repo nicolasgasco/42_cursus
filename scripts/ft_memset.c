@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 void	*ft_memset(char *str, int c, size_t n)
 {
 	unsigned int	i;

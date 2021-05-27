@@ -10,26 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-void *ft_memccpy(void *restrict dest, const void *restrict src, int c, int n)
+void *ft_memccpy(void *restrict dest, const void *restrict src, int c, size_t n)
 {
-	int	i;
-	i = 0;
-
-	const char	*buf1;
-	char 		*buf2;
+	unsigned int			i;
+	const char	*buffer1;
+	char 		*buffer2;
 	
 	i = 0;
-	buf1 = src;
-	buf2 = dest;
-	while (i < n && buf2[i] != c)
+	buffer1 = src;
+	buffer2 = dest;
+	while (i < n && buffer2[i] != c)
 	{
-
-			printf("FOund!\n");
-		if (buf2[i] == c)
-		buf2[i] = buf1[i];
+		buffer2[i] = buffer1[i];
 		i++;
 	}
-	printf("\n");
-	return (buf2);
+	if (buffer2[i] == c)
+	    i++;
+		return (&buffer2[i]);
+	return (NULL);
 }

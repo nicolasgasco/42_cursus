@@ -13,15 +13,15 @@
 void	*ft_memcpy(void *dest, const void *src, int n)
 {
 	int			i;
-	const char	*buf1;
-	char 		*buf2;
+	const char	*buffer1;
+	char 		*buffer2;
 	
 	i = 0;
-	buf1 = src;
-	buf2 = dest;
+	buffer1 = src;
+	buffer2 = dest;
 	while (i < n)
 	{
-		buf2[i] = buf1[i];
+		buffer2[i] = buffer1[i];
 		i++;
 	}
 	return (dest);

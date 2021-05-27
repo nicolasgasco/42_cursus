@@ -10,18 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-void	ft_bzero(void *s, size_t nbyte)
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
+	unsigned int	i;
 	i = 0;
 
 	char *dest = s;
 
-	while (i < nbyte)
+	while (i < n)
 	{
 		dest[i] = '\0';
 		i++;
 	}
+	i++;
 }
