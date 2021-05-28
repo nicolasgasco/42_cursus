@@ -14,8 +14,8 @@ void	*ft_memcpy(void *dest, const void *src, int n)
 {
 	int			i;
 	const char	*buffer1;
-	char 		*buffer2;
-	
+	char		*buffer2;
+
 	i = 0;
 	buffer1 = src;
 	buffer2 = dest;

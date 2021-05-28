@@ -10,12 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void *ft_memccpy(void *restrict dest, const void *restrict src, int c, size_t n)
+void	*ft_memccpy(void *restrict dest,
+const void *restrict src, int c, size_t n)
 {
-	unsigned int			i;
-	const char	*buffer1;
-	char 		*buffer2;
-	
+	unsigned int	i;
+	const char		*buffer1;
+	char			*buffer2;
+
 	i = 0;
 	buffer1 = src;
 	buffer2 = dest;
@@ -25,7 +26,9 @@ void *ft_memccpy(void *restrict dest, const void *restrict src, int c, size_t n)
 		i++;
 	}
 	if (buffer2[i] == c)
-	    i++;
+	{
+		i++;
 		return (&buffer2[i]);
+	}
 	return (NULL);
 }

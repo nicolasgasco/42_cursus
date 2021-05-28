@@ -1,0 +1,4 @@
+venv/
+a.out
+.vscode/
+.dist/

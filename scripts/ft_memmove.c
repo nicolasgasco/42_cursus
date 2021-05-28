@@ -1,11 +1,10 @@
-
-void *ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	int			i;
 	const char	*buffer1;
-	char 	*buffer2;
+	char		*buffer2;
 	char		*temp_buffer;
-	
+
 	i = 0;
 	temp_buffer = src;
 	buffer1 = src;

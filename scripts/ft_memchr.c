@@ -1,9 +1,8 @@
-
-void *ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned int			i;
-	const char *buffer;
-	
+	unsigned int	i;
+	const char		*buffer;
+
 	i = 0;
 	buffer = s;
 	while (i < n && buffer[i] != c)
@@ -11,6 +10,6 @@ void *ft_memchr(const void *s, int c, size_t n)
 		i++;
 	}
 	if (buffer[i] == c)
-		return &buffer[i];
-	return NULL;
+		return (&buffer[i]);
+	return (NULL);
 }
