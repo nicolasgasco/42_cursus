@@ -10,8 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-void *ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
+	void 			*result;
+	unsigned int	i;
 
+	i = 0;
+	result = malloc(nmemb * size);
+	while (i < nmemb * size)
+	{
+		printf("I is %d\n", i);
+		i++;
+	}
+	return result;
 }
