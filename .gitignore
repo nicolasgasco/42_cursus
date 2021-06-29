@@ -2,3 +2,4 @@ venv/
 a.out
 .vscode/
 .dist/
+libft-unit-test
