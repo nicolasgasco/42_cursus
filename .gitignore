@@ -3,3 +3,4 @@ a.out
 .vscode/
 .dist/
 libft-unit-test
+libft/libft.so
