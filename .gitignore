@@ -2,3 +2,5 @@ venv/
 a.out
 .vscode/
 .dist/
+libft/libft.h.gch
+libft/libft.so
