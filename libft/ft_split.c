@@ -13,26 +13,58 @@
 #include <stdio.h>
 #include "libft.h"
 
-int	ft_calc_num_separators(char const *s, char c, int count)
+int	ft_calc_total_len(char const *s, char c)
 {
-	char	*res;
+	int	res;
+	int	i;
+	int	tot_words;
 
-	res = ft_strchr(s, c);
-	if (res == NULL)
-		return (count);
-	count++;
-	res = ft_substr(res, 1, ft_strlen(res) - 1);
-	printf("RES is .%s.\n", res);
-	return (ft_calc_num_separators(res, c, count));
-
+	tot_words = 1;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] != c)
+			res++;
+		else
+			tot_words++;
+		i++;
+	}
+	return (tot_words + res);
 }
 
 char **ft_split(char const *s, char c)
 {
 	char	**result;
+	int		i;
+	int		j;
+	int		start;
 
-	printf("Original is: .%s.\n", s);
-	printf("Separator count is %d\n", ft_calc_num_separators(s, c, 0));
-
-	return ({"ciao", "ciao", NULL;});
+	result = malloc(ft_calc_total_len(s, c) * sizeof(char));
+	if (result == NULL)
+		return (NULL);
+	i = 0;
+	j = 0;
+	start = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == c && s[i - 1] != c)
+		{
+			if (i - start != 0)
+			{
+				result[j] = ft_substr(s, start, i - start);
+				j++;
+			}
+			start = i + 1;
+		}
+		else if (s[i] == c && s[i - 1] == c)
+			start++;
+		i++;
+	}
+	if (s[i - 1] != c)
+	{
+		result[j] = ft_substr(s, start, i - start);
+		j++;
+	}
+	result[j] = NULL;
+	return result;
 }
