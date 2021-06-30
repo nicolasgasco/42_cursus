@@ -18,12 +18,14 @@ unsigned int ft_strlcpy(char *dst, const char *src, unsigned int size)
 
 	i = 0;
 	length = 0;
-	buffer1 = src; 
+	buffer1 = src;
 	while(buffer1[i] != '\0')
 	{
 		i++;
 	}
 	length = i;
+	if (size == 0)
+		return (length);
 	i = 0;
 	while(i < length && i < (size - 1) && size != 0)
 	{

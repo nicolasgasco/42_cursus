@@ -12,24 +12,15 @@
 
 #include <stddef.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include "libft.h"
 
 char *ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int				i;
 	unsigned int	j;
 	char 			*result;
-	unsigned int	length;
 
-	i = start;
 	j = 0;
-	while (s[j] != '\0')
-	{
-		j++;
-	}
-	length = j;
-	j = 0;
-	if (start >= length)
+	if (start >= ft_strlen((char *)s))
 	{
 		result = malloc(1 * sizeof(char));
 		result[0] = '\0';
@@ -40,8 +31,8 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	while (j < len)
 	{
-		result[j] = s[i];
-		i++;
+		result[j] = s[start];
+		start++;
 		j++;
 	}
 	result[j] = '\0';
