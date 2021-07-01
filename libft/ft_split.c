@@ -13,35 +13,34 @@
 #include <stdio.h>
 #include "libft.h"
 
-int	ft_calc_total_len(char const *s, char c)
+static int	ft_calc_total_len(char const *s, char c)
 {
 	int	res;
 	int	i;
 	int	tot_words;
 
-	tot_words = 1;
+	tot_words = 0;
 	i = 0;
+	res = 0;
 	while (s[i] != '\0')
 	{
 		if (s[i] != c)
 			res++;
-		else
+		else if (s[i] == c && s[i - 1] && s[i - 1] != c)
 			tot_words++;
 		i++;
 	}
+	if (s[i - 1] != c)
+		tot_words += 1;
 	return (tot_words + res);
 }
 
-char **ft_split(char const *s, char c)
+static void	ft_write_strings_to_array(char const *s, char c, char **result)
 {
-	char	**result;
 	int		i;
 	int		j;
 	int		start;
 
-	result = malloc(ft_calc_total_len(s, c) * sizeof(char));
-	if (result == NULL)
-		return (NULL);
 	i = 0;
 	j = 0;
 	start = 0;
@@ -66,5 +65,15 @@ char **ft_split(char const *s, char c)
 		j++;
 	}
 	result[j] = NULL;
+}
+
+char **ft_split(char const *s, char c)
+{
+	char	**result;
+
+	result = malloc(ft_calc_total_len(s, c) * sizeof(char));
+	if (result == NULL)
+		return (NULL);
+	ft_write_strings_to_array(s, c, result);
 	return result;
 }
