@@ -71,6 +71,8 @@ char **ft_split(char const *s, char c)
 {
 	char	**result;
 
+	if (!s || !c)
+		return (NULL);
 	result = malloc(ft_calc_total_len(s, c) * sizeof(char));
 	if (result == NULL)
 		return (NULL);

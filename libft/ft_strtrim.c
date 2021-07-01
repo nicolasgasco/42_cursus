@@ -21,6 +21,10 @@ char *ft_strtrim(char const *s1, char const *set)
 	char	*res;
 
 	start = 0;
+	if (!set)
+		return (NULL);
+	if (!s1)
+		return ("");
 	end = ft_strlen((char *)s1) - 1;
 	while (start < (int)ft_strlen((char *)s1))
 	{
