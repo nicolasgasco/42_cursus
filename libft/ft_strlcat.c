@@ -10,27 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int ft_strlcat(char *dst, const char *src, unsigned int size)
+#include <stddef.h>
+#include "libft.h"
+#include <stdio.h>
+
+size_t ft_strlcat(char *dst, const char *src, size_t size)
 {
 	unsigned int	i;
-	const char		*buffer1;
-	unsigned int	length;
+	unsigned int	y;
+	unsigned int	dst_len;
 
-	i = 0;
-	length = 0;
-	buffer1 = src;
-	while(buffer1[i] != '\0')
-		i++;
-	length = i;
-	i = 0;
-	if (size == 0 || length == 0)
-		return (0);
-	while(i < length && i < (size - 1))
-	{
-		dst[i] = buffer1[i];
-		i++;
+	i = ft_strlen(dst);
+	y = 0;
+	dst_len = ft_strlen(dst);
+	if (size) {
+		while (src[y] != '\0' && i < (size - 1))
+		{
+			dst[i] = src[y];
+			i++;
+			y++;
+		}
+		dst[i] = '\0';
 	}
-	dst[i] = '\0';
-	return (length);
+	return (dst_len + ft_strlen((char *)src));;
 }
 
