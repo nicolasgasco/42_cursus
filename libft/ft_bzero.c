@@ -6,16 +6,16 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 08:25:52 by ngasco            #+#    #+#             */
-/*   Updated: 2021/06/10 10:01:42 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/07/14 14:18:54 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned int	i;
-	char			*dest;
+	size_t	i;
+	char	*dest;
 
 	i = 0;
 	dest = s;

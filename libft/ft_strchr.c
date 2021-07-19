@@ -6,17 +6,23 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 10:44:46 by ngasco            #+#    #+#             */
-/*   Updated: 2021/06/29 11:04:54 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/07/16 10:57:56 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
 	while (*s != c && *s != '\0')
 		s++;
 	if (*s == '\0')
+	{
 		if (c != '\0')
-			return (0);
+			return (NULL);
+		else
+			return ((char *)s);
+	}
 	if (*(s + 1) == c)
 		s++;
 	return ((char *)s);
