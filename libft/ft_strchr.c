@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 10:44:46 by ngasco            #+#    #+#             */
-/*   Updated: 2021/07/16 10:57:56 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/07/21 15:34:17 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,5 @@ char	*ft_strchr(const char *s, int c)
 		else
 			return ((char *)s);
 	}
-	if (*(s + 1) == c)
-		s++;
 	return ((char *)s);
 }
