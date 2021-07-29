@@ -14,9 +14,9 @@ cpu_load=$(top -bn1 | grep '^%Cpu' | cut -c 9- | xargs | awk '{printf "%.1f", $1
 last_boot=$(who -b | grep -oP '\d.+')
 ip=$(hostname -I)
 mac=$(ip -a link | awk '{print $2}' | tail -n -1)
-lvm=$(sudo pvdisplay | grep Allocatable | awk '{print $2}')
+lvm=$(sudo lvm pvdisplay | grep Allocatable | awk '{print $2}')
 tcp=$(netstat -an | grep ESTABLISHED | wc -l)
-sudo=$(sudo journalctl _COMM=sudo | grep COMMAND | wc -l)
+sudo=$(sudo cat /var/log/sudo/sudo.log | awk 'NR%2' | wc -l)
 users=$(who | wc -l)
 wall "  #Architecture: $arch
         #CPU physical: $cpu_p
