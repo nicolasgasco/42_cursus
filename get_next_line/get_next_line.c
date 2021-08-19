@@ -6,64 +6,62 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 17:14:15 by ngasco            #+#    #+#             */
-/*   Updated: 2021/08/18 18:13:13 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/08/19 18:16:08 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
-// Read the file one piece at the time
-
-// Store result in static variable
-
-
-
-char *get_next_line(int fd)
+void	ft_bzero(void *s, size_t n)
 {
-    // Create a buffer which is as big as BUFFER_SIZE
-    char    *buffer;
-    // Create a variable for the line read
-    char    *line;
-    int     i;
+	size_t	i;
+	char	*dest;
 
-    line = malloc(sizeof(char *));
-    buffer = malloc(sizeof(char) * BUFFER_SIZE);
-    i = 0;
+	i = 0;
+	dest = s;
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+}
 
-    // printf("%d\n", fd);
-    // Returns null if descriptor not valid or buffer not valid
-    if (fd < 0 || BUFFER_SIZE <= 0)
-    {
-        free(buffer);
-        free(line);
-        return (NULL);
-    }
+char	*get_next_line(int fd)
+{
+    char	*buffer;
+    char	*line;
+	size_t	bytes_read;
 
-    // Read bytes untill you reach a \n or the buffer is full
-    // Read from specified fd with read
-    read(fd, buffer, BUFFER_SIZE);
-    
-    // Look for \n inside of buffer
-    printf("|%s|\n", buffer);
-    while (buffer[i] != '\n' && buffer[i] != '\0')
-    {
-        // printf(".%c.\n", buffer[i]);
-        line[i] = buffer[i];
-        i++;
-    }
-    // If \n is found -> LINE FOUND
-    if (buffer[i] == '\n')
-    {
-        // printf("Word found: %s\n", line);
-        return (line);
-    }
+	if (BUFFER_SIZE <= 0 || read(fd, NULL, 0) == -1)
+		return (NULL);
+	bytes_read = 1;
+    line = (char *)malloc(sizeof(char *));
+	buffer = (char *)malloc(BUFFER_SIZE + 1);
+	ft_bzero(line, sizeof(char *));
+	ft_bzero(buffer, sizeof(char) * (BUFFER_SIZE + 1));
 
-    // If \0 is found -> KEEP SEARCHING
-    if (buffer[i] == '\0')
+	while (bytes_read > 0)
     {
-        // printf("Keep searching...\n");
-        return (NULL);
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read == 0)
+		{
+			free(buffer);
+			if (line[1] != '\0')
+			{
+				return (line);
+			}		
+			return (0);
+		}
+        if (ft_find_newline(buffer))
+        {
+			line = ft_strjoin(line, ft_substr(buffer, 0, ft_find_newline(buffer)));
+			line = ft_strjoin(line, "\n");
+			free(buffer);
+            return (line);
+        } else {
+			line = ft_strjoin(line, buffer);
+        }
     }
-    // Returns the line read
-    return (NULL);
+	return (NULL);
 }

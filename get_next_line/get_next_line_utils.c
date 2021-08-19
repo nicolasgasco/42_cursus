@@ -6,11 +6,12 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 17:14:02 by ngasco            #+#    #+#             */
-/*   Updated: 2021/08/18 17:50:02 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/08/19 18:11:44 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 size_t	ft_strlen(const char *s)
 {
@@ -22,23 +23,28 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*result;
-	int		len;
-	int		i;
+	unsigned int	j;
+	char			*result;
 
-	len = ft_strlen((char *)s1);
+	j = 0;
+	if (!s || !len || start >= ft_strlen((char *)s))
+	{
+		result = malloc(1 * sizeof(char));
+		result[0] = '\0';
+		return (result);
+	}
 	result = malloc((len + 1) * sizeof(char));
 	if (result == NULL)
 		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
+	while (j < len)
 	{
-		result[i] = s1[i];
-		i++;
+		result[j] = s[start];
+		start++;
+		j++;
 	}
-	result[i] = '\0';
+	result[j] = '\0';
 	return (result);
 }
 
@@ -77,4 +83,18 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	res = ft_join_strings(s1, s2, res);
 	return (res);
+}
+
+int	ft_find_newline(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\n' && s[i] != '\0')
+		i++;
+	if (i == 0 && s[0] == '\n')
+		return (1);
+	if (s[i] == '\0')
+		return (0);
+	return (i);
 }
