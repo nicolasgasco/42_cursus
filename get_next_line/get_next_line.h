@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 15:02:18 by ngasco            #+#    #+#             */
-/*   Updated: 2021/08/19 16:52:58 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/08/21 14:50:41 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 #include <unistd.h>
 
 size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s1);
 char    *ft_strjoin(char const *s1, char const *s2);
-int     ft_find_newline(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char    *get_next_line(int fd);
 

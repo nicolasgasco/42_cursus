@@ -25,15 +25,15 @@ int main(int argc, char **argv)
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
 		{
-			printf("Error, cannot open file\n");
+			// printf("Error, cannot open file\n");
 			return (1);
 		}
-		printf("========== FILE NAME: '%s' ==========\n", argv[1]);
+		// printf("========== FILE NAME: '%s' ==========\n", argv[1]);
 		printf("********** START file -> \n");
 		while (line != NULL)
 			{
 			line = get_next_line(fd);
-			printf("Line %d -->	%s", i, line);
+			printf("Line %d -->	.%s.\n", i, line);
 			i++;
 			free(line);
 		}
