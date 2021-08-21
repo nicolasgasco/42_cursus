@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 17:14:02 by ngasco            #+#    #+#             */
-/*   Updated: 2021/08/21 15:16:34 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/08/21 16:26:31 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 {
 	int	i;
 
+	if (!s || s[0] == '\0')
+		return (0);
 	i = 0;
 	while (s[i] != '\0')
 		i++;
@@ -32,7 +34,10 @@ char	*ft_strdup(const char *s1)
 	len = ft_strlen((char *)s1);
 	result = malloc((len + 1) * sizeof(char));
 	if (result == NULL)
+	{	
+		free(result);
 		return (NULL);
+	}
 	i = 0;
 	while (s1[i] != '\0')
 	{
@@ -68,13 +73,15 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (result);
 }
 
-static char	*ft_join_strings(char const *s1, char const *s2, char *res)
+static char	*ft_join_strings(char const *s1, char const *s2)
 {
+	char			*res;
 	unsigned int	i;
 	unsigned int	j;
 
 	i = 0;
 	j = 0;
+	res = malloc((ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1) * 1);
 	while (s1[i] != '\0')
 	{
 		res[j] = s1[i];
@@ -106,6 +113,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		free(res);
 		return (NULL);
 	}
-	res = ft_join_strings(s1, s2, res);
+	res = ft_join_strings(s1, s2);
 	return (res);
 }

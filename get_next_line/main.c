@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 		while (line != NULL)
 			{
 			line = get_next_line(fd);
-			printf("Line %d -->	.%s.\n", i, line);
+			printf("Line %d -->	%s", i, line);
 			i++;
 			free(line);
 		}

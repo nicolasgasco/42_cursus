@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 17:14:15 by ngasco            #+#    #+#             */
-/*   Updated: 2021/08/21 15:52:13 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/08/21 16:23:31 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*get_next_line(int fd)
 	char		*buffer;
 	char		*line;
 	static char	*buffer_stat;
-	size_t		bytes_read;
+	static size_t		bytes_read;
 
 	if (BUFFER_SIZE <= 0 || read(fd, NULL, 0) == -1)
 		return (NULL);
@@ -71,12 +71,18 @@ char	*get_next_line(int fd)
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		buffer[ft_strlen(buffer)] = '\0';
 		buffer_stat = ft_strjoin(buffer_stat, buffer);
-			if (bytes_read <= 0)
+		if (bytes_read <= 0)
 		{
 			free(line);
 			free(buffer);
 			return (NULL);
 		}
+	}
+	if (buffer_stat[0] == '\0' || bytes_read <= 0)
+	{
+		free(line);
+		free(buffer);
+		return (NULL);
 	}
 	while (!ft_find_newline(line))
 	{
@@ -94,12 +100,6 @@ char	*get_next_line(int fd)
 				free(buffer_stat);
 			return (line);
 		}
-		if (bytes_read <= 0)
-		{
-			free(line);
-			free(buffer);
-			return (NULL);
-		}
 		line = ft_strjoin(line, buffer_stat);
 		ft_bzero(buffer_stat, ft_strlen(buffer_stat) + 1);
 		free(buffer_stat);
@@ -108,12 +108,18 @@ char	*get_next_line(int fd)
 		if (bytes_read <= 0)
 		{
 			free(buffer);
+			if (line[0] == '\0')
+			{
+				free(line);
+				return (NULL);
+			}
 			line[ft_strlen(line)] = '\n';
 			return (line);
 		}
 		buffer[ft_strlen(buffer)] = '\0';
 		buffer_stat = ft_strjoin(buffer_stat, buffer);
 	}
+	free(buffer);
 	free(buffer_stat);	
 	return (line);
 }
