@@ -11,4 +11,4 @@ This is a collection of the projects I completed while doing the 'common core' o
 This is the list of projects sorted by date:
 1. **Libft** (July 2021): recreating some basic C functions like strdup or strjoin using only malloc and free
 2. **Born2beroot** (August 2021): creating a minimal Debian server on a virtual machine following a list of requirements, e.g. strong password policy, firewall with UFW, SSH, etc. In the repo there's only a Bash script that had to be broadcasted to all users every 10 minutes using crontab and wall.  
-3. **Get_next_line** (September 2021): writing a C scripts that accepts a file descriptors and returns one line at a time.
+3. **Get_next_line** (September 2021): writing a C script that accepts a valid file descriptor and returns a whole file one line at a time.
