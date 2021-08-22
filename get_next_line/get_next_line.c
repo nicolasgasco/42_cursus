@@ -43,21 +43,35 @@ char	*ft_strrchr(const char *s, int c)
 	return ((char *)(s + i));
 }
 
-void	ft_bzero(char *s)
+void	ft_bzero(char *s, size_t n)
 {
 	size_t	i;
-	char	*dest;
 
-	i = 0;
 	if (!s)
 		return;
-	dest = s;
-	while (s[i] != '\0')
+	i = 0;
+	while (i < n)
 	{
-		dest[i] = '\0';
+		*(char *)(s + i) = 0;
 		i++;
 	}
 }
+
+void	*ft_calloc(size_t count)
+{
+	void	*result;
+
+	result = malloc(count * sizeof(char));
+	if (result == NULL)
+	{
+		free(result);
+		return (NULL);
+	}
+	ft_bzero(result, count * sizeof(char));
+	return (result);
+}
+
+
 
 void	iterate_string(char *s, char *name)
 {
@@ -84,61 +98,81 @@ char *get_next_line(int fd)
 	char		*line;
 	int			read_flag;
 	static char	*buf_static;
+	int			i;
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
+	i = 0;
 	read_flag = 0;
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buffer = (char *)ft_calloc((BUFFER_SIZE + 1) * sizeof(char));
 	line = NULL;
-	if (buf_static && buf_static[0] != '\0')
+
+	if (buf_static)
 	{
-		// printf("1b) Buf_static exists or isn't empty...\n");
-		// pass
+		// iterate_string(buf_static, "buf_static");
+		// printf("Buf_static exists already\n");
 	}
 	// printf("1a) Buf_static doesn't exist or is empty...\n");
 	while (1)
 	{
-		if (read(fd, buffer, BUFFER_SIZE) <= 0)
-			break;
-		read_flag = 1;
-		buf_static = ft_strdup(buffer);
+		if (!buf_static || (buf_static && read_flag != 0) )
+		{
+			if (read(fd, buffer, BUFFER_SIZE) <= 0)
+				break;
+			read_flag = 1;
+			buf_static = ft_strdup(buffer);
+		}
 		// printf("2) Inside while and just read...\n");
 		if (ft_find_newline(buf_static) >= 0)
 		{
 			// printf("2a) Something was read with a newline...\n");
-			if ((int)ft_strlen(buf_static) == (ft_find_newline(buf_static) + 1))
-			{
-				line = ft_strdup(buf_static);
-				break;
-			}
 			line = ft_strjoin(line, ft_substr(buf_static, 0, ft_find_newline(buf_static) + 1));
-			break;
+			if (read_flag == 1)
+			{
+				free(buf_static);
+				buf_static = ft_strdup(ft_strrchr(buffer, '\n'));
+			}
+			buf_static = ft_substr(buf_static, 1, ft_strlen(buf_static) - 1);
+			if (read_flag != 1)
+			{
+				buf_static = ft_substr(buf_static, ft_find_newline(buf_static), ft_strlen(buf_static) - ft_find_newline(buf_static));
+				buf_static = ft_substr(buf_static, 1, ft_strlen(buf_static) - 1);
+				free(buffer);
+				return(line);
+			}
 		}
 		else
 		{
+			// printf("%d\n", i);
 			// printf("2b) Something was read without newline...\n");
-			if (!line)
+			if (read_flag == 0)
 			{
 				line = ft_strdup(buf_static);
-				continue;
+				buf_static = NULL;
+				return (line);
 			}
 			line = ft_strjoin(line, buf_static);
+
 			// ft_bzero(buf_static);
 			// ft_bzero(buffer);
 		}
+		i++;
 	}
-	// printf("3) Outside while...\n");
+	// printf("%d\n", i);
 	free(buffer);
 	if (read_flag == 1)
 	{
-		if (ft_find_newline(line) == -1)
+		// if (ft_find_newline(line) == -1)
+		// {
+		// 	printf("4) Entering last if...\n");
+		// 	line = ft_strjoin(line, "\n");
+		// }
+		if (line[ft_strlen(line)] != '\n')
 		{
-			// printf("4) Entering last if...\n");
 			line = ft_strjoin(line, "\n");
 		}
 		return (line);
 	}
-
 	// printf("5) Reached end of function...\n");
 	free(buf_static);
 	return (NULL);

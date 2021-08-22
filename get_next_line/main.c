@@ -35,6 +35,7 @@ int main(int argc, char **argv)
 			printf("Line %d -->	.%s.\n", i, line);
 			if (line == NULL)
 				break;
+			free(line);
 			i++;
 		}
 		printf("\n<- END of file **********\n");

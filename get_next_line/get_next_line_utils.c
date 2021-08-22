@@ -12,6 +12,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -37,10 +39,14 @@ char	*ft_strdup(const char *s1)
 {
 	char	*result;
 	int		i;
+	int		x;
 
-	if (!s1)
+	if (s1 == NULL)
 		return (NULL);
-	result = malloc((ft_strlen((char *)s1) + 1) * sizeof(char));
+	x = 0;
+	while (s1[x] != '\0')
+		x++;
+	result = ft_calloc((x + 1) * sizeof(char));
 	if (result == NULL)
 	{
 		free(result);
@@ -72,9 +78,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	if (len > ft_strlen((char *)s) - start)
 		return (NULL);
-	result = (char *)malloc((len + 1) * sizeof(char));
+	result = (char *)ft_calloc((len + 1) * sizeof(char));
 	if (result == NULL)
+	{
+		free(result);
 		return (NULL);
+	}
 	while (j < len)
 	{
 		result[j] = s[start];
@@ -93,7 +102,12 @@ static char	*ft_join_strings(char const *s1, char const *s2)
 
 	i = 0;
 	j = 0;
-	res = malloc((ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1) * 1);
+	res = (char *)ft_calloc((ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1) * sizeof(char));
+	if (res == NULL)
+	{
+		free(res);
+		return (NULL);
+	}
 	while (s1[i] != '\0')
 	{
 		res[j] = s1[i];
@@ -117,12 +131,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1)
 	{
-		// printf("S1 doesn't exitst\n");
 		return (ft_strdup(s2));
 	}
 	if (!s2)
 	{
-		// printf("S2 doesn't exit\n");
 		return (ft_strdup(s1));
 	}
 	res = malloc((ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1) * sizeof(char));
