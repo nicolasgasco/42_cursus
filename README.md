@@ -10,4 +10,5 @@ This is a collection of the projects I completed while doing the 'common core' o
 
 This is the list of projects sorted by date:
 1. **Libft**: recreating some basic C functions like strdup or strjoin using only malloc and free
-2. **Born2beroot**: creating a minimal Debian server on a virtual machine following a list of requirements, e.g. enforcing a strong password policy, enabling a firewall with UFW, activating SSH, adding users to sudoers and specific groups etc. In the repo there's only a Bash script to had to be broadcasted to all users every 10 minutes.  
+2. **Born2beroot**: creating a minimal Debian server on a virtual machine following a list of requirements, e.g. strong password policy, firewall with UFW, SSH, adding users to sudoers and specific groups etc. In the repo there's only a Bash script to had to be broadcasted to all users every 10 minutes.  
+3. **Get_next_line**: writing a C scripts that accepts a file descriptors and returns one line at a time.
