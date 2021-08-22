@@ -17,24 +17,32 @@ size_t	ft_strlen(const char *s)
 {
 	int	i;
 
-	if (!s || s[0] == '\0')
-		return (0);
 	i = 0;
-	while (s[i] != '\0')
+	if (!s)
+	{
+		return (0);
+	}
+	if (s[0] == '\0')
+		return (0);
+	if (s[i] != '\0')
+	{
+		while (s[i] != '\0')
 		i++;
-	return (i);
+		return (i);
+	}
+	return (0);
 }
 
 char	*ft_strdup(const char *s1)
 {
 	char	*result;
-	int		len;
 	int		i;
 
-	len = ft_strlen((char *)s1);
-	result = malloc((len + 1) * sizeof(char));
+	if (!s1)
+		return (NULL);
+	result = malloc((ft_strlen((char *)s1) + 1) * sizeof(char));
 	if (result == NULL)
-	{	
+	{
 		free(result);
 		return (NULL);
 	}
@@ -54,13 +62,17 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char			*result;
 
 	j = 0;
-	if (!s || !len || start >= ft_strlen((char *)s))
+	if (!s || !len)
 	{
-		result = malloc(1 * sizeof(char));
-		result[0] = '\0';
-		return (result);
+		return (NULL);
 	}
-	result = malloc((len + 1) * sizeof(char));
+	if (start >= ft_strlen((char *)s))
+	{
+		return (NULL);
+	}
+	if (len > ft_strlen((char *)s) - start)
+		return (NULL);
+	result = (char *)malloc((len + 1) * sizeof(char));
 	if (result == NULL)
 		return (NULL);
 	while (j < len)
@@ -104,10 +116,16 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*res;
 
 	if (!s1)
+	{
+		// printf("S1 doesn't exitst\n");
 		return (ft_strdup(s2));
+	}
 	if (!s2)
+	{
+		// printf("S2 doesn't exit\n");
 		return (ft_strdup(s1));
-	res = malloc((ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1) * 1);
+	}
+	res = malloc((ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1) * sizeof(char));
 	if (res == NULL)
 	{
 		free(res);

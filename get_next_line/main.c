@@ -14,8 +14,7 @@ int main(int argc, char **argv)
 {
 	int fd;
 	char *line;
-	int i = 1; 
-	line= (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	int i = 1;
 	if (argc < 2)
 		printf("File name missing.\n");
 	else if (argc > 2)
@@ -30,12 +29,13 @@ int main(int argc, char **argv)
 		}
 		// printf("========== FILE NAME: '%s' ==========\n", argv[1]);
 		printf("********** START file -> \n");
-		while (line != NULL)
-			{
+		while (1)
+		{
 			line = get_next_line(fd);
-			printf("Line %d -->	%s", i, line);
+			printf("Line %d -->	.%s.\n", i, line);
+			if (line == NULL)
+				break;
 			i++;
-			free(line);
 		}
 		printf("\n<- END of file **********\n");
 		close(fd);
