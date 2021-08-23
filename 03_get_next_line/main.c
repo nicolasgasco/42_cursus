@@ -16,30 +16,25 @@ int main(int argc, char **argv)
 	char *line;
 	int i = 1;
 	if (argc < 2)
-		printf("File name missing.\n");
-	else if (argc > 2)
-		printf("Too many arguments.\n");
-	else
+		return (0);
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+	printf("========== FILE NAME: '%s' ==========\n", argv[1]);
+	printf("********** START file -> \n");
+	while (1)
 	{
-		fd = open(argv[1], O_RDONLY);
-		if (fd == -1)
+		line = get_next_line(fd);
+		printf("Line %d -->	.%s.\n", i, line);
+		if (line == NULL)
 		{
-			// printf("Error, cannot open file\n");
-			return (1);
-		}
-		// printf("========== FILE NAME: '%s' ==========\n", argv[1]);
-		printf("********** START file -> \n");
-		while (1)
-		{
-			line = get_next_line(fd);
-			printf("Line %d -->	.%s.\n", i, line);
-			if (line == NULL)
-				break;
 			free(line);
-			i++;
+			break;
 		}
-		printf("\n<- END of file **********\n");
-		close(fd);
+		free(line);
+		i++;
 	}
+	printf("\n<- END of file **********\n");
+	free(line);
+	close(fd);
 	return (0);
 }
