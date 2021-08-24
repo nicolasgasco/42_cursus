@@ -6,146 +6,124 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 17:14:15 by ngasco            #+#    #+#             */
-/*   Updated: 2021/08/21 16:23:31 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/08/23 17:37:13 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-#include <string.h>
-#define getName(var)  #var
 
-int	ft_find_newline(const char *s)
+int	ft_find_nl(char *s)
 {
 	unsigned int	i;
 
-	i = 0;
 	if (!s)
-		return (-2);
+		return (-1);
+	i = 0;
 	while (s[i] != '\n' && s[i] != '\0')
 		i++;
-	if (i == ft_strlen(s))
+	if (s[i] == '\0')
 		return (-1);
 	return (i);
 }
 
-char	*ft_strrchr(const char *s, int c)
+char *ft_create_line(char *buf_static, int b_read, int index)
 {
+	char	*line;
 	int		i;
 
+	if (b_read == 0)
+		line = (char *)malloc((index + 1) * sizeof(char));
+	else
+		line = (char *)malloc((index + 2) * sizeof(char));
+	if (!line)
+		return (NULL);
 	i = 0;
-	while (*(s + i) != '\0' && *(s + i) != c)
-		i++;
-	if (s[i] == '\0' && s[i] != c)
-		return (0);
-	return ((char *)(s + i + 1));
-}
-
-void	ft_bzero(char *s, size_t n)
-{
-	size_t	i;
-
-	if (!s)
-		return;
-	i = 0;
-	while (i < n)
+	while (buf_static[i] != '\n')
 	{
-		*(char *)(s + i) = 0;
+		line[i] = buf_static[i];
 		i++;
 	}
+	if (b_read != 0)
+	{
+		line[i] = '\n';
+		line[i + 1] = '\0';
+	}
+	else
+		line[i + 1] = '\0';
+	return (line);
 }
 
-void	*ft_calloc(size_t count)
+char	*ft_calc_line(char *buf_static, int b_read)
 {
-	void	*result;
+	char	*line;
+	int		index;
 
-	result = malloc(count * sizeof(char));
-	if (result == NULL)
+	if (ft_strlen(buf_static) <= 0)
+		return (NULL);
+	index = ft_find_nl(buf_static);
+	if (index == -1 || index == ((int)ft_strlen(buf_static) - 1))
 	{
-		free(result);
+		line = ft_strdup(buf_static);
+		return (line);
+	}
+	// line = (char *)malloc((index + 2) * sizeof(char));
+	// if (!line)
+	// 	return (NULL);
+	// i = 0;
+	// while (buf_static[i] != '\n')
+	// {
+	// 	line[i] = buf_static[i];
+	// 	i++;
+	// }
+	// line[i] = '\n';
+	// line[i + 1] = '\0';
+	line = ft_create_line(buf_static, b_read, index);
+	return (line);
+}
+
+char	*ft_calc_buf(char	*buf_static)
+{
+	int				index;
+	unsigned int	buf_len;
+
+	if (!buf_static)
+		return (NULL);
+	buf_len = ft_strlen(buf_static);
+	index = ft_find_nl(buf_static);
+	if (index == -1 || ((buf_len - index) == 1))
+	{
+		free(buf_static);
 		return (NULL);
 	}
-	ft_bzero(result, count * sizeof(char));
-	return (result);
-}
-
-
-
-void	iterate_string(char *s, char *name)
-{
-	int	i;
-
-	i = 0;
-	printf("Iterating '%s'...\n.", name);
-	while (s[i] != '\0')
-	{
-		printf("%c", s[i]);
-		i++;
-	}
-	if (s[i] != '\0')
-	{
-		printf("NULL CHAR MISSING!!");
-	}
-	printf(".\n");
-	return;
+	buf_static = ft_substr(buf_static, (index + 1), (buf_len - index - 1));
+	return (buf_static);
 }
 
 char *get_next_line(int fd)
 {
 	char		*buffer;
 	char		*line;
-	int			read_flag;
+	int			b_read;
 	static char	*buf_static;
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
-	read_flag = 0;
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	line = NULL;
-
-	while (1)
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
+	b_read = 1;
+	while (ft_find_nl(buf_static) == -1)
 	{
-		if (!buf_static || (buf_static && read_flag != 0) )
-		{
-			if (read(fd, buffer, BUFFER_SIZE) <= 0)
-				break;
-			read_flag = 1;
-			buf_static = ft_strdup(buffer);
-		}
-		if (ft_find_newline(buf_static) >= 0)
-		{
-			line = ft_strjoin(line, ft_substr(buf_static, 0, ft_find_newline(buf_static) + 1));
-			if (read_flag == 1 && ft_strlen(buf_static) > ft_strlen(line))
-			{
-				free(buf_static);
-				buf_static = ft_strdup(ft_strrchr(buffer, '\n'));
-			}
-			buf_static = ft_substr(buf_static, 1, ft_strlen(buf_static) - 1);
-			if (read_flag != 1)
-			{
-				buf_static = ft_substr(buf_static, ft_find_newline(buf_static), ft_strlen(buf_static) - ft_find_newline(buf_static));
-				buf_static = ft_substr(buf_static, 1, ft_strlen(buf_static) - 1);
-				free(buffer);
-				return(line);
-			}
-		}
-		else
-		{
-			if (read_flag == 0)
-			{
-				line = ft_strdup(buf_static);
-				buf_static = NULL;
-				return (line);
-			}
-			line = ft_strjoin(line, buf_static);
-		}
+		b_read = read(fd, buffer, BUFFER_SIZE);
+		if (b_read <= 0)
+			break;
+		buffer[b_read] = '\0';
+		buf_static = ft_strjoin(buf_static, buffer);
 	}
 	free(buffer);
-	if (read_flag == 1)
-	{
-		line[ft_strlen(line) - 1] = '\n';
-		return (line);
-	}
-	free(buf_static);
-	return (NULL);
+	if (b_read == -1)
+		return (NULL);
+	line = ft_calc_line(buf_static, b_read);
+	buf_static = ft_calc_buf(buf_static);
+	return (line);
 }
