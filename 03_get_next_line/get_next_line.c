@@ -26,15 +26,12 @@ int	ft_find_nl(char *s)
 	return (i);
 }
 
-char *ft_create_line(char *buf_static, int b_read, int index)
+char *ft_create_line(char *buf_static, int index)
 {
 	char	*line;
 	int		i;
 
-	if (b_read == 0)
-		line = (char *)malloc((index + 1) * sizeof(char));
-	else
-		line = (char *)malloc((index + 2) * sizeof(char));
+	line = (char *)malloc((index + 2) * sizeof(char));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -43,17 +40,12 @@ char *ft_create_line(char *buf_static, int b_read, int index)
 		line[i] = buf_static[i];
 		i++;
 	}
-	if (b_read != 0)
-	{
-		line[i] = '\n';
-		line[i + 1] = '\0';
-	}
-	else
-		line[i + 1] = '\0';
+	line[i] = '\n';
+	line[i + 1] = '\0';
 	return (line);
 }
 
-char	*ft_calc_line(char *buf_static, int b_read)
+char	*ft_calc_line(char *buf_static)
 {
 	char	*line;
 	int		index;
@@ -66,18 +58,7 @@ char	*ft_calc_line(char *buf_static, int b_read)
 		line = ft_strdup(buf_static);
 		return (line);
 	}
-	// line = (char *)malloc((index + 2) * sizeof(char));
-	// if (!line)
-	// 	return (NULL);
-	// i = 0;
-	// while (buf_static[i] != '\n')
-	// {
-	// 	line[i] = buf_static[i];
-	// 	i++;
-	// }
-	// line[i] = '\n';
-	// line[i + 1] = '\0';
-	line = ft_create_line(buf_static, b_read, index);
+	line = ft_create_line(buf_static, index);
 	return (line);
 }
 
@@ -123,7 +104,7 @@ char *get_next_line(int fd)
 	free(buffer);
 	if (b_read == -1)
 		return (NULL);
-	line = ft_calc_line(buf_static, b_read);
+	line = ft_calc_line(buf_static);
 	buf_static = ft_calc_buf(buf_static);
 	return (line);
 }
