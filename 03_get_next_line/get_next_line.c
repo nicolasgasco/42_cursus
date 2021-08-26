@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 17:14:15 by ngasco            #+#    #+#             */
-/*   Updated: 2021/08/23 17:37:13 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/08/26 09:53:22 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_find_nl(char *s)
 	return (i);
 }
 
-char *ft_create_line(char *buf_static, int index)
+char	*ft_create_line(char *buf_static, int index)
 {
 	char	*line;
 	int		i;
@@ -80,7 +80,7 @@ char	*ft_calc_buf(char	*buf_static)
 	return (buf_static);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	char		*buffer;
 	char		*line;
@@ -97,7 +97,7 @@ char *get_next_line(int fd)
 	{
 		b_read = read(fd, buffer, BUFFER_SIZE);
 		if (b_read <= 0)
-			break;
+			break ;
 		buffer[b_read] = '\0';
 		buf_static = ft_strjoin(buf_static, buffer);
 	}
