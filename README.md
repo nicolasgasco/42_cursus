@@ -3,8 +3,14 @@
 This is a collection of the projects I completed while doing the 'common core' of 42Urduliz in Bilbao.
 
 ---
-### DISCLAIMER FOR FELLOW 42 STUDENTS!!
+### DISCLAIMER FOR FELLOW STUDENTS OF 42!!
 **Dont't copy from this repository. I'm not that good and it's against the spirit of 42. Asks your classmates for help. I only created this repository to keep trace of the work that I've done.**
+
+---
+
+---
+### DISCLAIMER ON STYLE!!
+**In order to be valid, code of 42 projects must follow strict rules (e.g. declare variable first and initialize later, no 'for' loops nor 'switch' statements allowed) and limits (e.g. 25 lines max per function, 4 named parameters per function, etc). Therefore it isn't always written in the most straight-forward way.**
 
 ---
 
