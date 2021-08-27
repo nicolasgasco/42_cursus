@@ -18,6 +18,7 @@
 
 void	ft_putstr(char *s);
 void	ft_putnbr(int n);
+void	ft_puthex(unsigned long hex, char uppercase);
 int		ft_printf(const char *, ...);
 
 #endif

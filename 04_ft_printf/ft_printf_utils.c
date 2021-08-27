@@ -48,3 +48,26 @@ void	ft_putnbr(int n)
 		write(1, &res, 1);
 	}
 }
+
+void	ft_puthex(unsigned long hex, char uppercase)
+{
+	char *alpha;
+
+	if (uppercase == 'X')
+		alpha = "ABCDEF";
+	else
+		alpha = "abcdef";
+	if ((hex / 16) == 0)
+	{
+		if ((hex % 16) < 10)
+			ft_putnbr(hex % 16);
+		else
+			write(1, &alpha[hex % 16 - 10], 1);
+		return ;
+	}
+	ft_puthex(hex / 16, uppercase);
+	if (hex % 16 <= 10)
+		ft_putnbr(hex % 16);
+	else
+		write(1, &alpha[hex % 16 - 10], 1);
+}
