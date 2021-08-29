@@ -50,6 +50,16 @@ void	ft_putnbr(int n, unsigned int *counter)
 	}
 }
 
+void	ft_putunbr(unsigned int n, unsigned int *counter)
+{
+	char	res;
+
+	if (n > 9)
+		ft_putnbr(n / 10, counter);
+	res = (n % 10) + '0';
+	*counter += write(1, &res, 1);
+}
+
 void	ft_puthex(unsigned long hex, char uppercase, unsigned int *counter)
 {
 	char *alpha;

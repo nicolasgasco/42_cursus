@@ -20,14 +20,10 @@ void	ft_found_percent(const char *str_char, va_list args, unsigned int *counter)
 	if (*str_char == 'c')
 	{
 		result = va_arg(args, int);
-		counter += write(1, &result, 1);
+		*counter += write(1, &result, 1);
 	}
 	else if (*str_char == 'u')
-	{
-		result = va_arg(args, int);
-		if (result >= 0)
-			ft_putnbr(result, counter);
-	}
+		ft_putunbr(va_arg(args, unsigned int), counter);
 	else if (*str_char == 'd' || *str_char == 'i')
 		ft_putnbr(va_arg(args, int), counter);
 	else if (*str_char == 's')
