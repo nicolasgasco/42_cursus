@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	ft_putstr(char *s)
+void ft_putstr(char *s, unsigned int *counter)
 {
 	int	i;
 
@@ -21,35 +21,36 @@ void	ft_putstr(char *s)
 		return ;
 	while (s[i] != '\0')
 	{
-		write(1, &s[i], 1);
+		*counter += write(1, &s[i], 1);
 		i++;
 	}
+	return ;
 }
 
-void	ft_putnbr(int n)
+void	ft_putnbr(int n, unsigned int *counter)
 {
 	char	res;
 
 	if (n == -2147483648)
 	{
-		ft_putnbr(n / 10);
-		write(1, "8", 1);
+		ft_putnbr(n / 10, counter);
+		*counter += write(1, "8", 1);
 	}
 	else if (n < 0)
 	{
-		write(1, "-", 1);
-		ft_putnbr(-n);
+		*counter += write(1, "-", 1);
+		ft_putnbr(-n, counter);
 	}
 	else
 	{
 		if (n > 9)
-			ft_putnbr(n / 10);
+			ft_putnbr(n / 10, counter);
 		res = (n % 10) + '0';
-		write(1, &res, 1);
+		*counter += write(1, &res, 1);
 	}
 }
 
-void	ft_puthex(unsigned long hex, char uppercase)
+void	ft_puthex(unsigned long hex, char uppercase, unsigned int *counter)
 {
 	char *alpha;
 
@@ -60,14 +61,14 @@ void	ft_puthex(unsigned long hex, char uppercase)
 	if ((hex / 16) == 0)
 	{
 		if ((hex % 16) < 10)
-			ft_putnbr(hex % 16);
+			ft_putnbr(hex % 16, counter);
 		else
-			write(1, &alpha[hex % 16 - 10], 1);
+			*counter += write(1, &alpha[hex % 16 - 10], 1);
 		return ;
 	}
-	ft_puthex(hex / 16, uppercase);
+	ft_puthex(hex / 16, uppercase, counter);
 	if (hex % 16 <= 10)
-		ft_putnbr(hex % 16);
+		ft_putnbr(hex % 16, counter);
 	else
-		write(1, &alpha[hex % 16 - 10], 1);
+		*counter += write(1, &alpha[hex % 16 - 10], 1);
 }

@@ -16,9 +16,9 @@
 # include <unistd.h>
 # include <stdio.h>
 
-void	ft_putstr(char *s);
-void	ft_putnbr(int n);
-void	ft_puthex(unsigned long hex, char uppercase);
+void	ft_putstr(char *s, unsigned int *counter);
+void	ft_putnbr(int n, unsigned int *counter);
+void	ft_puthex(unsigned long hex, char uppercase, unsigned int *counter);
 int		ft_printf(const char *, ...);
 
 #endif
