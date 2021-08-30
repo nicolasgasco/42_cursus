@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 12:04:39 by ngasco            #+#    #+#             */
-/*   Updated: 2021/08/26 12:15:52 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/08/30 13:07:14 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 # include <stdarg.h>
 # include <unistd.h>
 
-void	ft_putstr(char *s, unsigned int *counter);
+void	ft_putstr(const char *s, unsigned int *counter);
 void	ft_putnbr(int n, unsigned int *counter);
 void	ft_putunbr(unsigned int n, unsigned int *counter);
-void	ft_puthex(unsigned long hex, char uppercase, unsigned int *counter);
-int		ft_printf(const char *, ...);
+void	ft_puthex(unsigned int hex, char uppercase, unsigned int *counter);
+void	ft_puthexp(unsigned long hex, char uppercase, unsigned int *counter);
+int		ft_printf(const char *str, ...);
 
 #endif

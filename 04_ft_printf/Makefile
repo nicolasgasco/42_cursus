@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/08/30 13:23:13 by ngasco            #+#    #+#              #
+#    Updated: 2021/08/30 13:24:47 by ngasco           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = libftprintf.a
 
 SRCS =  ft_printf.c \
@@ -21,4 +33,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY:		all clean fclean re
+.PHONY : all clean fclean re
