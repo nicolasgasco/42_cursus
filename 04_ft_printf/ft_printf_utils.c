@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 11:22:12 by nicolasg          #+#    #+#             */
-/*   Updated: 2021/08/30 13:07:03 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/09/04 13:51:39 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	ft_putstr(const char *s, unsigned int *counter)
 
 	i = 0;
 	if (!s)
+	{
+		*counter += write(1, "(null)", 6);
 		return ;
+	}
 	while (s[i] != '\0')
 	{
 		*counter += write(1, &s[i], 1);
@@ -83,14 +86,11 @@ void	ft_puthex(unsigned int hex, char uppercase, unsigned int *counter)
 		*counter += write(1, &alpha[hex % 16 - 10], 1);
 }
 
-void	ft_puthexp(unsigned long hex, char upp, unsigned int *counter)
+void	ft_puthexp(unsigned long hex, unsigned int *counter)
 {
 	char	*alpha;
 
-	if (upp == 'X')
-		alpha = "ABCDEF";
-	else
-		alpha = "abcdef";
+	alpha = "abcdef";
 	if ((hex / 16) == 0)
 	{
 		if ((hex % 16) < 10)
@@ -99,7 +99,7 @@ void	ft_puthexp(unsigned long hex, char upp, unsigned int *counter)
 			*counter += write(1, &alpha[hex % 16 - 10], 1);
 		return ;
 	}
-	ft_puthexp(hex / 16, upp, counter);
+	ft_puthexp(hex / 16, counter);
 	if (hex % 16 < 10)
 		ft_putnbr(hex % 16, counter);
 	else
