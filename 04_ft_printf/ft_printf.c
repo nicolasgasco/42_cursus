@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 void	ft_flags(const char *str_char, va_list args, unsigned int *counter)
 {
