@@ -58,7 +58,7 @@ void	ft_putunbr(unsigned int n, unsigned int *counter)
 	char	res;
 
 	if (n > 9)
-		ft_putnbr(n / 10, counter);
+		ft_putunbr(n / 10, counter);
 	res = (n % 10) + '0';
 	*counter += write(1, &res, 1);
 }

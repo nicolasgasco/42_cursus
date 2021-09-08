@@ -33,9 +33,8 @@ void	ft_flags(const char *str_char, va_list args, unsigned int *counter)
 	else if (*str_char == 'p')
 	{
 		ft_putstr("0x", counter);
-		ft_puthexp(va_arg(args, unsigned long), 'x', counter);
+		ft_puthexp(va_arg(args, unsigned long), counter);
 	}
-	return ;
 }
 
 int	ft_printf(const char *str, ...)
