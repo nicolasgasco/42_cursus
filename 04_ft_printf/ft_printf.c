@@ -12,14 +12,28 @@
 
 #include "ft_printf.h"
 
+void	ft_calc_p(va_list args, unsigned int *counter)
+{
+	unsigned long	result_p;
+	
+	result_p = va_arg(args, unsigned long);
+	if (!result_p)
+		ft_putstr("(nil)", counter);
+	else
+	{
+		ft_putstr("0x", counter);
+		ft_puthexp(result_p, counter);
+	}
+}
+
 void	ft_flags(const char *str_char, va_list args, unsigned int *counter)
 {
-	unsigned char	result;
+	int				result_c;
 
 	if (*str_char == 'c')
 	{
-		result = va_arg(args, int);
-		*counter += write(1, &result, 1);
+		result_c = va_arg(args, int);
+		*counter += write(1, &result_c, 1);
 	}
 	else if (*str_char == 'u')
 		ft_putunbr(va_arg(args, unsigned int), counter);
@@ -30,10 +44,7 @@ void	ft_flags(const char *str_char, va_list args, unsigned int *counter)
 	else if (*str_char == 'x' || *str_char == 'X')
 		ft_puthex(va_arg(args, unsigned int), *str_char, counter);
 	else if (*str_char == 'p')
-	{
-		ft_putstr("0x", counter);
-		ft_puthexp(va_arg(args, unsigned long), counter);
-	}
+		ft_calc_p(args, counter);
 }
 
 int	ft_printf(const char *str, ...)
