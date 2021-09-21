@@ -1,0 +1,1 @@
+gcc main.c -I . -L minilibx -lmlx_Linux -lXext -lX11 -o so_long && ./so_long
