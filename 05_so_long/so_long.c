@@ -44,7 +44,7 @@ char **ft_parse_map(int file)
 
 int	main(int argc, char **argv)
 {
-	int	fd;
+	int	fp;
 	char	*line;
 	char	**map;
 	int	i;
@@ -52,26 +52,30 @@ int	main(int argc, char **argv)
 	i = 0;
 	if (argc < 2)
 	{
-		printf("Not enough arguments...\n");
+		perror("Not enough arguments");
+		return (-1);
 	}
 	if (argc > 2)
 	{
-		printf("Too many arguments...\n");
+		perror("Too many arguments");
+		return (-1);
 	}
 	if (argc == 2)
 	{
 		printf("File is: '%s'\n", argv[1]);
-		fd = open(argv[1], O_RDONLY);
-		if (fd == -1)
+		fp = open(argv[1], O_RDONLY);
+		if (fp == -1)
 		{
-			printf("File doesn't exist\n");
+			perror("An error ocurred");
+			return (-1);
 		} else {
-			printf("File opened. Fd is %d.\n", fd);
-			ft_parse_map(fd);
-			if (close(fd) == 0) {
+			printf("File opened. Fd is %d.\n", fp);
+			ft_parse_map(fp);
+			if (close(fp) == 0) {
 				printf("File closed successfully.\n");
 			} else {
-				printf("Error while closing file\n");
+				perror("Error while closing file");
+				return(-1);
 			}
 		}
 	}
