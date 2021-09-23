@@ -15,38 +15,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
-char **ft_parse_map(int file)
-{
-	int		fd;
-	int		i;
-	char	*line;
-	char	**map;
-
-	i = 0;
-	map = malloc(sizeof(char **));
-	while (1)
-	{
-		line = ft_get_next_line(file, 1);
-		if (line == NULL)
-			break;
-		map[i] = line;
-		i++;
-		printf("Line is: '%s'\n", line);
-	}
-	if (i == 0)
-	{
-		free(map);
-		return (NULL);
-	}
-	map[i] = NULL;
-	return (map);
-}
 
 int	main(int argc, char **argv)
 {
 	int	fp;
 	char	*line;
-	char	**map;
 	int	i;
 
 	i = 0;
@@ -70,7 +43,7 @@ int	main(int argc, char **argv)
 			return (-1);
 		} else {
 			printf("File opened. Fd is %d.\n", fp);
-			ft_parse_map(fp);
+			ft_validate_map(fp);
 			if (close(fp) == 0) {
 				printf("File closed successfully.\n");
 			} else {

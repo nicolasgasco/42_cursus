@@ -16,5 +16,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strrchr(char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_get_next_line(int fd, int buffer_size);
+// Map validation
+void    ft_validate_map(int file);
+int     ft_str_length(char *str);
 
 #endif
