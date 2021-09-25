@@ -20,6 +20,12 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+typedef struct	Maps {
+	char    **map;
+    int     n_rows;
+    int     n_cols;
+}				map;
+
 // Get next line
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
@@ -38,8 +44,11 @@ void    ft_check_map_length(char *line);
 void	ft_validate_map(int file, int *size);
 void	ft_open_for_validation(char	*file, int *size);
 
+// Saving map
+char	**ft_create_bi_array(char *file, int size, map *map);
+
 // Screen render
-void    ft_render_map();
+void    ft_render_map(void);
 
 // Hooks
 int		hook(void);
