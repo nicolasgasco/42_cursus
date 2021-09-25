@@ -6,11 +6,35 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 10:07:34 by ngasco            #+#    #+#             */
-/*   Updated: 2021/09/25 11:51:36 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/09/25 12:31:04 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	ft_open_for_validation(char	*file)
+{
+	int	fp;
+
+	fp = open(file, O_RDONLY);
+	if (fp == -1)
+	{
+		perror("An error ocurred while reading the file");
+		exit(0);
+	}
+	else
+	{
+		printf("File opened. Fd is %d.\n", fp);
+		ft_validate_map(fp);
+		if (close(fp) == 0)
+			printf("File closed successfully.\n");
+		else
+		{
+			perror("Error while closing file");
+			exit(0);
+		}
+	}
+}
 
 void	ft_var_counter(char line_c, int *e_count, int *c_count, int *p_count)
 {

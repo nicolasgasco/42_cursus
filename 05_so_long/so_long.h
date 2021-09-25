@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 10:07:44 by ngasco            #+#    #+#             */
-/*   Updated: 2021/09/25 12:09:53 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/09/25 12:33:21 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
 // Get next line
 size_t	ft_strlen(const char *s);
@@ -37,6 +44,10 @@ void    ft_check_foreign_chars(char *line);
 void    ft_check_min_chars(char *line);
 void    ft_check_map_length(char *line);
 void    ft_validate_map(int file);
+void    ft_open_for_validation(char	*file);
+
+// Screen render
+void    ft_render_map();
 
 
 #endif

@@ -1,3 +1,10 @@
+cmd.txt
+libft
+maps
 so_long
-README.md
-mlx_linux
+*.o
+.*
+*.out
+mlx
+*.gch
+so_long_map_generator
