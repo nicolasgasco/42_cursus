@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	{
 		printf("File is: '%s'\n", argv[1]);
 		ft_open_for_validation(argv[1]);
-		ft_render_map();
+		events();
 	}
 	return (1);
 }

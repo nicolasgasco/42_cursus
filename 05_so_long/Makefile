@@ -20,13 +20,19 @@ FLAGS = -Wall -Wextra -Werror
 
 # OBJS = $(SRCS:.c=.o)
 %.o: %.c
-	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+	@ $(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+# @ $(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+
 
 # @ gcc $(FLAGS) $(SRCS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -o $(NAME)
 # 	@ $(CC) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+#	$(CC) $(SRCS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+
 
 $(NAME): $(SRCS)
-	$(CC) $(SRCS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@ $(CC) $(SRCS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -o $(NAME)
+
+
 
 # $(NAME): $(OBJS)
 # 	@ echo "Compiling $(NAME)..."

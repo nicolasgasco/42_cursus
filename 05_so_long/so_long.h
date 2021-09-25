@@ -20,14 +20,6 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
 // Get next line
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
@@ -48,6 +40,12 @@ void    ft_open_for_validation(char	*file);
 
 // Screen render
 void    ft_render_map();
+
+// Hooks
+int		hook(void);
+
+// Events
+int		events(void);
 
 
 #endif
