@@ -62,6 +62,6 @@ char	**ft_create_bi_array(char *file, int size, map *map);
 
 // Rendering map
 void    ft_render_map(map *map);
-void    ft_populate_map(win *window, map *map);
+void    ft_populate_map(win *window, map *map, int offset);
 
 #endif
