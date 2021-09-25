@@ -1,8 +1,20 @@
-// #include "minilibx_opengl_20191021/mlx.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/25 10:07:44 by ngasco            #+#    #+#             */
+/*   Updated: 2021/09/25 12:09:53 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include "mlx/mlx.h"
 
 
 #ifndef SO_LONG_H
@@ -16,8 +28,15 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strrchr(char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_get_next_line(int fd, int buffer_size);
+
 // Map validation
+int     ft_map_line_length(char *str);
+void    ft_check_middle_line(char *line);
+void    ft_check_horizontal_border(char *line);
+void    ft_check_foreign_chars(char *line);
+void    ft_check_min_chars(char *line);
+void    ft_check_map_length(char *line);
 void    ft_validate_map(int file);
-int     ft_str_length(char *str);
+
 
 #endif
