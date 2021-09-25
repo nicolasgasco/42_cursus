@@ -12,7 +12,17 @@
 
 #include "so_long.h"
 
-void	ft_open_for_validation(char	*file)
+int	ft_count_chars(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+void	ft_open_for_validation(char	*file, int *size)
 {
 	int	fp;
 
@@ -25,7 +35,7 @@ void	ft_open_for_validation(char	*file)
 	else
 	{
 		printf("File opened. Fd is %d.\n", fp);
-		ft_validate_map(fp);
+		ft_validate_map(fp, size);
 		if (close(fp) == 0)
 			printf("File closed successfully.\n");
 		else
@@ -77,7 +87,7 @@ void	ft_check_min_chars(char *line)
 	}
 }
 
-void	ft_validate_map(int file)
+void	ft_validate_map(int file, int *size)
 {
 	char	*line;
 	char	*previous_line;
@@ -91,6 +101,7 @@ void	ft_validate_map(int file)
 			ft_check_min_chars("");
 			break ;
 		}
+		*size += ft_count_chars(line);
 		if (!previous_line)
 			ft_check_horizontal_border(line);
 		else
@@ -101,5 +112,6 @@ void	ft_validate_map(int file)
 		previous_line = line;
 	}
 	ft_check_horizontal_border(previous_line);
+	free(line);
 	printf("Map is legit.\n");
 }

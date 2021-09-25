@@ -35,8 +35,8 @@ void    ft_check_horizontal_border(char *line);
 void    ft_check_foreign_chars(char *line);
 void    ft_check_min_chars(char *line);
 void    ft_check_map_length(char *line);
-void    ft_validate_map(int file);
-void    ft_open_for_validation(char	*file);
+void	ft_validate_map(int file, int *size);
+void	ft_open_for_validation(char	*file, int *size);
 
 // Screen render
 void    ft_render_map();
@@ -46,6 +46,9 @@ int		hook(void);
 
 // Events
 int		events(void);
+
+// Loops
+int     loops(void);
 
 
 #endif
