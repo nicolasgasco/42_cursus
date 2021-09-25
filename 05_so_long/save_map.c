@@ -13,6 +13,21 @@ int	ft_open_file(char *file)
 	return (fp);
 }
 
+char	**ft_close_file(int fp, char ***result)
+{
+	if (close(fp) == 0)
+	{
+		printf("File closed successfully\n");
+		return (*result);
+	}
+	else
+	{
+		free(*result);
+		perror("Error while closing file");
+		exit(0);
+	}
+}	
+
 char	**ft_create_bi_array(char *file, int size, map *map)
 {
 	int		fp;
@@ -35,12 +50,5 @@ char	**ft_create_bi_array(char *file, int size, map *map)
 		i++;
 	}
 	result[i] = NULL;
-	if (close(fp) == 0)
-		return (result);
-	else
-	{
-		free(result);
-		perror("Error while closing file");
-		exit(0);
-	}
+	return (ft_close_file(fp, &result));
 }

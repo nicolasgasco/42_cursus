@@ -16,7 +16,6 @@
 #include <fcntl.h>
 #include "mlx/mlx.h"
 
-
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -24,7 +23,21 @@ typedef struct	Maps {
 	char    **map;
     int     n_rows;
     int     n_cols;
+    int     x;
+    int     y;
 }				map;
+
+typedef struct  Windows {
+    void	*mlx;
+    void	*win;
+}               win;
+
+typedef struct Imgs {
+    char    *path;
+	int		width;
+	int		height;
+} img;
+
 
 // Get next line
 size_t	ft_strlen(const char *s);
@@ -47,17 +60,8 @@ void	ft_open_for_validation(char	*file, int *size);
 // Saving map
 char	**ft_create_bi_array(char *file, int size, map *map);
 
-// Screen render
-void    ft_render_map(void);
-
-// Hooks
-int		hook(void);
-
-// Events
-int		events(void);
-
-// Loops
-int     loops(void);
-
+// Rendering map
+void    ft_render_map(map *map);
+void    ft_populate_map(win *window, map *map);
 
 #endif

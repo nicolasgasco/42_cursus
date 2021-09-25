@@ -34,6 +34,7 @@ int	main(int argc, char **argv)
 		ft_open_for_validation(argv[1], &file_size);
 		map.map = ft_create_bi_array(argv[1], file_size, &map);
 		printf("Map has %d cols and %d rows.\n", map.n_cols, map.n_rows);
+		ft_render_map(&map);
 		free(map.map);
 	}
 	return (1);
