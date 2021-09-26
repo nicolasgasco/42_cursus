@@ -29,7 +29,7 @@ void    ft_put_text(t_map *map)
     mlx_string_put(map->mlx, map->win, map->n_cols * 32  + 30, text_y, 0x00FFFFFF, ft_itoa(map->moves));
 }
 
-void    ft_populate_map(t_map *map, int offset)
+void    ft_populate_map(t_map *map, int offset, int start)
 {
     map->x = 0;
     map->y = 0;
@@ -55,9 +55,18 @@ void    ft_populate_map(t_map *map, int offset)
                 map->p_y = map->y;
             }
             else if (map->map[map->y][map->x] == 'E')
-                ft_render_tile(map, "./img/exit.xpm", offset);
+            {
+                if (start == 0 && map->n_collect == 0)
+                    ft_render_tile(map, "./img/exit.xpm", offset);
+                else
+                    ft_render_tile(map, "./img/exit_closed.xpm", offset);
+            }
             else if (map->map[map->y][map->x] == 'C')
+            {
+                if (start == 1)
+                    map->n_collect++;
                 ft_render_tile(map, "./img/star.xpm", offset);
+            }
             map->x++;
         }
         map->y++;
@@ -74,7 +83,8 @@ void    ft_render_map(t_map *map)
     map->win = mlx_new_window(map->mlx, map->n_cols * 32 + offset * 2, map->n_rows * 32 + offset * 2, "42 Escape");
     map->end_game = 0;
     map->moves = 0;
-    ft_populate_map(map, offset);
+    map->n_collect = 0;
+    ft_populate_map(map, offset, 1);
     ft_listen_events(map);
     mlx_loop(map->mlx);
 }

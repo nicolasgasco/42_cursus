@@ -58,16 +58,22 @@ void    ft_move_player(t_map *map, int x, int y)
 		{
 			printf("Found a collectible\n");
 			ft_remove_collectible(&map->map[map->p_y][map->p_x], &map->map[map->p_y + y][map->p_x + x]);
+			map->n_collect--;
 		}
 		else if (map->map[map->p_y + y][map->p_x + x] == 'E')
 		{
 			printf("Found an exit\n");
-			ft_found_exit(&map->map[map->p_y][map->p_x], &map->map[map->p_y + y][map->p_x + x]);
-			map->end_game = 1;
+			if (map->n_collect == 0)
+			{
+				ft_found_exit(&map->map[map->p_y][map->p_x], &map->map[map->p_y + y][map->p_x + x]);
+				map->end_game = 1;
+			}
+			else
+				printf("Collect all objects first.\n");
 		}
 		printf("Moves: %d\n", map->moves);
     }
-	ft_populate_map(map, 40);
+	ft_populate_map(map, 40, 0);
 	if (map->end_game == 1)
 	{
 		mlx_destroy_window(map->mlx, map->win);

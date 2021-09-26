@@ -38,6 +38,7 @@ typedef struct	Maps {
     void	*win;
     int     moves;
     int     end_game;
+    int     n_collect;
 }				t_map;
 
 typedef struct Imgs {
@@ -70,7 +71,7 @@ char	**ft_create_bi_array(char *file, int size, t_map *map);
 
 // Rendering map
 void    ft_render_map(t_map *map);
-void    ft_populate_map(t_map *map, int offset);
+void    ft_populate_map(t_map *map, int offset, int start);
 char	*ft_itoa(int n);
 
 // Keyboard events
