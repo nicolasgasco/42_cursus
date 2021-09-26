@@ -14,9 +14,10 @@ This is the list of projects sorted by date:
 3. **get_next_line** (C, August 2021): write a function which returns a line read from a
 file descriptor (bonus: multiple file descriptors without losing the reading thread on each of them)
 4. **ft_printf** (C, September 2021): reproduce basic functioning of prinft function (flags implemented: %c, %s, %i, %d, %u, %x, %X, %p, %%, no error handling except for NULL strings passed as parameter)
+5. **so_long** (C + Minilibx, October 2021): create a small 2D game using the Minilibx API. Goal of the game is leaving the map in the shortest amount of moves after collecting all objects.
 
 
 ---
 ### DISCLAIMER FOR FELLOW STUDENTS OF 42!!
-Dont't copy from this repository. I'm not that good and it's against the spirit of 42. Asks your classmates for help. I only created this repository to keep trace of the work that I do.
+Dont't copy from this repository. I'm not that good and it's against the spirit of 42. Asks your classmates for help. I only created this repository to keep track of the work that I do.
 ---
