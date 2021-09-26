@@ -37,8 +37,10 @@ int	main(int argc, char **argv)
 		ft_put_str("Ahoy, pirate! Welcome to 42 Escape.\n");
 		ft_put_str("The aim of the game is escaping in the smallest number of moves.\n");
 		ft_put_str("Don't forget to collect all the objects, though...\n");
-		ft_render_map(&map);
+		// ft_render_map(&map);
 		free(map.map);
+		// free(map.mlx);
+		// free(map.win);
 	}
 	return (1);
 }

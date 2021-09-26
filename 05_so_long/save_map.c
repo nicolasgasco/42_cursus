@@ -47,6 +47,7 @@ char	**ft_create_bi_array(char *file, int size, t_map *map)
 		result[i] = line;
 		map->n_rows = i + 1;
 		map->n_cols = ft_map_line_length(line);
+		free(line);
 		i++;
 	}
 	result[i] = NULL;
