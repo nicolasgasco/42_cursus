@@ -34,11 +34,9 @@ void	ft_open_for_validation(char	*file, int *size)
 	}
 	else
 	{
-		printf("File opened. Fd is %d.\n", fp);
+		// printf("File opened. Fd is %d.\n", fp);
 		ft_validate_map(fp, size);
-		if (close(fp) == 0)
-			printf("File closed successfully.\n");
-		else
+		if (close(fp) != 0)
 		{
 			perror("Error while closing file");
 			exit(0);
@@ -113,5 +111,5 @@ void	ft_validate_map(int file, int *size)
 	}
 	ft_check_horizontal_border(previous_line);
 	free(line);
-	printf("Map is legit.\n");
+	// printf("Map is legit.\n");
 }
