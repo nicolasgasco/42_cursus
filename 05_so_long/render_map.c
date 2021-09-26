@@ -44,8 +44,8 @@ void    ft_populate_map(t_map *map, int offset, int start)
     map->x = 0;
     map->y = 0;
 
-    printf("Populating window\n");
-    ft_put_text(map);
+    // printf("Populating window\n");
+    // ft_put_text(map);
     while (map->map[map->y] != NULL)
     {
         map->x = 0;
@@ -88,7 +88,7 @@ void    ft_render_map(t_map *map)
     int offset;
 
     offset = 40;
-    printf("Initializing window.\n");
+    // printf("Initializing window.\n");
 	map->mlx = mlx_init();
     map->win = mlx_new_window(map->mlx, map->n_cols * 32 + offset * 2, map->n_rows * 32 + offset * 2, "42 Escape");
     map->end_game = 0;
