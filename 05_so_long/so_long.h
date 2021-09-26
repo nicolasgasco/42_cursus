@@ -80,4 +80,7 @@ void    ft_listen_events(t_map *map);
 // Player movement
 void    ft_move_player(t_map *map, int x, int y);
 
+// Utils
+void	ft_put_str(char *str);
+
 #endif

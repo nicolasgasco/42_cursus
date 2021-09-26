@@ -22,11 +22,21 @@ void    ft_put_text(t_map *map)
     black->width = 20;
     black->height = 30;
 
-    mlx_string_put(map->mlx, map->win, 40, 25, 0x00FFFFFF, "Ahoy pirate!");
+    mlx_string_put(map->mlx, map->win, 40, 25, 0x00FFFFFF, "Ahoy, pirate!");
     black->rendered_tile = mlx_xpm_file_to_image(map->mlx, "./img/black.xpm", &black->width, &black->height);
     mlx_put_image_to_window (map->mlx, map->win, black->rendered_tile, map->n_cols * 32  + 30, 10);
     mlx_string_put(map->mlx, map->win, map->n_cols * 32 - 30, text_y, 0x00FFFFFF, "Moves: ");
     mlx_string_put(map->mlx, map->win, map->n_cols * 32  + 30, text_y, 0x00FFFFFF, ft_itoa(map->moves));
+}
+
+void ft_render_rocks(t_map *map, int offset, int index)
+{
+    if ((index + 1) % 5 == 0)
+        ft_render_tile(map, "./img/rock_3.xpm", offset);
+    else if ((index + 1) % 3 == 0)
+        ft_render_tile(map, "./img/rock_2.xpm", offset);
+    else
+        ft_render_tile(map, "./img/rock_1.xpm", offset);
 }
 
 void    ft_populate_map(t_map *map, int offset, int start)
@@ -44,7 +54,7 @@ void    ft_populate_map(t_map *map, int offset, int start)
             if (map->map[map->y][map->x] == '0')
                 ft_render_tile(map, "./img/water.xpm", offset);
             else if (map->map[map->y][map->x] == '1')
-                ft_render_tile(map, "./img/rock.xpm", offset);
+                ft_render_rocks(map, offset, map->y + map->x);
             else if (map->map[map->y][map->x] == 'P')
             {   
                 if (map->end_game == 0)
