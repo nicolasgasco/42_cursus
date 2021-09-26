@@ -36,6 +36,7 @@ typedef struct	Maps {
     int     p_y;
     void	*mlx;
     void	*win;
+    int     moves;
     int     end_game;
 }				t_map;
 
@@ -70,6 +71,7 @@ char	**ft_create_bi_array(char *file, int size, t_map *map);
 // Rendering map
 void    ft_render_map(t_map *map);
 void    ft_populate_map(t_map *map, int offset);
+char	*ft_itoa(int n);
 
 // Keyboard events
 void    ft_listen_events(t_map *map);

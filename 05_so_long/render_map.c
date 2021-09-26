@@ -13,11 +13,29 @@ void    ft_render_tile(t_map *map, char *path, int offset)
     mlx_put_image_to_window (map->mlx, map->win, rendered_tile, map->x * 32 + offset, map->y * 32 + offset);
 }
 
+void    ft_put_text(t_map *map)
+{
+    int     text_y;
+    t_img   *black;
+
+    text_y = 25;
+    black->width = 20;
+    black->height = 30;
+
+    mlx_string_put(map->mlx, map->win, 40, 25, 0x00FFFFFF, "Ahoy pirate!");
+    black->rendered_tile = mlx_xpm_file_to_image(map->mlx, "./img/black.xpm", &black->width, &black->height);
+    mlx_put_image_to_window (map->mlx, map->win, black->rendered_tile, map->n_cols * 32  + 30, 10);
+    mlx_string_put(map->mlx, map->win, map->n_cols * 32 - 30, text_y, 0x00FFFFFF, "Moves: ");
+    mlx_string_put(map->mlx, map->win, map->n_cols * 32  + 30, text_y, 0x00FFFFFF, ft_itoa(map->moves));
+}
+
 void    ft_populate_map(t_map *map, int offset)
 {
     map->x = 0;
     map->y = 0;
+
     printf("Populating window\n");
+    ft_put_text(map);
     while (map->map[map->y] != NULL)
     {
         map->x = 0;
@@ -55,6 +73,7 @@ void    ft_render_map(t_map *map)
 	map->mlx = mlx_init();
     map->win = mlx_new_window(map->mlx, map->n_cols * 32 + offset * 2, map->n_rows * 32 + offset * 2, "42 Escape");
     map->end_game = 0;
+    map->moves = 0;
     ft_populate_map(map, offset);
     ft_listen_events(map);
     mlx_loop(map->mlx);
