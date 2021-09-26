@@ -39,6 +39,8 @@ int	main(int argc, char **argv)
 		ft_put_str("Don't forget to collect all the objects, though...\n");
 		ft_render_map(&map);
 		free(map.map);
+		free(map.mlx);
+		free(map.win);
 	}
 	return (1);
 }
