@@ -36,12 +36,14 @@ typedef struct	Maps {
     int     p_y;
     void	*mlx;
     void	*win;
+    int     end_game;
 }				t_map;
 
 typedef struct Imgs {
     char    *path;
 	int		width;
 	int		height;
+    void    *rendered_tile;
 }               t_img;
 
 // Get next line

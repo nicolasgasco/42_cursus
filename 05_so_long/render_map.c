@@ -28,8 +28,11 @@ void    ft_populate_map(t_map *map, int offset)
             else if (map->map[map->y][map->x] == '1')
                 ft_render_tile(map, "./img/rock.xpm", offset);
             else if (map->map[map->y][map->x] == 'P')
-            {
-                ft_render_tile(map, "./img/skull.xpm", offset);
+            {   
+                if (map->end_game == 0)
+                    ft_render_tile(map, "./img/skull.xpm", offset);
+                else
+                    ft_render_tile(map, "./img/success.xpm", offset);
                 map->p_x = map->x;
                 map->p_y = map->y;
             }
@@ -51,6 +54,7 @@ void    ft_render_map(t_map *map)
     printf("Initializing window.\n");
 	map->mlx = mlx_init();
     map->win = mlx_new_window(map->mlx, map->n_cols * 32 + offset * 2, map->n_rows * 32 + offset * 2, "42 Escape");
+    map->end_game = 0;
     ft_populate_map(map, offset);
     ft_listen_events(map);
     mlx_loop(map->mlx);

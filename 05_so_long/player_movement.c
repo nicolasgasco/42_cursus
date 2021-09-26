@@ -62,11 +62,11 @@ void    ft_move_player(t_map *map, int x, int y)
 		{
 			printf("Found an exit\n");
 			ft_found_exit(&map->map[map->p_y][map->p_x], &map->map[map->p_y + y][map->p_x + x]);
-			exit_flag = 1;
+			map->end_game = 1;
 		}
     }
 	ft_populate_map(map, 40);
-	if (exit_flag == 1)
+	if (map->end_game == 1)
 	{
 		mlx_destroy_window(map->mlx, map->win);
 		exit(0);
