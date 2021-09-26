@@ -13,7 +13,7 @@ int	ft_open_file(char *file)
 	return (fp);
 }
 
-char	**ft_close_file(int fp, char ***result)
+char	**ft_close_file(int fp, char **result[])
 {
 	if (close(fp) == 0)
 	{
@@ -28,7 +28,7 @@ char	**ft_close_file(int fp, char ***result)
 	}
 }	
 
-char	**ft_create_bi_array(char *file, int size, map *map)
+char	**ft_create_bi_array(char *file, int size, t_map *map)
 {
 	int		fp;
 	char	**result;

@@ -14,7 +14,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <string.h>
+#include <errno.h>
 #include "mlx/mlx.h"
+
+#define MLX_SYNC_IMAGE_WRITABLE		1
+#define MLX_SYNC_WIN_FLUSH_CMD		2
+#define MLX_SYNC_WIN_CMD_COMPLETED	3
+
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
@@ -25,19 +32,17 @@ typedef struct	Maps {
     int     n_cols;
     int     x;
     int     y;
-}				map;
-
-typedef struct  Windows {
+    int     p_x;
+    int     p_y;
     void	*mlx;
     void	*win;
-}               win;
+}				t_map;
 
 typedef struct Imgs {
     char    *path;
 	int		width;
 	int		height;
-} img;
-
+}               t_img;
 
 // Get next line
 size_t	ft_strlen(const char *s);
@@ -58,10 +63,16 @@ void	ft_validate_map(int file, int *size);
 void	ft_open_for_validation(char	*file, int *size);
 
 // Saving map
-char	**ft_create_bi_array(char *file, int size, map *map);
+char	**ft_create_bi_array(char *file, int size, t_map *map);
 
 // Rendering map
-void    ft_render_map(map *map);
-void    ft_populate_map(win *window, map *map, int offset);
+void    ft_render_map(t_map *map);
+void    ft_populate_map(t_map *map, int offset);
+
+// Keyboard events
+void    ft_listen_events(t_map *map);
+
+// Player movement
+void    ft_move_player(t_map *map, int x, int y);
 
 #endif

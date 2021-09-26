@@ -15,7 +15,7 @@
 int	main(int argc, char **argv)
 {
 	int		file_size;
-	map		map;
+	t_map	map;
 
 	file_size = 0;
 	if (argc < 2)

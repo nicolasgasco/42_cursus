@@ -3,7 +3,7 @@
 int	images(void)
 {
 	void	*mlx;
-	void	*img;
+	void	*t_img;
 	char	*relative_path = "./img/tile_water.xpm";
 	int		img_width;
 	int		img_height;
