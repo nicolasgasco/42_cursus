@@ -65,6 +65,7 @@ void    ft_move_player(t_map *map, int x, int y)
 			ft_found_exit(&map->map[map->p_y][map->p_x], &map->map[map->p_y + y][map->p_x + x]);
 			map->end_game = 1;
 		}
+		printf("Moves: %d\n", map->moves);
     }
 	ft_populate_map(map, 40);
 	if (map->end_game == 1)
