@@ -63,7 +63,6 @@ void    ft_populate_map(t_map *map, int offset, int start)
 		}
 		map->y += 1;
 	}
-	ft_print_map(map->map);
 }
 
 void    ft_render_map(t_map *map)
@@ -76,7 +75,6 @@ void    ft_render_map(t_map *map)
 	map->end_game = 0;
 	map->moves = 0;
 	map->n_collect = 0;
-	ft_print_map(map->map);
 	ft_populate_map(map, offset, 1);
 	ft_listen_events(map);
 	mlx_loop(map->mlx);
