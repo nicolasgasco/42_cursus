@@ -2,34 +2,40 @@
 
 void    ft_render_tile(t_map *map, char *path, int offset)
 {
-    t_img     tile;
-    void    *rendered_tile;
-    int     width;
-    int     height;
+    t_img		tile;
+    static void	*rendered_tile;
+    static char	*previous_path;
 
-    tile.width = 32;
+	tile.width = 32;
     tile.height = 32;
-    rendered_tile = mlx_xpm_file_to_image(map->mlx, path, &tile.width, &tile.height);
-    mlx_put_image_to_window (map->mlx, map->win, rendered_tile, map->x * 32 + offset, map->y * 32 + offset);
+	if (!previous_path)
+		previous_path = ft_strdup(path);
+	if (!rendered_tile || ft_compare_strings(previous_path, path) == 0)
+		rendered_tile = mlx_xpm_file_to_image(map->mlx, path, &tile.width, &tile.height);
+	mlx_put_image_to_window (map->mlx, map->win, rendered_tile, map->x * 32 + offset, map->y * 32 + offset);
+	free(previous_path);
+	previous_path = ft_strdup(path);	
 }
 
 void    ft_put_text(t_map *map)
 {
     int     text_y;
+    int     width;
+    int     height;
     t_img   *black;
 
     text_y = 25;
-    black->width = 20;
-    black->height = 30;
+    width = 20;
+    height = 30;
 
     mlx_string_put(map->mlx, map->win, 40, 25, 0x00FFFFFF, "Ahoy, pirate!");
-    black->rendered_tile = mlx_xpm_file_to_image(map->mlx, "./img/black.xpm", &black->width, &black->height);
+    black->rendered_tile = mlx_xpm_file_to_image(map->mlx, "./img/black.xpm", &width, &height);
     mlx_put_image_to_window (map->mlx, map->win, black->rendered_tile, map->n_cols * 32  + 30, 10);
     mlx_string_put(map->mlx, map->win, map->n_cols * 32 - 30, text_y, 0x00FFFFFF, "Moves: ");
     mlx_string_put(map->mlx, map->win, map->n_cols * 32  + 30, text_y, 0x00FFFFFF, ft_itoa(map->moves));
 }
 
-void ft_render_rocks(t_map *map, int offset, int index)
+void	ft_render_rocks(t_map *map, int offset, int index)
 {
     if ((index + 1) % 5 == 0)
         ft_render_tile(map, "./img/rock_3.xpm", offset);
@@ -39,13 +45,38 @@ void ft_render_rocks(t_map *map, int offset, int index)
         ft_render_tile(map, "./img/rock_1.xpm", offset);
 }
 
+void	ft_render_player(t_map *map, int offset)
+{
+	if (map->end_game == 0)
+		ft_render_tile(map, "./img/skull.xpm", offset);
+	else
+		ft_render_tile(map, "./img/success.xpm", offset);
+	map->p_x = map->x;
+	map->p_y = map->y;
+}
+
+void	ft_render_exit(t_map *map, int offset, int start)
+{
+	if (start == 0 && map->n_collect == 0)
+		ft_render_tile(map, "./img/exit.xpm", offset);
+	else
+		ft_render_tile(map, "./img/exit_closed.xpm", offset);
+}
+
+void    ft_render_collectible(t_map *map, int offset, int start)
+{
+    if (start == 1)
+        map->n_collect++;
+    ft_render_tile(map, "./img/star.xpm", offset);
+
+}
+
 void    ft_populate_map(t_map *map, int offset, int start)
 {
     map->x = 0;
     map->y = 0;
 
-    // printf("Populating window\n");
-    // ft_put_text(map);
+    ft_put_text(map);
     while (map->map[map->y] != NULL)
     {
         map->x = 0;
@@ -56,27 +87,11 @@ void    ft_populate_map(t_map *map, int offset, int start)
             else if (map->map[map->y][map->x] == '1')
                 ft_render_rocks(map, offset, map->y + map->x);
             else if (map->map[map->y][map->x] == 'P')
-            {   
-                if (map->end_game == 0)
-                    ft_render_tile(map, "./img/skull.xpm", offset);
-                else
-                    ft_render_tile(map, "./img/success.xpm", offset);
-                map->p_x = map->x;
-                map->p_y = map->y;
-            }
+                ft_render_player(map, offset);
             else if (map->map[map->y][map->x] == 'E')
-            {
-                if (start == 0 && map->n_collect == 0)
-                    ft_render_tile(map, "./img/exit.xpm", offset);
-                else
-                    ft_render_tile(map, "./img/exit_closed.xpm", offset);
-            }
+				ft_render_exit(map, offset, start);
             else if (map->map[map->y][map->x] == 'C')
-            {
-                if (start == 1)
-                    map->n_collect++;
-                ft_render_tile(map, "./img/star.xpm", offset);
-            }
+                ft_render_collectible(map, offset, start);
             map->x++;
         }
         map->y++;
