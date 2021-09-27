@@ -93,4 +93,7 @@ void    ft_end_game(t_map *map);
 // Utils
 void	ft_put_str(char *str);
 
+// Delete
+void	ft_print_map(char **map);
+
 #endif
