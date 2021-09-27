@@ -37,8 +37,8 @@ void    ft_move_player(t_map *map, int x, int y)
 	int	exit_flag;
 	
 	exit_flag = 0;
-    if (map->map[map->p_y + y][map->p_x + x] != '1')
-    {
+	if (map->map[map->p_y + y][map->p_x + x] != '1')
+	{
 		map->moves += 1;
 		if (map->map[map->p_y + y][map->p_x + x] == '0')
 		{
@@ -61,6 +61,6 @@ void    ft_move_player(t_map *map, int x, int y)
 		}
 		ft_put_moves(map);
 		ft_populate_map(map, 40, 0);
-    }
+	}
 	ft_end_game(map);
 }

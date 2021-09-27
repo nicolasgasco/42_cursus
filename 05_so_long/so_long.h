@@ -28,24 +28,24 @@
 
 typedef struct	Maps {
 	char    **map;
-    int     n_rows;
-    int     n_cols;
-    int     x;
-    int     y;
-    int     p_x;
-    int     p_y;
-    void	*mlx;
-    void	*win;
-    int     moves;
-    int     end_game;
-    int     n_collect;
+	int     n_rows;
+	int     n_cols;
+	int     x;
+	int     y;
+	int     p_x;
+	int     p_y;
+	void	*mlx;
+	void	*win;
+	int     moves;
+	int     end_game;
+	int     n_collect;
 }				t_map;
 
 typedef struct Imgs {
-    char    *path;
+	char    *path;
 	int		width;
 	int		height;
-    void    *rendered_tile;
+	void    *rendered_tile;
 }               t_img;
 
 // Get next line
