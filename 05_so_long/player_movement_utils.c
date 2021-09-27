@@ -37,3 +37,14 @@ void    ft_end_game(t_map *map)
 		exit(0);
 	}
 }
+
+void	ft_print_map(char **map)
+{
+	int x = 0;
+	int y = 0;
+	while (map[y] != NULL)
+	{
+		printf("%s\n", map[y]);
+		y++;
+	}
+}
