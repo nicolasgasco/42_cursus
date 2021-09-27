@@ -44,11 +44,12 @@ char	**ft_create_bi_array(char *file, int size, t_map *map)
 		line = ft_get_next_line(fp, 1);
 		if (line == NULL)
 			break ;
-		result[i] = line;
-		map->n_rows = i + 1;
-		map->n_cols = ft_map_line_length(line);
+		if (i == 0)
+			map->n_cols = ft_map_line_length(line);
+		result[i] = ft_strdup(line);
 		i++;
 	}
+	map->n_rows = i;
 	result[i] = NULL;
 	return (ft_close_file(fp, &result));
 }
