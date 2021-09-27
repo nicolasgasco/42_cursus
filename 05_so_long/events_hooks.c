@@ -25,8 +25,6 @@ int    ft_keyboard_events(int keycode, t_map *map)
 
 void    ft_listen_events(t_map *map)
 {
-    // printf("Listening to keyboard.\n");
 	mlx_hook(map->win, 02, (1L<<0), ft_keyboard_events, map);
-    // printf("Listening to window buttons\n");
     mlx_hook(map->win, 17, (1L<<8), ft_close_window, map);
 }
