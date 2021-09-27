@@ -41,7 +41,9 @@ void    ft_move_player(t_map *map, int x, int y)
     {
 		map->moves += 1;
 		if (map->map[map->p_y + y][map->p_x + x] == '0')
+		{
 			ft_swap_tiles(&map->map[map->p_y][map->p_x], &map->map[map->p_y + y][map->p_x + x]);
+		}
 		else if (map->map[map->p_y + y][map->p_x + x] == 'C')
 		{
 			ft_remove_collectible(&map->map[map->p_y][map->p_x], &map->map[map->p_y + y][map->p_x + x]);
