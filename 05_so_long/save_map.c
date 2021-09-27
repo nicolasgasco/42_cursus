@@ -38,10 +38,10 @@ char	**ft_create_bi_array(char *file, int size, t_map *map)
 	i = 0;
 	fp = ft_open_file(file);
 	// printf("File opened. Fd is %d.\n", fp);
-	result = malloc(size);
+	result = malloc(size + 1);
 	while (1)
 	{
-		line = ft_get_next_line(fp, 1);
+		line = ft_get_next_line(fp, 2);
 		if (line == NULL)
 			break ;
 		if (i == 0)
@@ -50,6 +50,6 @@ char	**ft_create_bi_array(char *file, int size, t_map *map)
 		i++;
 	}
 	map->n_rows = i;
-	result[i] = NULL;
+	result[i] = "\n";
 	return (ft_close_file(fp, &result));
 }

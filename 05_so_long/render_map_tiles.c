@@ -10,14 +10,15 @@ void	ft_render_rocks(t_map *map, int offset, int index)
 		ft_render_tile(map, "./img/rock_1.xpm", offset);
 }
 
-void	ft_render_player(t_map *map, int offset)
+void	ft_render_player(t_map *map, int offset, int x, int y)
 {
 	if (map->end_game == 0)
 		ft_render_tile(map, "./img/player.xpm", offset);
 	else
 		ft_render_tile(map, "./img/success.xpm", offset);
-	map->p_x = map->x;
-	map->p_y = map->y;
+	printf("MIao %d %d\n", map->x, map->y);
+	map->p_x = x;
+	map->p_y = y;
 }
 
 void	ft_render_exit(t_map *map, int offset, int start)
@@ -31,7 +32,7 @@ void	ft_render_exit(t_map *map, int offset, int start)
 void    ft_render_collectible(t_map *map, int offset, int start)
 {
 	if (start == 1)
-		map->n_collect++;
+		map->n_collect += 1;
 	ft_render_tile(map, "./img/star.xpm", offset);
 
 }

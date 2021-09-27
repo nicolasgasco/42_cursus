@@ -111,5 +111,4 @@ void	ft_validate_map(int file, int *size)
 	}
 	ft_check_horizontal_border(previous_line);
 	free(line);
-	// printf("Map is legit.\n");
 }

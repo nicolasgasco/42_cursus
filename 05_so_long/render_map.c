@@ -54,15 +54,16 @@ void    ft_populate_map(t_map *map, int offset, int start)
 			else if (map->map[map->y][map->x] == '1')
 				ft_render_rocks(map, offset, map->y + map->x);
 			else if (map->map[map->y][map->x] == 'P')
-				ft_render_player(map, offset);
+				ft_render_player(map, offset, map->x, map->y);
 			else if (map->map[map->y][map->x] == 'E')
 				ft_render_exit(map, offset, start);
 			else if (map->map[map->y][map->x] == 'C')
 				ft_render_collectible(map, offset, start);
-			map->x++;
+			map->x += 1;
 		}
-		map->y++;
+		map->y += 1;
 	}
+	ft_print_map(map->map);
 }
 
 void    ft_render_map(t_map *map)
@@ -70,12 +71,12 @@ void    ft_render_map(t_map *map)
 	int offset;
 
 	offset = 40;
-	// printf("Initializing window.\n");
 	map->mlx = mlx_init();
 	map->win = mlx_new_window(map->mlx, map->n_cols * 32 + offset * 2, map->n_rows * 32 + offset * 2, "42 Escape");
 	map->end_game = 0;
 	map->moves = 0;
 	map->n_collect = 0;
+	ft_print_map(map->map);
 	ft_populate_map(map, offset, 1);
 	ft_listen_events(map);
 	mlx_loop(map->mlx);

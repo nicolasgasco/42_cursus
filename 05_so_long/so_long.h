@@ -76,7 +76,7 @@ char	*ft_itoa(int n);
 int     ft_compare_strings(char *s1, char *s2);
 void    ft_render_tile(t_map *map, char *path, int offset);
 void	ft_render_rocks(t_map *map, int offset, int index);
-void	ft_render_player(t_map *map, int offset);
+void	ft_render_player(t_map *map, int offset, int x, int y);
 void	ft_render_exit(t_map *map, int offset, int start);
 void    ft_render_collectible(t_map *map, int offset, int start);
 
@@ -92,6 +92,7 @@ void    ft_end_game(t_map *map);
 
 // Utils
 void	ft_put_str(char *str);
+void	ft_welcome_player();
 
 // Delete
 void	ft_print_map(char **map);
