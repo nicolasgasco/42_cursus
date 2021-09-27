@@ -16,10 +16,7 @@ int	ft_open_file(char *file)
 char	**ft_close_file(int fp, char **result[])
 {
 	if (close(fp) == 0)
-	{
-		// printf("File closed successfully\n");
 		return (*result);
-	}
 	else
 	{
 		free(*result);
@@ -37,7 +34,6 @@ char	**ft_create_bi_array(char *file, int size, t_map *map)
 
 	i = 0;
 	fp = ft_open_file(file);
-	// printf("File opened. Fd is %d.\n", fp);
 	result = malloc(size + 1);
 	while (1)
 	{

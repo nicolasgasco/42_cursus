@@ -47,7 +47,7 @@ void    ft_populate_map(t_map *map, int offset, int start)
 	while (map->map[map->y] != NULL)
 	{
 		map->x = 0;
-		while (map->map[map->y][map->x] != '\n')
+		while (map->map[map->y][map->x] != '\0')
 		{
 			if (map->map[map->y][map->x] == '0')
 				ft_render_tile(map, "./img/water.xpm", offset);

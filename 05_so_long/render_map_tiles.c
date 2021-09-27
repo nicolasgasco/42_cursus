@@ -16,7 +16,6 @@ void	ft_render_player(t_map *map, int offset, int x, int y)
 		ft_render_tile(map, "./img/player.xpm", offset);
 	else
 		ft_render_tile(map, "./img/success.xpm", offset);
-	printf("MIao %d %d\n", map->x, map->y);
 	map->p_x = x;
 	map->p_y = y;
 }

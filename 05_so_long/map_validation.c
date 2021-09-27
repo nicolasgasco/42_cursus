@@ -34,7 +34,6 @@ void	ft_open_for_validation(char	*file, int *size)
 	}
 	else
 	{
-		// printf("File opened. Fd is %d.\n", fp);
 		ft_validate_map(fp, size);
 		if (close(fp) != 0)
 		{
