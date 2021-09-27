@@ -73,12 +73,22 @@ char	**ft_create_bi_array(char *file, int size, t_map *map);
 void    ft_render_map(t_map *map);
 void    ft_populate_map(t_map *map, int offset, int start);
 char	*ft_itoa(int n);
+int     ft_compare_strings(char *s1, char *s2);
+void    ft_render_tile(t_map *map, char *path, int offset);
+void	ft_render_rocks(t_map *map, int offset, int index);
+void	ft_render_player(t_map *map, int offset);
+void	ft_render_exit(t_map *map, int offset, int start);
+void    ft_render_collectible(t_map *map, int offset, int start);
 
 // Keyboard events
 void    ft_listen_events(t_map *map);
 
 // Player movement
 void    ft_move_player(t_map *map, int x, int y);
+void    ft_swap_tiles(char *tile1, char *tile2);
+void    ft_remove_collectible(char *player, char *collect);
+void    ft_found_exit(char *player, char *collect);
+void    ft_end_game(t_map *map);
 
 // Utils
 void	ft_put_str(char *str);
