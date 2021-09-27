@@ -27,8 +27,11 @@ FLAGS = -Wall -Wextra -Werror
 # @ gcc $(FLAGS) $(SRCS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -o $(NAME)
 # 	@ $(CC) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-$(NAME): $(SRCS)
-	@ $(CC) $(SRCS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -o $(NAME)
+# $(NAME): $(SRCS)
+# 	@ $(CC) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+
+# $(LINUX): $(SRCS)
+# 	@ $(CC) $(SRCS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -o $(NAME)
 
 #	$(CC) $(SRCS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
@@ -57,7 +60,13 @@ $(NAME): $(SRCS)
 # test: $(OBJ)
 #     gcc -o $@ $^ $(CFLAGS) $(LIBS)
 
-all : $(NAME)
+all : $(SRCS)
+	@ echo "Compiling for macOs"
+	@ $(CC) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+
+linux : $(SRCS)
+	@ echo "Compiling for Linux"
+	@ $(CC) $(SRCS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -o $(NAME)
 
 clean :
 	@ echo "Cleaning bins..."
@@ -69,4 +78,6 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re
+rel : fclean linux
+
+.PHONY : all clean fclean re linux
