@@ -17,21 +17,24 @@ void    ft_render_tile(t_map *map, char *path, int offset)
 	previous_path = ft_strdup(path);	
 }
 
-void    ft_render_text(t_map *map)
+void    ft_render_text(t_map *map, int start)
 {
     int     text_y;
     int     width;
     int     height;
-    t_img   *black;
+    t_img   black;
 
     text_y = 25;
-    width = 20;
-    height = 30;
+    black.width = 20;
+    black.height = 30;
 
-    mlx_string_put(map->mlx, map->win, 40, 25, 0x00FFFFFF, "Ahoy, pirate!");
-    black->rendered_tile = mlx_xpm_file_to_image(map->mlx, "./img/black.xpm", &width, &height);
-    // mlx_put_image_to_window (map->mlx, map->win, black->rendered_tile, map->n_cols * 32  + 30, 10);
-    mlx_string_put(map->mlx, map->win, map->n_cols * 32 - 30, text_y, 0x00FFFFFF, "Moves: ");
+    if (start)
+    {
+        mlx_string_put(map->mlx, map->win, 40, 25, 0x00FFFFFF, "Ahoy, pirate!");
+        mlx_string_put(map->mlx, map->win, map->n_cols * 32 - 30, text_y, 0x00FFFFFF, "Moves: ");
+    }
+    black.rendered_tile = mlx_xpm_file_to_image(map->mlx, "./img/black.xpm", &black.width, &black.height);
+    mlx_put_image_to_window (map->mlx, map->win, black.rendered_tile, map->n_cols * 32  + 30, 10);
     mlx_string_put(map->mlx, map->win, map->n_cols * 32  + 30, text_y, 0x00FFFFFF, ft_itoa(map->moves));
 }
 
@@ -40,7 +43,7 @@ void    ft_populate_map(t_map *map, int offset, int start)
     map->x = 0;
     map->y = 0;
 
-    // ft_render_text(map);
+    ft_render_text(map, start);
     while (map->map[map->y] != NULL)
     {
         map->x = 0;
