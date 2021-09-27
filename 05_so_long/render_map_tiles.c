@@ -13,7 +13,7 @@ void	ft_render_rocks(t_map *map, int offset, int index)
 void	ft_render_player(t_map *map, int offset)
 {
 	if (map->end_game == 0)
-		ft_render_tile(map, "./img/skull.xpm", offset);
+		ft_render_tile(map, "./img/player.xpm", offset);
 	else
 		ft_render_tile(map, "./img/success.xpm", offset);
 	map->p_x = map->x;
