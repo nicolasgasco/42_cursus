@@ -68,14 +68,29 @@ void    ft_populate_map(t_map *map, int offset, int start)
 void    ft_render_map(t_map *map)
 {
 	int offset;
+	int	screen_width;
+	int	screen_height;
 
 	offset = 40;
-	map->mlx = mlx_init();
-	map->win = mlx_new_window(map->mlx, map->n_cols * 32 + offset * 2, map->n_rows * 32 + offset * 2, "42 Escape");
-	map->end_game = 0;
-	map->moves = 0;
-	map->n_collect = 0;
-	ft_populate_map(map, offset, 1);
-	ft_listen_events(map);
-	mlx_loop(map->mlx);
+	screen_width = map->n_cols * 32 + offset * 2;
+	screen_height = map->n_rows * 32 + offset * 2;
+	if (screen_width > 1920 || screen_height > 1080)
+	{
+		perror("Window size is too big");
+		exit(0);
+	}
+	else
+	{
+		ft_put_str("Ahoy, pirate! Welcome to 42 Escape.\n");
+		ft_put_str("The aim of the game is escaping in the smallest number of moves.\n");
+		ft_put_str("Don't forget to collect all the objects, though...\n");
+		map->mlx = mlx_init();
+		map->win = mlx_new_window(map->mlx, screen_width, screen_height, "42 Escape");
+		map->end_game = 0;
+		map->moves = 0;
+		map->n_collect = 0;
+		ft_populate_map(map, offset, 1);
+		ft_listen_events(map);
+		mlx_loop(map->mlx);
+		}
 }
