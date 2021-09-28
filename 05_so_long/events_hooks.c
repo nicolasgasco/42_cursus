@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events_hooks.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/28 20:26:33 by ngasco            #+#    #+#             */
+/*   Updated: 2021/09/28 20:26:34 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int ft_close_window(t_map *map)
@@ -9,6 +21,7 @@ int ft_close_window(t_map *map)
 
 int    ft_keyboard_events(int keycode, t_map *map)
 {
+	printf("%d\n", keycode);
 	if (keycode == 97 || keycode == 65361)
 		ft_move_player(map, -1, 0);
 	else if (keycode == 119 || keycode == 65362)

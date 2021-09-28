@@ -1,21 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_map_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/28 20:27:58 by ngasco            #+#    #+#             */
+/*   Updated: 2021/09/28 20:27:59 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
-
-void    ft_strcpy(char **dst, const char *src)
-{
-	unsigned int	i;
-
-	i = 0;
-	if (!src)
-		return ;
-	while (src[i] != '\0')
-	{
-		**dst = src[i];
-		**dst++;
-		i++;
-	}
-	*(dst + i) = '\0';
-	return ;
-}
 
 static int	ft_cal_number_digits(int n)
 {
