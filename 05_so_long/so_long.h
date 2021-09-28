@@ -78,6 +78,7 @@ void    ft_render_tile(t_map *map, char *path, int offset);
 void	ft_render_rocks(t_map *map, int offset, int index);
 void	ft_render_player(t_map *map, int offset, int x, int y);
 void	ft_render_exit(t_map *map, int offset, int start);
+void	ft_render_enemy(t_map *map, int offset);
 void    ft_render_collectible(t_map *map, int offset, int start);
 
 // Keyboard events

@@ -55,7 +55,8 @@ void	ft_check_foreign_chars(char *line)
 	while (line[i] != '\0')
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'E'
-			&& line[i] != 'C' && line[i] != 'P' && line[i] != '\n')
+			&& line[i] != 'C' && line[i] != 'P' && line[i] != '\n'
+			&& line[i] != 'M')
 		{
 			perror("Map error (foreign character)");
 			exit(0);

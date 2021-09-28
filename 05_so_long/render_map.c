@@ -59,6 +59,8 @@ void    ft_populate_map(t_map *map, int offset, int start)
 				ft_render_exit(map, offset, start);
 			else if (map->map[map->y][map->x] == 'C')
 				ft_render_collectible(map, offset, start);
+			else if (map->map[map->y][map->x] == 'M')
+				ft_render_enemy(map, offset);
 			map->x += 1;
 		}
 		map->y += 1;

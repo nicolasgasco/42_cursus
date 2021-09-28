@@ -35,3 +35,8 @@ void    ft_render_collectible(t_map *map, int offset, int start)
 	ft_render_tile(map, "./img/star.xpm", offset);
 
 }
+
+void	ft_render_enemy(t_map *map, int offset)
+{
+	ft_render_tile(map, "./img/enemy.xpm", offset);
+}
