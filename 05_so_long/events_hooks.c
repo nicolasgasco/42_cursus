@@ -50,5 +50,8 @@ void	ft_listen_events(t_map *map)
 {
 	mlx_hook(map->win, 02, (1L << 0), ft_keyboard_events, map);
 	mlx_hook(map->win, 17, (1L << 8), ft_close_window, map);
-	mlx_loop_hook(map->mlx, ft_automated_events, map);
+	if (map->e_exists == 1)
+	{
+		mlx_loop_hook(map->mlx, ft_automated_events, map);
+	}
 }
