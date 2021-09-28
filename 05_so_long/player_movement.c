@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 20:27:11 by ngasco            #+#    #+#             */
-/*   Updated: 2021/09/28 20:27:16 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/09/28 20:40:47 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ void	ft_putnbr_fd(int n, int fd)
 
 void	ft_put_moves(t_map *map)
 {		
-		ft_put_str("Moves: ");
-		ft_putnbr_fd(map->moves, 1);
-		ft_put_str("\n");
+	ft_put_str("Moves: ");
+	ft_putnbr_fd(map->moves, 1);
+	ft_put_str("\n");
 }
 
-void    ft_move_player(t_map *map, int x, int y)
+void	ft_move_player(t_map *map, int x, int y)
 {
 	int	exit_flag;
-	
+
 	exit_flag = 0;
 	if (map->map[map->p_y + y][map->p_x + x] != '1')
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map_tiles.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 20:27:49 by ngasco            #+#    #+#             */
-/*   Updated: 2021/09/28 20:27:50 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/09/28 20:39:50 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ void	ft_render_exit(t_map *map, int offset, int start)
 		ft_render_tile(map, "./img/exit_closed.xpm", offset);
 }
 
-void    ft_render_collectible(t_map *map, int offset, int start)
+void	ft_render_collectible(t_map *map, int offset, int start)
 {
 	if (start == 1)
 		map->n_collect += 1;
 	ft_render_tile(map, "./img/star.xpm", offset);
-
 }
 
 void	ft_render_enemy(t_map *map, int offset)

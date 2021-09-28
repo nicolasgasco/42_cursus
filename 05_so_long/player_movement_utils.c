@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 20:27:26 by ngasco            #+#    #+#             */
-/*   Updated: 2021/09/28 20:27:27 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/09/28 20:42:13 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void    ft_swap_tiles(char *tile1, char *tile2)
+void	ft_swap_tiles(char *tile1, char *tile2)
 {
 	char	temp;
 
@@ -21,7 +21,7 @@ void    ft_swap_tiles(char *tile1, char *tile2)
 	*tile2 = temp;
 }
 
-void    ft_remove_collectible(char *player, char *collect)
+void	ft_remove_collectible(char *player, char *collect)
 {
 	char	temp;
 
@@ -29,7 +29,7 @@ void    ft_remove_collectible(char *player, char *collect)
 	*player = '0';
 }
 
-void    ft_found_exit(char *player, char *collect)
+void	ft_found_exit(char *player, char *collect)
 {
 	char	temp;
 
@@ -37,7 +37,7 @@ void    ft_found_exit(char *player, char *collect)
 	*player = '0';
 }
 
-void    ft_end_game(t_map *map)
+void	ft_end_game(t_map *map)
 {
 	if (map->end_game == 1)
 	{
@@ -49,8 +49,11 @@ void    ft_end_game(t_map *map)
 
 void	ft_print_map(char **map)
 {
-	int x = 0;
-	int y = 0;
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
 	while (map[y] != NULL)
 	{
 		ft_put_str(map[y]);
