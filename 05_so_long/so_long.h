@@ -83,6 +83,7 @@ void    ft_render_collectible(t_map *map, int offset, int start);
 
 // Keyboard events
 void    ft_listen_events(t_map *map);
+int		ft_automated_events(t_map *map);
 
 // Player movement
 void    ft_move_player(t_map *map, int x, int y);
@@ -91,9 +92,14 @@ void    ft_remove_collectible(char *player, char *collect);
 void    ft_found_exit(char *player, char *collect);
 void    ft_end_game(t_map *map);
 
-// Utils
+// Text
 void	ft_put_str(char *str);
 void	ft_welcome_player();
+void	ft_putnbr_fd(int n, int fd);
+
+// Render text
+void	ft_put_moves(t_map *map);
+void	ft_render_ui(t_map *map, int start);
 
 // Delete
 void	ft_print_map(char **map);

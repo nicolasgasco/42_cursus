@@ -37,13 +37,6 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 }
 
-void	ft_put_moves(t_map *map)
-{		
-	ft_put_str("Moves: ");
-	ft_putnbr_fd(map->moves, 1);
-	ft_put_str("\n");
-}
-
 void	ft_move_player(t_map *map, int x, int y)
 {
 	int	exit_flag;
