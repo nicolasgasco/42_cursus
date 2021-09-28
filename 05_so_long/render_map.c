@@ -81,5 +81,6 @@ void	ft_render_map(t_map *map)
 		map->n_collect = 0;
 		ft_populate_map(map, offset, 1);
 		ft_listen_events(map);
+		mlx_loop(map->mlx);
 	}
 }
