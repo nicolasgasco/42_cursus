@@ -34,9 +34,21 @@ int	ft_keyboard_events(int keycode, t_map *map)
 		ft_close_window(map);
 	return (1);
 }
+int	ft_automated_events(t_map *map)
+{
+	int static i;
+	
+	if (!i)
+		i = 0;
+	if (i % 55555 == 0)
+		ft_enemy_movement(map);
+	i++;
+
+}
 
 void	ft_listen_events(t_map *map)
 {
 	mlx_hook(map->win, 02, (1L << 0), ft_keyboard_events, map);
 	mlx_hook(map->win, 17, (1L << 8), ft_close_window, map);
+	mlx_loop_hook(map->mlx, ft_automated_events, map);
 }

@@ -34,6 +34,8 @@ typedef struct	Maps {
 	int     y;
 	int     p_x;
 	int     p_y;
+	int		e_x;
+	int		e_y;
 	void	*mlx;
 	void	*win;
 	int     moves;
@@ -78,12 +80,11 @@ void    ft_render_tile(t_map *map, char *path, int offset);
 void	ft_render_rocks(t_map *map, int offset, int index);
 void	ft_render_player(t_map *map, int offset, int x, int y);
 void	ft_render_exit(t_map *map, int offset, int start);
-void	ft_render_enemy(t_map *map, int offset);
+void	ft_render_enemy(t_map *map, int offset, int x, int y);
 void    ft_render_collectible(t_map *map, int offset, int start);
 
 // Keyboard events
 void    ft_listen_events(t_map *map);
-int		ft_automated_events(t_map *map);
 
 // Player movement
 void    ft_move_player(t_map *map, int x, int y);
@@ -91,6 +92,7 @@ void    ft_swap_tiles(char *tile1, char *tile2);
 void    ft_remove_collectible(char *player, char *collect);
 void    ft_found_exit(char *player, char *collect);
 void    ft_end_game(t_map *map);
+void	ft_enemy_movement(t_map *map);
 
 // Text
 void	ft_put_str(char *str);
