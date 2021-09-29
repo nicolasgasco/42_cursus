@@ -33,8 +33,7 @@ void	ft_populate_map(t_map *map, int offset, int start)
 {
 	map->x = 0;
 	map->y = 0;
-	ft_render_ui(map, start);
-	while (map->map[map->y] != NULL)
+	while (map->map[map->y][0] != '\n')
 	{
 		map->x = 0;
 		while (map->map[map->y][map->x] != '\0')
@@ -79,7 +78,8 @@ void	ft_render_map(t_map *map)
 		map->end_game = 0;
 		map->moves = 0;
 		map->n_collect = 0;
-		map->e_exists = 0;
+		map->enem_n = 0;
+		ft_render_ui(map, offset);
 		ft_populate_map(map, offset, 1);
 		ft_listen_events(map);
 		mlx_loop(map->mlx);

@@ -21,7 +21,6 @@ int	ft_close_window(t_map *map)
 
 int	ft_keyboard_events(int keycode, t_map *map)
 {
-	printf("%d\n", keycode);
 	if (keycode == 97 || keycode == 65361)
 		ft_move_player(map, -1, 0);
 	else if (keycode == 119 || keycode == 65362)
@@ -40,17 +39,16 @@ int	ft_automated_events(t_map *map)
 	
 	if (!i)
 		i = 0;
-	if (i % 55555 == 0)
+	if (i % 44444 == 0)
 		ft_enemy_movement(map);
 	i++;
-
 }
 
 void	ft_listen_events(t_map *map)
 {
 	mlx_hook(map->win, 02, (1L << 0), ft_keyboard_events, map);
 	mlx_hook(map->win, 17, (1L << 8), ft_close_window, map);
-	if (map->e_exists == 1)
+	if (map->enem_n == 1)
 	{
 		mlx_loop_hook(map->mlx, ft_automated_events, map);
 	}

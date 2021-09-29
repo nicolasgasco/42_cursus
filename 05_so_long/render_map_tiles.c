@@ -52,5 +52,5 @@ void	ft_render_enemy(t_map *map, int offset, int x, int y)
 	ft_render_tile(map, "./img/enemy.xpm", offset);
 	map->e_x = x;
 	map->e_y = y;
-	map->e_exists = 1;
+	map->enem_n += 1;
 }

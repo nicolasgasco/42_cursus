@@ -34,7 +34,7 @@ typedef struct	Maps {
 	int     y;
 	int     p_x;
 	int     p_y;
-	int		e_exists;
+	int		enem_n;
 	int		e_x;
 	int		e_y;
 	void	*mlx;
