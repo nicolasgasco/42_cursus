@@ -56,6 +56,16 @@ void	ft_populate_map(t_map *map, int offset, int start)
 	}
 }
 
+void	ft_initialize_stats(t_map *map)
+{
+	map->end_game = 0;
+	map->moves = 0;
+	map->n_collect = 0;
+	map->enem_n = 0;
+	map->p_death = 0;
+	map->p_direction = 2;
+}
+
 void	ft_render_map(t_map *map)
 {
 	int	offset;
@@ -76,12 +86,7 @@ void	ft_render_map(t_map *map)
 		ft_welcome_player();
 		map->mlx = mlx_init();
 		map->win = mlx_new_window(map->mlx, screen_w, screen_h, "42 Escape");
-		map->end_game = 0;
-		map->moves = 0;
-		map->n_collect = 0;
-		map->enem_n = 0;
-		map->p_death = 0;
-		map->p_direction = 2;
+		ft_initialize_stats(map);
 		ft_render_ui(map, offset);
 		ft_populate_map(map, offset, 1);
 		ft_listen_events(map);
