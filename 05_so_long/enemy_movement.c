@@ -17,7 +17,7 @@ void	ft_kill_player(t_map *map, char *enemy)
 	*enemy = '0';
 	map->p_death = 1;
 	ft_populate_map(map, 40, 0);
-	ft_end_game(map);
+	ft_check_if_end(map);
 }
 
 void    ft_enemy_movement(t_map *map)
@@ -32,7 +32,7 @@ void    ft_enemy_movement(t_map *map)
         direction = 0;
     if (direction == 0)
     {
-		ft_end_game(map);
+		ft_check_if_end(map);
         if (map->map[y - 1][x + 1] == '0')
         {
             ft_swap_tiles(&map->map[y][x], &map->map[y - 1][x + 1]);

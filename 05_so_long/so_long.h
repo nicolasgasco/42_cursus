@@ -88,9 +88,9 @@ void    ft_listen_events(t_map *map);
 // Player movement
 void    ft_move_player(t_map *map, int x, int y);
 void    ft_swap_tiles(char *tile1, char *tile2);
-void    ft_remove_collectible(char *player, char *collect);
+void    ft_remove_collect(char *player, char *collect);
 void    ft_found_exit(char *player, char *collect);
-void    ft_end_game(t_map *map);
+void    ft_check_if_end(t_map *map);
 void	ft_enemy_movement(t_map *map);
 
 // Text to console

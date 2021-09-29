@@ -51,7 +51,7 @@ void	ft_move_player(t_map *map, int x, int y)
 		}
 		else if (map->map[map->p_y + y][map->p_x + x] == 'C')
 		{
-			ft_remove_collectible(&map->map[map->p_y][map->p_x], &map->map[map->p_y + y][map->p_x + x]);
+			ft_remove_collect(&map->map[map->p_y][map->p_x], &map->map[map->p_y + y][map->p_x + x]);
 			map->n_collect--;
 		}
 		else if (map->map[map->p_y + y][map->p_x + x] == 'E')
@@ -66,11 +66,11 @@ void	ft_move_player(t_map *map, int x, int y)
 		}
 		else if (map->map[map->p_y + y][map->p_x + x] == 'M')
 		{
-			ft_remove_collectible(&map->map[map->p_y][map->p_x], &map->map[map->p_y + y][map->p_x + x]);
+			ft_remove_collect(&map->map[map->p_y][map->p_x], &map->map[map->p_y + y][map->p_x + x]);
 			map->p_death = 1;
 		}
 		ft_put_moves(map);
 		ft_populate_map(map, 40, 0);
 	}
-	ft_end_game(map);
+	ft_check_if_end(map);
 }

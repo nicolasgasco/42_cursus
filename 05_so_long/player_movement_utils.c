@@ -21,7 +21,7 @@ void	ft_swap_tiles(char *tile1, char *tile2)
 	*tile2 = temp;
 }
 
-void	ft_remove_collectible(char *player, char *collect)
+void	ft_remove_collect(char *player, char *collect)
 {
 	char	temp;
 
@@ -37,7 +37,7 @@ void	ft_found_exit(char *player, char *collect)
 	*player = '0';
 }
 
-void	ft_end_game(t_map *map)
+void	ft_check_if_end(t_map *map)
 {
 	int	i;
 
