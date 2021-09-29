@@ -21,7 +21,6 @@ int	ft_close_window(t_map *map)
 
 int	ft_keyboard_events(int keycode, t_map *map)
 {
-	printf("%d\n", keycode);
 	if (keycode == 119 || keycode == 65362)
 	{
 		ft_move_player(map, 0, -1);
