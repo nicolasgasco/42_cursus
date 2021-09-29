@@ -14,7 +14,7 @@
 
 void	ft_welcome_player()
 {
-	ft_put_str("Ahoy, pirate! Welcome to 42 Escape.\n");
+	ft_put_str("Hello, child! Welcome to 42 Escape.\n");
 	ft_put_str("The aim of the game is escaping in the smallest number of moves.\n");
 	ft_put_str("Don't forget to collect all the objects, though...\n");
 }
@@ -38,7 +38,7 @@ void	ft_render_ui(t_map *map, int start)
 	black.height = 30;
 	if (start)
 	{
-		mlx_string_put(map->mlx, map->win, 40, 25, 0x00FFFFFF, "Ahoy, pirate!");
+		mlx_string_put(map->mlx, map->win, 40, 25, 0x00FFFFFF, "Hello, child!");
 		mlx_string_put(map->mlx, map->win, map->n_cols * 32 - 30, text_y, 0x00FFFFFF, "Moves: ");
 	}
 	black.rendered_tile = mlx_xpm_file_to_image(map->mlx, "./img/black.xpm", &black.width, &black.height);

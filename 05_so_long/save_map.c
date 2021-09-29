@@ -19,7 +19,7 @@ int	ft_open_file(char *file)
 	fp = open(file, O_RDONLY);
 	if (fp == -1)
 	{
-		perror("An error ocurred while reading the file");
+		perror("Error\n");
 		exit(0);
 	}
 	return (fp);
@@ -32,7 +32,7 @@ char	**ft_close_file(int fp, char **result[])
 	else
 	{
 		free(*result);
-		perror("Error while closing file");
+		perror("Error\n");
 		exit(0);
 	}
 }	

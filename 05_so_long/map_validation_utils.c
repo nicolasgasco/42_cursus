@@ -26,7 +26,8 @@ void	ft_check_middle_line(char *line)
 {
 	if (line[0] != '1' || line[ft_map_line_length(line) - 1] != '1')
 	{
-		perror("Map error (breach in the side walls)");
+		ft_put_str("Error\n");	
+		ft_put_str("You're map is not surrounded by walls (sides).\n");
 		exit(0);
 	}
 }
@@ -40,7 +41,8 @@ void	ft_check_horizontal_border(char *line)
 	{
 		if (line[i] != '1')
 		{
-			perror("Map error (breach in the top walls)");
+			ft_put_str("Error\n");	
+			ft_put_str("You're map is not surrounded by walls (top).\n");
 			exit(0);
 		}
 		i++;
@@ -58,7 +60,8 @@ void	ft_check_foreign_chars(char *line)
 			&& line[i] != 'C' && line[i] != 'P' && line[i] != '\n'
 			&& line[i] != 'M')
 		{
-			perror("Map error (foreign character)");
+			ft_put_str("Error\n");	
+			ft_put_str("Map can only contain 1, 0, C, P, and E.\n");
 			exit(0);
 		}
 		i++;
@@ -75,7 +78,8 @@ void	ft_check_map_length(char *line)
 	{
 		if (ft_map_line_length(line) != line_lenght)
 		{
-			perror("Map error (not rectangular)");
+			ft_put_str("Error\n");	
+			ft_put_str("Map must be rectangular in shape.\n");
 			exit(0);
 		}
 	}

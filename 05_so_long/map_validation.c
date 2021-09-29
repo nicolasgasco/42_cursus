@@ -29,7 +29,7 @@ void	ft_open_for_validation(char	*file, int *size)
 	fp = open(file, O_RDONLY);
 	if (fp == -1)
 	{
-		perror("An error ocurred while reading the file");
+		perror("Error\n");
 		exit(0);
 	}
 	else
@@ -37,7 +37,7 @@ void	ft_open_for_validation(char	*file, int *size)
 		ft_validate_map(fp, size);
 		if (close(fp) != 0)
 		{
-			perror("Error while closing file");
+			perror("Error\n");
 			exit(0);
 		}
 	}
@@ -67,13 +67,14 @@ void	ft_check_min_chars(char *line)
 	if (!p_count)
 		p_count = 0;
 	if (line[0] == '\0' && (e_count == 0 || c_count == 0 || p_count == 0))
-	{
+{
+		ft_put_str("Error\n");
 		if (e_count == 0)
-			perror("Map error (exit missing)");
+			perror("Map must have at least one exit.");
 		if (p_count == 0)
-			perror("Map error (player missing)");
+			perror("Map must have at least one player.");
 		if (c_count == 0)
-			perror("Map error (collectible missing)");
+			perror("Map must have at least one collectible.");
 		exit(0);
 	}
 	i = 0;

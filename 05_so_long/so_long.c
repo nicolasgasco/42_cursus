@@ -20,12 +20,14 @@ int	main(int argc, char **argv)
 	file_size = 0;
 	if (argc < 2)
 	{
-		perror("Not enough arguments");
+		ft_put_str("Error\n");
+		ft_put_str("Please provide a map.\n");
 		return (-1);
 	}
 	if (argc > 2)
 	{
-		perror("Too many arguments");
+		ft_put_str("Error\n");
+		ft_put_str("Please provide only one map.\n");
 		return (-1);
 	}
 	if (argc == 2)

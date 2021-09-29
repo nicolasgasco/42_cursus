@@ -19,11 +19,6 @@
 #include <limits.h>
 #include "mlx/mlx.h"
 
-#define MLX_SYNC_IMAGE_WRITABLE		1
-#define MLX_SYNC_WIN_FLUSH_CMD		2
-#define MLX_SYNC_WIN_CMD_COMPLETED	3
-
-
 #ifndef SO_LONG_H
 # define SO_LONG_H
 

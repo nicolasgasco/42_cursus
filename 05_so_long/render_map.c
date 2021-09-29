@@ -67,7 +67,8 @@ void	ft_render_map(t_map *map)
 	screen_h = map->n_rows * 32 + offset * 2;
 	if (screen_w > 5120 || screen_h > 2880)
 	{
-		perror("Window size is too big");
+		ft_put_str("Error\n");
+		ft_put_str("Map is too big.\n");
 		exit(0);
 	}
 	else
