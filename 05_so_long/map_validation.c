@@ -78,11 +78,8 @@ void	ft_check_min_chars(char *line)
 		exit(0);
 	}
 	i = 0;
-	while (line[i++] != '\0')
-	{	
-		printf("I is %d\n", i);
+	while (line[i++] != '\0')	
 		ft_var_counter(line[i], &e_num, &c_num, &p_num);
-	}
 }
 
 void	ft_validate_map(int file, int *size)
