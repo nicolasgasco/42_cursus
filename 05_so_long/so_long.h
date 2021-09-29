@@ -16,6 +16,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
+#include <limits.h>
 #include "mlx/mlx.h"
 
 #define MLX_SYNC_IMAGE_WRITABLE		1
@@ -41,6 +42,7 @@ typedef struct	Maps {
 	void	*win;
 	int     moves;
 	int     end_game;
+	int		p_death;
 	int     n_collect;
 }				t_map;
 

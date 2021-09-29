@@ -39,9 +39,14 @@ void	ft_found_exit(char *player, char *collect)
 
 void	ft_end_game(t_map *map)
 {
-	if (map->end_game == 1)
+	int	i;
+
+	i = 0;
+	if (map->end_game == 1 || map -> p_death == 1)
 	{
-		ft_put_str("Well done, pirate!\nSo long...\n");
+		while (i != 222222222)
+			i++;
+		ft_put_str("So long, child...\n");
 		mlx_destroy_window(map->mlx, map->win);
 		exit(0);
 	}

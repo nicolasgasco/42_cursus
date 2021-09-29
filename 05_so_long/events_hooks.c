@@ -35,12 +35,14 @@ int	ft_keyboard_events(int keycode, t_map *map)
 }
 int	ft_automated_events(t_map *map)
 {
-	int static i;
+	long static i;
 	
 	if (!i)
 		i = 0;
-	if (i % 44444 == 0)
+	if (i % 44444 == 0 && i > 44444)
 		ft_enemy_movement(map);
+	if (i == LONG_MAX)
+		i = 0;
 	i++;
 }
 
@@ -48,7 +50,7 @@ void	ft_listen_events(t_map *map)
 {
 	mlx_hook(map->win, 02, (1L << 0), ft_keyboard_events, map);
 	mlx_hook(map->win, 17, (1L << 8), ft_close_window, map);
-	if (map->enem_n == 1)
+	if (map->enem_n == 1 && map->n_cols > 10 && map->n_rows > 10)
 	{
 		mlx_loop_hook(map->mlx, ft_automated_events, map);
 	}

@@ -24,10 +24,12 @@ void	ft_render_rocks(t_map *map, int offset, int index)
 
 void	ft_render_player(t_map *map, int offset, int x, int y)
 {
-	if (map->end_game == 0)
-		ft_render_tile(map, "./img/player.xpm", offset);
-	else
+	if (map->p_death == 1)
+		ft_render_tile(map, "./img/dead.xpm", offset);
+	else if (map->end_game == 1)
 		ft_render_tile(map, "./img/success.xpm", offset);
+	else
+		ft_render_tile(map, "./img/player.xpm", offset);
 	map->p_x = x;
 	map->p_y = y;
 }
