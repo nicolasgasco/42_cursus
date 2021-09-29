@@ -43,45 +43,45 @@ void	ft_open_for_validation(char	*file, int *size)
 	}
 }
 
-void	ft_var_counter(char line_c, int *e_count, int *c_count, int *p_count)
+void	ft_var_counter(char line_c, int *e_num, int *c_num, int *p_num)
 {
 	if (line_c == 'E')
-		*e_count += 1;
+		*e_num += 1;
 	else if (line_c == 'C')
-		*c_count += 1;
+		*c_num += 1;
 	else if (line_c == 'P')
-		*p_count += 1;
+		*p_num += 1;
 }
 
 void	ft_check_min_chars(char *line)
 {
-	static int	e_count;
-	static int	c_count;
-	static int	p_count;
+	static int	e_num;
+	static int	c_num;
+	static int	p_num;
 	int			i;
 
-	if (!e_count)
-		e_count = 0;
-	if (!c_count)
-		c_count = 0;
-	if (!p_count)
-		p_count = 0;
-	if (line[0] == '\0' && (e_count == 0 || c_count == 0 || p_count == 0))
-{
+	if (!e_num)
+		e_num = 0;
+	if (!c_num)
+		c_num = 0;
+	if (!p_num)
+		p_num = 0;
+	if (line[0] == '\0' && (e_num == 0 || c_num == 0 || p_num == 0))
+	{
 		ft_put_str("Error\n");
-		if (e_count == 0)
+		if (e_num == 0)
 			ft_put_str("Map must have at least one exit.\n");
-		if (p_count == 0)
+		if (p_num == 0)
 			ft_put_str("Map must have at least one player.\n");
-		if (c_count == 0)
+		if (c_num == 0)
 			ft_put_str("Map must have at least one collectible.\n");
 		exit(0);
 	}
 	i = 0;
-	while (line[i] != '\0')
+	while (line[i++] != '\0')
 	{	
-		ft_var_counter(line[i], &e_count, &c_count, &p_count);
-		i++;
+		printf("I is %d\n", i);
+		ft_var_counter(line[i], &e_num, &c_num, &p_num);
 	}
 }
 
