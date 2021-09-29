@@ -70,6 +70,7 @@ linux : $(SRCS)
 clean :
 	@ echo "Cleaning bins..."
 	@ rm -rf $(OBJS)
+	@ rm -rf $(wildcard *.o)
 
 fclean : clean
 	@ echo "Cleaning all..."
