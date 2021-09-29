@@ -70,11 +70,11 @@ void	ft_check_min_chars(char *line)
 {
 		ft_put_str("Error\n");
 		if (e_count == 0)
-			perror("Map must have at least one exit.");
+			ft_put_str("Map must have at least one exit.\n");
 		if (p_count == 0)
-			perror("Map must have at least one player.");
+			ft_put_str("Map must have at least one player.\n");
 		if (c_count == 0)
-			perror("Map must have at least one collectible.");
+			ft_put_str("Map must have at least one collectible.\n");
 		exit(0);
 	}
 	i = 0;
