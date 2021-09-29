@@ -44,6 +44,7 @@ typedef struct	Maps {
 	int     end_game;
 	int		p_death;
 	int     n_collect;
+	int		p_direction;
 }				t_map;
 
 typedef struct Imgs {

@@ -80,6 +80,7 @@ void	ft_render_map(t_map *map)
 		map->n_collect = 0;
 		map->enem_n = 0;
 		map->p_death = 0;
+		map->p_direction = 2;
 		ft_render_ui(map, offset);
 		ft_populate_map(map, offset, 1);
 		ft_listen_events(map);

@@ -21,14 +21,31 @@ int	ft_close_window(t_map *map)
 
 int	ft_keyboard_events(int keycode, t_map *map)
 {
-	if (keycode == 97 || keycode == 65361)
-		ft_move_player(map, -1, 0);
-	else if (keycode == 119 || keycode == 65362)
+	printf("%d\n", keycode);
+	if (keycode == 119 || keycode == 65362)
+	{
 		ft_move_player(map, 0, -1);
+		map->p_direction = 0;
+		ft_populate_map(map, 40, 0);
+	}
 	else if (keycode == 100 || keycode == 65363)
+	{
 		ft_move_player(map, 1, 0);
+		map->p_direction = 1;
+		ft_populate_map(map, 40, 0);
+	}
 	else if (keycode == 115 || keycode == 65364)
+	{
 		ft_move_player(map, 0, 1);
+		map->p_direction = 2;
+		ft_populate_map(map, 40, 0);
+	}
+	else if (keycode == 97 || keycode == 65361)
+	{
+		ft_move_player(map, -1, 0);
+		map->p_direction = 3;
+		ft_populate_map(map, 40, 0);
+	}
 	else if (keycode == 65307)
 		ft_close_window(map);
 	return (1);

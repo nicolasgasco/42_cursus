@@ -29,7 +29,16 @@ void	ft_render_player(t_map *map, int offset, int x, int y)
 	else if (map->end_game == 1)
 		ft_render_tile(map, "./img/success.xpm", offset);
 	else
-		ft_render_tile(map, "./img/player.xpm", offset);
+	{	
+		if (map->p_direction == 0)
+			ft_render_tile(map, "./img/player_up.xpm", offset);
+		else if (map->p_direction == 1)
+			ft_render_tile(map, "./img/player_right.xpm", offset);
+		else if (map->p_direction == 2)
+			ft_render_tile(map, "./img/player.xpm", offset);
+		else if (map->p_direction == 3)
+			ft_render_tile(map, "./img/player_left.xpm", offset);
+	}
 	map->p_x = x;
 	map->p_y = y;
 }
