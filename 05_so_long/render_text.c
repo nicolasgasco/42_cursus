@@ -44,5 +44,5 @@ void	ft_render_ui(t_map *map, int start)
 	}
 	black.rendered_tile = mlx_xpm_file_to_image(map->mlx, "./img/black.xpm", &black.width, &black.height);
 	mlx_put_image_to_window (map->mlx, map->win, black.rendered_tile, map->n_cols * 32 + 30, 10);
-	mlx_string_put(map->mlx, map->win, map->n_cols * 32 + 30, text_y, 0x00FFFFFF, ft_itoa(map->moves));
+	mlx_string_put(map->mlx, map->win, map->n_cols * 32 + 30, text_y, 0x00F9D71C, ft_itoa(map->moves));
 }
