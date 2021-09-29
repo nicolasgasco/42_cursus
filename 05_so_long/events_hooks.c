@@ -56,7 +56,7 @@ int	ft_automated_events(t_map *map)
 	
 	if (!i)
 		i = 0;
-	if (i % 44444 == 0 && i > 44444)
+	if (i % 5555 == 0 && i > 5555)
 		ft_enemy_movement(map);
 	if (i == LONG_MAX)
 		i = 0;
