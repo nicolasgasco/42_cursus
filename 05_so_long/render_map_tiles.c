@@ -55,7 +55,7 @@ void	ft_render_collectible(t_map *map, int offset, int start)
 {
 	if (start == 1)
 		map->n_collect += 1;
-	ft_render_tile(map, "./img/star.xpm", offset);
+	ft_render_tile(map, "./img/egg.xpm", offset);
 }
 
 void	ft_render_enemy(t_map *map, int offset, int x, int y)

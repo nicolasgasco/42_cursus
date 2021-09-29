@@ -24,6 +24,7 @@ void	ft_put_moves(t_map *map)
 	ft_put_str("Moves: ");
 	ft_putnbr_fd(map->moves, 1);
 	ft_put_str("\n");
+	ft_render_ui(map, 40);
 }
 
 void	ft_render_ui(t_map *map, int start)
