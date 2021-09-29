@@ -22,78 +22,78 @@ void	ft_kill_player(t_map *map, char *enemy)
 
 void    ft_enemy_movement(t_map *map)
 {
-    static int	direction;
+	static int	direction;
 	int			x;
 	int			y;
 
 	x = map->e_x;
 	y = map->e_y;
-    if (!direction)
-        direction = 0;
-    if (direction == 0)
-    {
+	if (!direction)
+		direction = 0;
+	if (direction == 0)
+	{
 		ft_check_if_end(map);
-        if (map->map[y - 1][x + 1] == '0')
-        {
-            ft_swap_tiles(&map->map[y][x], &map->map[y - 1][x + 1]);
-            y--;
-            x++;
-        }
+		if (map->map[y - 1][x + 1] == '0')
+		{
+			ft_swap_tiles(&map->map[y][x], &map->map[y - 1][x + 1]);
+			y--;
+			x++;
+		}
 		else if (map->map[y - 1][x + 1] == 'P')
 		{
 			ft_kill_player(map, &map->map[y][x]);
 		}
-        else
-            direction++;
-    }
-    if (direction == 1)
-    {
-        if (map->map[y + 1][x + 1] == '0')
-        {
-            ft_swap_tiles(&map->map[y][x], &map->map[y + 1][x + 1]);
-            y++;
-            x++;
-        }
+		else
+			direction++;
+	}
+	if (direction == 1)
+	{
+		if (map->map[y + 1][x + 1] == '0')
+		{
+			ft_swap_tiles(&map->map[y][x], &map->map[y + 1][x + 1]);
+			y++;
+			x++;
+		}
 		else if (map->map[y + 1][x + 1] == 'P')
 		{
 			ft_kill_player(map, &map->map[y][x]);
 		}
-        else
-            direction++;
-    }
-    if (direction == 2)
-    {
-        if (map->map[y + 1][x - 1] == '0')
-        {
-            ft_swap_tiles(&map->map[y][x], &map->map[y + 1][x - 1]);
-            y++;
-            x--;
-        }
+		else
+			direction++;
+	}
+	if (direction == 2)
+	{
+		if (map->map[y + 1][x - 1] == '0')
+		{
+			ft_swap_tiles(&map->map[y][x], &map->map[y + 1][x - 1]);
+			y++;
+			x--;
+		}
 		else if (map->map[y + 1][x - 1] == 'P')
 		{
 			ft_kill_player(map, &map->map[y][x]);
 		}
-        else
-            direction++;
-    }
-    if (direction == 3)
-    {
-        if (map->map[y - 1][x - 1] == '0')
-        {
-            ft_swap_tiles(&map->map[y][x], &map->map[y - 1][x - 1]);
-            y--;
-            x--;
-        }
+		else
+			direction++;
+	}
+	if (direction == 3)
+	{
+		if (map->map[y - 1][x - 1] == '0')
+		{
+			ft_swap_tiles(&map->map[y][x], &map->map[y - 1][x - 1]);
+			y--;
+			x--;
+		}
 		else if (map->map[y - 1][x - 1] == 'P')
 		{
 			ft_kill_player(map, &map->map[y][x]);
 		}
-        else
-        {
-            direction = 0;
-            y--;
-            x++;
-        }
-    }
-    ft_populate_map(map, 40, 0);
+		else
+		{
+			direction = 0;
+			y--;
+			x++;
+		}
+	}
+	ft_populate_map(map, 40, 0);
 }
