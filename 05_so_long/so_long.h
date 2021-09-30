@@ -44,9 +44,9 @@ typedef struct	Maps {
 
 typedef struct Imgs {
 	char    *path;
-	int		width;
-	int		height;
-	void    *rendered_tile;
+	int		w;
+	int		h;
+	void    *r_tile;
 }               t_img;
 
 // Get next line

@@ -15,16 +15,16 @@
 void	ft_render_tile(t_map *map, char *path, int off)
 {
 	t_img		tile;
-	static void	*rendered_tile;
+	static void	*r_tile;
 	static char	*previous_path;
 
-	tile.width = 32;
-	tile.height = 32;
+	tile.w = 32;
+	tile.h = 32;
 	if (!previous_path)
 		previous_path = ft_strdup(path);
-	if (!rendered_tile || ft_compare_strings(previous_path, path) == 0)
-		rendered_tile = mlx_xpm_file_to_image(map->mlx, path, &tile.width, &tile.height);
-	mlx_put_image_to_window(map->mlx, map->win, rendered_tile, map->x * 32 + off, map->y * 32 + off);
+	if (!r_tile || ft_compare_strings(previous_path, path) == 0)
+		r_tile = mlx_xpm_file_to_image(map->mlx, path, &tile.w, &tile.h);
+	mlx_put_image_to_window(map->mlx, map->win, r_tile, map->x * 32 + off, map->y * 32 + off);
 	free(previous_path);
 	previous_path = ft_strdup(path);
 }
