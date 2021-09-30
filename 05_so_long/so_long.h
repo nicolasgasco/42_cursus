@@ -93,6 +93,13 @@ void    ft_found_exit(char *player, char *collect);
 void    ft_check_if_end(t_map *map);
 void	ft_enemy_movement(t_map *map);
 
+// Enemy movement
+void	ft_kill_player(t_map *map, char *enemy);
+void	ft_enemy_up(t_map *map, int *x, int *y, int *direction);
+void	ft_enemy_right(t_map *map, int *x, int *y, int *direction);
+void	ft_enemy_down(t_map *map, int *x, int *y, int *direction);
+void	ft_enemy_left(t_map *map, int *x, int *y, int *direction);
+
 // Text to console
 void	ft_put_str(char *str);
 void	ft_welcome_player();
