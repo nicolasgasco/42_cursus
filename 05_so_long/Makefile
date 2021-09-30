@@ -15,13 +15,50 @@ NAME = so_long
 
 SRCS = $(wildcard *.c)
 
+SRCS_BONUS = $(wildcard bonus/*bonus.c)
+
 
 FLAGS = -Wall -Wextra -Werror
 
-# OBJS = $(SRCS:.c=.o)
 %.o: %.c
 	 @ $(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
-	# @ $(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	
+# @ $(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+
+
+
+all : $(SRCS)
+	@ echo "Compiling for macOs"
+	@ $(CC) $(SRCS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+
+
+bonus : $(SRCS_BONUS)
+	@ echo "Compiling bonus for macOs"
+	@ $(CC) $(SRCS_BONUS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+
+
+linux : $(SRCS)
+	@ echo "Compiling for Linux"
+	@ $(CC) $(SRCS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -o $(NAME)
+
+bonus_linux : $(SRCS_BONUS)
+	@ echo "Compiling bonus for Linux"
+	@ $(CC) $(SRCS_BONUS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -o $(NAME)
+
+clean :
+	@ echo "Cleaning bins..."
+	@ rm -rf $(OBJS)
+	@ rm -rf $(wildcard *.o)
+
+fclean : clean
+	@ echo "Cleaning all..."
+	@ rm -rf $(NAME)
+
+re : fclean all
+
+rel : fclean linux
+
+.PHONY : all clean fclean re linux bonus bonus_linux
 
 # @ gcc $(FLAGS) $(SRCS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -o $(NAME)
 # 	@ $(CC) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
@@ -58,26 +95,3 @@ FLAGS = -Wall -Wextra -Werror
 
 # test: $(OBJ)
 #     gcc -o $@ $^ $(CFLAGS) $(LIBS)
-
-all : $(SRCS)
-	@ echo "Compiling for macOs"
-	@ $(CC) $(SRCS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-
-linux : $(SRCS)
-	@ echo "Compiling for Linux"
-	@ $(CC) $(SRCS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -o $(NAME)
-
-clean :
-	@ echo "Cleaning bins..."
-	@ rm -rf $(OBJS)
-	@ rm -rf $(wildcard *.o)
-
-fclean : clean
-	@ echo "Cleaning all..."
-	@ rm -rf $(NAME)
-
-re : fclean all
-
-rel : fclean linux
-
-.PHONY : all clean fclean re linux
