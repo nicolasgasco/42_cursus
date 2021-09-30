@@ -17,14 +17,18 @@ void	ft_render_tile(t_map *map, char *path, int off)
 	t_img		tile;
 	static void	*r_tile;
 	static char	*previous_path;
+	int			i_x;
+	int			i_y;
 
 	tile.w = 32;
 	tile.h = 32;
+	i_x = map->x * 32 + off;
+	i_y = map->y * 32 + off;
 	if (!previous_path)
 		previous_path = ft_strdup(path);
 	if (!r_tile || ft_compare_strings(previous_path, path) == 0)
 		r_tile = mlx_xpm_file_to_image(map->mlx, path, &tile.w, &tile.h);
-	mlx_put_image_to_window(map->mlx, map->win, r_tile, map->x * 32 + off, map->y * 32 + off);
+	mlx_put_image_to_window(map->mlx, map->win, r_tile, i_x, i_y);
 	free(previous_path);
 	previous_path = ft_strdup(path);
 }
