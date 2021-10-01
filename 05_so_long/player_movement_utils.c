@@ -48,6 +48,9 @@ void	ft_check_if_end(t_map *map)
 			i++;
 		ft_put_str("So long, child...\n");
 		mlx_destroy_window(map->mlx, map->win);
+		free(map->map);
+		free(map->b_tile);
+		free(map->r_tile);
 		exit(0);
 	}
 }

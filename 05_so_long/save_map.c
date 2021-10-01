@@ -55,6 +55,7 @@ char	**ft_create_bi_array(char *file, int size, t_map *map)
 		if (i == 0)
 			map->n_cols = ft_map_line_length(line);
 		result[i] = ft_strdup(line);
+		free(line);
 		i++;
 	}
 	map->n_rows = i;

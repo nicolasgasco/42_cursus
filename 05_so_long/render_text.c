@@ -46,8 +46,8 @@ void	ft_render_black_box(t_map *map)
 	n_cols = map->n_cols * 32;
 	b.w = 20;
 	b.w = 30;
-	b.r_tile = mlx_xpm_file_to_image(map->mlx, "./img/black.xpm", &b.w, &b.h);
-	mlx_put_image_to_window (map->mlx, map->win, b.r_tile, n_cols + 30, 10);
+	map->b_tile = mlx_xpm_file_to_image(map->mlx, "./img/black.xpm", &b.w, &b.h);
+	mlx_put_image_to_window (map->mlx, map->win, map->b_tile, n_cols + 30, 10);
 }
 void	ft_render_ui(t_map *map, int start)
 {
@@ -65,4 +65,5 @@ void	ft_render_ui(t_map *map, int start)
 		ft_render_initial_text(map, 0x00FFFFFF, t_y);
 	ft_render_black_box(map);
 	mlx_string_put(map->mlx, map->win, map->n_cols * 32 + 30, t_y, col, mvs);
+	free(mvs);
 }

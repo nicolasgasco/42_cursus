@@ -40,13 +40,14 @@ typedef struct	Maps {
 	int     p_y;
 	int		e_x;
 	int		e_y;
+	void    *r_tile;
+	void    *b_tile;
 }				t_map;
 
 typedef struct Imgs {
 	char    *path;
 	int		w;
 	int		h;
-	void    *r_tile;
 }               t_img;
 
 // Get next line
