@@ -6,24 +6,23 @@
 #    By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/25 10:07:55 by ngasco            #+#    #+#              #
-#    Updated: 2021/09/28 19:50:16 by ngasco           ###   ########.fr        #
+#    Updated: 2021/10/02 12:33:59 by ngasco           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = so_long
 
-SRCS = $(wildcard *.c)
+SRCS = $(wildcard src/*.c)
 
 SRCS_BONUS = $(wildcard bonus/*bonus.c)
 
 
 FLAGS = -Wall -Wextra -Werror
 
-%.o: %.c
-	 @ $(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
-	
-# @ $(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+# %.o: %.c
+	#  @ $(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+	# @ $(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 
 

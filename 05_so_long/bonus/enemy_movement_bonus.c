@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_movement.c                                  :+:      :+:    :+:   */
+/*   enemy_movement.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 20:27:11 by ngasco            #+#    #+#             */
-/*   Updated: 2021/09/28 20:40:47 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/02 12:35:59 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-void    ft_enemy_movement(t_map *map)
+void	ft_enemy_movement(t_map *map)
 {
 	static int	direction;
 	int			x;

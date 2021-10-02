@@ -6,11 +6,11 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 10:07:34 by ngasco            #+#    #+#             */
-/*   Updated: 2021/09/28 20:43:07 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/02 12:35:49 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	ft_count_chars(char *str)
 {
@@ -78,7 +78,7 @@ void	ft_check_min_chars(char *line)
 		exit(0);
 	}
 	i = 0;
-	while (line[i++] != '\0')	
+	while (line[i++] != '\0')
 		ft_var_counter(line[i], &e_num, &c_num, &p_num);
 }
 

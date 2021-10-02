@@ -6,11 +6,11 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 20:27:36 by ngasco            #+#    #+#             */
-/*   Updated: 2021/09/28 20:39:07 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/02 12:35:33 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	ft_render_tile(t_map *map, char *path, int off)
 {

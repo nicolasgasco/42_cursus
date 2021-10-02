@@ -6,11 +6,11 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 20:27:26 by ngasco            #+#    #+#             */
-/*   Updated: 2021/09/28 20:42:13 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/02 12:35:47 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	ft_swap_tiles(char *tile1, char *tile2)
 {
@@ -39,10 +39,10 @@ void	ft_found_exit(char *player, char *collect)
 
 void	ft_check_if_end(t_map *map)
 {
-	int	i;
+	long	i;
 
 	i = 0;
-	if (map->end_game == 1 || map -> p_death == 1)
+	if (map->end_game == 1 || map->p_death == 1)
 	{
 		while (i != 222222222)
 			i++;
