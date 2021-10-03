@@ -41,7 +41,7 @@ bonus : $(SRCS_BONUS)
 
 bonus_sanitizer : $(SRCS_BONUS)
 	@ echo "Compiling bonus for macOs"
-	@ $(CC) $(SRCS_BONUS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o fsanitize=address -fno-omit-frame-pointer $(NAME)
+	@ $(CC) $(SRCS_BONUS) -Lmlx -lmlx -framework OpenGL -framework AppKit fsanitize=address -fno-omit-frame-pointer -o $(NAME)
 
 linux : $(SRCS)
 	@ echo "Compiling for Linux"
@@ -49,7 +49,7 @@ linux : $(SRCS)
 
 linux_sanitizer : $(SRCS)
 	@ echo "Compiling for Linux with sanitizer"
-	@ $(CC) $(SRCS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -o -fsanitize=address -fno-omit-frame-pointer $(NAME)
+	@ $(CC) $(SRCS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -fsanitize=address -fno-omit-frame-pointer  -o $(NAME)
 
 bonus_linux : $(SRCS_BONUS)
 	@ echo "Compiling bonus for Linux"
@@ -57,7 +57,7 @@ bonus_linux : $(SRCS_BONUS)
 
 bonus_linux_sanitizer : $(SRCS_BONUS)
 	@ echo "Compiling bonus for Linux with sanitizer"
-	@ $(CC) $(SRCS_BONUS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -o -fsanitize=address -fno-omit-frame-pointer  $(NAME)
+	@ $(CC) $(SRCS_BONUS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -fsanitize=address -fno-omit-frame-pointer  -o $(NAME)
 
 clean :
 	@ echo "Cleaning bins..."
