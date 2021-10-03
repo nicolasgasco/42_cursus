@@ -18,7 +18,7 @@ void	ft_end_game(t_map *map)
 	mlx_destroy_window(map->mlx, map->win);
 	free(map->map);
 	free(map->b_tile);
-	free(map->r_tile);
+	// free(map->r_tile);
 	exit(0);
 }
 
