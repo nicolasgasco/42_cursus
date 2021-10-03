@@ -46,11 +46,7 @@ void	ft_check_if_end(t_map *map)
 	{
 		while (i != 222222222)
 			i++;
-		ft_put_str("So long, child...\n");
-		mlx_destroy_window(map->mlx, map->win);
-		free(map->map);
-		free(map->b_tile);
-		free(map->r_tile);
+		ft_end_game(map);
 		exit(0);
 	}
 }
