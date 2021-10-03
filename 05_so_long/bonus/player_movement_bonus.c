@@ -30,6 +30,7 @@ void	ft_moved_into_collect(t_map *map, int x, int y)
 	p_x = map->p_x;
 	p_y = map->p_y;
 	ft_remove_collect(&map->map[p_y][p_x], &map->map[p_y + y][p_x + x]);
+	ft_put_str("You collected an object!\n");
 	map->n_collect -= 1;
 }
 

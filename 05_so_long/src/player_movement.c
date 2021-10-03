@@ -17,8 +17,6 @@ void	ft_end_game(t_map *map)
 	ft_put_str("So long, child...\n");
 	mlx_destroy_window(map->mlx, map->win);
 	free(map->map);
-	if (map->r_tile)
-		free(map->r_tile);
 	exit(0);
 }
 
@@ -30,6 +28,7 @@ void	ft_moved_into_collect(t_map *map, int x, int y)
 	p_x = map->p_x;
 	p_y = map->p_y;
 	ft_remove_collect(&map->map[p_y][p_x], &map->map[p_y + y][p_x + x]);
+	ft_put_str("You collected an object!\n");
 	map->n_collect -= 1;
 }
 
