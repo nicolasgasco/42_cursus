@@ -19,14 +19,6 @@ void	ft_welcome_player(void)
 	ft_put_str("Don't forget to collect all the objects, though...\n");
 }
 
-void	ft_put_moves(t_map *map)
-{		
-	ft_put_str("Moves: ");
-	ft_putnbr_fd(map->moves, 1);
-	ft_put_str("\n");
-	ft_render_ui(map, 40);
-}
-
 void	ft_render_initial_text(t_map *map, int col, int t_y)
 {
 	char	*str1;
