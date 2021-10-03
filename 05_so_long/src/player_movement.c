@@ -67,6 +67,9 @@ void	ft_move_player(t_map *map, int x, int y)
 			ft_moved_into_collect(map, x, y);
 		else if (map->map[p_y + y][p_x + x] == 'E')
 			ft_moved_into_exit(map, x, y);
-		ft_populate_map(map, 40, 0);
 	}
+	ft_populate_map(map, 40, 0);
+	ft_put_str("Moves: ");
+	ft_putnbr_fd(map->moves, 1);
+	ft_put_str("\n");
 }
