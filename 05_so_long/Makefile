@@ -56,7 +56,7 @@ bonus_linux : $(SRCS_BONUS)
 	@ $(CC) $(SRCS_BONUS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -o $(NAME)
 
 bonus_linux_sanitizer : $(SRCS_BONUS)
-	@ echo "Compiling bonus for Linux"
+	@ echo "Compiling bonus for Linux with sanitizer"
 	@ $(CC) $(SRCS_BONUS) -I . -L minilibx -lmlx_Linux -lXext -lX11 -ggdb -o -fsanitize=address -fno-omit-frame-pointer  $(NAME)
 
 clean :
