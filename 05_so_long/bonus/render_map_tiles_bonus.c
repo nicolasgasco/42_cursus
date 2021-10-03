@@ -22,12 +22,20 @@ void	ft_render_rocks(t_map *map, int offset, int index)
 		ft_render_tile(map, "./img/rock_1.xpm", offset);
 }
 
+
 void	ft_render_player(t_map *map, int offset, int x, int y)
 {
-	if (map->p_death == 1)
-		ft_render_tile(map, "./img/dead.xpm", offset);
-	else if (map->end_game == 1)
+	if (map->end_game == 1)
 		ft_render_tile(map, "./img/success.xpm", offset);
+	else if (map->p_death == 1)
+		ft_render_tile(map, "./img/dead.xpm", offset);
+	else if (map->found_collect == 1)
+	{
+		if (map->x % 2 == 0)
+			ft_render_tile(map, "./img/yoda_egg.xpm", offset);
+		else if (map->x % 2 != 0)
+			ft_render_tile(map, "./img/yoda_star.xpm", offset);
+	}
 	else
 	{	
 		if (map->p_direction == 0)

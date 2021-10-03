@@ -32,6 +32,7 @@ void	ft_moved_into_collect(t_map *map, int x, int y)
 	ft_remove_collect(&map->map[p_y][p_x], &map->map[p_y + y][p_x + x]);
 	ft_put_str("You collected an object!\n");
 	map->n_collect -= 1;
+	map->found_collect = 1;
 }
 
 void	ft_moved_into_exit(t_map *map, int x, int y)
@@ -60,6 +61,7 @@ void	ft_move_player(t_map *map, int x, int y)
 	p_y = map->p_y;
 	p_x = map->p_x;
 	ft_check_if_end(map);
+	map->found_collect = 0;
 	if (map->map[p_y + y][p_x + x] != '1')
 	{
 		map->moves += 1;

@@ -33,6 +33,7 @@ typedef struct Maps {
 	int		p_death;
 	int		n_collect;
 	int		p_direction;
+	int		found_collect;
 	int		x;
 	int		y;
 	int		p_x;
