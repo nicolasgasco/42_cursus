@@ -44,6 +44,8 @@ void	ft_moved_into_exit(t_map *map, int x, int y)
 	{
 		ft_found_exit(&map->map[p_y][p_x], &map->map[p_y + y][p_x + x]);
 		map->end_game = 1;
+		ft_put_str("You found an exit!\n");
+		ft_put_str("Press any key to exit.\n");
 	}
 	else
 		ft_put_str("Collect all objects first.\n");
