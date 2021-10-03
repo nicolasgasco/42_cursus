@@ -17,7 +17,8 @@ void	ft_kill_player(t_map *map, char *enemy)
 	*enemy = '0';
 	map->p_death = 1;
 	ft_populate_map(map, 40, 0);
-	ft_check_if_end(map);
+	ft_put_str("The enemy was faster than you!\n");
+	ft_put_str("Press any key to exit.\n");
 }
 
 void	ft_enemy_up(t_map *map, int *x, int *y, int *direction)
