@@ -29,7 +29,8 @@ void	ft_open_for_validation(char	*file, int *size)
 	fp = open(file, O_RDONLY);
 	if (fp == -1)
 	{
-		perror("Error\n");
+		ft_put_str("Error\n");
+		ft_put_str("No such file or directory.\n");
 		exit(0);
 	}
 	else
