@@ -40,7 +40,6 @@ typedef struct Maps {
 	int		e_x;
 	int		e_y;
 	void	*r_tile;
-	void	*b_tile;
 }				t_map;
 
 typedef struct Imgs {
