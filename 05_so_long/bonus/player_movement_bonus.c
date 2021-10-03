@@ -73,6 +73,7 @@ void	ft_move_player(t_map *map, int x, int y)
 		{
 			ft_remove_collect(&map->map[p_y][p_x], &map->map[p_y + y][p_x + x]);
 			ft_put_str("You stepped into an enemy!\n");
+			ft_put_str("Press any key to exit.\n");
 			map->p_death = 1;
 		}
 		ft_render_ui(map, 40);
