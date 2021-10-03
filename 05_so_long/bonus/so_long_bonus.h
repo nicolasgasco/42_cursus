@@ -106,7 +106,6 @@ void	ft_welcome_player(void);
 void	ft_putnbr_fd(int n, int fd);
 
 // Render text
-void	ft_put_moves(t_map *map);
 void	ft_render_ui(t_map *map, int start);
 void	ft_end_game(t_map *map);
 
