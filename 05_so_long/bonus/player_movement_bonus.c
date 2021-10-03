@@ -72,9 +72,10 @@ void	ft_move_player(t_map *map, int x, int y)
 		else if (map->map[p_y + y][p_x + x] == 'M')
 		{
 			ft_remove_collect(&map->map[p_y][p_x], &map->map[p_y + y][p_x + x]);
+			ft_put_str("You stepped into an enemy!\n");
 			map->p_death = 1;
 		}
-		ft_put_moves(map);
+		ft_render_ui(map, 40);
 		ft_populate_map(map, 40, 0);
 	}
 }
