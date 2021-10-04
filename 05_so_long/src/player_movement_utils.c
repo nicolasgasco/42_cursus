@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 20:27:26 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/02 12:36:42 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/04 19:19:42 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,12 @@ void	ft_swap_tiles(char *tile1, char *tile2)
 
 void	ft_remove_collect(char *player, char *collect)
 {
-	char	temp;
-
 	*collect = *player;
 	*player = '0';
 }
 
 void	ft_found_exit(char *player, char *collect)
 {
-	char	temp;
-
 	*collect = *player;
 	*player = '0';
 }
