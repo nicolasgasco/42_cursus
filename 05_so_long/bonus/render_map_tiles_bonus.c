@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_map_tiles.c                                 :+:      :+:    :+:   */
+/*   render_map_tiles_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 20:27:49 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/02 12:35:38 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/04 19:13:45 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	ft_render_rocks(t_map *map, int offset, int index)
 	else
 		ft_render_tile(map, "./img/rock_1.xpm", offset);
 }
-
 
 void	ft_render_player(t_map *map, int offset, int x, int y)
 {

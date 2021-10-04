@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   save_map.c                                         :+:      :+:    :+:   */
+/*   save_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 20:28:06 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/02 12:35:25 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/04 19:01:17 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**ft_create_bi_array(char *file, int size, t_map *map)
 
 	i = 0;
 	fp = ft_open_file(file);
-	result = malloc(size + 1);
+	result = malloc(size * 2);
 	while (1)
 	{
 		line = ft_get_next_line(fp, 2);

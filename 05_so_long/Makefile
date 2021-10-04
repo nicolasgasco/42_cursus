@@ -6,7 +6,7 @@
 #    By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/25 10:07:55 by ngasco            #+#    #+#              #
-#    Updated: 2021/10/02 12:33:59 by ngasco           ###   ########.fr        #
+#    Updated: 2021/10/04 18:55:58 by ngasco           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ all : $(SRCS)
 
 sanitizer : $(SRCS)
 	@ echo "Compiling for macOs"
-	@ $(CC) $(SRCS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o -fsanitize=address -fno-omit-frame-pointer $(NAME)
+	@ $(CC) $(SRCS) -Lmlx -lmlx -framework OpenGL -framework AppKit -fsanitize=address -fno-omit-frame-pointer -o $(NAME)
 
 
 bonus : $(SRCS_BONUS)
@@ -41,7 +41,7 @@ bonus : $(SRCS_BONUS)
 
 bonus_sanitizer : $(SRCS_BONUS)
 	@ echo "Compiling bonus for macOs"
-	@ $(CC) $(SRCS_BONUS) -Lmlx -lmlx -framework OpenGL -framework AppKit fsanitize=address -fno-omit-frame-pointer -o $(NAME)
+	@ $(CC) $(SRCS_BONUS) -Lmlx -lmlx -framework OpenGL -framework AppKit -fsanitize=address -fno-omit-frame-pointer -o $(NAME)
 
 linux : $(SRCS)
 	@ echo "Compiling for Linux"

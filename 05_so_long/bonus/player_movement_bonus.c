@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_movement.c                                  :+:      :+:    :+:   */
+/*   player_movement_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 20:27:11 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/02 12:35:40 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/04 19:14:42 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_end_game(t_map *map)
 	mlx_destroy_window(map->mlx, map->win);
 	free(map->map);
 	free(map->b_tile);
-	// free(map->r_tile);
 	exit(0);
 }
 
@@ -53,6 +52,12 @@ void	ft_moved_into_exit(t_map *map, int x, int y)
 		ft_put_str("Collect all objects first.\n");
 }
 
+void	ft_put_enemy_message(void)
+{
+	ft_put_str("You stepped into an enemy!\n");
+	ft_put_str("Press any key to exit.\n");
+}
+
 void	ft_move_player(t_map *map, int x, int y)
 {
 	int	p_y;
@@ -74,8 +79,7 @@ void	ft_move_player(t_map *map, int x, int y)
 		else if (map->map[p_y + y][p_x + x] == 'M')
 		{
 			ft_remove_collect(&map->map[p_y][p_x], &map->map[p_y + y][p_x + x]);
-			ft_put_str("You stepped into an enemy!\n");
-			ft_put_str("Press any key to exit.\n");
+			ft_put_enemy_message();
 			map->p_death = 1;
 		}
 		ft_render_ui(map, 40);

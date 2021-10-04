@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 20:27:58 by ngasco            #+#    #+#             */
-/*   Updated: 2021/09/28 20:27:59 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/04 18:57:48 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,11 @@ int	ft_compare_strings(char *s1, char *s2)
 		i++;
 	}
 	return (1);
+}
+
+void	ft_put_moves(t_map *map)
+{		
+	ft_put_str("Moves: ");
+	ft_putnbr_fd(map->moves, 1);
+	ft_put_str("\n");
 }

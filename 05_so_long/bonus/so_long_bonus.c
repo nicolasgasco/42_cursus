@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 10:07:24 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/02 12:36:17 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/04 19:13:32 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	ft_validate_filename(char *file)
 		i++;
 	if (file[i] == '\0')
 		return (-1);
-	if (file[i + 1] == 'b' && file[i + 2] == 'e' && file[i + 3] == 'r' && file[i + 4] == '\0')
+	if (file[i + 1] == 'b' && file[i + 2] == 'e' && file[i + 3] == 'r'
+		&& file[i + 4] == '\0')
 		return (0);
 	return (-1);
 }
@@ -49,6 +50,12 @@ int	ft_check_file_extension(char *file)
 	return (0);
 }
 
+void	ft_put_error(void)
+{
+	ft_put_str("Error\n");
+	ft_put_str("Please provide a map.\n");
+}
+
 int	main(int argc, char **argv)
 {
 	int		file_size;
@@ -57,8 +64,7 @@ int	main(int argc, char **argv)
 	file_size = 0;
 	if (argc < 2)
 	{
-		ft_put_str("Error\n");
-		ft_put_str("Please provide a map.\n");
+		ft_put_error();
 		return (-1);
 	}
 	if (argc > 2)

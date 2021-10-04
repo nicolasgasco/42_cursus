@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 10:07:34 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/02 12:01:38 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/04 19:01:12 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ft_validate_map(int file, int *size)
 			ft_check_min_chars("");
 			break ;
 		}
-		*size += ft_count_chars(line);
+		*size += ft_count_chars(line + 1);
 		if (!previous_line)
 			ft_check_horizontal_border(line);
 		else
