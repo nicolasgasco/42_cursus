@@ -22,13 +22,18 @@ make bonus
 ```
 
 ### Linux
-Clone the repo and open the corresponding folder
++ Clone the repo and open the corresponding folder
 ```
 ➜ git clone https://github.com/nicolasgasco/42_cursus.git
 ➜ cd 42_cursus/
 ➜ cd 05_so_long/
 ```
-Compile program with bonus content
++ Follow the instraction here to install the library on Linux:
+```
+➜ git clone https://github.com/42Paris/minilibx-linux
+```
++ Rename the folder to `mlx_Linux` 
++ Compile program with bonus content
 ```
 make bonus_linux
 ./so_long maps/bonus/mapbonus.ber
