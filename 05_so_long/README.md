@@ -4,4 +4,6 @@ Short description:
 
 ## How to play
 
+Follow these instruction to play the game.
 ### MacOS
+`git pull `
