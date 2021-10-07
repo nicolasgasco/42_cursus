@@ -6,4 +6,4 @@ Short description:
 
 Follow these instruction to play the game.
 ### MacOS
-`git pull `
+> `git pull https://github.com/nicolasgasco/42_cursus.git`
