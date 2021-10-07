@@ -6,4 +6,9 @@ Short description:
 
 Follow these instruction to play the game.
 ### MacOS
-> `git pull https://github.com/nicolasgasco/42_cursus.git`
+> Clone the repo and open the folder
+> `git clone https://github.com/nicolasgasco/42_cursus.git`
+> `cd 42_cursus/`
+> `cd 05_so_long/`
+> Compile program with bonus content
+> `make bonus`
