@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <unistd.h>
 
 int	ft_check_unique(int pos, char *str)
