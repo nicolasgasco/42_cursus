@@ -5,18 +5,17 @@ int	main(int argc, char *argv[])
 {
 	char	*line;
 	int		fd;
-	int		i;
 
-	i = 0;
-	fd = open("text.txt", O_RDONLY);
-	printf("Fd is %d\n", fd);
+	fd = open("gnlTester/files/41_with_nl", O_RDONLY);
 	while (1)	
 	{	
 		line = get_next_line(fd);
-		printf("%s\n", line);
-		if (line == NULL || i == 3)
+		if (line == NULL)
+		{
+			free(line);
 			break;
-		i++;
+		}
+		free(line);
 	}
 	close(fd);
 	return (1);	

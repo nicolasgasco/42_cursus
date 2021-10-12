@@ -43,6 +43,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	result[i] = '\0';
+	// free(s1);
 	return (result);
 }
 
@@ -58,7 +59,113 @@ int	ft_find_nl(char *str)
 	if (str[i] == '\0')
 		return (-1);
 	else
-		return (1);
+		return (i);
+}
+
+char	*ft_substr(char *s)
+{
+	int		i;
+	char	*result;
+
+	i = 0;
+	if (!s)
+		return(NULL);
+	if (ft_strlen(s) == 1)
+	{
+		result = malloc(2);
+		result[0] = '\n';
+		result[1] = '\0';
+		return (result);
+	}
+	result = malloc(ft_find_nl(s) + 2);
+	while (i != (ft_find_nl(s) + 1))
+	{
+			result[i] = s[i];
+			i++;
+	}
+	result[i] = '\0';
+	return (result);
+}
+
+char *ft_trim(char *s)
+{
+	char *result;
+	int		i;
+	int		k;
+
+	i = 0;
+	k = ft_find_nl(s) + 1;
+	if (ft_strlen(s) == ((ft_find_nl(s) + 1)))
+		return (s);
+	result = malloc(ft_strlen(s) - ft_find_nl(s) + 1);
+	while (s[i] != '\0')
+	{
+		result[i] = s[k];
+		i++;
+		k++;
+	}
+	result[i] = '\0';
+	return (result);
+}
+
+char *ft_strdup(char *s1)
+{
+	int		i;
+	char	*result;
+	
+	if (!s1)
+		return (NULL);
+	result = malloc(ft_strlen(s1) + 1);
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		result[i] = s1[i];
+		i++;
+	}
+	result[i] = '\0';
+	return (result);
+}
+
+char	*ft_calc_line(char *buf_static)
+{
+	char	*result;
+
+	if (!buf_static)
+		return (NULL);
+	if (ft_find_nl(buf_static) == -1)
+	{
+		result = ft_strdup(buf_static);
+		return (result);
+	}
+	else
+	{
+		result = ft_substr(buf_static);
+		return (result);
+	}
+}
+
+char	*ft_calc_buf(char *buf_static)
+{
+	char *result;
+	if (!buf_static)
+		return (NULL);
+	if (buf_static[0] == '\n')
+	{
+		free(buf_static);
+		return (NULL);
+	}
+	if (ft_find_nl(buf_static) == -1)
+	{
+		free(buf_static);
+		return (NULL);
+	}
+	else
+	{
+		result = ft_trim(buf_static);
+		free(buf_static);
+		return (result);
+	}
+
 }
 
 char	*get_next_line(int fd)
@@ -72,7 +179,10 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
+	{
+		free(buf);
 		return (NULL);
+	}
 	while	(ft_find_nl(buf_stat) == -1)
 	{
 		b_read = read(fd, buf, BUFFER_SIZE);
@@ -84,6 +194,8 @@ char	*get_next_line(int fd)
 	free(buf);
 	if (b_read == -1)
 		return (NULL);
-	// printf("Buf now is %s\n", buf);
-	return (buf_stat);	
+	line = ft_calc_line(buf_stat);
+	printf("Line is .%s.\n", line);
+	buf_stat = ft_calc_buf(buf_stat);
+	return (line);	
 }
