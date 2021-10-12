@@ -6,7 +6,7 @@ int	main(int argc, char *argv[])
 	char	*line;
 	int		fd;
 
-	fd = open("gnlTester/files/41_with_nl", O_RDONLY);
+	fd = open("gnlTester/files/multiple_nlx5", O_RDONLY);
 	while (1)	
 	{	
 		line = get_next_line(fd);
@@ -15,6 +15,7 @@ int	main(int argc, char *argv[])
 			free(line);
 			break;
 		}
+		printf(".%s.\n", line);
 		free(line);
 	}
 	close(fd);

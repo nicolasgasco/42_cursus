@@ -43,7 +43,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	result[i] = '\0';
-	// free(s1);
+	free(s1);
 	return (result);
 }
 
@@ -51,9 +51,9 @@ int	ft_find_nl(char *str)
 {
 	int	i;
 
-	i = 0;
 	if (!str)
 		return (-1);
+	i = 0;
 	while (str[i] != '\0' && str[i] != '\n')
 		i++;
 	if (str[i] == '\0')
@@ -77,7 +77,7 @@ char	*ft_substr(char *s)
 		result[1] = '\0';
 		return (result);
 	}
-	result = malloc(ft_find_nl(s) + 2);
+result = malloc((ft_find_nl(s) + 1) + 1);
 	while (i != (ft_find_nl(s) + 1))
 	{
 			result[i] = s[i];
@@ -95,16 +95,15 @@ char *ft_trim(char *s)
 
 	i = 0;
 	k = ft_find_nl(s) + 1;
-	if (ft_strlen(s) == ((ft_find_nl(s) + 1)))
-		return (s);
-	result = malloc(ft_strlen(s) - ft_find_nl(s) + 1);
-	while (s[i] != '\0')
+	result = malloc(ft_strlen(s) - ft_find_nl(s) -1 + 1);
+	while (s[k] != '\0')
 	{
 		result[i] = s[k];
 		i++;
 		k++;
 	}
 	result[i] = '\0';
+	free(s);
 	return (result);
 }
 
@@ -129,10 +128,12 @@ char *ft_strdup(char *s1)
 char	*ft_calc_line(char *buf_static)
 {
 	char	*result;
-
+	int		index;
+	
 	if (!buf_static)
 		return (NULL);
-	if (ft_find_nl(buf_static) == -1)
+	index = ft_find_nl(buf_static);
+	if (index == -1 || buf_static[0] == '\n')
 	{
 		result = ft_strdup(buf_static);
 		return (result);
@@ -146,26 +147,17 @@ char	*ft_calc_line(char *buf_static)
 
 char	*ft_calc_buf(char *buf_static)
 {
-	char *result;
-	if (!buf_static)
-		return (NULL);
-	if (buf_static[0] == '\n')
-	{
-		free(buf_static);
-		return (NULL);
-	}
-	if (ft_find_nl(buf_static) == -1)
-	{
-		free(buf_static);
-		return (NULL);
-	}
-	else
-	{
-		result = ft_trim(buf_static);
-		free(buf_static);
-		return (result);
-	}
+	char	*result;
+	int		index;
 
+	index = ft_find_nl(buf_static);
+	if (index == -1)
+	{
+		free(buf_static);
+		return (NULL);
+	}
+	result = ft_trim(buf_static);
+	return (result);
 }
 
 char	*get_next_line(int fd)
@@ -179,10 +171,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
-	{
-		free(buf);
 		return (NULL);
-	}
 	while	(ft_find_nl(buf_stat) == -1)
 	{
 		b_read = read(fd, buf, BUFFER_SIZE);
@@ -195,7 +184,6 @@ char	*get_next_line(int fd)
 	if (b_read == -1)
 		return (NULL);
 	line = ft_calc_line(buf_stat);
-	printf("Line is .%s.\n", line);
 	buf_stat = ft_calc_buf(buf_stat);
 	return (line);	
 }
