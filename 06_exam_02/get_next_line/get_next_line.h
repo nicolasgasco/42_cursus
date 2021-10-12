@@ -3,4 +3,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-chat	*get_next_line(int fd);
+char	*get_next_line(int fd);
+
+#endif
