@@ -1,7 +1,7 @@
 #include "get_next_line.h"
 #include <stdio.h>
 #include <fcntl.h>
-int	main(int argc, char *argv[])
+int	main(void)
 {
 	char	*line;
 	int		fd;

@@ -130,7 +130,7 @@ char	*ft_calc_line(char *buf_static)
 	char	*result;
 	int		index;
 	
-	if (!buf_static)
+	if (!buf_static || ft_strlen(buf_static) == 0)
 		return (NULL);
 	index = ft_find_nl(buf_static);
 	if (index == -1 || buf_static[0] == '\n')
@@ -167,6 +167,7 @@ char	*get_next_line(int fd)
 	char				*line;
 	int					b_read;
 
+	b_read= 1;
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
 	buf = malloc(BUFFER_SIZE + 1);
