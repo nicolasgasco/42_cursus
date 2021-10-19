@@ -9,7 +9,7 @@
 char    *g_bin_str;
 // Utils
 int     ft_atoi(const char *str);
-void    ft_put_bin(int n, int pid);
+void	ft_stobin(int n, int pid);
 int     ft_printf(const char *str, ...);
 char	*ft_strjoin(char const *s1, char const *s2);
 // Scripts

@@ -37,7 +37,8 @@ int	ft_atoi(const char *str)
 	return ((int)result * negative);
 }
 
-void	ft_put_bin(int n, int pid)
+
+void	ft_put_bin(int n, int pid, int *i)
 {
 	if (n <= 1)
 	{
@@ -48,19 +49,34 @@ void	ft_put_bin(int n, int pid)
 			// ft_printf("%d\n", n);
 			kill(pid, SIGUSR2);
 		usleep(200);
+		printf("I is %d\n", *i);
+		while (*i != 8)
+		{
+			kill(pid, SIGUSR1);
+			usleep(200);
+			*i++;
+		}
 	}
 	else
 	{
-		ft_put_bin(n / 2, pid);
+		ft_put_bin(n / 2, pid, i);
 		if ((n % 2) == 0)
-			// ft_printf("%d\n", n % 2);
 			kill(pid, SIGUSR1);
 		else if ((n % 2) == 1)
-			// ft_printf("%d\n", n % 2);
 			kill(pid, SIGUSR2);
+		*i++;
 		usleep(200);
 	}
 }
+
+void	ft_stobin(int n, int pid)
+{
+	int	i;
+
+	i = 0;
+	ft_put_bin(n, pid, &i);
+}
+
 
 size_t	ft_strlen(const char *s)
 {
