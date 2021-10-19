@@ -31,19 +31,9 @@ int	main(int argc, char *argv[])
 	i = 0;
 	while (message[i] != '\0')
 	{
-		// ft_printf("Decimal is %d\n", message[i]);
-		// ft_put_bin((int)message[i], pid);
-		// ft_printf("\n");
-		if ((i % 2) != 0)
-		{
-			kill(pid, SIGUSR1);
-			usleep(500);
-		}
-		else
-		{
-			kill(pid, SIGUSR2);
-			usleep(500);
-		}
+		ft_printf("Decimal is %d\n", message[i]);
+		ft_put_bin((int)message[i], pid);
+		ft_printf("\n");
 		i++;
 	}
 	ft_printf("\n");
