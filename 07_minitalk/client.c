@@ -1,19 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/19 18:40:30 by ngasco            #+#    #+#             */
+/*   Updated: 2021/10/19 19:43:19 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-    int     pid;
-    char    *message;
-
-    if (argc != 3)
-    {
-        printf("Number of arguments is not correct\n");
-        return (1);
-    }
-    pid = ft_atoi(argv[1]);
-    message = argv[2];
-    ft_printf("PID is %d\n", pid);
-    ft_printf("String is %s\n", message);
-    kill(pid, SIGUSR1);
-    return (0);
+	int		pid;
+	char	*message;
+	int 	i;
+	
+	ft_printf("Argc is %d\n", argc);
+	if (argc != 3)
+	{
+		ft_printf("Number of arguments is not correct\n");
+		return (1);
+	}
+	pid = ft_atoi(argv[1]);
+	message = argv[2];
+	ft_printf("PID is %d\n", pid);
+	ft_printf("String is %s\n", message);
+	i = 0;
+	while (message[i] != '\0')
+	{
+		// ft_printf("Decimal is %d\n", message[i]);
+		// ft_put_bin((int)message[i], pid);
+		// ft_printf("\n");
+		if ((i % 2) != 0)
+		{
+			kill(pid, SIGUSR1);
+			usleep(500);
+		}
+		else
+		{
+			kill(pid, SIGUSR2);
+			usleep(500);
+		}
+		i++;
+	}
+	ft_printf("\n");
+	return (0);
 }

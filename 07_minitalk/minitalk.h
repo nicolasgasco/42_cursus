@@ -5,19 +5,13 @@
 # include <stdio.h>
 # include <signal.h>
 
-
-struct sigaction {
-    void (*sa_handler)(int);
-    // void (*sa_sigaction)(int, siginfo_t *, void *);
-    // sigset_t sa_mask;
-    // int sa_flags;
-    // void (*sa_restorer)(void);
-} sigaction;
-
-int	ft_atoi(const char *str);
-int	ft_printf(const char *str, ...);
-int ft_client(int argc, char *argv[]);
-int ft_server(void);
+// Utils
+int     ft_atoi(const char *str);
+void    ft_put_bin(int n, int pid);
+int     ft_printf(const char *str, ...);
+// Scripts
+int     ft_client(int argc, char *argv[]);
+int     ft_server(void);
 
 
 #endif

@@ -1,36 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/19 18:42:21 by ngasco            #+#    #+#             */
+/*   Updated: 2021/10/19 19:44:02 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
-void msg_handler(int signum)
+void	msg_handler(int signum)
 {
-    ft_printf("Mierda\n")
-    if (signum == SIGUSR1)
-    {
-        printf("Received SIGUSR1!\n");
-    }
+	if (signum == SIGUSR1)
+	{
+		ft_printf("Received SIGUSR1!\n\n");
+	}
+	else if (signum == SIGUSR2)
+	{
+		ft_printf("Received SIGUSR2!\n\n");
+	}
 }
 
-int main(void)
+int	main(void)
 {
-    int pid;
-    struct sigaction msg_action;
+	int	pid;
 
-    pid = getpid();
-    ft_printf("Server's PID is %d\n", pid);
-
-
-    // if (signal(SIGUSR1, msg_handler) < 0)
-    // {
-	// 	ft_printf("sigaction");
-	// 	return (1);
-	// }
-
-
-  msg_action.sa_handler = msg_handler;
-  sigemptyset (&msg_action.sa_mask);
-  msg_action.sa_flags = 0;
-
-    sigaction (SIGUSR1, NULL, &msg_action);
-    while (1)
+	pid = getpid();
+	ft_printf("Server's PID is %d\n", pid);
+	if (signal(SIGUSR1, msg_handler))
+	{
+		ft_printf("Error\n");
+		return (1);
+	}
+	if (signal(SIGUSR2, msg_handler))
+	{
+		ft_printf("Error\n");
+		return (1);
+	}
+	while (1)
 		sleep (10);
-    return (0);
+	return (0);
 }
