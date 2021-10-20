@@ -9,12 +9,16 @@
 char    *g_bin_str;
 // Utils
 int     ft_atoi(const char *str);
-void	ft_stobin(int n, int pid);
 int     ft_printf(const char *str, ...);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strdup(const char *s1);
+int     ft_strcmp(const char *s1, const char *s2);
+size_t	ft_strlen(const char *s);
+
 // Scripts
 int     ft_client(int argc, char *argv[]);
 int     ft_server(void);
-
+void	ft_put_bin(int n, int pid, int *counter);
+void	ft_inttobin(int	n, int	pid);
 
 #endif

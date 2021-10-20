@@ -38,43 +38,39 @@ int	ft_atoi(const char *str)
 }
 
 
-void	ft_put_bin(int n, int pid, int *i)
+void	ft_inttobin(int	n, int	pid)
+{
+	int	counter;
+
+	counter = 1;
+	ft_put_bin(n, pid, &counter);
+}
+void	ft_put_bin(int n, int pid, int *counter)
 {
 	if (n <= 1)
 	{
-		if (n == 0)
-			// ft_printf("%d\n", n);
-			kill(pid, SIGUSR1);
-		else if (n == 1)
-			// ft_printf("%d\n", n);
-			kill(pid, SIGUSR2);
-		usleep(200);
-		printf("I is %d\n", *i);
-		while (*i != 8)
+		while (*counter != 8)
 		{
 			kill(pid, SIGUSR1);
 			usleep(200);
-			*i++;
+			*counter += 1;
 		}
+		if (n == 0)
+			kill(pid, SIGUSR1);
+		else if (n == 1)
+			kill(pid, SIGUSR2);
+		usleep(200);
 	}
 	else
 	{
-		ft_put_bin(n / 2, pid, i);
+		*counter += 1;
+		ft_put_bin(n / 2, pid, counter);
 		if ((n % 2) == 0)
 			kill(pid, SIGUSR1);
 		else if ((n % 2) == 1)
 			kill(pid, SIGUSR2);
-		*i++;
 		usleep(200);
 	}
-}
-
-void	ft_stobin(int n, int pid)
-{
-	int	i;
-
-	i = 0;
-	ft_put_bin(n, pid, &i);
 }
 
 

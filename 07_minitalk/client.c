@@ -32,7 +32,7 @@ int	main(int argc, char *argv[])
 	while (message[i] != '\0')
 	{
 		ft_printf("Decimal is %d\n", message[i]);
-		ft_stobin((int)message[i], pid);
+		ft_inttobin((int)message[i], pid);
 		ft_printf("\n");
 		i++;
 	}
