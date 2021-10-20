@@ -19,30 +19,22 @@ void	ft_store_bin(char *str)
 	int	mult;
 	int	j;
 	
-	i = 0;
+	i = ft_strlen(str);
 	j = 0;
 	result = 0;
-	mult = 2;
-	while (str[i] != '\0')
+	mult = 1;
+	while (i > 0)
 	{
-		if (i == 0)
-		{
-			if (str[i] == '1')
-				result = result | 1;
-			else
-				result = result & ~1;
-		}
+		printf("%c\n", str[i -1]);
+		if (str[i - 1] == '1')
+			result = result | mult;
 		else
-		{
-			mult *= 2;
-			if (str[i] == '1')
-				result = result | mult;
-			else
-				result = result & ~1;
-		}
-		i++;
+			result = result & ~mult;
+		mult *= 2;
+		i--;
 	}
-	printf("Number is %d\n", result);
+	ft_printf("Number is %d\n", result);
+	ft_printf("Character is %c\n", result);
 }
 
 void	msg_handler(int signum)

@@ -49,12 +49,12 @@ void	ft_put_bin(int n, int pid, int *counter)
 {
 	if (n <= 1)
 	{
-		while (*counter != 8)
-		{
-			kill(pid, SIGUSR1);
-			usleep(200);
-			*counter += 1;
-		}
+		// while (*counter != 8)
+		// {
+		// 	kill(pid, SIGUSR1);
+		// 	usleep(200);
+		// 	*counter += 1;
+		// }
 		if (n == 0)
 			kill(pid, SIGUSR1);
 		else if (n == 1)
