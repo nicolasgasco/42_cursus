@@ -6,7 +6,7 @@
 # include <stdlib.h>
 # include "./ft_printf/ft_printf.h"
 
-char    *g_bin_str;
+int    g_bin;
 // Utils
 int     ft_atoi(const char *str);
 int     ft_printf(const char *str, ...);
@@ -18,7 +18,7 @@ size_t	ft_strlen(const char *s);
 // Scripts
 int     ft_client(int argc, char *argv[]);
 int     ft_server(void);
-void	ft_put_bin(int n, int pid, int *counter);
+void	ft_put_bin(int n, int pid);
 void	ft_inttobin(int	n, int	pid);
 
 #endif

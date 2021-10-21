@@ -43,35 +43,66 @@ void	ft_inttobin(int	n, int	pid)
 	int	counter;
 
 	counter = 1;
-	ft_put_bin(n, pid, &counter);
+	ft_put_bin(n, pid);
 }
-void	ft_put_bin(int n, int pid, int *counter)
-{
-	if (n <= 1)
+
+void	ft_put_bin(int n, int pid)
+{ 
+	int	counter;
+
+	counter = 0;
+	while (n / 2 >= 1)
 	{
-		// while (*counter != 8)
-		// {
-		// 	kill(pid, SIGUSR1);
-		// 	usleep(200);
-		// 	*counter += 1;
-		// }
-		if (n == 0)
-			kill(pid, SIGUSR1);
-		else if (n == 1)
-			kill(pid, SIGUSR2);
-		usleep(200);
-	}
-	else
-	{
-		*counter += 1;
-		ft_put_bin(n / 2, pid, counter);
 		if ((n % 2) == 0)
 			kill(pid, SIGUSR1);
 		else if ((n % 2) == 1)
 			kill(pid, SIGUSR2);
-		usleep(200);
+		usleep(50);
+		n = n / 2;
+		counter++;
+	}
+	if (n == 0)
+		kill(pid, SIGUSR1);
+	else
+		kill(pid, SIGUSR2);
+	usleep(50);
+	counter++;
+	// printf("Counter is %d\n", counter);
+	while(counter < 8)
+	{
+		kill(pid, SIGUSR1);
+		usleep(50);
+		counter++;
 	}
 }
+
+// void	ft_put_bin(int n, int pid, int *counter)
+// {
+// 	if (n <= 1)
+// 	{
+// 		// while (*counter != 8)
+// 		// {
+// 		// 	kill(pid, SIGUSR1);
+// 		// 	usleep(200);
+// 		// 	*counter += 1;
+// 		// }
+// 		if (n == 0)
+// 			kill(pid, SIGUSR1);
+// 		else if (n == 1)
+// 			kill(pid, SIGUSR2);
+// 		usleep(200);
+// 	}
+// 	else
+// 	{
+// 		*counter += 1;
+// 		ft_put_bin(n / 2, pid, counter);
+// 		if ((n % 2) == 0)
+// 			kill(pid, SIGUSR1);
+// 		else if ((n % 2) == 1)
+// 			kill(pid, SIGUSR2);
+// 		usleep(200);
+// 	}
+// }
 
 
 size_t	ft_strlen(const char *s)
