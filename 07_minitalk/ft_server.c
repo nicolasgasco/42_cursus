@@ -14,22 +14,22 @@
 
 void	msg_handler(int signo)
 {
-	unsigned int	counter_bit;
-	static long		g_bin;
+	unsigned int		counter_bit;
+	static int			bin;
 
-	if (!g_bin)
-		g_bin = 256;
-	counter_bit = g_bin & 65280;
+	if (!bin)
+		bin = 256;
+	counter_bit = bin & 65280;
 	if (signo == SIGUSR1)
-		g_bin = g_bin & ~(counter_bit / 256);
+		bin = bin & ~(counter_bit / 256);
 	else if (signo == SIGUSR2)
-		g_bin = g_bin | (counter_bit / 256);
+		bin = bin | (counter_bit / 256);
 	counter_bit <<= 1;
-	g_bin = (g_bin & 255) | counter_bit;
-	if ((counter_bit / 256) == 256)
+	bin = (bin & 255) | counter_bit;
+	if ((counter_bit / 256) >= 256)
 	{
-		ft_printf("%c", g_bin & 255);
-		g_bin = 256;
+		ft_printf("%c", bin & 255);
+		bin = 256;
 	}
 }
 
@@ -42,9 +42,6 @@ int	main(void)
 	signal(SIGUSR1, msg_handler);
 	signal(SIGUSR2, msg_handler);
 	while (1)
-	{
 		pause();
-	}
-	system("leaks server");
 	return (0);
 }

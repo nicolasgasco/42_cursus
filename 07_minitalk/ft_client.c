@@ -12,6 +12,9 @@
 
 #include "minitalk.h"
 
+#include <time.h>
+
+
 int	main(int argc, char *argv[])
 {
 	int		pid;
@@ -31,6 +34,5 @@ int	main(int argc, char *argv[])
 		ft_put_bin((int)message[i], pid);
 		i++;
 	}
-	system("leaks client");
 	return (0);
 }

@@ -13,11 +13,8 @@
 #ifndef MINITALK_H
 # define MINITALK_H
 # include <unistd.h>
-# include <stdio.h>
 # include <signal.h>
-# include <stdlib.h>
 # include <stdarg.h>
-# include <unistd.h>
 
 //  Printf
 void	ft_putstr(const char *s, unsigned int *counter);
