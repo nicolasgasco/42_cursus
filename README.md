@@ -21,5 +21,5 @@ file descriptor (bonus: multiple file descriptors without losing the reading thr
 
 ---
 ### DISCLAIMER FOR FELLOW STUDENTS OF 42!!
-Dont't copy from this repository. I'm not that good and it's against the spirit of 42. Asks your classmates for help. I only created this repository to keep track of the work that I do. 
+Dont't copy from this repository. I'm not that good and it's against the spirit of 42. Ask your classmates for help. I only created this repository to keep track of my progress.
 ---
