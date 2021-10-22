@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 18:50:12 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/19 19:33:22 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/22 17:51:14 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ int	ft_atoi(const char *str)
 	return ((int)result * negative);
 }
 
-
-void	ft_inttobin(int	n, int	pid)
+void	ft_inttobin(int n, int pid)
 {
 	int	counter;
 
@@ -47,7 +46,7 @@ void	ft_inttobin(int	n, int	pid)
 }
 
 void	ft_put_bin(int n, int pid)
-{ 
+{
 	int	counter;
 
 	counter = 0;
@@ -67,43 +66,13 @@ void	ft_put_bin(int n, int pid)
 		kill(pid, SIGUSR2);
 	usleep(50);
 	counter++;
-	// printf("Counter is %d\n", counter);
-	while(counter < 8)
+	while (counter < 8)
 	{
 		kill(pid, SIGUSR1);
 		usleep(50);
 		counter++;
 	}
 }
-
-// void	ft_put_bin(int n, int pid, int *counter)
-// {
-// 	if (n <= 1)
-// 	{
-// 		// while (*counter != 8)
-// 		// {
-// 		// 	kill(pid, SIGUSR1);
-// 		// 	usleep(200);
-// 		// 	*counter += 1;
-// 		// }
-// 		if (n == 0)
-// 			kill(pid, SIGUSR1);
-// 		else if (n == 1)
-// 			kill(pid, SIGUSR2);
-// 		usleep(200);
-// 	}
-// 	else
-// 	{
-// 		*counter += 1;
-// 		ft_put_bin(n / 2, pid, counter);
-// 		if ((n % 2) == 0)
-// 			kill(pid, SIGUSR1);
-// 		else if ((n % 2) == 1)
-// 			kill(pid, SIGUSR2);
-// 		usleep(200);
-// 	}
-// }
-
 
 size_t	ft_strlen(const char *s)
 {

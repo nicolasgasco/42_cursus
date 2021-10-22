@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk_utils.c                                   :+:      :+:    :+:   */
+/*   minitalk_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 18:50:12 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/19 19:33:22 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/22 17:16:57 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	ft_strcmp(const char *s1, const char *s2)
 	}
 	return ((unsigned char)*(s1 + i) - (unsigned char)*(s2 + i));
 }
-
 
 char	*ft_strdup(const char *s1)
 {

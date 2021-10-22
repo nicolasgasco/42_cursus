@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 18:40:30 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/19 19:43:19 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/22 17:14:19 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ int	main(int argc, char *argv[])
 {
 	int		pid;
 	char	*message;
-	int 	i;
-	
-	ft_printf("Argc is %d\n", argc);
+	int		i;
+
 	if (argc != 3)
 	{
 		ft_printf("Number of arguments is not correct\n");
@@ -31,11 +30,8 @@ int	main(int argc, char *argv[])
 	i = 0;
 	while (message[i] != '\0')
 	{
-		// ft_printf("Decimal is %d\n", message[i]);
 		ft_inttobin((int)message[i], pid);
-		ft_printf("\n");
 		i++;
 	}
-	ft_printf("\n");
 	return (0);
 }
