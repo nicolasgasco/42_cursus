@@ -39,7 +39,7 @@ int	ft_atoi(const char *str)
 
 void	ft_sleep(void)
 {
-	usleep(195);
+	usleep(200);
 }
 
 void	ft_put_bin(int n, int pid)

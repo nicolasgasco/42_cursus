@@ -28,7 +28,10 @@ void	msg_handler(int signo)
 	bin = (bin & 255) | counter_bit;
 	if ((counter_bit / 256) >= 256)
 	{
-		ft_printf("%c", bin & 255);
+		if ((bin & 255) == 0)
+			ft_printf("\n");
+		else
+			ft_printf("%c", bin & 255);
 		bin = 256;
 	}
 }

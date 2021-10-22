@@ -34,5 +34,6 @@ int	main(int argc, char *argv[])
 		ft_put_bin((int)message[i], pid);
 		i++;
 	}
+	ft_put_bin((int)message[i], pid);
 	return (0);
 }
