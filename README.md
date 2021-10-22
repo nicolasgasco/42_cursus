@@ -17,6 +17,8 @@ file descriptor (bonus: multiple file descriptors without losing the reading thr
 4. **ft_printf** (C programming, September 2021): reproduce basic functioning of prinft function (flags implemented: %c, %s, %i, %d, %u, %x, %X, %p, %%, no error handling except for NULL strings passed as parameter)
 5. **so_long** (2D gaming, October 2021): create a small 2D game using the Minilibx API. Goal of the game is leaving the map in the shortest amount of moves after collecting all objects.
 6. **exam_02** (exam, October 2021): The exercises I did in order to prepare for the 2nd rank exam.
+7. **minitalk** (C programming, October 2021): code a small data exchange program using UNIX signals (SIGUSR1 and SIGUSR2) and bitwise operations. A string is passed as parameter to the client, converted into binary, and sent to the server in form of signals (either 0 or 1), where the string is reconstructed and outputted. 
+
 
 
 ---
