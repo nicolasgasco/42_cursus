@@ -4,7 +4,7 @@ This is a collection of the projects I completed while doing the 'common core' o
 
 ---
 ### DISCLAIMER ON STYLE!!
-In order to be valid, code of 42 projects must follow strict rules (e.g. declare variables first and initialize later, no for loops nor switch statements allowed) and limits (e.g. 25 lines max per function, 4 named parameters per function, etc). Therefore it isn't always written in the most straight-forward way.
+In order to be valid, code of 42 projects must follow strict -- sometimes slightly weird -- rules and limits. For this reason, my code isn't always written in the cleanest and most straight-forward way.
 ---
 
 
