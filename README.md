@@ -10,7 +10,7 @@ In order to be valid, code of 42 projects must follow strict -- sometimes slight
 
 
 This is the list of projects sorted by date:
-1. **libft** (C programming, July 2021): re-write useful C functions like strdup or strjoin using only malloc and free
+1. **libft** (C programming, July 2021): re-write useful C functions like split or join using only malloc and free
 2. **born2beroot** (Linux sys administration, August 2021): create a virtual machine under specific instructions. Setting a minimal Debian server implementing strict rules, e.g. strong password policy, UFW firewall, SSH, etc. In the repo there's only a Bash script that had to be broadcasted to all users every 10 minutes using crontab and wall
 3. **get_next_line** (C programming, August 2021): write a function which returns a line read from a
 file descriptor (bonus: multiple file descriptors without losing the reading thread on each of them)
