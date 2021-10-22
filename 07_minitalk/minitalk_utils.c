@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 18:50:12 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/22 19:18:54 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/22 20:07:17 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_atoi(const char *str)
 
 void	ft_sleep(void)
 {
-	usleep(100);
+	usleep(50);
 }
 
 void	ft_put_bin(int n, int pid)

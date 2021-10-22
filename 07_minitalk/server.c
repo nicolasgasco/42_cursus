@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 18:42:21 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/22 19:19:16 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/22 20:00:48 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(void)
 	signal(SIGUSR2, msg_handler);
 	while (1)
 	{
-		sleep (1);
+		pause();
 	}
 	system("leaks server");
 	return (0);
