@@ -2,14 +2,7 @@
 
 This is a collection of the projects I completed while doing the 'common core' of 42Urduliz in Bilbao.
 
----
-### DISCLAIMER ON STYLE!!
-In order to be valid, code of 42 projects must follow strict -- sometimes slightly weird -- rules and limits. For this reason, my code isn't always written in the cleanest and most straight-forward way.
----
-
-
-
-This is the list of projects sorted by date (descending):
+Here is the list of projects sorted by date (descending):
 1. **minitalk** (C programming, October 2021): code a small data exchange program using UNIX signals (SIGUSR1 and SIGUSR2) and bitwise operations. A string is passed as parameter to the client, converted into binary, and sent to the server in form of signals (either 0 or 1), where the string is reconstructed and outputted. 
 2. **exam_02** (exam, October 2021): The exercises I did in order to prepare for the 2nd rank exam.
 3. **so_long** (2D gaming, October 2021): create a small 2D game using the Minilibx API. Goal of the game is leaving the map in the shortest amount of moves after collecting all objects.
