@@ -1,7 +1,8 @@
 # MINITALK
 
 Description:
->  The purpose of this project is to code a small data exchange program using UNIX signals.
+>  The purpose of this project is to code a small data exchange program using UNIX signals and bitwise operations.
+A server listens for signals (SIGUSR1 and SIGUSR2) emitted by a client. The client receives a string as a parameter, converts it into binary, and sends it to the server in form of 0s (SIGUSR1) and 1s (SIGUSR2). The server receives the signals and convert them back to a string, which is then outputted in the console.
 
 ## Run the scripts
 
