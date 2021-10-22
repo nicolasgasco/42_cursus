@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 18:40:30 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/22 17:14:19 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/22 19:20:55 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,12 @@ int	main(int argc, char *argv[])
 	}
 	pid = ft_atoi(argv[1]);
 	message = argv[2];
-	ft_printf("PID is %d\n", pid);
-	ft_printf("String is %s\n", message);
 	i = 0;
 	while (message[i] != '\0')
 	{
-		ft_inttobin((int)message[i], pid);
+		ft_put_bin((int)message[i], pid);
 		i++;
 	}
+	system("leaks client");
 	return (0);
 }

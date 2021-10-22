@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 18:42:21 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/22 18:32:50 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/22 19:19:16 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	msg_handler(int signo)
 {
-	int			counter_bit;
-	static int	g_bin;
+	unsigned int	counter_bit;
+	static long		g_bin;
 
 	if (!g_bin)
 		g_bin = 256;
@@ -38,12 +38,13 @@ int	main(void)
 	int		pid;
 
 	pid = getpid();
-	ft_printf("Pid is %d\n", pid);
+	ft_printf("Pid is %d.\n", pid);
 	signal(SIGUSR1, msg_handler);
 	signal(SIGUSR2, msg_handler);
 	while (1)
 	{
 		sleep (1);
 	}
+	system("leaks server");
 	return (0);
 }
