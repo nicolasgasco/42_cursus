@@ -6,11 +6,11 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 10:57:57 by ngasco            #+#    #+#             */
-/*   Updated: 2021/08/30 13:07:31 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/22 18:22:07 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "minitalk.h"
 
 void	ft_flags(const char *str_char, va_list args, unsigned int *counter)
 {

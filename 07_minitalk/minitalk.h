@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:47:15 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/22 17:50:49 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/22 18:19:28 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,17 @@
 # include <stdio.h>
 # include <signal.h>
 # include <stdlib.h>
-# include "./ft_printf/ft_printf.h"
+# include <stdarg.h>
+# include <unistd.h>
 
+
+//  Printf
+void	ft_putstr(const char *s, unsigned int *counter);
+void	ft_putnbr(int n, unsigned int *counter);
+void	ft_putunbr(unsigned int n, unsigned int *counter);
+void	ft_puthex(unsigned int hex, char uppercase, unsigned int *counter);
+void	ft_puthexp(unsigned long hex, unsigned int *counter);
+int		ft_printf(const char *str, ...);
 // Utils
 int		ft_atoi(const char *str);
 int		ft_printf(const char *str, ...);

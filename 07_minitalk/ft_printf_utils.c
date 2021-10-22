@@ -6,11 +6,11 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 11:22:12 by nicolasg          #+#    #+#             */
-/*   Updated: 2021/09/04 13:51:39 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/22 18:22:04 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "minitalk.h"
 
 void	ft_putstr(const char *s, unsigned int *counter)
 {
