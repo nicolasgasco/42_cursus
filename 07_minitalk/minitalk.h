@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:47:15 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/22 19:18:35 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/23 15:27:26 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ int		ft_printf(const char *str, ...);
 
 // Utils
 int		ft_atoi(const char *str);
-int		ft_printf(const char *str, ...);
 
 // Scripts
-int     ft_client(int argc, char *argv[]);
+int		ft_client(int argc, char *argv[]);
 int		ft_server(void);
 void	ft_put_bin(int n, int pid);
 
