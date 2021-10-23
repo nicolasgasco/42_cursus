@@ -14,21 +14,30 @@ CLIENT = client
 
 SERVER = server
 
-SRCS_CLIENT =  ft_client.c \
-
-SRCS_SERVER = ft_server.c \
-
-SRCS_PRINTF = ft_printf.c \
+SRCS_BONUS_PRINTF = ft_printf.c \
 			  ft_printf_utils.c \
+
+SRCS_BONUS_CLIENT = ft_client_bonus.c \
+
+SRCS_BONUS_SERVER = ft_server_bonus.c \
+
+SRCS_BONUS_PRINTF = ft_printf_bonus.c \
+			  	   	ft_printf_utils_bonus.c \
 
 FLAGS = -Wall -Wextra -Werror \
 
 $(CLIENT):
-	@ gcc $(FLAGS) $(SRCS_CLIENT) $(SRCS_PRINTF) -o client
+	@ gcc $(FLAGS) $(SRCS_BONUS_CLIENT) $(SRCS_BONUS_PRINTF) -o client
 	@ echo "Compiling client..."
 
 $(SERVER):
-	@ gcc $(FLAGS) $(SRCS_SERVER) $(SRCS_PRINTF) -o server
+	@ gcc $(FLAGS) $(SRCS_BONUS_SERVER) $(SRCS_BONUS_PRINTF) -o server
+	@ echo "Compiling server..."
+
+bonus :
+	@ gcc $(FLAGS) $(SRCS_BONUS_CLIENT) $(SRCS_BONUS_PRINTF) -o client
+	@ echo "Compiling client..."
+	@ gcc $(FLAGS) $(SRCS_BONUS_SERVER) $(SRCS_BONUS_PRINTF) -o server
 	@ echo "Compiling server..."
 
 all : $(SERVER) $(CLIENT)
