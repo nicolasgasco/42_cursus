@@ -24,8 +24,8 @@ Execute in two separate terminal tabs.
 ```
 ./server
 ```
-Read the PID from server and pass it as parameter along with a string of your choice.
 ### Client
+Read the PID from server and pass it as parameter along with a string of your choice.
 ```
 ./client PID STRING
 ```
