@@ -9,3 +9,5 @@ libft/libft.so
 .gitignore
 server
 client
+*.o
+libft.a
