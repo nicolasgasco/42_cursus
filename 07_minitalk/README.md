@@ -8,7 +8,7 @@ A server listens for signals (SIGUSR1 and SIGUSR2) emitted by a client. The clie
 
 Follow these instruction to see the project in action.
 
-### Any OS able to compile C
+### UNIX
 Clone the repo and open the corresponding folder
 ```
 ➜ git clone https://github.com/nicolasgasco/42_cursus.git
