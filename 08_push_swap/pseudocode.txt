@@ -1,3 +1,11 @@
+CREATING ARRAY
+1. Crete a string with all numbers
+2. Split the string
+3. Convert all chunks to numbers
+4. Store in reverse order
+
+SORTING
+
 1. Find smallest number
     First time
         If on top or left -> Shift up
