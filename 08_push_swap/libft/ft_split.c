@@ -38,6 +38,7 @@ static void	ft_write_strings_to_array(char const *s, char c, char **result)
 {
 	int		i;
 	int		start;
+	char	*temp;
 
 	i = 0;
 	start = 0;
@@ -47,7 +48,9 @@ static void	ft_write_strings_to_array(char const *s, char c, char **result)
 		{
 			if (i - start != 0)
 			{
-				*result = ft_substr(s, start, i - start);
+				temp = ft_substr(s, start, i - start);
+				*result = temp;
+				free(temp);
 				result++;
 			}
 			start = i + 1;
@@ -57,7 +60,11 @@ static void	ft_write_strings_to_array(char const *s, char c, char **result)
 		i++;
 	}
 	if (s[i - 1] != c)
-		*result = ft_substr(s, start, i - start);
+	{
+		temp = ft_substr(s, start, i - start);
+		*result = temp;
+		free(temp);
+	}
 	if (s[i - 1] != c)
 		result++;
 	*result = NULL;
@@ -73,14 +80,17 @@ char	**ft_split(char const *s, char c)
 	{
 		result = (char **)malloc(sizeof(char *) + 1);
 		result[0] = NULL;
+		free((char *)s);
 		return (result);
 	}
 	result = (char **)malloc((ft_calc_total_len(s, c) + 1) * sizeof(char *));
 	if (result == NULL)
 	{
 		free(result);
+		free((char *)s);
 		return (NULL);
 	}
 	ft_write_strings_to_array(s, c, result);
+	free((char *)s);
 	return (result);
 }

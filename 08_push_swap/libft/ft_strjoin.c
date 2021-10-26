@@ -22,6 +22,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (i++ < len2)
 		res[i - 1 + len1] = s2[i - 1];
 	res[i - 1 + len1] = '\0';
-	free((char *)s1);
+	if (ft_strlen(s1) != 0)
+		free((char *)s1);
 	return (res);
 }
