@@ -7,7 +7,7 @@ int	main(void)
 	int	fd;
 	char 	*str;
 		
-	fd = open("file.txt", O_RDONLY);
+	fd = open("multiple_nlx5", O_RDONLY);
 	while (1)
 	{
 		str = get_next_line(fd);
@@ -15,6 +15,7 @@ int	main(void)
 			break;
 		if (i == 10)
 			break;
+		// printf("Line %d: .%s.\n", i + 1, str);
 		free(str);
 		i++;
 	}
