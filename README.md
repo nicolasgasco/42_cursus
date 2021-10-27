@@ -1,4 +1,4 @@
-# Projects done while a student of 42Urduliz
+# Projects done at 42Urduliz
 
 This is a collection of the projects I completed while doing the 'common core' of 42Urduliz in Bilbao.
 
