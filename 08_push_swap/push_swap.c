@@ -6,6 +6,5 @@ int	main(int argc, char *argv[])
 
 	ft_create_linked_list(argc, argv, &num_list);
 
-	// free(&num_list);
 	return (0);
 }
