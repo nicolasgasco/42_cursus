@@ -22,6 +22,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	{
 		result = malloc(1 * sizeof(char));
 		result[0] = '\0';
+		free((char *)s);
 		return (result);
 	}
 	result = malloc((len + 1) * sizeof(char));
@@ -34,5 +35,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		j++;
 	}
 	result[j] = '\0';
+	free((char *)s);
 	return (result);
 }
