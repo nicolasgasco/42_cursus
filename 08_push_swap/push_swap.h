@@ -13,8 +13,8 @@ typedef struct NumList {
     int         hi_a;
     int         lo_b;
     int         hi_b;
-    struct Node *a_arr;
-    struct Node *b_arr;
+    struct Node *a_list;
+    struct Node *b_list;
 } num_list;
 
 struct Node {
@@ -58,6 +58,12 @@ char		**ft_split(char const *s, char c);
 // void		ft_putendl_fd(char *s, int fd);
 // void		ft_putnbr_fd(int n, int fd);
 
+// Linked list methods
+void	ft_insert_beginning(struct Node **root, int value);
+void	ft_insert_end(struct Node **root, int value);
+void	ft_deallocate_list(struct Node **root);
+void	ft_iterate_list(struct Node *root, char c);
+void	ft_insert_after(struct Node *node, int value);
 // Push swap
 void	ft_create_linked_list(int argc, char **args, num_list *num_list);
 
