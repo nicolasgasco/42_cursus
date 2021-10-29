@@ -6,19 +6,21 @@
 # include <stdlib.h>
 
 typedef struct NumList {
-    int num_tot;
-    int lo_tot;
-    int hi_tot;
-    int lo_a;
-    int hi_a;
-    int lo_b;
-    int hi_b;
+    int         num_tot;
+    int         lo_tot;
+    int         hi_tot;
+    int         lo_a;
+    int         hi_a;
+    int         lo_b;
+    int         hi_b;
+    struct Node *a_arr;
+    struct Node *b_arr;
 } num_list;
 
-typedef struct Node {
+struct Node {
     int         x;
-    struct node *next;
-} node;
+    struct Node *next;
+};
 
 // Libft
 size_t  ft_strlen(const char *s);
