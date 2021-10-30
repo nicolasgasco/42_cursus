@@ -73,6 +73,7 @@ void	ft_remove_node(struct Node **root, int value);
 // Rules
 void	ft_s(num_list *number_list, char c);
 void	ft_p(num_list *number_list, char c);
+void	ft_r(num_list *number_list, char c);
 
 // Push swap
 void	ft_create_linked_list(int argc, char **args, num_list *num_list);

@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:43:05 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/30 18:13:56 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/30 18:47:34 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,14 @@ int	main(int argc, char *argv[])
 	ft_print_struct(ptr);
 	ft_move(&number_list, 'p', 'b');
 	ft_print_struct(ptr);
-	ft_move(&number_list, 'p', 'a');
+	ft_move(&number_list, 'p', 'b');
+	ft_print_struct(ptr);
+	ft_move(&number_list, 'p', 'b');
+	ft_move(&number_list, 'p', 'b');
+	ft_print_struct(ptr);
+	ft_move(&number_list, 'p', 'b');
+	ft_print_struct(ptr);
+	ft_move(&number_list, 'r', 'r');
 	ft_print_struct(ptr);
 	
 	return (0);
