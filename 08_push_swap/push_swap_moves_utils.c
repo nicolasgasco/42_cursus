@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int	ft_s(struct Node **root, char c)
+void	ft_s(struct Node **root, char c)
 {
 	if (root == NULL || (*root)->next == NULL || (*root)->next->next == NULL)
 		return;
