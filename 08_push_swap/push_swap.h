@@ -6,6 +6,7 @@
 # include <stdlib.h>
 
 typedef struct NumList {
+    int         num_moves;
     int         num_tot;
     int         lo_tot;
     int         hi_tot;
@@ -54,7 +55,7 @@ char		**ft_split(char const *s, char c);
 // char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 // void		ft_striteri(char *s, void (*f)(unsigned int, char*));
 void		ft_putchar_fd(char c, int fd);
-// void		ft_putstr_fd(char *s, int fd);
+void		ft_putstr_fd(char *s, int fd);
 // void		ft_putendl_fd(char *s, int fd);
 // void		ft_putnbr_fd(int n, int fd);
 
@@ -68,9 +69,13 @@ void	ft_swap_nodes(struct Node **root, int i1, int i2);
 void	ft_remove_node(struct Node **root, int value);
 
 // Rules
-void    ft_s(struct Node **root, char c);
+void	ft_s(num_list *number_list, char c);
 
 // Push swap
 void	ft_create_linked_list(int argc, char **args, num_list *num_list);
+void	ft_move(num_list *number_list, char list, char move);
+
+// To delete
+void    ft_print_struct(num_list *number_list);
 
 #endif
