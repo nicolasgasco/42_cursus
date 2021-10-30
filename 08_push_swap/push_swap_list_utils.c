@@ -75,3 +75,54 @@ void	ft_insert_after(struct Node *node, int value)
 	new_node->next = node->next;
 	node->next = new_node;
 }
+
+void	ft_swap_nodes(struct Node **root, int i1, int i2)
+{
+	int			i;
+	struct Node	*curr;
+	struct Node *temp;
+	struct Node	*node1;
+
+	curr = *root;
+	node1 = malloc(sizeof(struct Node));
+	temp = malloc(sizeof(struct Node));
+	i = 0;
+	while (i < i1)
+	{
+		curr = curr->next;
+		i++;
+	}
+	node1 = curr;
+	while (i < i2)
+	{
+		curr = curr->next;
+		i++;
+	}
+	temp->x = curr->x;
+	curr->x = node1->x;
+	node1->x = temp->x;
+}
+void	ft_remove_node(struct Node **root, int value)
+{
+	struct Node *curr = *root;
+	struct Node	*to_remove;
+	if (*root == NULL)
+		return;
+	if ((*root)->x == value)
+	{
+		to_remove = *root;
+		*root = (*root)->next;
+		free(to_remove);
+		return;
+	}
+	while (curr->next != NULL)
+	{
+		if (curr->next->x == value)
+		{
+			to_remove = curr->next;
+			curr->next = curr->next->next;
+			free(to_remove);
+		}
+		curr = curr->next;
+	}
+}

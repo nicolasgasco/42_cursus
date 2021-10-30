@@ -61,8 +61,18 @@ void	ft_create_linked_list(int argc, char **args, num_list *num_list)
 	ft_print_int_array(num_arr, argc - 1);
 	num_list->num_tot = argc - 1;
 	num_list->a_list = ft_populate_nodes(num_arr, num_list->num_tot);
+	ft_iterate_list(num_list->a_list, 'a');
+	printf("Adding 10 at the beginning\n");
 	ft_insert_beginning(&num_list->a_list, 10);
+	ft_iterate_list(num_list->a_list, 'a');
+	printf("Inserting 1234 after double next\n");
 	ft_insert_after(num_list->a_list->next->next, 1234);
+	ft_iterate_list(num_list->a_list, 'a');
+	printf("Removing new value\n");
+	ft_remove_node(&num_list->a_list, 1234);
+	ft_iterate_list(num_list->a_list, 'a');
+	printf("Swapping index 0 and 1\n");
+	ft_swap_nodes(&num_list->a_list, 4, 5);
 	ft_iterate_list(num_list->a_list, 'a');
 	num_list->b_list = ft_populate_nodes(NULL, 0);
 	ft_iterate_list(num_list->b_list, 'b');
