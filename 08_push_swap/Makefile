@@ -13,7 +13,7 @@ $(NAME):
 all : $(NAME)
 
 clean :
-	@ rm -rf $(OBJS)
+	@ rm -rf $(wildcard *.o)
 	@ echo "Deleting .o..."
 
 fclean : clean

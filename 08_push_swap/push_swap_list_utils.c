@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_list_utils.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/30 17:44:18 by ngasco            #+#    #+#             */
+/*   Updated: 2021/10/30 18:11:02 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <stdio.h>
 
@@ -102,27 +114,30 @@ void	ft_swap_nodes(struct Node **root, int i1, int i2)
 	curr->x = node1->x;
 	node1->x = temp->x;
 }
-void	ft_remove_node(struct Node **root, int value)
+
+void	ft_remove_node(struct Node **root, int index)
 {
-	struct Node *curr = *root;
+	struct Node *curr;
 	struct Node	*to_remove;
+	int			i;
+	
+	i = 1;
+	curr = *root;
 	if (*root == NULL)
 		return;
-	if ((*root)->x == value)
+	if (index == 0)
 	{
 		to_remove = *root;
 		*root = (*root)->next;
 		free(to_remove);
 		return;
 	}
-	while (curr->next != NULL)
+	while (i < index)
 	{
-		if (curr->next->x == value)
-		{
-			to_remove = curr->next;
-			curr->next = curr->next->next;
-			free(to_remove);
-		}
 		curr = curr->next;
+		i++;
 	}
+	to_remove = curr->next;
+	curr->next = curr->next->next;
+	free(to_remove);
 }

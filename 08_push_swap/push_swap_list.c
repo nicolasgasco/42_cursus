@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_list.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/30 17:44:07 by ngasco            #+#    #+#             */
+/*   Updated: 2021/10/30 17:58:02 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <stdio.h>
 
@@ -47,7 +59,7 @@ int *ft_create_num_arr(int argc, char *argv[])
 		exit(1);
 	while (i < argc)
 	{
-		result[argc - 1 - i] = ft_atoi(argv[i]);
+		result[i - 1] = ft_atoi(argv[i]);
 		i++;
 	}
 	return (result);

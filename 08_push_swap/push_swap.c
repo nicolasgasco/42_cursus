@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/30 17:43:05 by ngasco            #+#    #+#             */
+/*   Updated: 2021/10/30 18:13:56 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <stdio.h>
 
-void ft_print_struct(num_list *number_list)
+void	ft_print_struct(num_list *number_list)
 {
 	printf("\n");
 	ft_iterate_list(number_list->a_list, 'a');
@@ -11,16 +23,20 @@ void ft_print_struct(num_list *number_list)
 	printf("\n");
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	num_list number_list;
-	num_list *ptr;
+	num_list	number_list;
+	num_list	*ptr;
 
 	ptr = &number_list;
 	ft_create_linked_list(argc, argv, &number_list);
 	ft_print_struct(ptr);
-	ft_move(&number_list, 's', 's');
+	ft_move(&number_list, 's', 'a');
 	ft_print_struct(ptr);
-
+	ft_move(&number_list, 'p', 'b');
+	ft_print_struct(ptr);
+	ft_move(&number_list, 'p', 'a');
+	ft_print_struct(ptr);
+	
 	return (0);
 }

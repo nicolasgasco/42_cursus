@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_moves_utils.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/30 17:43:54 by ngasco            #+#    #+#             */
+/*   Updated: 2021/10/30 18:13:50 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ft_ss(num_list *number_list)
@@ -8,10 +20,9 @@ void	ft_ss(num_list *number_list)
 	root1 = number_list->a_list;
 	root2 = number_list->b_list;
 	if (root1 == NULL || root1->next == NULL || root1->next->next == NULL)
-		return;
+		return ;
 	if (root2 == NULL || root2->next == NULL || root2->next->next == NULL)
-		return;
-
+		return ;
 	ft_putstr_fd("ss", 0);
 	ft_putchar_fd('\n', 0);
 	ft_swap_nodes(&root1, 0, 1);
@@ -21,23 +32,45 @@ void	ft_ss(num_list *number_list)
 
 void	ft_s(num_list *number_list, char c)
 {
+	struct Node	*root;
+
 	if (c == 's')
 	{
 		ft_ss(number_list);
-		return;
+		return ;
 	}
-	struct Node	*root;
 	if (c == 'a')
 		root = number_list->a_list;
 	else
 		root = number_list->b_list;
-	
 	if (root == NULL || root->next == NULL || root->next->next == NULL)
-		return;
-	
+		return ;
 	ft_putchar_fd('s', 0);
 	ft_putchar_fd(c, 0);
 	ft_putchar_fd('\n', 0);
 	ft_swap_nodes(&root, 0, 1);
+	number_list->num_moves += 1;
+}
+
+void	ft_p(num_list *number_list, char c)
+{
+	struct Node	*node;
+	
+	ft_putchar_fd('p', 0);
+	if (c == 'a')
+	{
+		node = number_list->b_list;
+		ft_remove_node(&number_list->b_list, 0);
+		ft_insert_beginning(&number_list->a_list, node->x);
+		ft_putchar_fd(c, 0);
+	}
+	else
+	{
+		node = number_list->a_list;
+		ft_remove_node(&number_list->a_list, 0);
+		ft_insert_beginning(&number_list->b_list, node->x);
+		ft_putchar_fd(c, 0);
+	}
+	ft_putchar_fd('\n', 0);
 	number_list->num_moves += 1;
 }
