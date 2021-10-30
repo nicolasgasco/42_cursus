@@ -53,7 +53,7 @@ char		**ft_split(char const *s, char c);
 // char		*ft_itoa(int n);
 // char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 // void		ft_striteri(char *s, void (*f)(unsigned int, char*));
-// void		ft_putchar_fd(char c, int fd);
+void		ft_putchar_fd(char c, int fd);
 // void		ft_putstr_fd(char *s, int fd);
 // void		ft_putendl_fd(char *s, int fd);
 // void		ft_putnbr_fd(int n, int fd);
@@ -66,6 +66,9 @@ void	ft_iterate_list(struct Node *root, char c);
 void	ft_insert_after(struct Node *node, int value);
 void	ft_swap_nodes(struct Node **root, int i1, int i2);
 void	ft_remove_node(struct Node **root, int value);
+
+// Rules
+int     ft_s(struct Node **root, char c);
 
 // Push swap
 void	ft_create_linked_list(int argc, char **args, num_list *num_list);
