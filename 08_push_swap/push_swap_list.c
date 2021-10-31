@@ -6,13 +6,13 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:44:07 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/31 16:55:30 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/31 17:55:42 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-struct Node	*ft_populate_nodes(int *num_arr, int n)
+struct Node	*ft_populate_Nodes(int *num_arr, int n)
 {
 	struct Node	*root;
 	int			i;
@@ -56,11 +56,10 @@ void	ft_create_linked_list(int argc, char **args, num_list *num_list)
 		num_arr = ft_create_num_arr(argc, args);
 	else
 	{
-		// Change this with case when there is a single string with many numbers
 		num_arr = ft_create_num_arr(argc, args);
 	}
 	ft_print_int_array(num_arr, argc - 1);
 	num_list->num_tot = argc - 1;
-	num_list->a_list = ft_populate_nodes(num_arr, num_list->num_tot);
+	num_list->a_list = ft_populate_Nodes(num_arr, num_list->num_tot);
 	return ;
 }

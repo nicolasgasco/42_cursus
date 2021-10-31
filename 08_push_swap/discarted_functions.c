@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   discarted_functions.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/31 17:59:23 by ngasco            #+#    #+#             */
+/*   Updated: 2021/10/31 18:00:25 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	ft_insert_after(struct Node *node, int value)
+void	ft_insert_after(struct Node *Node, int value)
 {
 	struct Node	*new_node;
 
@@ -8,8 +20,8 @@ void	ft_insert_after(struct Node *node, int value)
 	if (new_node == NULL)
 		exit(1);
 	new_node->x = value;
-	new_node->next = node->next;
-	node->next = new_node;
+	new_node->next = Node->next;
+	Node->next = new_node;
 }
 
 void	ft_print_struct(num_list *number_list)
@@ -21,7 +33,6 @@ void	ft_print_struct(num_list *number_list)
 	printf("Num moves is %d\n", number_list->num_moves);
 	printf("\n");
 }
-
 
 void	ft_iterate_list(struct Node *root, char c)
 {
@@ -42,7 +53,8 @@ void	ft_iterate_list(struct Node *root, char c)
 
 void	ft_print_int_array(int *arr, int n)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	printf("Int array: [");
 	while (i < n)
