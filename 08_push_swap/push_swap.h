@@ -12,12 +12,12 @@ typedef struct NumList {
     int         num_tot;
     int         lo_tot;
     int         hi_tot;
+    struct Node *a_list;
     int         lo_a;
     int         hi_a;
+    struct Node *b_list;
     int         lo_b;
     int         hi_b;
-    struct Node *a_list;
-    struct Node *b_list;
 } num_list;
 
 struct Node {
@@ -71,9 +71,11 @@ void	ft_swap_nodes(struct Node **root, int i1, int i2);
 void	ft_remove_node(struct Node **root, int value);
 
 // Rules
+void	ft_put_move(num_list *number_list, char move, char list);
 void	ft_s(num_list *number_list, char c);
 void	ft_p(num_list *number_list, char c);
 void	ft_r(num_list *number_list, char c);
+void	ft_R(num_list *number_list, char c);
 
 // Push swap
 void	ft_create_linked_list(int argc, char **args, num_list *num_list);
@@ -81,5 +83,6 @@ void	ft_move(num_list *number_list, char list, char move);
 
 // To delete
 void    ft_print_struct(num_list *number_list);
+void	ft_print_int_array(int *arr, int n);
 
 #endif

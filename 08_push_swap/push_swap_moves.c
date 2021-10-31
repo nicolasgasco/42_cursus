@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:43:42 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/30 18:22:58 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/31 15:58:11 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,6 @@ void	ft_move(num_list *number_list, char move, char list)
 		ft_p(number_list, list);
 	else if (move == 'r')
 		ft_r(number_list, list);
+	else if (move == 'R')
+		ft_R(number_list, list);
 }
