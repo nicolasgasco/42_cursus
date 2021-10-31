@@ -6,25 +6,25 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 17:59:23 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/31 18:00:25 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/31 18:05:02 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_insert_after(struct Node *Node, int value)
+void	ft_insert_after(struct s_node *s_node, int value)
 {
-	struct Node	*new_node;
+	struct s_node	*new_node;
 
-	new_node = malloc(sizeof(struct Node));
+	new_node = malloc(sizeof(struct s_node));
 	if (new_node == NULL)
 		exit(1);
 	new_node->x = value;
-	new_node->next = Node->next;
-	Node->next = new_node;
+	new_node->next = s_node->next;
+	s_node->next = new_node;
 }
 
-void	ft_print_struct(num_list *number_list)
+void	ft_print_struct(t_list *number_list)
 {
 	printf("\n");
 	ft_iterate_list(number_list->a_list, 'a');
@@ -34,12 +34,12 @@ void	ft_print_struct(num_list *number_list)
 	printf("\n");
 }
 
-void	ft_iterate_list(struct Node *root, char c)
+void	ft_iterate_list(struct s_node *root, char c)
 {
-	struct Node	*curr;
+	struct s_node	*curr;
 
 	curr = root;
-	printf("Nodes list %c: {", c);
+	printf("s_nodes list %c: {", c);
 	while (curr != NULL)
 	{
 		if (!curr->next)

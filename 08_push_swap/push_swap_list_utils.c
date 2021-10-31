@@ -6,16 +6,16 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:44:18 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/31 17:55:59 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/31 18:02:52 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_deallocate_list(struct Node **root)
+void	ft_deallocate_list(struct s_node **root)
 {
-	struct Node	*curr;
-	struct Node	*aux;
+	struct s_node	*curr;
+	struct s_node	*aux;
 
 	curr = *root;
 	if (curr == NULL)
@@ -28,12 +28,12 @@ void	ft_deallocate_list(struct Node **root)
 	}
 }
 
-void	ft_insert_end(struct Node **root, int value)
+void	ft_insert_end(struct s_node **root, int value)
 {
-	struct Node	*new_node;
-	struct Node	*curr;
+	struct s_node	*new_node;
+	struct s_node	*curr;
 
-	new_node = malloc(sizeof(struct Node));
+	new_node = malloc(sizeof(struct s_node));
 	if (new_node == NULL)
 		exit(1);
 	new_node->next = NULL;
@@ -46,11 +46,11 @@ void	ft_insert_end(struct Node **root, int value)
 	curr->next = new_node;
 }
 
-void	ft_insert_beginning(struct Node **root, int value)
+void	ft_insert_beginning(struct s_node **root, int value)
 {
-	struct Node	*new_node;
+	struct s_node	*new_node;
 
-	new_node = malloc(sizeof(struct Node));
+	new_node = malloc(sizeof(struct s_node));
 	if (new_node == NULL)
 		exit(1);
 	new_node->x = value;
@@ -58,16 +58,16 @@ void	ft_insert_beginning(struct Node **root, int value)
 	*root = new_node;
 }
 
-void	ft_swap_nodes(struct Node **root, int i1, int i2)
+void	ft_swap_nodes(struct s_node **root, int i1, int i2)
 {
 	int			i;
-	struct Node	*curr;
-	struct Node	*temp;
-	struct Node	*node1;
+	struct s_node	*curr;
+	struct s_node	*temp;
+	struct s_node	*node1;
 
 	curr = *root;
-	node1 = malloc(sizeof(struct Node));
-	temp = malloc(sizeof(struct Node));
+	node1 = malloc(sizeof(struct s_node));
+	temp = malloc(sizeof(struct s_node));
 	i = 0;
 	while (i < i1)
 	{
@@ -85,10 +85,10 @@ void	ft_swap_nodes(struct Node **root, int i1, int i2)
 	node1->x = temp->x;
 }
 
-void	ft_remove_node(struct Node **root, int index)
+void	ft_remove_node(struct s_node **root, int index)
 {
-	struct Node	*curr;
-	struct Node	*to_remove;
+	struct s_node	*curr;
+	struct s_node	*to_remove;
 	int			i;
 
 	i = 1;

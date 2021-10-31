@@ -6,13 +6,13 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:43:54 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/31 18:01:03 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/31 18:05:02 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_put_move(num_list *number_list, char move, char list)
+void	ft_put_move(t_list *number_list, char move, char list)
 {
 	if (move == 'R')
 	{
@@ -26,10 +26,10 @@ void	ft_put_move(num_list *number_list, char move, char list)
 	number_list->num_moves += 1;
 }
 
-void	ft_ss(num_list *number_list)
+void	ft_ss(t_list *number_list)
 {
-	struct Node	*root1;
-	struct Node	*root2;
+	struct s_node	*root1;
+	struct s_node	*root2;
 
 	root1 = number_list->a_list;
 	root2 = number_list->b_list;
@@ -41,9 +41,9 @@ void	ft_ss(num_list *number_list)
 	ft_swap_nodes(&root2, 0, 1);
 }
 
-void	ft_s(num_list *number_list, char c)
+void	ft_s(t_list *number_list, char c)
 {
-	struct Node	*root;
+	struct s_node	*root;
 
 	if (c == 's')
 	{
@@ -65,9 +65,9 @@ void	ft_s(num_list *number_list, char c)
 	}
 }
 
-void	ft_p(num_list *number_list, char c)
+void	ft_p(t_list *number_list, char c)
 {
-	struct Node	*node;
+	struct s_node	*node;
 
 	if (c == 'a')
 	{

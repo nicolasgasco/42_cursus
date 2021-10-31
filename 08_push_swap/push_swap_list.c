@@ -6,20 +6,20 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:44:07 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/31 17:55:42 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/31 18:05:02 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-struct Node	*ft_populate_Nodes(int *num_arr, int n)
+struct s_node	*ft_populate_s_nodes(int *num_arr, int n)
 {
-	struct Node	*root;
+	struct s_node	*root;
 	int			i;
 
 	if (!num_arr)
 		return (NULL);
-	root = malloc(sizeof(struct Node));
+	root = malloc(sizeof(struct s_node));
 	root->x = num_arr[0];
 	i = 1;
 	while (i < n)
@@ -48,7 +48,7 @@ int	*ft_create_num_arr(int argc, char *argv[])
 	return (result);
 }
 
-void	ft_create_linked_list(int argc, char **args, num_list *num_list)
+void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 {
 	int		*num_arr;
 
@@ -59,7 +59,7 @@ void	ft_create_linked_list(int argc, char **args, num_list *num_list)
 		num_arr = ft_create_num_arr(argc, args);
 	}
 	ft_print_int_array(num_arr, argc - 1);
-	num_list->num_tot = argc - 1;
-	num_list->a_list = ft_populate_Nodes(num_arr, num_list->num_tot);
+	n_list->num_tot = argc - 1;
+	n_list->a_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
 	return ;
 }

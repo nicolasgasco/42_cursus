@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:43:05 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/31 18:01:12 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/10/31 18:05:02 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 int	main(int argc, char *argv[])
 {
-	num_list	number_list;
-	num_list	*ptr;
+	t_list	number_list;
+	t_list	*ptr;
 
 	ptr = &number_list;
 	ft_create_linked_list(argc, argv, &number_list);
