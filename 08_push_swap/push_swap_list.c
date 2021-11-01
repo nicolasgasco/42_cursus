@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:44:07 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/31 18:05:02 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/01 16:16:17 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,12 @@ int	*ft_create_num_arr(int argc, char *argv[])
 	if (result == NULL)
 		exit(1);
 	while (i < argc)
-	{
+	{	
+		if (ft_check_if_num(argv[i]) == 0)
+		{
+			ft_putstr_fd("Error\n", 0);
+			exit(0);
+		}
 		result[i - 1] = ft_atoi(argv[i]);
 		i++;
 	}
@@ -57,6 +62,11 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 	else
 	{
 		num_arr = ft_create_num_arr(argc, args);
+	}
+	if (ft_check_repetition(num_arr, (argc - 1)) == 0)
+	{
+		ft_putstr_fd("Error\n", 0);
+		exit(1);
 	}
 	ft_print_int_array(num_arr, argc - 1);
 	n_list->num_tot = argc - 1;

@@ -6,14 +6,16 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 09:18:01 by ngasco            #+#    #+#             */
-/*   Updated: 2021/07/12 15:48:58 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/01 16:35:06 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+#include <stdio.h>
 int	ft_atoi(const char *str)
 {
 	int				i;
-	unsigned int	result;
+	unsigned long	result;
 	int				negative;
 
 	i = 0;
@@ -31,6 +33,14 @@ int	ft_atoi(const char *str)
 	{
 		result = (result * 10) + (str[i] - '0');
 		i++;
+	}
+	printf("Result is %lu\n", result);
+	printf("Int min is is %lu\n", (unsigned long)INT_MAX);
+	printf("negative is %d\n", negative);
+	if ((negative == 1 && result > (unsigned long)INT_MAX) || (negative == -1 && result > (unsigned long)INT_MAX + 1))
+	{
+		ft_putstr_fd("Error\n", 0);
+		exit(2);
 	}
 	return ((int)result * negative);
 }

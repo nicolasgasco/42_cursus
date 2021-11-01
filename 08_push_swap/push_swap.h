@@ -32,6 +32,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
 void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
 
 // Linked list methods
 void	ft_insert_beginning(struct s_node **root, int value);
@@ -48,6 +49,10 @@ void	ft_s(t_list *number_list, char c);
 void	ft_p(t_list *number_list, char c);
 void	ft_r(t_list *number_list, char c);
 void	ft_rr(t_list *number_list, char c);
+
+// Validation
+int		ft_check_if_num(char *s);
+int		ft_check_repetition(int *nums, int limit);
 
 // Push swap
 void	ft_create_linked_list(int argc, char **args, t_list *t_list);

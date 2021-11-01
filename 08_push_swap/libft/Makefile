@@ -7,10 +7,10 @@ CC      = gcc
 RM      = rm -f
 CFLAGS  = -Wall -Wextra -Werror
 INCS    = libft.h
+OBJS    = $(SRCS:.c=.o)
 
-$(NAME):
-	@ $(SRCS:.c=.o) $(INCLUDE)
-	@ $(LIBC) $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(INCLUDE)
+	$(LIBC) $(NAME) $(OBJS)
 
 all: $(NAME)
 

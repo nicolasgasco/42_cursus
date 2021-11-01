@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 15:34:09 by nicolasg          #+#    #+#             */
-/*   Updated: 2021/07/14 15:13:37 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/01 16:08:55 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putstr_fd(char *s, int fd)
 	int	i;
 
 	i = 0;
-	if (!s || !fd)
+	if (!s || fd < 0)
 		return ;
 	while (s[i] != '\0')
 	{
