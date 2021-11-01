@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:44:18 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/31 18:02:52 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/01 18:04:51 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,5 @@ void	ft_remove_node(struct s_node **root, int index)
 	}
 	to_remove = curr->next;
 	curr->next = curr->next->next;
-	free(to_remove);
+	// free(to_remove);
 }

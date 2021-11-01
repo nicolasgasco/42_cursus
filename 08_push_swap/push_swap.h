@@ -53,6 +53,7 @@ void	ft_rr(t_list *number_list, char c);
 // Validation
 int		ft_check_if_num(char *s);
 int		ft_check_repetition(int *nums, int limit);
+void	ft_put_err(int code);
 
 // Push swap
 void	ft_create_linked_list(int argc, char **args, t_list *t_list);

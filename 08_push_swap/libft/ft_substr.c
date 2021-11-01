@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 23:10:08 by nicolasg          #+#    #+#             */
-/*   Updated: 2021/07/16 09:59:21 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/01 18:10:31 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		j++;
 	}
 	result[j] = '\0';
-	free((char *)s);
+	// free((char *)s);
 	return (result);
 }

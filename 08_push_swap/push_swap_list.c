@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:44:07 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/01 16:16:17 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/01 18:25:15 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ struct s_node	*ft_populate_s_nodes(int *num_arr, int n)
 		ft_insert_end(&root, num_arr[i]);
 		i++;
 	}
-	free(num_arr);
+	// free(num_arr);
 	return (root);
 }
 
-int	*ft_create_num_arr(int argc, char *argv[])
+int	*ft_create_num_arr(int argc, char *argv[], t_list *n_list)
 {
 	int		*result;
 	int		i;
@@ -50,26 +50,44 @@ int	*ft_create_num_arr(int argc, char *argv[])
 		result[i - 1] = ft_atoi(argv[i]);
 		i++;
 	}
+	n_list->num_tot = argc - 1;
 	return (result);
+}
+
+int	*ft_create_str_arr(char *str, t_list *n_list)
+{
+	int		i;
+	char	**num_str;
+	int		*result;
+
+	i = 0;
+	num_str = ft_split(str, ',');
+	while (num_str[i] != NULL)
+		i++;
+	result = (int *)malloc(sizeof(int) * i);
+	i = 0;
+	while (num_str[i] != NULL)
+	{
+ 		result[i] = ft_atoi(num_str[i]);
+		i++;
+	}
+	n_list->num_tot = i;
+	return result;
 }
 
 void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 {
 	int		*num_arr;
 
-	if (argc > 2)
-		num_arr = ft_create_num_arr(argc, args);
+	if (argc == 1)
+		ft_put_err(2);
+	if (argc == 2)
+		num_arr = ft_create_str_arr(args[1], n_list);
 	else
-	{
-		num_arr = ft_create_num_arr(argc, args);
-	}
+		num_arr = ft_create_num_arr(argc, args, n_list);
 	if (ft_check_repetition(num_arr, (argc - 1)) == 0)
-	{
-		ft_putstr_fd("Error\n", 0);
-		exit(1);
-	}
-	ft_print_int_array(num_arr, argc - 1);
-	n_list->num_tot = argc - 1;
+		ft_put_err(1);
+	ft_print_int_array(num_arr, n_list->num_tot);
 	n_list->a_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
 	return ;
 }

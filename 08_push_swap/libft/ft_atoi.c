@@ -6,18 +6,12 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 09:18:01 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/01 16:52:34 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/01 17:43:57 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
-
-void	ft_put_err(void)
-{
-	ft_putstr_fd("Error\n", 0);
-	exit(2);
-}
 
 int	ft_atoi(const char *str)
 {
@@ -43,6 +37,6 @@ int	ft_atoi(const char *str)
 	}
 	if ((negative == 1 && result > (unsigned long)INT_MAX)
 		|| (negative == -1 && result > (unsigned long)INT_MAX + 1))
-		ft_put_err();
+		ft_put_err(0);
 	return ((int)result * negative);
 }

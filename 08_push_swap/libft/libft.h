@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 15:37:27 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/01 16:20:08 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/01 17:43:59 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ void		ft_putchar_fd(char c, int fd);
 void		ft_putstr_fd(char *s, int fd);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
+void        ft_put_err(int code);
 
 #endif
