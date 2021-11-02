@@ -67,19 +67,19 @@ void	ft_s(t_list *number_list, char c)
 
 void	ft_p(t_list *number_list, char c)
 {
-	struct s_node	*node;
+	int	value;
 
 	if (c == 'a')
 	{
-		node = number_list->b_list;
+		value = number_list->b_list->x;;
 		ft_remove_node(&number_list->b_list, 0);
-		ft_insert_beginning(&number_list->a_list, node->x);
+		ft_insert_beginning(&number_list->a_list, value);
 	}
 	else
 	{
-		node = number_list->a_list;
+		value = number_list->a_list->x;
 		ft_remove_node(&number_list->a_list, 0);
-		ft_insert_beginning(&number_list->b_list, node->x);
+		ft_insert_beginning(&number_list->b_list, value);
 	}
 	ft_put_move(number_list, 'p', c);
 }

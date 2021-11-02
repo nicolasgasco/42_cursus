@@ -44,6 +44,7 @@ void	ft_insert_end(struct s_node **root, int value)
 	while (curr->next != NULL)
 		curr = curr->next;
 	curr->next = new_node;
+	// free(new_node);
 }
 
 void	ft_insert_beginning(struct s_node **root, int value)
@@ -109,5 +110,5 @@ void	ft_remove_node(struct s_node **root, int index)
 	}
 	to_remove = curr->next;
 	curr->next = curr->next->next;
-	// free(to_remove);
+	free(to_remove);
 }
