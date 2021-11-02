@@ -27,7 +27,6 @@ struct s_node	*ft_populate_s_nodes(int *num_arr, int n)
 		ft_insert_end(&root, num_arr[i]);
 		i++;
 	}
-	// free(num_arr);
 	return (root);
 }
 
@@ -54,6 +53,20 @@ int	*ft_create_num_arr(int argc, char *argv[], t_list *n_list)
 	return (result);
 }
 
+int	ft_check_character(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	*ft_create_str_arr(char *str, t_list *n_list)
 {
 	int		i;
@@ -61,7 +74,10 @@ int	*ft_create_str_arr(char *str, t_list *n_list)
 	int		*result;
 
 	i = 0;
-	num_str = ft_split(str, ',');
+	if (ft_check_character(str, ','))
+		num_str = ft_split(str, ',');
+	else
+		num_str = ft_split(str, ' ');
 	while (num_str[i] != NULL)
 		i++;
 	result = (int *)malloc(sizeof(int) * i);
@@ -72,6 +88,7 @@ int	*ft_create_str_arr(char *str, t_list *n_list)
 		i++;
 	}
 	n_list->num_tot = i;
+	free(num_str);
 	return result;
 }
 
@@ -85,9 +102,10 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 		num_arr = ft_create_str_arr(args[1], n_list);
 	else
 		num_arr = ft_create_num_arr(argc, args, n_list);
-	if (ft_check_repetition(num_arr, (argc - 1)) == 0)
+	if (ft_check_repetition(num_arr, n_list->num_tot) == 0)
 		ft_put_err(1);
 	ft_print_int_array(num_arr, n_list->num_tot);
 	n_list->a_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
+	free(num_arr);
 	return ;
 }

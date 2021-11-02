@@ -57,6 +57,7 @@ static void	ft_write_strings_to_array(char const *s, char c, char **result)
 		i++;
 	}
 	if (s[i - 1] != c)
+
 		*result = ft_substr(s, start, i - start);
 	if (s[i - 1] != c)
 		result++;
@@ -82,6 +83,6 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	}
 	ft_write_strings_to_array(s, c, result);
-	free((char *)s);
+	// free((char *)s);
 	return (result);
 }
