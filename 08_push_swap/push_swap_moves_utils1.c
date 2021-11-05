@@ -16,13 +16,13 @@ void	ft_put_move(t_list *number_list, char move, char list)
 {
 	if (move == 'R')
 	{
-		ft_putchar_fd('r', 0);
-		ft_putchar_fd('r', 0);
+		ft_putchar_fd('r', 1);
+		ft_putchar_fd('r', 1);
 	}
 	else
-		ft_putchar_fd(move, 0);
-	ft_putchar_fd(list, 0);
-	ft_putchar_fd('\n', 0);
+		ft_putchar_fd(move, 1);
+	ft_putchar_fd(list, 1);
+	ft_putchar_fd('\n', 1);
 	number_list->num_moves += 1;
 }
 
