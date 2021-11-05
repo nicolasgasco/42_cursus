@@ -56,13 +56,15 @@ void	ft_rr_aux(struct s_node *root, char list, t_list *t_list)
 	{
 		ft_remove_node(&t_list->a_list, i);
 		ft_insert_beginning(&t_list->a_list, moved_node);
+		ft_put_move(t_list, 'r', 'a');
 	}
 	else
 	{
 		ft_remove_node(&t_list->b_list, i);
 		ft_insert_beginning(&t_list->b_list, moved_node);
+		ft_put_move(t_list, 'r', 'b');
 	}
-	ft_put_move(t_list, 'R', list);
+	// ft_put_move(t_list, 'R', list);
 }
 
 void	ft_rr(t_list *t_list, char c)
