@@ -19,16 +19,18 @@ int	main(int argc, char *argv[])
 
 	number_list.num_moves = 0;
 	ft_create_linked_list(argc, argv, &number_list);
-	// ft_print_struct(&number_list);
-	ft_move(&number_list, 's', 'a');
+	ft_print_struct(&number_list);
+	// ft_move(&number_list, 's', 'a');
 	ft_move(&number_list, 'p', 'b');
-	ft_move(&number_list, 'p', 'b');
-	ft_move(&number_list, 'p', 'b');
-	ft_move(&number_list, 's', 'a');
-	ft_move(&number_list, 'p', 'a');
-	ft_move(&number_list, 'p', 'a');
-	ft_move(&number_list, 'p', 'a');
-	// ft_print_struct(&number_list);
+	// ft_move(&number_list, 'p', 'b');
+	// ft_move(&number_list, 'p', 'b');
+	// ft_move(&number_list, 'r', 'r');
+	// ft_move(&number_list, 'R', 'r');
+	// ft_move(&number_list, 's', 'a');
+	// ft_move(&number_list, 'p', 'a');
+	// ft_move(&number_list, 'p', 'a');
+	// ft_move(&number_list, 'p', 'a');
+	ft_print_struct(&number_list);
 	ft_deallocate_list(&number_list.a_list);
 	ft_deallocate_list(&number_list.b_list);
 	return (0);

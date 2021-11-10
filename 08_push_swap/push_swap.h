@@ -13,9 +13,11 @@ typedef struct NumList {
 	int			lo_tot;
 	int			hi_tot;
 	struct s_node	*a_list;
+	int			a_len;
 	int			lo_a;
 	int			hi_a;
 	struct s_node	*b_list;
+	int			b_len;
 	int			lo_b;
 	int			hi_b;
 }	t_list;
@@ -54,6 +56,9 @@ void	ft_rr(t_list *number_list, char c);
 int		ft_check_if_num(char *s);
 int		ft_check_repetition(int *nums, int limit);
 void	ft_put_err(int code);
+
+// List stats
+int		ft_list_len(struct s_node **root);
 
 // Push swap
 void	ft_create_linked_list(int argc, char **args, t_list *t_list);
