@@ -15,10 +15,7 @@
 void	ft_put_move(t_list *number_list, char move, char list)
 {
 	if (move == 'R')
-	{
-		ft_putchar_fd('r', 1);
-		ft_putchar_fd('r', 1);
-	}
+		ft_putstr_fd("rr", 1);
 	else
 		ft_putchar_fd(move, 1);
 	ft_putchar_fd(list, 1);
