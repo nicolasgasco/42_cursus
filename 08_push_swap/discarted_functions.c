@@ -29,7 +29,7 @@ void	ft_print_struct(t_list *number_list)
 	static int	n_moves;
 
 	if (!n_moves)
-		n_moves = 1;
+		n_moves = 0;
 	printf("\n");
 	printf("%d)_ _ _ _ _ _ _ _ _ _ _\n", n_moves);
 	printf("\n");
