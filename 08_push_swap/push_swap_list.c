@@ -49,7 +49,7 @@ int	*ft_create_num_arr(int argc, char *argv[], t_list *n_list)
 		result[i - 1] = ft_atoi(argv[i]);
 		i++;
 	}
-	n_list->num_tot = argc - 1;
+	n_list->hi_tot = argc - 1;
 	return (result);
 }
 
@@ -87,7 +87,7 @@ int	*ft_create_str_arr(char *str, t_list *n_list)
  		result[i] = ft_atoi(num_str[i]);
 		i++;
 	}
-	n_list->num_tot = i;
+	n_list->hi_tot = i;
 	free(num_str);
 	return result;
 }
@@ -102,10 +102,10 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 		num_arr = ft_create_str_arr(args[1], n_list);
 	else
 		num_arr = ft_create_num_arr(argc, args, n_list);
-	if (ft_check_repetition(num_arr, n_list->num_tot) == 0)
+	if (ft_check_repetition(num_arr, n_list->hi_tot) == 0)
 		ft_put_err(1);
-	// ft_print_int_array(num_arr, n_list->num_tot);
-	n_list->a_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
+	// ft_print_int_array(num_arr, n_list->hi_tot);
+	n_list->a_list = ft_populate_s_nodes(num_arr, n_list->hi_tot);
 	ft_initialize_stats(n_list);
 	free(num_arr);
 	return ;
