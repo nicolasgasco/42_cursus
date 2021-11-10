@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 	ft_print_struct(&number_list);
 	// ft_move(&number_list, 's', 'a');
 	ft_move(&number_list, 'p', 'b');
-	// ft_move(&number_list, 'p', 'b');
+	ft_move(&number_list, 'p', 'b');
 	// ft_move(&number_list, 'p', 'b');
 	// ft_move(&number_list, 'r', 'r');
 	// ft_move(&number_list, 'R', 'r');
@@ -30,7 +30,6 @@ int	main(int argc, char *argv[])
 	// ft_move(&number_list, 'p', 'a');
 	// ft_move(&number_list, 'p', 'a');
 	// ft_move(&number_list, 'p', 'a');
-	ft_print_struct(&number_list);
 	ft_deallocate_list(&number_list.a_list);
 	ft_deallocate_list(&number_list.b_list);
 	return (0);

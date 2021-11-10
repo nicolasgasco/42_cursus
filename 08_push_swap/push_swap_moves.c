@@ -22,4 +22,6 @@ void	ft_move(t_list *number_list, char move, char list)
 		ft_r(number_list, list);
 	else if (move == 'R')
 		ft_rr(number_list, list);
+	ft_update_stats(number_list);
+	ft_print_struct(number_list);
 }

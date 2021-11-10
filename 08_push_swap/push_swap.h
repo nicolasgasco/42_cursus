@@ -58,7 +58,9 @@ int		ft_check_repetition(int *nums, int limit);
 void	ft_put_err(int code);
 
 // List stats
-int		ft_list_len(struct s_node **root);
+void    ft_update_stats(t_list *n_list);
+int 	ft_list_len(struct s_node *root);
+int 	ft_find_hilo(struct s_node *root, char flag);
 
 // Push swap
 void	ft_create_linked_list(int argc, char **args, t_list *t_list);
