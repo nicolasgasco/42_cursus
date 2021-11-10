@@ -26,12 +26,31 @@ void	ft_insert_after(struct s_node *s_node, int value)
 
 void	ft_print_struct(t_list *number_list)
 {
+	static int	n_moves;
+
+	if (!n_moves)
+		n_moves = 1;
+	printf("\n");
+	printf("%d)_ _ _ _ _ _ _ _ _ _ _\n", n_moves);
+	printf("\n");
+	printf("Num tot is: %d\n", number_list->num_tot);
+	printf("Num moves is: %d\n", number_list->num_moves);
+	printf("\n");
+	printf("Low tot is: %d\n", number_list->lo_tot);
+	printf("Hi tot is: %d\n", number_list->hi_tot);
 	printf("\n");
 	ft_iterate_list(number_list->a_list, 'a');
-	ft_iterate_list(number_list->b_list, 'b');
-	printf("Num tot is %d\n", number_list->num_tot);
-	printf("Num moves is %d\n", number_list->num_moves);
+	printf("A len is: %d\n", number_list->a_len);
+	printf("Low a is: %d\n", number_list->lo_a);
+	printf("Hi a is: %d\n", number_list->hi_a);
 	printf("\n");
+	ft_iterate_list(number_list->b_list, 'b');
+	printf("B len is: %d\n", number_list->b_len);
+	printf("Low b is: %d\n", number_list->lo_b);
+	printf("Hi b is: %d\n", number_list->hi_b);
+	printf("_ _ _ _ _ _ _ _ _ _ _\n");
+	printf("\n");
+	n_moves++;
 }
 
 void	ft_iterate_list(struct s_node *root, char c)
