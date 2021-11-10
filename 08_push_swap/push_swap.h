@@ -61,6 +61,7 @@ void	ft_put_err(int code);
 void    ft_update_stats(t_list *n_list);
 int 	ft_list_len(struct s_node *root);
 int 	ft_find_hilo(struct s_node *root, char flag);
+void    ft_initialize_stats(t_list *n_list);
 
 // Push swap
 void	ft_create_linked_list(int argc, char **args, t_list *t_list);
