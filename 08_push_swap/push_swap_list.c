@@ -102,7 +102,7 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 		num_arr = ft_create_str_arr(args[1], n_list);
 	else
 		num_arr = ft_create_num_arr(argc, args, n_list);
-	if (ft_check_repetition(num_arr, n_list->num_tot) == 0)
+	if (ft_check_repetition(num_arr, n_list->num_tot) == 0 || ft_check_size(n_list->num_tot) == 0)
 		ft_put_err(1);
 	// ft_print_int_array(num_arr, n_list->num_tot);
 	n_list->a_list = ft_populate_s_nodes(num_arr, n_list->num_tot);

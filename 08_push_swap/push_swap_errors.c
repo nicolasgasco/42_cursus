@@ -54,3 +54,10 @@ int	ft_check_repetition(int *nums, int limit)
 	}
 	return (1);
 }
+
+int	ft_check_size(int list_size)
+{
+	if (list_size <= 1)
+		return (0);
+	return (1);
+}
