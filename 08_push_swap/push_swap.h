@@ -66,6 +66,7 @@ int 	ft_find_hilo(struct s_node *root, char flag);
 void    ft_initialize_stats(t_list *n_list);
 
 // Sorting
+void    ft_sort_two(t_list *n_list);
 void    ft_sort_three(t_list *n_list);
 
 // Push swap

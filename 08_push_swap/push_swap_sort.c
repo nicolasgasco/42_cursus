@@ -28,3 +28,17 @@ void    ft_sort_three(t_list *n_list)
         }
     }
 }
+
+void    ft_sort_two(t_list *n_list)
+{
+    // Biggest is on top
+    if (n_list->a_list->x == n_list->hi_tot)
+    {
+        printf("Biggest is on top\n");
+        ft_move(n_list, 's', 'a');
+    }
+    else
+    {
+        printf("It's already sorted\n");
+    }
+}
