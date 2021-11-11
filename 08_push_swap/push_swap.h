@@ -44,6 +44,7 @@ void	ft_iterate_list(struct s_node *root, char c);
 void	ft_insert_after(struct s_node *node, int value);
 void	ft_swap_nodes(struct s_node **root, int i1, int i2);
 void	ft_remove_node(struct s_node **root, int value);
+int		ft_get_value(struct s_node *list, int index);
 
 // Rules
 void	ft_put_move(t_list *number_list, char move, char list);
@@ -55,7 +56,7 @@ void	ft_rr(t_list *number_list, char c);
 // Validation
 int		ft_check_if_num(char *s);
 int		ft_check_repetition(int *nums, int limit);
-int	ft_check_size(int list_size);
+int		ft_check_size(int list_size);
 void	ft_put_err(int code);
 
 // List stats
@@ -63,6 +64,9 @@ void    ft_update_stats(t_list *n_list);
 int 	ft_list_len(struct s_node *root);
 int 	ft_find_hilo(struct s_node *root, char flag);
 void    ft_initialize_stats(t_list *n_list);
+
+// Sorting
+void    ft_sort_three(t_list *n_list);
 
 // Push swap
 void	ft_create_linked_list(int argc, char **args, t_list *t_list);

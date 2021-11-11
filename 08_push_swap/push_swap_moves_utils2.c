@@ -79,3 +79,25 @@ void	ft_rr(t_list *t_list, char c)
 	else
 		ft_rr_aux(t_list->b_list, 'b', t_list);
 }
+
+int		ft_get_value(struct s_node *list, int index)
+{
+    struct s_node	*curr;
+    int             i;
+
+    i = 0;
+	curr = list;
+	if (curr == NULL)
+	{
+		printf("Trying to read empty array\n");
+		exit(10);
+	}
+	while(curr != NULL)
+	{
+		if (i == index)
+			return (curr->x);
+        i++;
+        curr = curr->next;
+	}
+    return (i);
+}
