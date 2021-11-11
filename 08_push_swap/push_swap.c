@@ -15,22 +15,27 @@
 
 int	main(int argc, char *argv[])
 {
-	t_list	number_list;
+	t_list	num_list;
 
-	number_list.num_moves = 0;
-	ft_create_linked_list(argc, argv, &number_list);
-	ft_print_struct(&number_list);
-	// ft_move(&number_list, 's', 'a');
-	ft_move(&number_list, 'p', 'b');
-	ft_move(&number_list, 'p', 'b');
-	// ft_move(&number_list, 'p', 'b');
-	// ft_move(&number_list, 'r', 'r');
-	// ft_move(&number_list, 'R', 'r');
-	// ft_move(&number_list, 's', 'a');
-	// ft_move(&number_list, 'p', 'a');
-	// ft_move(&number_list, 'p', 'a');
-	// ft_move(&number_list, 'p', 'a');
-	ft_deallocate_list(&number_list.a_list);
-	ft_deallocate_list(&number_list.b_list);
+	num_list.num_moves = 0;
+	ft_create_linked_list(argc, argv, &num_list);
+	ft_print_struct(&num_list);
+	if (num_list.num_tot == 1)
+	{
+		printf("Errora\n");
+		exit(1);
+	}
+	// ft_move(&num_list, 's', 'a');
+	// ft_move(&num_list, 'p', 'b');
+	// ft_move(&num_list, 'p', 'b');
+	// ft_move(&num_list, 'p', 'b');
+	// ft_move(&num_list, 'r', 'r');
+	// ft_move(&num_list, 'R', 'r');
+	// ft_move(&num_list, 's', 'a');
+	// ft_move(&num_list, 'p', 'a');
+	// ft_move(&num_list, 'p', 'a');
+	// ft_move(&num_list, 'p', 'a');
+	ft_deallocate_list(&num_list.a_list);
+	ft_deallocate_list(&num_list.b_list);
 	return (0);
 }
