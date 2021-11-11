@@ -9,7 +9,7 @@
 
 typedef struct NumList {
 	int			num_moves;
-	int			hi_tot;
+	int			num_tot;
 	int			lo_tot;
 	int			hi_tot;
 	struct s_node	*a_list;
