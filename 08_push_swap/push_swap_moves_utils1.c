@@ -55,7 +55,8 @@ void	ft_s(t_list *number_list, char c)
 			root = number_list->a_list;
 		else
 			root = number_list->b_list;
-		if (root == NULL || root->next == NULL || root->next->next == NULL)
+		// 		if (root == NULL || root->next == NULL || root->next->next == NULL)
+		if (root == NULL || root->next == NULL)
 			return ;
 		ft_swap_nodes(&root, 0, 1);
 		ft_put_move(number_list, 's', c);
