@@ -33,7 +33,7 @@ void	ft_print_struct(t_list *number_list)
 	printf("\n");
 	printf("%d)_ _ _ _ _ _ _ _ _ _ _\n", n_moves);
 	printf("\n");
-	printf("Num tot is: %d\n", number_list->num_tot);
+	printf("Num tot is: %d\n", number_list->hi_tot);
 	printf("Num moves is: %d\n", number_list->num_moves);
 	printf("\n");
 	printf("Low tot is: %d\n", number_list->lo_tot);
