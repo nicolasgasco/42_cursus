@@ -23,7 +23,8 @@ typedef struct NumList {
 }	t_list;
 
 struct s_node {
-	int			x;
+	int				x;
+	int				i;
 	struct s_node	*next;
 };
 
@@ -45,6 +46,8 @@ void	ft_insert_after(struct s_node *node, int value);
 void	ft_swap_nodes(struct s_node **root, int i1, int i2);
 void	ft_remove_node(struct s_node **root, int value);
 int		ft_get_value(struct s_node *list, int index);
+int		*ft_bubble_sort(int *num_arr, int limit);
+void    ft_assign_index(struct s_node *linked, int *array, int limit);
 
 // Rules
 void	ft_put_move(t_list *number_list, char move, char list);

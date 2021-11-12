@@ -20,18 +20,18 @@ int	main(int argc, char *argv[])
 	num_list.num_moves = 0;
 	ft_create_linked_list(argc, argv, &num_list);
 	ft_print_struct(&num_list);
-	if (num_list.num_tot == 2)
-	{
-		printf("There are 2 elements\n");
-		ft_sort_two(&num_list);
-	}
-	if (num_list.num_tot == 3)
-	{
-		printf("There are 3 elements\n");
-		ft_sort_three(&num_list);
-	}
+	// if (num_list.num_tot == 2)
+	// {
+	// 	printf("There are 2 elements\n");
+	// 	ft_sort_two(&num_list);
+	// }
+	// if (num_list.num_tot == 3)
+	// {
+	// 	printf("There are 3 elements\n");
+	// 	ft_sort_three(&num_list);
+	// }
 	// ft_move(&num_list, 's', 'a');
-	// ft_move(&num_list, 'p', 'b');
+	ft_move(&num_list, 'p', 'b');
 	// ft_move(&num_list, 'p', 'b');
 	// ft_move(&num_list, 'p', 'b');
 	// ft_move(&num_list, 'r', 'r');

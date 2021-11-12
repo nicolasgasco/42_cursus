@@ -62,9 +62,9 @@ void	ft_iterate_list(struct s_node *root, char c)
 	while (curr != NULL)
 	{
 		if (!curr->next)
-			printf("%d", curr->x);
+			printf("%d (%d)", curr->x, curr->i);
 		else
-			printf("%d, ", curr->x);
+			printf("%d (%d), ", curr->x, curr->i);
 		curr = curr->next;
 	}
 	printf("}\n");
