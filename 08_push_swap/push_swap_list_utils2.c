@@ -1,20 +1,37 @@
 #include "push_swap.h"
+void    ft_assign_i_linked(struct s_node *list, struct s_node *ordered)
+{
+    struct s_node   *curr_l;
+    struct s_node   *curr_o;
 
-void    ft_assign_index(struct s_node *linked, int *array, int limit)
+    curr_l = list;
+    while (curr_l != NULL)
+    {
+        curr_o = ordered;
+        while (curr_o != NULL)
+        {
+            if (curr_o->x == curr_l->x)
+                curr_l->i = curr_o->i;
+            curr_o = curr_o->next;
+        }
+        curr_l = curr_l->next;
+    }
+}
+
+void	ft_assign_i(struct s_node *linked, int *array, int limit)
 {
     struct s_node   *curr;
     int             i;
 
 
-    i = 1;
+    i = 0;
     while (i < limit)
     {
         curr = linked;
         while (curr != NULL)
         {
             if (array[i] == curr->x)
-                curr->i = i;
-            // printf("%d\n", array[i]);
+                curr->i = i + 1;
             curr = curr->next;
         }
         i++;
@@ -27,8 +44,6 @@ int *ft_bubble_sort(int *num_arr, int limit)
     int temp;
     int sorted;
 
-    // printf("Int arrayu at first\n");
-    // ft_print_int_array(num_arr, limit);
     while (1)
     {
         sorted = 1;
@@ -44,8 +59,6 @@ int *ft_bubble_sort(int *num_arr, int limit)
             }
             i++;
         }
-        // printf("Int arrayu after bubble\n");
-        // ft_print_int_array(num_arr, limit);
         if (sorted == 1)
             break;
     }

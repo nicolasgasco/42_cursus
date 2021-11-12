@@ -38,6 +38,7 @@ void	ft_print_struct(t_list *number_list)
 	printf("\n");
 	printf("Low tot is: %d\n", number_list->lo_tot);
 	printf("Hi tot is: %d\n", number_list->hi_tot);
+	ft_iterate_list(number_list->o_list, 'o');
 	printf("\n");
 	ft_iterate_list(number_list->a_list, 'a');
 	printf("A len is: %d\n", number_list->a_len);

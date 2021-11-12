@@ -8,18 +8,19 @@
 # include <stdio.h>
 
 typedef struct NumList {
-	int			num_moves;
-	int			num_tot;
-	int			lo_tot;
-	int			hi_tot;
+	int				num_moves;
+	int				num_tot;
+	int				lo_tot;
+	int				hi_tot;
+	struct s_node	*o_list;
 	struct s_node	*a_list;
-	int			a_len;
-	int			lo_a;
-	int			hi_a;
+	int				a_len;
+	int				lo_a;
+	int				hi_a;
 	struct s_node	*b_list;
-	int			b_len;
-	int			lo_b;
-	int			hi_b;
+	int				b_len;
+	int				lo_b;
+	int				hi_b;
 }	t_list;
 
 struct s_node {
@@ -47,7 +48,8 @@ void	ft_swap_nodes(struct s_node **root, int i1, int i2);
 void	ft_remove_node(struct s_node **root, int value);
 int		ft_get_value(struct s_node *list, int index);
 int		*ft_bubble_sort(int *num_arr, int limit);
-void    ft_assign_index(struct s_node *linked, int *array, int limit);
+void	ft_assign_i(struct s_node *linked, int *array, int limit);
+void    ft_assign_i_linked(struct s_node *list, struct s_node *ordered);
 
 // Rules
 void	ft_put_move(t_list *number_list, char move, char list);

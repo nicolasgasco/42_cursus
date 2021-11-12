@@ -51,6 +51,8 @@ void    ft_update_stats(t_list *n_list)
     n_list->hi_b = ft_find_hilo(n_list->b_list, 'h');
     n_list->lo_a = ft_find_hilo(n_list->a_list, 'l');
     n_list->lo_b = ft_find_hilo(n_list->b_list, 'l');
+    ft_assign_i_linked(n_list->a_list, n_list->o_list);
+    ft_assign_i_linked(n_list->b_list, n_list->o_list);
 }
 
 void    ft_initialize_stats(t_list *n_list)

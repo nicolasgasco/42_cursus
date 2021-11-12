@@ -105,12 +105,14 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 	if (ft_check_repetition(num_arr, n_list->num_tot) == 0)
 		ft_put_err(1);
 	n_list->a_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
+	n_list->o_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
 	ft_initialize_stats(n_list);
 	if (ft_check_size(n_list->num_tot) == 0)
 		ft_put_err(1);
 	num_arr = ft_bubble_sort(num_arr, n_list->num_tot);
-	ft_assign_index(n_list->a_list, num_arr, n_list->num_tot);
 	ft_print_int_array(num_arr, n_list->num_tot);
+	ft_assign_i(n_list->o_list, num_arr, n_list->num_tot);
+	ft_iterate_list(n_list->o_list, 'o');
 	free(num_arr);
 	return ;
 }

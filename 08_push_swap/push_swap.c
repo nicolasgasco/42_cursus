@@ -32,8 +32,8 @@ int	main(int argc, char *argv[])
 	// }
 	// ft_move(&num_list, 's', 'a');
 	ft_move(&num_list, 'p', 'b');
-	// ft_move(&num_list, 'p', 'b');
-	// ft_move(&num_list, 'p', 'b');
+	ft_move(&num_list, 'p', 'b');
+	ft_move(&num_list, 'p', 'b');
 	// ft_move(&num_list, 'r', 'r');
 	// ft_move(&num_list, 'R', 'r');
 	// ft_move(&num_list, 's', 'a');
