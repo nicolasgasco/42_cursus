@@ -63,6 +63,7 @@ int		ft_check_if_num(char *s);
 int		ft_check_repetition(int *nums, int limit);
 int		ft_check_size(int list_size);
 void	ft_put_err(int code);
+int	ft_check_if_sorted(struct s_node *a_list, int size);
 
 // List stats
 void    ft_update_stats(t_list *n_list);

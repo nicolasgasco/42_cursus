@@ -31,25 +31,28 @@ void	ft_print_struct(t_list *number_list)
 	if (!n_moves)
 		n_moves = 0;
 	printf("\n");
-	printf("%d)_ _ _ _ _ _ _ _ _ _ _\n", n_moves);
+	printf("==============\n");
+	printf("%d)\n", n_moves);
 	printf("\n");
+	ft_iterate_list(number_list->o_list, 'o');
 	printf("Num tot is: %d\n", number_list->hi_tot);
 	printf("Num moves is: %d\n", number_list->num_moves);
 	printf("\n");
 	printf("Low tot is: %d\n", number_list->lo_tot);
 	printf("Hi tot is: %d\n", number_list->hi_tot);
-	ft_iterate_list(number_list->o_list, 'o');
+	printf("______________\n");
 	printf("\n");
 	ft_iterate_list(number_list->a_list, 'a');
 	printf("A len is: %d\n", number_list->a_len);
 	printf("Low a is: %d\n", number_list->lo_a);
 	printf("Hi a is: %d\n", number_list->hi_a);
+	printf("______________\n");
 	printf("\n");
 	ft_iterate_list(number_list->b_list, 'b');
 	printf("B len is: %d\n", number_list->b_len);
 	printf("Low b is: %d\n", number_list->lo_b);
 	printf("Hi b is: %d\n", number_list->hi_b);
-	printf("_ _ _ _ _ _ _ _ _ _ _\n");
+	printf("==============\n");
 	printf("\n");
 	n_moves++;
 }

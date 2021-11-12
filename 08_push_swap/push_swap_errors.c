@@ -61,3 +61,22 @@ int	ft_check_size(int list_size)
 		return (0);
 	return (1);
 }
+
+int	ft_check_if_sorted(struct s_node *a_list, int size)
+{
+	struct s_node	*curr;
+	int				i;
+
+	i = 1;
+	curr = a_list;
+	while (curr->next != NULL)
+	{
+		if (curr->x > curr->next->x)
+			return (0);
+		curr = curr->next;
+		i++;
+	}
+	if (i == size)
+		return (1);
+	return (0);
+}
