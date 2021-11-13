@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:43:05 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/31 18:05:02 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/13 12:00:13 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	main(int argc, char *argv[])
 	// 	ft_sort_three(&num_list);
 	// }
 	// ft_move(&num_list, 's', 'a');
-	ft_move(&num_list, 's', 'a');
-	// ft_move(&num_list, 'p', 'b');
+	// ft_move(&num_list, 's', 'a');
+	ft_move(&num_list, 'p', 'b');
 	// ft_move(&num_list, 'p', 'b');
 	// ft_move(&num_list, 'r', 'r');
 	// ft_move(&num_list, 'R', 'r');

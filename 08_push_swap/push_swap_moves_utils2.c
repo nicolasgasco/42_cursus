@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 16:56:10 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/31 18:05:02 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/13 12:06:12 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,24 +80,24 @@ void	ft_rr(t_list *t_list, char c)
 		ft_rr_aux(t_list->b_list, 'b', t_list);
 }
 
-int		ft_get_value(struct s_node *list, int index)
+int	ft_get_value(struct s_node *list, int index)
 {
-    struct s_node	*curr;
-    int             i;
+	struct s_node	*curr;
+	int				i;
 
-    i = 0;
+	i = 0;
 	curr = list;
 	if (curr == NULL)
 	{
 		printf("Trying to read empty array\n");
 		exit(10);
 	}
-	while(curr != NULL)
+	while (curr != NULL)
 	{
 		if (i == index)
 			return (curr->x);
-        i++;
-        curr = curr->next;
+		i++;
+		curr = curr->next;
 	}
-    return (i);
+	return (i);
 }

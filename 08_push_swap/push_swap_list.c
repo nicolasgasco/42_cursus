@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:44:07 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/01 18:25:15 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/13 12:01:18 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 struct s_node	*ft_populate_s_nodes(int *num_arr, int n)
 {
 	struct s_node	*root;
-	int			i;
+	int				i;
 
 	if (!num_arr)
 		return (NULL);
@@ -84,12 +84,12 @@ int	*ft_create_str_arr(char *str, t_list *n_list)
 	i = 0;
 	while (num_str[i] != NULL)
 	{
- 		result[i] = ft_atoi(num_str[i]);
+		result[i] = ft_atoi(num_str[i]);
 		i++;
 	}
 	n_list->num_tot = i;
 	free(num_str);
-	return result;
+	return (result);
 }
 
 void	ft_create_linked_list(int argc, char **args, t_list *n_list)

@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:44:18 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/01 18:04:51 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/13 12:01:54 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_insert_beginning(struct s_node **root, int value)
 
 void	ft_swap_nodes(struct s_node **root, int i1, int i2)
 {
-	int			i;
+	int				i;
 	struct s_node	*curr;
 	struct s_node	*temp;
 	struct s_node	*node1;
@@ -90,7 +90,7 @@ void	ft_remove_node(struct s_node **root, int index)
 {
 	struct s_node	*curr;
 	struct s_node	*to_remove;
-	int			i;
+	int				i;
 
 	i = 1;
 	curr = *root;
