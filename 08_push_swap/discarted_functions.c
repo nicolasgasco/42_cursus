@@ -6,15 +6,15 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 17:59:23 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/31 18:05:02 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/13 12:56:47 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_insert_after(struct s_node *s_node, int value)
+void ft_insert_after(struct s_node *s_node, int value)
 {
-	struct s_node	*new_node;
+	struct s_node *new_node;
 
 	new_node = malloc(sizeof(struct s_node));
 	if (new_node == NULL)
@@ -24,9 +24,9 @@ void	ft_insert_after(struct s_node *s_node, int value)
 	s_node->next = new_node;
 }
 
-void	ft_print_struct(t_list *number_list)
+void ft_print_struct(t_list *number_list)
 {
-	static int	n_moves;
+	static int n_moves;
 
 	if (!n_moves)
 		n_moves = 0;
@@ -57,9 +57,9 @@ void	ft_print_struct(t_list *number_list)
 	n_moves++;
 }
 
-void	ft_iterate_list(struct s_node *root, char c)
+void ft_iterate_list(struct s_node *root, char c)
 {
-	struct s_node	*curr;
+	struct s_node *curr;
 
 	curr = root;
 	printf("s_nodes list %c: {", c);
@@ -74,9 +74,9 @@ void	ft_iterate_list(struct s_node *root, char c)
 	printf("}\n");
 }
 
-void	ft_print_int_array(int *arr, int n)
+void ft_print_int_array(int *arr, int n)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	printf("Int array: [");
@@ -89,4 +89,37 @@ void	ft_print_int_array(int *arr, int n)
 		i++;
 	}
 	printf("]\n");
+}
+
+void ft_put_bin(int n)
+{
+	if (n <= 1)
+	{
+		if ((n % 2) == 0)
+			printf("0");
+		else if ((n % 2) == 1)
+			printf("1");
+		return;
+	}
+	ft_put_bin(n / 2);
+	n = n % 2;
+	if ((n % 2) == 0)
+		printf("0");
+	else
+		printf("1");
+}
+
+void ft_put_bin_list(struct s_node *root)
+{
+	struct s_node *curr;
+
+	curr = root;
+	while (curr != NULL)
+	{
+		printf("I is: %d\n", curr->i);
+		printf("Binary is: ");
+		ft_put_bin(curr->i);
+		printf("\n");
+		curr = curr->next;
+	}
 }

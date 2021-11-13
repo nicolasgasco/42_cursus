@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 12:07:46 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/13 12:09:03 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/13 12:27:06 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,6 @@ void	ft_update_stats(t_list *n_list)
 	n_list->lo_b = ft_find_hilo(n_list->b_list, 'l');
 	ft_assign_i_linked(n_list->a_list, n_list->o_list);
 	ft_assign_i_linked(n_list->b_list, n_list->o_list);
-	if (ft_check_if_sorted(n_list->a_list, n_list->num_tot))
-	{
-		printf("Array is sorted! FIN\n");
-		exit(1);
-	}
 }
 
 void	ft_initialize_stats(t_list *n_list)

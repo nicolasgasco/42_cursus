@@ -74,6 +74,7 @@ void    ft_initialize_stats(t_list *n_list);
 // Sorting
 void    ft_sort_two(t_list *n_list);
 void    ft_sort_three(t_list *n_list);
+void	ft_radix_sort(t_list *n_list);
 
 // Push swap
 void	ft_create_linked_list(int argc, char **args, t_list *t_list);
@@ -82,5 +83,7 @@ void	ft_move(t_list *number_list, char list, char move);
 // To delete
 void	ft_print_struct(t_list *number_list);
 void	ft_print_int_array(int *arr, int n);
+void	ft_put_bin(int n);
+void	ft_put_bin_list(struct s_node *root);
 
 #endif

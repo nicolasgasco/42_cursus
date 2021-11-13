@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:44:07 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/13 12:01:18 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/13 12:26:56 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,12 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 		ft_put_err(1);
 	n_list->a_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
 	n_list->o_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
-	ft_initialize_stats(n_list);
-	if (ft_check_size(n_list->num_tot) == 0)
-		ft_put_err(1);
 	num_arr = ft_bubble_sort(num_arr, n_list->num_tot);
 	ft_print_int_array(num_arr, n_list->num_tot);
 	ft_assign_i(n_list->o_list, num_arr, n_list->num_tot);
-	ft_iterate_list(n_list->o_list, 'o');
+	ft_initialize_stats(n_list);
+	if (ft_check_size(n_list->num_tot) == 0)
+		ft_put_err(1);
 	free(num_arr);
 	return ;
 }
