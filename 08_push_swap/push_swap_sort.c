@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 12:06:52 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/13 14:05:26 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/13 14:15:05 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void ft_radix_sort(t_list *n_list)
 	struct s_node	*curr_a;
 	struct s_node	*curr_b;
 	int 			i;
+	int				x;
 	int				comp;
 	int				y;
 
@@ -68,11 +69,9 @@ void ft_radix_sort(t_list *n_list)
 	while (1)
 	{
 		curr_a = n_list->a_list;
-		ft_iterate_list(curr_a, 'a');
 		// ft_put_bin_list(n_list->a_list);
-		if (y == 2)
-			break ;
-		while (curr_a != NULL)
+		x = 0;
+		while (x < n_list->num_tot)
 		{
 			i = curr_a->i;
 			curr_a = curr_a->next;
@@ -87,9 +86,12 @@ void ft_radix_sort(t_list *n_list)
 			else
 			{
 				// printf("%d is 0\n", i);
-				ft_move(n_list, 'p', 'b');
+				// ft_move(n_list, 'p', 'b');
 			}
 			printf("\n");
+			ft_iterate_list(curr_a, 'a');
+			ft_iterate_list(n_list->b_list, 'b');
+			x++;
 		}
 		// break ;
 		curr_b = n_list->b_list;
@@ -98,10 +100,14 @@ void ft_radix_sort(t_list *n_list)
 			ft_move(n_list, 'p', 'a');
 			curr_b = curr_b->next;
 		}
+		ft_iterate_list(curr_a, 'a');
 		ft_iterate_list(n_list->b_list, 'b');
 
 		comp = comp << 1;
+		if (y == 2)
+			break ;
 		y++;
+		
 		// printf("Sorted: %d\n", ft_check_if_sorted(n_list->a_list, n_list->num_tot));
 		// if (ft_check_if_sorted(n_list->a_list, n_list->num_tot) == 1)
 		printf("Comp is %d\n", comp);
