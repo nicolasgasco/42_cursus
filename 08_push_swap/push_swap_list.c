@@ -84,7 +84,7 @@ int	*ft_create_str_arr(char *str, t_list *n_list)
 	i = 0;
 	while (num_str[i] != NULL)
 	{
-		result[i] = ft_atoi(num_str[i]);
+		result[i] = ft_atoi(ft_strtrim(num_str[i], " "));
 		i++;
 	}
 	n_list->num_tot = i;
