@@ -25,12 +25,18 @@ int	main(int argc, char *argv[])
 		printf("There are 2 elements\n");
 		ft_sort_two(&num_list);
 	}
-	// if (num_list.num_tot == 3)
-	// {
-	// 	printf("There are 3 elements\n");
-	// 	ft_sort_three(&num_list);
-	// }
-	ft_radix_sort(&num_list);
+	else if (num_list.num_tot == 3)
+	{
+		// ft_putstr_fd("There are 3 elements\n", 0);
+		ft_sort_three(&num_list);
+	}
+	else if (num_list.num_tot == 5)
+	{
+		// 
+	}
+	else {
+		ft_radix_sort(&num_list);
+	}
 	// ft_move(&num_list, 's', 'a');
 	// ft_move(&num_list, 's', 'a');
 	// ft_move(&num_list, 'p', 'b');
@@ -44,7 +50,7 @@ int	main(int argc, char *argv[])
 	// ft_move(&num_list, 'p', 'a');
 	// ft_move(&num_list, 'p', 'a');
 	// ft_move(&num_list, 'p', 'a');
-	// ft_print_struct(&num_list);
+	ft_print_struct(&num_list);
 	ft_deallocate_list(&num_list.a_list);
 	ft_deallocate_list(&num_list.b_list);
 	return (0);

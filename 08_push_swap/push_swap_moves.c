@@ -14,6 +14,12 @@
 
 void	ft_move(t_list *number_list, char move, char list)
 {
+	if (ft_check_if_sorted(number_list->a_list, number_list->num_tot))
+	{
+		ft_putstr_fd("Array is sorted! FIN\n", 0);
+		// ft_print_struct(number_list);
+		exit(1);
+	}
 	if (move == 's')
 		ft_s(number_list, list);
 	else if (move == 'p')
@@ -26,8 +32,8 @@ void	ft_move(t_list *number_list, char move, char list)
 	// ft_print_struct(number_list);
 	if (ft_check_if_sorted(number_list->a_list, number_list->num_tot))
 	{
-		// printf("Array is sorted! FIN\n");
-		// ft_print_struct(number_list);
+		ft_putstr_fd("Array is sorted! FIN\n", 0);
+		ft_print_struct(number_list);
 		exit(1);
 	}
 }
