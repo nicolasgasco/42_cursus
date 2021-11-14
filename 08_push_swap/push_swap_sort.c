@@ -14,14 +14,14 @@
 
 void ft_sort_two(t_list *n_list)
 {
-	if (n_list->a_list->x == n_list->hi_tot)
+	if (n_list->a_list->x == n_list->hi_a)
 	{
-		ft_putstr_fd("Biggest is on top\n", 0);
+		// ft_putstr_fd("Biggest is on top\n", 0);
 		ft_move(n_list, 's', 'a');
 	}
 	else
 	{
-		ft_putstr_fd("It's already sorted\n", 0);
+		// ft_putstr_fd("It's already sorted\n", 0);
 	}
 }
 
@@ -29,44 +29,57 @@ void ft_sort_three(t_list *n_list)
 {
 	if (n_list->a_list->x == n_list->lo_a)
 	{
-		ft_putstr_fd("Smallest is on top\n", 0);
+		// ft_putstr_fd("Smallest is on top\n", 0);
 		ft_move(n_list, 'R', 'a');
 		ft_move(n_list, 's', 'a');
 	}
 	else if (ft_get_value(n_list->a_list, n_list->a_len - 1) == n_list->lo_a)
 	{
-		ft_putstr_fd("Smallest is at the bottom\n", 0);
+		// ft_putstr_fd("Smallest is at the bottom\n", 0);
 		if (n_list->a_list->x == n_list->hi_a)
 		{
-			ft_putstr_fd("Biggest is on top\n", 0);
+			// ft_putstr_fd("Biggest is on top\n", 0);
 			ft_move(n_list, 'r', 'a');
 			ft_move(n_list, 's', 'a');
 		}
 		else
 		{
-			ft_putstr_fd("Biggest is in the middle\n", 0);
+			// ft_putstr_fd("Biggest is in the middle\n", 0);
 			ft_move(n_list, 'R', 'a');
 		}
 	}
 	else
 	{
-		ft_putstr_fd("Smallest is in the middle\n", 0);
+		// ft_putstr_fd("Smallest is in the middle\n", 0);
 		if (n_list->a_list->x == n_list->hi_a)
 		{
-			ft_putstr_fd("Biggest is on top\n", 0);
+			// ft_putstr_fd("Biggest is on top\n", 0);
 			ft_move(n_list, 'r', 'a');
 		}
 		else
 		{
-			ft_putstr_fd("Biggest is at bottom\n", 0);
+			// ft_putstr_fd("Biggest is at bottom\n", 0);
 			ft_move(n_list, 's', 'a');
 		}
 
 	}
 }
 
+void ft_sort_four(t_list *n_list)
+{
+	ft_choose_direction(n_list, n_list->a_list, n_list->hi_tot);
+	ft_move(n_list, 'p', 'b');
+	ft_choose_direction(n_list, n_list->a_list, n_list->lo_tot);
+	ft_move(n_list, 'p', 'b');
+	ft_sort_two(n_list);
+	ft_move(n_list, 'p', 'a');
+	ft_move(n_list, 'p', 'a');
+	ft_move(n_list, 'r', 'a');
+}
+
 void ft_sort_five(t_list *n_list)
 {
+	ft_iterate_list(n_list->a_list, 'a');
 	ft_choose_direction(n_list, n_list->a_list, n_list->hi_tot);
 	ft_move(n_list, 'p', 'b');
 	ft_choose_direction(n_list, n_list->a_list, n_list->lo_tot);

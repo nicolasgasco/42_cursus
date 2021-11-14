@@ -14,7 +14,7 @@
 
 void	ft_put_err(int code)
 {
-	ft_putstr_fd("Error\n", 0);
+	ft_putstr_fd("Error\n", 2);
 	exit(code);
 }
 

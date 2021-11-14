@@ -22,13 +22,17 @@ int	main(int argc, char *argv[])
 	// ft_print_struct(&num_list);
 	if (num_list.num_tot == 2)
 	{
-		printf("There are 2 elements\n");
+		// printf("There are 2 elements\n");
 		ft_sort_two(&num_list);
 	}
 	else if (num_list.num_tot == 3)
 	{
-		ft_putstr_fd("There are 3 elements\n", 0);
+		// ft_putstr_fd("There are 3 elements\n", 0);
 		ft_sort_three(&num_list);
+	}
+	else if (num_list.num_tot == 4)
+	{
+		ft_sort_four(&num_list);
 	}
 	else if (num_list.num_tot == 5)
 	{

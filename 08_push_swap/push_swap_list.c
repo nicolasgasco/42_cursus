@@ -43,7 +43,7 @@ int	*ft_create_num_arr(int argc, char *argv[], t_list *n_list)
 	{	
 		if (ft_check_if_num(argv[i]) == 0)
 		{
-			ft_putstr_fd("Error\n", 0);
+			ft_putstr_fd("Error\n", 2);
 			exit(0);
 		}
 		result[i - 1] = ft_atoi(argv[i]);

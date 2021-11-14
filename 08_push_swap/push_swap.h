@@ -75,6 +75,7 @@ void    ft_initialize_stats(t_list *n_list);
 // Sorting
 void    ft_sort_two(t_list *n_list);
 void    ft_sort_three(t_list *n_list);
+void 	ft_sort_four(t_list *n_list);
 void	ft_sort_five(t_list *n_list);
 void	ft_radix_sort(t_list *n_list);
 void    ft_choose_direction(t_list *n_list, struct s_node *list, int value);
