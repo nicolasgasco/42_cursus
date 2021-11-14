@@ -62,10 +62,10 @@ void ft_radix_sort(t_list *n_list)
 	int 			i;
 	int				x;
 	int				comp;
-	int				y;
 
-	y = 0;
 	comp = 1;
+	// ft_iterate_list(n_list->a_list, 'a');
+	// ft_iterate_list(n_list->b_list, 'b');
 	while (1)
 	{
 		curr_a = n_list->a_list;
@@ -75,43 +75,48 @@ void ft_radix_sort(t_list *n_list)
 		{
 			i = curr_a->i;
 			curr_a = curr_a->next;
-			printf("\n");
-			if ((i & comp) != comp)
+			// printf("\n");
+			// printf("I is %d\n", i);
+			if ((i & comp) == comp)
 			{
 				// printf("Comp is %d\n", comp);
 				// printf("Comp & i is %d\n", comp & i);	
 				// printf("%d is 1\n", i);
+				// printf("ra\n");
 				ft_move(n_list, 'r', 'a');
+				// ft_iterate_list(n_list->a_list, 'a');
+				// ft_iterate_list(n_list->b_list, 'b');
 			}
 			else
 			{
 				// printf("%d is 0\n", i);
-				// ft_move(n_list, 'p', 'b');
+				// printf("pb\n");
+				ft_move(n_list, 'p', 'b');
+				// ft_iterate_list(n_list->a_list, 'a');
+				// ft_iterate_list(n_list->b_list, 'b');
 			}
-			printf("\n");
-			ft_iterate_list(curr_a, 'a');
-			ft_iterate_list(n_list->b_list, 'b');
+			// printf("\n");
 			x++;
 		}
-		// break ;
 		curr_b = n_list->b_list;
 		while (curr_b != NULL)
 		{
-			ft_move(n_list, 'p', 'a');
+			// printf("pa\n");
 			curr_b = curr_b->next;
+			ft_move(n_list, 'p', 'a');
+			// ft_iterate_list(n_list->a_list, 'a');
+			// ft_iterate_list(n_list->b_list, 'b');
+			x++;
 		}
-		ft_iterate_list(curr_a, 'a');
-		ft_iterate_list(n_list->b_list, 'b');
-
 		comp = comp << 1;
-		if (y == 2)
-			break ;
-		y++;
-		
+		// ft_iterate_list(n_list->a_list, 'a');
+		// ft_iterate_list(n_list->b_list, 'b');
 		// printf("Sorted: %d\n", ft_check_if_sorted(n_list->a_list, n_list->num_tot));
+		if (ft_check_if_sorted(n_list->a_list, n_list->num_tot) == 1)
+			break;
 		// if (ft_check_if_sorted(n_list->a_list, n_list->num_tot) == 1)
-		printf("Comp is %d\n", comp);
-		printf("_______________\n");
-
+		// printf("Comp is %d\n", comp);
+		// printf("\n-_-_-_-_-_-\n");
+		// printf("\n-_-_-_-_-_-\n");
 	}
 }

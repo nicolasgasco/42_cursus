@@ -18,7 +18,8 @@ void	ft_r_aux(struct s_node **root, char list, t_list *t_list)
 
 	if (root == NULL)
 		return ;
-	if ((*root)->next == NULL || (*root)->next->next == NULL)
+	// if ((*root)->next == NULL || (*root)->next->next == NULL)
+	if ((*root)->next == NULL)
 		return ;
 	moved_node = (*root)->x;
 	ft_remove_node(root, 0);

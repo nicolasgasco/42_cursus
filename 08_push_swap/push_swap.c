@@ -19,7 +19,7 @@ int	main(int argc, char *argv[])
 
 	num_list.num_moves = 0;
 	ft_create_linked_list(argc, argv, &num_list);
-	ft_print_struct(&num_list);
+	// ft_print_struct(&num_list);
 	if (num_list.num_tot == 2)
 	{
 		printf("There are 2 elements\n");
@@ -38,9 +38,13 @@ int	main(int argc, char *argv[])
 	// ft_move(&num_list, 'r', 'r');
 	// ft_move(&num_list, 'R', 'r');
 	// ft_move(&num_list, 's', 'a');
+	// ft_move(&num_list, 'p', 'b');
+	// ft_move(&num_list, 'p', 'b');
+	// ft_move(&num_list, 'p', 'b');
 	// ft_move(&num_list, 'p', 'a');
 	// ft_move(&num_list, 'p', 'a');
 	// ft_move(&num_list, 'p', 'a');
+	// ft_print_struct(&num_list);
 	ft_deallocate_list(&num_list.a_list);
 	ft_deallocate_list(&num_list.b_list);
 	return (0);

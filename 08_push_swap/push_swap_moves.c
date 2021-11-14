@@ -26,7 +26,8 @@ void	ft_move(t_list *number_list, char move, char list)
 	// ft_print_struct(number_list);
 	if (ft_check_if_sorted(number_list->a_list, number_list->num_tot))
 	{
-		printf("Array is sorted! FIN\n");
+		// printf("Array is sorted! FIN\n");
+		// ft_print_struct(number_list);
 		exit(1);
 	}
 }
