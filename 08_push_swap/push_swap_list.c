@@ -97,7 +97,7 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 	int		*num_arr;
 
 	if (argc == 1)
-		ft_put_err(2);
+		exit(2);
 	if (argc == 2)
 		num_arr = ft_create_str_arr(args[1], n_list);
 	else
