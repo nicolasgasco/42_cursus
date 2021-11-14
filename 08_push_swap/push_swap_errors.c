@@ -12,12 +12,6 @@
 
 #include "push_swap.h"
 
-void	ft_put_err(int code)
-{
-	ft_putstr_fd("Error\n", 2);
-	exit(code);
-}
-
 int	ft_check_if_num(char *s)
 {
 	int	i;
