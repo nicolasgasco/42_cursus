@@ -64,7 +64,7 @@ int		ft_check_if_num(char *s);
 int		ft_check_repetition(int *nums, int limit);
 int		ft_check_size(int list_size);
 void	ft_put_err(int code);
-int	ft_check_if_sorted(struct s_node *a_list, int size);
+int		ft_check_if_sorted(struct s_node *a_list, int size);
 
 // List stats
 void    ft_update_stats(t_list *n_list);
@@ -75,7 +75,9 @@ void    ft_initialize_stats(t_list *n_list);
 // Sorting
 void    ft_sort_two(t_list *n_list);
 void    ft_sort_three(t_list *n_list);
+void	ft_sort_five(t_list *n_list);
 void	ft_radix_sort(t_list *n_list);
+void    ft_choose_direction(t_list *n_list, struct s_node *list, int value);
 
 // Push swap
 void	ft_create_linked_list(int argc, char **args, t_list *t_list);

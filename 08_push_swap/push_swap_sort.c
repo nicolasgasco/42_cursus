@@ -14,7 +14,6 @@
 
 void ft_sort_two(t_list *n_list)
 {
-	// Biggest is on top
 	if (n_list->a_list->x == n_list->hi_tot)
 	{
 		ft_putstr_fd("Biggest is on top\n", 0);
@@ -28,18 +27,16 @@ void ft_sort_two(t_list *n_list)
 
 void ft_sort_three(t_list *n_list)
 {
-	if (n_list->a_list->x == n_list->lo_tot)
+	if (n_list->a_list->x == n_list->lo_a)
 	{
-		// ft_putstr_fd("Smallest is on top\n", 0);
+		ft_putstr_fd("Smallest is on top\n", 0);
 		ft_move(n_list, 'R', 'a');
 		ft_move(n_list, 's', 'a');
 	}
-	// Smallest is at bottom
-	else if (ft_get_value(n_list->a_list, n_list->a_len - 1) == n_list->lo_tot)
+	else if (ft_get_value(n_list->a_list, n_list->a_len - 1) == n_list->lo_a)
 	{
 		ft_putstr_fd("Smallest is at the bottom\n", 0);
-		// Biggest is on top
-		if (n_list->a_list->x == n_list->hi_tot)
+		if (n_list->a_list->x == n_list->hi_a)
 		{
 			ft_putstr_fd("Biggest is on top\n", 0);
 			ft_move(n_list, 'r', 'a');
@@ -47,27 +44,37 @@ void ft_sort_three(t_list *n_list)
 		}
 		else
 		{
-			// Biggest is in the middle
 			ft_putstr_fd("Biggest is in the middle\n", 0);
 			ft_move(n_list, 'R', 'a');
 		}
 	}
 	else
 	{
-		// Smallest is in the middle
 		ft_putstr_fd("Smallest is in the middle\n", 0);
-		if (n_list->a_list->x == n_list->hi_tot)
+		if (n_list->a_list->x == n_list->hi_a)
 		{
-			// Biggest ont op
+			ft_putstr_fd("Biggest is on top\n", 0);
 			ft_move(n_list, 'r', 'a');
 		}
 		else
 		{
-			// If biggest at bottom
+			ft_putstr_fd("Biggest is at bottom\n", 0);
 			ft_move(n_list, 's', 'a');
 		}
 
 	}
+}
+
+void ft_sort_five(t_list *n_list)
+{
+	ft_choose_direction(n_list, n_list->a_list, n_list->hi_tot);
+	ft_move(n_list, 'p', 'b');
+	ft_choose_direction(n_list, n_list->a_list, n_list->lo_tot);
+	ft_move(n_list, 'p', 'b');
+	ft_sort_three(n_list);
+	ft_move(n_list, 'p', 'a');
+	ft_move(n_list, 'p', 'a');
+	ft_move(n_list, 'r', 'a');
 }
 
 void ft_radix_sort(t_list *n_list)

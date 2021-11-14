@@ -27,30 +27,18 @@ int	main(int argc, char *argv[])
 	}
 	else if (num_list.num_tot == 3)
 	{
-		// ft_putstr_fd("There are 3 elements\n", 0);
+		ft_putstr_fd("There are 3 elements\n", 0);
 		ft_sort_three(&num_list);
 	}
 	else if (num_list.num_tot == 5)
 	{
-		// 
+		ft_sort_five(&num_list);
 	}
-	else {
+	else
+	{
 		ft_radix_sort(&num_list);
 	}
-	// ft_move(&num_list, 's', 'a');
-	// ft_move(&num_list, 's', 'a');
-	// ft_move(&num_list, 'p', 'b');
-	// ft_move(&num_list, 'p', 'b');
-	// ft_move(&num_list, 'r', 'r');
-	// ft_move(&num_list, 'R', 'r');
-	// ft_move(&num_list, 's', 'a');
-	// ft_move(&num_list, 'p', 'b');
-	// ft_move(&num_list, 'p', 'b');
-	// ft_move(&num_list, 'p', 'b');
-	// ft_move(&num_list, 'p', 'a');
-	// ft_move(&num_list, 'p', 'a');
-	// ft_move(&num_list, 'p', 'a');
-	ft_print_struct(&num_list);
+	// ft_print_struct(&num_list);
 	ft_deallocate_list(&num_list.a_list);
 	ft_deallocate_list(&num_list.b_list);
 	return (0);
