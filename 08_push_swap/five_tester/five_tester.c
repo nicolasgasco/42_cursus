@@ -23,9 +23,9 @@ int main()
             return (0);
         else
         {
-            printf("Test %d\n", i + 1);
+            printf("Test %d\n\n", i + 1);
             
-            // Removing newline after set of number
+            // Removing newline after set of numbers
             line[ft_strlen(line) - 1] = '\0';
             
             // Putting Bash command together
@@ -33,7 +33,7 @@ int main()
             cmd = ft_strjoin(cmd, line); // set of numbers
             cmd = ft_strjoin(cmd, "'; ./push_swap $ARG  | ./checker $ARG");
 
-            printf("Cmd is: %s\n", cmd);
+            printf("%s\n", cmd);
             
             // Copy over binaries and checker
             system("cp ../push_swap ./");
