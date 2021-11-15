@@ -42,16 +42,16 @@ char	*ft_strtrim(char const *s1, char const *set);
 // Linked list methods
 void	ft_insert_beginning(struct s_node **root, int value);
 void	ft_insert_end(struct s_node **root, int value);
-void	ft_deallocate_list(struct s_node **root);
-void	ft_iterate_list(struct s_node *root, char c);
 void	ft_insert_after(struct s_node *node, int value);
 void	ft_swap_nodes(struct s_node **root, int i1, int i2);
 void	ft_remove_node(struct s_node **root, int value);
+void	ft_deallocate_list(struct s_node **root);
+void	ft_free_lists(t_list *n_list);
 int		ft_get_value(struct s_node *list, int index);
 int		*ft_bubble_sort(int *num_arr, int limit);
 void	ft_assign_i(struct s_node *linked, int *array, int limit);
 void    ft_assign_i_linked(struct s_node *list, struct s_node *ordered);
-void	ft_free_lists(t_list *n_list);
+
 
 // Rules
 void	ft_put_move(t_list *number_list, char move, char list);
@@ -88,10 +88,11 @@ void    ft_choose_direction(t_list *n_list, struct s_node *list, int value);
 void	ft_create_linked_list(int argc, char **args, t_list *t_list);
 void	ft_move(t_list *number_list, char list, char move);
 
-// To delete
+// Not part of official assignment
 void	ft_print_struct(t_list *number_list);
 void	ft_print_int_array(int *arr, int n);
 void	ft_put_bin(int n);
 void	ft_put_bin_list(struct s_node *root);
+void	ft_iterate_list(struct s_node *root, char c);
 
 #endif
