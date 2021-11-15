@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 int	ft_atoi(const char *str)
 {
@@ -37,6 +36,6 @@ int	ft_atoi(const char *str)
 	}
 	if ((negative == 1 && result > (unsigned long)INT_MAX)
 		|| (negative == -1 && result > (unsigned long)INT_MAX + 1))
-		ft_put_err(0);
+		ft_put_err(0, "(Bigger than int)");
 	return ((int)result * negative);
 }
