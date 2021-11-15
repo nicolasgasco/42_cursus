@@ -51,6 +51,7 @@ int		ft_get_value(struct s_node *list, int index);
 int		*ft_bubble_sort(int *num_arr, int limit);
 void	ft_assign_i(struct s_node *linked, int *array, int limit);
 void    ft_assign_i_linked(struct s_node *list, struct s_node *ordered);
+void	ft_free_lists(t_list *n_list);
 
 // Rules
 void	ft_put_move(t_list *number_list, char move, char list);
@@ -78,6 +79,8 @@ void    ft_sort_two(t_list *n_list);
 void    ft_sort_three(t_list *n_list);
 void 	ft_sort_four(t_list *n_list);
 void	ft_sort_five(t_list *n_list);
+void	ft_sort_six(t_list *n_list);
+void	ft_sort_seven(t_list *n_list);
 void	ft_radix_sort(t_list *n_list);
 void    ft_choose_direction(t_list *n_list, struct s_node *list, int value);
 

@@ -38,12 +38,19 @@ int	main(int argc, char *argv[])
 	{
 		ft_sort_five(&num_list);
 	}
+	else if (num_list.num_tot == 6)
+	{
+		ft_sort_six(&num_list);
+	}	
+	else if (num_list.num_tot == 7)
+	{
+		ft_sort_seven(&num_list);
+	}
 	else
 	{
 		ft_radix_sort(&num_list);
 	}
 	// ft_print_struct(&num_list);
-	ft_deallocate_list(&num_list.a_list);
-	ft_deallocate_list(&num_list.b_list);
+	ft_free_lists(&num_list);
 	return (0);
 }
