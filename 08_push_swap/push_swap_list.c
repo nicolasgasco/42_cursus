@@ -109,11 +109,9 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 	else
 		num_arr = ft_args_are_nums(argc, args, n_list);
 	if (ft_check_repetition(num_arr, n_list->num_tot) == 0)
-		ft_put_err(1, "");
+		ft_put_err(3, "(There is a duplicate)\n");
 	if (ft_check_if_sorted_arr(num_arr, n_list->num_tot) == 1)
-	{
 		ft_put_err(1, "(Numbers are already sorted)\n");
-	}
 	n_list->a_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
 	n_list->o_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
 	num_arr = ft_bubble_sort(num_arr, n_list->num_tot);
