@@ -7,7 +7,8 @@ int main()
     int     i;
     char    *cmd;
 
-    // Open file with one set of numbers for every new line
+    // Open file containing one set of numbers for each line
+    // Random sets generator: https://www.random.org/integer-sets/
     fd = open("numbers", O_RDONLY);
     i = 0;
     while (1)
