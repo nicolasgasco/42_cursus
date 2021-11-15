@@ -30,7 +30,7 @@ struct s_node	*ft_populate_s_nodes(int *num_arr, int n)
 	return (root);
 }
 
-int	*ft_create_num_arr(int argc, char *argv[], t_list *n_list)
+int	*ft_args_are_nums(int argc, char *argv[], t_list *n_list)
 {
 	int		*result;
 	int		i;
@@ -41,9 +41,9 @@ int	*ft_create_num_arr(int argc, char *argv[], t_list *n_list)
 		exit(1);
 	while (i < argc)
 	{	
-		if (ft_check_if_num(argv[i]) == 0)
+		if (ft_check_non_num(argv[i]) == 0)
 		{
-			ft_putstr_fd("Error\n", 2);
+			ft_put_err(2, "(Non numeric values)\n");
 			exit(0);
 		}
 		result[i - 1] = ft_atoi(argv[i]);
@@ -67,19 +67,25 @@ int	ft_check_character(char *str, char c)
 	return (0);
 }
 
-int	*ft_create_str_arr(char *str, t_list *n_list)
+int	*ft_arg_is_str(char *str, t_list *n_list)
 {
 	int		i;
 	char	**num_str;
 	int		*result;
 
 	i = 0;
+	if (str[0] == '\0')
+		ft_put_err(2, "(Empty string)\n");
 	if (ft_check_character(str, ','))
 		num_str = ft_split(str, ',');
 	else
 		num_str = ft_split(str, ' ');
 	while (num_str[i] != NULL)
+	{
+		if (ft_check_non_num(num_str[i]) == 0)
+			ft_put_err(2, "(Non numeric values)\n");
 		i++;
+	}
 	result = (int *)malloc(sizeof(int) * i);
 	i = 0;
 	while (num_str[i] != NULL)
@@ -97,17 +103,16 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 	int		*num_arr;
 
 	if (argc == 1)
-		exit(2);
+		ft_put_err(1, "(No arguments provided)\n");
 	if (argc == 2)
-		num_arr = ft_create_str_arr(args[1], n_list);
+		num_arr = ft_arg_is_str(args[1], n_list);
 	else
-		num_arr = ft_create_num_arr(argc, args, n_list);
+		num_arr = ft_args_are_nums(argc, args, n_list);
 	if (ft_check_repetition(num_arr, n_list->num_tot) == 0)
-		ft_put_err(1);
+		ft_put_err(1, "");
 	if (ft_check_if_sorted_arr(num_arr, n_list->num_tot) == 1)
 	{
-		ft_putstr_fd("Numbers are already sorted\n", 0);
-		ft_put_err(1);
+		ft_put_err(1, "(Numbers are already sorted)\n");
 	}
 	n_list->a_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
 	n_list->o_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
@@ -115,7 +120,7 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 	ft_assign_i(n_list->o_list, num_arr, n_list->num_tot);
 	ft_initialize_stats(n_list);
 	if (ft_check_size(n_list->num_tot) == 0)
-		ft_put_err(1);
+		ft_put_err(1, "");
 	free(num_arr);
 	return ;
 }

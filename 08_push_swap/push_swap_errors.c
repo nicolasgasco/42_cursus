@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	ft_check_if_num(char *s)
+int	ft_check_non_num(char *s)
 {
 	int	i;
 

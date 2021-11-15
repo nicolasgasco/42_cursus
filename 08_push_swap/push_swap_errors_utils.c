@@ -12,8 +12,10 @@
 
 #include "push_swap.h"
 
-void	ft_put_err(int code)
+void	ft_put_err(int code, char *str)
 {
-	ft_putstr_fd("Error\n", 2);
+
+	ft_putstr_fd("Error\n", 0);
+	ft_putstr_fd(str, 0);
 	exit(code);
 }

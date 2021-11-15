@@ -60,10 +60,10 @@ void	ft_r(t_list *number_list, char c);
 void	ft_rr(t_list *number_list, char c);
 
 // Validation
-int		ft_check_if_num(char *s);
+int		ft_check_non_num(char *s);
 int		ft_check_repetition(int *nums, int limit);
 int		ft_check_size(int list_size);
-void	ft_put_err(int code);
+void	ft_put_err(int code, char *str);
 int		ft_check_if_sorted(struct s_node *a_list, int size);
 int		ft_check_if_sorted_arr(int *array, int size);
 
