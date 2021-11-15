@@ -6,6 +6,7 @@ Here is the list of projects sorted by date (descending):
 1. **push_swap** (C programming, November 2021)
 
 3. **minitalk** (C programming, October 2021): code a small data exchange program using UNIX signals (SIGUSR1 and SIGUSR2) and bitwise operations. A string is passed as parameter to the client, converted into binary, and sent to the server in form of signals (either 0 or 1), where the string is reconstructed and outputted. 
+![Screenshot of completed project](https://res.cloudinary.com/ngasco/image/upload/v1635067508/42/Screenshot_from_2021-10-24_11-22-56_mfbq1j.png "Screenshot of Minitalk")
 
 3. **exam_02** (exam, October 2021): The exercises I did in order to prepare for the 2nd rank exam.
 
