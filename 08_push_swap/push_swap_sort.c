@@ -27,6 +27,8 @@ void ft_sort_two(t_list *n_list)
 
 void ft_sort_three(t_list *n_list)
 {
+	if (ft_check_if_sorted(n_list->a_list, n_list->a_len) == 1)
+		return ;
 	if (n_list->a_list->x == n_list->lo_a)
 	{
 		// ft_putstr_fd("Smallest is on top\n", 0);
@@ -79,7 +81,6 @@ void ft_sort_four(t_list *n_list)
 
 void ft_sort_five(t_list *n_list)
 {
-	ft_iterate_list(n_list->a_list, 'a');
 	ft_choose_direction(n_list, n_list->a_list, n_list->hi_tot);
 	ft_move(n_list, 'p', 'b');
 	ft_choose_direction(n_list, n_list->a_list, n_list->lo_tot);

@@ -34,7 +34,7 @@ void ft_print_struct(t_list *number_list)
 	printf("==============\n");
 	printf("%d)\n", n_moves);
 	printf("\n");
-	ft_iterate_list(number_list->o_list, 'o');
+	// ft_iterate_list(number_list->o_list, 'o');
 	printf("Num tot is: %d\n", number_list->hi_tot);
 	printf("Num moves is: %d\n", number_list->num_moves);
 	printf("\n");
