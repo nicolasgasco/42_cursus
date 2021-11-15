@@ -21,35 +21,19 @@ int	main(int argc, char *argv[])
 	ft_create_linked_list(argc, argv, &num_list);
 	// ft_print_struct(&num_list);
 	if (num_list.num_tot == 2)
-	{
-		// printf("There are 2 elements\n");
 		ft_sort_two(&num_list);
-	}
 	else if (num_list.num_tot == 3)
-	{
-		// ft_putstr_fd("There are 3 elements\n", 0);
 		ft_sort_three(&num_list);
-	}
 	else if (num_list.num_tot == 4)
-	{
 		ft_sort_four(&num_list);
-	}
 	else if (num_list.num_tot == 5)
-	{
 		ft_sort_five(&num_list);
-	}
 	else if (num_list.num_tot == 6)
-	{
 		ft_sort_six(&num_list);
-	}	
 	else if (num_list.num_tot == 7)
-	{
 		ft_sort_seven(&num_list);
-	}
 	else
-	{
 		ft_radix_sort(&num_list);
-	}
 	// ft_print_struct(&num_list);
 	ft_free_lists(&num_list);
 	return (0);
