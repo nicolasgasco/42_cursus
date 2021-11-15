@@ -84,6 +84,7 @@ void	ft_swap_nodes(struct s_node **root, int i1, int i2)
 	temp->x = curr->x;
 	curr->x = node1->x;
 	node1->x = temp->x;
+	free(temp);
 }
 
 void	ft_remove_node(struct s_node **root, int index)
