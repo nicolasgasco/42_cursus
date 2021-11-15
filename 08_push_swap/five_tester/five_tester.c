@@ -32,7 +32,7 @@ int main()
             cmd = ft_strjoin(cmd, "ARG='");
             cmd = ft_strjoin(cmd, line); // set of numbers
             cmd = ft_strjoin(cmd, "'; ./push_swap $ARG  | ./checker $ARG");
-
+            // valgrind --undef-value-errors=no --leak-check=full
             printf("%s\n", cmd);
             
             // Copy over binaries and checker
