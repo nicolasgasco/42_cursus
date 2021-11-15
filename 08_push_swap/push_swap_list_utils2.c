@@ -79,7 +79,7 @@ int	*ft_bubble_sort(int *num_arr, int limit)
 
 void	ft_free_lists(t_list *n_list)
 {
-	ft_deallocate_list(n_list->a_list);
-	ft_deallocate_list(n_list->b_list);
-	ft_deallocate_list(n_list->o_list);
+	ft_deallocate_list(&n_list->a_list);
+	ft_deallocate_list(&n_list->b_list);
+	ft_deallocate_list(&n_list->o_list);
 }
