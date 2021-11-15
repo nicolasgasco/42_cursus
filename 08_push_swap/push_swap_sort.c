@@ -69,9 +69,9 @@ void ft_sort_three(t_list *n_list)
 
 void ft_sort_four(t_list *n_list)
 {
-	ft_choose_direction(n_list, n_list->a_list, n_list->hi_tot);
+	ft_choose_direction(n_list, n_list->a_list, n_list->hi_a);
 	ft_move(n_list, 'p', 'b');
-	ft_choose_direction(n_list, n_list->a_list, n_list->lo_tot);
+	ft_choose_direction(n_list, n_list->a_list, n_list->lo_a);
 	ft_move(n_list, 'p', 'b');
 	ft_sort_two(n_list);
 	ft_move(n_list, 'p', 'a');
@@ -81,11 +81,35 @@ void ft_sort_four(t_list *n_list)
 
 void ft_sort_five(t_list *n_list)
 {
-	ft_choose_direction(n_list, n_list->a_list, n_list->hi_tot);
+	ft_choose_direction(n_list, n_list->a_list, n_list->hi_a);
 	ft_move(n_list, 'p', 'b');
-	ft_choose_direction(n_list, n_list->a_list, n_list->lo_tot);
+	ft_choose_direction(n_list, n_list->a_list, n_list->lo_a);
 	ft_move(n_list, 'p', 'b');
 	ft_sort_three(n_list);
+	ft_move(n_list, 'p', 'a');
+	ft_move(n_list, 'p', 'a');
+	ft_move(n_list, 'r', 'a');
+}
+
+void ft_sort_six(t_list *n_list)
+{
+	ft_choose_direction(n_list, n_list->a_list, n_list->hi_a);
+	ft_move(n_list, 'p', 'b');
+	ft_choose_direction(n_list, n_list->a_list, n_list->lo_a);
+	ft_move(n_list, 'p', 'b');
+	ft_sort_four(n_list);
+	ft_move(n_list, 'p', 'a');
+	ft_move(n_list, 'p', 'a');
+	ft_move(n_list, 'r', 'a');
+}
+
+void ft_sort_seven(t_list *n_list)
+{
+	ft_choose_direction(n_list, n_list->a_list, n_list->hi_a);
+	ft_move(n_list, 'p', 'b');
+	ft_choose_direction(n_list, n_list->a_list, n_list->lo_a);
+	ft_move(n_list, 'p', 'b');
+	ft_sort_five(n_list);
 	ft_move(n_list, 'p', 'a');
 	ft_move(n_list, 'p', 'a');
 	ft_move(n_list, 'r', 'a');
