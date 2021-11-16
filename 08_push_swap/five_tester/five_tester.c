@@ -31,7 +31,7 @@ int main()
             // Putting Bash command together
             cmd = ft_strjoin(cmd, "ARG='");
             cmd = ft_strjoin(cmd, line); // set of numbers
-            cmd = ft_strjoin(cmd, "'; ./push_swap $ARG  | ./checker $ARG");
+            cmd = ft_strjoin(cmd, "'; ./push_swap $ARG  | valgrind --undef-value-errors=no --leak-check=full ./checker $ARG");
             // valgrind --undef-value-errors=no --leak-check=full
             printf("%s\n", cmd);
             

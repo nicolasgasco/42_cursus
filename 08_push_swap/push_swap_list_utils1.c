@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_list_utils.c                             :+:      :+:    :+:   */
+/*   push_swap_list_utils1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:44:18 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/13 12:01:54 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/16 18:27:48 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,14 @@ void	ft_swap_nodes(struct s_node **root, int i1, int i2)
 	temp->x = curr->x;
 	curr->x = node1->x;
 	node1->x = temp->x;
+	i = 0;
+	while (i < i1)
+	{
+		curr = curr->next;
+		i++;
+	}
+	curr->x = temp->x;
+	free(node1);
 	free(temp);
 }
 
