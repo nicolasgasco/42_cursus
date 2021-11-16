@@ -89,7 +89,7 @@ int	ft_get_value(struct s_node *list, int index)
 	curr = list;
 	if (curr == NULL)
 	{
-		printf("Trying to read empty array\n");
+		ft_putstr_fd("Trying to read empty array\n", 0);
 		exit(10);
 	}
 	while (curr != NULL)
