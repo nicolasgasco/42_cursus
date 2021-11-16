@@ -14,7 +14,7 @@
 
 void	ft_check_non_num_util(char *num_str)
 {
-	if (ft_check_non_num(num_str) == 0)
+	if (ft_check_non_num(ft_strtrim(num_str, " ")) == 0)
 		ft_put_err(2, "(Non numeric values)\n");
 }
 
