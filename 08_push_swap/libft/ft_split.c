@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 17:44:27 by ngasco            #+#    #+#             */
-/*   Updated: 2021/10/31 17:44:34 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/16 19:50:30 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static void	ft_write_strings_to_array(char const *s, char c, char **result)
 		i++;
 	}
 	if (s[i - 1] != c)
-
 		*result = ft_substr(s, start, i - start);
 	if (s[i - 1] != c)
 		result++;
@@ -83,6 +82,5 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	}
 	ft_write_strings_to_array(s, c, result);
-	// free((char *)s);
 	return (result);
 }
