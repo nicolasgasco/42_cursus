@@ -77,6 +77,33 @@ int	*ft_bubble_sort(int *num_arr, int limit)
 	return (num_arr);
 }
 
+void	ft_swap_nodes_i(struct s_node **root, int i1, int i2)
+{
+	int				i;
+	struct s_node	*curr;
+	int				tempi1;
+	int				tempi2;		
+
+	curr = *root;
+	i = -1;
+	while (i++ < (i1 - 1))
+		curr = curr->next;
+	tempi1 = curr->i;
+	i--;
+	while (i++ < (i2 - 1))
+		curr = curr->next;
+	tempi2 = curr->i;
+	curr = *root;
+	i = -1;
+	while (i++ < (i1 - 1))
+		curr = curr->next;
+	curr->i = tempi2;
+	i--;
+	while (i++ < (i2 - 1))
+		curr = curr->next;
+	curr->i = tempi1;	
+}
+
 void	ft_swap_nodes(struct s_node **root, int i1, int i2)
 {
 	int				i;
@@ -85,31 +112,22 @@ void	ft_swap_nodes(struct s_node **root, int i1, int i2)
 	int				tempx2;		
 
 	curr = *root;
-	i = 0;
-	while (i < i1)
-	{
+	i = -1;
+	while (i++ < (i1 - 1))
 		curr = curr->next;
-		i++;
-	}
 	tempx1 = curr->x;
-	while (i < i2)
-	{
+	i--;
+	while (i++ < (i2 - 1))
 		curr = curr->next;
-		i++;
-	}
 	tempx2 = curr->x;
 	curr = *root;
-	i = 0;
-	while (i < i1)
-	{
+	i = -1;
+	while (i++ < (i1 - 1))
 		curr = curr->next;
-		i++;
-	}
 	curr->x = tempx2;
-	while (i < i2)
-	{
+	i--;
+	while (i++ < (i2 - 1))
 		curr = curr->next;
-		i++;
-	}
 	curr->x = tempx1;
+	ft_swap_nodes_i(root, i1, i2);
 }
