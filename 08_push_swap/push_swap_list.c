@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:44:07 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/13 12:26:56 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/16 19:38:24 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,14 @@ int	*ft_arg_is_str(char *str, t_list *n_list)
 	int		*result;
 
 	i = 0;
-	if (str[0] == '\0')
-		ft_put_err(2, "(Empty string)\n");
+	ft_check_empty(str[0]);
 	if (ft_check_character(str, ','))
 		num_str = ft_split(str, ',');
 	else
 		num_str = ft_split(str, ' ');
 	while (num_str[i] != NULL)
 	{
-		if (ft_check_non_num(num_str[i]) == 0)
-			ft_put_err(2, "(Non numeric values)\n");
+		ft_check_non_num_util(num_str[i]);
 		i++;
 	}
 	result = (int *)malloc(sizeof(int) * i);

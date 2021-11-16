@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/16 19:01:54 by ngasco            #+#    #+#             */
+/*   Updated: 2021/11/16 19:39:11 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -50,8 +62,7 @@ void	ft_free_lists(t_list *n_list);
 int		ft_get_value(struct s_node *list, int index);
 int		*ft_bubble_sort(int *num_arr, int limit);
 void	ft_assign_i(struct s_node *linked, int *array, int limit);
-void    ft_assign_i_linked(struct s_node *list, struct s_node *ordered);
-
+void	ft_assign_i_linked(struct s_node *list, struct s_node *ordered);
 
 // Rules
 void	ft_put_move(t_list *number_list, char move, char list);
@@ -67,22 +78,24 @@ int		ft_check_size(int list_size);
 void	ft_put_err(int code, char *str);
 int		ft_check_if_sorted(struct s_node *a_list, int size);
 int		ft_check_if_sorted_arr(int *array, int size);
+void	ft_check_non_num_util(char *num_str);
+void	ft_check_empty(char c);
 
 // List stats
-void    ft_update_stats(t_list *n_list);
-int 	ft_list_len(struct s_node *root);
-int 	ft_find_hilo(struct s_node *root, char flag);
-void    ft_initialize_stats(t_list *n_list);
+void	ft_update_stats(t_list *n_list);
+int		ft_list_len(struct s_node *root);
+int		ft_find_hilo(struct s_node *root, char flag);
+void	ft_initialize_stats(t_list *n_list);
 
 // Sorting
-void    ft_sort_two(t_list *n_list);
-void    ft_sort_three(t_list *n_list);
-void 	ft_sort_four(t_list *n_list);
+void	ft_sort_two(t_list *n_list);
+void	ft_sort_three(t_list *n_list);
+void	ft_sort_four(t_list *n_list);
 void	ft_sort_five(t_list *n_list);
 void	ft_sort_six(t_list *n_list);
 void	ft_sort_seven(t_list *n_list);
 void	ft_radix_sort(t_list *n_list);
-void    ft_choose_direction(t_list *n_list, struct s_node *list, int value);
+void	ft_choose_direction(t_list *n_list, struct s_node *list, int value);
 
 // Push swap
 void	ft_create_linked_list(int argc, char **args, t_list *t_list);

@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 16:56:10 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/13 12:06:12 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/16 19:15:21 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_r_aux(struct s_node **root, char list, t_list *t_list)
 
 	if (root == NULL)
 		return ;
-	// if ((*root)->next == NULL || (*root)->next->next == NULL)
 	if ((*root)->next == NULL)
 		return ;
 	moved_node = (*root)->x;

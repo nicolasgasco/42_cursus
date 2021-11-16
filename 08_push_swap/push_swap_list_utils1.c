@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:44:18 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/16 18:52:45 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/16 19:40:07 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	ft_insert_end(struct s_node **root, int value)
 	while (curr->next != NULL)
 		curr = curr->next;
 	curr->next = new_node;
-	// free(new_node);
 }
 
 void	ft_insert_beginning(struct s_node **root, int value)
@@ -92,4 +91,3 @@ void	ft_free_lists(t_list *n_list)
 	ft_deallocate_list(&n_list->b_list);
 	ft_deallocate_list(&n_list->o_list);
 }
-
