@@ -6,12 +6,11 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:43:05 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/13 12:16:58 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/16 19:01:15 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int	main(int argc, char *argv[])
 {
@@ -19,7 +18,6 @@ int	main(int argc, char *argv[])
 
 	num_list.num_moves = 0;
 	ft_create_linked_list(argc, argv, &num_list);
-	// ft_print_struct(&num_list);
 	if (num_list.num_tot == 2)
 		ft_sort_two(&num_list);
 	else if (num_list.num_tot == 3)
@@ -34,7 +32,6 @@ int	main(int argc, char *argv[])
 		ft_sort_seven(&num_list);
 	else
 		ft_radix_sort(&num_list);
-	// ft_print_struct(&num_list);
 	ft_free_lists(&num_list);
 	return (0);
 }
