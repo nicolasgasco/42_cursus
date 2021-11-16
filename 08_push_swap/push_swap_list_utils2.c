@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 12:02:31 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/13 12:03:50 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/16 19:00:12 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,39 @@ int	*ft_bubble_sort(int *num_arr, int limit)
 	return (num_arr);
 }
 
-void	ft_free_lists(t_list *n_list)
+void	ft_swap_nodes(struct s_node **root, int i1, int i2)
 {
-	ft_deallocate_list(&n_list->a_list);
-	ft_deallocate_list(&n_list->b_list);
-	ft_deallocate_list(&n_list->o_list);
+	int				i;
+	struct s_node	*curr;
+	int				tempX1;
+	int				tempX2;		
+
+	curr = *root;
+	i = 0;
+	while (i < i1)
+	{
+		curr = curr->next;
+		i++;
+	}
+	tempX1 = curr->x;
+	while (i < i2)
+	{
+		curr = curr->next;
+		i++;
+	}
+	tempX2 = curr->x;
+	curr = *root;
+	i = 0;
+	while (i < i1)
+	{
+		curr = curr->next;
+		i++;
+	}
+	curr->x = tempX2;
+	while (i < i2)
+	{
+		curr = curr->next;
+		i++;
+	}
+	curr->x = tempX1;
 }

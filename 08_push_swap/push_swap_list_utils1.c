@@ -6,7 +6,7 @@
 /*   By: ngasco <ngasco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:44:18 by ngasco            #+#    #+#             */
-/*   Updated: 2021/11/16 18:27:48 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/11/16 18:52:45 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,42 +59,6 @@ void	ft_insert_beginning(struct s_node **root, int value)
 	*root = new_node;
 }
 
-void	ft_swap_nodes(struct s_node **root, int i1, int i2)
-{
-	int				i;
-	struct s_node	*curr;
-	struct s_node	*temp;
-	struct s_node	*node1;
-
-	curr = *root;
-	node1 = malloc(sizeof(struct s_node));
-	temp = malloc(sizeof(struct s_node));
-	i = 0;
-	while (i < i1)
-	{
-		curr = curr->next;
-		i++;
-	}
-	node1 = curr;
-	while (i < i2)
-	{
-		curr = curr->next;
-		i++;
-	}
-	temp->x = curr->x;
-	curr->x = node1->x;
-	node1->x = temp->x;
-	i = 0;
-	while (i < i1)
-	{
-		curr = curr->next;
-		i++;
-	}
-	curr->x = temp->x;
-	free(node1);
-	free(temp);
-}
-
 void	ft_remove_node(struct s_node **root, int index)
 {
 	struct s_node	*curr;
@@ -121,3 +85,11 @@ void	ft_remove_node(struct s_node **root, int index)
 	curr->next = curr->next->next;
 	free(to_remove);
 }
+
+void	ft_free_lists(t_list *n_list)
+{
+	ft_deallocate_list(&n_list->a_list);
+	ft_deallocate_list(&n_list->b_list);
+	ft_deallocate_list(&n_list->o_list);
+}
+
