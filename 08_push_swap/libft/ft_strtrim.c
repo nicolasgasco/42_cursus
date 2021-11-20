@@ -52,6 +52,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	{
 		res = malloc(1 * sizeof(char));
 		res[0] = '\0';
+		free((char *)s1);
 		return (res);
 	}
 	end = ft_calc_end(s1, set);
@@ -60,11 +61,13 @@ char	*ft_strtrim(char const *s1, char const *set)
 	{
 		res = malloc(1 * sizeof(char));
 		res[0] = '\0';
+		free((char *)s1);
 		return (res);
 	}
 	res = malloc((end - start + 1 + 1) * sizeof(char));
 	if (res == NULL)
 		return (NULL);
 	ft_strlcpy(res, (char *)&s1[start], end - start + 1 + 1);
+	free((char *)s1);
 	return (res);
 }
