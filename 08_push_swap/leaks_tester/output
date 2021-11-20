@@ -1,0 +1,601 @@
+
+==37409== Memcheck, a memory error detector
+==37409== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37409== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37409== Command: ./checker 645138585 74316795
+==37409== Parent PID: 37407
+==37409== 
+==37409== 
+==37409== HEAP SUMMARY:
+==37409==     in use at exit: 0 bytes in 0 blocks
+==37409==   total heap usage: 17 allocs, 17 frees, 2,242 bytes allocated
+==37409== 
+==37409== All heap blocks were freed -- no leaks are possible
+==37409== 
+==37409== For lists of detected and suppressed errors, rerun with: -s
+==37409== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37425== Memcheck, a memory error detector
+==37425== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37425== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37425== Command: ./checker 460385220 834764020
+==37425== Parent PID: 37423
+==37425== 
+==37425== 
+==37425== HEAP SUMMARY:
+==37425==     in use at exit: 0 bytes in 0 blocks
+==37425==   total heap usage: 15 allocs, 15 frees, 1,239 bytes allocated
+==37425== 
+==37425== All heap blocks were freed -- no leaks are possible
+==37425== 
+==37425== For lists of detected and suppressed errors, rerun with: -s
+==37425== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37433== Memcheck, a memory error detector
+==37433== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37433== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37433== Command: ./checker 101684321 -883869229
+==37433== Parent PID: 37431
+==37433== 
+==37433== 
+==37433== HEAP SUMMARY:
+==37433==     in use at exit: 0 bytes in 0 blocks
+==37433==   total heap usage: 17 allocs, 17 frees, 2,246 bytes allocated
+==37433== 
+==37433== All heap blocks were freed -- no leaks are possible
+==37433== 
+==37433== For lists of detected and suppressed errors, rerun with: -s
+==37433== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37447== Memcheck, a memory error detector
+==37447== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37447== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37447== Command: ./checker -928587520 630235426
+==37447== Parent PID: 37445
+==37447== 
+==37447== 
+==37447== HEAP SUMMARY:
+==37447==     in use at exit: 0 bytes in 0 blocks
+==37447==   total heap usage: 15 allocs, 15 frees, 1,241 bytes allocated
+==37447== 
+==37447== All heap blocks were freed -- no leaks are possible
+==37447== 
+==37447== For lists of detected and suppressed errors, rerun with: -s
+==37447== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37470== Memcheck, a memory error detector
+==37470== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37470== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37470== Command: ./checker -186031682 615998779
+==37470== Parent PID: 37468
+==37470== 
+==37470== 
+==37470== HEAP SUMMARY:
+==37470==     in use at exit: 0 bytes in 0 blocks
+==37470==   total heap usage: 15 allocs, 15 frees, 1,241 bytes allocated
+==37470== 
+==37470== All heap blocks were freed -- no leaks are possible
+==37470== 
+==37470== For lists of detected and suppressed errors, rerun with: -s
+==37470== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37486== Memcheck, a memory error detector
+==37486== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37486== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37486== Command: ./checker -559220354 -139984218 -486008566
+==37486== Parent PID: 37484
+==37486== 
+==37486== 
+==37486== HEAP SUMMARY:
+==37486==     in use at exit: 0 bytes in 0 blocks
+==37486==   total heap usage: 25 allocs, 25 frees, 2,351 bytes allocated
+==37486== 
+==37486== All heap blocks were freed -- no leaks are possible
+==37486== 
+==37486== For lists of detected and suppressed errors, rerun with: -s
+==37486== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37500== Memcheck, a memory error detector
+==37500== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37500== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37500== Command: ./checker -895629374 -837331135 -792161483
+==37500== Parent PID: 37498
+==37500== 
+==37500== 
+==37500== HEAP SUMMARY:
+==37500==     in use at exit: 0 bytes in 0 blocks
+==37500==   total heap usage: 19 allocs, 19 frees, 1,309 bytes allocated
+==37500== 
+==37500== All heap blocks were freed -- no leaks are possible
+==37500== 
+==37500== For lists of detected and suppressed errors, rerun with: -s
+==37500== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37507== Memcheck, a memory error detector
+==37507== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37507== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37507== Command: ./checker -165511752 434129648 -249741704
+==37507== Parent PID: 37505
+==37507== 
+==37507== 
+==37507== HEAP SUMMARY:
+==37507==     in use at exit: 0 bytes in 0 blocks
+==37507==   total heap usage: 21 allocs, 21 frees, 2,313 bytes allocated
+==37507== 
+==37507== All heap blocks were freed -- no leaks are possible
+==37507== 
+==37507== For lists of detected and suppressed errors, rerun with: -s
+==37507== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37514== Memcheck, a memory error detector
+==37514== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37514== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37514== Command: ./checker 67802476 473413102 862152325
+==37514== Parent PID: 37512
+==37514== 
+==37514== 
+==37514== HEAP SUMMARY:
+==37514==     in use at exit: 0 bytes in 0 blocks
+==37514==   total heap usage: 19 allocs, 19 frees, 1,301 bytes allocated
+==37514== 
+==37514== All heap blocks were freed -- no leaks are possible
+==37514== 
+==37514== For lists of detected and suppressed errors, rerun with: -s
+==37514== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37521== Memcheck, a memory error detector
+==37521== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37521== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37521== Command: ./checker -997739039 -670237924 615126598
+==37521== Parent PID: 37519
+==37521== 
+==37521== 
+==37521== HEAP SUMMARY:
+==37521==     in use at exit: 0 bytes in 0 blocks
+==37521==   total heap usage: 19 allocs, 19 frees, 1,307 bytes allocated
+==37521== 
+==37521== All heap blocks were freed -- no leaks are possible
+==37521== 
+==37521== For lists of detected and suppressed errors, rerun with: -s
+==37521== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37537== Memcheck, a memory error detector
+==37537== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37537== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37537== Command: ./checker -168731842 -573444263 -587580804
+==37537== Parent PID: 37535
+==37537== 
+==37537== 
+==37537== HEAP SUMMARY:
+==37537==     in use at exit: 0 bytes in 0 blocks
+==37537==   total heap usage: 25 allocs, 25 frees, 2,350 bytes allocated
+==37537== 
+==37537== All heap blocks were freed -- no leaks are possible
+==37537== 
+==37537== For lists of detected and suppressed errors, rerun with: -s
+==37537== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37551== Memcheck, a memory error detector
+==37551== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37551== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37551== Command: ./checker 596578679 331591496 941085325
+==37551== Parent PID: 37547
+==37551== 
+==37551== 
+==37551== HEAP SUMMARY:
+==37551==     in use at exit: 0 bytes in 0 blocks
+==37551==   total heap usage: 21 allocs, 21 frees, 2,308 bytes allocated
+==37551== 
+==37551== All heap blocks were freed -- no leaks are possible
+==37551== 
+==37551== For lists of detected and suppressed errors, rerun with: -s
+==37551== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37558== Memcheck, a memory error detector
+==37558== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37558== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37558== Command: ./checker -15759373 -889389563 -181737365
+==37558== Parent PID: 37556
+==37558== 
+==37558== 
+==37558== HEAP SUMMARY:
+==37558==     in use at exit: 0 bytes in 0 blocks
+==37558==   total heap usage: 21 allocs, 21 frees, 2,312 bytes allocated
+==37558== 
+==37558== All heap blocks were freed -- no leaks are possible
+==37558== 
+==37558== For lists of detected and suppressed errors, rerun with: -s
+==37558== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37565== Memcheck, a memory error detector
+==37565== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37565== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37565== Command: ./checker -210968429 -176064518 -550522669
+==37565== Parent PID: 37563
+==37565== 
+==37565== 
+==37565== HEAP SUMMARY:
+==37565==     in use at exit: 0 bytes in 0 blocks
+==37565==   total heap usage: 21 allocs, 21 frees, 2,315 bytes allocated
+==37565== 
+==37565== All heap blocks were freed -- no leaks are possible
+==37565== 
+==37565== For lists of detected and suppressed errors, rerun with: -s
+==37565== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37574== Memcheck, a memory error detector
+==37574== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37574== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37574== Command: ./checker -739224881 -429217481 332919292
+==37574== Parent PID: 37572
+==37574== 
+==37574== 
+==37574== HEAP SUMMARY:
+==37574==     in use at exit: 0 bytes in 0 blocks
+==37574==   total heap usage: 19 allocs, 19 frees, 1,307 bytes allocated
+==37574== 
+==37574== All heap blocks were freed -- no leaks are possible
+==37574== 
+==37574== For lists of detected and suppressed errors, rerun with: -s
+==37574== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37581== Memcheck, a memory error detector
+==37581== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37581== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37581== Command: ./checker -874660377 848288873 -759393671 -572683573 -265687985
+==37581== Parent PID: 37579
+==37581== 
+==37581== 
+==37581== HEAP SUMMARY:
+==37581==     in use at exit: 0 bytes in 0 blocks
+==37581==   total heap usage: 53 allocs, 53 frees, 2,755 bytes allocated
+==37581== 
+==37581== All heap blocks were freed -- no leaks are possible
+==37581== 
+==37581== For lists of detected and suppressed errors, rerun with: -s
+==37581== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37597== Memcheck, a memory error detector
+==37597== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37597== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37597== Command: ./checker 436060696 157806853 741288821 950709319 -340489443
+==37597== Parent PID: 37595
+==37597== 
+==37597== 
+==37597== HEAP SUMMARY:
+==37597==     in use at exit: 0 bytes in 0 blocks
+==37597==   total heap usage: 57 allocs, 57 frees, 2,820 bytes allocated
+==37597== 
+==37597== All heap blocks were freed -- no leaks are possible
+==37597== 
+==37597== For lists of detected and suppressed errors, rerun with: -s
+==37597== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37611== Memcheck, a memory error detector
+==37611== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37611== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37611== Command: ./checker 508995371 946249737 -380778962 -104624526 16248488
+==37611== Parent PID: 37609
+==37611== 
+==37611== 
+==37611== HEAP SUMMARY:
+==37611==     in use at exit: 0 bytes in 0 blocks
+==37611==   total heap usage: 49 allocs, 49 frees, 2,678 bytes allocated
+==37611== 
+==37611== All heap blocks were freed -- no leaks are possible
+==37611== 
+==37611== For lists of detected and suppressed errors, rerun with: -s
+==37611== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37618== Memcheck, a memory error detector
+==37618== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37618== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37618== Command: ./checker -898349933 -453343816 -803650899 938202676 -888521790
+==37618== Parent PID: 37616
+==37618== 
+==37618== 
+==37618== HEAP SUMMARY:
+==37618==     in use at exit: 0 bytes in 0 blocks
+==37618==   total heap usage: 65 allocs, 65 frees, 2,988 bytes allocated
+==37618== 
+==37618== All heap blocks were freed -- no leaks are possible
+==37618== 
+==37618== For lists of detected and suppressed errors, rerun with: -s
+==37618== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37625== Memcheck, a memory error detector
+==37625== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37625== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37625== Command: ./checker 295506731 -318297567 -951317667 -493320180 679074000
+==37625== Parent PID: 37623
+==37625== 
+==37625== 
+==37625== HEAP SUMMARY:
+==37625==     in use at exit: 0 bytes in 0 blocks
+==37625==   total heap usage: 65 allocs, 65 frees, 3,006 bytes allocated
+==37625== 
+==37625== All heap blocks were freed -- no leaks are possible
+==37625== 
+==37625== For lists of detected and suppressed errors, rerun with: -s
+==37625== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37632== Memcheck, a memory error detector
+==37632== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37632== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37632== Command: ./checker 545083955 -569539939 -462465197 334806786 592991704
+==37632== Parent PID: 37630
+==37632== 
+==37632== 
+==37632== HEAP SUMMARY:
+==37632==     in use at exit: 0 bytes in 0 blocks
+==37632==   total heap usage: 53 allocs, 53 frees, 2,747 bytes allocated
+==37632== 
+==37632== All heap blocks were freed -- no leaks are possible
+==37632== 
+==37632== For lists of detected and suppressed errors, rerun with: -s
+==37632== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37639== Memcheck, a memory error detector
+==37639== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37639== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37639== Command: ./checker -254551803 767857792 -533667868 -798942466 44454914
+==37639== Parent PID: 37637
+==37639== 
+==37639== 
+==37639== HEAP SUMMARY:
+==37639==     in use at exit: 0 bytes in 0 blocks
+==37639==   total heap usage: 61 allocs, 61 frees, 2,896 bytes allocated
+==37639== 
+==37639== All heap blocks were freed -- no leaks are possible
+==37639== 
+==37639== For lists of detected and suppressed errors, rerun with: -s
+==37639== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37655== Memcheck, a memory error detector
+==37655== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37655== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37655== Command: ./checker 506887842 -592129437 962279180 -570916606 394582427
+==37655== Parent PID: 37653
+==37655== 
+==37655== 
+==37655== HEAP SUMMARY:
+==37655==     in use at exit: 0 bytes in 0 blocks
+==37655==   total heap usage: 61 allocs, 61 frees, 2,914 bytes allocated
+==37655== 
+==37655== All heap blocks were freed -- no leaks are possible
+==37655== 
+==37655== For lists of detected and suppressed errors, rerun with: -s
+==37655== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37669== Memcheck, a memory error detector
+==37669== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37669== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37669== Command: ./checker -866304609 221814534 -433212425 -290313035 371227828
+==37669== Parent PID: 37667
+==37669== 
+==37669== 
+==37669== HEAP SUMMARY:
+==37669==     in use at exit: 0 bytes in 0 blocks
+==37669==   total heap usage: 53 allocs, 53 frees, 2,749 bytes allocated
+==37669== 
+==37669== All heap blocks were freed -- no leaks are possible
+==37669== 
+==37669== For lists of detected and suppressed errors, rerun with: -s
+==37669== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37676== Memcheck, a memory error detector
+==37676== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37676== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37676== Command: ./checker 609581079 57854077 -743943020 286933253 911788673
+==37676== Parent PID: 37674
+==37676== 
+==37676== 
+==37676== HEAP SUMMARY:
+==37676==     in use at exit: 0 bytes in 0 blocks
+==37676==   total heap usage: 61 allocs, 61 frees, 2,916 bytes allocated
+==37676== 
+==37676== All heap blocks were freed -- no leaks are possible
+==37676== 
+==37676== For lists of detected and suppressed errors, rerun with: -s
+==37676== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37683== Memcheck, a memory error detector
+==37683== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37683== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37683== Command: ./checker 768234471 475826328 -406174488 -525633106 -936834771 -405121732 569826453 819453051 582163657 893183680 -815345575 136060424 804827495 -358441895 -516321406 242414033 729146251 697021497 906093828 -130578139 175280921 -171388000 137911002 -940855057 -295552896 -974323645 -525457999 636940488 -38486896 -241255450 -57509892 -584002120 543414041 -374133691 -279768041 -211845195 545960133 -899004675 48483686 -442088419 920082236 -433597273 -696218651 850762204 -530558270 714276864 91591104 479265652 451065037 293330064 -164445591 985841437 -285830490 -345899510 138385422 673388188 840363066 327125250 606367677 -764229700 222837281 -536353816 -327877343 346669500 -478143167 63735332 -815449455 -542435762 540760185 694373548 975712884 -182085743 152183366 -720758639 -820381811 -666559704 -907342857 -704324040 94135883 -2044016 447207928 634517957 667933933 750838949 268438970 446730757 636345408 978891610 608733725 -510701556 843402507 63381520 -851186297 351556470 -147659639 47822328 -190979578 648975685 -491872255 80499750
+==37683== Parent PID: 37681
+==37683== 
+==37683== 
+==37683== HEAP SUMMARY:
+==37683==     in use at exit: 0 bytes in 0 blocks
+==37683==   total heap usage: 4,733 allocs, 4,733 frees, 1,062,413 bytes allocated
+==37683== 
+==37683== All heap blocks were freed -- no leaks are possible
+==37683== 
+==37683== For lists of detected and suppressed errors, rerun with: -s
+==37683== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37690== Memcheck, a memory error detector
+==37690== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37690== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37690== Command: ./checker 745904202 -516488777 -85616232 -542868174 -731669035 182841731 135748513 261666132 730144625 -558114632 780233408 357228719 579020733 -120576325 -681710437 767855729 246724673 765463855 964955903 -11383309 -772455457 42397337 65476535 314935582 -600828050 -107034897 903192478 -800512412 54857424 -383616630 -825564311 -695322101 -598245008 952674966 -873488077 754876956 -859821431 -4938635 -11429732 274730142 -121452041 -358889856 689480626 -747724432 753777470 -138338842 634693099 -852969253 14190451 -12215078 612942966 700723316 221411508 722833867 788641593 -152630522 340220009 -304230821 -59388363 335183011 901562776 261606846 512642382 720743202 -905656758 358642112 -492043110 -546208498 -378618349 881937810 -216082788 288260715 -406913999 -426608954 823055074 68475348 -353716020 860976363 -466313387 925134153 -588571389 941566723 655766427 392042519 109080115 186708194 647143127 -96083486 591290027 -373673841 -503726377 320631047 -731994937 490646805 -745525151 24300623 -406422173 563086355 510849219 851794438
+==37690== Parent PID: 37688
+==37690== 
+==37690== 
+==37690== HEAP SUMMARY:
+==37690==     in use at exit: 0 bytes in 0 blocks
+==37690==   total heap usage: 4,733 allocs, 4,733 frees, 1,062,405 bytes allocated
+==37690== 
+==37690== All heap blocks were freed -- no leaks are possible
+==37690== 
+==37690== For lists of detected and suppressed errors, rerun with: -s
+==37690== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37712== Memcheck, a memory error detector
+==37712== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37712== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37712== Command: ./checker -356383665 961169088 788286856 -455213232 -868251138 286779424 752523278 -693618842 625671545 -284413479 886871537 425425092 275124863 -51059837 -433876749 163135656 -123028390 9526541 -166037484 -22993778 201563159 120727063 -515528732 -99950564 -648365126 -7700603 -348444040 -677240299 716007154 869103270 -526421048 -711407211 -203071312 967508403 -912885587 -141502200 -686998772 559574521 809078845 -117729684 119726394 437042460 -632561304 537942466 310162997 263645369 757897078 -263120680 785166193 -581544583 -470155198 693936474 32766101 434673294 -3584843 -323091971 932775974 -523446117 -646269234 530252494 -887069771 122672875 622242546 627397789 -974405876 565311191 -397582758 472585315 -380706127 -224351135 -495554042 372397171 -740933394 639430985 565700618 883572696 49375221 492945219 -776911378 917934445 289861889 -555734204 -217991318 -687300584 -571436383 -92723505 -176398052 -943360579 -589648161 261057377 -741192378 -875028720 591709991 334727087 96906771 329927304 -812867004 -189214597 646881028 424298915
+==37712== Parent PID: 37710
+==37712== 
+==37712== 
+==37712== HEAP SUMMARY:
+==37712==     in use at exit: 0 bytes in 0 blocks
+==37712==   total heap usage: 4,733 allocs, 4,733 frees, 1,062,419 bytes allocated
+==37712== 
+==37712== All heap blocks were freed -- no leaks are possible
+==37712== 
+==37712== For lists of detected and suppressed errors, rerun with: -s
+==37712== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37726== Memcheck, a memory error detector
+==37726== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37726== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37726== Command: ./checker 754885574 -216177758 -158196340 -381075257 168260694 3485296 969369680 -140384893 203442931 86294170 -966692456 -952698489 -979017030 -577919210 753546592 640742124 -252939182 -554478457 -226912266 565142510 -772749973 613522656 743531229 903947601 -509273684 900273938 670072167 135663109 -998961495 -666062996 -168149370 27918058 46399315 -635790023 -761452530 735893920 -327856780 816391608 996103265 -962118754 309303122 -690705187 -376512233 920426244 -305551537 3185557 126780425 728429544 758712531 488466901 667726317 -147885471 -499885191 932554426 656008232 769620825 -323407349 255441337 -925847111 550075866 642837391 -769066793 219869885 14403745 779049435 211764053 261109186 -962278754 191186913 580048758 -608653263 152585616 -860079944 474008882 -52290462 881106046 282133827 158072113 572089800 -406014188 -742488856 -531351710 -932804897 779161947 714728225 335521200 -65003830 -853332230 -340536655 -975523747 -917400905 121824173 467881048 -7606717 -666847440 558838994 907306617 246313544 779030275 -643753393
+==37726== Parent PID: 37724
+==37726== 
+==37726== 
+==37726== HEAP SUMMARY:
+==37726==     in use at exit: 0 bytes in 0 blocks
+==37726==   total heap usage: 4,733 allocs, 4,733 frees, 1,062,407 bytes allocated
+==37726== 
+==37726== All heap blocks were freed -- no leaks are possible
+==37726== 
+==37726== For lists of detected and suppressed errors, rerun with: -s
+==37726== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37733== Memcheck, a memory error detector
+==37733== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37733== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37733== Command: ./checker -190830581 -363362544 -242850280 -357740565 -978890644 -74239336 -573231812 812243 464157565 630279491 188375557 586364571 -776256711 953235518 -87647305 -94397390 -443958362 538125340 -972353825 316132509 909880285 -806428577 562289911 -277770730 603938400 -590748159 -190911754 446873775 -479012868 981109546 540286306 25086546 -377019386 354318746 -935137990 585590358 -620193342 -158692742 -272533208 -286395499 -376579383 751310140 -496338576 -490776816 974393287 905974880 -890448891 -309730327 -92987740 697224794 -669059111 378867651 406352269 518165161 -296571722 -661994407 860155291 -130457806 69249038 -811058327 -460921602 103337092 -701130854 -418573960 -133021850 -115635973 -359320996 -924189587 595855372 -752581356 -194964994 747516794 419791356 621536929 899581484 -468822374 973313235 -914234767 650247173 571416250 -663533037 -390625525 -653228677 -80868383 102130026 368682186 694071224 -671932959 -705735172 -692422975 -321800249 -60253104 -103083142 -769327373 -558080832 -946092617 684936865 609325729 -953864275 -854506331
+==37733== Parent PID: 37731
+==37733== 
+==37733== 
+==37733== HEAP SUMMARY:
+==37733==     in use at exit: 0 bytes in 0 blocks
+==37733==   total heap usage: 4,733 allocs, 4,733 frees, 1,062,441 bytes allocated
+==37733== 
+==37733== All heap blocks were freed -- no leaks are possible
+==37733== 
+==37733== For lists of detected and suppressed errors, rerun with: -s
+==37733== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37740== Memcheck, a memory error detector
+==37740== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37740== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37740== Command: ./checker -286427658 90245366 -984687441 829568755 -164348410 195629969 -353460336 30396374 -128793626 -297650885 123411983 -392585047 -912662574 -166118511 830392608 -424542188 755474351 -346720647 -250806356 541893237 846330589 447614102 493329996 -566180380 948648725 804343793 792577503 -928099134 -464617406 -623833578 -871671725 871541693 -654174121 965864692 -714817788 -186644678 -88624846 522601689 897747672 -264982592 862584601 904930448 -915379536 795968427 168101374 -132553096 279701184 -329781157 -878660162 -993615976 33051337 -294474867 672538916 -264671353 797161376 -134165869 -831963510 -112547125 -494342234 -78303988 -546013035 154468197 103224403 -564047198 -173912169 -931086182 -853199412 -552197600 217431418 -703427238 -965026702 553898915 -213322441 -549898197 -327187064 571728373 36315798 -467238406 247259314 -320095073 650000624 -499216163 -257481761 -233620574 -184970213 910471380 -389775724 525176449 -399058237 -612003174 209005381 262174891 -250700267 -599151062 -635369562 601882752 -1555783 980070747 496140607 185680771
+==37740== Parent PID: 37738
+==37740== 
+==37740== 
+==37740== HEAP SUMMARY:
+==37740==     in use at exit: 0 bytes in 0 blocks
+==37740==   total heap usage: 4,733 allocs, 4,733 frees, 1,062,443 bytes allocated
+==37740== 
+==37740== All heap blocks were freed -- no leaks are possible
+==37740== 
+==37740== For lists of detected and suppressed errors, rerun with: -s
+==37740== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37747== Memcheck, a memory error detector
+==37747== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37747== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37747== Command: ./checker 873001607 290086984 -915467558 -840660271 385169425 -145243184 400292106 -353158361 436043413 693385463 -551835030 216392569 564986936 -805205840 -507025661 790176616 -635270410 275100496 -401854322 564517806 290021808 638044527 -423489069 35850051 -586011632 -141520785 -829530793 395657700 -604713612 658156454 57215991 534607372 -716226797 793402440 -104477322 569760780 77142643 880467594 -430299507 151189340 -264545929 -346695649 707965023 360157738 -572275461 811128350 -624452818 306101122 -746959429 -534670456 -491303120 -167009822 126924256 -911109709 597496655 981480962 247496321 -950993313 149036546 839650821 155366665 487613178 938531013 419888119 -802496978 -20705969 -89800901 -533634833 583223599 493230892 32609816 243036859 -545368312 21012706 -665283328 -12856255 970102777 165550631 -201145722 -575406755 814842807 802419636 -424229900 464426157 617194773 -274811891 -774691816 214119779 8174557 448982100 434040459 225771609 362752602 -934875983 -804876024 105738042 -129032401 -743486401 -598104884 -229948149
+==37747== Parent PID: 37745
+==37747== 
+==37747== 
+==37747== HEAP SUMMARY:
+==37747==     in use at exit: 0 bytes in 0 blocks
+==37747==   total heap usage: 4,733 allocs, 4,733 frees, 1,062,413 bytes allocated
+==37747== 
+==37747== All heap blocks were freed -- no leaks are possible
+==37747== 
+==37747== For lists of detected and suppressed errors, rerun with: -s
+==37747== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37763== Memcheck, a memory error detector
+==37763== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37763== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37763== Command: ./checker 897820369 209791790 94685470 676382301 -267569635 248756176 375174978 311261202 -340277177 -492744540 28003912 320814646 -483099418 93878618 153618982 -165312341 747400595 230064403 466861435 642221874 596244966 -654217507 -227952363 451030865 -725023109 455000375 175917660 -964511874 -446617234 258574425 -554730603 72105414 711021216 -83637714 -759493547 -364073374 635982915 410074234 593044780 246056102 -398469938 -646869420 -233934258 509868486 890815189 -991077420 -37420995 166900601 94028672 680490016 352093752 550042758 -904524743 -969933615 -774167306 327488869 -563711425 -176912705 -932138588 38834587 -213735137 375397688 283257913 -50520798 -237064560 671508022 -279240716 768106726 456880002 -905506076 -857087437 178452239 619320846 732151507 -646005234 -204146199 144024275 278335756 238811035 19786796 18692138 -801384685 695551664 -889230409 -148018412 955893032 266987231 -539583677 -430472367 -588376911 -469371845 -94052101 -853074515 302482527 666521001 -782141530 -742379037 302828171 -418059665 540250096
+==37763== Parent PID: 37761
+==37763== 
+==37763== 
+==37763== HEAP SUMMARY:
+==37763==     in use at exit: 0 bytes in 0 blocks
+==37763==   total heap usage: 4,733 allocs, 4,733 frees, 1,062,409 bytes allocated
+==37763== 
+==37763== All heap blocks were freed -- no leaks are possible
+==37763== 
+==37763== For lists of detected and suppressed errors, rerun with: -s
+==37763== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37777== Memcheck, a memory error detector
+==37777== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37777== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37777== Command: ./checker -166361733 74083788 -177926328 466826159 -917517486 -873391750 583322925 918811022 -310634974 991867608 294340253 701478693 743002992 719289665 565221816 999389354 -266536638 910759553 -518872302 920814999 -874227241 -648991337 569367038 -644455661 508388165 -338398000 577325465 826952620 621748041 288476805 -856413317 -907566418 104848536 144146111 -502505902 424034554 -951806765 750598365 -22375722 154936419 -729304179 571857191 -504304677 -717735557 18257678 -792807424 159289832 137105498 885509353 -584568494 78047111 282585257 -61183994 756330840 -749223008 -917352253 21326555 630080651 698232136 -419669443 -141881248 -862057752 -989216418 -871690172 -539543641 681285652 -417053138 -644720307 878310499 393371735 389858403 345973414 -992590453 -817706475 449406795 -630653636 1134608 -993112187 447709864 92256173 -258612484 -995311960 80958836 -700535789 253296657 479025759 -934844090 -415571696 441526560 451101166 -999032763 289835146 -72931952 -406415137 -416171859 -50808415 -78084120 -518511119 -844048023 34161093
+==37777== Parent PID: 37775
+==37777== 
+==37777== 
+==37777== HEAP SUMMARY:
+==37777==     in use at exit: 0 bytes in 0 blocks
+==37777==   total heap usage: 4,733 allocs, 4,733 frees, 1,062,413 bytes allocated
+==37777== 
+==37777== All heap blocks were freed -- no leaks are possible
+==37777== 
+==37777== For lists of detected and suppressed errors, rerun with: -s
+==37777== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37790== Memcheck, a memory error detector
+==37790== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37790== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37790== Command: ./checker -740580399 124880088 -947212757 -375340340 623907648 884083964 -657933588 -647776780 -887555014 -81011319 310419086 180365813 -942443829 -104780937 856909953 757235798 -864453447 650362632 885441675 232436341 787195173 439215396 -421841389 15994561 -209578040 -611445822 -318590639 703136624 -515867741 197067966 698142109 686836580 900510006 375267485 183266910 728187130 -55245520 -14307709 -71941585 301684598 -475613383 -279472191 42543604 348950723 387366257 706916718 848020160 75259755 53674487 140123953 491350686 682927668 -339026003 -395368292 -138229972 923989615 -720191081 -821215079 519282208 95969449 584309410 594494854 -542111421 997154795 -617981886 279764586 -42475631 877218399 202920716 105498283 -364556793 807698983 44731679 -116787378 176484379 -440041406 332587054 582822931 -413517299 -727865682 -454933460 -849132658 -414338881 -751629221 -565172973 925511730 -747410332 539857880 -136611743 242399979 483223039 -609296432 427435960 665094219 73571567 564284016 -379870040 356810124 -967885696 637226493
+==37790== Parent PID: 37788
+==37790== 
+==37790== 
+==37790== HEAP SUMMARY:
+==37790==     in use at exit: 0 bytes in 0 blocks
+==37790==   total heap usage: 4,733 allocs, 4,733 frees, 1,062,405 bytes allocated
+==37790== 
+==37790== All heap blocks were freed -- no leaks are possible
+==37790== 
+==37790== For lists of detected and suppressed errors, rerun with: -s
+==37790== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37797== Memcheck, a memory error detector
+==37797== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37797== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37797== Command: ./checker 867469415 -308721003 110780084 761764234 -953118726 793409697 -927811994 -494504065 -600488693 -656143685 589695970 233035606 -283521537 -354581806 -837803050 -431070305 778547983 547085615 447718961 461992311 294812899 844732126 -295155155 -477844917 215047061 -624099601 803912732 365007352 836519837 -437583013 983698639 -366364983 -223958004 507295247 790787250 458210939 639093632 -656541815 -244873910 871267258 377538757 528296249 -254813960 602794517 613931120 950597823 -265964714 -329245732 361205813 376662264 -755785217 649106951 380712833 -66165702 308853220 -473897002 728798439 -57500934 446627180 93741537 -811331618 409841604 -789683243 -972413287 -91516944 -151897382 -955653754 402269301 -452516829 -125469682 667736518 -589737535 -631557623 -125692759 -260980281 25453661 -458701327 496757919 968977407 551861916 -536499447 -258505328 -307744764 -991327187 -450739208 -565862568 -689890222 -768437502 -50514746 -754584696 -451217896 -890423427 387470273 -612206182 626236370 -266870388 747386627 837129020 -571599724 233517075 -287548892 -622629626 714678379 555632330 126645708 858971392 426990899 -343816661 561497947 -135315210 -998782631 -637386073 -540750769 -847158686 -436772767 -75152879 -410167646 -326654003 319035791 778025986 -288468828 248306388 786899725 -189156225 183631506 -110147664 350984382 927491961 -438684652 783958793 -556543800 -64155292 878553828 -871423229 -299697043 -288820292 -583808156 615508782 -884332160 917936112 -572888414 -118404666 -718563121 265356850 9160131 407499660 -303406486 377509073 -648029253 -615586577 234372571 -623298544 669982407 782756851 -161028186 -49935169 729312424 916180435 -281349692 497963590 -746675593 978718439 432362292 192959317 -146270568 502958411 -865193348 -873156251 -121721289 699611069 -654161277 35881218 -355592336 -682764304 -971754223 720293894 655839230 942443935 -820152633 -330961771 327263502 -626867753 -658746040 749421291 -802815632 431522348 -762623104 14402288 662970961 978781572 -81179947 -853058161 31355757 943422285 -106792675 919438571 538159430 -667487473 783234365 -801350401 743810683 -163760333 -743517833 636634560 956975838 -464253759 602289685 957413834 -251160974 -789163876 557350517 -259336097 692938523 -298749017 535029337 -63243638 696542731 -987373387 427873126 -863276920 -616271858 396047907 288547778 48391545 -382558082 -731739762 216836850 663266616 710610384 -389758631 -45240678 814667 -411479615 720565213 -231202083 41667057 -495407342 639407211 -60070645 79754766 249531016 571734093 276181367 414267884 -266807805 -747764531 628097173 361941889 155358615 -624300229 964622949 138070756 -590353581 -615394115 -478402891 450144779 990149830 -10775599 -735240485 128392548 786629600 492679152 552580040 340673738 -484149533 378212949 -603188556 51333026 204516341 76174331 328060460 -119347670 194730829 -379278254 547442546 389844761 444187329 -364700539 -641212964 400174870 132631725 503719528 -886603843 73657664 34316920 71152393 -340791537 79917497 564142511 576757946 -404071755 -988256751 -138219423 999642919 795968187 956902610 -161418560 -335915784 723197814 206394903 306599165 -735519475 -865876927 -406386388 189492710 536230083 83536441 -871729641 -378439133 898594987 -670177143 460879793 630568080 -554043762 -764427340 272673531 542418653 -607181480 544871820 -863343055 836099208 -153220127 -877107603 -118545866 -19436133 -769281533 -234344355 -137027610 231348813 -752895948 665339468 -860365709 -333782533 769268793 707190992 -71265597 422550267 -766115709 147329514 780234824 375809515 844084225 -6579931 -768533539 266737032 915720039 856237888 10125940 -635736242 -709526880 -635355180 -138232558 428552978 -238487957 -979822867 -240096731 550142577 -600978425 678924436 724952857 -982500983 87573459 -860822974 -286488145 -556144675 787870255 -640175086 522739478 816364987 815859965 -124789500 -75954372 277370778 -226903468 352218290 -387031482 276652528 895729137 471154354 -863846252 -877152743 -17284137 -644198184 -897028386 193402224 66765074 -677398148 463231795 671324081 157585745 348729815 -426777108 -260465976 -156317193 308524293 10530663 -476799980 588699506 -954449041 -3554460 212442936 -618318271 -629633172 118433342 -790605014 -393364431 -280420369 -223493348 -866422811 326839202 -176996431 -169115564 480824290 484707022 -148718899 -824751630 861975244 -757847477 941774830 -457234703 -7365481 371344787 -871911287 -979039008 632920662 -443000047 134982333 870001085 419456101 -811067168 146271639 -470951645 -372859932 -809707877 -792397806 -205618558 -111467828 -802401046 -8002494 906173128 970762391 588456702 -360155466 861593495 813393490 337521280 -693262642 -885737579 -371157641 -500935519 -982840711 -618914590 -342614879 75641739 -938038939 987956099 107918914 -638732543 -49210818 431608550 967464499 912613111 347848553 432891228 -759440872 772899665 -749625661 -919147091 651346613 -561842907 926060653 -953817105 382672279 340624403 317557511 949245072 988626303 -100803726 -908721399 924619005 -813476447 -561089454 -49526519 708232985 185400875 -652704175 -138040393 706115362 279677043 904509558 565830033 723134830 -350877369 564692113 119266734 449998883 718126589 -279705114 339064168 -357205640
+==37797== Parent PID: 37795
+==37797== 
+==37797== 
+==37797== HEAP SUMMARY:
+==37797==     in use at exit: 0 bytes in 0 blocks
+==37797==   total heap usage: 17,680 allocs, 17,680 frees, 6,828,374 bytes allocated
+==37797== 
+==37797== All heap blocks were freed -- no leaks are possible
+==37797== 
+==37797== For lists of detected and suppressed errors, rerun with: -s
+==37797== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37831== Memcheck, a memory error detector
+==37831== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37831== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37831== Command: ./checker 404943351 -994820661 -355810003 198183982 -970419737 -67753802 725223869 308592625 -994036371 -785450940 804741181 347611864 -386872870 -707261190 -235316533 895112844 -954381448 -145752326 -753233997 -788397142 -208034630 -144870925 -494521261 257739191 -56436937 -26005596 -383261276 -17284327 -822520613 -86227241 264063305 -481338514 831565006 467907015 -511668489 95812188 881904544 -277402438 -966902073 222347818 260567268 678851504 944169206 -857183032 821363580 734287134 -426508022 110637046 -700997014 105801883 455256541 209897970 213251012 602607311 -942594167 -480622928 472146171 -202714778 59353091 778614028 -914079524 -442379902 565394750 -427544777 -470537220 660618039 -27808102 -705961576 406601951 414798047 617571937 -273918901 -928472359 -398941365 -275206844 1840006 169116891 429174566 836571452 789228316 752091772 -645164712 770797572 -957972578 773959477 -495934563 -878821663 931167963 -574939243 -576786552 -203881456 -523776365 488426345 -99713309 915270745 -332535901 -123584436 -540986130 -870397695 -128353803 238195858 -332764354 -785914424 980061682 650371258 181574092 282226551 -132894496 -434421425 630561630 271193698 -419724038 -209305073 -712771493 571658578 142269972 -594645262 646099978 -907502944 270300138 152822184 608715431 -290944211 -887609524 -69020200 -640975361 512065825 -460923334 -135311679 -920988886 -524766353 -489381224 -96868563 -441765957 85641468 307113510 756579894 75148471 -381038453 -636838645 -407647365 699250582 -275212241 833146045 608948568 511577069 335374003 292830742 -874319811 -170153600 680872596 -893559070 -382566399 965096401 -155859105 -378161119 -708705139 765035385 263775869 491064369 227232839 -418279578 -362715694 -387324814 -5721353 -60473652 -221419673 -293325611 29426299 -134193356 -647443165 -303407175 22672021 941097769 51777778 461461260 -896018118 784075433 -121922513 807312170 767257702 722141326 604723954 -76893190 997691153 -813851304 -887949132 -158954176 -254250589 831457357 658179752 -787827695 -972093308 -495813933 529728040 287403469 279915374 6210697 985458558 938237518 586200641 -82237276 -362076307 255884979 122626345 714962839 -111498176 -460380912 -744048692 775976795 229798948 -686467403 718605028 -765773840 -187778125 190460157 -393528447 -862028427 -615952641 757815390 298579582 678945599 -564696906 158229036 -313989006 36377474 451213286 489370292 -888137990 33443844 -553668743 887783679 -757535753 -725429094 -252853423 -277612749 330423579 -230998621 -903192606 -404653543 328102701 435786132 28344092 -780709059 -351247762 -78391681 820676152 781769262 -888715544 480931124 590407786 -814582775 -715026431 304554643 -689030830 76780718 864994872 370671033 -279975660 -474051828 675927518 718300116 981068274 799867229 409347308 -219599205 185458948 550578508 -401555685 -449167898 811313961 61641795 -567386741 -786165416 -775645743 -978015187 -666166681 -706755153 -318059949 -456549184 142973878 -576729732 -431511224 -135253079 -147987456 257513726 -58259097 -886386117 129096688 792967917 179071464 -188075285 -10839803 -547773175 -293008258 -349522445 593639628 -90384110 -33284388 445846119 -425363613 -454731056 148703856 626956246 625237844 666168405 141644478 -197351145 594534211 316343153 956912590 150478503 228715121 -214448745 -553911125 882653392 -591205907 -210779576 524878002 -165387897 661445651 547148649 126854202 -686531367 809823751 752522666 -63213006 -37501168 121158412 -347493635 -696827189 -490211634 217622998 -156537012 -794523718 702638670 352698963 296117463 517201939 -301766033 523672519 -251142147 -195312980 -374580346 227405832 453248263 405237717 690083243 -103931987 -357601575 -570259959 -4962718 -304688467 -160081675 -653606228 439366622 -184131536 -72890246 -800593527 235221015 248469124 707936144 -862104438 -734413376 -342549056 253270816 937331017 -11369686 -271465162 512046875 -274277701 -76473975 985505161 261984357 -449969338 -52172353 737084882 431183023 -618843352 -62534402 646629067 -751249086 -482110855 -961068038 915639965 644450235 -875559329 -297009182 -533540611 71900760 -669971309 -766753240 -694893028 -778580338 244261601 -29877166 753023176 -421028702 -933999678 -379910908 939972136 -127661468 -666224344 -110634199 594093321 89827776 136021675 -195898665 448475855 -913669264 482861325 -502979182 -205422579 -786938928 -647718780 -951473919 250515024 187342897 -872530909 976399764 727449834 -709619751 -683283043 396891447 -843355970 -617145729 -715066002 -49062979 179969694 651658668 -842352948 -972669518 661768443 -836252730 -447226470 -880647057 -144611954 602078754 594106916 -490237015 -364399351 315050108 -51222298 -936736277 465790536 -995211803 -104470554 439294566 798821214 452225444 470440536 -83950139 325743484 -885695366 809335528 -142169820 460616886 873069091 -294249106 38534855 680471376 -124247180 -183648087 -491741203 799399431 238899819 -1008863 24335467 -655674504 -151402592 455880574 -887689632 -382242911 644114557 -709360270 497350193 -910334973 317019497 749575283 620610792 -537495584 917238234 -608858822 378042627 -886232138 -852020381 552672955 833237630 -894792028 -601993329 -63982284 763629851 282834509 -702428247 -96456800 -915094342 -762761117 228744345 -397950876 -464503053
+==37831== Parent PID: 37829
+==37831== 
+==37831== 
+==37831== HEAP SUMMARY:
+==37831==     in use at exit: 0 bytes in 0 blocks
+==37831==   total heap usage: 17,945 allocs, 17,945 frees, 6,786,073 bytes allocated
+==37831== 
+==37831== All heap blocks were freed -- no leaks are possible
+==37831== 
+==37831== For lists of detected and suppressed errors, rerun with: -s
+==37831== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37872== Memcheck, a memory error detector
+==37872== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37872== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37872== Command: ./checker 645632335 -546321320 820677519 -519540268 822162588 -612278175 -843654633 274322084 967723680 485998896 223216908 868244421 -312089420 91652130 -367439660 829543464 803946730 50777699 -309973301 680322243 -575525176 -152860172 -255756031 680635618 95641913 351303398 332008637 -706364251 578741694 -205293790 -566132947 966923814 -240895506 -837742392 163499358 -227382890 -482434150 602325706 -940748651 633361797 684649978 -176669340 -642716857 -216652207 259884668 -387821314 -898792877 802914105 -763098637 198484765 385807419 752839401 -62390685 152859026 37890903 -953801152 -884253348 999344068 -906077329 -868874935 -314163806 -400448388 -764363834 120704491 222971864 -328235059 208638276 -991692941 -244127112 96415279 926330360 -873528124 898754187 721064802 654047610 404770443 666472057 721448255 973192319 -326496714 -909440808 -425678732 -916860768 -109853273 479944911 102490241 846006452 -805157187 -454716558 -676535507 137863007 -848464927 985771574 -872373966 376620958 798110756 -802062319 -345707998 559295222 -761538386 508527149 -383091871 -274970103 -168258862 212058520 39521268 534977644 -329793202 -959747072 899946495 -571838772 -565888024 -892074110 -103334839 67816168 504312188 450668394 -204635288 146507788 -490327616 653498777 -747923837 610044213 252774371 -282444532 292854317 -201622167 -674934886 -53053747 -353824722 603415912 -552687127 -382753857 702378111 129790341 478655204 -399324758 631071295 -603158964 665292124 -171542080 -778835822 820143226 575087538 -834309278 -616095766 -665458688 -113489085 379676460 409188417 -330160630 -649321618 104096966 -754713088 -759380835 -682379506 190194979 281076636 -734100723 989715239 -337580880 -646905251 -754419921 254300161 -571016805 56274399 -720856078 -39363015 -268481814 76145843 484760219 776905153 791370333 -747418389 -233375761 -536613609 -682488648 521966974 -275710534 -595739208 -850315165 343855552 -792446989 -85151618 8227355 -49510069 846030049 -331235651 -174277845 -328984073 59733427 -407102074 501584912 860865244 351776017 -849012883 -680766532 -106089681 -80415259 -138487682 814621738 463728144 327323513 -820897953 782930029 -351629139 955059373 -409955776 -831865454 -281335956 725384025 -635201740 -310481826 -684496938 225942361 -211535049 970780825 131754109 -872523625 507918952 -494122907 -625742495 491537886 622675245 -641040984 721488041 836582363 892019311 612399010 855374161 455516557 -507385046 -848211951 836243407 215541647 941998793 -661244067 -309740222 966979348 -358459732 -423176759 427996339 -405206441 -202952090 676211563 573121783 -327124906 58891872 -803237249 668249875 993517881 -252335980 451214379 277605722 244404520 -602378875 -781589126 660781032 -426089220 -411447633 -405294414 -372083154 -367036687 867912517 -528123270 99446982 -491885278 -441789684 612696815 -463195634 -393514356 -856614006 820000095 -560580224 -764560615 394652750 -271067172 -775550657 -476987394 -897618257 -161632971 872993017 843336423 -320772339 -98163855 -311257156 -722251355 -447735040 -405200502 222499740 -644744548 212347339 715172612 794887059 -683872419 92095757 -823166305 611314384 6063627 647977137 222281955 114669 270869870 -242390152 -603364922 -582366206 678181175 158972639 -572775270 162907029 -399703879 -51660781 -461339705 -404226882 -375467969 73587133 994837638 50443257 775744009 -543595371 305548013 -878179736 292860552 -333376326 -840562159 441966258 -455539174 554933445 -290565547 -148848362 -148746439 98970427 -788786560 -781566649 918139228 -106048972 936788684 -687820304 -868712366 -471205342 -814295494 224783221 462216202 569962214 -215953105 -518540325 -19641035 -99325829 -794651434 905068292 -601617928 545346568 922228138 -86984203 -72552121 32573426 -630980443 868241336 -665790303 592271995 83258109 -445199675 352666377 994268275 -542459252 -420201139 226484834 -146795301 -224679808 -107776791 487437503 -769087085 423342678 -358980618 -103404739 335955819 -273018150 -309638725 -534066212 -53608986 490653684 -367763274 17785243 32465107 563639118 -947843064 -868804785 191562666 606663014 339459256 540879397 -231772676 -11486626 -900405326 -366594065 814329839 470320372 -319678539 -9190160 -619171100 146351715 -682744214 531995494 -443475828 -917302692 -835368840 -997664422 -452266791 704792546 873128128 -295272100 280678169 81132012 425294246 -874901379 -630663399 956508910 -529000924 612317963 -594447635 -709805137 977862531 658938956 826586219 -533584323 373034706 -50610252 972679138 584161750 -242282433 688667087 236169610 521840053 637574524 -484156452 -893222237 -649450318 659778129 931267525 -510414829 810045794 -196828058 -698810497 682156036 321647211 -584341726 493515012 -988547578 333783692 -194654598 159099545 481095161 -868173887 280741280 -342001627 -841403153 -248642779 -109790945 -645328451 462632351 693038587 577352042 536884161 520006201 690873182 788944084 276030024 -58638796 -248766865 365492474 -302286672 478660477 400462590 -105409773 -79222527 -170059489 -579066953 477007299 -500896374 -310595413 -85882027 289994244 939250203 -577240518 -836559045 476341388 971388840 -589471464 -776902539 -425568562 741695927 568465338 592604295 -346697823 191114910 -728951712 178476010 -913416820 -42571869 -983065676
+==37872== Parent PID: 37870
+==37872== 
+==37872== 
+==37872== HEAP SUMMARY:
+==37872==     in use at exit: 0 bytes in 0 blocks
+==37872==   total heap usage: 17,679 allocs, 17,679 frees, 6,830,739 bytes allocated
+==37872== 
+==37872== All heap blocks were freed -- no leaks are possible
+==37872== 
+==37872== For lists of detected and suppressed errors, rerun with: -s
+==37872== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37900== Memcheck, a memory error detector
+==37900== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37900== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37900== Command: ./checker -651299571 478683841 -173387688 628346214 231923953 -274309613 -648202984 900176042 -753082249 294804348 -301657739 -964974337 379716118 17143348 -983105859 295348249 30169101 -902448732 -410251639 -227193575 -245682579 -925815169 -401080956 644179252 -612536963 312820069 446389469 220556249 739922319 -958961083 -168403274 443769096 -42339799 405023836 -456116059 -229088634 620170347 -321972855 -727224762 591596247 810733586 222571987 -737530064 -1439972 -931085083 -261928450 -710535681 448986642 329341965 -69435 759419431 -938442841 902304331 -997082682 -510712874 -770748939 -253285387 64289421 564927721 662280346 311029219 938928565 713121676 -964818170 945936910 232838086 497042308 849454688 967120936 -136496034 837301728 878339735 -688018184 983934305 -54057638 387218777 -838395100 -43544316 129360932 -38072930 -879397693 -85960005 -649803413 716149519 146043036 38628023 160540032 -124969989 202096305 118869696 -274410691 970049363 -888362843 460322458 177997585 -908780042 -285817198 -761336936 -980258799 612199717 621678261 -622109280 199229478 -10250014 -229824426 -393203921 -799505995 -918600482 -655958663 -347129967 -573264560 -234414988 797797145 -146451656 -701268320 850977452 36746702 -107675792 -535760204 471394726 573792309 -855359289 405811095 260393163 394089016 -438708291 862585800 139223650 -159086129 942649661 -594260613 419322455 -527106733 987598838 547579677 -475032105 -903293187 27701903 39386794 728337692 683228164 -775811832 -710761646 -517443764 659093795 84668235 221010537 -365078037 517145351 651969816 -569746877 748218646 -498715875 5445850 -413886774 410426084 615324883 443136111 -510968214 -811894485 443167029 -772253708 408535886 150989644 129320045 -93829467 -563784605 -662412447 -173892806 586270829 358773914 904120503 865142121 -782708258 984534815 281884003 620468449 -21206910 570224911 761745469 244253175 -646427570 -373321505 920663728 333940563 425693465 -906226015 -596100931 695109921 956304775 304880653 -731696335 -470665699 -403246438 529235473 501644218 158790727 504247394 -738248038 111918315 -761560522 -917380487 -51300608 -707140376 311231124 -912518046 874903352 595384861 662429880 709786758 -567117656 -605612437 -91081729 549955127 -655989648 -978253102 595721465 147201456 480482464 -220937066 646505973 493400571 333433484 -253955200 -125730353 241457147 -894554807 217861442 -132051750 400077176 -281144528 -403794561 745878273 654235775 375313580 803584214 -827561593 -779267364 913369592 -383506798 810242521 -226537917 -523056542 373955737 990048427 -695702214 -621397343 -424488087 -509014098 -523285303 811140904 968497894 -680828110 451843012 -974117585 492838385 98371927 696949538 988800837 420111426 754373609 190430655 -103256758 -420999598 -132702678 -96623505 611777235 46454118 398692968 456778598 116129205 -204638928 432725560 884566911 -967005599 -383634836 311212504 -115090667 800742480 980001147 -858442731 907300015 -741129279 -164201214 -947849715 -343645084 -636823641 -348231988 -335580144 -841791836 603807707 -210903936 -22190031 -899735721 -381714739 -651618602 -155037069 -164774047 -938081858 165270108 950612317 182076325 684962286 -646803823 -944238151 982321936 -391598595 955938680 -829816342 -140578412 305154488 79960343 318349458 298730724 637637899 -37229119 -893628831 -254526263 -280733134 -102891553 -337881316 -365184420 -374489957 -664026968 12298362 -75236756 609730321 765489409 -711751844 377358917 -816991160 457830995 422459958 -15594552 -872824573 -780552779 -598850286 -607035005 54006278 526317816 872283872 -385059907 -529152810 128827819 -139049678 243425276 530138880 643774904 450625933 -826297603 825731952 -69975292 -47472241 234746324 463163939 -954460867 809495286 421804159 -584744350 -51589478 -274906455 -417783160 -925782721 -97257122 -278566646 335061602 -193874960 29217812 635692742 505584370 422874505 728677941 969636256 -143426136 -891262632 999790834 -87211774 -92454544 -458394198 850828266 462057478 717753572 -500463702 84383456 -123890331 597499895 -340758399 300652150 -758874604 -665335851 31712091 -319960542 -955605492 -581111216 971815315 -839786882 -907979122 -329992016 825097409 -401422580 405735666 593171689 -32621896 -920553011 936167674 -620496074 -529338317 993319946 163251091 30465854 -688395251 -165398850 -791783767 285796890 -882925094 -367900027 49065601 -847925873 63699158 179884903 -482406055 -953569047 -186238324 338148415 811648943 578586112 551904607 21097586 320084234 565177441 -317263836 -865536427 -259231054 541173218 346452971 -27546268 -110105781 -356584108 -329077678 -2879031 -29588422 -126344316 875482681 382381714 265318940 194553672 -159747253 219224798 395139938 435866181 452892712 -367529818 61096928 -469916458 -145958233 529534101 -679351191 -289250658 -673323405 -53549762 -771151056 -663726608 -944544800 296326670 230051951 396550188 -525431183 -822510526 384468988 938432859 -921857657 -139651877 413495788 213554690 -840661086 -650297835 682135419 -419427280 744658774 454720637 349508264 -329826897 750223567 -192816952 463014732 346817043 616320470 344639904 -864204097 -642685310 -395178572 -318020295 -33388719 -806684436 363548893 368563278 629379708 -194579244 577798775 334725210
+==37900== Parent PID: 37898
+==37900== 
+==37900== 
+==37900== HEAP SUMMARY:
+==37900==     in use at exit: 0 bytes in 0 blocks
+==37900==   total heap usage: 17,727 allocs, 17,727 frees, 6,840,220 bytes allocated
+==37900== 
+==37900== All heap blocks were freed -- no leaks are possible
+==37900== 
+==37900== For lists of detected and suppressed errors, rerun with: -s
+==37900== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==37939== Memcheck, a memory error detector
+==37939== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37939== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==37939== Command: ./checker -451897581 -217318748 783725066 -694455539 -718234034 -112788974 -910629551 -396327170 584726861 -632948708 -164195448 44973701 661493701 -587615134 -22849886 177646110 -373059455 -617501878 -257219858 649649999 -674141323 -448582898 -379444736 -351196196 -597946900 -271859943 337262543 -471834962 -91338246 842323345 -745141032 -618608469 931072490 870815146 -29124922 -337195883 986481058 -534337653 362553643 354513826 -3159039 -941743188 422114335 963406531 -79168279 -989211697 -497026229 130436114 -568491632 120252189 -535216900 71850677 -680676341 470140445 940297810 -331438666 410782166 754172642 -61731605 127178644 -926424162 367458297 -190709023 -676116005 114294598 -453276842 -511833355 219543009 988909035 -515619727 898758368 548533203 615415399 -80819938 -631723414 -297070298 -215412463 -147008528 189513566 659697253 572434703 -777116337 -674789402 167370248 -886108648 -851327886 907297927 -492882607 336272558 -362463588 -392531830 123702828 -215815322 -802672850 -998167306 -904901837 -371851568 -357041968 -953264183 -736976759 329332152 510747666 -839537997 -320988358 -299490116 882404516 -3004677 233121629 787084740 14793952 388187866 561523803 -322232402 -459087537 316015881 -436094403 853079784 -321860239 207585598 -91485201 315917319 476701975 -764733651 872396210 5987805 -4233815 242835275 -659764087 192154302 -580932708 518321544 28860514 -68954761 -388210069 207900987 173341980 -59199028 387227055 -649057904 -825588367 -593832203 -508357058 -778079319 407447255 -180316255 -322699164 -339783423 857022467 464360448 292585808 913120298 629530658 865485989 -614894424 742503484 -938450610 663656436 -902072054 -871380742 -100532208 -958740038 484250006 839420892 252021470 -253212995 108979310 420054735 -304022732 -282930955 593694837 -434051643 -312151038 -932621126 -986900588 -571549059 324690722 251125575 -822124489 -940270453 -106558830 -229883649 -712877532 914679536 -888142848 -253759786 -250708492 305759723 -251639803 392853055 -704205701 198024464 903723082 527282158 460302346 -698625343 657365452 724463346 827748085 985397944 938375399 401008925 875067458 25421062 -448491659 -775402201 -597508914 594131296 647396466 3079125 722770112 -822983138 510936399 569006459 -716207245 995382037 123062066 -522944023 -236814139 130619883 587220591 279452047 59311544 618912986 -551147242 426364906 965983601 972437708 -811344258 894304849 -372640286 -16820946 -367164321 666283258 855705552 -269595771 -890850557 259538272 -556810789 -957723352 -582211023 -566931322 704082700 -244696954 78435867 -611820507 482552772 414469087 -266872434 311379203 990535165 -499577344 -345167060 -145960309 217470247 -696659384 119740013 4167567 -995296085 812198179 509809655 667755679 283840874 406885410 -958544194 315438696 -304930007 -616786135 916616556 -305355711 -604299579 330103926 754444007 -483005264 -102446673 924214327 361851402 -933417328 977531655 -382728349 427937831 -835389882 263887217 105584417 -223929823 549229526 379991078 -926966599 -549941891 -269732315 966104912 607798976 768819811 278260340 547152914 866425303 -45741327 998703473 -229206279 606818520 907813503 -671387376 560543187 889362860 223250941 546180998 266817378 -873738301 564219783 -831096068 828095296 882211553 -539867378 149417088 324411530 82667179 -75602736 741421099 -539199587 142249946 -445192095 344471793 -875609223 949909117 539083497 341928570 -621260778 278664456 623972677 95348353 630527941 -399761395 -137508747 822629018 -524207282 -631286336 616403815 222766098 -331048718 -93254326 531720881 -715366460 -281837663 367471006 128872265 531979424 994134872 -342337852 572528294 265373609 162853721 371301164 636527026 -915358322 -142622608 681549600 -542508397 466973120 -745452229 -64473442 -662963038 679156410 640219617 384264493 -717238198 -961682662 951896151 218171144 580603799 -750842351 -972417850 -15228276 890443914 -33571021 -409557570 -962891374 232579220 325718258 -599997571 682075144 -642759508 -23370964 41218727 -705796917 254622196 404280103 213193261 267513214 -987607522 407462005 -764135077 292689122 715509146 895721554 -628775172 -548198232 663039427 99450796 734195428 791745219 -377055427 -818991455 -363567623 994050445 -780700400 648317371 -722839868 -498368161 -765006089 -62778641 91111119 -655947039 -245325841 -437151900 -312728953 -387779717 495649378 -384060629 62913946 178380907 781975261 5700641 478628278 374187846 -519113223 625118891 -507752421 32873047 -202594144 -328882270 194757474 -311286992 -458358223 899411415 359933841 651948177 806883904 801247954 454744896 -521641173 -460790966 144233119 -322625372 -453419056 -534956441 -143232905 86249988 -749676395 862121205 185443786 544880042 -683505285 577283860 391681509 -355173242 -568300073 888497079 -67438674 -937291390 -417620063 125677235 -834627213 676105733 750689274 38997656 921106580 -192238108 964711036 978912459 595769325 747310381 -323266676 837145985 -110595682 -196944397 979200013 704517984 -661717737 983278888 -708065349 -808604449 847406659 -831061960 376417742 992300421 -142773421 -670772203 -285904490 -759936539 636423912 -267711554 -58806595 -486292219 -886329707 888936100 -953632798 229957338 -81347220 -449218542 750641019 483342389
+==37939== Parent PID: 37937
+==37939== 
+==37939== 
+==37939== HEAP SUMMARY:
+==37939==     in use at exit: 0 bytes in 0 blocks
+==37939==   total heap usage: 18,145 allocs, 18,145 frees, 6,789,406 bytes allocated
+==37939== 
+==37939== All heap blocks were freed -- no leaks are possible
+==37939== 
+==37939== For lists of detected and suppressed errors, rerun with: -s
+==37939== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

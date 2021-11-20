@@ -1,12 +1,12 @@
-NAME = five_tester
+NAME = leaks_tester
 
 SRCS=$(wildcard *.c)
 
 FLAGS = -Wall -Wextra -Werror
 
 $(NAME):
-	@ gcc $(SRCS) -o five_tester
-	@echo "Compiling five_tester..."
+	@ gcc $(SRCS) -o leaks_tester
+	@echo "Compiling leaks_tester..."
 
 all : $(NAME)
 
