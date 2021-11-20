@@ -36,6 +36,6 @@ int	ft_atoi(const char *str)
 	}
 	if ((negative == 1 && result > (unsigned long)INT_MAX)
 		|| (negative == -1 && result > (unsigned long)INT_MAX + 1))
-		ft_put_err(0, "(Bigger than int)");
+		ft_put_err(0, "(Bigger than int)\n");
 	return ((int)result * negative);
 }
