@@ -31,10 +31,10 @@ int main()
             // Putting Bash command together
             cmd = ft_strjoin(cmd, "ARG='");
             cmd = ft_strjoin(cmd, line); // set of numbers
-            cmd = ft_strjoin(cmd, "'; ./push_swap $ARG  | valgrind --undef-value-errors=no --leak-check=full ./checker $ARG");
+            cmd = ft_strjoin(cmd, "'; ./push_swap $ARG  | valgrind --undef-value-errors=no --leak-check=full ./checker $ARG >> results 2>&1");
             // valgrind --undef-value-errors=no --leak-check=full
             printf("%s\n", cmd);
-            
+                        
             // Copy over binaries and checker
             system("cp ../push_swap ./");
             system("cp ../checker ./");
