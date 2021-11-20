@@ -24,7 +24,7 @@ int	ft_check_non_num(char *s)
 	{
 		if (s[i] < 48 || s[i] > 57)
 		{
-			if ((s[i] < 9 || s[i] > 13) && s[i] != 32 )
+			if ((s[i] < 9 || s[i] > 13) && s[i] != 32 && s[i] != ',' )
 				return (0);
 		}
 		i++;
