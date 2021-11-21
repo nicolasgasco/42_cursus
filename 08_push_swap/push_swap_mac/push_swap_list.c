@@ -112,5 +112,4 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 	ft_assign_i(n_list->o_list, num_arr, n_list->num_tot);
 	free(num_arr);
 	ft_initialize_stats(n_list);
-	return ;
 }

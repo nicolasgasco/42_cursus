@@ -16,7 +16,6 @@ void	ft_move(t_list *number_list, char move, char list)
 {
 	if (ft_check_if_sorted(number_list->a_list, number_list->num_tot))
 	{
-		ft_putstr_fd("Array is sorted! 2\n", 1);
 		ft_free_lists(number_list);
 		exit(0);
 	}
@@ -31,7 +30,6 @@ void	ft_move(t_list *number_list, char move, char list)
 	ft_update_stats(number_list);
 	if (ft_check_if_sorted(number_list->a_list, number_list->num_tot))
 	{
-		ft_putstr_fd("Array was sorted!\n", 0);
 		ft_free_lists(number_list);
 		exit(0);
 	}

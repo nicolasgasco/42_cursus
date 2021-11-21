@@ -21,5 +21,5 @@ void	ft_check_non_num_util(char *num_str)
 void	ft_check_empty(char c)
 {
 	if (c == '\0')
-		ft_put_err(2, "(Empty string)\n");
+		ft_put_err(2, NULL);
 }
