@@ -46,7 +46,7 @@ int	*ft_args_are_nums(int argc, char *argv[], t_list *n_list)
 			free(result);
 			ft_put_err(2);
 		}
-		result[i - 1] = ft_atoi(argv[i], &result);
+		result[i - 1] = ft_atoi(argv[i]);
 		i++;
 	}
 	n_list->num_tot = argc - 1;
@@ -87,7 +87,7 @@ int	*ft_arg_is_str(char *str, t_list *n_list)
 	i = 0;
 	while (num_str[i] != NULL)
 	{
-		result[i] = ft_atoi(num_str[i], &result);
+		result[i] = ft_atoi(num_str[i]);
 		i++;
 	}
 	n_list->num_tot = i;

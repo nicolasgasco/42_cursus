@@ -12,17 +12,14 @@
 
 #include "libft.h"
 
-void	ft_check_limits(int negative, unsigned long result, int **array)
+void	ft_check_limits(int negative, unsigned long result)
 {
 	if ((negative == 1 && result > (unsigned long)INT_MAX)
 	|| (negative == -1 && result > (unsigned long)INT_MAX + 1))
-	{
-		free(array);
-		ft_put_err(0, "(Bigger than int)\n");
-	}
+		ft_put_err(0);
 }
 
-int	ft_atoi(const char *str, int **array)
+int	ft_atoi(const char *str)
 {
 	int				i;
 	unsigned long	result;
@@ -44,6 +41,6 @@ int	ft_atoi(const char *str, int **array)
 		result = (result * 10) + (str[i] - '0');
 		i++;
 	}
-	ft_check_limits(negative, result, array);
+	ft_check_limits(negative, result);
 	return ((int)result * negative);
 }
