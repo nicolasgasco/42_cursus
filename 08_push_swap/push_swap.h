@@ -75,7 +75,7 @@ void	ft_rr(t_list *number_list, char c);
 int		ft_check_non_num(char *s);
 int		ft_check_repetition(int *nums, int limit);
 int		ft_check_size(int list_size);
-void	ft_put_err(int code, char *str);
+void	ft_put_err(int code);
 int		ft_check_if_sorted(struct s_node *a_list, int size);
 int		ft_check_if_sorted_arr(int *array, int size);
 void	ft_check_non_num_util(char *num_str);

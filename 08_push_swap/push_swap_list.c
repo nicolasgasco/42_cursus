@@ -42,7 +42,7 @@ int	*ft_args_are_nums(int argc, char *argv[], t_list *n_list)
 	while (i < argc)
 	{	
 		if (ft_check_non_num(argv[i]) == 0)
-			ft_put_err(2, "(Non numeric values)\n");
+			ft_put_err(2);
 		result[i - 1] = ft_atoi(argv[i]);
 		i++;
 	}
@@ -71,6 +71,8 @@ int	*ft_arg_is_str(char *str, t_list *n_list)
 	int		*result;
 
 	ft_check_empty(str[0]);
+	if (ft_check_character(str, ' ') == 0)
+		ft_put_err(1);
 	num_str = ft_split(str, ' ');
 	i = 0;
 	while (num_str[i] != NULL)
@@ -97,17 +99,15 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 	int		*num_arr;
 
 	if (argc == 1)
-		ft_put_err(1, "(No arguments provided)\n");
+		exit(1);
 	if (argc == 2)
 		num_arr = ft_arg_is_str(args[1], n_list);
 	else
 		num_arr = ft_args_are_nums(argc, args, n_list);
-	if (ft_check_size(n_list->num_tot) == 0)
-		ft_put_err(1, "Empty\n");
 	if (ft_check_repetition(num_arr, n_list->num_tot) == 0)
-		ft_put_err(3, "(There is a duplicate)\n");
+		ft_put_err(3);
 	if (ft_check_if_sorted_arr(num_arr, n_list->num_tot) == 1)
-		ft_put_err(4, "(Numbers are already sorted)\n");
+		ft_put_err(4);
 	n_list->a_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
 	n_list->o_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
 	num_arr = ft_bubble_sort(num_arr, n_list->num_tot);

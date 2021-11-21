@@ -15,11 +15,11 @@
 void	ft_check_non_num_util(char *num_str)
 {
 	if (ft_check_non_num(num_str) == 0)
-		ft_put_err(2, "(Non numeric values)\n");
+		ft_put_err(2);
 }
 
 void	ft_check_empty(char c)
 {
 	if (c == '\0')
-		ft_put_err(2, "(Empty string)\n");
+		ft_put_err(2);
 }
