@@ -72,8 +72,7 @@ void	ft_sort_five(t_list *n_list)
 
 void	ft_radix_sort(t_list *n_list)
 {
-	struct s_node	*curr_a;
-	struct s_node	*curr_b;
+	struct s_node	*curr;
 	int				i;
 	int				x;
 	int				comp;
@@ -81,20 +80,19 @@ void	ft_radix_sort(t_list *n_list)
 	comp = 1;
 	while (1)
 	{
-		curr_a = n_list->a_list;
+		curr = n_list->a_list;
 		x = -1;
 		while (x++ < (n_list->num_tot - 1))
 		{
-			i = curr_a->i;
-			curr_a = curr_a->next;
+			i = curr->i;
+			curr = curr->next;
 			ft_radix_choose_direction(i, comp, n_list);
 		}
-		curr_b = n_list->b_list;
-		while (curr_b != NULL)
+		curr = n_list->b_list;
+		while (curr != NULL)
 		{
-			curr_b = curr_b->next;
+			curr = curr->next;
 			ft_move(n_list, 'p', 'a');
-			x++;
 		}
 		comp = comp << 1;
 		if (ft_check_if_sorted(n_list->a_list, n_list->num_tot) == 1)
