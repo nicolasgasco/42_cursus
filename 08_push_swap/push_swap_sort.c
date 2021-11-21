@@ -82,16 +82,12 @@ void	ft_radix_sort(t_list *n_list)
 	while (1)
 	{
 		curr_a = n_list->a_list;
-		x = 0;
-		while (x < n_list->num_tot)
+		x = -1;
+		while (x++ < (n_list->num_tot - 1))
 		{
 			i = curr_a->i;
 			curr_a = curr_a->next;
-			if ((i & comp) == comp)
-				ft_move(n_list, 'r', 'a');
-			else
-				ft_move(n_list, 'p', 'b');
-			x++;
+			ft_radix_choose_direction(i, comp, n_list);
 		}
 		curr_b = n_list->b_list;
 		while (curr_b != NULL)
