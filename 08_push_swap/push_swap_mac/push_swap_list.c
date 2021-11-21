@@ -42,10 +42,7 @@ int	*ft_args_are_nums(int argc, char *argv[], t_list *n_list)
 	while (i < argc)
 	{	
 		if (ft_check_non_num(argv[i]) == 0)
-		{
 			ft_put_err(2, NULL);
-			exit(0);
-		}
 		result[i - 1] = ft_atoi(argv[i]);
 		i++;
 	}
@@ -105,15 +102,15 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 		num_arr = ft_args_are_nums(argc, args, n_list);
 	if (ft_check_repetition(num_arr, n_list->num_tot) == 0)
 		ft_put_err(3, NULL);
+	if (ft_check_size(n_list->num_tot) == 0)
+		exit(1);
 	if (ft_check_if_sorted_arr(num_arr, n_list->num_tot) == 1)
-		ft_put_err(4, NULL);
+		exit(4);
 	n_list->a_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
 	n_list->o_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
 	num_arr = ft_bubble_sort(num_arr, n_list->num_tot);
 	ft_assign_i(n_list->o_list, num_arr, n_list->num_tot);
 	free(num_arr);
 	ft_initialize_stats(n_list);
-	if (ft_check_size(n_list->num_tot) == 0)
-		ft_put_err(1, NULL);
 	return ;
 }
