@@ -42,7 +42,10 @@ int	*ft_args_are_nums(int argc, char *argv[], t_list *n_list)
 	while (i < argc)
 	{	
 		if (ft_check_non_num(argv[i]) == 0)
+		{
+			free(result);
 			ft_put_err(2);
+		}
 		result[i - 1] = ft_atoi(argv[i]);
 		i++;
 	}
@@ -77,7 +80,7 @@ int	*ft_arg_is_str(char *str, t_list *n_list)
 	i = 0;
 	while (num_str[i] != NULL)
 	{
-		ft_check_non_num_util(num_str[i]);
+		ft_check_non_num_util(num_str, i);
 		i++;
 	}
 	if (i == 1)

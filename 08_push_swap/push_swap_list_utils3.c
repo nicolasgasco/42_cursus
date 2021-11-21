@@ -12,10 +12,13 @@
 
 #include "push_swap.h"
 
-void	ft_check_non_num_util(char *num_str)
+void	ft_check_non_num_util(char **num_str, int i)
 {
-	if (ft_check_non_num(num_str) == 0)
+	if (ft_check_non_num(num_str[i]) == 0)
+	{
+		free(num_str);
 		ft_put_err(2);
+	}
 }
 
 void	ft_check_empty(char c)

@@ -78,7 +78,7 @@ int		ft_check_size(int list_size);
 void	ft_put_err(int code);
 int		ft_check_if_sorted(struct s_node *a_list, int size);
 int		ft_check_if_sorted_arr(int *array, int size);
-void	ft_check_non_num_util(char *num_str);
+void	ft_check_non_num_util(char **num_str, int i);
 void	ft_check_empty(char c);
 
 // List stats
