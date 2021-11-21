@@ -74,8 +74,6 @@ int	*ft_arg_is_str(char *str, t_list *n_list)
 	int		*result;
 
 	ft_check_empty(str[0]);
-	if (ft_check_character(str, ' ') == 0)
-		ft_put_err(1);
 	num_str = ft_split(str, ' ');
 	i = 0;
 	while (num_str[i] != NULL)
@@ -115,7 +113,7 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 	if (ft_check_if_sorted_arr(num_arr, n_list->num_tot) == 1)
 	{
 		free(num_arr);
-		ft_put_err(4);
+		exit(4);
 	}
 	n_list->a_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
 	n_list->o_list = ft_populate_s_nodes(num_arr, n_list->num_tot);
