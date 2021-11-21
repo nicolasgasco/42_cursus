@@ -17,6 +17,8 @@
 # include <stddef.h>
 # include <stdlib.h>
 
+#include <stdio.h>
+
 typedef struct NumList {
 	int				num_moves;
 	int				num_tot;
@@ -94,6 +96,7 @@ void	ft_sort_six(t_list *n_list);
 void	ft_sort_seven(t_list *n_list);
 void	ft_radix_sort(t_list *n_list);
 void	ft_choose_direction(t_list *n_list, struct s_node *list, int value);
+void	ft_radix_choose_move(int i, int comp, t_list *n_list);
 
 // Push swap
 void	ft_create_linked_list(int argc, char **args, t_list *t_list);

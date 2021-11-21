@@ -69,3 +69,12 @@ void	ft_sort_seven(t_list *n_list)
 	ft_move(n_list, 'p', 'a');
 	ft_move(n_list, 'r', 'a');
 }
+
+void	ft_radix_choose_move(int i, int comp, t_list *n_list)
+{
+	if ((i & comp) == comp)
+		ft_move(n_list, 'r', 'a');
+	else
+		ft_move(n_list, 'p', 'b');
+}
+
