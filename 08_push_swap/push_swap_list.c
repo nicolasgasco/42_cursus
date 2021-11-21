@@ -42,10 +42,7 @@ int	*ft_args_are_nums(int argc, char *argv[], t_list *n_list)
 	while (i < argc)
 	{	
 		if (ft_check_non_num(argv[i]) == 0)
-		{
 			ft_put_err(2, "(Non numeric values)\n");
-			exit(0);
-		}
 		result[i - 1] = ft_atoi(argv[i]);
 		i++;
 	}
