@@ -17,8 +17,6 @@
 # include <stddef.h>
 # include <stdlib.h>
 
-# include <stdio.h>
-
 typedef struct NumList {
 	int				num_moves;
 	int				num_tot;
