@@ -70,17 +70,16 @@ int	*ft_arg_is_str(char *str, t_list *n_list)
 	char	**num_str;
 	int		*result;
 
-	i = 0;
 	ft_check_empty(str[0]);
-	if (ft_check_character(str, ','))
-		num_str = ft_split(str, ',');
-	else
-		num_str = ft_split(str, ' ');
+	num_str = ft_split(str, ' ');
+	i = 0;
 	while (num_str[i] != NULL)
 	{
 		ft_check_non_num_util(num_str[i]);
 		i++;
 	}
+	if (i == 1)
+		exit(1);
 	result = (int *)malloc(sizeof(int) * i);
 	i = 0;
 	while (num_str[i] != NULL)
@@ -103,6 +102,8 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 		num_arr = ft_arg_is_str(args[1], n_list);
 	else
 		num_arr = ft_args_are_nums(argc, args, n_list);
+	if (ft_check_size(n_list->num_tot) == 0)
+		ft_put_err(1, "Empty\n");
 	if (ft_check_repetition(num_arr, n_list->num_tot) == 0)
 		ft_put_err(3, "(There is a duplicate)\n");
 	if (ft_check_if_sorted_arr(num_arr, n_list->num_tot) == 1)
@@ -113,7 +114,5 @@ void	ft_create_linked_list(int argc, char **args, t_list *n_list)
 	ft_assign_i(n_list->o_list, num_arr, n_list->num_tot);
 	free(num_arr);
 	ft_initialize_stats(n_list);
-	if (ft_check_size(n_list->num_tot) == 0)
-		ft_put_err(1, "");
 	return ;
 }
