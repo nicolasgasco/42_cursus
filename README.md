@@ -4,6 +4,7 @@ This is a collection of the projects I completed while doing the 'common core' o
 
 Here is the list of projects sorted by date (descending):
 1. **push_swap** (C programming, November 2021): given an array of random integers, two stacks, and a limited set of moves (e.g. rotate entire stack up or down), write to the console the smallest number of instructions required to sort the array.
+![Screenshot of completed project](https://res.cloudinary.com/ngasco/image/upload/v1637695175/42/Screenshot_from_2021-11-23_20-19-22_itr7wd.png "Screenshot of Push_swap")
 
 3. **minitalk** (C programming, October 2021): code a small data exchange program using UNIX signals (SIGUSR1 and SIGUSR2) and bitwise operations. A string is passed as parameter to the client, converted into binary, and sent to the server in form of signals (either 0 or 1), where the string is reconstructed and outputted. 
 ![Screenshot of completed project](https://res.cloudinary.com/ngasco/image/upload/v1635067508/42/Screenshot_from_2021-10-24_11-22-56_mfbq1j.png "Screenshot of Minitalk")
