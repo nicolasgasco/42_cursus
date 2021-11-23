@@ -24,44 +24,25 @@ make
 ```
 Sort an array of integers without repetitions of your choice
 ```
-ARG="-755254759 46382822 168313279 -712408378 -976005565 532734670 -658929270 -846861339"; ./push_swap $ARG
+ARG="-755254759 46382822 168313279 -712408378 -976005565 532734670 -658929270"; ./push_swap $ARG
 ```
 Expected output
 ```
-ra
+rra
+rra
 pb
-ra
+rra
 pb
-ra
+rra
+rra
 pb
-ra
-pb
-pa
-pa
-pa
-pa
-ra
-pb
-pb
-ra
-ra
-ra
-pb
-pb
-pa
-pa
-pa
-pa
-ra
-pb
-pb
-ra
-ra
-pb
+rra
+rra
 pb
 ra
 pa
 pa
+ra
 pa
 pa
 ra
