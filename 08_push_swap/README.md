@@ -6,7 +6,7 @@ types of algorithms and choose the one (of many) most appropriate solution for a
 
 The two available stacks were managed with linked lists and the numbers were sorted using the Radix algorithm and bitwise operations. The output of the program is the list of movement necessary to sort the numbers.
 
-![Screenshot of completed project](https://res.cloudinary.com/ngasco/image/upload/v1635067508/42/Screenshot_from_2021-10-24_11-22-56_mfbq1j.png "Screenshot of Minitalk")
+![Screenshot of completed project](https://res.cloudinary.com/ngasco/image/upload/v1637695175/42/Screenshot_from_2021-11-23_20-19-22_itr7wd.png "Screenshot of Push_swap")
 ## Run the scripts
 
 Follow these instruction to see the project in action.
