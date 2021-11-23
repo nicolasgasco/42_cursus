@@ -12,6 +12,7 @@ Here is the list of projects sorted by date (descending):
 3. **exam_02** (exam, October 2021): The exercises I did in order to prepare for the 2nd rank exam.
 
 4. **so_long** (2D gaming, October 2021): create a small 2D game using the Minilibx API. Goal of the game is leaving the map in the shortest amount of moves after collecting all objects.
+
 ![Screenshot of completed project](https://res.cloudinary.com/ngasco/image/upload/v1633638518/42/Screenshot_from_2021-10-07_22-25-25_iirvcu.png "Screenshot of 42 Escape")
 
 5. **ft_printf** (C programming, September 2021): reproduce basic functioning of prinft function (flags implemented: %c, %s, %i, %d, %u, %x, %X, %p, %%, no error handling except for NULL strings passed as parameter)
