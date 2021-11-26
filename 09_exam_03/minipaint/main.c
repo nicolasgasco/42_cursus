@@ -24,7 +24,10 @@ void ft_draw_board(struct board board)
 		x = 0;
 		while (x < board.width)
 		{
-			write(1, &board.empty, 1);
+			if ((y == board.x1 && x == board.x2) || (y == board.y1 && x == board.y2))
+				write(1, &board.shape, 1);
+			else
+				write(1, &board.empty, 1);
 			x++;
 		}
 		write(1, "\n", 1);
@@ -79,7 +82,6 @@ int main(int argc, char *argv[])
 	while (i < 2)
 	{
 		fscanf(file, "%f", &coordinate);
-		printf("Size is %f\n", coordinate);
 		if (board.x1 == 0)
 		{
 			board.x1 = (int)coordinate;
