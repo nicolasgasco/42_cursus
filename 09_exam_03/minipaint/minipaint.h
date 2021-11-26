@@ -9,6 +9,12 @@ struct  board {
     int     width;
     int     height;
     char    empty;
+    char    shape;
+    int     x1;
+    int     x2;
+    int     y1;
+    int     y2;
+    int     radius;
 };
 
 void ft_print_struct(struct board board);
