@@ -28,7 +28,6 @@ void ft_print_tab(struct board *board)
 		printf("\n");
 		y++;
 	}
-	printf("_______________\n\n");
 }
 
 void ft_print_struct(struct board board)
@@ -99,7 +98,6 @@ void ft_draw_shape(struct board *board, int y_coord, int x_coord, int width, int
 		}
 		y++;
 	}
-	printf("_______________\n\n");
 }
 
 int ft_scan_shape(struct board *board, FILE *file)
