@@ -136,11 +136,13 @@ int main(int argc, char *argv[])
 	if (!(file = fopen(argv[1], "r")))
 	{
 		write(1, "Error: Operation file corrupted\n", 32);
+		fclose(file);
 		return (1);
 	}
 	if (ft_scan_line(file) != 3 || board_width > 300 || board_height > 300 || board_width <= 0 || board_height <= 0)
 	{
 		write(1, "Error: Operation file corrupted\n", 32);
+		fclose(file);
 		return (1);
 	}
 	ft_draw_board();
