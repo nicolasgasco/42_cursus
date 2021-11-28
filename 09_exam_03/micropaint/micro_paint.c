@@ -29,21 +29,12 @@ void ft_print_tab()
 		x = 0;
 		while (tab[y][x] != '\0')
 		{
-			printf("%c", tab[y][x]);
+			write(1, &tab[y][x], 1);
 			x++;
 		}
-		printf("\n");
+		write(1, "\n", 1);
 		y++;
 	}
-}
-
-void ft_print_struct()
-{
-	printf("First line:\n");
-	printf("width is %d\n", width);
-	printf("height is %d\n", height);
-	printf("empty is %c\n", empty);
-	// ft_print_tab(&;
 }
 
 void ft_draw_board()
@@ -79,7 +70,7 @@ void ft_draw_shape()
 		{
 			if (((float)y < y_coord) || ((float)y > (y_coord + height)) || (float)x < x_coord || (float)x > (x_coord + width))
 			{
-				tab[y][x] = '0';
+				// Outside
 			}
 			else if ((float)y - y_coord < 1 || (float)x - x_coord < 1)
 				tab[y][x] = stroke;
@@ -108,7 +99,10 @@ int ft_round_float(float n)
 
 int ft_scan_line(FILE *file)
 {
-	return fscanf(file, "%d %d %c\n", &board_width, &board_height, &empty);
+	int result;
+
+	result = fscanf(file, "%d %d %c\n", &board_width, &board_height, &empty);
+	return result;
 }
 
 int ft_scan_shape(FILE *file)
@@ -123,6 +117,7 @@ int main(int argc, char *argv[])
 {
 	FILE *file;
 	int	shape_res;
+
 	if (argc != 2)
 	{
 		write(1, "Error: argument\n", 16);
@@ -133,7 +128,7 @@ int main(int argc, char *argv[])
 		write(1, "Error: Operation file corrupted\n", 32);
 		return (1);
 	}
-	if (ft_scan_line(file) != 3 || width > 300 || height > 300)
+	if (ft_scan_line(file) != 3 || board_width > 300 || board_height > 300 || board_width <= 0 || board_height <= 0)
 	{
 		write(1, "Error: Operation file corrupted\n", 32);
 		return (1);
@@ -160,7 +155,6 @@ int main(int argc, char *argv[])
 		}
 	}
 	ft_print_tab();
-	// ft_print_struct();
 	fclose(file);
 	return (0);
 }
