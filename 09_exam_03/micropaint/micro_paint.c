@@ -70,9 +70,6 @@ void ft_draw_board()
 
 void ft_draw_shape()
 {
-	And a rectangle with a top left corner (Xtl, Ytl) and a bottom right corner (Xbr, Ybr)
-If Xtl <= Xa <= Xbr and Ytl <= Ya <= Ybr then the point is in the rectangle
-
 	int y = 0;
 
 	while (tab[y] != NULL)
@@ -80,7 +77,21 @@ If Xtl <= Xa <= Xbr and Ytl <= Ya <= Ybr then the point is in the rectangle
 		int x = 0;
 		while (tab[y][x] != '\0')
 		{
-			if (
+			if (((float)y < y_coord) || ((float)y > (y_coord + height)) || (float)x < x_coord || (float)x > (x_coord + width))
+			{
+				tab[y][x] = '0';
+			}
+			else if ((float)y - y_coord < 1 || (float)x - x_coord < 1)
+				tab[y][x] = stroke;
+			else if ((x_coord + width) - (float)x < 1)
+				tab[y][x] = stroke;
+			else if ((y_coord + height) - (float)y < 1)
+				tab[y][x] = stroke;
+			else
+			{
+				if (shape == 'R')
+					tab[y][x] = stroke;
+			}
 			x++;
 		}
 		y++;
@@ -95,47 +106,58 @@ int ft_round_float(float n)
 	return (int)n / 10;
 }
 
-void ft_scan_line(FILE *file)
+int ft_scan_line(FILE *file)
 {
-	fscanf(file, "%d %d %c\n", &board_width, &board_height, &empty);
+	return fscanf(file, "%d %d %c\n", &board_width, &board_height, &empty);
 }
 
 int ft_scan_shape(FILE *file)
 {
 	int result;
 
-	return fscanf(file, "%c %f %f %f %f %c\n", &shape, &x_coord, &y_coord, &width, &height, &stroke);
+	result = fscanf(file, "%c %f %f %f %f %c\n", &shape, &x_coord, &y_coord, &width, &height, &stroke);
+	return result;
 }
 
 int main(int argc, char *argv[])
 {
 	FILE *file;
+	int	shape_res;
 	if (argc != 2)
 	{
 		write(1, "Error: argument\n", 16);
 		return (1);
 	}
-	file = fopen(argv[1], "r");
-	if (!file)
+	if (!(file = fopen(argv[1], "r")))
 	{
 		write(1, "Error: Operation file corrupted\n", 32);
 		return (1);
 	}
-	ft_scan_line(file);
-	if (width > 300 || height > 300)
+	if (ft_scan_line(file) != 3 || width > 300 || height > 300)
 	{
 		write(1, "Error: Operation file corrupted\n", 32);
 		return (1);
 	}
 	ft_draw_board();
-	while (ft_scan_shape(file) == 6)
+	while (1)
 	{
-		if (width <= 0 || height <= 0 || (shape != 'R' && shape != 'r'))
+		shape_res = ft_scan_shape(file);
+		if (shape_res == 6)
+		{
+			if (width <= 0 || height <= 0 || (shape != 'R' && shape != 'r'))
+			{
+				write(1, "Error: Operation file corrupted\n", 32);
+				return (1);
+			}
+			ft_draw_shape();
+		}
+		else if (shape_res == -1)
+			break ;
+		else
 		{
 			write(1, "Error: Operation file corrupted\n", 32);
 			return (1);
 		}
-		ft_draw_shape();
 	}
 	ft_print_tab();
 	// ft_print_struct();
