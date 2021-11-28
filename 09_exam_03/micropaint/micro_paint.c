@@ -165,6 +165,7 @@ int main(int argc, char *argv[])
 		}
 	}
 	ft_print_tab();
+	ft_free_tab();
 	fclose(file);
 	return (0);
 }
