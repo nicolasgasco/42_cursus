@@ -86,14 +86,6 @@ void ft_draw_shape()
 	}
 }
 
-int ft_round_float(float n)
-{
-	n *= 10.00;
-	if ((int)n % 10 > 5)
-		n++;
-	return (int)n / 10;
-}
-
 int ft_scan_line(FILE *file)
 {
 	int result;
