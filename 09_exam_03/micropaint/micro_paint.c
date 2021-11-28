@@ -89,14 +89,6 @@ void ft_draw_shape()
 	}
 }
 
-int ft_round_float(float n)
-{
-	n *= 10.00;
-	if ((int)n % 10 > 5)
-		n++;
-	return (int)n / 10;
-}
-
 int ft_scan_line(FILE *file)
 {
 	int result;
@@ -113,6 +105,19 @@ int ft_scan_shape(FILE *file)
 	return result;
 }
 
+void ft_free_tab()
+{
+	int	y;
+
+	y = 0;
+	while (tab[y] != NULL)
+	{
+		free(tab[y]);
+		y++;
+	}
+	free(tab);
+}
+
 int main(int argc, char *argv[])
 {
 	FILE *file;
@@ -126,11 +131,13 @@ int main(int argc, char *argv[])
 	if (!(file = fopen(argv[1], "r")))
 	{
 		write(1, "Error: Operation file corrupted\n", 32);
+		fclose(file);
 		return (1);
 	}
 	if (ft_scan_line(file) != 3 || board_width > 300 || board_height > 300 || board_width <= 0 || board_height <= 0)
 	{
 		write(1, "Error: Operation file corrupted\n", 32);
+		fclose(file);
 		return (1);
 	}
 	ft_draw_board();
@@ -142,6 +149,8 @@ int main(int argc, char *argv[])
 			if (width <= 0 || height <= 0 || (shape != 'R' && shape != 'r'))
 			{
 				write(1, "Error: Operation file corrupted\n", 32);
+				ft_free_tab();
+				fclose(file);
 				return (1);
 			}
 			ft_draw_shape();
@@ -151,6 +160,8 @@ int main(int argc, char *argv[])
 		else
 		{
 			write(1, "Error: Operation file corrupted\n", 32);
+			ft_free_tab();
+			fclose(file);
 			return (1);
 		}
 	}
