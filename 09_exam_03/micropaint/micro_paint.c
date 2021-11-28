@@ -138,6 +138,11 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 	ft_scan_line(&board, file);
+	if (board.width > 300 || board.height > 300)
+	{
+		write(1, "Error: Operation file corrupted\n", 32);
+		return (1);
+	}
 	if (board.empty == 'r' || board.empty == 'R')
 	{
 		write(1, "Error: Operation file corrupted\n", 32);
