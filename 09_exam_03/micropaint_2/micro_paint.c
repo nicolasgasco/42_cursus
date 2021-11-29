@@ -53,7 +53,8 @@ char	**ft_create_board()
 	int y, x;
 	char	**result;
 
-	result = malloc(sizeof(char *) * b_h + 1);		
+	result = malloc(sizeof(char *) * b_h + 1);	
+	y = 0;
 	while (y < b_h)
 	{
 		x = 0;
@@ -121,7 +122,7 @@ int	main(int argc, char *argv[])
 	FILE	*file;
 	if (!(file = fopen(argv[1], "r")))
 	{				
-		write(1, "Error: Operation file corrupted\n", 32);	
+		write(1, "Error: Operation file corrupted\n", 32);
 		return (1);
 	}
 	if (ft_scan_board(file) != 3 || b_w > 300 || b_h > 300 || b_w <= 0 || b_h <= 0)
