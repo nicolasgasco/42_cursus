@@ -92,7 +92,7 @@ void	ft_draw_shape()
 		while (board[y][x] != '\0')
 		{
 			distance = sqrt(  powf((x - c_x), 2) + powf( (y - c_y)  , 2)); 
-			if (distance < radius)
+			if (distance <= radius)
 			{
 				if (shape == 'C')
 					board[y][x] = stroke;
