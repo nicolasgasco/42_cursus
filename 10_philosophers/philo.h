@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef struct Philo {
 	unsigned int    n_philos;
@@ -23,19 +24,23 @@ typedef struct Philo {
     unsigned int    t_eat;
     unsigned int    t_sleep;
     unsigned int    n_eats;
-}	philo;
+    struct timeval	t_start;
+}	t_data;
 
 // To be deleted
-void    ft_print_struct(philo *philo);
+void    ft_print_struct(t_data *philo);
 
 // Put utils
 void    ft_putstr(char *s);
 int     ft_atoi(const char *str);
 
+// Time utils
+int    ft_calc_elapsed_time(t_data *philo);
+
 // Thread
-void    ft_create_threads(philo *philo, int argc, char *argv[]);
+void    ft_create_threads(t_data *philo, int argc, char *argv[]);
 
 // Init utils
-void	ft_init_struct(philo *philo, int argc, char *argv[]);
+void	ft_init_struct(t_data *philo, int argc, char *argv[]);
 
 #endif

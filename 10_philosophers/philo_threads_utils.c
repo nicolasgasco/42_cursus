@@ -1,13 +1,20 @@
 #include "philo.h"
 
-void *myThreadFun(void *vargp)
+void *ft_thread_action(void *vargp)
 {
-    sleep(1);
+	struct timeval	current_time;
+	t_data	*philo_cpy;
+	
+	philo_cpy = vargp;
+	usleep(50);
+	ft_calc_elapsed_time(philo_cpy);
+    usleep(100000);
+	printf("NUmber of philosophers inside of thread is %d\n", philo_cpy->n_philos);
     printf("Printing GeeksQuiz from Thread \n");
     return NULL;
 }
   
-void    ft_create_threads(philo *philo, int argc, char *argv[])
+void    ft_create_threads(t_data *philo, int argc, char *argv[])
 {
 	pthread_t		*philos;
 	unsigned int	i;
@@ -18,7 +25,8 @@ void    ft_create_threads(philo *philo, int argc, char *argv[])
 	i = 0;
 	while (i < philo->n_philos)
 	{
-		if (pthread_create(&philos[i], NULL, myThreadFun, NULL) != 0)
+		printf("NUmber of philosophers is %d\n", philo->n_philos);
+		if (pthread_create(&philos[i], NULL, ft_thread_action, philo) != 0)
 		{
 			ft_putstr("Failed to created thread\n");
 			exit (1);
@@ -35,6 +43,7 @@ void    ft_create_threads(philo *philo, int argc, char *argv[])
 			exit (2);
 		}
 		printf("Thread %d has finished execution\n", i + 1);
+	
 		i++;
 	}
 	printf("After Threads\n");

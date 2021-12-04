@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 		ft_putstr("Error: arguments\n");
 		return (1);
 	}
-	philo			philo;
+	t_data			philo;
 	pthread_t		*philos;
 	unsigned int	i;
 	
