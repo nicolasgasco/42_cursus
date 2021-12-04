@@ -4,7 +4,7 @@ int main(int argc, char *argv[])
 {
 	if (argc < 4 || argc > 6)
 	{
-		ft_putstr("Error: arguments\n");
+		ft_putstr(2, "Error: arguments\n");
 		return (1);
 	}
 	t_data			philo;

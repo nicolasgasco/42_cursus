@@ -27,12 +27,13 @@ typedef struct Philo {
     struct timeval	t_start;
 }	t_data;
 
+// Libft utils
+void    ft_putstr(int fd, char *s);
+int     ft_atoi(const char *str);
+void	ft_putnbr(int n, unsigned int *counter);
+
 // To be deleted
 void    ft_print_struct(t_data *philo);
-
-// Put utils
-void    ft_putstr(char *s);
-int     ft_atoi(const char *str);
 
 // Time utils
 int    ft_calc_elapsed_time(t_data *philo);

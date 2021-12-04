@@ -1,22 +1,22 @@
 #include "philo.h"
 
-void    ft_putstr(char *s)
+void	ft_putstr(int fd, char *s)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (s[i] != '\0')
-    {
-        write(1, &s[i], 1);
-        i++;
-    }
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
 }
 
 int	ft_atoi(const char *str)
 {
-	int				i;
-	unsigned long	result;
-	int				negative;
+	int i;
+	unsigned long result;
+	int negative;
 
 	i = 0;
 	result = 0;
@@ -35,4 +35,27 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return ((int)result * negative);
+}
+
+void	ft_putnbr(int n, unsigned int *counter)
+{
+	char res;
+
+	if (n == -2147483648)
+	{
+		ft_putnbr(n / 10, counter);
+		*counter += write(1, "8", 1);
+	}
+	else if (n < 0)
+	{
+		*counter += write(1, "-", 1);
+		ft_putnbr(-n, counter);
+	}
+	else
+	{
+		if (n > 9)
+			ft_putnbr(n / 10, counter);
+		res = (n % 10) + '0';
+		*counter += write(1, &res, 1);
+	}
 }
