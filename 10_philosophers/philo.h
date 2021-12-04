@@ -15,8 +15,22 @@
 # include <unistd.h>
 # include <stdio.h>
 
+typedef struct Philo {
+	unsigned int    n_philos;
+    unsigned int    t_death;
+    unsigned int    t_eat;
+    unsigned int    t_sleep;
+    unsigned int    n_eats;
+}	philo;
+
+// To be deleted
+void    ft_print_struct(philo *philo);
 
 // Put utils
 void    ft_putstr(char *s);
+int     ft_atoi(const char *str);
+
+// Init utils
+void	ft_init_struct(philo *philo, int argc, char *argv[]);
 
 #endif
