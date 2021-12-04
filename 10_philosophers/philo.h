@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <limits.h>
 # include <sys/time.h>
 
 typedef struct Philo {
@@ -30,7 +31,7 @@ typedef struct Philo {
 // Libft utils
 void    ft_putstr(int fd, char *s);
 int     ft_atoi(const char *str);
-void	ft_putnbr(int n, unsigned int *counter);
+void	ft_putnbr(long n);
 
 // To be deleted
 void    ft_print_struct(t_data *philo);
@@ -43,5 +44,8 @@ void    ft_create_threads(t_data *philo, int argc, char *argv[]);
 
 // Init utils
 void	ft_init_struct(t_data *philo, int argc, char *argv[]);
+
+// Status utils
+void	ft_put_status(t_data *philo, int id, char flag);
 
 #endif

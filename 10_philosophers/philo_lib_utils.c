@@ -37,25 +37,26 @@ int	ft_atoi(const char *str)
 	return ((int)result * negative);
 }
 
-void	ft_putnbr(int n, unsigned int *counter)
+void	ft_putnbr(long n)
 {
-	char res;
+	int	result;
 
-	if (n == -2147483648)
+	if (n < INT_MIN || n > INT_MAX)
+		return ;
+	if (n < 0)
 	{
-		ft_putnbr(n / 10, counter);
-		*counter += write(1, "8", 1);
+		write(1, "-", 1);
+		n *= -1;
 	}
-	else if (n < 0)
+	if (n < 10)
 	{
-		*counter += write(1, "-", 1);
-		ft_putnbr(-n, counter);
+		result = n + '0';
+		write(1, &result, 1); 
 	}
 	else
 	{
-		if (n > 9)
-			ft_putnbr(n / 10, counter);
-		res = (n % 10) + '0';
-		*counter += write(1, &res, 1);
+		result = (n % 10) + '0';
+		ft_putnbr(n / 10);
+		write(1, &result, 1);	
 	}
 }

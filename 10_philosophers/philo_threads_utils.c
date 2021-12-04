@@ -31,6 +31,8 @@ void    ft_create_threads(t_data *philo, int argc, char *argv[])
 			exit (1);
 		}
 		printf("Thread %d has started\n", i + 1);
+		usleep(50000);
+		ft_put_status(philo, i + 1, 'd');
 		i++;
 	}
 	i = 0;
@@ -41,8 +43,6 @@ void    ft_create_threads(t_data *philo, int argc, char *argv[])
 			ft_putstr(2, "Failed to join thread\n");
 			exit (2);
 		}
-		printf("Thread %d has finished execution\n", i + 1);
-	
 		i++;
 	}
 	printf("After Threads\n");
