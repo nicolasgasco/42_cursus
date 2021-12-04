@@ -14,6 +14,8 @@
 # define PHILOSOPHERS_H
 # include <unistd.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <pthread.h>
 
 typedef struct Philo {
 	unsigned int    n_philos;
@@ -29,6 +31,9 @@ void    ft_print_struct(philo *philo);
 // Put utils
 void    ft_putstr(char *s);
 int     ft_atoi(const char *str);
+
+// Thread
+void    ft_create_threads(philo *philo, int argc, char *argv[]);
 
 // Init utils
 void	ft_init_struct(philo *philo, int argc, char *argv[]);
