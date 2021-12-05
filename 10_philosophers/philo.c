@@ -23,7 +23,7 @@ int	main(int argc, char *argv[])
 		ft_putstr(2, "Error: arguments\n");
 		return (1);
 	}
-	ft_init_struct(&common_data, argc, argv);
+	ft_init_common(&common_data, argc, argv);
 	ft_print_common(&common_data);
 	ft_init_threads(&common_data, argc, argv);
 	return (0);

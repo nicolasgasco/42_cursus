@@ -19,23 +19,24 @@
 # include <limits.h>
 # include <sys/time.h>
 
-typedef struct p_data {
-    unsigned int    n_philos;
-    unsigned int    i_philo;
-    struct timeval	t_start;
-    int             *forks;
-} t_philo;
-
 typedef struct Philo {
 	unsigned int    n_philos;
     unsigned int    t_death;
     unsigned int    t_eat;
     unsigned int    t_sleep;
     unsigned int    n_eats;
-    int             *forks;
     struct timeval	t_start;
-    t_philo         philo_data;
-}	t_data;
+    pthread_mutex_t fork_mutex;
+}   t_data;
+
+typedef struct p_data {
+    unsigned int    n_philos;
+    unsigned int    i_philo;
+    struct timeval	t_start;
+    int             fork;
+    t_data          common_data;
+}   t_philo;
+
 
 // Libft utils
 void    ft_putstr(int fd, char *s);
@@ -57,14 +58,13 @@ void	ft_join_threads(t_data *common_data, pthread_t *philos);
 
 
 // Init utils
-void	ft_init_struct(t_data *philo, int argc, char *argv[]);
+void	ft_init_common(t_data *philo, int argc, char *argv[]);
+void	ft_init_philo(t_philo *philo, t_data *common_data, int i);
 
 // Status utils
 void	ft_put_status(struct timeval start, int id, char flag);
 
 // Forks utils
-int     *ft_init_forks(int n_philos);
-int     ft_get_x_fork(t_philo *philo, int index);
-void    ft_take_fork(t_philo *philo, int index);
+void    ft_start_eating(t_philo *philo, unsigned int index);
 
 #endif

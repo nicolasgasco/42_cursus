@@ -1,37 +1,51 @@
 #include "philo.h"
 
-int ft_get_x_fork(t_philo *philo, int index)
+void ft_start_eating(t_philo *philo, unsigned int index)
 {
-    if (index < 0)
-        return (philo->forks[index + philo->n_philos]);
-    else if (index >= philo->n_philos)
-        return (philo->forks[index - philo->n_philos]);
-    return (philo->forks[index]);
-}
+    int mutex_res;
 
-void    ft_take_fork(t_philo *philo, int index)
-{
-    if (index < 0)
-        philo->forks[index + philo->n_philos] = 0;
-    else if (index >= philo->n_philos)
-        philo->forks[index - philo->n_philos] = 0;
-    else
-        philo->forks[index] = 0;
-    ft_put_status(philo->t_start, philo->i_philo, 'f');
-}
-
-int *ft_init_forks(int n_philos)
-{
-    int *result;
-    int i;
-
-    i = 0;
-    result = (int *)malloc(sizeof(int) * n_philos + 1);
-    while(i < n_philos)
+    printf("Philosopher %d wants to eat\n", philo->i_philo);
+    mutex_res = pthread_mutex_lock(&philo->common_data.fork_mutex);
+    printf("Mutex res is %d\n", mutex_res);
+    if (mutex_res)
     {
-        result[i] = 1;
-        i++;
+        printf("Mutex failed!\n");
     }
-    result[i] = -1;
-    return (result);
+    philo->fork = 2;
 }
+
+// int ft_get_x_fork(t_philo *philo, int index)
+// {
+//     if (index < 0)
+//         return (philo->forks[index + philo->n_philos]);
+//     else if (index >= philo->n_philos)
+//         return (philo->forks[index - philo->n_philos]);
+//     return (philo->forks[index]);
+// }
+
+// void    ft_take_fork(t_philo *philo, int index)
+// {
+//     if (index < 0)
+//         philo->forks[index + philo->n_philos] = 0;
+//     else if (index >= philo->n_philos)
+//         philo->forks[index - philo->n_philos] = 0;
+//     else
+//         philo->forks[index] = 0;
+//     ft_put_status(philo->t_start, philo->i_philo, 'f');
+// }
+
+// int *ft_init_forks(int n_philos)
+// {
+//     int *result;
+//     int i;
+
+//     i = 0;
+//     result = (int *)malloc(sizeof(int) * n_philos + 1);
+//     while(i < n_philos)
+//     {
+//         result[i] = 1;
+//         i++;
+//     }
+//     result[i] = -1;
+//     return (result);
+// }

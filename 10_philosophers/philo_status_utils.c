@@ -50,7 +50,7 @@ void	ft_put_status(struct timeval start, int id, char flag)
 
 	timestamp = ft_calc_elapsed_time(start);
 	ft_putnbr(timestamp);
-	ft_put_id(id + 1);
+	ft_put_id(id); // Add 1 when necessary
 	ft_put_action(flag);
 	ft_putstr(1, "\n\n");
 }

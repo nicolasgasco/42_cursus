@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-void	ft_init_struct(t_data *common_data, int argc, char *argv[])
+void	ft_init_common(t_data *common_data, int argc, char *argv[])
 {
 	if (argc == 6)
 		common_data->n_eats = ft_atoi(argv[5]);
@@ -22,6 +22,15 @@ void	ft_init_struct(t_data *common_data, int argc, char *argv[])
 	common_data->t_death = ft_atoi(argv[2]);
 	common_data->t_eat = ft_atoi(argv[3]);
 	common_data->t_sleep = ft_atoi(argv[4]);
-	common_data->forks = ft_init_forks(common_data->n_philos);
+	// common_data->forks = ft_init_forks(common_data->n_philos);
 	gettimeofday(&common_data->t_start, NULL);
+}
+
+void	ft_init_philo(t_philo *philo, t_data *common_data, int i)
+{
+	philo->i_philo = i;
+	philo->fork = 1;
+	philo->t_start = common_data->t_start;
+	philo->n_philos = common_data->n_philos;
+	philo->common_data = *common_data;
 }
