@@ -19,6 +19,11 @@
 # include <limits.h>
 # include <sys/time.h>
 
+typedef struct p_data {
+    unsigned int    i_philo;
+    struct timeval	t_start;
+} t_philo;
+
 typedef struct Philo {
 	unsigned int    n_philos;
     unsigned int    t_death;
@@ -26,6 +31,7 @@ typedef struct Philo {
     unsigned int    t_sleep;
     unsigned int    n_eats;
     struct timeval	t_start;
+    t_philo         philo_data;
 }	t_data;
 
 // Libft utils
@@ -37,7 +43,7 @@ void	ft_putnbr(long n);
 void    ft_print_struct(t_data *philo);
 
 // Time utils
-int    ft_calc_elapsed_time(t_data *philo);
+double  ft_calc_elapsed_time(struct timeval start);
 
 // Thread
 void    ft_create_threads(t_data *philo, int argc, char *argv[]);
@@ -46,6 +52,6 @@ void    ft_create_threads(t_data *philo, int argc, char *argv[]);
 void	ft_init_struct(t_data *philo, int argc, char *argv[]);
 
 // Status utils
-void	ft_put_status(t_data *philo, int id, char flag);
+void	ft_put_status(struct timeval start, int id, char flag);
 
 #endif
