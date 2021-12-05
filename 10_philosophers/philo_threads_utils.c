@@ -2,29 +2,34 @@
 
 void *ft_thread_action(void *vargp)
 {
-	struct timeval	current_time;
-	t_data	*philo_cpy;
+	// struct timeval	current_time;
+	t_philo	*philo_cpy;
 	
 	philo_cpy = vargp;
-    usleep(50000);
-	printf("Elapsed time is %d\n", ft_calc_elapsed_time(philo_cpy));
-	printf("NUmber of philosophers inside of thread is %d\n", philo_cpy->n_philos);
-    printf("Printing GeeksQuiz from Thread \n");
+	usleep(50000);
+	printf("Elapsed time is %f\n", ft_calc_elapsed_time(philo_cpy->t_start));
+	printf("Tstart %ld\n", philo_cpy->t_start.tv_sec);
+	printf("Index inside: %d\n", philo_cpy->i_philo);
+	ft_put_status(philo_cpy->t_start, philo_cpy->i_philo, 'f');
+	printf("\n\n");
     return NULL;
 }
   
-void    ft_create_threads(t_data *philo, int argc, char *argv[])
+void    ft_create_threads(t_data *common_data, int argc, char *argv[])
 {
 	pthread_t		*philos;
 	unsigned int	i;
+	t_philo			*philo;
 	
-	philos = malloc(sizeof(pthread_t) * philo->n_philos + 1);
-
+	
+	philos = malloc(sizeof(pthread_t) * common_data->n_philos + 1);
 	ft_putstr(2, "Creating threads...\n");
 	i = 0;
-	while (i < philo->n_philos)
+	while (i < common_data->n_philos)
 	{
-		printf("NUmber of philosophers is %d\n", philo->n_philos);
+		philo = malloc(sizeof(t_philo));
+		philo->i_philo = i + 1;
+		philo->t_start = common_data->t_start;
 		if (pthread_create(&philos[i], NULL, ft_thread_action, philo) != 0)
 		{
 			ft_putstr(2, "Failed to created thread\n");
@@ -32,11 +37,10 @@ void    ft_create_threads(t_data *philo, int argc, char *argv[])
 		}
 		printf("Thread %d has started\n", i + 1);
 		usleep(50000);
-		ft_put_status(philo, i + 1, 'd');
 		i++;
 	}
 	i = 0;
-	while (i < philo->n_philos)
+	while (i < common_data->n_philos)
 	{
 		if (pthread_join(philos[i], NULL) != 0)
 		{

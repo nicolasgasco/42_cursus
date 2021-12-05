@@ -12,15 +12,15 @@
 
 #include "philo.h"
 
-void	ft_init_struct(t_data *philo, int argc, char *argv[])
+void	ft_init_struct(t_data *common_data, int argc, char *argv[])
 {
 	if (argc == 6)
-		philo->n_eats = ft_atoi(argv[5]);
+		common_data->n_eats = ft_atoi(argv[5]);
 	else
-		philo->n_eats = -1;
-	philo->n_philos = ft_atoi(argv[1]);
-	philo->t_death = ft_atoi(argv[2]);
-	philo->t_eat = ft_atoi(argv[3]);
-	philo->t_sleep = ft_atoi(argv[4]);
-	gettimeofday(&philo->t_start, NULL);
+		common_data->n_eats = -1;
+	common_data->n_philos = ft_atoi(argv[1]);
+	common_data->t_death = ft_atoi(argv[2]);
+	common_data->t_eat = ft_atoi(argv[3]);
+	common_data->t_sleep = ft_atoi(argv[4]);
+	gettimeofday(&common_data->t_start, NULL);
 }
