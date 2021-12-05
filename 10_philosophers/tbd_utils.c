@@ -15,9 +15,11 @@ void    ft_put_forks(int *forks)
     printf("\n");
 }
 
-void    ft_print_struct(t_data *common_data)
+void    ft_print_common(t_data *common_data)
 {
-    printf("__________________________________\n\n");
+    printf("\n==================================\n");
+    printf("            COMMON                \n");       
+    printf("==================================\n");
     printf("Number of philosophers: %d\n", common_data->n_philos);
     printf("Time to death: %d\n", common_data->t_death);
     printf("Time to eat: %d\n", common_data->t_eat);
@@ -25,6 +27,18 @@ void    ft_print_struct(t_data *common_data)
     printf("Number of eats: %d\n", common_data->n_eats);
     printf("Forks are: ");
     ft_put_forks(common_data->forks);
+    // printf("seconds : %ld\nmicro seconds : %d\n\n", common_data->t_start.tv_sec, common_data->t_start.tv_usec);
+    printf("__________________________________\n\n");
+}
+
+void    ft_print_philo(t_philo *philo)
+{
+    printf("\n==================================\n");
+    printf("            PHILO                \n");       
+    printf("==================================\n");
+    printf("Philo index is %d\n", philo->i_philo);
+    printf("Forks are: ");
+    ft_put_forks(philo->forks);
     // printf("seconds : %ld\nmicro seconds : %d\n\n", common_data->t_start.tv_sec, common_data->t_start.tv_usec);
     printf("__________________________________\n\n");
 }

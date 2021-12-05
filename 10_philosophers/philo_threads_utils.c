@@ -12,14 +12,15 @@
 
 #include "philo.h"
 
-void	*ft_thread_action(void *vargp)
+void	*ft_thread_routine(void *vargp)
 {
 	t_philo	*philo_cpy;
 
 	philo_cpy = vargp;
-	printf("Tstart %ld\n", philo_cpy->t_start.tv_sec);
-	printf("Index inside: %d\n", philo_cpy->i_philo);
-	ft_put_status(philo_cpy->t_start, philo_cpy->i_philo, 'f');
+
+	ft_print_philo(philo_cpy);
+	ft_take_fork(philo_cpy, 0);
+	ft_print_philo(philo_cpy);
 	printf("\n\n");
 	return (NULL);
 }
@@ -35,7 +36,9 @@ void	ft_create_threads(t_data *common_data, pthread_t *philos)
 		philo = malloc(sizeof(t_philo));
 		philo->i_philo = i;
 		philo->t_start = common_data->t_start;
-		if (pthread_create(&philos[i], NULL, ft_thread_action, philo) != 0)
+		philo->forks = common_data->forks;
+		philo->n_philos = common_data->n_philos;
+		if (pthread_create(&philos[i], NULL, ft_thread_routine, philo) != 0)
 		{
 			ft_putstr(2, "Failed to created thread\n");
 			exit (1);

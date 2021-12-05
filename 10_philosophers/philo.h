@@ -20,8 +20,10 @@
 # include <sys/time.h>
 
 typedef struct p_data {
+    unsigned int    n_philos;
     unsigned int    i_philo;
     struct timeval	t_start;
+    int             *forks;
 } t_philo;
 
 typedef struct Philo {
@@ -41,11 +43,12 @@ int     ft_atoi(const char *str);
 void	ft_putnbr(long n);
 
 // To be deleted
-void    ft_print_struct(t_data *philo);
+void    ft_print_common(t_data *philo);
+void    ft_print_philo(t_philo *philo);
 void    ft_put_forks(int *forks);
 
 // Time utils
-int  ft_calc_elapsed_time(struct timeval start);
+int     ft_calc_elapsed_time(struct timeval start);
 
 // Thread
 void    ft_init_threads(t_data *philo, int argc, char *argv[]);
@@ -60,6 +63,8 @@ void	ft_init_struct(t_data *philo, int argc, char *argv[]);
 void	ft_put_status(struct timeval start, int id, char flag);
 
 // Forks utils
-int *ft_init_forks(int n_philos);
+int     *ft_init_forks(int n_philos);
+int     ft_get_x_fork(t_philo *philo, int index);
+void    ft_take_fork(t_philo *philo, int index);
 
 #endif

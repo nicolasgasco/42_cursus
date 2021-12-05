@@ -24,7 +24,7 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	ft_init_struct(&common_data, argc, argv);
-	ft_print_struct(&common_data);
+	ft_print_common(&common_data);
 	ft_init_threads(&common_data, argc, argv);
 	return (0);
 }
