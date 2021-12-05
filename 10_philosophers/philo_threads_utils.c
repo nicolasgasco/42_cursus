@@ -33,7 +33,7 @@ void	ft_create_threads(t_data *common_data, pthread_t *philos)
 	while (i < common_data->n_philos)
 	{
 		philo = malloc(sizeof(t_philo));
-		philo->i_philo = i + 1;
+		philo->i_philo = i;
 		philo->t_start = common_data->t_start;
 		if (pthread_create(&philos[i], NULL, ft_thread_action, philo) != 0)
 		{
@@ -60,6 +60,7 @@ void	ft_join_threads(t_data *common_data, pthread_t *philos)
 		}
 		i++;
 	}
+	ft_join_threads(common_data, philos);
 }
 
 void	ft_init_threads(t_data *common_data, int argc, char *argv[])
@@ -69,6 +70,6 @@ void	ft_init_threads(t_data *common_data, int argc, char *argv[])
 	philos = malloc(sizeof(pthread_t) * common_data->n_philos + 1);
 	ft_putstr(2, "Creating threads...\n");
 	ft_create_threads(common_data, philos);
-	ft_join_threads(common_data, philos);
 	printf("After Threads\n");
+	free(philos);
 }
