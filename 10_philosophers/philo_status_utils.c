@@ -1,16 +1,13 @@
 #include "philo.h"
 
-int    ft_calc_elapsed_time(t_data *philo)
+double    ft_calc_elapsed_time(struct timeval start)
 {
-	int			result;
-	struct timeval	t_now;
-	struct timeval 	t_now2;
+	double			result;
+	struct timeval 	t_now;
 	
 	gettimeofday(&t_now, NULL);
-	usleep(5000);
-	gettimeofday(&t_now2, NULL);
-	result = (t_now2.tv_sec - t_now.tv_sec) * 1000;
-	result += (t_now2.tv_usec - t_now.tv_usec) / 1000;
+	result = (t_now.tv_sec - start.tv_sec) * 1000.0;
+	result += (t_now.tv_usec - start.tv_usec) / 1000.0;
 	return (result);
 }
 
@@ -35,11 +32,11 @@ void	ft_put_id(int id)
 	write(1, " ", 1);
 }
 
-void	ft_put_status(t_data *philo, int id, char flag)
+void	ft_put_status(struct timeval start, int id, char flag)
 {
 	int	timestamp;
 	
-	timestamp = ft_calc_elapsed_time(philo);
+	timestamp = ft_calc_elapsed_time(start);
 	ft_putnbr(timestamp);
 	ft_put_id(id);
 	ft_put_action(flag);
