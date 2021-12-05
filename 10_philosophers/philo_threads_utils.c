@@ -6,8 +6,7 @@ void *ft_thread_action(void *vargp)
 	t_philo	*philo_cpy;
 	
 	philo_cpy = vargp;
-	usleep(50000);
-	printf("Elapsed time is %f\n", ft_calc_elapsed_time(philo_cpy->t_start));
+	usleep(100000);
 	printf("Tstart %ld\n", philo_cpy->t_start.tv_sec);
 	printf("Index inside: %d\n", philo_cpy->i_philo);
 	ft_put_status(philo_cpy->t_start, philo_cpy->i_philo, 'f');

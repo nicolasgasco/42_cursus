@@ -43,7 +43,7 @@ void	ft_putnbr(long n);
 void    ft_print_struct(t_data *philo);
 
 // Time utils
-double  ft_calc_elapsed_time(struct timeval start);
+int  ft_calc_elapsed_time(struct timeval start);
 
 // Thread
 void    ft_create_threads(t_data *philo, int argc, char *argv[]);

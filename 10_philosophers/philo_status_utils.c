@@ -1,8 +1,8 @@
 #include "philo.h"
 
-double    ft_calc_elapsed_time(struct timeval start)
+int	ft_calc_elapsed_time(struct timeval start)
 {
-	double			result;
+	int				result;
 	struct timeval 	t_now;
 	
 	gettimeofday(&t_now, NULL);
