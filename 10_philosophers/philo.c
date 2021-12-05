@@ -25,6 +25,6 @@ int	main(int argc, char *argv[])
 	}
 	ft_init_struct(&common_data, argc, argv);
 	ft_print_struct(&common_data);
-	ft_create_threads(&common_data, argc, argv);
+	ft_init_threads(&common_data, argc, argv);
 	return (0);
 }

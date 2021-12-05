@@ -6,7 +6,7 @@
 /*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:07:18 by ngasco            #+#    #+#             */
-/*   Updated: 2021/12/05 17:07:19 by ngasco           ###   ########.fr       */
+/*   Updated: 2021/12/05 17:30:23 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,11 @@ void	*ft_thread_action(void *vargp)
 	return (NULL);
 }
 
-void	ft_create_threads(t_data *common_data, int argc, char *argv[])
+void	ft_create_threads(t_data *common_data, pthread_t *philos)
 {
-	pthread_t		*philos;
-	unsigned int	i;
 	t_philo			*philo;
+	unsigned int	i;
 
-	philos = malloc(sizeof(pthread_t) * common_data->n_philos + 1);
-	ft_putstr(2, "Creating threads...\n");
 	i = 0;
 	while (i < common_data->n_philos)
 	{
@@ -47,6 +44,12 @@ void	ft_create_threads(t_data *common_data, int argc, char *argv[])
 		usleep(50000);
 		i++;
 	}
+}
+
+void	ft_join_threads(t_data *common_data, pthread_t *philos)
+{
+	unsigned int	i;
+
 	i = 0;
 	while (i < common_data->n_philos)
 	{
@@ -57,5 +60,15 @@ void	ft_create_threads(t_data *common_data, int argc, char *argv[])
 		}
 		i++;
 	}
+}
+
+void	ft_init_threads(t_data *common_data, int argc, char *argv[])
+{
+	pthread_t		*philos;
+
+	philos = malloc(sizeof(pthread_t) * common_data->n_philos + 1);
+	ft_putstr(2, "Creating threads...\n");
+	ft_create_threads(common_data, philos);
+	ft_join_threads(common_data, philos);
 	printf("After Threads\n");
 }

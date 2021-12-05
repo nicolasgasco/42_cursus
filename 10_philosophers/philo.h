@@ -46,7 +46,10 @@ void    ft_print_struct(t_data *philo);
 int  ft_calc_elapsed_time(struct timeval start);
 
 // Thread
-void    ft_create_threads(t_data *philo, int argc, char *argv[]);
+void    ft_init_threads(t_data *philo, int argc, char *argv[]);
+void	ft_create_threads(t_data *common_data, pthread_t *philos);
+void	ft_join_threads(t_data *common_data, pthread_t *philos);
+
 
 // Init utils
 void	ft_init_struct(t_data *philo, int argc, char *argv[]);
