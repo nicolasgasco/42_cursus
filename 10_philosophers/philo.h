@@ -30,6 +30,7 @@ typedef struct Philo {
     unsigned int    t_eat;
     unsigned int    t_sleep;
     unsigned int    n_eats;
+    int             *forks;
     struct timeval	t_start;
     t_philo         philo_data;
 }	t_data;
@@ -41,6 +42,7 @@ void	ft_putnbr(long n);
 
 // To be deleted
 void    ft_print_struct(t_data *philo);
+void    ft_put_forks(int *forks);
 
 // Time utils
 int  ft_calc_elapsed_time(struct timeval start);
@@ -56,5 +58,8 @@ void	ft_init_struct(t_data *philo, int argc, char *argv[]);
 
 // Status utils
 void	ft_put_status(struct timeval start, int id, char flag);
+
+// Forks utils
+int *ft_init_forks(int n_philos);
 
 #endif
