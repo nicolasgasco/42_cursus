@@ -22,5 +22,6 @@ void	ft_init_struct(t_data *common_data, int argc, char *argv[])
 	common_data->t_death = ft_atoi(argv[2]);
 	common_data->t_eat = ft_atoi(argv[3]);
 	common_data->t_sleep = ft_atoi(argv[4]);
+	common_data->forks = ft_init_forks(common_data->n_philos);
 	gettimeofday(&common_data->t_start, NULL);
 }
