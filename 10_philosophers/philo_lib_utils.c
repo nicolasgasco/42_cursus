@@ -14,7 +14,7 @@
 
 void	ft_putstr(int fd, char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -26,9 +26,9 @@ void	ft_putstr(int fd, char *s)
 
 int	ft_atoi(const char *str)
 {
-	int i;
-	unsigned long result;
-	int negative;
+	int				i;
+	unsigned long	result;
+	int				negative;
 
 	i = 0;
 	result = 0;
@@ -63,12 +63,12 @@ void	ft_putnbr(long n)
 	if (n < 10)
 	{
 		result = n + '0';
-		write(1, &result, 1); 
+		write(1, &result, 1);
 	}
 	else
 	{
 		result = (n % 10) + '0';
 		ft_putnbr(n / 10);
-		write(1, &result, 1);	
+		write(1, &result, 1);
 	}
 }

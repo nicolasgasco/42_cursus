@@ -15,8 +15,8 @@
 int	ft_calc_elapsed_time(struct timeval start)
 {
 	int				result;
-	struct timeval 	t_now;
-	
+	struct timeval	t_now;
+
 	gettimeofday(&t_now, NULL);
 	result = (t_now.tv_sec - start.tv_sec) * 1000.0;
 	result += (t_now.tv_usec - start.tv_usec) / 1000.0;
@@ -47,7 +47,7 @@ void	ft_put_id(int id)
 void	ft_put_status(struct timeval start, int id, char flag)
 {
 	int	timestamp;
-	
+
 	timestamp = ft_calc_elapsed_time(start);
 	ft_putnbr(timestamp);
 	ft_put_id(id);

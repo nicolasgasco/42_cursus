@@ -12,26 +12,24 @@
 
 #include "philo.h"
 
-void *ft_thread_action(void *vargp)
+void	*ft_thread_action(void *vargp)
 {
-	// struct timeval	current_time;
 	t_philo	*philo_cpy;
-	
+
 	philo_cpy = vargp;
 	printf("Tstart %ld\n", philo_cpy->t_start.tv_sec);
 	printf("Index inside: %d\n", philo_cpy->i_philo);
 	ft_put_status(philo_cpy->t_start, philo_cpy->i_philo, 'f');
 	printf("\n\n");
-    return NULL;
+	return (NULL);
 }
-  
-void    ft_create_threads(t_data *common_data, int argc, char *argv[])
+
+void	ft_create_threads(t_data *common_data, int argc, char *argv[])
 {
 	pthread_t		*philos;
 	unsigned int	i;
 	t_philo			*philo;
-	
-	
+
 	philos = malloc(sizeof(pthread_t) * common_data->n_philos + 1);
 	ft_putstr(2, "Creating threads...\n");
 	i = 0;
