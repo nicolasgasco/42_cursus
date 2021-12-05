@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/05 17:07:18 by ngasco            #+#    #+#             */
+/*   Updated: 2021/12/05 17:07:19 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void *ft_thread_action(void *vargp)
@@ -6,7 +18,6 @@ void *ft_thread_action(void *vargp)
 	t_philo	*philo_cpy;
 	
 	philo_cpy = vargp;
-	usleep(100000);
 	printf("Tstart %ld\n", philo_cpy->t_start.tv_sec);
 	printf("Index inside: %d\n", philo_cpy->i_philo);
 	ft_put_status(philo_cpy->t_start, philo_cpy->i_philo, 'f');
