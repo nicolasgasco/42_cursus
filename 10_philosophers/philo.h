@@ -26,15 +26,12 @@ typedef struct Philo {
     unsigned int    t_sleep;
     unsigned int    n_eats;
     struct timeval	t_start;
-    pthread_mutex_t fork_mutex;
+    int             *forks;
 }   t_data;
 
 typedef struct p_data {
-    unsigned int    n_philos;
     unsigned int    i_philo;
-    struct timeval	t_start;
-    int             fork;
-    t_data          common_data;
+    t_data          *common_data;
 }   t_philo;
 
 
@@ -60,6 +57,7 @@ void	ft_join_threads(t_data *common_data, pthread_t *philos);
 // Init utils
 void	ft_init_common(t_data *philo, int argc, char *argv[]);
 void	ft_init_philo(t_philo *philo, t_data *common_data, int i);
+int     *ft_init_forks(int n_philos);
 
 // Status utils
 void	ft_put_status(struct timeval start, int id, char flag);

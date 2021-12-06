@@ -25,8 +25,8 @@ void    ft_print_common(t_data *common_data)
     printf("Time to eat: %d\n", common_data->t_eat);
     printf("Time to sleep: %d\n", common_data->t_sleep);
     printf("Number of eats: %d\n", common_data->n_eats);
-    // printf("Forks are: ");
-    // ft_put_forks(common_data->forks);
+    printf("Forks are: ");
+    ft_put_forks(common_data->forks);
     // printf("seconds : %ld\nmicro seconds : %d\n\n", common_data->t_start.tv_sec, common_data->t_start.tv_usec);
     printf("__________________________________\n\n");
 }
@@ -37,7 +37,7 @@ void    ft_print_philo(t_philo *philo)
     printf("|            PHILO %d             |\n", philo->i_philo);       
     printf("==================================\n");
     // printf("Philo index is %d\n", philo->i_philo);
-    printf("| Fork is %d                      |\n", philo->fork);
+    printf("| Fork is %d                      |\n", philo->common_data->forks[philo->i_philo]);
     // ft_put_forks(philo->forks);
     // printf("seconds : %ld\nmicro seconds : %d\n\n", common_data->t_start.tv_sec, common_data->t_start.tv_usec);
     printf("__________________________________\n\n");

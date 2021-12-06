@@ -18,7 +18,7 @@ void	*ft_thread_routine(void *vargp)
 
 	philo_cpy = vargp;
 
-	ft_start_eating(philo_cpy, philo_cpy->i_philo);
+	// ft_start_eating(philo_cpy, philo_cpy->i_philo);
 	ft_print_philo(philo_cpy);
 	return (NULL);
 }
@@ -29,7 +29,7 @@ void	ft_create_threads(t_data *common_data, pthread_t *philos)
 	unsigned int	i;
 
 	i = 0;
-	pthread_mutex_init(&common_data->fork_mutex, NULL);
+	// pthread_mutex_init(&common_data->fork_mutex, NULL);
 	while (i < common_data->n_philos)
 	{
 		philo = malloc(sizeof(t_philo));
@@ -60,7 +60,7 @@ void	ft_join_threads(t_data *common_data, pthread_t *philos)
 		}
 		i++;
 	}
-	pthread_mutex_destroy(&common_data->fork_mutex);
+	// pthread_mutex_destroy(&common_data->fork_mutex);
 }
 
 void	ft_init_threads(t_data *common_data, int argc, char *argv[])

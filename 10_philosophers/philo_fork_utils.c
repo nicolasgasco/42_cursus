@@ -1,18 +1,18 @@
 #include "philo.h"
 
-void ft_start_eating(t_philo *philo, unsigned int index)
-{
-    int mutex_res;
+// void ft_start_eating(t_philo *philo, unsigned int index)
+// {
+//     int mutex_res;
 
-    printf("Philosopher %d wants to eat\n", philo->i_philo);
-    mutex_res = pthread_mutex_lock(&philo->common_data.fork_mutex);
-    printf("Mutex res is %d\n", mutex_res);
-    if (mutex_res)
-    {
-        printf("Mutex failed!\n");
-    }
-    philo->fork = 2;
-}
+//     printf("Philosopher %d wants to eat\n", philo->i_philo);
+//     mutex_res = pthread_mutex_lock(&philo->common_data.fork_mutex);
+//     printf("Mutex res is %d\n", mutex_res);
+//     if (mutex_res)
+//     {
+//         printf("Mutex failed!\n");
+//     }
+//     philo->fork = 2;
+// }
 
 // int ft_get_x_fork(t_philo *philo, int index)
 // {
@@ -32,20 +32,4 @@ void ft_start_eating(t_philo *philo, unsigned int index)
 //     else
 //         philo->forks[index] = 0;
 //     ft_put_status(philo->t_start, philo->i_philo, 'f');
-// }
-
-// int *ft_init_forks(int n_philos)
-// {
-//     int *result;
-//     int i;
-
-//     i = 0;
-//     result = (int *)malloc(sizeof(int) * n_philos + 1);
-//     while(i < n_philos)
-//     {
-//         result[i] = 1;
-//         i++;
-//     }
-//     result[i] = -1;
-//     return (result);
 // }
