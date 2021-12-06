@@ -67,6 +67,6 @@ int				*ft_create_forks(int n_philos);
 pthread_mutex_t *ft_create_forks_mutex(int n_philos, t_data *common_data);
 void			ft_start_eating(t_philo *philo, unsigned int index);
 int				ft_check_fork_index(t_philo *philo, int index);
-void			ft_take_fork(t_philo *philo, int index);
+void			ft_check_forks(t_philo *philo, int index);
 
 #endif

@@ -17,10 +17,9 @@ void	*ft_thread_routine(void *vargp)
 	t_philo	*philo_cpy;
 
 	philo_cpy = vargp;
-	usleep(50000);
+	usleep(5000);
 	ft_start_eating(philo_cpy, philo_cpy->i_philo);
 	ft_print_philo(philo_cpy);
-	// ft_print_common(philo_cpy->common_data);
 	return (NULL);
 }
 
@@ -72,5 +71,6 @@ void	ft_init_threads(t_data *common_data, int argc, char *argv[])
 	ft_putstr(2, "Creating threads...\n");
 	ft_create_threads(common_data, philos);
 	printf("After Threads\n");
+	ft_print_common(common_data);
 	free(philos);
 }
