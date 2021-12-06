@@ -29,9 +29,11 @@ void	*ft_thread_routine(void *vargp)
 	t_philo	*philo_cpy;
 
 	philo_cpy = vargp;
-	usleep(5000);
-	ft_print_forks(philo_cpy);
-	ft_start_eating(philo_cpy, philo_cpy->i_philo);
+	while(1)
+	{
+		usleep(5000);
+		ft_start_eating(philo_cpy, philo_cpy->i_philo);
+	}
 	return (NULL);
 }
 

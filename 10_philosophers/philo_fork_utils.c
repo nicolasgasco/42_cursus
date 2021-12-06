@@ -3,28 +3,35 @@
 void ft_start_eating(t_philo *philo, unsigned int index)
 {
 	printf("Philosopher %d is trying to eat\n", index);
-	ft_check_forks(philo, index);
+	ft_take_forks(philo, index);
+	sleep(1);
 }
 
-// int ft_get_x_fork(t_philo *philo, int index)
-// {
-//     if (index < 0)
-//         return (philo->forks[index + philo->n_philos]);
-//     else if (index >= philo->n_philos)
-//         return (philo->forks[index - philo->n_philos]);
-//     return (philo->forks[index]);
-// }
-
-void	ft_check_forks(t_philo *philo, int index)
+void	ft_take_forks(t_philo *philo, int index)
 {
+	printf("Philosopher %u is before mutex\n", philo->i_philo);
 	pthread_mutex_lock(&philo->common_data->forks_mutex[index]);
 	pthread_mutex_lock(&philo->common_data->forks_mutex[ft_check_fork_index(philo, index - 1)]);
+	printf("Philosopher %u is inside mutex\n", philo->i_philo);
+	ft_print_forks(philo);
 	philo->common_data->forks[index] = 0;
 	philo->common_data->forks[ft_check_fork_index(philo, ft_check_fork_index(philo, index - 1))] = 0;
-	printf("Philosopher %u is taking forks\n", philo->i_philo);
-	sleep(2);
+	ft_print_forks(philo);
+	int i = 0;
+	while (i < 5)
+	{
+		printf("Philosopher %u is taking forks (%d/5)\n", philo->i_philo, i + 1);
+		ft_print_forks(philo);
+		sleep(2);
+		i++;
+	}
+	philo->common_data->forks[index] = 1;
+	philo->common_data->forks[ft_check_fork_index(philo, ft_check_fork_index(philo, index - 1))] = 1;
+	ft_print_forks(philo);
+	printf("Philosopher %u is done taking forks\n", philo->i_philo);
 	pthread_mutex_unlock(&philo->common_data->forks_mutex[index]);
 	pthread_mutex_unlock(&philo->common_data->forks_mutex[ft_check_fork_index(philo, index - 1)]);
+	printf("Philosopher %u is after mutex\n", philo->i_philo);
 }
 
 pthread_mutex_t *ft_create_forks_mutex(int n_philos, t_data *common_data)
