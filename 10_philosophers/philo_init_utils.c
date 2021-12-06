@@ -22,29 +22,13 @@ void	ft_init_common(t_data *common_data, int argc, char *argv[])
 	common_data->t_death = ft_atoi(argv[2]);
 	common_data->t_eat = ft_atoi(argv[3]);
 	common_data->t_sleep = ft_atoi(argv[4]);
-	common_data->forks = ft_init_forks(common_data->n_philos);
+	common_data->forks = ft_create_forks(common_data->n_philos);
+	common_data->forks_mutex = ft_create_forks_mutex(common_data->n_philos, common_data);
 	gettimeofday(&common_data->t_start, NULL);
 }
 
 void	ft_init_philo(t_philo *philo, t_data *common_data, int i)
 {
 	philo->i_philo = i;
-	// philo->fork = 1;
 	philo->common_data = common_data;
-}
-
-int *ft_init_forks(int n_philos)
-{
-    int *result;
-    int i;
-
-    i = 0;
-    result = (int *)malloc(sizeof(int) * n_philos + 1);
-    while(i < n_philos)
-    {
-        result[i] = 1;
-        i++;
-    }
-    result[i] = -1;
-    return (result);
 }

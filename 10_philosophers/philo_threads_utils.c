@@ -29,7 +29,6 @@ void	ft_create_threads(t_data *common_data, pthread_t *philos)
 	unsigned int	i;
 
 	i = 0;
-	// pthread_mutex_init(&common_data->fork_mutex, NULL);
 	while (i < common_data->n_philos)
 	{
 		philo = malloc(sizeof(t_philo));

@@ -1,5 +1,29 @@
 #include "philo.h"
 
+int *ft_create_forks(int n_philos)
+{
+	int *result;
+	int i;
+
+	i = 0;
+	result = (int *)malloc(sizeof(int) * n_philos + 1);
+	while(i < n_philos)
+	{
+		result[i] = 1;
+		i++;
+	}
+	result[i] = -1;
+	return (result);
+}
+
+pthread_mutex_t *ft_create_forks_mutex(int n_philos, t_data *common_data)
+{
+	pthread_mutex_t *result;
+
+	result = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * n_philos);
+	return (result);
+}
+
 // void ft_start_eating(t_philo *philo, unsigned int index)
 // {
 //     int mutex_res;
