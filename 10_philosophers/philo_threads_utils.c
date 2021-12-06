@@ -17,9 +17,10 @@ void	*ft_thread_routine(void *vargp)
 	t_philo	*philo_cpy;
 
 	philo_cpy = vargp;
-
-	// ft_start_eating(philo_cpy, philo_cpy->i_philo);
+	usleep(50000);
+	ft_start_eating(philo_cpy, philo_cpy->i_philo);
 	ft_print_philo(philo_cpy);
+	// ft_print_common(philo_cpy->common_data);
 	return (NULL);
 }
 
@@ -33,6 +34,7 @@ void	ft_create_threads(t_data *common_data, pthread_t *philos)
 	{
 		philo = malloc(sizeof(t_philo));
 		ft_init_philo(philo, common_data, i);
+		pthread_mutex_init(&common_data->forks_mutex[i], NULL);
 		if (pthread_create(&philos[i], NULL, ft_thread_routine, philo) != 0)
 		{
 			ft_putstr(2, "Failed to created thread\n");
@@ -57,9 +59,9 @@ void	ft_join_threads(t_data *common_data, pthread_t *philos)
 			ft_putstr(2, "Failed to join thread\n");
 			exit (2);
 		}
+		pthread_mutex_destroy(&common_data->forks_mutex[i]);
 		i++;
 	}
-	// pthread_mutex_destroy(&common_data->fork_mutex);
 }
 
 void	ft_init_threads(t_data *common_data, int argc, char *argv[])
