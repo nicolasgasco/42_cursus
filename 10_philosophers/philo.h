@@ -45,6 +45,7 @@ void			ft_putnbr(long n);
 void			ft_print_common(t_data *philo);
 void			ft_print_philo(t_philo *philo);
 void			ft_put_forks(int *forks);
+void            ft_print_forks(t_philo *philo);
 
 // Time utils
 int				ft_calc_elapsed_time(struct timeval start);

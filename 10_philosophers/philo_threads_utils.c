@@ -12,14 +12,26 @@
 
 #include "philo.h"
 
+void	ft_init_threads(t_data *common_data, int argc, char *argv[])
+{
+	pthread_t		*philos;
+
+	philos = malloc(sizeof(pthread_t) * common_data->n_philos + 1);
+	ft_putstr(2, "Creating threads...\n");
+	ft_create_threads(common_data, philos);
+	printf("After Threads\n");
+	ft_print_common(common_data);
+	free(philos);
+}
+
 void	*ft_thread_routine(void *vargp)
 {
 	t_philo	*philo_cpy;
 
 	philo_cpy = vargp;
 	usleep(5000);
+	ft_print_forks(philo_cpy);
 	ft_start_eating(philo_cpy, philo_cpy->i_philo);
-	ft_print_philo(philo_cpy);
 	return (NULL);
 }
 
@@ -61,16 +73,4 @@ void	ft_join_threads(t_data *common_data, pthread_t *philos)
 		pthread_mutex_destroy(&common_data->forks_mutex[i]);
 		i++;
 	}
-}
-
-void	ft_init_threads(t_data *common_data, int argc, char *argv[])
-{
-	pthread_t		*philos;
-
-	philos = malloc(sizeof(pthread_t) * common_data->n_philos + 1);
-	ft_putstr(2, "Creating threads...\n");
-	ft_create_threads(common_data, philos);
-	printf("After Threads\n");
-	ft_print_common(common_data);
-	free(philos);
 }

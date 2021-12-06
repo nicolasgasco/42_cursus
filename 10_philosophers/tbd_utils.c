@@ -42,3 +42,30 @@ void    ft_print_philo(t_philo *philo)
     // printf("seconds : %ld\nmicro seconds : %d\n\n", common_data->t_start.tv_sec, common_data->t_start.tv_usec);
     printf("__________________________________\n\n");
 }
+
+void    ft_print_forks(t_philo *philo)
+{
+    int i;
+
+    i = 0;
+    while (i < philo->common_data->n_philos)
+    {
+        printf("________________.");
+        i++;
+    }
+    printf("\n");
+    i = 0;
+    while (philo->common_data->forks[i] != -1)
+    {
+        printf("|| P%d: fork %d || ", i, philo->common_data->forks[i]);
+        i++;
+    }
+    i = 0;
+    printf("\n");
+    while (i < philo->common_data->n_philos)
+    {
+        printf("________________.");
+        i++;
+    }
+    printf("\n");
+}
