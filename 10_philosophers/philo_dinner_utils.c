@@ -7,7 +7,6 @@ void ft_start_dinner(t_philo *philo, unsigned int index)
 
 	fork_right = &philo->common_data->forks[index];
 	fork_left = &philo->common_data->forks[ft_get_i(philo, index - 1)];
-	// printf("Philosopher %u is before mutex\n", index);
 	if (*fork_right == 1 && *fork_left == 1)
 	{
 		ft_eat(philo, index, fork_left, fork_right);
@@ -27,6 +26,10 @@ void	ft_eat(t_philo *philo, int index, int *fork_left, int *fork_right)
 	*fork_left = 1;
 	pthread_mutex_unlock(&philo->common_data->forks_mutex[index]);
 	pthread_mutex_unlock(&philo->common_data->forks_mutex[ft_get_i(philo, index - 1)]);
+}
+
+void	ft_sleep(t_philo *philo)
+{
 }
 
 int    ft_get_i(t_philo *philo, int index)

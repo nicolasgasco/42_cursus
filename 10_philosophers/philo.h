@@ -64,13 +64,14 @@ pthread_mutex_t *ft_create_forks_mutex(int n_philos, t_data *common_data);
 
 // Status utils
 void			ft_put_status(t_philo *philo, char flag);
-void			ft_put_action(t_philo *philo, char flag);
+void			ft_put_action(char flag);
 void			ft_put_timestamp(t_philo *philo);
 int				ft_calc_elapsed_time(struct timeval start);
 
-// Forks utils
+// Dinner utils
 void			ft_start_dinner(t_philo *philo, unsigned int index);
 int				ft_get_i(t_philo *philo, int index);
+void			ft_sleep(t_philo *philo);
 void			ft_eat(t_philo *philo, int index, int *fork_left, int *fork_right);
 
 #endif
