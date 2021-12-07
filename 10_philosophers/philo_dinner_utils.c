@@ -7,9 +7,9 @@ void ft_start_dinner(t_philo *philo, unsigned int index)
 
 	fork_right = &philo->common_data->forks[index];
 	fork_left = &philo->common_data->forks[ft_get_i(philo, index - 1)];
+	ft_die(philo);
 	if (*fork_right == 1 && *fork_left == 1)
 	{
-		ft_die(philo);
 		ft_eat(philo, index, fork_left, fork_right);
 		ft_sleep(philo);
 		ft_put_status(philo, 't');
@@ -20,12 +20,12 @@ void	ft_eat(t_philo *philo, int index, int *fork_left, int *fork_right)
 {
 	pthread_mutex_lock(&philo->common_data->forks_mutex[index]);
 	pthread_mutex_lock(&philo->common_data->forks_mutex[ft_get_i(philo, index - 1)]);
+	gettimeofday(&philo->t_meal, NULL);
 	*fork_right = 0;
 	*fork_left = 0;
 	ft_put_status(philo, 'e');
 	philo->meals++;
-	gettimeofday(&philo->t_meal, NULL);
-	usleep(philo->common_data->t_eat);
+	ft_msleep(philo->common_data->t_eat);
 	*fork_right = 1;
 	*fork_left = 1;
 	pthread_mutex_unlock(&philo->common_data->forks_mutex[index]);
@@ -35,7 +35,7 @@ void	ft_eat(t_philo *philo, int index, int *fork_left, int *fork_right)
 void	ft_sleep(t_philo *philo)
 {
 	ft_put_status(philo, 's');
-	usleep(philo->common_data->t_sleep);
+	ft_msleep(philo->common_data->t_sleep);
 }
 
 void	ft_die(t_philo *philo)

@@ -41,10 +41,10 @@ void	ft_put_timestamp(t_philo *philo)
 void	ft_put_status(t_philo *philo, char flag)
 {
 
-	// pthread_mutex_lock(&philo->common_data->status_mutex);
+	pthread_mutex_lock(&philo->common_data->status_mutex);
 	ft_put_timestamp(philo);
 	ft_put_id(philo->i_philo); // Add 1 when necessary
 	ft_put_action(flag);
 	// ft_print_forks(philo);
-	// pthread_mutex_unlock(&philo->common_data->status_mutex);
+	pthread_mutex_unlock(&philo->common_data->status_mutex);
 }

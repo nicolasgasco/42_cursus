@@ -81,5 +81,6 @@ void			ft_die(t_philo *philo);
 int				ft_calc_time_label(struct timeval start);
 int				ft_calc_elapsed_time(struct timeval now, struct timeval start);
 struct timeval	ft_get_now();
+void			ft_msleep(int interval);
 
 #endif

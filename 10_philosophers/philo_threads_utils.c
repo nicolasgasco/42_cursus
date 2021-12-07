@@ -40,6 +40,7 @@ void	ft_create_threads(t_data *common_data, pthread_t *philos)
 	unsigned int	i;
 
 	i = 0;
+	pthread_mutex_init(&common_data->status_mutex, NULL);
 	while (i < common_data->n_philos)
 	{
 		philo = malloc(sizeof(t_philo));
@@ -70,4 +71,5 @@ void	ft_join_threads(t_data *common_data, pthread_t *philos)
 		pthread_mutex_destroy(&common_data->forks_mutex[i]);
 		i++;
 	}
+	pthread_mutex_destroy(&common_data->status_mutex);
 }
