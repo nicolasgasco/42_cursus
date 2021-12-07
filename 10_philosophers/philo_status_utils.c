@@ -12,17 +12,6 @@
 
 #include "philo.h"
 
-int	ft_calc_elapsed_time(struct timeval start)
-{
-	int				result;
-	struct timeval	t_now;
-
-	gettimeofday(&t_now, NULL);
-	result = (t_now.tv_sec - start.tv_sec) * 1000.0;
-	result += (t_now.tv_usec - start.tv_usec) / 1000.0;
-	return (result);
-}
-
 void	ft_put_action(char flag)
 {
 	if (flag == 'f')
@@ -46,16 +35,16 @@ void	ft_put_id(int id)
 
 void	ft_put_timestamp(t_philo *philo)
 {
-	ft_putnbr(ft_calc_elapsed_time(philo->common_data->t_start));
+	ft_putnbr(ft_calc_time_label(philo->common_data->t_start));
 }
 
 void	ft_put_status(t_philo *philo, char flag)
 {
 
-	pthread_mutex_lock(&philo->common_data->status_mutex);
+	// pthread_mutex_lock(&philo->common_data->status_mutex);
 	ft_put_timestamp(philo);
 	ft_put_id(philo->i_philo); // Add 1 when necessary
 	ft_put_action(flag);
 	// ft_print_forks(philo);
-	pthread_mutex_unlock(&philo->common_data->status_mutex);
+	// pthread_mutex_unlock(&philo->common_data->status_mutex);
 }
