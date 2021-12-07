@@ -67,7 +67,7 @@ void			ft_put_status(struct timeval start, int id, char flag);
 int				*ft_create_forks(int n_philos);
 pthread_mutex_t *ft_create_forks_mutex(int n_philos, t_data *common_data);
 void			ft_start_eating(t_philo *philo, unsigned int index);
-int				ft_check_fork_index(t_philo *philo, int index);
-void			ft_take_forks(t_philo *philo, int index);
+int				ft_calc_i(t_philo *philo, int index);
+void			ft_take_forks(t_philo *philo);
 
 #endif
