@@ -34,6 +34,7 @@ typedef struct Philo {
 typedef struct p_data {
 	unsigned int    i_philo;
 	struct timeval	t_meal;
+	int				meals;
 	t_data          *common_data;
 }   t_philo;
 
@@ -74,9 +75,11 @@ void			ft_start_dinner(t_philo *philo, unsigned int index);
 int				ft_get_i(t_philo *philo, int index);
 void			ft_sleep(t_philo *philo);
 void			ft_eat(t_philo *philo, int index, int *fork_left, int *fork_right);
+void			ft_die(t_philo *philo);
 
 // Time
 int				ft_calc_time_label(struct timeval start);
 int				ft_calc_elapsed_time(struct timeval now, struct timeval start);
+struct timeval	ft_get_now();
 
 #endif

@@ -31,6 +31,7 @@ void	ft_init_philo(t_philo *philo, t_data *common_data, int i)
 {
 	philo->i_philo = i;
 	philo->t_meal = common_data->t_start;
+	philo->meals = 0;
 	philo->common_data = common_data;
 }
 

@@ -23,7 +23,7 @@ void	ft_put_action(char flag)
 	else if (flag == 't')
 		ft_putstr(1, "is thinking\n");
 	else if (flag == 'd')
-		ft_putstr(1, "is thinking\n");
+		ft_putstr(1, "is dead\n");
 }
 
 void	ft_put_id(int id)

@@ -20,3 +20,11 @@ int	ft_calc_elapsed_time(struct timeval now, struct timeval start)
 
     return (result);
 }
+
+struct timeval	ft_get_now()
+{
+	struct timeval	t_now;
+
+	gettimeofday(&t_now, NULL);
+	return (t_now);	
+}
