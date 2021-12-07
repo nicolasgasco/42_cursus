@@ -19,18 +19,12 @@ void	ft_take_forks(t_philo *philo, int index, int *fork_left, int *fork_right)
 {
 	pthread_mutex_lock(&philo->common_data->forks_mutex[index]);
 	pthread_mutex_lock(&philo->common_data->forks_mutex[ft_get_i(philo, index - 1)]);
-	// printf("Philosopher %u is inside mutex\n", index);
-	// ft_print_forks(philo);
 	*fork_right = 0;
 	*fork_left = 0;
-	printf("%u started eating\n", philo->i_philo);
-	ft_print_forks(philo);
+	ft_put_status(philo, 'e');
 	sleep(philo->common_data->t_eat);
-	// printf("%u finished eating\n", philo->i_philo);
 	*fork_right = 1;
 	*fork_left = 1;
-	// ft_print_forks(philo);
-	// printf("Philosopher %u is done taking forks\n", index);
 	pthread_mutex_unlock(&philo->common_data->forks_mutex[index]);
 	pthread_mutex_unlock(&philo->common_data->forks_mutex[ft_get_i(philo, index - 1)]);
 }

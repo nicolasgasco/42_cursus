@@ -28,6 +28,7 @@ typedef struct Philo {
 	struct timeval	t_start;
 	int             *forks;
 	pthread_mutex_t *forks_mutex;
+	pthread_mutex_t	status_mutex;
 }   t_data;
 
 typedef struct p_data {
@@ -55,7 +56,6 @@ void   			ft_init_threads(t_data *philo, int argc, char *argv[]);
 void			ft_create_threads(t_data *common_data, pthread_t *philos);
 void			ft_join_threads(t_data *common_data, pthread_t *philos);
 
-
 // Init utils
 void			ft_init_common(t_data *philo, int argc, char *argv[]);
 void			ft_init_philo(t_philo *philo, t_data *common_data, int i);
@@ -63,7 +63,7 @@ int				*ft_create_forks(int n_philos);
 pthread_mutex_t *ft_create_forks_mutex(int n_philos, t_data *common_data);
 
 // Status utils
-void			ft_put_status(struct timeval start, int id, char flag);
+void			ft_put_status(t_philo *philo, char flag);
 
 // Forks utils
 void			ft_start_dinner(t_philo *philo, unsigned int index);

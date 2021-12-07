@@ -44,13 +44,18 @@ void	ft_put_id(int id)
 	write(1, " ", 1);
 }
 
-void	ft_put_status(struct timeval start, int id, char flag)
+void	ft_put_timestamp(t_philo *philo)
 {
-	int	timestamp;
+	ft_putnbr(ft_calc_elapsed_time(philo->common_data->t_start));
+}
 
-	timestamp = ft_calc_elapsed_time(start);
-	ft_putnbr(timestamp);
-	ft_put_id(id); // Add 1 when necessary
+void	ft_put_status(t_philo *philo, char flag)
+{
+
+	pthread_mutex_lock(&philo->common_data->status_mutex);
+	ft_put_timestamp(philo);
+	ft_put_id(philo->i_philo); // Add 1 when necessary
 	ft_put_action(flag);
-	ft_putstr(1, "\n\n");
+	// ft_print_forks(philo);
+	pthread_mutex_unlock(&philo->common_data->status_mutex);
 }
