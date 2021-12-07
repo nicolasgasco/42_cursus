@@ -50,7 +50,6 @@ void	ft_create_threads(t_data *common_data, pthread_t *philos)
 			ft_putstr(2, "Failed to created thread\n");
 			exit (1);
 		}
-		usleep(50000);
 		i++;
 	}
 	ft_join_threads(common_data, philos);

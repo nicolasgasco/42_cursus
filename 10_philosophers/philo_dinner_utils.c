@@ -11,7 +11,8 @@ void ft_start_dinner(t_philo *philo, unsigned int index)
 	{
 		ft_die(philo);
 		ft_eat(philo, index, fork_left, fork_right);
-		sleep(philo->common_data->t_sleep);
+		ft_sleep(philo);
+		ft_put_status(philo, 't');
 	}
 }
 
@@ -24,7 +25,7 @@ void	ft_eat(t_philo *philo, int index, int *fork_left, int *fork_right)
 	ft_put_status(philo, 'e');
 	philo->meals++;
 	gettimeofday(&philo->t_meal, NULL);
-	sleep(philo->common_data->t_eat);
+	usleep(philo->common_data->t_eat);
 	*fork_right = 1;
 	*fork_left = 1;
 	pthread_mutex_unlock(&philo->common_data->forks_mutex[index]);
@@ -33,13 +34,15 @@ void	ft_eat(t_philo *philo, int index, int *fork_left, int *fork_right)
 
 void	ft_sleep(t_philo *philo)
 {
+	ft_put_status(philo, 's');
+	usleep(philo->common_data->t_sleep);
 }
 
 void	ft_die(t_philo *philo)
 {
 	if (philo->meals == 0)
 	{
-		if (ft_calc_elapsed_time(ft_get_now(), philo->common_data->t_start) > philo->common_data->t_death * 1000) // Remove 1000
+		if (ft_calc_elapsed_time(ft_get_now(), philo->common_data->t_start) > philo->common_data->t_death)
 		{
 			ft_put_status(philo, 'd');
 			exit(1);
@@ -47,7 +50,7 @@ void	ft_die(t_philo *philo)
 	}
 	else
 	{
-		if (ft_calc_elapsed_time(ft_get_now(), philo->t_meal) > philo->common_data->t_death * 1000) // Remove 1000
+		if (ft_calc_elapsed_time(ft_get_now(), philo->t_meal) > philo->common_data->t_death)
 		{
 			ft_put_status(philo, 'd');
 			exit(1);
