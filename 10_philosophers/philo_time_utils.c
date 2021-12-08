@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_time_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/08 13:52:52 by ngasco            #+#    #+#             */
+/*   Updated: 2021/12/08 13:52:53 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	ft_calc_time_label(struct timeval start)
@@ -11,31 +23,32 @@ int	ft_calc_time_label(struct timeval start)
 	return (result);
 }
 
-int	ft_calc_elapsed_time(struct timeval now, struct timeval start)
+int	ft_calc_time(struct timeval now, struct timeval start)
 {
-    int result;
+	int	result;
 
-    result = (now.tv_sec - start.tv_sec) * 1000;
+	result = (now.tv_sec - start.tv_sec) * 1000;
 	result += (now.tv_usec - start.tv_usec) / 1000;
-
-    return (result);
+	return (result);
 }
 
-struct timeval	ft_get_now()
+struct timeval	ft_now(void)
 {
 	struct timeval	t_now;
 
 	gettimeofday(&t_now, NULL);
-	return (t_now);	
+	return (t_now);
 }
 
 void	ft_msleep(t_philo *philo, int interval)
 {
-	int	i = 0;
-	while (i < 100)
+	int	i;
+
+	i = 0;
+	while (i < 1000)
 	{
-		ft_die(philo);
-		usleep(interval * 10);
+		ft_death(philo);
+		usleep(interval);
 		i++;
 	}
 }

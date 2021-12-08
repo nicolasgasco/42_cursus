@@ -35,15 +35,14 @@ void	ft_put_id(int id)
 
 void	ft_put_timestamp(t_philo *philo)
 {
-	ft_putnbr(ft_calc_time_label(philo->common_data->t_start));
+	ft_putnbr(ft_calc_time_label(philo->c_data->t_start));
 }
 
 void	ft_put_status(t_philo *philo, char flag)
 {
-
-	pthread_mutex_lock(&philo->common_data->status_mutex);
+	pthread_mutex_lock(&philo->c_data->status_mutex);
 	ft_put_timestamp(philo);
-	ft_put_id(philo->i_philo); // Add 1 when necessary
+	ft_put_id(philo->i_philo + 1);
 	ft_put_action(flag);
-	pthread_mutex_unlock(&philo->common_data->status_mutex);
+	pthread_mutex_unlock(&philo->c_data->status_mutex);
 }

@@ -12,41 +12,41 @@
 
 #include "philo.h"
 
-void	ft_init_common(t_data *common_data, int argc, char *argv[])
+void	ft_init_common(t_data *c_data, int argc, char *argv[])
 {
 	if (argc == 6)
-		common_data->n_eats = ft_atoi(argv[5]);
+		c_data->n_eats = ft_atoi(argv[5]);
 	else
-		common_data->n_eats = -1;
-	common_data->n_philos = ft_atoi(argv[1]);
-	common_data->t_death = ft_atoi(argv[2]);
-	common_data->t_eat = ft_atoi(argv[3]);
-	common_data->t_sleep = ft_atoi(argv[4]);
-	common_data->forks = ft_create_forks(common_data, common_data->n_philos);
-	common_data->forks_mutex = ft_create_forks_mutex(common_data->n_philos, common_data);
-	gettimeofday(&common_data->t_start, NULL);
+		c_data->n_eats = -1;
+	c_data->n_philos = ft_atoi(argv[1]);
+	c_data->t_death = ft_atoi(argv[2]);
+	c_data->t_eat = ft_atoi(argv[3]);
+	c_data->t_sleep = ft_atoi(argv[4]);
+	c_data->forks = ft_create_forks(c_data, c_data->n_philos);
+	c_data->forks_mutex = ft_create_forks_mutex(c_data->n_philos, c_data);
+	gettimeofday(&c_data->t_start, NULL);
 }
 
-void	ft_init_philo(t_philo *philo, t_data *common_data, int i)
+void	ft_init_philo(t_philo *philo, t_data *c_data, int i)
 {
 	philo->i_philo = i;
-	philo->t_meal = common_data->t_start;
+	philo->t_meal = c_data->t_start;
 	philo->meals = 0;
-	philo->common_data = common_data;
+	philo->c_data = c_data;
 }
 
-pthread_mutex_t *ft_create_forks_mutex(int n_philos, t_data *common_data)
+pthread_mutex_t	*ft_create_forks_mutex(int n_philos, t_data *c_data)
 {
-	pthread_mutex_t *result;
+	pthread_mutex_t	*result;
 
 	result = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * n_philos);
 	return (result);
 }
 
-int *ft_create_forks(t_data *common_data, int n_philos)
+int	*ft_create_forks(t_data *c_data, int n_philos)
 {
-	int *result;
-	int i;
+	int	*result;
+	int	i;
 
 	i = 0;
 	result = (int *)malloc(sizeof(int) * n_philos + 1);
@@ -56,6 +56,6 @@ int *ft_create_forks(t_data *common_data, int n_philos)
 		i++;
 	}
 	result[i] = -1;
-	common_data->n_forks = i;
+	c_data->n_forks = i;
 	return (result);
 }

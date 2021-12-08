@@ -12,13 +12,13 @@
 
 #include "philo.h"
 
-void	ft_init_threads(t_data *common_data, int argc, char *argv[])
+void	ft_init_threads(t_data *c_data, int argc, char *argv[])
 {
 	pthread_t		*philos;
 
-	philos = malloc(sizeof(pthread_t) * common_data->n_philos + 1);
+	philos = malloc(sizeof(pthread_t) * c_data->n_philos + 1);
 	ft_putstr(2, "Creating threads...\n");
-	ft_create_threads(common_data, philos);
+	ft_create_threads(c_data, philos);
 	printf("After Threads\n");
 	free(philos);
 }
@@ -28,31 +28,31 @@ void	*ft_routine(void *vargp)
 	t_philo	*philo_cpy;
 
 	philo_cpy = vargp;
-	if (philo_cpy->common_data->n_forks > 1)
+	if (philo_cpy->c_data->n_forks > 1)
 	{
-		while(1)
+		while (1)
 			ft_start_dinner(philo_cpy, philo_cpy->i_philo);
 	}
 	else
 	{
-		usleep(philo_cpy->common_data->t_death * 1000);
+		usleep(philo_cpy->c_data->t_death * 1000);
 		ft_put_status(philo_cpy, 'd');
 	}
 	return (NULL);
 }
 
-void	ft_create_threads(t_data *common_data, pthread_t *philos)
+void	ft_create_threads(t_data *c_data, pthread_t *philos)
 {
 	t_philo			*philo;
 	unsigned int	i;
 
 	i = 0;
-	pthread_mutex_init(&common_data->status_mutex, NULL);
-	while (i < common_data->n_philos)
+	pthread_mutex_init(&c_data->status_mutex, NULL);
+	while (i < c_data->n_philos)
 	{
 		philo = malloc(sizeof(t_philo));
-		ft_init_philo(philo, common_data, i);
-		pthread_mutex_init(&common_data->forks_mutex[i], NULL);
+		ft_init_philo(philo, c_data, i);
+		pthread_mutex_init(&c_data->forks_mutex[i], NULL);
 		if (pthread_create(&philos[i], NULL, ft_routine, philo) != 0)
 		{
 			ft_putstr(2, "Failed to created thread\n");
@@ -60,23 +60,23 @@ void	ft_create_threads(t_data *common_data, pthread_t *philos)
 		}
 		i++;
 	}
-	ft_join_threads(common_data, philos);
+	ft_join_threads(c_data, philos);
 }
 
-void	ft_join_threads(t_data *common_data, pthread_t *philos)
+void	ft_join_threads(t_data *c_data, pthread_t *philos)
 {
 	unsigned int	i;
 
 	i = 0;
-	while (i < common_data->n_philos)
+	while (i < c_data->n_philos)
 	{
 		if (pthread_join(philos[i], NULL) != 0)
 		{
 			ft_putstr(2, "Failed to join thread\n");
 			exit (2);
 		}
-		pthread_mutex_destroy(&common_data->forks_mutex[i]);
+		pthread_mutex_destroy(&c_data->forks_mutex[i]);
 		i++;
 	}
-	pthread_mutex_destroy(&common_data->status_mutex);
+	pthread_mutex_destroy(&c_data->status_mutex);
 }
