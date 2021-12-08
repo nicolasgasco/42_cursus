@@ -14,6 +14,8 @@
 
 void	ft_put_action(char flag)
 {
+	if (flag == 'f')
+		ft_putstr(1, "has taken a fork\n");
 	if (flag == 'e')
 		ft_putstr(1, "is eating\n");
 	else if (flag == 's')
@@ -22,7 +24,7 @@ void	ft_put_action(char flag)
 		ft_putstr(1, "is thinking\n");
 	else if (flag == 'd')
 	{
-		ft_putstr(1, "is dead\n");
+		ft_putstr(1, "die\n");
 		exit(1);
 	}
 }

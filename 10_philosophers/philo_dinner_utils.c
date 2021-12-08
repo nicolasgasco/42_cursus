@@ -31,7 +31,9 @@ void	ft_start_dinner(t_philo *philo, unsigned int index)
 void	ft_eat(t_philo *philo, int i, int *fork_l, int *fork_r)
 {
 	pthread_mutex_lock(&philo->c_data->forks_mutex[i]);
+	ft_put_status(philo, 'f');
 	pthread_mutex_lock(&philo->c_data->forks_mutex[ft_get_i(philo, i - 1)]);
+	ft_put_status(philo, 'f');
 	gettimeofday(&philo->t_meal, NULL);
 	*fork_r = 0;
 	*fork_l = 0;
