@@ -15,19 +15,19 @@ void    ft_put_forks(int *forks)
     printf("\n");
 }
 
-void    ft_print_common(t_data *common_data)
+void    ft_print_common(t_data *c_data)
 {
     printf("\n==================================\n");
     printf("            COMMON                \n");       
     printf("==================================\n");
-    printf("Number of philosophers: %d\n", common_data->n_philos);
-    printf("Time to death: %d\n", common_data->t_death);
-    printf("Time to eat: %d\n", common_data->t_eat);
-    printf("Time to sleep: %d\n", common_data->t_sleep);
-    printf("Number of eats: %d\n", common_data->n_eats);
+    printf("Number of philosophers: %d\n", c_data->n_philos);
+    printf("Time to death: %d\n", c_data->t_death);
+    printf("Time to eat: %d\n", c_data->t_eat);
+    printf("Time to sleep: %d\n", c_data->t_sleep);
+    printf("Number of eats: %d\n", c_data->n_eats);
     printf("Forks are: ");
-    ft_put_forks(common_data->forks);
-    // printf("seconds : %ld\nmicro seconds : %d\n\n", common_data->t_start.tv_sec, common_data->t_start.tv_usec);
+    ft_put_forks(c_data->forks);
+    // printf("seconds : %ld\nmicro seconds : %d\n\n", c_data->t_start.tv_sec, c_data->t_start.tv_usec);
     printf("__________________________________\n\n");
 }
 
@@ -37,9 +37,9 @@ void    ft_print_philo(t_philo *philo)
     printf("|            PHILO %d             |\n", philo->i_philo);       
     printf("==================================\n");
     // printf("Philo index is %d\n", philo->i_philo);
-    printf("| Fork is %d                      |\n", philo->common_data->forks[philo->i_philo]);
+    printf("| Fork is %d                      |\n", philo->c_data->forks[philo->i_philo]);
     // ft_put_forks(philo->forks);
-    // printf("seconds : %ld\nmicro seconds : %d\n\n", common_data->t_start.tv_sec, common_data->t_start.tv_usec);
+    // printf("seconds : %ld\nmicro seconds : %d\n\n", c_data->t_start.tv_sec, c_data->t_start.tv_usec);
     printf("__________________________________\n\n");
 }
 
@@ -48,21 +48,21 @@ void    ft_print_forks(t_philo *philo)
     int i;
 
     i = 0;
-    while (i < philo->common_data->n_philos)
+    while (i < philo->c_data->n_philos)
     {
         printf("________________.");
         i++;
     }
     printf("\n");
     i = 0;
-    while (philo->common_data->forks[i] != -1)
+    while (philo->c_data->forks[i] != -1)
     {
-        printf("|| P%d: fork %d || ", i, philo->common_data->forks[i]);
+        printf("|| P%d: fork %d || ", i, philo->c_data->forks[i]);
         i++;
     }
     i = 0;
     printf("\n");
-    while (i < philo->common_data->n_philos)
+    while (i < philo->c_data->n_philos)
     {
         printf("________________.");
         i++;
