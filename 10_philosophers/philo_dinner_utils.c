@@ -25,7 +25,7 @@ void	ft_eat(t_philo *philo, int index, int *fork_left, int *fork_right)
 	*fork_left = 0;
 	ft_put_status(philo, 'e');
 	philo->meals++;
-	ft_msleep(philo->common_data->t_eat);
+	ft_msleep(philo, philo->common_data->t_eat);
 	*fork_right = 1;
 	*fork_left = 1;
 	pthread_mutex_unlock(&philo->common_data->forks_mutex[index]);
@@ -35,7 +35,7 @@ void	ft_eat(t_philo *philo, int index, int *fork_left, int *fork_right)
 void	ft_sleep(t_philo *philo)
 {
 	ft_put_status(philo, 's');
-	ft_msleep(philo->common_data->t_sleep);
+	ft_msleep(philo, philo->common_data->t_sleep);
 }
 
 void	ft_die(t_philo *philo)

@@ -29,7 +29,13 @@ struct timeval	ft_get_now()
 	return (t_now);	
 }
 
-void	ft_msleep(int interval)
+void	ft_msleep(t_philo *philo, int interval)
 {
-	usleep(interval * 1000);
+	int	i = 0;
+	while (i < 100)
+	{
+		ft_die(philo);
+		usleep(interval * 10);
+		i++;
+	}
 }
