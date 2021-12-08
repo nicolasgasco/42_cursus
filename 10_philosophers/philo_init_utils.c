@@ -22,7 +22,7 @@ void	ft_init_common(t_data *common_data, int argc, char *argv[])
 	common_data->t_death = ft_atoi(argv[2]);
 	common_data->t_eat = ft_atoi(argv[3]);
 	common_data->t_sleep = ft_atoi(argv[4]);
-	common_data->forks = ft_create_forks(common_data->n_philos);
+	common_data->forks = ft_create_forks(common_data, common_data->n_philos);
 	common_data->forks_mutex = ft_create_forks_mutex(common_data->n_philos, common_data);
 	gettimeofday(&common_data->t_start, NULL);
 }
@@ -43,7 +43,7 @@ pthread_mutex_t *ft_create_forks_mutex(int n_philos, t_data *common_data)
 	return (result);
 }
 
-int *ft_create_forks(int n_philos)
+int *ft_create_forks(t_data *common_data, int n_philos)
 {
 	int *result;
 	int i;
@@ -56,5 +56,6 @@ int *ft_create_forks(int n_philos)
 		i++;
 	}
 	result[i] = -1;
+	common_data->n_forks = i;
 	return (result);
 }

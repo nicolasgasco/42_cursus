@@ -20,7 +20,6 @@ void	ft_init_threads(t_data *common_data, int argc, char *argv[])
 	ft_putstr(2, "Creating threads...\n");
 	ft_create_threads(common_data, philos);
 	printf("After Threads\n");
-	ft_print_common(common_data);
 	free(philos);
 }
 
@@ -29,8 +28,16 @@ void	*ft_routine(void *vargp)
 	t_philo	*philo_cpy;
 
 	philo_cpy = vargp;
-	while(1)
-		ft_start_dinner(philo_cpy, philo_cpy->i_philo);
+	if (philo_cpy->common_data->n_forks > 1)
+	{
+		while(1)
+			ft_start_dinner(philo_cpy, philo_cpy->i_philo);
+	}
+	else
+	{
+		usleep(philo_cpy->common_data->t_death * 1000);
+		ft_put_status(philo_cpy, 'd');
+	}
 	return (NULL);
 }
 
