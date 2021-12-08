@@ -53,13 +53,6 @@ void	ft_putnbr(long n)
 {
 	int	result;
 
-	if (n < INT_MIN || n > INT_MAX)
-		return ;
-	if (n < 0)
-	{
-		write(1, "-", 1);
-		n *= -1;
-	}
 	if (n < 10)
 	{
 		result = n + '0';

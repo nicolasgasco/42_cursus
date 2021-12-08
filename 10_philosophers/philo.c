@@ -24,7 +24,6 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	ft_init_common(&c_data, argc, argv);
-	ft_print_common(&c_data);
 	ft_init_threads(&c_data, argc, argv);
 	return (0);
 }

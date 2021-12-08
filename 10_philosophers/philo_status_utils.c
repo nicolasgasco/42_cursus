@@ -14,16 +14,17 @@
 
 void	ft_put_action(char flag)
 {
-	if (flag == 'f')
-		ft_putstr(1, "has taken a fork\n");
-	else if (flag == 'e')
+	if (flag == 'e')
 		ft_putstr(1, "is eating\n");
 	else if (flag == 's')
 		ft_putstr(1, "is sleeping\n");
 	else if (flag == 't')
 		ft_putstr(1, "is thinking\n");
 	else if (flag == 'd')
+	{
 		ft_putstr(1, "is dead\n");
+		exit(1);
+	}
 }
 
 void	ft_put_id(int id)

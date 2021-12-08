@@ -17,9 +17,7 @@ void	ft_init_threads(t_data *c_data, int argc, char *argv[])
 	pthread_t		*philos;
 
 	philos = malloc(sizeof(pthread_t) * c_data->n_philos + 1);
-	ft_putstr(2, "Creating threads...\n");
 	ft_create_threads(c_data, philos);
-	printf("After Threads\n");
 	free(philos);
 }
 
@@ -34,10 +32,7 @@ void	*ft_routine(void *vargp)
 			ft_start_dinner(philo_cpy, philo_cpy->i_philo);
 	}
 	else
-	{
-		usleep(philo_cpy->c_data->t_death * 1000);
-		ft_put_status(philo_cpy, 'd');
-	}
+		ft_msleep(philo_cpy, philo_cpy->c_data->t_death);
 	return (NULL);
 }
 

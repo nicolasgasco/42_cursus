@@ -57,19 +57,13 @@ void	ft_death(t_philo *philo)
 	if (philo->meals == 0)
 	{
 		elapsed_time = ft_calc_time(ft_now(), philo->c_data->t_start);
-		if (elapsed_time > philo->c_data->t_death)
-		{
+		if (elapsed_time > (philo->c_data->t_death + 5))
 			ft_put_status(philo, 'd');
-			exit(1);
-		}
 	}
 	else
 	{
-		if (ft_calc_time(ft_now(), philo->t_meal) > philo->c_data->t_death)
-		{
+		if (ft_calc_time(ft_now(), philo->t_meal) > (philo->c_data->t_death + 5))
 			ft_put_status(philo, 'd');
-			exit(1);
-		}
 	}
 }
 
