@@ -16,7 +16,12 @@ void	ft_start_dinner(t_philo *philo, unsigned int index)
 {
 	int				*fork_r;
 	int				*fork_l;
-
+	
+	if (philo->c_data->end == 1)
+	{
+		ft_free_mallocs(philo);
+		exit(1);
+	}
 	fork_r = &philo->c_data->forks[index];
 	fork_l = &philo->c_data->forks[ft_get_i(philo, index - 1)];
 	ft_death(philo);

@@ -15,8 +15,6 @@
 int	main(int argc, char *argv[])
 {
 	t_data			c_data;
-	pthread_t		*philos;
-	unsigned int	i;
 
 	if (argc < 4 || argc > 6)
 	{
@@ -24,6 +22,6 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	ft_init_common(&c_data, argc, argv);
-	ft_init_threads(&c_data, argc, argv);
+	ft_init_threads(&c_data);
 	return (0);
 }

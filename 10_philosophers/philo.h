@@ -21,11 +21,11 @@
 # include <sys/time.h>
 
 typedef struct Philo {
-	unsigned int	n_philos;
-	unsigned int	t_death;
-	unsigned int	t_eat;
-	unsigned int	t_sleep;
-	unsigned int	n_eats;
+	int				n_philos;
+	int				t_death;
+	int				t_eat;
+	int				t_sleep;
+	int				n_eats;
 	struct timeval	t_start;
 	int				*forks;
 	int				n_forks;
@@ -36,7 +36,7 @@ typedef struct Philo {
 }	t_data;
 
 typedef struct p_data {
-	unsigned int	i_philo;
+	int				i_philo;
 	struct timeval	t_meal;
 	int				meals;
 	t_data			*c_data;
@@ -56,8 +56,8 @@ void			ft_print_forks(t_philo *philo);
 // Time utils
 int				ft_calc_time_label(struct timeval start);
 
-// Thread
-void			ft_init_threads(t_data *philo, int argc, char *argv[]);
+// Threads
+void			ft_init_threads(t_data *c_data);
 void			ft_create_threads(t_data *c_data, pthread_t *philos);
 void			ft_join_threads(t_data *c_data, pthread_t *philos);
 
@@ -65,7 +65,7 @@ void			ft_join_threads(t_data *c_data, pthread_t *philos);
 void			ft_init_common(t_data *philo, int argc, char *argv[]);
 void			ft_init_philo(t_philo *philo, t_data *c_data, int i);
 int				*ft_create_forks(t_data *c_data, int n_philos);
-pthread_mutex_t	*ft_create_forks_mutex(int n_philos, t_data *c_data);
+pthread_mutex_t	*ft_create_forks_mutex(int n_philos);
 
 // Status utils
 void			ft_put_status(t_philo *philo, char flag);

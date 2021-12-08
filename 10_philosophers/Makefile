@@ -2,10 +2,10 @@ NAME = philo
 
 SRCS=$(wildcard *.c)
 
-# FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 $(NAME):
-	@ gcc $(FLAGS) $(SRCS) -lpthread -o $(NAME)
+	@ gcc $(FLAGS) $(SRCS) -lpthread -o $(NAME) $(SANITIZER)
 	@ echo "Compiling philosophers..."
 
 all : $(NAME)

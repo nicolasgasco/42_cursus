@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-void	ft_init_threads(t_data *c_data, int argc, char *argv[])
+void	ft_init_threads(t_data *c_data)
 {
 	pthread_t		*philos;
 
@@ -42,8 +42,8 @@ void	*ft_routine(void *vargp)
 
 void	ft_create_threads(t_data *c_data, pthread_t *philos)
 {
-	t_philo			*philo;
-	unsigned int	i;
+	t_philo	*philo;
+	int		i;
 
 	i = 0;
 	pthread_mutex_init(&c_data->status_mutex, NULL);
@@ -64,7 +64,7 @@ void	ft_create_threads(t_data *c_data, pthread_t *philos)
 
 void	ft_join_threads(t_data *c_data, pthread_t *philos)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	while (i < c_data->n_philos)

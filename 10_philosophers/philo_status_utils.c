@@ -47,7 +47,7 @@ void	ft_put_status(t_philo *philo, char flag)
 	if (flag == 'z')
 	{
 		ft_putstr(1, "All philosophers finished eating\n");
-		exit(3);
+		philo->c_data->end = 1;
 	}
 	ft_put_timestamp(philo);
 	ft_put_id(philo->i_philo + 1);
