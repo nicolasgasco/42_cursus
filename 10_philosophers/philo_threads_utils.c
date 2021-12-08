@@ -32,7 +32,11 @@ void	*ft_routine(void *vargp)
 			ft_start_dinner(philo_cpy, philo_cpy->i_philo);
 	}
 	else
+	{
 		ft_msleep(philo_cpy, philo_cpy->c_data->t_death);
+		ft_put_status(philo_cpy, 'd');
+		ft_free_mallocs(philo_cpy);
+	}
 	return (NULL);
 }
 

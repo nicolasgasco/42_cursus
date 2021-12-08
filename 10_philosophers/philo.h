@@ -30,6 +30,7 @@ typedef struct Philo {
 	int				*forks;
 	int				n_forks;
 	int				finished_eating;
+	int				end;
 	pthread_mutex_t	*forks_mutex;
 	pthread_mutex_t	status_mutex;
 }	t_data;
@@ -68,15 +69,17 @@ pthread_mutex_t	*ft_create_forks_mutex(int n_philos, t_data *c_data);
 
 // Status utils
 void			ft_put_status(t_philo *philo, char flag);
-void			ft_put_action(char flag);
+void			ft_put_action(t_philo *philo, char flag);
 void			ft_put_timestamp(t_philo *philo);
 int				ft_calc_time_label(struct timeval start);
 
 // Dinner utils
 void			ft_start_dinner(t_philo *philo, unsigned int index);
 int				ft_get_i(t_philo *philo, int index);
+void			ft_free_mallocs(t_philo *philo);
 void			ft_sleep(t_philo *philo);
 void			ft_eat(t_philo *philo, int index, int *fork_l, int *fork_r);
+void			ft_think(t_philo *philo);
 void			ft_death(t_philo *philo);
 
 // Time
