@@ -29,6 +29,7 @@ typedef struct Philo {
 	struct timeval	t_start;
 	int				*forks;
 	int				n_forks;
+	int				finished_eating;
 	pthread_mutex_t	*forks_mutex;
 	pthread_mutex_t	status_mutex;
 }	t_data;
