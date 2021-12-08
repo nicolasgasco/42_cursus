@@ -4,8 +4,10 @@ SRCS=$(wildcard *.c)
 
 FLAGS = -Wall -Wextra -Werror
 
+SANITIZER =  -fsanitize=address -static-libasan -g
+
 $(NAME):
-	@ gcc $(FLAGS) $(SRCS) -lpthread -o $(NAME) $(SANITIZER)
+	@ gcc $(FLAGS) $(SRCS) -lpthread -o $(NAME)
 	@ echo "Compiling philosophers..."
 
 all : $(NAME)

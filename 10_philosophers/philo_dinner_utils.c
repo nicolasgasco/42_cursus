@@ -22,9 +22,9 @@ void	ft_start_dinner(t_philo *philo, unsigned int index)
 		ft_free_mallocs(philo);
 		exit(1);
 	}
+	ft_death(philo);
 	fork_r = &philo->c_data->forks[index];
 	fork_l = &philo->c_data->forks[ft_get_i(philo, index - 1)];
-	ft_death(philo);
 	if (*fork_r == 1 && *fork_l == 1)
 	{
 		ft_eat(philo, index, fork_l, fork_r);

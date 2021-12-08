@@ -16,7 +16,7 @@ void	ft_put_action(t_philo *philo, char flag)
 {
 	if (flag == 'f')
 		ft_putstr(1, "has taken a fork\n");
-	else if (flag == 'e')
+	if (flag == 'e' && philo)
 		ft_putstr(1, "is eating\n");
 	else if (flag == 's')
 		ft_putstr(1, "is sleeping\n");
@@ -43,14 +43,17 @@ void	ft_put_timestamp(t_philo *philo)
 
 void	ft_put_status(t_philo *philo, char flag)
 {
-	pthread_mutex_lock(&philo->c_data->status_mutex);
-	if (flag == 'z')
+	if (philo->c_data->end == 0)
 	{
-		ft_putstr(1, "All philosophers finished eating\n");
-		philo->c_data->end = 1;
+		pthread_mutex_lock(&philo->c_data->status_mutex);
+		if (flag == 'z')
+		{
+			ft_putstr(1, "All philosophers finished eating\n");
+			philo->c_data->end = 1;
+		}
+		ft_put_timestamp(philo);
+		ft_put_id(philo->i_philo + 1);
+		ft_put_action(philo, flag);
+		pthread_mutex_unlock(&philo->c_data->status_mutex);
 	}
-	ft_put_timestamp(philo);
-	ft_put_id(philo->i_philo + 1);
-	ft_put_action(philo, flag);
-	pthread_mutex_unlock(&philo->c_data->status_mutex);
 }
