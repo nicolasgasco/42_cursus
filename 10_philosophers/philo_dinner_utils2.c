@@ -51,24 +51,17 @@ void	ft_death(t_philo *philo)
 		if (elapsed_time > (philo->c_data->t_death))
 			ft_put_status(philo, 'd');
 	}
-	else if (philo->meals < philo->c_data->n_eats)
-	{
-		if (ft_calc_time(ft_now(), philo->t_meal) > (philo->c_data->t_death))
-			ft_put_status(philo, 'd');
-	}
 	else
 	{
-		if (ft_calc_time(ft_now(), philo->t_meal) > (philo->c_data->t_death))
-			ft_put_status(philo, 'd');
-        if (philo->meals == philo->c_data->n_eats)
+		elapsed_time = ft_calc_time(ft_now(), philo->t_meal);
+		if (elapsed_time > (philo->c_data->t_death))
+				ft_put_status(philo, 'd');
+		if (philo->meals == philo->c_data->n_eats)
 		{
 			philo->c_data->finished_eating++;
 			philo->meals++;
 		}
 		if (philo->c_data->finished_eating == philo->c_data->n_philos)
-		{
 			ft_put_status(philo, 'z');
-			exit(3);
-		}
 	}
 }

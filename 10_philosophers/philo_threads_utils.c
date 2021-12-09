@@ -67,6 +67,11 @@ void	*ft_routine(void *vargp)
 	t_philo	*philo_cpy;
 
 	philo_cpy = vargp;
+	if (philo_cpy->c_data->n_eats == 0)
+	{
+		ft_free_philo(philo_cpy);
+		return (NULL);
+	}
 	if (philo_cpy->c_data->n_philos > 1)
 	{
 		while (philo_cpy->c_data->end == 0)
