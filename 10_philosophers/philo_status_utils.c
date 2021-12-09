@@ -29,6 +29,18 @@ void	ft_put_status(t_philo *philo, char flag)
 	}
 }
 
+void	ft_put_timestamp(t_philo *philo)
+{
+	ft_putnbr(ft_calc_time_label(philo->c_data->t_start));
+}
+
+void	ft_put_id(int id)
+{
+	write(1, " ", 1);
+	ft_putnbr(id);
+	write(1, " ", 1);
+}
+
 void	ft_put_action(t_philo *philo, char flag)
 {
 	if (flag == 'f')
@@ -44,16 +56,4 @@ void	ft_put_action(t_philo *philo, char flag)
 		ft_putstr(1, "died\n");
 		philo->c_data->end = 1;
 	}
-}
-
-void	ft_put_id(int id)
-{
-	write(1, " ", 1);
-	ft_putnbr(id);
-	write(1, " ", 1);
-}
-
-void	ft_put_timestamp(t_philo *philo)
-{
-	ft_putnbr(ft_calc_time_label(philo->c_data->t_start));
 }
