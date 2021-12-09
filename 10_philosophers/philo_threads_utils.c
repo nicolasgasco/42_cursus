@@ -65,7 +65,7 @@ void	*ft_routine(void *vargp)
 	t_philo	*philo_cpy;
 
 	philo_cpy = vargp;
-	if (philo_cpy->c_data->n_forks > 1)
+	if (philo_cpy->c_data->n_philos > 1)
 	{
 		while (1)
 			ft_start_dinner(philo_cpy, philo_cpy->i_philo);
