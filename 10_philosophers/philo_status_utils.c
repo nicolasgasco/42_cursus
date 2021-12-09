@@ -31,7 +31,7 @@ void	ft_put_status(t_philo *philo, char flag)
 
 void	ft_put_timestamp(t_philo *philo)
 {
-	ft_putnbr(ft_calc_time_label(philo->c_data->t_start));
+	ft_putnbr(ft_calc_timestamp(philo->c_data->t_start));
 }
 
 void	ft_put_id(int id)
