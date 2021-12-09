@@ -58,6 +58,5 @@ int	*ft_create_forks(t_data *c_data, int n_philos)
 		i++;
 	}
 	result[i] = -1;
-	c_data->n_forks = i;
 	return (result);
 }
