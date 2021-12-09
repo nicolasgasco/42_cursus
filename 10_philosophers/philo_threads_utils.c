@@ -18,7 +18,6 @@ void	ft_init_threads(t_data *c_data)
 
 	philos = malloc(sizeof(pthread_t) * c_data->n_philos);
 	ft_create_threads(c_data, philos);
-	free(philos);
 }
 
 void	*ft_routine(void *vargp)
