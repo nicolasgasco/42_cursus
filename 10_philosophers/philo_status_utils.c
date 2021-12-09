@@ -45,7 +45,7 @@ void	ft_put_action(t_philo *philo, char flag)
 {
 	if (flag == 'f')
 		ft_putstr(1, "has taken a fork\n");
-	if (flag == 'e' && philo)
+	if (flag == 'e')
 		ft_putstr(1, "is eating\n");
 	else if (flag == 's')
 		ft_putstr(1, "is sleeping\n");
