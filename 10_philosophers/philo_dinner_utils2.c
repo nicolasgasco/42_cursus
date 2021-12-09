@@ -19,7 +19,7 @@ void	ft_eat(t_philo *philo, int i, int *fork_l, int *fork_r)
     ft_put_status(philo, 'f');
     pthread_mutex_lock(&philo->c_data->forks_mutex[ft_get_i(philo, i - 1)]);
     *fork_l = 0;
-    ft_put_status(philo, 'f')
+    ft_put_status(philo, 'f');
     philo->meals++;
     gettimeofday(&philo->t_meal, NULL);
     ft_put_status(philo, 'e');

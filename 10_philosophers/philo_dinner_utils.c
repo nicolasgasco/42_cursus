@@ -17,11 +17,6 @@ void	ft_start_dinner(t_philo *philo, unsigned int index)
 	int				*fork_r;
 	int				*fork_l;
 	
-	if (philo->c_data->end == 1)
-	{
-		ft_free_mallocs(philo);
-		exit(1);
-	}
 	ft_death(philo);
 	fork_r = &philo->c_data->forks[index];
 	fork_l = &philo->c_data->forks[ft_get_i(philo, index - 1)];
@@ -33,11 +28,20 @@ void	ft_start_dinner(t_philo *philo, unsigned int index)
 	}
 }
 
-void	ft_free_mallocs(t_philo *philo)
+void	ft_free_philo(t_philo *philo)
 {
-	free(philo->c_data->forks_mutex);
-	free(philo->c_data->forks);
 	free(philo);
+}
+
+void	ft_free_c_data(t_data *c_data)
+{
+	free(c_data->forks_mutex);
+	free(c_data->forks);
+}
+
+void	ft_free_philos(pthread_t *philos)
+{
+	free(philos);
 }
 
 int	ft_get_i(t_philo *philo, int index)

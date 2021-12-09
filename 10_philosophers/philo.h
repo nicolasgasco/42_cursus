@@ -59,11 +59,12 @@ int				ft_calc_time_label(struct timeval start);
 void			ft_init_threads(t_data *c_data);
 void			ft_create_threads(t_data *c_data, pthread_t *philos);
 void			ft_join_threads(t_data *c_data, pthread_t *philos);
+void			*ft_routine(void *vargp);
 
 // Init utils
 void			ft_init_common(t_data *philo, int argc, char *argv[]);
 void			ft_init_philo(t_philo *philo, t_data *c_data, int i);
-int				*ft_create_forks(t_data *c_data, int n_philos);
+int				*ft_create_forks(int n_philos);
 pthread_mutex_t	*ft_create_forks_mutex(int n_philos);
 
 // Status utils
@@ -71,15 +72,18 @@ void			ft_put_status(t_philo *philo, char flag);
 void			ft_put_action(t_philo *philo, char flag);
 void			ft_put_timestamp(t_philo *philo);
 int				ft_calc_time_label(struct timeval start);
+void			ft_put_id(int id);
 
 // Dinner utils
 void			ft_start_dinner(t_philo *philo, unsigned int index);
 int				ft_get_i(t_philo *philo, int index);
-void			ft_free_mallocs(t_philo *philo);
 void			ft_sleep(t_philo *philo);
 void			ft_eat(t_philo *philo, int index, int *fork_l, int *fork_r);
 void			ft_think(t_philo *philo);
 void			ft_death(t_philo *philo);
+void			ft_free_c_data(t_data *c_data);
+void			ft_free_philo(t_philo *philo);
+void			ft_free_philos(pthread_t *philos);
 
 // Time
 int				ft_calc_timestamp(struct timeval start);
