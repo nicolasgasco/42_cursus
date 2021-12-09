@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int	ft_calc_time_label(struct timeval start)
+int	ft_calc_timestamp(struct timeval start)
 {
 	int				result;
 	struct timeval	t_now;
