@@ -35,36 +35,43 @@ void	ft_eat(t_philo *philo, int i, int *fork_l, int *fork_r)
 
 void	ft_think(t_philo *philo)
 {
-	ft_put_status(philo, 't');
+	if (philo->c_data->end == 0)
+		ft_put_status(philo, 't');
 }
 
 void	ft_sleep(t_philo *philo)
 {
-	ft_put_status(philo, 's');
-	ft_msleep(philo, philo->c_data->t_sleep);
+	if (philo->c_data->end == 0)
+	{
+		ft_put_status(philo, 's');
+		ft_msleep(philo, philo->c_data->t_sleep);
+	}
 }
 
 void	ft_death(t_philo *philo)
 {
 	int	elapsed_time;
 
-	if (philo->meals == 0)
+	if (philo->c_data->end == 0)
 	{
-		elapsed_time = ft_calc_time(ft_now(), philo->c_data->t_start);
-		if (elapsed_time > (philo->c_data->t_death))
-			ft_put_status(philo, 'd');
-	}
-	else
-	{
-		elapsed_time = ft_calc_time(ft_now(), philo->t_meal);
-		if (elapsed_time > (philo->c_data->t_death))
-				ft_put_status(philo, 'd');
-		if (philo->meals == philo->c_data->n_eats)
+		if (philo->meals == 0)
 		{
-			philo->c_data->finished_eating++;
-			philo->meals++;
+			elapsed_time = ft_calc_time(ft_now(), philo->c_data->t_start);
+			if (elapsed_time > (philo->c_data->t_death))
+				ft_put_status(philo, 'd');
 		}
-		if (philo->c_data->finished_eating == philo->c_data->n_philos)
-			ft_put_status(philo, 'z');
+		else
+		{
+			elapsed_time = ft_calc_time(ft_now(), philo->t_meal);
+			if (elapsed_time > (philo->c_data->t_death))
+					ft_put_status(philo, 'd');
+			if (philo->meals == philo->c_data->n_eats)
+			{
+				philo->c_data->finished_eating++;
+				philo->meals++;
+			}
+			if (philo->c_data->finished_eating == philo->c_data->n_philos)
+				philo->c_data->end = 1;
+		}
 	}
 }

@@ -23,11 +23,8 @@ void	ft_start_dinner(t_philo *philo, unsigned int index)
 	if (*fork_r == 1 && *fork_l == 1)
 	{
 		ft_eat(philo, index, fork_l, fork_r);
-		if (philo->c_data->end == 0)
-		{
-			ft_sleep(philo);
-			ft_think(philo);
-		}
+		ft_sleep(philo);
+		ft_think(philo);
 	}
 }
 
