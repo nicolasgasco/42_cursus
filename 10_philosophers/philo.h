@@ -28,7 +28,6 @@ typedef struct Philo {
 	int				n_eats;
 	struct timeval	t_start;
 	int				*forks;
-	int				n_forks;
 	int				finished_eating;
 	int				end;
 	pthread_mutex_t	*forks_mutex;
