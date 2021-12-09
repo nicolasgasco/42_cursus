@@ -32,7 +32,6 @@ void	ft_eat(t_philo *philo, int i, int *fork_l, int *fork_r)
 
 void	ft_think(t_philo *philo)
 {
-	ft_sleep(philo);
 	ft_put_status(philo, 't');
 }
 
