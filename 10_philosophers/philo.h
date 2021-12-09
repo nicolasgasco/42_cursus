@@ -82,7 +82,7 @@ void			ft_think(t_philo *philo);
 void			ft_death(t_philo *philo);
 
 // Time
-int				ft_calc_time_label(struct timeval start);
+int				ft_calc_timestamp(struct timeval start);
 int				ft_calc_time(struct timeval now, struct timeval start);
 struct timeval	ft_now(void);
 void			ft_msleep(t_philo *philo, int interval);
