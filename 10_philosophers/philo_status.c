@@ -14,14 +14,11 @@
 
 void	ft_put_status(t_philo *philo, char flag)
 {
-	if (philo->c_data->end == 0)
-	{
-		pthread_mutex_lock(&philo->c_data->status_mutex);
-		ft_put_timestamp(philo);
-		ft_put_id(philo->i_philo + 1);
-		ft_put_action(philo, flag);
-		pthread_mutex_unlock(&philo->c_data->status_mutex);
-	}
+	pthread_mutex_lock(&philo->c_data->status_mutex);
+	ft_put_timestamp(philo);
+	ft_put_id(philo->i_philo + 1);
+	ft_put_action(philo, flag);
+	pthread_mutex_unlock(&philo->c_data->status_mutex);
 }
 
 void	ft_put_timestamp(t_philo *philo)
