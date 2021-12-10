@@ -1,2 +1,0 @@
-- Protect death in case n_eats == -1
-- Remove while 1 and add end condition
