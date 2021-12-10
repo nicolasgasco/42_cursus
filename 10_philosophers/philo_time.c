@@ -48,7 +48,7 @@ void	ft_msleep(t_philo *philo, int interval)
 	while (i < 10)
 	{
 		usleep(interval * 100);
+		ft_death(philo);
 		i++:	
 	}
-	ft_death(philo);
 }
