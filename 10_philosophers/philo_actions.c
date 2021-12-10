@@ -35,17 +35,13 @@ void	ft_eat(t_philo *philo, int i, int *fork_l, int *fork_r)
 
 void	ft_think(t_philo *philo)
 {
-	if (philo->c_data->end == 0)
-		ft_put_status(philo, 't');
+	ft_put_status(philo, 't');
 }
 
 void	ft_sleep(t_philo *philo)
 {
-	if (philo->c_data->end == 0)
-	{
-		ft_put_status(philo, 's');
-		ft_msleep(philo, philo->c_data->t_sleep);
-	}
+	ft_put_status(philo, 's');
+	ft_msleep(philo, philo->c_data->t_sleep);
 }
 
 void	ft_death(t_philo *philo)
