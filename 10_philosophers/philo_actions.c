@@ -54,6 +54,7 @@ void	ft_death(t_philo *philo)
 
 	if (philo->c_data->end == 0)
 	{
+		elapsed_time = ft_calc_time(ft_now(), philo->t_meal);
 		if (elapsed_time > (philo->c_data->t_death))
 				ft_put_status(philo, 'd');
 		if (philo->meals == philo->c_data->n_eats)
