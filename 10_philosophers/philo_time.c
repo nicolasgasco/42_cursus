@@ -42,6 +42,13 @@ struct timeval	ft_now(void)
 
 void	ft_msleep(t_philo *philo, int interval)
 {
-	usleep(interval * 1000);
+	int	i;
+	
+	i = 0;
+	while (i < 10)
+	{
+		usleep(interval * 100);
+		i++:	
+	}
 	ft_death(philo);
 }
