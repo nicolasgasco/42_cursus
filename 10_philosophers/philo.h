@@ -78,7 +78,7 @@ void			ft_put_id(int id);
 void			ft_start_dinner(t_philo *philo, unsigned int index);
 int				ft_get_i(t_philo *philo, int index);
 void			ft_sleep(t_philo *philo);
-void			ft_eat(t_philo *philo, int index, int *fork_l, int *fork_r);
+void			ft_eat(t_philo *philo, int index);
 void			ft_think(t_philo *philo);
 void			ft_death(t_philo *philo);
 void			ft_free_c_data(t_data *c_data);
