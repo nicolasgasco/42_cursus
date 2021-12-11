@@ -12,6 +12,31 @@
 
 #include "philo.h"
 
+void	*ft_routine(void *vargp)
+{
+	t_philo	*philo_cpy;
+
+	philo_cpy = vargp;
+	if (philo_cpy->c_data->n_eats == 0)
+	{
+		ft_free_philo(philo_cpy);
+		return (NULL);
+	}
+	if (philo_cpy->c_data->n_philos > 1)
+	{
+		while (philo_cpy->c_data->end == 0)
+			ft_start_dinner(philo_cpy, philo_cpy->i_philo);
+		ft_free_philo(philo_cpy);
+	}
+	else
+	{
+		ft_msleep(philo_cpy, philo_cpy->c_data->t_death);
+		ft_put_status(philo_cpy, 'd');
+		ft_free_philo(philo_cpy);
+	}
+	return (NULL);
+}
+
 void	ft_init_threads(t_data *c_data)
 {
 	pthread_t		*philos;
@@ -60,30 +85,5 @@ void	ft_join_threads(t_data *c_data, pthread_t *philos)
 	pthread_mutex_destroy(&c_data->status_mutex);
 	ft_free_c_data(c_data);
 	ft_free_philos(philos);
-}
-
-void	*ft_routine(void *vargp)
-{
-	t_philo	*philo_cpy;
-
-	philo_cpy = vargp;
-	if (philo_cpy->c_data->n_eats == 0)
-	{
-		ft_free_philo(philo_cpy);
-		return (NULL);
-	}
-	if (philo_cpy->c_data->n_philos > 1)
-	{
-		while (philo_cpy->c_data->end == 0)
-			ft_start_dinner(philo_cpy, philo_cpy->i_philo);
-		ft_free_philo(philo_cpy);
-	}
-	else
-	{
-		ft_msleep(philo_cpy, philo_cpy->c_data->t_death);
-		ft_put_status(philo_cpy, 'd');
-		ft_free_philo(philo_cpy);
-	}
-	return (NULL);
 }
 
