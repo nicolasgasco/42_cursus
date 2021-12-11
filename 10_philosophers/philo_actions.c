@@ -12,8 +12,13 @@
 
 #include "philo.h"
 
-void	ft_eat(t_philo *philo, int i, int *fork_l, int *fork_r)
+void	ft_eat(t_philo *philo, int i)
 {
+	int				*fork_r;
+	int				*fork_l;
+	
+	fork_r = &philo->c_data->forks[i];
+	fork_l = &philo->c_data->forks[ft_get_i(philo, i - 1)];
 	if (philo->c_data->end == 0)
 	{
 		pthread_mutex_lock(&philo->c_data->forks_mutex[i]);
