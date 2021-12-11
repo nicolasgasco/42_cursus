@@ -42,6 +42,15 @@ struct timeval	ft_now(void)
 
 void	ft_msleep(t_philo *philo, int interval)
 {
-	usleep(interval * 1000);
-	ft_death(philo);
+	struct timeval	t_now;
+
+	gettimeofday(&t_now, NULL);
+	while (1)
+	{
+		usleep(10);
+		if (ft_calc_time(ft_now(), t_now) > interval && philo)
+		{
+			break;
+		}
+	}
 }
