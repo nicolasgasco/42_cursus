@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-void	ft_eat(t_philo *philo, int i)
+void	ft_eat_sleep_think(t_philo *philo, int i)
 {
 	if (!pthread_mutex_lock(&philo->c_data->f_mutex[ft_get_i(philo, i - 1)])
 		&& !pthread_mutex_lock(&philo->c_data->f_mutex[i]))
@@ -20,24 +20,19 @@ void	ft_eat(t_philo *philo, int i)
 		gettimeofday(&philo->t_meal, NULL);
 		ft_put_forks(philo);
 		philo->meals++;
-		ft_put_status(philo, 'e');
+		ft_put_eat(philo);
 		ft_msleep(philo, philo->c_data->t_eat);
 		pthread_mutex_unlock(&philo->c_data->f_mutex[ft_get_i(philo, i - 1)]);
 		pthread_mutex_unlock(&philo->c_data->f_mutex[i]);
-		ft_put_status(philo, 's');
+		ft_put_sleep(philo);
 		ft_msleep(philo, philo->c_data->t_sleep);
-		ft_put_status(philo, 't');
+		ft_put_think(philo);
 	}
-}
-
-void	ft_think(t_philo *philo)
-{
-	ft_put_status(philo, 't');
 }
 
 void	ft_sleep(t_philo *philo)
 {
-	ft_put_status(philo, 's');
+	ft_put_sleep(philo);
 	ft_msleep(philo, philo->c_data->t_sleep);
 }
 

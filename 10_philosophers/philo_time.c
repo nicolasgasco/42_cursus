@@ -49,8 +49,9 @@ void	ft_msleep(t_philo *philo, int interval)
 	while (1)
 	{
 		usleep(100);
-		if (ft_calc_time(ft_now(), t_now) == interval || philo->c_data->end == 1)
-			break;
+		if (ft_calc_time(ft_now(), t_now) == interval
+			|| philo->c_data->end == 1)
+			break ;
 		ft_death(philo);
 	}
 }

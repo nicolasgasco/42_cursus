@@ -67,14 +67,15 @@ void			ft_put_action(t_philo *philo, char flag);
 void			ft_put_timestamp(t_philo *philo);
 int				ft_calc_time_label(struct timeval start);
 void			ft_put_id(int id);
+void			ft_put_eat(t_philo *philo);
+void			ft_put_sleep(t_philo *philo);
+void			ft_put_think(t_philo *philo);
 void			ft_put_forks(t_philo *philo);
 
 // Dinner utils
+void			ft_eat_sleep_think(t_philo *philo, int i);
 void			ft_start_dinner(t_philo *philo, unsigned int index);
 int				ft_get_i(t_philo *philo, int index);
-void			ft_sleep(t_philo *philo);
-void			ft_eat(t_philo *philo, int i);
-void			ft_think(t_philo *philo);
 void			ft_death(t_philo *philo);
 void			ft_free_c_data(t_data *c_data);
 void			ft_free_philo(t_philo *philo);
