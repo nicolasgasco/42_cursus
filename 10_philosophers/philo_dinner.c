@@ -14,10 +14,18 @@
 
 void	ft_start_dinner(t_philo *philo, unsigned int index)
 {
-	ft_eat(philo, index);
-	ft_sleep(philo);
-	ft_think(philo);
+	int	*fork_r;
+	int	*fork_l;
+	
 	ft_death(philo);
+	fork_r = &philo->c_data->forks[index];
+	fork_l = &philo->c_data->forks[ft_get_i(philo, index - 1)];
+	if (*fork_l == 1)
+	{
+		ft_eat(philo, index, fork_l, fork_r);
+		ft_sleep(philo);
+		ft_think(philo);
+	}
 }
 
 void	ft_free_philo(t_philo *philo)

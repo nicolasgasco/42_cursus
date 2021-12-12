@@ -26,7 +26,9 @@ void	ft_init_common(t_data *c_data, int argc, char *argv[])
 	c_data->forks_mutex = ft_create_forks_mutex(c_data->n_philos);
 	c_data->finished_eating = 0;
 	c_data->end = 0;
-	gettimeofday(&c_data->t_start, NULL);
+	c_data->t_start.tv_sec = 0;
+	c_data->t_start.tv_usec = 0;
+	// gettimeofday(&c_data->t_start, NULL);
 }
 
 void	ft_init_philo(t_philo *philo, t_data *c_data, int i)
