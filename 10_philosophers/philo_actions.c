@@ -14,30 +14,19 @@
 
 void	ft_eat(t_philo *philo, int i)
 {
-	int	*fork_r;
-	int	*fork_l;
-
-	fork_r = &philo->c_data->forks[i];
-	fork_l = &philo->c_data->forks[ft_get_i(philo, i - 1)];
-	if (*fork_r == 1 && *fork_l == 1)
+	if (!pthread_mutex_lock(&philo->c_data->forks_mutex[ft_get_i(philo, i - 1)]) && !pthread_mutex_lock(&philo->c_data->forks_mutex[i]))
 	{
-		pthread_mutex_lock(&philo->c_data->forks_mutex[i]);
-		pthread_mutex_lock(&philo->c_data->forks_mutex[ft_get_i(philo, i - 1)]);
-		*fork_r = 0;
-		*fork_l = 0;
+		gettimeofday(&philo->t_meal, NULL);
 		ft_put_forks(philo);
 		philo->meals++;
-		gettimeofday(&philo->t_meal, NULL);
 		ft_put_status(philo, 'e');
 		ft_msleep(philo, philo->c_data->t_eat);
-		*fork_l = 1;
-		*fork_r = 1;
 		pthread_mutex_unlock(&philo->c_data->forks_mutex[ft_get_i(philo, i - 1)]);
 		pthread_mutex_unlock(&philo->c_data->forks_mutex[i]);
-		ft_sleep(philo);
-		ft_think(philo);
+		ft_put_status(philo, 's');
+		ft_msleep(philo, philo->c_data->t_sleep);
+		ft_put_status(philo, 't');
 	}
-
 }
 
 void	ft_think(t_philo *philo)

@@ -14,8 +14,8 @@
 
 void	ft_start_dinner(t_philo *philo, unsigned int index)
 {
-	ft_eat(philo, index);	
 	ft_death(philo);
+	ft_eat(philo, index);	
 }
 
 void	ft_free_philo(t_philo *philo)
