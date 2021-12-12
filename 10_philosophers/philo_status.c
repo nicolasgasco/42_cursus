@@ -52,3 +52,15 @@ void	ft_put_action(t_philo *philo, char flag)
 		philo->c_data->end = 1;
 	}
 }
+
+void	ft_put_forks(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->c_data->status_mutex);
+	ft_put_timestamp(philo);
+	ft_put_id(philo->i_philo + 1);
+	ft_putstr(1, "has taken a fork\n");
+	ft_put_timestamp(philo);
+	ft_put_id(philo->i_philo + 1);
+	ft_putstr(1, "has taken a fork\n");
+	pthread_mutex_unlock(&philo->c_data->status_mutex);
+}
