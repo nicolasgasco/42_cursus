@@ -52,7 +52,7 @@ int	*ft_create_forks(int n_philos)
 	int	i;
 
 	i = 0;
-	result = (int *)malloc(sizeof(int) * n_philos + 1);
+	result = (int *)malloc(sizeof(int) * (n_philos + 1));
 	while (i < n_philos)
 	{
 		result[i] = 1;
