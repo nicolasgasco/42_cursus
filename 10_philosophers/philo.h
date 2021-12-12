@@ -46,12 +46,6 @@ void			ft_putstr(int fd, char *s);
 int				ft_atoi(const char *str);
 void			ft_putnbr(long n);
 
-// To be deleted
-void			ft_print_common(t_data *philo);
-void			ft_print_philo(t_philo *philo);
-void			ft_put_forks(int *forks);
-void			ft_print_forks(t_philo *philo);
-
 // Time utils
 int				ft_calc_time_label(struct timeval start);
 
@@ -73,6 +67,7 @@ void			ft_put_action(t_philo *philo, char flag);
 void			ft_put_timestamp(t_philo *philo);
 int				ft_calc_time_label(struct timeval start);
 void			ft_put_id(int id);
+void			ft_put_forks(t_philo *philo);
 
 // Dinner utils
 void			ft_start_dinner(t_philo *philo, unsigned int index);
