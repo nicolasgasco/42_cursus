@@ -47,6 +47,9 @@ void			ft_init_philo(t_philo *philo, t_data *c_data, int i);
 int				*ft_create_forks(int n_philos);
 pthread_mutex_t	*ft_create_f_mutex(int n_philos);
 
+// Error
+int				ft_common_error(t_data *c_data, int argc);
+
 // Threads
 void			ft_init_threads(t_data *c_data);
 void			ft_create_threads(t_data *c_data, pthread_t *philos);
