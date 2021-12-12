@@ -30,7 +30,7 @@ typedef struct Philo {
 	int				*forks;
 	int				finished_eating;
 	int				end;
-	pthread_mutex_t	*forks_mutex;
+	pthread_mutex_t	*f_mutex;
 	pthread_mutex_t	status_mutex;
 }	t_data;
 
@@ -59,7 +59,7 @@ void			*ft_routine(void *vargp);
 void			ft_init_common(t_data *philo, int argc, char *argv[]);
 void			ft_init_philo(t_philo *philo, t_data *c_data, int i);
 int				*ft_create_forks(int n_philos);
-pthread_mutex_t	*ft_create_forks_mutex(int n_philos);
+pthread_mutex_t	*ft_create_f_mutex(int n_philos);
 
 // Status utils
 void			ft_put_status(t_philo *philo, char flag);

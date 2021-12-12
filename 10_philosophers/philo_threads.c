@@ -61,7 +61,7 @@ void	ft_create_threads(t_data *c_data, pthread_t *philos)
 			gettimeofday(&c_data->t_start, NULL);
 		philo = malloc(sizeof(t_philo));
 		ft_init_philo(philo, c_data, i);
-		pthread_mutex_init(&c_data->forks_mutex[i], NULL);
+		pthread_mutex_init(&c_data->f_mutex[i], NULL);
 		if (pthread_create(&philos[i], NULL, ft_routine, philo) != 0)
 		{
 			ft_putstr(2, "Failed to created thread\n");
@@ -84,11 +84,10 @@ void	ft_join_threads(t_data *c_data, pthread_t *philos)
 			ft_putstr(2, "Failed to join thread\n");
 			exit (2);
 		}
-		pthread_mutex_destroy(&c_data->forks_mutex[i]);
+		pthread_mutex_destroy(&c_data->f_mutex[i]);
 		i++;
 	}
 	pthread_mutex_destroy(&c_data->status_mutex);
 	ft_free_c_data(c_data);
 	ft_free_philos(philos);
 }
-

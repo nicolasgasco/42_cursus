@@ -15,7 +15,7 @@
 void	ft_start_dinner(t_philo *philo, unsigned int index)
 {
 	ft_death(philo);
-	ft_eat(philo, index);	
+	ft_eat(philo, index);
 }
 
 void	ft_free_philo(t_philo *philo)
@@ -25,7 +25,7 @@ void	ft_free_philo(t_philo *philo)
 
 void	ft_free_c_data(t_data *c_data)
 {
-	free(c_data->forks_mutex);
+	free(c_data->f_mutex);
 	free(c_data->forks);
 }
 
