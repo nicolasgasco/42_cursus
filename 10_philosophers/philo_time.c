@@ -45,12 +45,12 @@ void	ft_msleep(t_philo *philo, int interval)
 	struct timeval	t_now;
 
 	gettimeofday(&t_now, NULL);
-	usleep(1000);
 	while (philo->c_data->end == 0)
 	{
 		usleep(100);
-		if (ft_calc_time(ft_now(), t_now) >= interval)
+		if (ft_calc_time(ft_now(), philo->t_meal) > (philo->c_data->t_death))
+			ft_put_death(philo);
+		if (ft_calc_time(ft_now(), t_now) == interval)
 			break ;
-		ft_death(philo);
 	}
 }
