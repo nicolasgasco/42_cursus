@@ -16,50 +16,65 @@ void	ft_put_forks(t_philo *philo)
 {
 	int	timestamp;
 
-	timestamp = ft_calc_timestamp(philo->c_data->t_start);
-	pthread_mutex_lock(&philo->c_data->status_mutex);
-	ft_putnbr(timestamp);
-	ft_put_id(philo->i_philo + 1);
-	ft_putstr(1, "has taken a fork\n");
-	ft_putnbr(timestamp);
-	ft_put_id(philo->i_philo + 1);
-	ft_putstr(1, "has taken a fork\n");
-	pthread_mutex_unlock(&philo->c_data->status_mutex);
+	if (philo->c_data->end == 0)
+	{
+		timestamp = ft_calc_timestamp(philo->c_data->t_start);
+		pthread_mutex_lock(&philo->c_data->status_mutex);
+		ft_putnbr(timestamp);
+		ft_put_id(philo->i_philo + 1);
+		ft_putstr(1, "has taken a fork\n");
+		ft_putnbr(timestamp);
+		ft_put_id(philo->i_philo + 1);
+		ft_putstr(1, "has taken a fork\n");
+		pthread_mutex_unlock(&philo->c_data->status_mutex);
+	}
 }
 
 void	ft_put_eat(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->c_data->status_mutex);
-	ft_put_timestamp(philo);
-	ft_put_id(philo->i_philo + 1);
-	ft_putstr(1, "is eating\n");
-	pthread_mutex_unlock(&philo->c_data->status_mutex);
+	if (philo->c_data->end == 0)
+	{
+		pthread_mutex_lock(&philo->c_data->status_mutex);
+		ft_put_timestamp(philo);
+		ft_put_id(philo->i_philo + 1);
+		ft_putstr(1, "is eating\n");
+		pthread_mutex_unlock(&philo->c_data->status_mutex);
+	}
 }
 
 void	ft_put_sleep(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->c_data->status_mutex);
-	ft_put_timestamp(philo);
-	ft_put_id(philo->i_philo + 1);
-	ft_putstr(1, "is sleeping\n");
-	pthread_mutex_unlock(&philo->c_data->status_mutex);
+	if (philo->c_data->end == 0)
+	{
+		pthread_mutex_lock(&philo->c_data->status_mutex);
+		ft_put_timestamp(philo);
+		ft_put_id(philo->i_philo + 1);
+		ft_putstr(1, "is sleeping\n");
+		pthread_mutex_unlock(&philo->c_data->status_mutex);
+	}
 }
 
 void	ft_put_think(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->c_data->status_mutex);
-	ft_put_timestamp(philo);
-	ft_put_id(philo->i_philo + 1);
-	ft_putstr(1, "is thinking\n");
-	pthread_mutex_unlock(&philo->c_data->status_mutex);
+	if (philo->c_data->end == 0)
+	{
+		pthread_mutex_lock(&philo->c_data->status_mutex);
+		ft_put_timestamp(philo);
+		ft_put_id(philo->i_philo + 1);
+		ft_putstr(1, "is thinking\n");
+		pthread_mutex_unlock(&philo->c_data->status_mutex);
+	}
 }
 
 void	ft_put_death(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->c_data->status_mutex);
-	ft_put_timestamp(philo);
-	ft_put_id(philo->i_philo + 1);
-	ft_putstr(1, "died\n");
-	philo->c_data->end = 1;
-	pthread_mutex_unlock(&philo->c_data->status_mutex);
+	if (philo->c_data->end == 0)
+	{
+		pthread_mutex_lock(&philo->c_data->status_mutex);
+		ft_put_timestamp(philo);
+		ft_put_id(philo->i_philo + 1);
+		ft_putstr(1, "died\n");
+		philo->c_data->end = 1;
+		pthread_mutex_unlock(&philo->c_data->status_mutex);
+	}
 }
