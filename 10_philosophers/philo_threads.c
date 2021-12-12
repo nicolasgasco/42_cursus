@@ -34,7 +34,7 @@ void	*ft_routine(void *vargp)
 	else
 	{
 		ft_msleep(philo_cpy, philo_cpy->c_data->t_death);
-		ft_put_status(philo_cpy, 'd');
+		ft_put_death(philo_cpy);
 		ft_free_philo(philo_cpy);
 	}
 	return (NULL);

@@ -62,8 +62,6 @@ int				*ft_create_forks(int n_philos);
 pthread_mutex_t	*ft_create_f_mutex(int n_philos);
 
 // Status utils
-void			ft_put_status(t_philo *philo, char flag);
-void			ft_put_action(t_philo *philo, char flag);
 void			ft_put_timestamp(t_philo *philo);
 int				ft_calc_time_label(struct timeval start);
 void			ft_put_id(int id);
@@ -71,6 +69,7 @@ void			ft_put_eat(t_philo *philo);
 void			ft_put_sleep(t_philo *philo);
 void			ft_put_think(t_philo *philo);
 void			ft_put_forks(t_philo *philo);
+void			ft_put_death(t_philo *philo);
 
 // Dinner utils
 void			ft_eat_sleep_think(t_philo *philo, int i);
