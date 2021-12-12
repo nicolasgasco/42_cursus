@@ -46,11 +46,10 @@ void	ft_msleep(t_philo *philo, int interval)
 
 	gettimeofday(&t_now, NULL);
 	usleep(1000);
-	while (1)
+	while (philo->c_data->end == 0)
 	{
 		usleep(100);
-		if (ft_calc_time(ft_now(), t_now) == interval
-			|| philo->c_data->end == 1)
+		if (ft_calc_time(ft_now(), t_now) >= interval)
 			break ;
 		ft_death(philo);
 	}
