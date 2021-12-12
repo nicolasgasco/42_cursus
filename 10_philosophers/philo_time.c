@@ -48,8 +48,7 @@ void	ft_msleep(t_philo *philo, int interval)
 	while (philo->c_data->end == 0)
 	{
 		usleep(100);
-		if (ft_calc_time(ft_now(), philo->t_meal) > (philo->c_data->t_death))
-			ft_put_death(philo);
+		ft_death(philo);
 		if (ft_calc_time(ft_now(), t_now) == interval)
 			break ;
 	}
