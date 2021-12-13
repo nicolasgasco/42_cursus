@@ -14,7 +14,7 @@
 
 int	ft_common_error(t_data *c_data, int argc)
 {
-	if (c_data->n_philos <= 0)
+	if (c_data->n_philos <= 0 || c_data->n_philos > 200)
 		return (0);
 	if (c_data->t_death <= 0 || c_data->t_sleep <= 0 || c_data->t_eat <= 0)
 	{
