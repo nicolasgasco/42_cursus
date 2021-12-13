@@ -17,7 +17,7 @@ void	*ft_routine(void *vargp)
 	t_philo	*philo_cpy;
 
 	philo_cpy = vargp;
-	while (philo_cpy->i_philo != (philo_cpy->c_data->n_philos - 1))
+	while (philo_cpy->c_data->t_start.tv_sec == 0)
 		usleep(100);
 	gettimeofday(&philo_cpy->c_data->t_start, NULL);
 	gettimeofday(&philo_cpy->t_meal, NULL);
@@ -57,6 +57,8 @@ void	ft_create_threads(t_data *c_data, pthread_t *philos)
 	pthread_mutex_init(&c_data->status_mutex, NULL);
 	while (i < c_data->n_philos)
 	{
+		if (i == c_data->n_philos - 1)
+			gettimeofday(&c_data->t_start, NULL);
 		philo = malloc(sizeof(t_philo));
 		ft_init_philo(philo, c_data, i);
 		pthread_mutex_init(&c_data->f_mutex[i], NULL);
