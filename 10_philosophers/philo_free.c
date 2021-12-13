@@ -28,15 +28,3 @@ void	ft_free_philos(pthread_t *philos)
 	free(philos);
 }
 
-int	ft_get_i(t_philo *philo, int index)
-{
-	int	fork_index;
-
-	if (index < 0)
-		fork_index = index + philo->c_data->n_philos;
-	else if (index >= philo->c_data->n_philos)
-		fork_index = index - philo->c_data->n_philos;
-	else
-		fork_index = index;
-	return (fork_index);
-}
