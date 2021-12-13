@@ -15,16 +15,18 @@
 void	ft_put_forks(t_philo *philo)
 {
 	int	timestamp;
+	int	id;
 
 	if (philo->c_data->end == 0)
 	{
+		id = philo->i_philo + 1;
 		timestamp = ft_calc_timestamp(philo->c_data->t_start);
 		pthread_mutex_lock(&philo->c_data->status_mutex);
 		ft_putnbr(timestamp);
-		ft_put_id(philo->i_philo + 1);
+		ft_put_id(id);
 		ft_putstr(1, "has taken a fork\n");
 		ft_putnbr(timestamp);
-		ft_put_id(philo->i_philo + 1);
+		ft_put_id(id);
 		ft_putstr(1, "has taken a fork\n");
 		pthread_mutex_unlock(&philo->c_data->status_mutex);
 	}
