@@ -24,7 +24,11 @@ void	*ft_routine(void *vargp)
 	if (philo_cpy->c_data->n_philos > 1)
 	{
 		while (philo_cpy->c_data->end == 0)
-			ft_start_dinner(philo_cpy, philo_cpy->i_philo);
+		{
+			ft_death(philo);
+			if (philo->c_data->end == 1)
+				ft_eat_sleep_think(philo, index);
+		}
 		ft_free_philo(philo_cpy);
 	}
 	else
