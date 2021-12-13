@@ -23,6 +23,14 @@ int	ft_calc_timestamp(struct timeval start)
 	return (result);
 }
 
+struct timeval	ft_now(void)
+{
+	struct timeval	t_now;
+
+	gettimeofday(&t_now, NULL);
+	return (t_now);
+}
+
 int	ft_calc_time(struct timeval now, struct timeval start)
 {
 	int	result;
@@ -30,14 +38,6 @@ int	ft_calc_time(struct timeval now, struct timeval start)
 	result = (now.tv_sec - start.tv_sec) * 1000;
 	result += (now.tv_usec - start.tv_usec) / 1000;
 	return (result);
-}
-
-struct timeval	ft_now(void)
-{
-	struct timeval	t_now;
-
-	gettimeofday(&t_now, NULL);
-	return (t_now);
 }
 
 int	ft_calc_time_micro(struct timeval now, struct timeval start)
@@ -59,7 +59,7 @@ void	ft_msleep(t_philo *philo, int interval)
 	{
 		usleep(100);
 		ft_death(philo);
-		if (ft_calc_time_micro(ft_now(), t_now) == interval)
+		if (ft_calc_time_micro(ft_now(), t_now) >= interval)
 			break ;
 	}
 }

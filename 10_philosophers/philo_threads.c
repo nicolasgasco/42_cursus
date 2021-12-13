@@ -18,16 +18,16 @@ void	*ft_routine(void *vargp)
 
 	philo_cpy = vargp;
 	while (philo_cpy->c_data->t_start.tv_sec == 0)
-		usleep(50);
+		usleep(100);
 	gettimeofday(&philo_cpy->c_data->t_start, NULL);
 	gettimeofday(&philo_cpy->t_meal, NULL);
 	if (philo_cpy->c_data->n_philos > 1)
 	{
 		while (philo_cpy->c_data->end == 0)
 		{
-			ft_death(philo);
-			if (philo->c_data->end == 1)
-				ft_eat_sleep_think(philo, index);
+			ft_death(philo_cpy);
+			if (philo_cpy->c_data->end == 0)
+				ft_eat_sleep_think(philo_cpy, philo_cpy->i_philo);
 		}
 		ft_free_philo(philo_cpy);
 	}

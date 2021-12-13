@@ -16,7 +16,7 @@ int	main(int argc, char *argv[])
 {
 	t_data	c_data;
 
-	if (argc < 4 || argc > 6)
+	if (argc <= 4 || argc > 6)
 	{
 		ft_putstr(2, "Error: arguments\n");
 		return (1);
