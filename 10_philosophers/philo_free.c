@@ -12,13 +12,6 @@
 
 #include "philo.h"
 
-void	ft_start_dinner(t_philo *philo, unsigned int index)
-{
-	ft_death(philo);
-	if (philo->c_data->end == 1)
-		ft_eat_sleep_think(philo, index);
-}
-
 void	ft_free_philo(t_philo *philo)
 {
 	free(philo);
