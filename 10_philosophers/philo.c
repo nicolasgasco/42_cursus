@@ -23,7 +23,10 @@ int	main(int argc, char *argv[])
 	}
 	ft_init_common(&c_data, argc, argv);
 	if (!ft_common_error(&c_data, argc))
+	{
+		ft_putstr(2, "Error: arguments\n");
 		return (1);
+	}
 	ft_init_threads(&c_data);
 	return (0);
 }
