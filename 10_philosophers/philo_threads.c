@@ -20,6 +20,7 @@ void	*ft_routine(void *vargp)
 	while (philo_cpy->c_data->t_start.tv_sec == 0)
 		usleep(50);
 	gettimeofday(&philo_cpy->c_data->t_start, NULL);
+	gettimeofday(&philo_cpy->t_meal, NULL);
 	if (philo_cpy->c_data->n_philos > 1)
 	{
 		while (philo_cpy->c_data->end == 0)
