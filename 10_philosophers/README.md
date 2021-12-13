@@ -26,23 +26,20 @@ Execute program with parameters: n_philosophers time_before_death time_eat time_
 ```
 ./philo 4 410 200 200 1
 ```
-Expected output
+One of the possible outputs 
 ```
-0 3 has taken a fork
-0 3 has taken a fork
-0 3 is eating
-200 3 is sleeping
-200 4 has taken a fork
-200 4 has taken a fork
-200 4 is eating
-400 3 is thinking
-400 4 is sleeping
-400 1 has taken a fork
-400 1 has taken a fork
-400 1 is eating
-600 4 is thinking
-600 1 is sleeping
-600 2 has taken a fork
-600 2 has taken a fork
-600 2 is eating
+0 4 has taken a fork
+0 4 has taken a fork
+0 4 is eating
+0 2 has taken a fork
+0 2 has taken a fork
+0 2 is eating
+200 4 is sleeping
+200 1 has taken a fork
+200 1 has taken a fork
+200 1 is eating
+200 3 has taken a fork
+200 3 has taken a fork
+200 3 is eating
+200 2 is sleeping
 ```
