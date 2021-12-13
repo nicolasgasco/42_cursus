@@ -1,6 +1,6 @@
 NAME = philo
 
-SRCS=$(wildcard *.c)
+SRCS = $(wildcard *.c)
 
 FLAGS = -Wall -Wextra -Werror
 
