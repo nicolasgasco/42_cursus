@@ -58,3 +58,16 @@ void	ft_death(t_philo *philo)
 			philo->c_data->end = 1;
 	}
 }
+
+int	ft_get_i(t_philo *philo, int index)
+{
+	int	fork_index;
+
+	if (index < 0)
+		fork_index = index + philo->c_data->n_philos;
+	else if (index >= philo->c_data->n_philos)
+		fork_index = index - philo->c_data->n_philos;
+	else
+		fork_index = index;
+	return (fork_index);
+}
