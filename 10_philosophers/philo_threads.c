@@ -62,6 +62,7 @@ void	ft_create_threads(t_data *c_data, pthread_t *philos)
 		philo = malloc(sizeof(t_philo));
 		ft_init_philo(philo, c_data, i);
 		pthread_mutex_init(&c_data->f_mutex[i], NULL);
+		pthread_mutex_init(&philo->d_mutex, NULL);
 		if (pthread_create(&philos[i], NULL, ft_routine, philo) != 0)
 		{
 			ft_putstr(2, "Failed to create thread\n");
@@ -69,10 +70,10 @@ void	ft_create_threads(t_data *c_data, pthread_t *philos)
 		}
 		i++;
 	}
-	ft_join_threads(c_data, philos);
+	ft_join_threads(c_data, philo, philos);
 }
 
-void	ft_join_threads(t_data *c_data, pthread_t *philos)
+void	ft_join_threads(t_data *c_data, t_philo *philo, pthread_t *philos)
 {
 	int	i;
 
@@ -85,6 +86,7 @@ void	ft_join_threads(t_data *c_data, pthread_t *philos)
 			exit (2);
 		}
 		pthread_mutex_destroy(&c_data->f_mutex[i]);
+		pthread_mutex_destroy(&philo->d_mutex);
 		i++;
 	}
 	pthread_mutex_destroy(&c_data->status_mutex);
