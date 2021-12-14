@@ -27,4 +27,3 @@ void	ft_free_philos(pthread_t *philos)
 {
 	free(philos);
 }
-
