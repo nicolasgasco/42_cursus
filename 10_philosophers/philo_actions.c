@@ -19,7 +19,7 @@ void	ft_eat_sleep_think(t_philo *philo, int i)
 
 	fork_r = &philo->c_data->forks[philo->i_philo];
 	fork_l = &philo->c_data->forks[ft_get_i(philo, philo->i_philo - 1)];
-	if (*fork_l == 1 && *fork_r == 1 && philo->c_data-> end == 0)
+	if (*fork_l == 1 && *fork_r == 1)
 	{
 		pthread_mutex_lock(&philo->c_data->f_mutex[i]);
 		pthread_mutex_lock(&philo->c_data->f_mutex[ft_get_i(philo, i - 1)]);
