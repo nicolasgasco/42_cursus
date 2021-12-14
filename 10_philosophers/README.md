@@ -6,6 +6,7 @@ Description:
 
 42's take on the classic [Dining philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem). The mandatory part was done using the phtread API to execute n numbers of threads at once that eat, sleep, then start eating again. Mutex was used to manage the limited resources available. Given the right parameters (e.g. `5 800 200 200`), philosophers keep repeating their cycle virtually forever.
 
+Here's an example (first number is timestamp in miliseconds):
 ![Screenshot of completed project](https://res.cloudinary.com/ngasco/image/upload/v1639432723/42/Screenshot_from_2021-12-13_22-57-45_jy9pa7.png "Screenshot of Philosophers")
 ## Run the scripts
 
