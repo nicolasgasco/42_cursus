@@ -38,7 +38,6 @@ typedef struct p_data {
 	int				i_philo;
 	struct timeval	t_meal;
 	int				meals;
-	pthread_mutex_t			d_mutex;
 	t_data			*c_data;
 }	t_philo;
 
@@ -54,7 +53,7 @@ int				ft_common_error(t_data *c_data, int argc);
 // Threads
 void			ft_init_threads(t_data *c_data);
 void			ft_create_threads(t_data *c_data, pthread_t *philos);
-void			ft_join_threads(t_data *c_data, t_philo *philo, pthread_t *philos);
+void			ft_join_threads(t_data *c_data, pthread_t *philos);
 void			*ft_routine(void *vargp);
 
 // Time
