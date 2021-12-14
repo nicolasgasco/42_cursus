@@ -38,6 +38,7 @@ typedef struct p_data {
 	int				i_philo;
 	struct timeval	t_meal;
 	int				meals;
+	pthread_mutex_t			d_mutex;
 	t_data			*c_data;
 }	t_philo;
 
