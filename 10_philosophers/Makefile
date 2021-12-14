@@ -5,6 +5,7 @@ SRCS = $(wildcard *.c)
 FLAGS = -Wall -Wextra -Werror
 
 SANITIZER =  -fsanitize=address -static-libsan -g
+# SANITIZER =  -fsanitize=thread -static-libsan -g
 
 $(NAME):
 	@ gcc $(FLAGS) $(SRCS) -lpthread -o $(NAME) $(SANITIZER)
