@@ -23,7 +23,7 @@ Compile the program
 ```
 make
 ```
-Execute program with parameters: n_philosophers time_before_death time_eat time_sleep [numbers_of_eats] (last parameter is optional)
+Execute program with parameters: `n_philosophers time_before_death time_eat time_sleep [numbers_of_eats]` (last parameter is optional)
 ```
 ./philo 4 410 200 200 1
 ```
