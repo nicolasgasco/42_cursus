@@ -4,7 +4,7 @@ Description:
 > In this project, you will learn the basics of threading a process. You will learn how to make threads. You will discover the mutex.
 
 
-42's take on the classic [Dining philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem). The mandatory part was done using the phtread API to execute n numbers of threads at once that eat, then sleep, then start eating again. Mutex was used to manage the limited resources availables. Given the right parameters (e.g. 5 800 200 200), philosophers keep repeating their cycle basically infinitely.
+42's take on the classic [Dining philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem). The mandatory part was done using the phtread API to execute n numbers of threads at once that eat, sleep, then start eating again. Mutex was used to manage the limited resources availables. Given the right parameters (e.g. 5 800 200 200), philosophers keep repeating their cycle basically infinitely.
 
 ![Screenshot of completed project](https://res.cloudinary.com/ngasco/image/upload/v1639432723/42/Screenshot_from_2021-12-13_22-57-45_jy9pa7.png "Screenshot of Philosophers")
 ## Run the scripts
