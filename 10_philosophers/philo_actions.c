@@ -49,7 +49,10 @@ void	ft_death(t_philo *philo)
 	{
 		elapsed_time = ft_calc_time(ft_now(), philo->t_meal);
 		if (elapsed_time > (philo->c_data->t_death))
+		{
+			philo->c_data->end = 1;
 			ft_put_death(philo);
+		}
 		if (philo->meals == philo->c_data->n_eats)
 		{
 			philo->c_data->finished_eating++;
