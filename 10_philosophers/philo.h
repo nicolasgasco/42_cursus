@@ -33,6 +33,7 @@ typedef struct Philo {
 	pthread_mutex_t	d_mutex;
 	pthread_mutex_t	e_mutex;
 	pthread_mutex_t	*f_mutex;
+	pthread_mutex_t	t_mutex;
 	pthread_mutex_t	status_mutex;
 }	t_data;
 

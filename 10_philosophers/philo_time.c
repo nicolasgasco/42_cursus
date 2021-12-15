@@ -55,8 +55,12 @@ void	ft_msleep(t_philo *philo, int interval)
 
 	interval *= 10;
 	gettimeofday(&t_now, NULL);
-	while (philo->c_data->end == 0)
+	while (1)
 	{
+		pthread_mutex_lock(&philo->c_data->e_mutex);
+		if (philo->c_data->end == 0)
+			break;
+		pthread_mutex_unlock(&philo->c_data->e_mutex);
 		usleep(100);
 		ft_death(philo);
 		if (ft_calc_time_micro(ft_now(), t_now) >= interval)
