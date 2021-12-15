@@ -71,13 +71,9 @@ void	ft_put_think(t_philo *philo)
 
 void	ft_put_death(t_philo *philo)
 {
-
 	pthread_mutex_lock(&philo->c_data->status_mutex);
-	if (philo->c_data->end == 0)
-	{
-		ft_put_timestamp(philo);
-		ft_put_id(philo->i_philo + 1);
-		ft_putstr(1, "died\n");
-	}
+	ft_put_timestamp(philo);
+	ft_put_id(philo->i_philo + 1);
+	ft_putstr(1, "died\n");
 	pthread_mutex_unlock(&philo->c_data->status_mutex);
 }
