@@ -30,6 +30,8 @@ typedef struct Philo {
 	int				*forks;
 	int				finished_eating;
 	int				end;
+	pthread_mutex_t	d_mutex;
+	pthread_mutex_t	e_mutex;
 	pthread_mutex_t	*f_mutex;
 	pthread_mutex_t	status_mutex;
 }	t_data;

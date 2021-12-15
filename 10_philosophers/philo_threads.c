@@ -55,6 +55,8 @@ void	ft_create_threads(t_data *c_data, pthread_t *philos)
 
 	i = 0;
 	pthread_mutex_init(&c_data->status_mutex, NULL);
+	pthread_mutex_init(&c_data->d_mutex, NULL);
+	pthread_mutex_init(&c_data->e_mutex, NULL);
 	while (i < c_data->n_philos)
 	{
 		if (i == c_data->n_philos - 1)
@@ -88,6 +90,8 @@ void	ft_join_threads(t_data *c_data, pthread_t *philos)
 		i++;
 	}
 	pthread_mutex_destroy(&c_data->status_mutex);
+	pthread_mutex_destroy(&c_data->d_mutex);
+	pthread_mutex_destroy(&c_data->e_mutex);
 	ft_free_c_data(c_data);
 	ft_free_philos(philos);
 }
