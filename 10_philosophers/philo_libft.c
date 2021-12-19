@@ -12,6 +12,16 @@
 
 #include "philo.h"
 
+int		ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
 void	ft_putstr(int fd, char *s)
 {
 	int	i;
@@ -46,6 +56,8 @@ int	ft_atoi(const char *str)
 		result = (result * 10) + (str[i] - '0');
 		i++;
 	}
+	if (i < ft_strlen(str))
+		return (0);
 	return ((int)result * negative);
 }
 
