@@ -19,6 +19,8 @@
 # include <pthread.h>
 # include <limits.h>
 # include <sys/time.h>
+# include <sys/wait.h>
+
 
 typedef struct Philo {
 	int				n_philos;
@@ -57,7 +59,7 @@ int				ft_common_error(t_data *c_data, int argc);
 void			ft_init_threads(t_data *c_data);
 void			ft_create_procs(t_data *c_data);
 void			ft_join_threads(t_data *c_data, pthread_t *philos);
-void			*ft_routine(void *vargp);
+void			ft_routine(t_philo *philo);
 
 // Time
 

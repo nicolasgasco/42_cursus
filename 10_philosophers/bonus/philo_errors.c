@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   philo_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/05 17:07:18 by ngasco            #+#    #+#             */
-/*   Updated: 2021/12/08 13:52:24 by ngasco           ###   ########.fr       */
+/*   Created: 2021/12/12 18:21:50 by ngasco            #+#    #+#             */
+/*   Updated: 2021/12/12 18:21:51 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int	main(int argc, char *argv[])
+int	ft_common_error(t_data *c_data, int argc)
 {
-	t_data	c_data;
-
-	if (argc <= 4 || argc > 6)
+	if (c_data->n_philos <= 0 || c_data->n_philos > 200)
+		return (0);
+	if (c_data->t_death <= 0 || c_data->t_sleep <= 0 || c_data->t_eat <= 0)
 	{
-		ft_putstr(2, "Error: arguments\n");
-		return (1);
+		ft_free_c_data(c_data);
+		return (0);
 	}
-	ft_init_common(&c_data, argc, argv);
-	if (!ft_common_error(&c_data, argc))
+	if (argc == 6 && c_data->n_eats <= 0)
 	{
-		ft_putstr(2, "Error: arguments\n");
-		return (1);
+		ft_free_c_data(c_data);
+		return (0);
 	}
-	ft_create_procs(&c_data);
-	return (0);
+	return (1);
 }

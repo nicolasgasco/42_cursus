@@ -10,35 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
-void	*ft_routine(void *vargp)
+void	ft_routine(t_philo *philo)
 {
-	t_philo	*philo_cpy;
-
-	philo_cpy = vargp;
-	while (philo_cpy->c_data->t_start.tv_sec == 0)
-		usleep(10);
-	usleep(1000);
-	gettimeofday(&philo_cpy->c_data->t_start, NULL);
-	gettimeofday(&philo_cpy->t_meal, NULL);
-	if (philo_cpy->c_data->n_philos > 1)
+	printf("Inside routine (%d)\n", philo->i_philo);
+	// while (philo->c_data->t_start.tv_sec == 0)
+	// 	usleep(10);
+	// usleep(1000);
+	gettimeofday(&philo->c_data->t_start, NULL);
+	gettimeofday(&philo->t_meal, NULL);
+	if (philo->c_data->n_philos > 1)
 	{
-		while (philo_cpy->c_data->end == 0)
+		while (philo->c_data->end == 0)
 		{ 
-			ft_death(philo_cpy);
-			if (philo_cpy->c_data->end == 0)
-				ft_eat_sleep_think(philo_cpy, philo_cpy->i_philo);
+			ft_death(philo);
+			if (philo->c_data->end == 0)
+				ft_eat_sleep_think(philo, philo->i_philo);
 		}
-		ft_free_philo(philo_cpy);
+		ft_free_philo(philo);
 	}
 	else
 	{
-		ft_msleep(philo_cpy, philo_cpy->c_data->t_death);
-		ft_put_death(philo_cpy);
-		ft_free_philo(philo_cpy);
+		printf("One philosopher (%d)\n", philo->i_philo);
+		ft_msleep(philo, philo->c_data->t_death);
+		ft_put_death(philo);
+		// ft_free_philo(philo);
 	}
-	return (NULL);
+	return;
 }
 
 // void	ft_init_threads(t_data *c_data)
@@ -51,25 +50,30 @@ void	*ft_routine(void *vargp)
 
 void	ft_create_procs(t_data *c_data)
 {
-	// t_philo	*philo;
+	t_philo	*philo;
 	int		i;
 	int		id;
 
 	i = 0;
-	// pthread_mutex_init(&c_data->status_mutex, NULL);
-	// pthread_mutex_init(&c_data->d_mutex, NULL);
-	// pthread_mutex_init(&c_data->e_mutex, NULL);
-	// pthread_mutex_init(&c_data->t_mutex, NULL);
 	id = fork();
-	if (id != 0)
+	waitpid(id, NULL, 0);
+	if (id == 0)
 	{
-		printf("%d\n", id);
+		printf("Process %d\n", id);
 		while (i < c_data->n_philos)
 		{
-			if (id != 0)
+			if (id == 0)
+			{
 				id = fork();
-			if (id != 0)
-				printf("Process %d\n", id);
+				waitpid(id, NULL, 0);
+				if (id != 0)
+				{
+					philo = malloc(sizeof(t_philo));
+					ft_init_philo(philo, c_data, i);
+					printf("%d (%d)\n", id, philo->i_philo);
+					ft_routine(philo);
+				}
+			}
 			i++;
 		}
 	}

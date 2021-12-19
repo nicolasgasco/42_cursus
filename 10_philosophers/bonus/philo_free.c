@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   philo_dinner_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/05 17:07:18 by ngasco            #+#    #+#             */
-/*   Updated: 2021/12/08 13:52:24 by ngasco           ###   ########.fr       */
+/*   Created: 2021/12/08 13:56:35 by ngasco            #+#    #+#             */
+/*   Updated: 2021/12/08 13:56:36 by ngasco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int	main(int argc, char *argv[])
+void	ft_free_philo(t_philo *philo)
 {
-	t_data	c_data;
+	free(philo);
+}
 
-	if (argc <= 4 || argc > 6)
-	{
-		ft_putstr(2, "Error: arguments\n");
-		return (1);
-	}
-	ft_init_common(&c_data, argc, argv);
-	if (!ft_common_error(&c_data, argc))
-	{
-		ft_putstr(2, "Error: arguments\n");
-		return (1);
-	}
-	ft_create_procs(&c_data);
-	return (0);
+void	ft_free_c_data(t_data *c_data)
+{
+	free(c_data->f_mutex);
+	free(c_data->forks);
+}
+
+void	ft_free_philos(pthread_t *philos)
+{
+	free(philos);
 }
