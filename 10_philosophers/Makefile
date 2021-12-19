@@ -4,7 +4,7 @@ BONUS = philo_bonus
 
 SRCS = $(wildcard *.c)
 
-SRCS_BONUS = $(wildcard *.c)
+SRCS_BONUS = $(wildcard bonus/*)
 
 FLAGS = -Wall -Wextra -Werror
 
