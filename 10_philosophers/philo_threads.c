@@ -18,7 +18,8 @@ void	*ft_routine(void *vargp)
 
 	philo_cpy = vargp;
 	while (philo_cpy->c_data->t_start.tv_sec == 0)
-		usleep(100);
+		usleep(10);
+	usleep(1000);
 	gettimeofday(&philo_cpy->c_data->t_start, NULL);
 	gettimeofday(&philo_cpy->t_meal, NULL);
 	if (philo_cpy->c_data->n_philos > 1)
