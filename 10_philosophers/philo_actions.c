@@ -48,10 +48,10 @@ void	ft_death(t_philo *philo)
 {
 	int	elapsed_time;
 
-	// pthread_mutex_lock(&philo->c_data->d_mutex);
+	pthread_mutex_lock(&philo->c_data->d_mutex);
 	if (philo->c_data->end == 0)
 	{
-		// pthread_mutex_unlock(&philo->c_data->d_mutex);
+		pthread_mutex_unlock(&philo->c_data->d_mutex);
 		elapsed_time = ft_calc_time(ft_now(), philo->t_meal);
 		if (elapsed_time > (philo->c_data->t_death))
 		{
@@ -66,8 +66,8 @@ void	ft_death(t_philo *philo)
 		if (philo->c_data->finished_eating == philo->c_data->n_philos)
 			philo->c_data->end = 1;
 	}
-	// else
-	// 	pthread_mutex_unlock(&philo->c_data->d_mutex);
+	else
+		pthread_mutex_unlock(&philo->c_data->d_mutex);
 }
 
 int	ft_get_i(t_philo *philo, int index)
