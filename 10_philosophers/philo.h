@@ -75,6 +75,7 @@ void			ft_free_philos(pthread_t *philos);
 // Actions
 void			ft_eat_sleep_think(t_philo *philo, int i);
 void			ft_death(t_philo *philo);
+void			ft_eat(t_philo *philo, int *fork_l, int *fork_r);
 int				ft_get_i(t_philo *philo, int index);
 
 // Status
