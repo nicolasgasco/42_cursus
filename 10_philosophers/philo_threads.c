@@ -25,7 +25,7 @@ void	*ft_routine(void *vargp)
 	if (philo_cpy->c_data->n_philos > 1)
 	{
 		while (philo_cpy->c_data->end == 0)
-		ft_eat_sleep_think(philo_cpy, philo_cpy->i_philo);
+			ft_eat_sleep_think(philo_cpy, philo_cpy->i_philo);
 		ft_free_philo(philo_cpy);
 	}
 	else

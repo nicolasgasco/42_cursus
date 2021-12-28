@@ -20,7 +20,6 @@ void	ft_free_philo(t_philo *philo)
 void	ft_free_c_data(t_data *c_data)
 {
 	free(c_data->f_mutex);
-	free(c_data->forks);
 }
 
 void	ft_free_philos(pthread_t *philos)

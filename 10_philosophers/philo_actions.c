@@ -81,7 +81,7 @@ int	ft_get_i(t_philo *philo, int index)
 
 void	ft_lock_mutexes(t_philo *philo, int i)
 {
-	if ((philo->i_philo % 2 + 1) == 0)
+	if ((philo->i_philo + 1) % 2 == 0)
 	{
 		pthread_mutex_lock(&philo->c_data->f_mutex[ft_get_i(philo, i - 1)]);
 		pthread_mutex_lock(&philo->c_data->f_mutex[i]);
