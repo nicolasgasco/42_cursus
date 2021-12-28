@@ -23,10 +23,7 @@ void	ft_init_common(t_data *c_data, int argc, char *argv[])
 	c_data->t_eat = ft_atoi(argv[3]);
 	c_data->t_sleep = ft_atoi(argv[4]);
 	if (c_data->n_philos > 0 && c_data->n_philos <= 200)
-	{
-		c_data->forks = ft_create_forks(c_data->n_philos);
 		c_data->f_mutex = ft_create_f_mutex(c_data->n_philos);
-	}
 	c_data->finished_eating = 0;
 	c_data->end = 0;
 	c_data->t_start.tv_sec = 0;

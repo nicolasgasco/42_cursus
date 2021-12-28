@@ -100,6 +100,5 @@ void			ft_msleep(t_philo *philo, int interval);
 void			ft_putstr(int fd, char *s);
 int				ft_atoi(const char *str);
 void			ft_putnbr(long n);
-int				*ft_create_forks(int n_philos);
 
 #endif
