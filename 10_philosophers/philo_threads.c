@@ -36,17 +36,7 @@ void	*ft_routine(void *vargp)
 void	ft_valid_sym(t_philo *philo_cpy)
 {
 	while (philo_cpy->c_data->end == 0)
-	{ 
-		ft_death(philo_cpy);
-		pthread_mutex_lock(&philo_cpy->c_data->d_mutex);
-		if (philo_cpy->c_data->end == 0)
-		{
-			pthread_mutex_unlock(&philo_cpy->c_data->d_mutex);
-			ft_eat_sleep_think(philo_cpy, philo_cpy->i_philo);
-		}
-		else
-			pthread_mutex_unlock(&philo_cpy->c_data->d_mutex);
-	}
+		ft_eat_sleep_think(philo_cpy, philo_cpy->i_philo);
 	ft_free_philo(philo_cpy);
 }
 
