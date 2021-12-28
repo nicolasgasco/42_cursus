@@ -14,16 +14,7 @@
 
 void	ft_eat_sleep_think(t_philo *philo, int i)
 {
-	if (philo->i_philo % 2 == 0)
-	{
-		pthread_mutex_lock(&philo->c_data->f_mutex[ft_get_i(philo, i - 1)]);
-		pthread_mutex_lock(&philo->c_data->f_mutex[i]);
-	}
-	else
-	{
-		pthread_mutex_lock(&philo->c_data->f_mutex[i]);	
-		pthread_mutex_lock(&philo->c_data->f_mutex[ft_get_i(philo, i - 1)]);
-	}
+	ft_lock_mutexes(philo, i);
 	ft_death(philo);
 	ft_eat(philo);
 	pthread_mutex_unlock(&philo->c_data->f_mutex[ft_get_i(philo, i - 1)]);
@@ -86,4 +77,18 @@ int	ft_get_i(t_philo *philo, int index)
 	else
 		fork_index = index;
 	return (fork_index);
+}
+
+void	ft_lock_mutexes(t_philo *philo, int i)
+{
+	if ((philo->i_philo % 2 + 1) == 0)
+	{
+		pthread_mutex_lock(&philo->c_data->f_mutex[ft_get_i(philo, i - 1)]);
+		pthread_mutex_lock(&philo->c_data->f_mutex[i]);
+	}
+	else
+	{
+		pthread_mutex_lock(&philo->c_data->f_mutex[i]);	
+		pthread_mutex_lock(&philo->c_data->f_mutex[ft_get_i(philo, i - 1)]);
+	}
 }
