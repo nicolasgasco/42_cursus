@@ -59,6 +59,7 @@ void			ft_init_threads(t_data *c_data);
 void			ft_create_threads(t_data *c_data, pthread_t *philos);
 void			ft_join_threads(t_data *c_data, pthread_t *philos);
 void			*ft_routine(void *vargp);
+void			ft_valid_sym(t_philo *philo_cpy);
 
 // Time
 int				ft_calc_timestamp(struct timeval start);

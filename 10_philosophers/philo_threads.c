@@ -23,15 +23,7 @@ void	*ft_routine(void *vargp)
 	gettimeofday(&philo_cpy->c_data->t_start, NULL);
 	gettimeofday(&philo_cpy->t_meal, NULL);
 	if (philo_cpy->c_data->n_philos > 1)
-	{
-		while (philo_cpy->c_data->end == 0)
-		{ 
-			ft_death(philo_cpy);
-			if (philo_cpy->c_data->end == 0)
-				ft_eat_sleep_think(philo_cpy, philo_cpy->i_philo);
-		}
-		ft_free_philo(philo_cpy);
-	}
+		ft_valid_sym(philo_cpy);
 	else
 	{
 		ft_msleep(philo_cpy, philo_cpy->c_data->t_death);
@@ -39,6 +31,23 @@ void	*ft_routine(void *vargp)
 		ft_free_philo(philo_cpy);
 	}
 	return (NULL);
+}
+
+void	ft_valid_sym(t_philo *philo_cpy)
+{
+	while (philo_cpy->c_data->end == 0)
+	{ 
+		ft_death(philo_cpy);
+		pthread_mutex_lock(&philo_cpy->c_data->d_mutex);
+		if (philo_cpy->c_data->end == 0)
+		{
+			pthread_mutex_unlock(&philo_cpy->c_data->d_mutex);
+			ft_eat_sleep_think(philo_cpy, philo_cpy->i_philo);
+		}
+		else
+			pthread_mutex_unlock(&philo_cpy->c_data->d_mutex);
+	}
+	ft_free_philo(philo_cpy);
 }
 
 void	ft_init_threads(t_data *c_data)
