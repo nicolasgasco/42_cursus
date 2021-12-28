@@ -59,7 +59,6 @@ void			ft_init_threads(t_data *c_data);
 void			ft_create_threads(t_data *c_data, pthread_t *philos);
 void			ft_join_threads(t_data *c_data, pthread_t *philos);
 void			*ft_routine(void *vargp);
-void			ft_valid_sym(t_philo *philo_cpy);
 
 // Time
 int				ft_calc_timestamp(struct timeval start);
@@ -76,7 +75,7 @@ void			ft_free_philos(pthread_t *philos);
 // Actions
 void			ft_eat_sleep_think(t_philo *philo, int i);
 void			ft_death(t_philo *philo);
-void			ft_eat(t_philo *philo, int *fork_l, int *fork_r);
+void			ft_eat(t_philo *philo);
 int				ft_get_i(t_philo *philo, int index);
 
 // Status
