@@ -14,8 +14,8 @@
 
 void	ft_eat_sleep_think(t_philo *philo, int i)
 {
-	ft_lock_mutexes(philo, i);
 	ft_death(philo);
+	ft_lock_mutexes(philo, i);
 	ft_eat(philo);
 	pthread_mutex_unlock(&philo->c_data->f_mutex[ft_get_i(philo, i - 1)]);
 	pthread_mutex_unlock(&philo->c_data->f_mutex[i]);
@@ -34,6 +34,15 @@ void	ft_eat(t_philo *philo)
 		philo->meals++;
 		gettimeofday(&philo->t_meal, NULL);
 		ft_put_eat(philo);
+		if (philo->meals == philo->c_data->n_eats)
+		{
+			philo->c_data->finished_eating++;
+			philo->meals++;
+		}
+		if (philo->c_data->finished_eating == philo->c_data->n_philos)
+		{
+			philo->c_data->end = 1;
+		}
 		ft_msleep(philo, philo->c_data->t_eat);
 	}
 	else
@@ -54,13 +63,6 @@ void	ft_death(t_philo *philo)
 			philo->c_data->end = 1;
 			ft_put_death(philo);
 		}
-		if (philo->meals == philo->c_data->n_eats)
-		{
-			philo->c_data->finished_eating++;
-			philo->meals++;
-		}
-		if (philo->c_data->finished_eating == philo->c_data->n_philos)
-			philo->c_data->end = 1;
 	}
 	else
 		pthread_mutex_unlock(&philo->c_data->d_mutex);
@@ -81,7 +83,7 @@ int	ft_get_i(t_philo *philo, int index)
 
 void	ft_lock_mutexes(t_philo *philo, int i)
 {
-	if ((philo->i_philo + 1) % 2 == 0)
+	if ((philo->i_philo + 1) % 2 != 0)
 	{
 		pthread_mutex_lock(&philo->c_data->f_mutex[ft_get_i(philo, i - 1)]);
 		pthread_mutex_lock(&philo->c_data->f_mutex[i]);
