@@ -47,8 +47,9 @@ typedef struct p_data {
 // Init
 void			ft_init_common(t_data *philo, int argc, char *argv[]);
 void			ft_init_philo(t_philo *philo, t_data *c_data, int i);
-int				*ft_create_forks(int n_philos);
 pthread_mutex_t	*ft_create_f_mutex(int n_philos);
+void			ft_init_c_mutex(t_data *c_data);
+void			ft_destroy_c_mutex(t_data *c_data);
 
 // Error
 int				ft_common_error(t_data *c_data, int argc);
@@ -60,7 +61,6 @@ void			ft_join_threads(t_data *c_data, pthread_t *philos);
 void			*ft_routine(void *vargp);
 
 // Time
-
 int				ft_calc_timestamp(struct timeval start);
 int				ft_calc_time(struct timeval now, struct timeval start);
 int				ft_calc_time_micro(struct timeval now, struct timeval start);
@@ -100,5 +100,6 @@ void			ft_msleep(t_philo *philo, int interval);
 void			ft_putstr(int fd, char *s);
 int				ft_atoi(const char *str);
 void			ft_putnbr(long n);
+int				*ft_create_forks(int n_philos);
 
 #endif

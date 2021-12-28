@@ -49,18 +49,18 @@ pthread_mutex_t	*ft_create_f_mutex(int n_philos)
 	return (result);
 }
 
-int	*ft_create_forks(int n_philos)
+void	ft_init_c_mutex(t_data *c_data)
 {
-	int	*result;
-	int	i;
+	pthread_mutex_init(&c_data->status_mutex, NULL);
+	pthread_mutex_init(&c_data->d_mutex, NULL);
+	pthread_mutex_init(&c_data->e_mutex, NULL);
+	pthread_mutex_init(&c_data->t_mutex, NULL);
+}
 
-	i = 0;
-	result = (int *)malloc(sizeof(int) * (n_philos + 1));
-	while (i < n_philos)
-	{
-		result[i] = 1;
-		i++;
-	}
-	result[i] = -1;
-	return (result);
+void	ft_destroy_c_mutex(t_data *c_data)
+{
+	pthread_mutex_destroy(&c_data->status_mutex);
+	pthread_mutex_destroy(&c_data->d_mutex);
+	pthread_mutex_destroy(&c_data->e_mutex);
+	pthread_mutex_destroy(&c_data->t_mutex);
 }

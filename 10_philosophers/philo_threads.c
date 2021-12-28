@@ -19,7 +19,7 @@ void	*ft_routine(void *vargp)
 	philo_cpy = vargp;
 	while (philo_cpy->c_data->t_start.tv_sec == 0)
 		usleep(10);
-	usleep(1000);
+	usleep(500000);
 	gettimeofday(&philo_cpy->c_data->t_start, NULL);
 	gettimeofday(&philo_cpy->t_meal, NULL);
 	if (philo_cpy->c_data->n_philos > 1)
@@ -55,10 +55,7 @@ void	ft_create_threads(t_data *c_data, pthread_t *philos)
 	int		i;
 
 	i = 0;
-	pthread_mutex_init(&c_data->status_mutex, NULL);
-	pthread_mutex_init(&c_data->d_mutex, NULL);
-	pthread_mutex_init(&c_data->e_mutex, NULL);
-	pthread_mutex_init(&c_data->t_mutex, NULL);
+	ft_init_c_mutex(c_data);
 	while (i < c_data->n_philos)
 	{
 		if (i == c_data->n_philos - 1)
@@ -88,10 +85,7 @@ void	ft_join_threads(t_data *c_data, pthread_t *philos)
 		pthread_mutex_destroy(&c_data->f_mutex[i]);
 		i++;
 	}
-	pthread_mutex_destroy(&c_data->status_mutex);
-	pthread_mutex_destroy(&c_data->d_mutex);
-	pthread_mutex_destroy(&c_data->e_mutex);
-	pthread_mutex_destroy(&c_data->t_mutex);
+	ft_destroy_c_mutex(c_data);
 	ft_free_c_data(c_data);
 	ft_free_philos(philos);
 }
