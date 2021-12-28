@@ -35,6 +35,7 @@ void	ft_eat_sleep_think(t_philo *philo, int i)
 
 void	ft_eat(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->c_data->d_mutex);
 	if (philo->c_data->end == 0)
 	{
 		pthread_mutex_unlock(&philo->c_data->d_mutex);
