@@ -77,11 +77,7 @@ int				ft_get_i(t_philo *philo, int index);
 void			ft_lock_mutexes(t_philo *philo, int i);
 
 // Status
-void			ft_put_forks(t_philo *philo);
-void			ft_put_eat(t_philo *philo);
-void			ft_put_sleep(t_philo *philo);
-void			ft_put_think(t_philo *philo);
-void			ft_put_death(t_philo *philo);
+void			ft_put_status(t_philo *philo, char flag);
 
 // Time
 int				ft_calc_timestamp(struct timeval start);

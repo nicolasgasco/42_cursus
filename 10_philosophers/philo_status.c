@@ -12,64 +12,29 @@
 
 #include "philo.h"
 
-void	ft_put_forks(t_philo *philo)
+void	ft_put_status(t_philo *philo, char flag)
 {
 	int	timestamp;
 
 	timestamp = ft_calc_timestamp(philo->c_data->t_start);
-	if (philo->c_data->end == 0)
+	pthread_mutex_lock(&philo->c_data->death_mutex);
+	if (philo->c_data->end == 1 && flag != 'd')
 	{
-		pthread_mutex_lock(&philo->c_data->status_mutex);
+		pthread_mutex_unlock(&philo->c_data->death_mutex);
+		return ;
+	}
+	else
+		pthread_mutex_unlock(&philo->c_data->death_mutex);
+	pthread_mutex_lock(&philo->c_data->status_mutex);
+	if (flag == 'f')
 		printf("%d %d has taken a fork\n", timestamp, philo->i_philo + 1);
-		pthread_mutex_unlock(&philo->c_data->status_mutex);
-	}
-}
-
-void	ft_put_eat(t_philo *philo)
-{
-	int	timestamp;
-
-	timestamp = ft_calc_timestamp(philo->c_data->t_start);
-	if (philo->c_data->end == 0)
-	{
-		pthread_mutex_lock(&philo->c_data->status_mutex);
+	else if (flag == 'e')
 		printf("%d %d is eating\n", timestamp, philo->i_philo + 1);
-		pthread_mutex_unlock(&philo->c_data->status_mutex);
-	}
-}
-
-void	ft_put_sleep(t_philo *philo)
-{
-	int	timestamp;
-
-	timestamp = ft_calc_timestamp(philo->c_data->t_start);
-	if (philo->c_data->end == 0)
-	{
-		pthread_mutex_lock(&philo->c_data->status_mutex);
+	else if (flag == 's')
 		printf("%d %d is sleeping\n", timestamp, philo->i_philo + 1);
-		pthread_mutex_unlock(&philo->c_data->status_mutex);
-	}
-}
-
-void	ft_put_think(t_philo *philo)
-{
-	int	timestamp;
-
-	timestamp = ft_calc_timestamp(philo->c_data->t_start);
-	if (philo->c_data->end == 0)
-	{
-		pthread_mutex_lock(&philo->c_data->status_mutex);
+	else if (flag == 't')
 		printf("%d %d is thinking\n", timestamp, philo->i_philo + 1);
-		pthread_mutex_unlock(&philo->c_data->status_mutex);
-	}
-}
-
-void	ft_put_death(t_philo *philo)
-{
-	if (philo->c_data->end == 0)
-	{
-		pthread_mutex_lock(&philo->c_data->status_mutex);
-		printf("%d %d died\n", ft_calc_timestamp(philo->c_data->t_start), philo->i_philo + 1);
-		pthread_mutex_unlock(&philo->c_data->status_mutex);
-	}
+	else if (flag == 'd')
+		printf("%d %d died\n", timestamp, philo->i_philo + 1);
+	pthread_mutex_unlock(&philo->c_data->status_mutex);
 }
