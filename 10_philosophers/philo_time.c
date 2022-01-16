@@ -49,8 +49,13 @@ void	ft_msleep(t_philo *philo, int interval)
 	{
 		usleep(100);
 		ft_death(philo);
-		if (ft_calc_time(ft_now(), t_now) >= interval)
+		pthread_mutex_lock(&philo->c_data->death_mutex);
+		if (ft_calc_time(ft_now(), t_now) >= interval || philo->c_data->end == 1)
+		{
+			pthread_mutex_unlock(&philo->c_data->death_mutex);
 			break ;
+		}
+		pthread_mutex_unlock(&philo->c_data->death_mutex);
 	}
 	while ((ft_calc_timestamp(philo->c_data->t_start) % 2) != 0)
 	{

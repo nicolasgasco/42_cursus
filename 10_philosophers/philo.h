@@ -32,7 +32,7 @@ typedef struct Philo {
 	int				end;
 	pthread_mutex_t	*f_mutex;
 	pthread_mutex_t	status_mutex;
-	pthread_mutex_t death_mutex;
+	pthread_mutex_t	death_mutex;
 }	t_data;
 
 typedef struct p_data {
@@ -71,6 +71,7 @@ void			ft_free_philos(pthread_t *philos);
 
 // Actions
 void			ft_eat_sleep_think(t_philo *philo, int i);
+void			ft_eat(t_philo *philo, int *fork_r, int *fork_l, int i);
 void			ft_death(t_philo *philo);
 int				ft_get_i(t_philo *philo, int index);
 void			ft_lock_mutexes(t_philo *philo, int i);
@@ -81,11 +82,6 @@ void			ft_put_eat(t_philo *philo);
 void			ft_put_sleep(t_philo *philo);
 void			ft_put_think(t_philo *philo);
 void			ft_put_death(t_philo *philo);
-
-// Status utils
-void			ft_put_timestamp(t_philo *philo);
-int				ft_calc_time_label(struct timeval start);
-void			ft_put_id(int id);
 
 // Time
 int				ft_calc_timestamp(struct timeval start);

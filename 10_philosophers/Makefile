@@ -19,7 +19,7 @@ bonus:
 	@ gcc $(FLAGS) $(SRCS_BONUS) -lpthread -o $(BONUS)
 	@ echo "Compiling bonus..."
 
-all : $(NAME) bonus
+all : $(NAME) 
 
 clean :
 	@ rm -rf $(wildcard *.o)

@@ -14,40 +14,52 @@
 
 void	ft_put_forks(t_philo *philo)
 {
+	int	timestamp;
+
+	timestamp = ft_calc_timestamp(philo->c_data->t_start);
 	if (philo->c_data->end == 0)
 	{
 		pthread_mutex_lock(&philo->c_data->status_mutex);
-		printf("%d %d has taken a fork\n", ft_calc_timestamp(philo->c_data->t_start), philo->i_philo + 1);
+		printf("%d %d has taken a fork\n", timestamp, philo->i_philo + 1);
 		pthread_mutex_unlock(&philo->c_data->status_mutex);
 	}
 }
 
 void	ft_put_eat(t_philo *philo)
 {
+	int	timestamp;
+
+	timestamp = ft_calc_timestamp(philo->c_data->t_start);
 	if (philo->c_data->end == 0)
 	{
 		pthread_mutex_lock(&philo->c_data->status_mutex);
-		printf("%d %d is eating\n", ft_calc_timestamp(philo->c_data->t_start), philo->i_philo + 1);
+		printf("%d %d is eating\n", timestamp, philo->i_philo + 1);
 		pthread_mutex_unlock(&philo->c_data->status_mutex);
 	}
 }
 
 void	ft_put_sleep(t_philo *philo)
 {
+	int	timestamp;
+
+	timestamp = ft_calc_timestamp(philo->c_data->t_start);
 	if (philo->c_data->end == 0)
 	{
 		pthread_mutex_lock(&philo->c_data->status_mutex);
-		printf("%d %d is sleeping\n", ft_calc_timestamp(philo->c_data->t_start), philo->i_philo + 1);
+		printf("%d %d is sleeping\n", timestamp, philo->i_philo + 1);
 		pthread_mutex_unlock(&philo->c_data->status_mutex);
 	}
 }
 
 void	ft_put_think(t_philo *philo)
 {
+	int	timestamp;
+
+	timestamp = ft_calc_timestamp(philo->c_data->t_start);
 	if (philo->c_data->end == 0)
 	{
 		pthread_mutex_lock(&philo->c_data->status_mutex);
-		printf("%d %d is thinking\n", ft_calc_timestamp(philo->c_data->t_start), philo->i_philo + 1);
+		printf("%d %d is thinking\n", timestamp, philo->i_philo + 1);
 		pthread_mutex_unlock(&philo->c_data->status_mutex);
 	}
 }
