@@ -23,7 +23,10 @@ void	ft_init_common(t_data *c_data, int argc, char *argv[])
 	c_data->t_eat = ft_atoi(argv[3]);
 	c_data->t_sleep = ft_atoi(argv[4]);
 	if (c_data->n_philos > 0 && c_data->n_philos <= 200)
+	{
+		c_data->forks = ft_create_forks(c_data->n_philos);
 		c_data->f_mutex = ft_create_f_mutex(c_data->n_philos);
+	}
 	c_data->finished_eating = 0;
 	c_data->end = 0;
 	c_data->t_start.tv_sec = 0;
@@ -46,18 +49,18 @@ pthread_mutex_t	*ft_create_f_mutex(int n_philos)
 	return (result);
 }
 
-void	ft_init_c_mutex(t_data *c_data)
+int	*ft_create_forks(int n_philos)
 {
-	pthread_mutex_init(&c_data->status_mutex, NULL);
-	pthread_mutex_init(&c_data->d_mutex, NULL);
-	pthread_mutex_init(&c_data->e_mutex, NULL);
-	pthread_mutex_init(&c_data->t_mutex, NULL);
-}
+	int	*result;
+	int	i;
 
-void	ft_destroy_c_mutex(t_data *c_data)
-{
-	pthread_mutex_destroy(&c_data->status_mutex);
-	pthread_mutex_destroy(&c_data->d_mutex);
-	pthread_mutex_destroy(&c_data->e_mutex);
-	pthread_mutex_destroy(&c_data->t_mutex);
+	i = 0;
+	result = (int *)malloc(sizeof(int) * (n_philos + 1));
+	while (i < n_philos)
+	{
+		result[i] = 1;
+		i++;
+	}
+	result[i] = -1;
+	return (result);
 }

@@ -30,11 +30,9 @@ typedef struct Philo {
 	int				*forks;
 	int				finished_eating;
 	int				end;
-	pthread_mutex_t	d_mutex;
-	pthread_mutex_t	e_mutex;
 	pthread_mutex_t	*f_mutex;
-	pthread_mutex_t	t_mutex;
 	pthread_mutex_t	status_mutex;
+	pthread_mutex_t death_mutex;
 }	t_data;
 
 typedef struct p_data {
@@ -47,9 +45,8 @@ typedef struct p_data {
 // Init
 void			ft_init_common(t_data *philo, int argc, char *argv[]);
 void			ft_init_philo(t_philo *philo, t_data *c_data, int i);
+int				*ft_create_forks(int n_philos);
 pthread_mutex_t	*ft_create_f_mutex(int n_philos);
-void			ft_init_c_mutex(t_data *c_data);
-void			ft_destroy_c_mutex(t_data *c_data);
 
 // Error
 int				ft_common_error(t_data *c_data, int argc);
@@ -75,7 +72,6 @@ void			ft_free_philos(pthread_t *philos);
 // Actions
 void			ft_eat_sleep_think(t_philo *philo, int i);
 void			ft_death(t_philo *philo);
-void			ft_eat(t_philo *philo);
 int				ft_get_i(t_philo *philo, int index);
 void			ft_lock_mutexes(t_philo *philo, int i);
 
