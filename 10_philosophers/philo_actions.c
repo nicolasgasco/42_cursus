@@ -23,7 +23,7 @@ void	ft_eat_sleep_think(t_philo *philo, int i)
 	if (*fork_l == 1 && *fork_r == 1)
 	{
 		pthread_mutex_unlock(&philo->c_data->death_mutex);
-		ft_eat(philo, fork_r, fork_r, i);
+		ft_eat(philo, fork_r, fork_l, i);
 		ft_put_status(philo, 's');
 		ft_msleep(philo, philo->c_data->t_sleep);
 		ft_put_status(philo, 't');
