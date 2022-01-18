@@ -38,12 +38,15 @@ int	ft_calc_time(struct timeval now, struct timeval start)
 
 void	ft_msleep(t_philo *philo, int interval)
 {
-	struct timeval	start;
+	struct timeval	t_target;
 	struct timeval	now;
+	int				target;
 
-	gettimeofday(&start, NULL);
+	gettimeofday(&t_target, NULL);
+	target = ft_calc_time(t_target, philo->c_data->t_start);
+	target += interval;
 	gettimeofday(&now, NULL);
-	while (ft_calc_time(now, start) < interval)
+	while (ft_calc_time(now, philo->c_data->t_start) < target)
 	{
 		usleep(100);
 		gettimeofday(&now, NULL);

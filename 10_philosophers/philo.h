@@ -74,7 +74,6 @@ void			ft_eat_sleep_think(t_philo *philo, int i);
 void			ft_eat(t_philo *philo, int *fork_r, int *fork_l, int i);
 void			ft_death(t_philo *philo);
 int				ft_get_i(t_philo *philo, int index);
-void			ft_lock_mutexes(t_philo *philo, int i);
 
 // Status
 void			ft_put_status(t_philo *philo, char flag);

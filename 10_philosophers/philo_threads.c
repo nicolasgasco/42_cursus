@@ -21,6 +21,8 @@ void	*ft_routine(void *vargp)
 		usleep(100);
 	gettimeofday(&philo_cpy->c_data->t_start, NULL);
 	gettimeofday(&philo_cpy->t_meal, NULL);
+	if ((philo_cpy->i_philo + 1) % 2 == 0)
+		usleep(500);
 	if (philo_cpy->c_data->n_philos > 1)
 	{
 		while (philo_cpy->c_data->end == 0)

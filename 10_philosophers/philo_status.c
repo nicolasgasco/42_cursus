@@ -17,14 +17,8 @@ void	ft_put_status(t_philo *philo, char flag)
 	int	timestamp;
 
 	timestamp = ft_calc_timestamp(philo->c_data->t_start);
-	pthread_mutex_lock(&philo->c_data->death_mutex);
 	if (philo->c_data->end == 1 && flag != 'd')
-	{
-		pthread_mutex_unlock(&philo->c_data->death_mutex);
 		return ;
-	}
-	else
-		pthread_mutex_unlock(&philo->c_data->death_mutex);
 	pthread_mutex_lock(&philo->c_data->status_mutex);
 	if (flag == 'f')
 		printf("%d %d has taken a fork\n", timestamp, philo->i_philo + 1);
