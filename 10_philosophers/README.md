@@ -35,20 +35,20 @@ Execute program with parameters: `n_philosophers time_before_death time_eat time
 ```
 ./philo 4 410 200 200 1
 ```
-One of the possible outputs 
+Expected output:
 ```
-0 4 has taken a fork
-0 4 has taken a fork
-0 4 is eating
-0 2 has taken a fork
-0 2 has taken a fork
-0 2 is eating
-200 4 is sleeping
-200 1 has taken a fork
-200 1 has taken a fork
-200 1 is eating
-200 3 has taken a fork
-200 3 has taken a fork
-200 3 is eating
-200 2 is sleeping
+0 1 has taken a fork
+0 1 has taken a fork
+0 1 is eating
+0 3 has taken a fork
+0 3 has taken a fork
+0 3 is eating
+200 3 is sleeping
+200 1 is sleeping
+200 2 has taken a fork
+200 2 has taken a fork
+200 4 has taken a fork
+200 4 has taken a fork
+200 4 is eating
+200 2 is eating
 ```
