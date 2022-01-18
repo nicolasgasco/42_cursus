@@ -8,7 +8,7 @@ Description:
 Given the right parameters (e.g. `4 410 200 200`), philosophers keep repeating their cycle virtually forever, unless a maximum number of times each philosophers must eat before the simulation ends.
 
 ```
-n_philosophers time_before_death time_eat time_sleep (time_eats)
+n_philosophers  time_before_death time_eat  time_sleep  [time_eats]
 4 410 200 200
 5 800 200 200 5
 ```
