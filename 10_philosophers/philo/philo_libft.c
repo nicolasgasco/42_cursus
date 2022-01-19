@@ -58,20 +58,3 @@ int	ft_atoi(const char *str)
 		return (0);
 	return ((int)result);
 }
-
-void	ft_putnbr(long n)
-{
-	int	result;
-
-	if (n < 10)
-	{
-		result = n + '0';
-		write(1, &result, 1);
-	}
-	else
-	{
-		result = (n % 10) + '0';
-		ft_putnbr(n / 10);
-		write(1, &result, 1);
-	}
-}

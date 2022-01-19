@@ -87,6 +87,6 @@ void			ft_msleep(t_philo *philo, int interval);
 // Libft utils
 void			ft_putstr(int fd, char *s);
 int				ft_atoi(const char *str);
-void			ft_putnbr(long n);
+int				ft_strlen(const char *s);
 
 #endif
