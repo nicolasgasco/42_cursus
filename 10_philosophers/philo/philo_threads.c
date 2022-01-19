@@ -17,22 +17,14 @@ void	*ft_routine(void *vargp)
 	t_philo	*philo_cpy;
 
 	philo_cpy = vargp;
-	while (philo_cpy->c_data->t_start.tv_sec == 0)
+	while (philo_cpy->c_data->t_start.tv_usec == 0)
 		usleep(100);
 	gettimeofday(&philo_cpy->c_data->t_start, NULL);
 	gettimeofday(&philo_cpy->t_meal, NULL);
-	if ((philo_cpy->i_philo + 1) % 2 == 0)
+	if ((philo_cpy->i_philo + 1) % 2 != 0)
 		usleep(500);
 	if (philo_cpy->c_data->n_philos > 1)
-	{
-		while (philo_cpy->c_data->end == 0)
-		{
-			ft_death(philo_cpy);
-			if (philo_cpy->c_data->end == 0)
-				ft_eat_sleep_think(philo_cpy, philo_cpy->i_philo);
-		}
-		ft_free_philo(philo_cpy);
-	}
+		ft_multiple_philos(philo_cpy);
 	else
 	{
 		ft_msleep(philo_cpy, philo_cpy->c_data->t_death);
@@ -40,6 +32,17 @@ void	*ft_routine(void *vargp)
 		ft_free_philo(philo_cpy);
 	}
 	return (NULL);
+}
+
+void	ft_multiple_philos(t_philo *philo)
+{
+	while (philo->c_data->end == 0)
+	{
+		ft_death(philo);
+		if (philo->c_data->end == 0)
+			ft_eat_sleep_think(philo, philo->i_philo);
+	}
+	ft_free_philo(philo);
 }
 
 void	ft_init_threads(t_data *c_data)
@@ -66,9 +69,7 @@ void	ft_create_threads(t_data *c_data, pthread_t *philos)
 		ft_init_philo(philo, c_data, i);
 		pthread_mutex_init(&c_data->f_mutex[i], NULL);
 		if (pthread_create(&philos[i], NULL, ft_routine, philo) != 0)
-		{
 			ft_putstr(2, "Failed to create thread\n");
-		}
 		i++;
 	}
 	ft_join_threads(c_data, philos);
@@ -82,9 +83,7 @@ void	ft_join_threads(t_data *c_data, pthread_t *philos)
 	while (i < c_data->n_philos)
 	{
 		if (pthread_join(philos[i], NULL) != 0)
-		{
 			ft_putstr(2, "Failed to join thread\n");
-		}
 		pthread_mutex_destroy(&c_data->f_mutex[i]);
 		i++;
 	}
