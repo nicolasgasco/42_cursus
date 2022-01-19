@@ -4,7 +4,7 @@ BONUS = philo_bonus
 
 SRCS = $(wildcard *.c)
 
-SRCS_BONUS = $(wildcard bonus/*)
+SRCS_BONUS = $(wildcard ../philo_bonus/*)
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -17,9 +17,9 @@ $(NAME):
 
 bonus:
 	@ gcc $(FLAGS) $(SRCS_BONUS) -lpthread -o $(BONUS)
-	@ echo "Compiling bonus..."
+	@ echo "Compiling philosophers - bonus..."
 
-all : $(NAME) 
+all : $(NAME) bonus 
 
 clean :
 	@ rm -rf $(wildcard *.o)

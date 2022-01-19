@@ -15,11 +15,11 @@
 int	ft_calc_timestamp(struct timeval start)
 {
 	int				result;
-	struct timeval	t_now;
+	struct timeval	now;
 
-	gettimeofday(&t_now, NULL);
-	result = (t_now.tv_sec - start.tv_sec) * 1000;
-	result += (t_now.tv_usec - start.tv_usec) / 1000;
+	gettimeofday(&now, NULL);
+	result = (now.tv_sec * 1000) + (now.tv_usec / 1000);
+	result -= (start.tv_sec * 1000) + (start.tv_usec / 1000);
 	return (result);
 }
 
@@ -35,38 +35,25 @@ int	ft_calc_time(struct timeval now, struct timeval start)
 {
 	int	result;
 
-	result = (now.tv_sec - start.tv_sec) * 1000;
-	result += (now.tv_usec - start.tv_usec) / 1000;
-	return (result);
-}
-
-int	ft_calc_time_micro(struct timeval now, struct timeval start)
-{
-	int	result;
-
-	result = (now.tv_sec - start.tv_sec) * 10000;
-	result += (now.tv_usec - start.tv_usec) / 100;
-	return (result);
+	result = (now.tv_sec * 1000 + now.tv_usec / 1000);
+	result -= (start.tv_sec * 1000 + start.tv_usec / 1000);
+	return  (result);
 }
 
 void	ft_msleep(t_philo *philo, int interval)
 {
-	struct timeval	t_now;
+	struct timeval	t_target;
+	struct timeval	now;
+	int				target;
 
-	interval *= 10;
-	gettimeofday(&t_now, NULL);
-	while (1)
+	gettimeofday(&t_target, NULL);
+	target = ft_calc_time(t_target, philo->c_data->t_start);
+	target += interval;
+	gettimeofday(&now, NULL);
+	while (ft_calc_time(now, philo->c_data->t_start) < target)
 	{
 		usleep(100);
-		// ft_death(philo);
-		// pthread_mutex_lock(&philo->c_data->t_mutex);
-		if (philo->c_data->end == 1)
-		{
-			// pthread_mutex_unlock(&philo->c_data->t_mutex);
-			break;
-		}
-		// pthread_mutex_unlock(&philo->c_data->t_mutex);
-		if (ft_calc_time_micro(ft_now(), t_now) >= interval)
-			break ;
+		gettimeofday(&now, NULL);
+		ft_death(philo);
 	}
 }

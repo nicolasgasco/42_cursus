@@ -19,9 +19,8 @@
 # include <pthread.h>
 # include <limits.h>
 # include <sys/time.h>
-# include <sys/wait.h>
 
-
+// Structure with general data
 typedef struct Philo {
 	int				n_philos;
 	int				t_death;
@@ -32,13 +31,12 @@ typedef struct Philo {
 	int				*forks;
 	int				finished_eating;
 	int				end;
-	pthread_mutex_t	d_mutex;
-	pthread_mutex_t	e_mutex;
 	pthread_mutex_t	*f_mutex;
-	pthread_mutex_t	t_mutex;
 	pthread_mutex_t	status_mutex;
+	pthread_mutex_t	death_mutex;
 }	t_data;
 
+// Structure with data relevant to single philosophers + general data
 typedef struct p_data {
 	int				i_philo;
 	struct timeval	t_meal;
@@ -46,26 +44,23 @@ typedef struct p_data {
 	t_data			*c_data;
 }	t_philo;
 
-// Init
+// Structs initialization
 void			ft_init_common(t_data *philo, int argc, char *argv[]);
 void			ft_init_philo(t_philo *philo, t_data *c_data, int i);
 int				*ft_create_forks(int n_philos);
 pthread_mutex_t	*ft_create_f_mutex(int n_philos);
 
-// Error
+// Error management
 int				ft_common_error(t_data *c_data, int argc);
 
-// Threads
-void			ft_init_threads(t_data *c_data);
+// Threads initialization
 void			ft_create_procs(t_data *c_data);
-void			ft_join_threads(t_data *c_data, pthread_t *philos);
 void			ft_routine(t_philo *philo);
+void			ft_multiple_philos(t_philo *philo);
 
-// Time
-
+// Time methods
 int				ft_calc_timestamp(struct timeval start);
 int				ft_calc_time(struct timeval now, struct timeval start);
-int				ft_calc_time_micro(struct timeval now, struct timeval start);
 struct timeval	ft_now(void);
 void			ft_msleep(t_philo *philo, int interval);
 
@@ -74,25 +69,17 @@ void			ft_free_c_data(t_data *c_data);
 void			ft_free_philo(t_philo *philo);
 void			ft_free_philos(pthread_t *philos);
 
-// Actions
-void			ft_eat_sleep_think(t_philo *philo);
+// Actions methods
+void			ft_eat_sleep_think(t_philo *philo, int i);
+void			ft_eat(t_philo *philo, int *fork_r, int *fork_l, int i);
 void			ft_death(t_philo *philo);
-void			ft_eat(t_philo *philo, int *fork_l, int *fork_r);
 int				ft_get_i(t_philo *philo, int index);
 
-// Status
-void			ft_put_forks(t_philo *philo);
-void			ft_put_eat(t_philo *philo);
-void			ft_put_sleep(t_philo *philo);
-void			ft_put_think(t_philo *philo);
+// Output status to console
+void			ft_put_status(t_philo *philo, char flag);
 void			ft_put_death(t_philo *philo);
 
-// Status utils
-void			ft_put_timestamp(t_philo *philo);
-int				ft_calc_time_label(struct timeval start);
-void			ft_put_id(int id);
-
-// Time
+// Time methods
 int				ft_calc_timestamp(struct timeval start);
 int				ft_calc_time(struct timeval now, struct timeval start);
 struct timeval	ft_now(void);
@@ -101,6 +88,6 @@ void			ft_msleep(t_philo *philo, int interval);
 // Libft utils
 void			ft_putstr(int fd, char *s);
 int				ft_atoi(const char *str);
-void			ft_putnbr(long n);
+int				ft_strlen(const char *s);
 
 #endif
