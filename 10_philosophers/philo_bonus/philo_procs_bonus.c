@@ -36,7 +36,7 @@ void	ft_multiple_philos(t_philo *philo)
 	{
 		ft_death(philo);
 		if (philo->c_data->end == 0)
-			ft_eat_sleep_think(philo, philo->i_philo);
+			ft_eat_sleep_think(philo);
 	}
 	ft_free_philo(philo);
 }
@@ -47,24 +47,24 @@ void	ft_create_procs(t_data *c_data)
 	int		i;
 	int		id;
 
-	i = 0;
 	id = fork();
 	if (id == 0)
 	{
 		// waitpid(id, NULL, 0);
+		i = 0;
 		while (i < c_data->n_philos)
 		{
 			if (id == 0)
 			{
 				id = fork();
-				// waitpid(id, NULL, 0);
 				if (id != 0)
 				{
 					philo = malloc(sizeof(t_philo));
 					ft_init_philo(philo, c_data, i);
 					if (i == c_data->n_philos - 1)
 						gettimeofday(&c_data->t_start, NULL);
-					printf("%d (%d)\n", id, philo->i_philo);
+					philo->id_philo = id;
+					// printf("%d (%d)\n", id, philo->i_philo);
 					ft_routine(philo);
 				}
 			}

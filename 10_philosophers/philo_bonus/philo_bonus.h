@@ -19,6 +19,7 @@
 # include <pthread.h>
 # include <limits.h>
 # include <sys/time.h>
+#include <sys/wait.h>
 
 // Structure with general data
 typedef struct Philo {
@@ -39,6 +40,7 @@ typedef struct Philo {
 // Structure with data relevant to single philosophers + general data
 typedef struct p_data {
 	int				i_philo;
+	int				id_philo;
 	struct timeval	t_meal;
 	int				meals;
 	t_data			*c_data;
@@ -70,8 +72,8 @@ void			ft_free_philo(t_philo *philo);
 void			ft_free_philos(pthread_t *philos);
 
 // Actions methods
-void			ft_eat_sleep_think(t_philo *philo, int i);
-void			ft_eat(t_philo *philo, int *fork_r, int *fork_l, int i);
+void			ft_eat_sleep_think(t_philo *philo);
+void			ft_eat(t_philo *philo);
 void			ft_death(t_philo *philo);
 int				ft_get_i(t_philo *philo, int index);
 
