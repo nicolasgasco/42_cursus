@@ -12,7 +12,7 @@
 
 #include "philo_bonus.h"
 
-void	ft_routine(t_philo *philo)
+void ft_routine(t_philo *philo)
 {
 	while (philo->c_data->t_start.tv_usec == 0)
 		usleep(100);
@@ -30,7 +30,7 @@ void	ft_routine(t_philo *philo)
 	}
 }
 
-void	ft_multiple_philos(t_philo *philo)
+void ft_multiple_philos(t_philo *philo)
 {
 	while (philo->c_data->end == 0)
 	{
@@ -41,34 +41,41 @@ void	ft_multiple_philos(t_philo *philo)
 	ft_free_philo(philo);
 }
 
-void	ft_create_procs(t_data *c_data)
+void ft_create_procs(t_data *c_data)
 {
-	t_philo	*philo;
-	int		i;
-	int		id;
+	t_philo *philo;
+	int i;
+	int id;
 
-	id = fork();
-	if (id == 0)
+	i = 0;
+	id = 1;
+	while (i < c_data->n_philos)
 	{
-		// waitpid(id, NULL, 0);
-		i = 0;
-		while (i < c_data->n_philos)
+		if (id != 0)
 		{
-			if (id == 0)
+			id = fork();
+			if (id != 0)
 			{
-				id = fork();
-				if (id != 0)
-				{
-					philo = malloc(sizeof(t_philo));
-					ft_init_philo(philo, c_data, i);
-					if (i == c_data->n_philos - 1)
-						gettimeofday(&c_data->t_start, NULL);
-					philo->id_philo = id;
-					// printf("%d (%d)\n", id, philo->i_philo);
-					ft_routine(philo);
-				}
+				ft_add_pid(c_data, id, i);
+				printf("%d (%d)\n", id, i);
 			}
-			i++;
+			else
+			{
+				philo = malloc(sizeof(t_philo));
+				ft_init_philo(philo, c_data, i);
+				// if (i == c_data->n_philos - 1)
+				// 	gettimeofday(&c_data->t_start, NULL);
+				printf("%d (%d)\n", id, philo->i_philo);
+				// ft_routine(philo);
+			}
 		}
+		i++;
 	}
+	// i = 0;
+	// while (i < c_data->n_philos)
+	// {
+	// 	waitpid(c_data->pids[i], &status, 0);
+	// 	i++;
+	// }
+	// ft_put_pids(c_data);
 }

@@ -29,9 +29,9 @@ typedef struct Philo {
 	int				t_sleep;
 	int				n_eats;
 	struct timeval	t_start;
-	int				*forks;
 	int				finished_eating;
 	int				end;
+	int				*pids;
 	pthread_mutex_t	*f_mutex;
 	pthread_mutex_t	status_mutex;
 	pthread_mutex_t	death_mutex;
@@ -40,17 +40,19 @@ typedef struct Philo {
 // Structure with data relevant to single philosophers + general data
 typedef struct p_data {
 	int				i_philo;
-	int				id_philo;
 	struct timeval	t_meal;
 	int				meals;
 	t_data			*c_data;
 }	t_philo;
 
+
+// TBD
+void			ft_put_pids(t_data *c_data);
+
 // Structs initialization
 void			ft_init_common(t_data *philo, int argc, char *argv[]);
 void			ft_init_philo(t_philo *philo, t_data *c_data, int i);
-int				*ft_create_forks(int n_philos);
-pthread_mutex_t	*ft_create_f_mutex(int n_philos);
+void			ft_add_pid(t_data *c_data, int pid, int i);
 
 // Error management
 int				ft_common_error(t_data *c_data, int argc);
@@ -67,7 +69,6 @@ struct timeval	ft_now(void);
 void			ft_msleep(t_philo *philo, int interval);
 
 // Free
-void			ft_free_c_data(t_data *c_data);
 void			ft_free_philo(t_philo *philo);
 void			ft_free_philos(pthread_t *philos);
 

@@ -18,12 +18,10 @@ int	ft_common_error(t_data *c_data, int argc)
 		return (1);
 	if (c_data->t_death <= 0 || c_data->t_sleep <= 0 || c_data->t_eat <= 0)
 	{
-		ft_free_c_data(c_data);
 		return (1);
 	}
 	if (argc == 6 && c_data->n_eats <= 0)
 	{
-		ft_free_c_data(c_data);
 		return (1);
 	}
 	return (0);

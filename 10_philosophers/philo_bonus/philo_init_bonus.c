@@ -22,11 +22,10 @@ void	ft_init_common(t_data *c_data, int argc, char *argv[])
 	c_data->t_death = ft_atoi(argv[2]);
 	c_data->t_eat = ft_atoi(argv[3]);
 	c_data->t_sleep = ft_atoi(argv[4]);
-	// if (c_data->n_philos > 0 && c_data->n_philos <= 200)
-	// {
-	// 	c_data->forks = ft_create_forks(c_data->n_philos);
-	// 	c_data->f_mutex = ft_create_f_mutex(c_data->n_philos);
-	// }
+	if (c_data->n_philos > 0 && c_data->n_philos <= 200)
+	{
+		c_data->pids = malloc(sizeof(int) * c_data->n_philos);
+	}
 	c_data->finished_eating = 0;
 	c_data->end = 0;
 	c_data->t_start.tv_sec = 0;
@@ -41,26 +40,21 @@ void	ft_init_philo(t_philo *philo, t_data *c_data, int i)
 	philo->c_data = c_data;
 }
 
-pthread_mutex_t	*ft_create_f_mutex(int n_philos)
+void	ft_add_pid(t_data *c_data, int pid, int i)
 {
-	pthread_mutex_t	*result;
-
-	result = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * n_philos);
-	return (result);
+	c_data->pids[i] = pid;
 }
 
-int	*ft_create_forks(int n_philos)
+void	ft_put_pids(t_data *c_data)
 {
-	int	*result;
 	int	i;
 
 	i = 0;
-	result = (int *)malloc(sizeof(int) * (n_philos + 1));
-	while (i < n_philos)
+	printf("\n");
+	while (i < c_data->n_philos)
 	{
-		result[i] = 1;
+		printf("%d , ", c_data->pids[i]);
 		i++;
 	}
-	result[i] = -1;
-	return (result);
+	printf("\n");
 }
