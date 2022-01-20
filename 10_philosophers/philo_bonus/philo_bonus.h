@@ -19,7 +19,9 @@
 # include <pthread.h>
 # include <limits.h>
 # include <sys/time.h>
-#include <sys/wait.h>
+# include <sys/wait.h>
+# include <semaphore.h>
+# include <fcntl.h>
 
 // Structure with general data
 typedef struct Philo {
@@ -29,12 +31,12 @@ typedef struct Philo {
 	int				t_sleep;
 	int				n_eats;
 	struct timeval	t_start;
+	int				finished_init;
 	int				finished_eating;
 	int				end;
 	int				*pids;
-	pthread_mutex_t	*f_mutex;
-	pthread_mutex_t	status_mutex;
-	pthread_mutex_t	death_mutex;
+	sem_t			*forks_sem;
+	sem_t			*death_sem;
 }	t_data;
 
 // Structure with data relevant to single philosophers + general data
@@ -42,6 +44,7 @@ typedef struct p_data {
 	int				i_philo;
 	struct timeval	t_meal;
 	int				meals;
+	pthread_t		death_check;
 	t_data			*c_data;
 }	t_philo;
 

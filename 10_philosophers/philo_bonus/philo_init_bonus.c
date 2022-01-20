@@ -27,6 +27,7 @@ void	ft_init_common(t_data *c_data, int argc, char *argv[])
 		c_data->pids = malloc(sizeof(int) * c_data->n_philos);
 	}
 	c_data->finished_eating = 0;
+	c_data->finished_init = 0;
 	c_data->end = 0;
 	c_data->t_start.tv_sec = 0;
 	c_data->t_start.tv_usec = 0;
