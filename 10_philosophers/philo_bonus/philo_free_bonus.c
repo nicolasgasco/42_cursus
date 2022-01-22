@@ -12,12 +12,10 @@
 
 #include "philo_bonus.h"
 
-void	ft_free_philo(t_philo *philo)
+void	ft_free_all(t_data *c_data)
 {
-	free(philo);
-}
-
-void	ft_free_philos(pthread_t *philos)
-{
-	free(philos);
+	sem_close(c_data->forks_sem);
+	sem_close(c_data->status_sem);
+	sem_close(c_data->death_sem);
+	free(c_data->pids);
 }
