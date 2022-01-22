@@ -101,6 +101,6 @@ void ft_create_procs(t_data *c_data)
 		}
 		i++;
 	}
-	sem_destroy(c_data->forks_sem);
-	sem_destroy(c_data->death_sem);
+	sem_unlink("/forks");
+	sem_unlink("/death");
 }
