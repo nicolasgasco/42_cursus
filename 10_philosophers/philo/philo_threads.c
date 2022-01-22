@@ -69,7 +69,7 @@ void	ft_create_threads(t_data *c_data, pthread_t *philos)
 		ft_init_philo(philo, c_data, i);
 		pthread_mutex_init(&c_data->f_mutex[i], NULL);
 		if (pthread_create(&philos[i], NULL, ft_routine, philo) != 0)
-			ft_putstr(2, "Failed to create thread\n");
+			printf("Failed to join thread\n");
 		i++;
 	}
 	ft_join_threads(c_data, philos);
@@ -83,7 +83,7 @@ void	ft_join_threads(t_data *c_data, pthread_t *philos)
 	while (i < c_data->n_philos)
 	{
 		if (pthread_join(philos[i], NULL) != 0)
-			ft_putstr(2, "Failed to join thread\n");
+			printf("Failed to join thread\n");
 		pthread_mutex_destroy(&c_data->f_mutex[i]);
 		i++;
 	}

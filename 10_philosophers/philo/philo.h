@@ -88,7 +88,6 @@ struct timeval	ft_now(void);
 void			ft_msleep(t_philo *philo, int interval);
 
 // Libft utils
-void			ft_putstr(int fd, char *s);
 int				ft_atoi(const char *str);
 int				ft_strlen(const char *s);
 
