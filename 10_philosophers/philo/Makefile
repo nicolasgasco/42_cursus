@@ -17,10 +17,6 @@ $(NAME): $(OBJS)
 	@ gcc $(FLAGS) $(SRCS) -lpthread -o $(NAME)
 	@ echo "Compiling philosophers..."
 
-bonus:
-	@ gcc $(FLAGS) $(SRCS_BONUS) -lpthread -o $(BONUS)
-	@ echo "Compiling philosophers - bonus..."
-
 all : $(NAME) 
 
 clean :
