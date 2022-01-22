@@ -8,10 +8,12 @@ SRCS_BONUS = $(wildcard ../philo_bonus/*)
 
 FLAGS = -Wall -Wextra -Werror
 
-SANITIZER =  -fsanitize=address -static-libasan -g
+OBJS = $(SRCS:.c=.o)
+
+SANITIZER =  -fsanitize=address -static-libsan -g
 # SANITIZER =  -fsanitize=thread -static-libsan -g
 
-$(NAME):
+$(NAME): $(OBJS)
 	@ gcc $(FLAGS) $(SRCS) -lpthread -o $(NAME)
 	@ echo "Compiling philosophers..."
 
@@ -19,7 +21,7 @@ bonus:
 	@ gcc $(FLAGS) $(SRCS_BONUS) -lpthread -o $(BONUS)
 	@ echo "Compiling philosophers - bonus..."
 
-all : $(NAME) bonus 
+all : $(NAME) 
 
 clean :
 	@ rm -rf $(wildcard *.o)
