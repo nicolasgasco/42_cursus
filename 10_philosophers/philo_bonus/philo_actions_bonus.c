@@ -30,11 +30,6 @@ void	ft_eat(t_philo *philo)
 	ft_death(philo);
 	gettimeofday(&philo->t_meal, NULL);
 	philo->meals++;
-	// if (philo->meals == philo->c_data->n_eats)
-	// {
-	// 	philo->c_data->finished_eating++;
-	// 	philo->meals++;
-	// }
 	ft_put_status(philo, 'e');
 	ft_msleep(philo, philo->c_data->t_eat);
 	sem_post(philo->c_data->forks_sem);
@@ -43,19 +38,17 @@ void	ft_eat(t_philo *philo)
 
 void	ft_death(t_philo *philo)
 {
-		sem_wait(philo->c_data->death_sem);
-		if (ft_calc_time(ft_now(), philo->t_meal) > philo->c_data->t_death)
-		{
-			ft_put_death(philo);
-			exit(1);
-		}
-		printf("%d\n", philo->meals);
-		if (philo->meals == philo->c_data->n_eats)
-		{
-			exit(1);
-			philo->c_data->end = 1;
-		}
-		sem_post(philo->c_data->death_sem);
+	sem_wait(philo->c_data->death_sem);
+	if (ft_calc_time(ft_now(), philo->t_meal) > philo->c_data->t_death)
+	{
+		ft_put_death(philo);
+		exit(1);
+	}
+	if (philo->c_data->n_eats > 0 && philo->meals == (philo->c_data->n_eats + 1))
+	{
+		exit(1);
+	}
+	sem_post(philo->c_data->death_sem);
 }
 
 int	ft_get_i(t_philo *philo, int index)
