@@ -6,9 +6,9 @@ FLAGS = -Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 
-$(NAME): $(OBJS)
-	@ gcc $(FLAGS) $(OBJS) -lpthread -o $(NAME)
-	@ echo "Compiling philosophers..."
+$(BONUS): $(OBJS)
+	@ gcc $(FLAGS) $(OBJS) -lpthread -o $(BONUS)
+	@ echo "Compiling Philosophers - Bonus..."
 
 all : $(BONUS)
 
@@ -17,7 +17,7 @@ clean :
 	@ echo "Deleting .o..."
 
 fclean : clean
-	@ rm -rf $(NAME)
+	@ rm -rf $(BONUS)
 	@ echo "Deleting program..."
 
 re : fclean all
