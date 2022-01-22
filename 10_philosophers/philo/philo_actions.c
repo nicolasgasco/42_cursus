@@ -74,4 +74,3 @@ int	ft_get_i(t_philo *philo, int index)
 		return (philo->c_data->n_philos - 1);
 	return (index);
 }
-

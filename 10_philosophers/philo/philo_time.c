@@ -37,7 +37,7 @@ int	ft_calc_time(struct timeval now, struct timeval start)
 
 	result = (now.tv_sec * 1000 + now.tv_usec / 1000);
 	result -= (start.tv_sec * 1000 + start.tv_usec / 1000);
-	return  (result);
+	return (result);
 }
 
 void	ft_msleep(t_philo *philo, int interval)
