@@ -22,7 +22,7 @@ void	*ft_routine(void *vargp)
 	gettimeofday(&philo_cpy->c_data->t_start, NULL);
 	gettimeofday(&philo_cpy->t_meal, NULL);
 	if ((philo_cpy->i_philo + 1) % 2 != 0)
-		usleep(500);
+		usleep(50);
 	if (philo_cpy->c_data->n_philos > 1)
 		ft_multiple_philos(philo_cpy);
 	else
