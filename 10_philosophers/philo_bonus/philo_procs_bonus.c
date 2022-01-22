@@ -17,18 +17,14 @@ void	ft_routine(t_philo *philo)
 	gettimeofday(&philo->c_data->t_start, NULL);
 	gettimeofday(&philo->t_meal, NULL);
 	if ((philo->i_philo + 1) % 2 == 0)
-	{
 		usleep(100);
-	}
 	if (philo->c_data->n_philos > 1)
-	{
 		ft_multiple_philos(philo);
-	}
 	else
 	{
 		ft_msleep(philo, philo->c_data->t_death);
-		ft_put_status(philo, 'd');
-		ft_free_philo(philo);
+		ft_put_death(philo);
+		exit(1);
 	}
 }
 
@@ -46,13 +42,11 @@ void	*ft_death_routine(void *vargp)
 
 void	ft_multiple_philos(t_philo *philo)
 {
-	while (philo->c_data->end == 0)
+	while (1)
 	{
 		ft_death(philo);
-		if (philo->c_data->end == 0)
-			ft_eat_sleep_think(philo);
+		ft_eat_sleep_think(philo);
 	}
-	ft_free_philo(philo);
 }
 
 void	ft_create_procs(t_data *c_data)
@@ -77,9 +71,10 @@ void	ft_create_procs(t_data *c_data)
 		}
 		i++;
 	}
+	ft_wait_procs(c_data, philo);
 }
 
-void	ft_wait_procs(t_data *c_data)
+void	ft_wait_procs(t_data *c_data, t_philo *philo)
 {
 	int	i;
 	int	y;
@@ -100,7 +95,5 @@ void	ft_wait_procs(t_data *c_data)
 		}
 		i++;
 	}
-	sem_unlink("/forks");
-	sem_unlink("/death");
-	sem_unlink("/status");
+	ft_free_all(c_data);
 }

@@ -28,6 +28,5 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	ft_create_procs(&c_data);
-	ft_wait_procs(&c_data);
 	return (0);
 }
