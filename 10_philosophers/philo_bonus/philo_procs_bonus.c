@@ -12,13 +12,13 @@
 
 #include "philo_bonus.h"
 
-void	ft_routine(t_philo *philo)
+void ft_routine(t_philo *philo)
 {
 	gettimeofday(&philo->c_data->t_start, NULL);
 	gettimeofday(&philo->t_meal, NULL);
 	if ((philo->i_philo + 1) % 2 == 0)
 	{
-		usleep(50);
+		usleep(100);
 	}
 	if (philo->c_data->n_philos > 1)
 	{
@@ -32,15 +32,15 @@ void	ft_routine(t_philo *philo)
 	}
 }
 
-void	*ft_death_check_routine(void *vargp)
+void *ft_death_check_routine(void *vargp)
 {
-	t_philo	*philo_cpy;
+	t_philo *philo_cpy;
 
 	philo_cpy = vargp;
 	while (1)
 	{
 		usleep(100);
-		ft_death(philo_cpy);	
+		ft_death(philo_cpy);
 	}
 }
 
@@ -60,7 +60,7 @@ void ft_create_procs(t_data *c_data)
 	t_philo *philo;
 	int i;
 	int id;
-	int	status;
+	int status;
 
 	i = 0;
 	id = 1;
@@ -68,20 +68,19 @@ void ft_create_procs(t_data *c_data)
 	c_data->forks_sem = sem_open("/forks", O_CREAT, 0, c_data->n_philos);
 	sem_unlink("/death");
 	c_data->death_sem = sem_open("/death", O_CREAT, 0, 1);
+	sem_unlink("/status");
+	c_data->status_sem = sem_open("/status", O_CREAT, 0, 1);
 	while (i < c_data->n_philos)
 	{
+		id = fork();
 		if (id != 0)
+			ft_add_pid(c_data, id, i);
+		else
 		{
-			id = fork();
-			if (id != 0)
-				ft_add_pid(c_data, id, i);
-			else
-			{
-				philo = malloc(sizeof(t_philo));
-				ft_init_philo(philo, c_data, i);
-				pthread_create(&philo->death_check, NULL, ft_death_check_routine, philo);
-				ft_routine(philo);
-			}
+			philo = malloc(sizeof(t_philo));
+			ft_init_philo(philo, c_data, i);
+			pthread_create(&philo->death_check, NULL, ft_death_check_routine, philo);
+			ft_routine(philo);
 		}
 		i++;
 	}
@@ -103,4 +102,5 @@ void ft_create_procs(t_data *c_data)
 	}
 	sem_unlink("/forks");
 	sem_unlink("/death");
+	sem_unlink("/status");
 }
