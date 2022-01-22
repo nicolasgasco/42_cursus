@@ -10,18 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
+# include <semaphore.h>
+# include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-# include <stdlib.h>
-# include <pthread.h>
-# include <limits.h>
+# include <signal.h>
 # include <sys/time.h>
-# include <sys/wait.h>
-# include <semaphore.h>
-# include <fcntl.h>
+# include <limits.h>
+# include <pthread.h>
 
 // Structure with general data
 typedef struct Philo {
