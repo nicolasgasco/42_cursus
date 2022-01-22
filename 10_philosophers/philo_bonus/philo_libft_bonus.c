@@ -22,18 +22,6 @@ int		ft_strlen(const char *s)
 	return (i);
 }
 
-void	ft_putstr(int fd, char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-}
-
 int	ft_atoi(const char *str)
 {
 	int				i;

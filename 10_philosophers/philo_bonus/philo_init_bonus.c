@@ -23,14 +23,15 @@ void	ft_init_common(t_data *c_data, int argc, char *argv[])
 	c_data->t_eat = ft_atoi(argv[3]);
 	c_data->t_sleep = ft_atoi(argv[4]);
 	if (c_data->n_philos > 0 && c_data->n_philos <= 200)
-	{
 		c_data->pids = malloc(sizeof(int) * c_data->n_philos);
-	}
-	c_data->finished_eating = 0;
-	c_data->finished_init = 0;
-	c_data->end = 0;
 	c_data->t_start.tv_sec = 0;
 	c_data->t_start.tv_usec = 0;
+	sem_unlink("/forks");
+	c_data->forks_sem = sem_open("/forks", O_CREAT, 0, c_data->n_philos);
+	sem_unlink("/death");
+	c_data->death_sem = sem_open("/death", O_CREAT, 0, 1);
+	sem_unlink("/status");
+	c_data->status_sem = sem_open("/status", O_CREAT, 0, 1);
 }
 
 void	ft_init_philo(t_philo *philo, t_data *c_data, int i)
@@ -44,18 +45,4 @@ void	ft_init_philo(t_philo *philo, t_data *c_data, int i)
 void	ft_add_pid(t_data *c_data, int pid, int i)
 {
 	c_data->pids[i] = pid;
-}
-
-void	ft_put_pids(t_data *c_data)
-{
-	int	i;
-
-	i = 0;
-	printf("\n");
-	while (i < c_data->n_philos)
-	{
-		printf("%d , ", c_data->pids[i]);
-		i++;
-	}
-	printf("\n");
 }

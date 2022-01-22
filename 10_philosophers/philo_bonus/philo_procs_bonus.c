@@ -52,7 +52,7 @@ void ft_multiple_philos(t_philo *philo)
 		if (philo->c_data->end == 0)
 			ft_eat_sleep_think(philo);
 	}
-	// ft_free_philo(philo);
+	ft_free_philo(philo);
 }
 
 void ft_create_procs(t_data *c_data)
@@ -60,16 +60,9 @@ void ft_create_procs(t_data *c_data)
 	t_philo *philo;
 	int i;
 	int id;
-	int status;
 
 	i = 0;
 	id = 1;
-	sem_unlink("/forks");
-	c_data->forks_sem = sem_open("/forks", O_CREAT, 0, c_data->n_philos);
-	sem_unlink("/death");
-	c_data->death_sem = sem_open("/death", O_CREAT, 0, 1);
-	sem_unlink("/status");
-	c_data->status_sem = sem_open("/status", O_CREAT, 0, 1);
 	while (i < c_data->n_philos)
 	{
 		id = fork();
@@ -84,8 +77,15 @@ void ft_create_procs(t_data *c_data)
 		}
 		i++;
 	}
+}
+
+void ft_wait_procs(t_data *c_data)
+{
+	int	i;
+	int	y;
+	int status;
+	
 	i = 0;
-	int y = 0;
 	while (i < c_data->n_philos)
 	{
 		waitpid(-1, &status, 0);

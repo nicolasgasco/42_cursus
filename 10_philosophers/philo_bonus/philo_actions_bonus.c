@@ -44,10 +44,9 @@ void	ft_death(t_philo *philo)
 		ft_put_death(philo);
 		exit(1);
 	}
-	if (philo->c_data->n_eats > 0 && philo->meals == (philo->c_data->n_eats + 1))
-	{
+	if (philo->c_data->n_eats > 0
+		&& philo->meals == (philo->c_data->n_eats + 1))
 		exit(1);
-	}
 	sem_post(philo->c_data->death_sem);
 }
 
