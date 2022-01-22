@@ -36,6 +36,7 @@ typedef struct Philo {
 	int				*pids;
 	sem_t			*forks_sem;
 	sem_t			*death_sem;
+	sem_t			*status_sem;
 }	t_data;
 
 // Structure with data relevant to single philosophers + general data
