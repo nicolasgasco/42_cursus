@@ -10,11 +10,8 @@ FLAGS = -Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 
-SANITIZER =  -fsanitize=address -static-libsan -g
-# SANITIZER =  -fsanitize=thread -static-libsan -g
-
 $(NAME): $(OBJS)
-	@ gcc $(FLAGS) $(SRCS) -lpthread -o $(NAME)
+	@ gcc $(FLAGS) $(OBJS) -lpthread -o $(NAME)
 	@ echo "Compiling philosophers..."
 
 all : $(NAME) 
