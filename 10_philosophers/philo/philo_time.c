@@ -52,8 +52,8 @@ void	ft_msleep(t_philo *philo, int interval)
 	gettimeofday(&now, NULL);
 	while (ft_calc_time(now, philo->c_data->t_start) < target)
 	{
+		ft_death(philo);
 		usleep(100);
 		gettimeofday(&now, NULL);
-		ft_death(philo);
 	}
 }
