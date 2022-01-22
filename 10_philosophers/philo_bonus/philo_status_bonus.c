@@ -12,9 +12,9 @@
 
 #include "philo_bonus.h"
 
-void ft_put_status(t_philo *philo, char flag)
+void	t_put_status(t_philo *philo, char flag)
 {
-	int timestamp;
+	int	timestamp;
 
 	timestamp = ft_calc_timestamp(philo->c_data->t_start);
 	sem_wait(philo->c_data->status_sem);
@@ -29,9 +29,9 @@ void ft_put_status(t_philo *philo, char flag)
 	sem_post(philo->c_data->status_sem);
 }
 
-void ft_put_death(t_philo *philo)
+void	ft_put_death(t_philo *philo)
 {
-	int timestamp;
+	int	timestamp;
 
 	sem_wait(philo->c_data->status_sem);
 	timestamp = ft_calc_timestamp(philo->c_data->t_start);

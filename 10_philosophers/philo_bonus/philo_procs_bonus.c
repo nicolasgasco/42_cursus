@@ -12,7 +12,7 @@
 
 #include "philo_bonus.h"
 
-void ft_routine(t_philo *philo)
+void	ft_routine(t_philo *philo)
 {
 	gettimeofday(&philo->c_data->t_start, NULL);
 	gettimeofday(&philo->t_meal, NULL);
@@ -32,9 +32,9 @@ void ft_routine(t_philo *philo)
 	}
 }
 
-void *ft_death_check_routine(void *vargp)
+void	*ft_death_routine(void *vargp)
 {
-	t_philo *philo_cpy;
+	t_philo	*philo_cpy;
 
 	philo_cpy = vargp;
 	while (1)
@@ -44,7 +44,7 @@ void *ft_death_check_routine(void *vargp)
 	}
 }
 
-void ft_multiple_philos(t_philo *philo)
+void	ft_multiple_philos(t_philo *philo)
 {
 	while (philo->c_data->end == 0)
 	{
@@ -55,11 +55,11 @@ void ft_multiple_philos(t_philo *philo)
 	ft_free_philo(philo);
 }
 
-void ft_create_procs(t_data *c_data)
+void	ft_create_procs(t_data *c_data)
 {
-	t_philo *philo;
-	int i;
-	int id;
+	t_philo	*philo;
+	int		i;
+	int		id;
 
 	i = 0;
 	id = 1;
@@ -72,19 +72,19 @@ void ft_create_procs(t_data *c_data)
 		{
 			philo = malloc(sizeof(t_philo));
 			ft_init_philo(philo, c_data, i);
-			pthread_create(&philo->death_check, NULL, ft_death_check_routine, philo);
+			pthread_create(&philo->death_check, NULL, ft_death_routine, philo);
 			ft_routine(philo);
 		}
 		i++;
 	}
 }
 
-void ft_wait_procs(t_data *c_data)
+void	ft_wait_procs(t_data *c_data)
 {
 	int	i;
 	int	y;
-	int status;
-	
+	int	status;
+
 	i = 0;
 	while (i < c_data->n_philos)
 	{
