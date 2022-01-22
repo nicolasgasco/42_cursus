@@ -12,7 +12,7 @@
 
 #include "philo_bonus.h"
 
-void	t_put_status(t_philo *philo, char flag)
+void	ft_put_status(t_philo *philo, char flag)
 {
 	int	timestamp;
 
