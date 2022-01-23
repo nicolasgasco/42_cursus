@@ -3,7 +3,7 @@
 This is a collection of the projects I completed while doing the 'common core' of 42Urduliz in Bilbao.
 
 Here is the list of projects sorted by date (descending):
-1. **minishell** (C programming, UNIX, February 2022): recreate a small bash-inspired shell for UNIX. Group project done in a separate repository.
+1. **minishell** (C programming, UNIX, February 2022): recreate a small bash-inspired shell for UNIX. Group project done [in a separate repository](https://github.com/nicolasgasco/42_minishell).
 
 2. **philosophers** (C programming, December 2021): 42's take on the classic [Dining philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem) using threads and mutexes.
 ![Screenshot of completed project](https://res.cloudinary.com/ngasco/image/upload/v1639432723/42/Screenshot_from_2021-12-13_22-57-45_jy9pa7.png "Screenshot of Philosophers")
