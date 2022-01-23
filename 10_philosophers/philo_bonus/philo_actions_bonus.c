@@ -42,11 +42,15 @@ void	ft_death(t_philo *philo)
 	if (ft_calc_time(ft_now(), philo->t_meal) > philo->c_data->t_death)
 	{
 		ft_put_death(philo);
+		pthread_join(philo->death_check, NULL);
 		exit(1);
 	}
 	if (philo->c_data->n_eats > 0
 		&& philo->meals == (philo->c_data->n_eats + 1))
+	{
+		pthread_join(philo->death_check, NULL);
 		exit(1);
+	}
 	sem_post(philo->c_data->death_sem);
 }
 
