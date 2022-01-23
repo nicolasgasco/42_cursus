@@ -50,9 +50,3 @@ void	ft_death(t_philo *philo)
 	sem_post(philo->c_data->death_sem);
 }
 
-int	ft_get_i(t_philo *philo, int index)
-{
-	if (index < 0)
-		return (philo->c_data->n_philos - 1);
-	return (index);
-}

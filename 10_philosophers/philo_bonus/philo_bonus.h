@@ -78,7 +78,6 @@ void			ft_free_all(t_data *c_data);
 void			ft_eat_sleep_think(t_philo *philo);
 void			ft_eat(t_philo *philo);
 void			ft_death(t_philo *philo);
-int				ft_get_i(t_philo *philo, int index);
 
 // Output status to console
 void			ft_put_status(t_philo *philo, char flag);
