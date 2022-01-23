@@ -68,7 +68,6 @@ void	ft_create_procs(t_data *c_data)
 			ft_init_philo(philo, c_data, i);
 			pthread_create(&philo->death_check, NULL, ft_death_routine, philo);
 			ft_routine(philo);
-			pthread_join(philo->death_check, NULL);
 		}
 		i++;
 	}
