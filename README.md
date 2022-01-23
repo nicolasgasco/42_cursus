@@ -9,7 +9,6 @@ Here is the list of projects sorted by date (descending):
 ![Screenshot of completed project](https://res.cloudinary.com/ngasco/image/upload/v1639432723/42/Screenshot_from_2021-12-13_22-57-45_jy9pa7.png "Screenshot of Philosophers")
 
 3. **exam_03** (C programming, December 2021): the exercises I did in order to prepare for the 3rd rank exam.
-![Screenshot of micro_paint from exam 03](https://res.cloudinary.com/ngasco/image/upload/v1638223784/42/Screenshot_from_2021-11-29_23-08-53_ocvlwc.png "Screenshot of micro_paint from exam 03")
 
 4. **push_swap** (C programming, November 2021): given an array of random integers, two stacks, and a limited set of moves (e.g. rotate entire stack up or down), write to the console the smallest number of instructions required to sort the array.
 ![Screenshot of completed project](https://res.cloudinary.com/ngasco/image/upload/v1637695175/42/Screenshot_from_2021-11-23_20-19-22_itr7wd.png "Screenshot of Push_swap")
