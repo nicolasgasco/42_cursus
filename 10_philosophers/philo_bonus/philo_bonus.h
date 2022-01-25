@@ -24,7 +24,6 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 
-
 // Structure with general data
 typedef struct Philo {
 	int				n_philos;

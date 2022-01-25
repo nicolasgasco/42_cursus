@@ -53,4 +53,3 @@ void	ft_death(t_philo *philo)
 	}
 	sem_post(philo->c_data->death_sem);
 }
-
