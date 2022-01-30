@@ -27,8 +27,8 @@ Execute in two separate terminal tabs.
   ./server
   ```
 - **Client**
+  
   Read the PID from server and pass it as parameter along with a string of your choice.
   ```
   ./client PID "Example string"
   ```
-Script works at best with strings below 1000 characters.
