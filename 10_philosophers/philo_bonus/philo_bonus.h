@@ -62,7 +62,7 @@ int				ft_common_error(t_data *c_data, int argc);
 void			ft_create_procs(t_data *c_data);
 void			ft_routine(t_philo *philo);
 void			ft_multiple_philos(t_philo *philo);
-void			ft_wait_procs(t_data *c_data, t_philo *philo);
+void			ft_wait_procs(t_data *c_data);
 
 // Time methods
 int				ft_calc_timestamp(struct timeval start);

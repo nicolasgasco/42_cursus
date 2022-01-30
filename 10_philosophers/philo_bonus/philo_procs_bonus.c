@@ -74,7 +74,7 @@ void	ft_create_procs(t_data *c_data)
 	ft_wait_procs(c_data, philo);
 }
 
-void	ft_wait_procs(t_data *c_data, t_philo *philo)
+void	ft_wait_procs(t_data *c_data)
 {
 	int	i;
 	int	y;
