@@ -22,11 +22,11 @@ Compile the programs
 make all
 ```
 Execute in two separate terminal tabs.
-#### Server
+- **Server**
 ```
 ./server
 ```
-#### Client
+- **Client**
 Read the PID from server and pass it as parameter along with a string of your choice.
 ```
 ./client PID "Example string"
