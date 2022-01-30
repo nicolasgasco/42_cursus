@@ -65,7 +65,7 @@ void	ft_put_bin(int n, int pid)
 			kill(pid, SIGUSR1);
 		else if ((n % 2) == 1)
 			kill(pid, SIGUSR2);
-		ft_sleep(200);
+		ft_sleep(1000);
 		n = n / 2;
 		counter++;
 	}
@@ -73,12 +73,12 @@ void	ft_put_bin(int n, int pid)
 		kill(pid, SIGUSR1);
 	else
 		kill(pid, SIGUSR2);
-	ft_sleep(200);
+	ft_sleep(1000);
 	counter++;
 	while (counter < 8)
 	{
 		kill(pid, SIGUSR1);
-		ft_sleep(300);
+		ft_sleep(1000);
 		counter++;
 	}
 }
