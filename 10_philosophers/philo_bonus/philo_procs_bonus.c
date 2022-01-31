@@ -71,7 +71,7 @@ void	ft_create_procs(t_data *c_data)
 		}
 		i++;
 	}
-	ft_wait_procs(c_data, philo);
+	ft_wait_procs(c_data);
 }
 
 void	ft_wait_procs(t_data *c_data)
