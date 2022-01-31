@@ -1,17 +1,11 @@
 NAME = philo
 
-BONUS = philo_bonus
-
 SRCS = $(wildcard *.c)
-
-SRCS_BONUS = $(wildcard ../philo_bonus/*)
 
 FLAGS = -Wall -Wextra -Werror
 
-OBJS = $(SRCS:.c=.o)
-
-$(NAME): $(OBJS)
-	@ gcc $(FLAGS) $(OBJS) -lpthread -o $(NAME)
+$(NAME):
+	@ gcc $(FLAGS) $(SRCS) -lpthread -o $(NAME)
 	@ echo "Compiling philosophers..."
 
 all : $(NAME) 

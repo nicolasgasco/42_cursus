@@ -4,10 +4,8 @@ SRCS = $(wildcard *.c)
 
 FLAGS = -Wall -Wextra -Werror
 
-OBJS = $(SRCS:.c=.o)
-
-$(BONUS): $(OBJS)
-	@ gcc $(FLAGS) $(OBJS) -lpthread -o $(BONUS)
+$(BONUS):
+	@ gcc $(FLAGS) $(SRCS) -lpthread -o $(BONUS)
 	@ echo "Compiling Philosophers - Bonus..."
 
 all : $(BONUS)
