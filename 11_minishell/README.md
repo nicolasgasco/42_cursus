@@ -1,7 +1,7 @@
 # Minishell (February 2022)
 > The objective of this project is for you to create a simple shell. Yes, your little bash or zsh. You will learn a lot about processes and file descriptors.
 
-This is a group project done [in a separate repository](https://github.com/nicolasgasco/42_minishell) and together with [@adelcor](https://github.com/adelcor).
+This is a group project done with [@adelcor](https://github.com/adelcor) [in a separate repository](https://github.com/nicolasgasco/42_minishell) and together with [@adelcor](https://github.com/adelcor).
 
 The shell must:
 - interpret quotes correctly
@@ -14,6 +14,17 @@ The shell must:
 - execute pipes
 - Catch `ctrl-C`, `ctrl-D`, and `ctrl-\` signals
 
+## Run the program
+
+### Unix
+Clone the repository and open it
+```
+# You might need to run this on MacOs
+brew install readline
+
+make
+./minishell
+```
 
 ## Examples
 
