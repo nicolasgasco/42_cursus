@@ -3,7 +3,7 @@
 This is a collection of the projects I completed while doing the 'common core' of 42Urduliz in Bilbao.
 
 Here is the list of projects sorted by date (descending):
-1. **net_practice** (system administration, April 2022): configure small-scale networks to make a network run and learn how networking works.
+1. **net_practice** (system administration, April 2022): configure small-scale networks to make a network run and learn how networking and subnetting work.
 
 2. **minishell** (C programming, February 2022): recreate a small Bash-inspired shell for UNIX. Group project done [in a separate repository](https://github.com/nicolasgasco/42_minishell) with [@adelcor](https://github.com/adelcor).
 ![Screenshot of Minishell example](https://res.cloudinary.com/ngasco/image/upload/v1649785877/42/minishell/Screenshot_from_2022-04-12_19-47-39_isuenb.png
