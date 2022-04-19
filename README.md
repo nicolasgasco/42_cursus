@@ -6,6 +6,8 @@ Here is the list of projects sorted by date (descending):
 1. **net_practice** (system administration, April 2022): solve networking problems to make a network run and learn how networking works. Configure small-scale networks following TCP/IP addressing rules.
 
 2. **minishell** (C programming, February 2022): recreate a small Bash-inspired shell for UNIX. Group project done [in a separate repository](https://github.com/nicolasgasco/42_minishell) with [@adelcor](https://github.com/adelcor).
+![Screenshot of Minishell example](https://res.cloudinary.com/ngasco/image/upload/v1649785877/42/minishell/Screenshot_from_2022-04-12_19-47-39_isuenb.png
+ "Screenshot of Minishell example")
 
 3. **philosophers** (C programming, December 2021): 42's take on the classic [Dining philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem) using threads and mutexes.
 ![Screenshot of completed project](https://res.cloudinary.com/ngasco/image/upload/v1639432723/42/Screenshot_from_2021-12-13_22-57-45_jy9pa7.png "Screenshot of Philosophers")
