@@ -3,7 +3,7 @@
 This is a collection of the projects I completed while doing the 'common core' of 42Urduliz in Bilbao.
 
 Here is the list of projects sorted by date (descending):
-1. **cpp_modules** (C++ programming, May 2022): 9 mini projects to learn various topics of C++.
+1. **cpp_modules** (C++ programming, May 2022): 9 mini projects to learn various topics of C++ (98).
 
 2. **net_practice** (system administration, April 2022): configure small-scale networks to make a network run and learn how networking and subnetting work.
 
