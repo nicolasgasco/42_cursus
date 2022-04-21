@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __CONTACT_H__
 #define __CONTACT_H__
 
@@ -20,7 +21,7 @@ class Contact {
     void setPhoneNumber(std::string phoneNumber);
     void setDarkestSecret(std::string darkestSecret);
 
-    bool getIsEmpty(void);
+    bool getIsEmpty(void) const;
     void setIsEmptyToFalse(void);
 
    private:

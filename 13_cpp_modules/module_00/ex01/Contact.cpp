@@ -69,7 +69,7 @@ void Contact::setDarkestSecret(std::string darkestSecret) {
 //                             Get set isEmpty                                //
 //                                                                            //
 // ************************************************************************** //
-bool Contact::getIsEmpty(void) {
+bool Contact::getIsEmpty(void) const {
     return (this->_isEmpty);
 }
 

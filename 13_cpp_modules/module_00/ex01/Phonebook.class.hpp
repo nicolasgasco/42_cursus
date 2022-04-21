@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __PHONE_BOOK_H__
 #define __PHONE_BOOK_H__
 
@@ -15,8 +16,8 @@ class PhoneBook {
     void promptAndShowSingleEntry(void);
     void displaySingleEntryDetails(int index);
 
-    int getNumberOfValidContacts(void);
-    int getTotalNumberOfContacts(void);
+    int getNumberOfValidContacts(void) const;
+    int getTotalNumberOfContacts(void) const;
 
    private:
     int _totalNumberOfContacts;

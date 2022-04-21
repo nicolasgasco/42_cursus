@@ -110,7 +110,7 @@ void PhoneBook::displaySingleEntryDetails(int index) {
 //                       Getter/setter num of contacts                        //
 //                                                                            //
 // ************************************************************************** //
-int PhoneBook::getNumberOfValidContacts(void) {
+int PhoneBook::getNumberOfValidContacts(void) const {
     int numberOfContacts = 0;
     for (int i = 0; i < this->_totalNumberOfContacts; i++) {
         if (!this->contactList[i].getIsEmpty()) {
@@ -120,6 +120,6 @@ int PhoneBook::getNumberOfValidContacts(void) {
     return numberOfContacts;
 }
 
-int PhoneBook::getTotalNumberOfContacts(void) {
+int PhoneBook::getTotalNumberOfContacts(void) const {
     return this->_totalNumberOfContacts;
 }
