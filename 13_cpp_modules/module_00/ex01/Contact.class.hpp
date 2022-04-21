@@ -18,7 +18,10 @@ class Contact {
     void setPhoneNumber(std::string phoneNumber);
     void setDarkestSecret(std::string darkestSecret);
 
+    void addSingleContactField(std::string id);
+
     bool getIsEmpty(void);
+    void setIsEmpty(void);
 
    private:
     bool _isEmpty;

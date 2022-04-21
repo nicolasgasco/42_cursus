@@ -10,12 +10,14 @@ class PhoneBook {
     ~PhoneBook(void);
 
     void displayAllContacts(void);
-    int getNumberOfContacts(void);
-    // add new contact
-    // search contact
-    // Display all contacts
-    // Display summary
-    // Dsiplay full info
+
+    int getNumberOfValidContacts(void);
+    int getTotalNumberOfContacts(void);
+
+    void promptAndShowSingleEntry(void);
+    void displaySingleEntryDetails(int index);
+
+    void addNewEntry(void);
 
    private:
     int _totalNumberOfContacts;

@@ -1,25 +1,89 @@
+#include <iomanip>
 #include <iostream>
 
 #include "Phonebook.class.hpp"
 
 PhoneBook::PhoneBook(void) : _totalNumberOfContacts(8) {
-    std::cout << "PhoneBook constructor" << std::endl;
 }
 
 PhoneBook::~PhoneBook(void) {
-    std::cout << "PhoneBook destructor" << std::endl;
-    return;
 }
 
-void PhoneBook::displayAllContacts(void) {
-    if (this->getNumberOfContacts() == 0) {
-        std::cout << "No contacts to show. ADD a new one." << std::endl;
+void PhoneBook::addNewEntry(void) {
+    int indexToInsert = this->getNumberOfValidContacts();
+    if (indexToInsert >= this->getTotalNumberOfContacts()) {
+        indexToInsert = (this->getTotalNumberOfContacts() - 1);
+    }
+    this->contactList[indexToInsert].addSingleContactField("FIRST");
+    this->contactList[indexToInsert].addSingleContactField("LAST");
+    this->contactList[indexToInsert].addSingleContactField("NICK");
+    this->contactList[indexToInsert].addSingleContactField("PHONE");
+    this->contactList[indexToInsert].addSingleContactField("SECRET");
+    this->contactList[indexToInsert].setIsEmpty();
+}
+
+void outputTruncatedValue(std::string value) {
+    std::cout << std::setfill(' ') << std::setw(10);
+    if (value.length() <= 10) {
+        std::cout << value << "|";
     } else {
-        std::cout << "Show contacts" << std::endl;
+        std::cout << value.substr(0, 9).append(".") << "|";
     }
 }
 
-int PhoneBook::getNumberOfContacts(void) {
+void outputPopulatedContacts(PhoneBook *instance) {
+    std::cout << ".__________.__________.__________.__________." << std::endl;
+    std::cout << "|     index|     first|      last|      nick|" << std::endl;
+    std::cout << "|——————————|——————————|——————————|——————————|" << std::endl;
+    for (int i = 0; i < instance->getTotalNumberOfContacts(); i++) {
+        if (!instance->contactList[i].getIsEmpty()) {
+            std::cout << "|";
+            std::cout << std::setfill(' ') << std::setw(10);
+            std::cout << i << "|";
+            outputTruncatedValue(instance->contactList[i].firstName);
+            outputTruncatedValue(instance->contactList[i].lastName);
+            outputTruncatedValue(instance->contactList[i].nickName);
+            std::cout << std::endl;
+            std::cout << "|----------|----------|----------|----------|" << std::endl;
+        }
+    }
+}
+
+void PhoneBook::displayAllContacts(void) {
+    if (this->getNumberOfValidContacts() == 0) {
+        std::cout << "No contacts to show. ADD a new one." << std::endl;
+    } else {
+        outputPopulatedContacts(this);
+        this->promptAndShowSingleEntry();
+    }
+}
+
+void PhoneBook::displaySingleEntryDetails(int index) {
+    std::cout << "FIRST NAME: " << this->contactList[index].firstName << std::endl;
+    std::cout << "LAST NAME: " << this->contactList[index].lastName << std::endl;
+    std::cout << "NICKNAME: " << this->contactList[index].nickName << std::endl;
+    std::cout << "PHONE NUMBER: " << this->contactList[index].phoneNumber << std::endl;
+    std::cout << "DARKEST SECRET: " << this->contactList[index].darkestSecret << std::endl;
+}
+
+void PhoneBook::promptAndShowSingleEntry(void) {
+    std::string input;
+    int indexToShow;
+    while (1) {
+        std::cout << "Enter index of entry to show: ";
+        std::getline(std::cin, input);
+        indexToShow = atoi(input.c_str());
+        if (indexToShow > (this->getNumberOfValidContacts() - 1) || indexToShow > (this->getTotalNumberOfContacts() - 1)) {
+            std::cout << "Invalid index." << std::endl;
+            continue;
+        } else {
+            this->displaySingleEntryDetails(indexToShow);
+            return;
+        }
+    }
+}
+
+int PhoneBook::getNumberOfValidContacts(void) {
     int numberOfContacts = 0;
     for (int i = 0; i < this->_totalNumberOfContacts; i++) {
         if (!this->contactList[i].getIsEmpty()) {
@@ -27,4 +91,8 @@ int PhoneBook::getNumberOfContacts(void) {
         }
     }
     return numberOfContacts;
+}
+
+int PhoneBook::getTotalNumberOfContacts(void) {
+    return this->_totalNumberOfContacts;
 }

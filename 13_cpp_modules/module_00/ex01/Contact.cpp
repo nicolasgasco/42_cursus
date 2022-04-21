@@ -3,15 +3,17 @@
 #include "Contact.class.hpp"
 
 Contact::Contact(void) : _isEmpty(true) {
-    std::cout << "Contact constructor" << std::endl;
 }
 
 Contact::~Contact(void) {
-    std::cout << "Contact destructor" << std::endl;
 }
 
 bool Contact::getIsEmpty(void) {
     return (this->_isEmpty);
+}
+
+void Contact::setIsEmpty() {
+    this->_isEmpty = false;
 }
 
 void Contact::setFirstName(std::string firstName) {
@@ -32,4 +34,30 @@ void Contact::setPhoneNumber(std::string phoneNumber) {
 
 void Contact::setDarkestSecret(std::string darkestSecret) {
     this->darkestSecret = darkestSecret;
+}
+
+void Contact::addSingleContactField(std::string id) {
+    std::string value;
+    std::cout << "Insert ";
+    if (id == "FIRST") {
+        std::cout << "first name: ";
+        std::getline(std::cin, value);
+        this->setFirstName(value);
+    } else if (id == "LAST") {
+        std::cout << "last name: ";
+        std::getline(std::cin, value);
+        this->setLastName(value);
+    } else if (id == "NICK") {
+        std::cout << "nickname: ";
+        std::getline(std::cin, value);
+        this->setNickName(value);
+    } else if (id == "PHONE") {
+        std::cout << "phone number: ";
+        std::getline(std::cin, value);
+        this->setPhoneNumber(value);
+    } else if (id == "SECRET") {
+        std::cout << "darkest secret: ";
+        std::getline(std::cin, value);
+        this->setDarkestSecret(value);
+    }
 }
