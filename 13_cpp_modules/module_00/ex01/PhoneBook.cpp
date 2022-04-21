@@ -21,7 +21,15 @@ void PhoneBook::addNewEntry(void) {
     this->contactList[indexToInsert].addSingleField("NICK");
     this->contactList[indexToInsert].addSingleField("PHONE");
     this->contactList[indexToInsert].addSingleField("SECRET");
-    this->contactList[indexToInsert].setIsEmptyToFalse();
+    if (!this->contactList[indexToInsert].firstName.length() &&
+        !this->contactList[indexToInsert].lastName.length() &&
+        !this->contactList[indexToInsert].nickName.length() &&
+        !this->contactList[indexToInsert].phoneNumber.length() &&
+        !this->contactList[indexToInsert].darkestSecret.length()) {
+        std::cout << "Empty data. ADD valid contact." << std::endl;
+    } else {
+        this->contactList[indexToInsert].setIsEmptyToFalse();
+    }
 }
 
 void outputTruncatedValue(std::string value) {
