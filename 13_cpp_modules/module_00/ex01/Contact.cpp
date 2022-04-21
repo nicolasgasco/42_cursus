@@ -8,34 +8,11 @@ Contact::Contact(void) : _isEmpty(true) {
 Contact::~Contact(void) {
 }
 
-bool Contact::getIsEmpty(void) {
-    return (this->_isEmpty);
-}
-
-void Contact::setIsEmptyToFalse() {
-    this->_isEmpty = false;
-}
-
-void Contact::setFirstName(std::string firstName) {
-    this->firstName = firstName;
-}
-
-void Contact::setLastName(std::string lastName) {
-    this->lastName = lastName;
-}
-
-void Contact::setNickName(std::string nickName) {
-    this->nickName = nickName;
-}
-
-void Contact::setPhoneNumber(std::string phoneNumber) {
-    this->phoneNumber = phoneNumber;
-}
-
-void Contact::setDarkestSecret(std::string darkestSecret) {
-    this->darkestSecret = darkestSecret;
-}
-
+// ************************************************************************** //
+//                                                                            //
+//                             Adding field                                   //
+//                                                                            //
+// ************************************************************************** //
 void Contact::addSingleField(std::string id) {
     std::string value;
     std::cout << "Insert ";
@@ -60,4 +37,42 @@ void Contact::addSingleField(std::string id) {
         std::getline(std::cin, value);
         this->setDarkestSecret(value);
     }
+}
+
+// ************************************************************************** //
+//                                                                            //
+//                             Set properties                                 //
+//                                                                            //
+// ************************************************************************** //
+void Contact::setFirstName(std::string firstName) {
+    this->firstName = firstName;
+}
+
+void Contact::setLastName(std::string lastName) {
+    this->lastName = lastName;
+}
+
+void Contact::setNickName(std::string nickName) {
+    this->nickName = nickName;
+}
+
+void Contact::setPhoneNumber(std::string phoneNumber) {
+    this->phoneNumber = phoneNumber;
+}
+
+void Contact::setDarkestSecret(std::string darkestSecret) {
+    this->darkestSecret = darkestSecret;
+}
+
+// ************************************************************************** //
+//                                                                            //
+//                             Get set isEmpty                                //
+//                                                                            //
+// ************************************************************************** //
+bool Contact::getIsEmpty(void) {
+    return (this->_isEmpty);
+}
+
+void Contact::setIsEmptyToFalse() {
+    this->_isEmpty = false;
 }

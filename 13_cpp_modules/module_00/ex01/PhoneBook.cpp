@@ -11,6 +11,11 @@ PhoneBook::PhoneBook(void) : _totalNumberOfContacts(8) {
 PhoneBook::~PhoneBook(void) {
 }
 
+// ************************************************************************** //
+//                                                                            //
+//                             Adding entry                                   //
+//                                                                            //
+// ************************************************************************** //
 void PhoneBook::addNewEntry(void) {
     int indexToInsert = this->getNumberOfValidContacts();
     if (indexToInsert >= this->getTotalNumberOfContacts()) {
@@ -31,6 +36,12 @@ void PhoneBook::addNewEntry(void) {
         this->contactList[indexToInsert].setIsEmptyToFalse();
     }
 }
+
+// ************************************************************************** //
+//                                                                            //
+//                             Displaying entries                             //
+//                                                                            //
+// ************************************************************************** //
 
 void outputTruncatedValue(std::string value) {
     std::cout << std::setfill(' ') << std::setw(10);
@@ -68,14 +79,6 @@ void PhoneBook::displayAllContacts(void) {
     }
 }
 
-void PhoneBook::displaySingleEntryDetails(int index) {
-    std::cout << "FIRST NAME: " << this->contactList[index].firstName << std::endl;
-    std::cout << "LAST NAME: " << this->contactList[index].lastName << std::endl;
-    std::cout << "NICKNAME: " << this->contactList[index].nickName << std::endl;
-    std::cout << "PHONE NUMBER: " << this->contactList[index].phoneNumber << std::endl;
-    std::cout << "DARKEST SECRET: " << this->contactList[index].darkestSecret << std::endl;
-}
-
 void PhoneBook::promptAndShowSingleEntry(void) {
     std::string input;
     int indexToShow;
@@ -94,6 +97,19 @@ void PhoneBook::promptAndShowSingleEntry(void) {
     }
 }
 
+void PhoneBook::displaySingleEntryDetails(int index) {
+    std::cout << "FIRST NAME: " << this->contactList[index].firstName << std::endl;
+    std::cout << "LAST NAME: " << this->contactList[index].lastName << std::endl;
+    std::cout << "NICKNAME: " << this->contactList[index].nickName << std::endl;
+    std::cout << "PHONE NUMBER: " << this->contactList[index].phoneNumber << std::endl;
+    std::cout << "DARKEST SECRET: " << this->contactList[index].darkestSecret << std::endl;
+}
+
+// ************************************************************************** //
+//                                                                            //
+//                       Getter/setter num of contacts                        //
+//                                                                            //
+// ************************************************************************** //
 int PhoneBook::getNumberOfValidContacts(void) {
     int numberOfContacts = 0;
     for (int i = 0; i < this->_totalNumberOfContacts; i++) {

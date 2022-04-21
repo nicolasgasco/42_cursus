@@ -9,15 +9,14 @@ class PhoneBook {
     PhoneBook(void);
     ~PhoneBook(void);
 
+    void addNewEntry(void);
+
     void displayAllContacts(void);
-
-    int getNumberOfValidContacts(void);
-    int getTotalNumberOfContacts(void);
-
     void promptAndShowSingleEntry(void);
     void displaySingleEntryDetails(int index);
 
-    void addNewEntry(void);
+    int getNumberOfValidContacts(void);
+    int getTotalNumberOfContacts(void);
 
    private:
     int _totalNumberOfContacts;
