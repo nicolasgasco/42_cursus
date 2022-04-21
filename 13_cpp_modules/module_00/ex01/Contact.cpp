@@ -12,7 +12,7 @@ bool Contact::getIsEmpty(void) {
     return (this->_isEmpty);
 }
 
-void Contact::setIsEmpty() {
+void Contact::setIsEmptyToFalse() {
     this->_isEmpty = false;
 }
 
@@ -36,7 +36,7 @@ void Contact::setDarkestSecret(std::string darkestSecret) {
     this->darkestSecret = darkestSecret;
 }
 
-void Contact::addSingleContactField(std::string id) {
+void Contact::addSingleField(std::string id) {
     std::string value;
     std::cout << "Insert ";
     if (id == "FIRST") {

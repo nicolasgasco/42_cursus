@@ -14,14 +14,14 @@ PhoneBook::~PhoneBook(void) {
 void PhoneBook::addNewEntry(void) {
     int indexToInsert = this->getNumberOfValidContacts();
     if (indexToInsert >= this->getTotalNumberOfContacts()) {
-        indexToInsert = (this->getTotalNumberOfContacts() - 1);
+        indexToInsert = 0;
     }
-    this->contactList[indexToInsert].addSingleContactField("FIRST");
-    this->contactList[indexToInsert].addSingleContactField("LAST");
-    this->contactList[indexToInsert].addSingleContactField("NICK");
-    this->contactList[indexToInsert].addSingleContactField("PHONE");
-    this->contactList[indexToInsert].addSingleContactField("SECRET");
-    this->contactList[indexToInsert].setIsEmpty();
+    this->contactList[indexToInsert].addSingleField("FIRST");
+    this->contactList[indexToInsert].addSingleField("LAST");
+    this->contactList[indexToInsert].addSingleField("NICK");
+    this->contactList[indexToInsert].addSingleField("PHONE");
+    this->contactList[indexToInsert].addSingleField("SECRET");
+    this->contactList[indexToInsert].setIsEmptyToFalse();
 }
 
 void outputTruncatedValue(std::string value) {
@@ -41,7 +41,7 @@ void outputPopulatedContacts(PhoneBook *instance) {
         if (!instance->contactList[i].getIsEmpty()) {
             std::cout << "|";
             std::cout << std::setfill(' ') << std::setw(10);
-            std::cout << i << "|";
+            std::cout << i + 1 << "|";
             outputTruncatedValue(instance->contactList[i].firstName);
             outputTruncatedValue(instance->contactList[i].lastName);
             outputTruncatedValue(instance->contactList[i].nickName);
@@ -75,11 +75,12 @@ void PhoneBook::promptAndShowSingleEntry(void) {
         std::cout << "Enter index of entry to show: ";
         std::getline(std::cin, input);
         indexToShow = atoi(input.c_str());
-        if (indexToShow > (this->getNumberOfValidContacts() - 1) || indexToShow > (this->getTotalNumberOfContacts() - 1)) {
+        if (indexToShow <= 0 || indexToShow > this->getNumberOfValidContacts() ||
+            indexToShow > this->getTotalNumberOfContacts()) {
             std::cout << "Invalid index." << std::endl;
             continue;
         } else {
-            this->displaySingleEntryDetails(indexToShow);
+            this->displaySingleEntryDetails(indexToShow - 1);
             return;
         }
     }
