@@ -3,6 +3,7 @@
 #define __PHONE_BOOK_H__
 
 #include "Contact.class.hpp"
+
 class PhoneBook {
    public:
     Contact contactList[8];

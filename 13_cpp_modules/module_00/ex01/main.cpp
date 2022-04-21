@@ -7,7 +7,8 @@ int main(void) {
 
     while (1) {
         std::string cmd;
-        std::cout << "Insert either ADD, SEARCH or EXIT: ";
+        std::cout << std::endl
+                  << "Insert either ADD, SEARCH or EXIT: ";
         std::getline(std::cin, cmd);
         if (cmd == "ADD") {
             phoneBook.addNewEntry();

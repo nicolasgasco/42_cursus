@@ -21,6 +21,7 @@ void PhoneBook::addNewEntry(void) {
     if (indexToInsert >= this->getTotalNumberOfContacts()) {
         indexToInsert = 0;
     }
+    std::cout << std::endl;
     this->contactList[indexToInsert].addSingleField("FIRST");
     this->contactList[indexToInsert].addSingleField("LAST");
     this->contactList[indexToInsert].addSingleField("NICK");
@@ -72,7 +73,8 @@ void outputPopulatedContacts(PhoneBook *instance) {
 
 void PhoneBook::displayAllContacts(void) {
     if (this->getNumberOfValidContacts() == 0) {
-        std::cout << "No contacts to show. ADD a new one." << std::endl;
+        std::cout << std::endl
+                  << "No contacts to show. ADD a new one." << std::endl;
     } else {
         outputPopulatedContacts(this);
         this->promptAndShowSingleEntry();
@@ -83,7 +85,8 @@ void PhoneBook::promptAndShowSingleEntry(void) {
     std::string input;
     int indexToShow;
     while (1) {
-        std::cout << "Enter index of entry to show: ";
+        std::cout << std::endl
+                  << "Enter index of entry to show: ";
         std::getline(std::cin, input);
         indexToShow = atoi(input.c_str());
         if (indexToShow <= 0 || indexToShow > this->getNumberOfValidContacts() ||
@@ -98,11 +101,13 @@ void PhoneBook::promptAndShowSingleEntry(void) {
 }
 
 void PhoneBook::displaySingleEntryDetails(int index) {
-    std::cout << "FIRST NAME: " << this->contactList[index].firstName << std::endl;
-    std::cout << "LAST NAME: " << this->contactList[index].lastName << std::endl;
-    std::cout << "NICKNAME: " << this->contactList[index].nickName << std::endl;
-    std::cout << "PHONE NUMBER: " << this->contactList[index].phoneNumber << std::endl;
-    std::cout << "DARKEST SECRET: " << this->contactList[index].darkestSecret << std::endl;
+    std::cout << std::endl;
+    std::cout << "FIRST NAME.........................." << this->contactList[index].firstName << std::endl;
+    std::cout << "LAST NAME..........................." << this->contactList[index].lastName << std::endl;
+    std::cout << "NICKNAME............................" << this->contactList[index].nickName << std::endl;
+    std::cout << "PHONE NUMBER........................" << this->contactList[index].phoneNumber << std::endl;
+    std::cout << "DARKEST SECRET......................" << this->contactList[index].darkestSecret << std::endl;
+    std::cout << std::endl;
 }
 
 // ************************************************************************** //
