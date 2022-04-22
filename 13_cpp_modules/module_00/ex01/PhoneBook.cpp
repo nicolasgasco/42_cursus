@@ -28,7 +28,7 @@ PhoneBook::~PhoneBook(void) {
 // ************************************************************************** //
 void PhoneBook::addNewEntry(void) {
     int indexToInsert = this->_getNumberOfValidContacts();
-    if (indexToInsert >= this->getTotalNumberOfContacts()) {
+    if (indexToInsert >= this->_totalNumberOfContacts) {
         indexToInsert = 0;
     }
     std::cout << std::endl;
@@ -69,7 +69,7 @@ void PhoneBook::_outputPopulatedContacts(void) const {
     std::cout << "|     index|     first|      last|      nick|" << std::endl;
     std::cout << "|——————————|——————————|——————————|——————————|" << std::endl;
 
-    for (int i = 0; i < this->getTotalNumberOfContacts(); i++) {
+    for (int i = 0; i < this->_totalNumberOfContacts; i++) {
         if (this->_contactList[i].getIsEmpty()) {
             continue;
         }
@@ -104,7 +104,7 @@ void PhoneBook::promptAndShowEntryByIndex(void) const {
 
         int indexToShow = std::atoi(input.c_str());
         if (indexToShow <= 0 || indexToShow > this->_getNumberOfValidContacts() ||
-            indexToShow > this->getTotalNumberOfContacts()) {
+            indexToShow > this->_totalNumberOfContacts) {
             std::cout << std::endl
                       << "Invalid index." << std::endl;
             continue;
@@ -136,8 +136,4 @@ int PhoneBook::_getNumberOfValidContacts(void) const {
         }
     }
     return numberOfContacts;
-}
-
-int PhoneBook::getTotalNumberOfContacts(void) const {
-    return this->_totalNumberOfContacts;
 }

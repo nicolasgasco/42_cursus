@@ -25,8 +25,6 @@ class PhoneBook {
     bool displayAllContacts(void) const;
     void promptAndShowEntryByIndex(void) const;
 
-    int getTotalNumberOfContacts(void) const;
-
    private:
     const int _totalNumberOfContacts;
     Contact _contactList[8];
