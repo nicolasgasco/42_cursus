@@ -16,11 +16,11 @@ OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(STD) $(FLAGS) -o $(NAME) $(OBJ)
+	$(CC) $(STD) $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ)
 	@echo "Compilation done."
 
 $(OBJ_DIR)%.o: %.cpp $(INCLUDES)
-	$(CC) $(STD) $(FLAGS) -c $< -I. -o $@
+	$(CC) $(STD) $(FLAGS) $(SANITIZE) -c $< -I. -o $@
 
 clean:
 	@rm -f $(OBJ)
