@@ -91,7 +91,8 @@ void PhoneBook::promptAndShowSingleEntry(void) {
         indexToShow = atoi(input.c_str());
         if (indexToShow <= 0 || indexToShow > this->getNumberOfValidContacts() ||
             indexToShow > this->getTotalNumberOfContacts()) {
-            std::cout << "Invalid index." << std::endl;
+            std::cout << std::endl
+                      << "Invalid index." << std::endl;
             continue;
         } else {
             this->displaySingleEntryDetails(indexToShow - 1);

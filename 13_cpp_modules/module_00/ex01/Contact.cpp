@@ -19,49 +19,24 @@ void Contact::addSingleField(std::string id) {
     if (id == "FIRST") {
         std::cout << "first name: ";
         std::getline(std::cin, value);
-        this->setFirstName(value);
+        this->firstName = value;
     } else if (id == "LAST") {
         std::cout << "last name: ";
         std::getline(std::cin, value);
-        this->setLastName(value);
+        this->lastName = value;
     } else if (id == "NICK") {
         std::cout << "nickname: ";
         std::getline(std::cin, value);
-        this->setNickName(value);
+        this->nickName = value;
     } else if (id == "PHONE") {
         std::cout << "phone number: ";
         std::getline(std::cin, value);
-        this->setPhoneNumber(value);
+        this->phoneNumber = value;
     } else if (id == "SECRET") {
         std::cout << "darkest secret: ";
         std::getline(std::cin, value);
-        this->setDarkestSecret(value);
+        this->darkestSecret = value;
     }
-}
-
-// ************************************************************************** //
-//                                                                            //
-//                             Set properties                                 //
-//                                                                            //
-// ************************************************************************** //
-void Contact::setFirstName(std::string firstName) {
-    this->firstName = firstName;
-}
-
-void Contact::setLastName(std::string lastName) {
-    this->lastName = lastName;
-}
-
-void Contact::setNickName(std::string nickName) {
-    this->nickName = nickName;
-}
-
-void Contact::setPhoneNumber(std::string phoneNumber) {
-    this->phoneNumber = phoneNumber;
-}
-
-void Contact::setDarkestSecret(std::string darkestSecret) {
-    this->darkestSecret = darkestSecret;
 }
 
 // ************************************************************************** //

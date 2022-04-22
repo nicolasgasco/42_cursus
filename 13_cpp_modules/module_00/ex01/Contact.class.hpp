@@ -15,12 +15,6 @@ class Contact {
 
     void addSingleField(std::string id);
 
-    void setFirstName(std::string firstName);
-    void setLastName(std::string lastName);
-    void setNickName(std::string nickName);
-    void setPhoneNumber(std::string phoneNumber);
-    void setDarkestSecret(std::string darkestSecret);
-
     bool getIsEmpty(void) const;
     void setIsEmptyToFalse(void);
 
