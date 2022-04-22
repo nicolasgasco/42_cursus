@@ -19,21 +19,21 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(STD) $(FLAGS) -o $(NAME) $(OBJ)
-	@echo "##### retro_contacts compiling finished! #####"
+	@echo "Compilation done."
 
 $(OBJ_DIR)%.o: %.cpp $(INCLUDES)
 	@mkdir -p $(OBJ_DIR)
-	@echo "##### Creating" [ $@ ] " #####"
+	@echo "Creating" [ $@ ] ""
 	$(CC) $(STD) $(FLAGS) -c $< -I. -o $@
 
 clean:
 	@rm -f $(OBJ)
 	@rm -rf $(OBJ_DIR)
-	@echo "##### Removed object files #####"
+	@echo "Removed object files"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "##### Removed binary files #####"
+	@echo "Removed binary files"
 
 re: fclean all
 
