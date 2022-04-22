@@ -71,17 +71,7 @@ void outputPopulatedContacts(PhoneBook *instance) {
     }
 }
 
-void PhoneBook::displayAllContacts(void) {
-    if (this->getNumberOfValidContacts() == 0) {
-        std::cout << std::endl
-                  << "No contacts to show. ADD a new one." << std::endl;
-    } else {
-        outputPopulatedContacts(this);
-        this->promptAndShowSingleEntry();
-    }
-}
-
-void PhoneBook::promptAndShowSingleEntry(void) {
+void PhoneBook::promptAndShowEntryByIndex(void) {
     std::string input;
     int indexToShow;
     while (1) {
@@ -101,6 +91,16 @@ void PhoneBook::promptAndShowSingleEntry(void) {
     }
 }
 
+bool PhoneBook::displayAllContacts(void) {
+    if (this->getNumberOfValidContacts() == 0) {
+        std::cout << std::endl
+                  << "No contacts to show. ADD a new one." << std::endl;
+        return (false);
+    }
+    outputPopulatedContacts(this);
+    return (true);
+}
+
 void PhoneBook::displaySingleEntryDetails(int index) {
     std::cout << std::endl;
     std::cout << "FIRST NAME.........................." << this->contactList[index].firstName << std::endl;
@@ -108,12 +108,11 @@ void PhoneBook::displaySingleEntryDetails(int index) {
     std::cout << "NICKNAME............................" << this->contactList[index].nickName << std::endl;
     std::cout << "PHONE NUMBER........................" << this->contactList[index].phoneNumber << std::endl;
     std::cout << "DARKEST SECRET......................" << this->contactList[index].darkestSecret << std::endl;
-    std::cout << std::endl;
 }
 
 // ************************************************************************** //
 //                                                                            //
-//                       Getter/setter num of contacts                        //
+//                       Getters num of contacts                        //
 //                                                                            //
 // ************************************************************************** //
 int PhoneBook::getNumberOfValidContacts(void) const {

@@ -13,8 +13,8 @@ class PhoneBook {
 
     void addNewEntry(void);
 
-    void displayAllContacts(void);
-    void promptAndShowSingleEntry(void);
+    bool displayAllContacts(void);
+    void promptAndShowEntryByIndex(void);
     void displaySingleEntryDetails(int index);
 
     int getNumberOfValidContacts(void) const;
