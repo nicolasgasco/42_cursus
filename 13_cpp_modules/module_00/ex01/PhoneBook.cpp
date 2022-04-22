@@ -32,20 +32,20 @@ void PhoneBook::addNewEntry(void) {
         indexToInsert = 0;
     }
     std::cout << std::endl;
-    this->_contactList[indexToInsert].addSingleField("FIRST");
-    this->_contactList[indexToInsert].addSingleField("LAST");
-    this->_contactList[indexToInsert].addSingleField("NICK");
-    this->_contactList[indexToInsert].addSingleField("PHONE");
-    this->_contactList[indexToInsert].addSingleField("SECRET");
+    this->_contactsList[indexToInsert].addSingleField("FIRST");
+    this->_contactsList[indexToInsert].addSingleField("LAST");
+    this->_contactsList[indexToInsert].addSingleField("NICK");
+    this->_contactsList[indexToInsert].addSingleField("PHONE");
+    this->_contactsList[indexToInsert].addSingleField("SECRET");
 
-    if (!this->_contactList[indexToInsert].getFirstName().length() &&
-        !this->_contactList[indexToInsert].getLastName().length() &&
-        !this->_contactList[indexToInsert].getNickName().length() &&
-        !this->_contactList[indexToInsert].getPhoneNumber().length() &&
-        !this->_contactList[indexToInsert].getDarkestSecret().length()) {
+    if (!this->_contactsList[indexToInsert].getFirstName().length() &&
+        !this->_contactsList[indexToInsert].getLastName().length() &&
+        !this->_contactsList[indexToInsert].getNickName().length() &&
+        !this->_contactsList[indexToInsert].getPhoneNumber().length() &&
+        !this->_contactsList[indexToInsert].getDarkestSecret().length()) {
         std::cout << "Empty data. ADD valid contact." << std::endl;
     } else {
-        this->_contactList[indexToInsert].setIsEmptyToFalse();
+        this->_contactsList[indexToInsert].setIsEmptyToFalse();
     }
 }
 
@@ -70,16 +70,16 @@ void PhoneBook::_outputPopulatedContacts(void) const {
     std::cout << "|——————————|——————————|——————————|——————————|" << std::endl;
 
     for (int i = 0; i < this->_totalNumberOfContacts; i++) {
-        if (this->_contactList[i].getIsEmpty()) {
+        if (this->_contactsList[i].getIsEmpty()) {
             continue;
         }
 
         std::cout << "|";
         std::cout << std::setfill(' ') << std::setw(10);
         std::cout << i + 1 << "|";
-        outputTruncatedValue(this->_contactList[i].getFirstName());
-        outputTruncatedValue(this->_contactList[i].getLastName());
-        outputTruncatedValue(this->_contactList[i].getNickName());
+        outputTruncatedValue(this->_contactsList[i].getFirstName());
+        outputTruncatedValue(this->_contactsList[i].getLastName());
+        outputTruncatedValue(this->_contactsList[i].getNickName());
         std::cout << std::endl;
         std::cout << "|----------|----------|----------|----------|" << std::endl;
     }
@@ -116,11 +116,11 @@ void PhoneBook::promptAndShowEntryByIndex(void) const {
 
 void PhoneBook::_displaySingleEntryDetails(int index) const {
     std::cout << std::endl;
-    std::cout << "FIRST NAME.........................." << this->_contactList[index].getFirstName() << std::endl;
-    std::cout << "LAST NAME..........................." << this->_contactList[index].getLastName() << std::endl;
-    std::cout << "NICKNAME............................" << this->_contactList[index].getNickName() << std::endl;
-    std::cout << "PHONE NUMBER........................" << this->_contactList[index].getPhoneNumber() << std::endl;
-    std::cout << "DARKEST SECRET......................" << this->_contactList[index].getDarkestSecret() << std::endl;
+    std::cout << "FIRST NAME.........................." << this->_contactsList[index].getFirstName() << std::endl;
+    std::cout << "LAST NAME..........................." << this->_contactsList[index].getLastName() << std::endl;
+    std::cout << "NICKNAME............................" << this->_contactsList[index].getNickName() << std::endl;
+    std::cout << "PHONE NUMBER........................" << this->_contactsList[index].getPhoneNumber() << std::endl;
+    std::cout << "DARKEST SECRET......................" << this->_contactsList[index].getDarkestSecret() << std::endl;
 }
 
 // ************************************************************************** //
@@ -131,7 +131,7 @@ void PhoneBook::_displaySingleEntryDetails(int index) const {
 int PhoneBook::_getNumberOfValidContacts(void) const {
     int numberOfContacts = 0;
     for (int i = 0; i < this->_totalNumberOfContacts; i++) {
-        if (!this->_contactList[i].getIsEmpty()) {
+        if (!this->_contactsList[i].getIsEmpty()) {
             numberOfContacts++;
         }
     }

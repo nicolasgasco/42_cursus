@@ -27,7 +27,7 @@ class PhoneBook {
 
    private:
     const int _totalNumberOfContacts;
-    Contact _contactList[8];
+    Contact _contactsList[8];
 
     void _outputPopulatedContacts(void) const;
     void _displaySingleEntryDetails(int index) const;
