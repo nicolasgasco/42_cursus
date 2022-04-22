@@ -22,13 +22,10 @@ $(NAME): $(OBJ)
 	@echo "Compilation done."
 
 $(OBJ_DIR)%.o: %.cpp $(INCLUDES)
-	@mkdir -p $(OBJ_DIR)
-	@echo "Creating" [ $@ ] ""
 	$(CC) $(STD) $(FLAGS) -c $< -I. -o $@
 
 clean:
 	@rm -f $(OBJ)
-	@rm -rf $(OBJ_DIR)
 	@echo "Removed object files"
 
 fclean: clean
