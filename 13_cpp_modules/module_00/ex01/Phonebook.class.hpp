@@ -17,8 +17,6 @@
 
 class PhoneBook {
    public:
-    Contact contactList[8];
-
     PhoneBook(void);
     ~PhoneBook(void);
 
@@ -26,13 +24,16 @@ class PhoneBook {
 
     bool displayAllContacts(void) const;
     void promptAndShowEntryByIndex(void) const;
-    void displaySingleEntryDetails(int index) const;
 
-    int getNumberOfValidContacts(void) const;
     int getTotalNumberOfContacts(void) const;
 
    private:
-    int const _totalNumberOfContacts;
+    const int _totalNumberOfContacts;
+    Contact _contactList[8];
+
+    void _outputPopulatedContacts(void) const;
+    void _displaySingleEntryDetails(int index) const;
+    int _getNumberOfValidContacts(void) const;
 };
 
 #endif
