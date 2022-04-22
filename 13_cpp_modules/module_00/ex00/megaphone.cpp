@@ -13,8 +13,8 @@
 #include <cstring>
 #include <iostream>
 
-void outputStringUpper(char *str) {
-    for (int y = 0; y < (int)strlen(str); ++y) {
+void outputStringUpper(std::string str) {
+    for (int y = 0; y < (int)str.length(); ++y) {
         std::cout << (char)toupper(str[y]);
     }
 }
@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
         return (0);
     }
     for (int i = 1; i < argc; ++i) {
-        outputStringUpper(argv[i]);
+        outputStringUpper((std::string)argv[i]);
     }
     std::cout << std::endl;
     return 0;
