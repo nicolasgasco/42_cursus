@@ -63,7 +63,7 @@ void outputPopulatedContacts(PhoneBook *instance) {
         if (instance->contactList[i].getIsEmpty()) {
             continue;
         }
-        
+
         std::cout << "|";
         std::cout << std::setfill(' ') << std::setw(10);
         std::cout << i + 1 << "|";
@@ -73,6 +73,16 @@ void outputPopulatedContacts(PhoneBook *instance) {
         std::cout << std::endl;
         std::cout << "|----------|----------|----------|----------|" << std::endl;
     }
+}
+
+bool PhoneBook::displayAllContacts(void) {
+    if (this->getNumberOfValidContacts() == 0) {
+        std::cout << std::endl
+                  << "No contacts to show. ADD a new one." << std::endl;
+        return (false);
+    }
+    outputPopulatedContacts(this);
+    return (true);
 }
 
 void PhoneBook::promptAndShowEntryByIndex(void) {
@@ -88,21 +98,10 @@ void PhoneBook::promptAndShowEntryByIndex(void) {
             std::cout << std::endl
                       << "Invalid index." << std::endl;
             continue;
-        } else {
-            this->displaySingleEntryDetails(indexToShow - 1);
-            return;
         }
+        this->displaySingleEntryDetails(indexToShow - 1);
+        return;
     }
-}
-
-bool PhoneBook::displayAllContacts(void) {
-    if (this->getNumberOfValidContacts() == 0) {
-        std::cout << std::endl
-                  << "No contacts to show. ADD a new one." << std::endl;
-        return (false);
-    }
-    outputPopulatedContacts(this);
-    return (true);
 }
 
 void PhoneBook::displaySingleEntryDetails(int index) {
