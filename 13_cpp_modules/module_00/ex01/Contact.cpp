@@ -31,23 +31,23 @@ void Contact::addSingleField(std::string id) {
     if (id == "FIRST") {
         std::cout << "first name: ";
         std::getline(std::cin, value);
-        this->firstName = value;
+        this->setFirstName(value);
     } else if (id == "LAST") {
         std::cout << "last name: ";
         std::getline(std::cin, value);
-        this->lastName = value;
+        this->setLastName(value);
     } else if (id == "NICK") {
         std::cout << "nickname: ";
         std::getline(std::cin, value);
-        this->nickName = value;
+        this->setNickName(value);
     } else if (id == "PHONE") {
         std::cout << "phone number: ";
         std::getline(std::cin, value);
-        this->phoneNumber = value;
+        this->setPhoneNumber(value);
     } else if (id == "SECRET") {
         std::cout << "darkest secret: ";
         std::getline(std::cin, value);
-        this->darkestSecret = value;
+        this->setDarkestSecret(value);
     }
 }
 
@@ -62,4 +62,46 @@ bool Contact::getIsEmpty(void) const {
 
 void Contact::setIsEmptyToFalse() {
     this->_isEmpty = false;
+}
+
+// ************************************************************************** //
+//                                                                            //
+//                             Attributes getters                             //
+//                                                                            //
+// ************************************************************************** //
+std::string Contact::getFirstName(void) const {
+    return this->_firstName;
+}
+std::string Contact::getLastName(void) const {
+    return this->_lastName;
+}
+std::string Contact::getNickName(void) const {
+    return this->_nickName;
+}
+std::string Contact::getPhoneNumber(void) const {
+    return this->_phoneNumber;
+}
+std::string Contact::getDarkestSecret(void) const {
+    return this->_darkestSecret;
+}
+
+// ************************************************************************** //
+//                                                                            //
+//                             Attributes setters                             //
+//                                                                            //
+// ************************************************************************** //
+void Contact::setFirstName(std::string value) {
+    this->_firstName = value;
+}
+void Contact::setLastName(std::string value) {
+    this->_lastName = value;
+}
+void Contact::setNickName(std::string value) {
+    this->_nickName = value;
+}
+void Contact::setPhoneNumber(std::string value) {
+    this->_phoneNumber = value;
+}
+void Contact::setDarkestSecret(std::string value) {
+    this->_darkestSecret = value;
 }

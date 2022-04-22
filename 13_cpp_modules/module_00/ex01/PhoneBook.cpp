@@ -38,11 +38,11 @@ void PhoneBook::addNewEntry(void) {
     this->contactList[indexToInsert].addSingleField("PHONE");
     this->contactList[indexToInsert].addSingleField("SECRET");
 
-    if (!this->contactList[indexToInsert].firstName.length() &&
-        !this->contactList[indexToInsert].lastName.length() &&
-        !this->contactList[indexToInsert].nickName.length() &&
-        !this->contactList[indexToInsert].phoneNumber.length() &&
-        !this->contactList[indexToInsert].darkestSecret.length()) {
+    if (!this->contactList[indexToInsert].getFirstName().length() &&
+        !this->contactList[indexToInsert].getLastName().length() &&
+        !this->contactList[indexToInsert].getNickName().length() &&
+        !this->contactList[indexToInsert].getPhoneNumber().length() &&
+        !this->contactList[indexToInsert].getDarkestSecret().length()) {
         std::cout << "Empty data. ADD valid contact." << std::endl;
     } else {
         this->contactList[indexToInsert].setIsEmptyToFalse();
@@ -77,9 +77,9 @@ void outputPopulatedContacts(const PhoneBook *instance) {
         std::cout << "|";
         std::cout << std::setfill(' ') << std::setw(10);
         std::cout << i + 1 << "|";
-        outputTruncatedValue(instance->contactList[i].firstName);
-        outputTruncatedValue(instance->contactList[i].lastName);
-        outputTruncatedValue(instance->contactList[i].nickName);
+        outputTruncatedValue(instance->contactList[i].getFirstName());
+        outputTruncatedValue(instance->contactList[i].getLastName());
+        outputTruncatedValue(instance->contactList[i].getNickName());
         std::cout << std::endl;
         std::cout << "|----------|----------|----------|----------|" << std::endl;
     }
@@ -116,11 +116,11 @@ void PhoneBook::promptAndShowEntryByIndex(void) const {
 
 void PhoneBook::displaySingleEntryDetails(int index) const {
     std::cout << std::endl;
-    std::cout << "FIRST NAME.........................." << this->contactList[index].firstName << std::endl;
-    std::cout << "LAST NAME..........................." << this->contactList[index].lastName << std::endl;
-    std::cout << "NICKNAME............................" << this->contactList[index].nickName << std::endl;
-    std::cout << "PHONE NUMBER........................" << this->contactList[index].phoneNumber << std::endl;
-    std::cout << "DARKEST SECRET......................" << this->contactList[index].darkestSecret << std::endl;
+    std::cout << "FIRST NAME.........................." << this->contactList[index].getFirstName() << std::endl;
+    std::cout << "LAST NAME..........................." << this->contactList[index].getLastName() << std::endl;
+    std::cout << "NICKNAME............................" << this->contactList[index].getNickName() << std::endl;
+    std::cout << "PHONE NUMBER........................" << this->contactList[index].getPhoneNumber() << std::endl;
+    std::cout << "DARKEST SECRET......................" << this->contactList[index].getDarkestSecret() << std::endl;
 }
 
 // ************************************************************************** //
