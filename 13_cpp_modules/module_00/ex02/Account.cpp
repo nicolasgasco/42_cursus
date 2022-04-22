@@ -2,7 +2,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Account.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -72,7 +72,7 @@ int Account::getNbWithdrawals(void) {
 //                                                                            //
 // ************************************************************************** //
 void Account::displayAccountsInfos(void) {
-    _displayTimestamp();
+    this->_displayTimestamp();
     std::cout
         << "accounts:" << getNbAccounts()
         << ";"
