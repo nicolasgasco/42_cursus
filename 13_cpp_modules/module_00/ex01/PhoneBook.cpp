@@ -27,6 +27,7 @@ void PhoneBook::addNewEntry(void) {
     this->contactList[indexToInsert].addSingleField("NICK");
     this->contactList[indexToInsert].addSingleField("PHONE");
     this->contactList[indexToInsert].addSingleField("SECRET");
+
     if (!this->contactList[indexToInsert].firstName.length() &&
         !this->contactList[indexToInsert].lastName.length() &&
         !this->contactList[indexToInsert].nickName.length() &&
@@ -72,13 +73,13 @@ void outputPopulatedContacts(PhoneBook *instance) {
 }
 
 void PhoneBook::promptAndShowEntryByIndex(void) {
-    std::string input;
-    int indexToShow;
     while (1) {
+        std::string input;
         std::cout << std::endl
                   << "Enter index of entry to show: ";
         std::getline(std::cin, input);
-        indexToShow = atoi(input.c_str());
+
+        int indexToShow = atoi(input.c_str());
         if (indexToShow <= 0 || indexToShow > this->getNumberOfValidContacts() ||
             indexToShow > this->getTotalNumberOfContacts()) {
             std::cout << std::endl
