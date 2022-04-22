@@ -13,7 +13,8 @@ int main(void) {
         if (cmd == "ADD") {
             phoneBook.addNewEntry();
         } else if (cmd == "SEARCH") {
-            if (phoneBook.displayAllContacts()) {
+            int areContactsToShow = phoneBook.displayAllContacts();
+            if (areContactsToShow) {
                 phoneBook.promptAndShowEntryByIndex();
             }
         } else if (cmd == "EXIT") {
