@@ -54,7 +54,7 @@ void outputTruncatedValue(std::string value) {
     }
 }
 
-void outputPopulatedContacts(PhoneBook *instance) {
+void outputPopulatedContacts(const PhoneBook *instance) {
     std::cout << ".__________.__________.__________.__________." << std::endl;
     std::cout << "|     index|     first|      last|      nick|" << std::endl;
     std::cout << "|——————————|——————————|——————————|——————————|" << std::endl;
@@ -75,7 +75,7 @@ void outputPopulatedContacts(PhoneBook *instance) {
     }
 }
 
-bool PhoneBook::displayAllContacts(void) {
+bool PhoneBook::displayAllContacts(void) const {
     if (this->getNumberOfValidContacts() == 0) {
         std::cout << std::endl
                   << "No contacts to show. ADD a new one." << std::endl;
@@ -85,7 +85,7 @@ bool PhoneBook::displayAllContacts(void) {
     return (true);
 }
 
-void PhoneBook::promptAndShowEntryByIndex(void) {
+void PhoneBook::promptAndShowEntryByIndex(void) const {
     while (1) {
         std::string input;
         std::cout << std::endl
@@ -104,7 +104,7 @@ void PhoneBook::promptAndShowEntryByIndex(void) {
     }
 }
 
-void PhoneBook::displaySingleEntryDetails(int index) {
+void PhoneBook::displaySingleEntryDetails(int index) const {
     std::cout << std::endl;
     std::cout << "FIRST NAME.........................." << this->contactList[index].firstName << std::endl;
     std::cout << "LAST NAME..........................." << this->contactList[index].lastName << std::endl;

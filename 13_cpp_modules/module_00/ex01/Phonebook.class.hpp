@@ -13,15 +13,15 @@ class PhoneBook {
 
     void addNewEntry(void);
 
-    bool displayAllContacts(void);
-    void promptAndShowEntryByIndex(void);
-    void displaySingleEntryDetails(int index);
+    bool displayAllContacts(void) const;
+    void promptAndShowEntryByIndex(void) const;
+    void displaySingleEntryDetails(int index) const;
 
     int getNumberOfValidContacts(void) const;
     int getTotalNumberOfContacts(void) const;
 
    private:
-    int _totalNumberOfContacts;
+    int const _totalNumberOfContacts;
 };
 
 #endif
