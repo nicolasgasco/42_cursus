@@ -105,8 +105,8 @@ void Account::_displayTimestamp(void) {
     std::cout << std::setw(2) << std::setfill('0') << 1 + ltm->tm_mon;
     std::cout << std::setw(2) << std::setfill('0') << ltm->tm_mday;
     std::cout << "_";
-    std::cout << std::setw(2) << std::setfill('0') << 5 + ltm->tm_hour;
-    std::cout << std::setw(2) << std::setfill('0') << 30 + ltm->tm_min;
+    std::cout << std::setw(2) << std::setfill('0') << ltm->tm_hour;
+    std::cout << std::setw(2) << std::setfill('0') << ltm->tm_min;
     std::cout << std::setw(2) << std::setfill('0') << ltm->tm_sec;
     std::cout << "] ";
 }
