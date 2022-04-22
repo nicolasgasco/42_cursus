@@ -1,4 +1,4 @@
-NAME = phonebook
+NAME = account
 CC = c++
 STD = -std=c++98 -pedantic
 FLAGS = -Wall -Wextra -Werror

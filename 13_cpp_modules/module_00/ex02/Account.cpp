@@ -13,7 +13,16 @@
 
 #include "Account.hpp"
 
-Account::Account(void) {
+#include <iostream>
+
+Account::Account(int initial_deposit) {
+    this->_displayTimestamp();
+    std::cout
+        << " index:" << this->_accountIndex << ";amount:42;created" << std::endl;
+
+    if (initial_deposit) {
+        //
+    }
 }
 
 Account::~Account(void) {
@@ -33,12 +42,13 @@ int Account::getNbWithdrawals(void) {
     return (0);
 }
 void Account::displayAccountsInfos(void) {
+    std::cout << "Displayin Accounts Infos" << std::endl;
 }
 
 // Deposit
 void Account::makeDeposit(int deposit) {
     if (deposit) {
-        // 
+        //
     }
     return;
 }
@@ -56,5 +66,11 @@ void Account::displayStatus(void) const {
 }
 
 void Account::_displayTimestamp(void) {
+    std::cout << "[";
+    std::time_t result = std::time(nullptr);
+    // std::cout << std::asctime(std::localtime(&result))
+    //           << result;
+    std::cout << result;
+    std::cout << "]";
     return;
 }
