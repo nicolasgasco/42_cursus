@@ -58,17 +58,20 @@ void outputPopulatedContacts(PhoneBook *instance) {
     std::cout << ".__________.__________.__________.__________." << std::endl;
     std::cout << "|     index|     first|      last|      nick|" << std::endl;
     std::cout << "|——————————|——————————|——————————|——————————|" << std::endl;
+
     for (int i = 0; i < instance->getTotalNumberOfContacts(); i++) {
-        if (!instance->contactList[i].getIsEmpty()) {
-            std::cout << "|";
-            std::cout << std::setfill(' ') << std::setw(10);
-            std::cout << i + 1 << "|";
-            outputTruncatedValue(instance->contactList[i].firstName);
-            outputTruncatedValue(instance->contactList[i].lastName);
-            outputTruncatedValue(instance->contactList[i].nickName);
-            std::cout << std::endl;
-            std::cout << "|----------|----------|----------|----------|" << std::endl;
+        if (instance->contactList[i].getIsEmpty()) {
+            continue;
         }
+        
+        std::cout << "|";
+        std::cout << std::setfill(' ') << std::setw(10);
+        std::cout << i + 1 << "|";
+        outputTruncatedValue(instance->contactList[i].firstName);
+        outputTruncatedValue(instance->contactList[i].lastName);
+        outputTruncatedValue(instance->contactList[i].nickName);
+        std::cout << std::endl;
+        std::cout << "|----------|----------|----------|----------|" << std::endl;
     }
 }
 
