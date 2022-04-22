@@ -1,4 +1,3 @@
-#include <stdlib.h>
 
 #include <iomanip>
 #include <iostream>
@@ -92,7 +91,7 @@ void PhoneBook::promptAndShowEntryByIndex(void) const {
                   << "Enter index of entry to show: ";
         std::getline(std::cin, input);
 
-        int indexToShow = atoi(input.c_str());
+        int indexToShow = std::atoi(input.c_str());
         if (indexToShow <= 0 || indexToShow > this->getNumberOfValidContacts() ||
             indexToShow > this->getTotalNumberOfContacts()) {
             std::cout << std::endl
