@@ -5,9 +5,9 @@ FLAGS = -Wall -Wextra -Werror
 SANITIZE = -g -fsanitize=address
 
 SRC_NAME =	main.cpp \
+			Zombie.cpp \
 			newZombie.cpp \
 			randomChump.cpp \
-			Zombie.cpp \
 
 INCLUDES = Zombie.hpp \
 
