@@ -1,15 +1,17 @@
-NAME = brainz
+NAME = 03
 CC = c++
 STD = -std=c++98 -pedantic
 FLAGS = -Wall -Wextra -Werror
 SANITIZE = -g -fsanitize=address
 
 SRC_NAME =	main.cpp \
-			Zombie.cpp \
-			newZombie.cpp \
-			randomChump.cpp \
+			Weapon.cpp \
+			HumanA.cpp \
+			HumanB.cpp \
 
-INCLUDES = Zombie.hpp \
+INCLUDES = 	Weapon.hpp \
+			HumanA.hpp \
+			HumanB.hpp \
 
 OBJ_NAME = $(SRC_NAME:.cpp=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
