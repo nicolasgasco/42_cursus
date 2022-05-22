@@ -6,8 +6,7 @@ SANITIZE = -g -fsanitize=address
 
 SRC_NAME =	main.cpp \
 			Zombie.cpp \
-			newZombie.cpp \
-			randomChump.cpp \
+			ZombieHorde.cpp \
 
 INCLUDES = Zombie.hpp \
 

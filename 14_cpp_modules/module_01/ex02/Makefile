@@ -1,15 +1,10 @@
-NAME = brainz
+NAME = 02
 CC = c++
 STD = -std=c++98 -pedantic
 FLAGS = -Wall -Wextra -Werror
 SANITIZE = -g -fsanitize=address
 
 SRC_NAME =	main.cpp \
-			Zombie.cpp \
-			newZombie.cpp \
-			randomChump.cpp \
-
-INCLUDES = Zombie.hpp \
 
 OBJ_NAME = $(SRC_NAME:.cpp=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
@@ -21,7 +16,7 @@ $(NAME): $(OBJ)
 	$(CC) $(STD) $(FLAGS) -o $(NAME) $(OBJ)
 	@echo "Compilation done."
 
-$(OBJ_DIR)%.o: %.cpp $(INCLUDES)
+$(OBJ_DIR)%.o: %.cpp
 	$(CC) $(STD) $(FLAGS) -c $< -I. -o $@
 
 clean:
