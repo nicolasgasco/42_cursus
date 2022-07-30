@@ -9,6 +9,7 @@ void replace(std::string sourceFileName, std::string toBeReplaced, std::string t
         std::ofstream targetFile(sourceFileName.append(".replace").c_str());
 
         std::string line;
+        int timesReplaced = 0;
         while (getline(sourceFile, line))
         {
             size_t foundIndex = line.find(toBeReplaced);
@@ -16,6 +17,7 @@ void replace(std::string sourceFileName, std::string toBeReplaced, std::string t
                 targetFile << line << std::endl;
             else
             {
+                timesReplaced++;
                 while (1)
                 {
                     std::string firstChunk = line.substr(0, foundIndex);
@@ -32,6 +34,10 @@ void replace(std::string sourceFileName, std::string toBeReplaced, std::string t
                 }
                 targetFile << std::endl;
             }
+        }
+        if (timesReplaced == 0)
+        {
+            std::cerr << "Error: Nothing to replace" << std::endl;
         }
         targetFile.close();
     }
