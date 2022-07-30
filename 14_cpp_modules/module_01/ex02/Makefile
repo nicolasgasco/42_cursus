@@ -1,5 +1,5 @@
 NAME = 02
-CC = c++
+CC = clang++
 STD = -std=c++98 -pedantic
 FLAGS = -Wall -Wextra -Werror
 SANITIZE = -g -fsanitize=address
