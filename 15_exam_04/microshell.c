@@ -16,7 +16,7 @@ void ft_print_string_array(char **array)
     printf("- - - - - - - - - - - - - - - -\n");
 }
 
-void ft_get_cmd_args(char **argv, char **new_args)
+void ft_trim_args(char **argv, char **new_args)
 {
     int i;
     for (i = 0; argv[i]; i++)
@@ -55,19 +55,22 @@ void ft_write_fd(int fd, char *string)
 
 int main(int argc, char *argv[], char **envp)
 {
+    int num_args;
     printf("________________________\n\n");
+    int pipe_opened = 0;
+    int next_is_pipe = 0;
+    int wrote_into_pipe = 0;
+
     argv++;
     while (*argv)
     {
         if (strcmp(*argv, "|") == 0)
-        {
-            // printf("\tFound a pipe\n");
-        }
+            argv += 1;
         else if (strcmp(*argv, ";") == 0)
             argv += 1;
         else if (strcmp(*argv, "cd") == 0)
         {
-            int num_args = ft_get_num_args(argv);
+            num_args = ft_get_num_args(argv);
             if (num_args != 2)
             {
                 ft_write_fd(STDERR_FILENO, "error: cd: bad arguments\n");
@@ -87,17 +90,75 @@ int main(int argc, char *argv[], char **envp)
         }
         else
         {
-            // printf("\tNot pipe, not semicolon\n");
+            int fd[2];
+            int fd2[2];
+            // ft_print_string_array(argv);
+            num_args = ft_get_num_args(argv);
+            if (*(argv + num_args) && strcmp(*(argv + num_args), "|") == 0)
+            {
+                printf("Opening main pipe\n");
+                if (pipe_opened == 0)
+                {
+                    pipe_opened = 1;
+                    if (pipe(fd) == -1)
+                    {
+                        printf("Error with pipe\n");
+                        exit(2);
+                    }
+                }
+                else
+                {
+                    printf("Opening second pipe\n");
+                    if (pipe(fd2) == -1)
+                    {
+                        printf("Error with pipe\n");
+                        exit(2);
+                    }
+                }
+            }
+            else
+                next_is_pipe = 0;
             int pid = fork();
-
             if (pid < 0)
             {
                 printf("Error with fork\n");
+                exit(2);
             }
-            else if (pid == 0)
+            if (pid == 0)
             {
+
+                if (wrote_into_pipe == 0)
+                {
+                    printf("Writing into pipe (%s, %d)\n", *argv, wrote_into_pipe);
+                    if (dup2(fd[1], STDOUT_FILENO) < 0)
+                    {
+                        printf("error with dup2\n");
+                        exit(2);
+                    }
+                }
+                if (wrote_into_pipe == 1)
+                {
+
+                    printf("Reading from pipe (%s)\n", *argv);
+                    if (dup2(fd[0], STDIN_FILENO) < 0)
+                    {
+                        printf("Error with dup2\n");
+                        exit(2);
+                    }
+                    if (next_is_pipe == 1)
+                    {
+                        printf("mierda\n");
+                        if (dup2(fd2[1], STDOUT_FILENO) < 0)
+                        {
+                            printf("Error with dup2\n");
+                            exit(2);
+                        }
+                    }
+                }
+                close(fd[1]);
+                close(fd[0]);
                 char *new_args[argc];
-                ft_get_cmd_args(argv, new_args);
+                ft_trim_args(argv, new_args);
                 if (execve(*argv, new_args, envp) == -1)
                 {
                     ft_write_fd(STDERR_FILENO, "error: cannot execute ");
@@ -107,13 +168,16 @@ int main(int argc, char *argv[], char **envp)
                     exit(2);
                 }
             }
-            else
-            {
-                int status;
-                waitpid(0, &status, 0);
-                int num_args = ft_get_num_args(argv);
-                argv += num_args;
-            }
+
+            int status;
+            waitpid(0, &status, 0);
+            if (wrote_into_pipe == 0 || next_is_pipe == 1)
+                close(fd[1]);
+            if (wrote_into_pipe == 1)
+                close(fd[0]);
+            wrote_into_pipe = 1;
+            int num_args = ft_get_num_args(argv);
+            argv += num_args;
         }
     }
     // system("leaks microshell");
