@@ -29,6 +29,9 @@ Don't copy from this repository. I'm not that good and it's against the spirit o
 
 
 ## Screenshots
+### Cub3D
+![screencast-nimbus-capture-2022_08_12-17_53_56_lqj089](https://user-images.githubusercontent.com/73175085/184505477-a271ac22-ed26-4a7a-bd68-f12efd6a4ced.gif)
+
 ### Minishell
 <img src="https://res.cloudinary.com/ngasco/image/upload/v1649785877/42/minishell/Screenshot_from_2022-04-12_19-47-39_isuenb.png" width="600"/>
 
