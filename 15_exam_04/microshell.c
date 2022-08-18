@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <errno.h>
+#define READ 0
+#define WRITE 1
 
 void ft_print_string_array(char **array)
 {
@@ -56,19 +59,26 @@ void ft_write_fd(int fd, char *string)
 int main(int argc, char *argv[], char **envp)
 {
     int num_args;
-    printf("________________________\n\n");
+    // printf("________________________\n\n");
     int pipe_opened = 0;
     int next_is_pipe = 0;
-    int wrote_into_pipe = 0;
+    int must_write = 0;
+    int must_read = 0;
+    int must_write_read = 0;
 
     argv++;
     while (*argv)
     {
-        if (strcmp(*argv, "|") == 0)
+        if (strcmp(*argv, "|") == 0 && *(argv + 1))
+        {
+            // printf("Pipe\n\n");
             argv += 1;
-        else if (strcmp(*argv, ";") == 0)
+        }
+        else if (strcmp(*argv, ";") == 0 && *(argv + 1))
+        {
             argv += 1;
-        else if (strcmp(*argv, "cd") == 0)
+        }
+        else if (strcmp(*argv, "cd") == 0 && *(argv + 1))
         {
             num_args = ft_get_num_args(argv);
             if (num_args != 2)
@@ -90,34 +100,52 @@ int main(int argc, char *argv[], char **envp)
         }
         else
         {
-            int fd[2];
-            int fd2[2];
+            int fd[2][2];
             // ft_print_string_array(argv);
             num_args = ft_get_num_args(argv);
             if (*(argv + num_args) && strcmp(*(argv + num_args), "|") == 0)
             {
-                printf("Opening main pipe\n");
+                // printf("Next one is a pipe\n");
+                next_is_pipe = 1;
                 if (pipe_opened == 0)
                 {
+                    // printf("Opening first pipe for writing only\n");
+                    if (pipe(fd[0]) == -1)
+                    {
+                        printf("Error with pipe\n");
+                        exit(2);
+                    }
                     pipe_opened = 1;
-                    if (pipe(fd) == -1)
-                    {
-                        printf("Error with pipe\n");
-                        exit(2);
-                    }
+                    must_write = 1;
                 }
-                else
+                else if (next_is_pipe == 1)
                 {
-                    printf("Opening second pipe\n");
-                    if (pipe(fd2) == -1)
+                    // printf("Opening second pipe for reading and writing\n");
+                    if (pipe(fd[1]) == -1)
                     {
                         printf("Error with pipe\n");
                         exit(2);
                     }
+                    pipe_opened = 1;
+                    must_write_read = 1;
                 }
             }
             else
+            {
+                // printf("Next one is not a pipe (%s)\n", *argv);
                 next_is_pipe = 0;
+                if (pipe_opened == 1)
+                {
+                    // printf("Not opening pipe, only reading\n");
+                    must_read = 1;
+                }
+                else
+                {
+                    pipe_opened = 0;
+                }
+            }
+            // printf("Fd[0] is %d and %d\n", fd[0][READ], fd[0][WRITE]);
+            // printf("Fd[1] is %d and %d\n", fd[1][READ], fd[1][WRITE]);
             int pid = fork();
             if (pid < 0)
             {
@@ -126,37 +154,39 @@ int main(int argc, char *argv[], char **envp)
             }
             if (pid == 0)
             {
-
-                if (wrote_into_pipe == 0)
+                if (must_write == 1)
                 {
-                    printf("Writing into pipe (%s, %d)\n", *argv, wrote_into_pipe);
-                    if (dup2(fd[1], STDOUT_FILENO) < 0)
+                    // printf("Writing into first pipe (%s)\n", *argv);
+                    if (dup2(fd[0][WRITE], STDOUT_FILENO) < 0)
                     {
-                        printf("error with dup2\n");
+                        printf("error with dup2 (%s)\n", strerror(errno));
                         exit(2);
                     }
                 }
-                if (wrote_into_pipe == 1)
+                else if (must_read == 1)
                 {
-
-                    printf("Reading from pipe (%s)\n", *argv);
-                    if (dup2(fd[0], STDIN_FILENO) < 0)
+                    // printf("Reading from first pipe (%s)\n", *argv);
+                    if (dup2(fd[0][READ], STDIN_FILENO) < 0)
                     {
-                        printf("Error with dup2\n");
+                        printf("error with dup2 (%s)\n", strerror(errno));
                         exit(2);
                     }
-                    if (next_is_pipe == 1)
+                }
+                else if (must_write_read == 1)
+                {
+                    // printf("Reading from first pipe and writing into one (%s)\n", *argv);
+                    if (dup2(fd[0][READ], STDIN_FILENO) < 0)
                     {
-                        printf("mierda\n");
-                        if (dup2(fd2[1], STDOUT_FILENO) < 0)
-                        {
-                            printf("Error with dup2\n");
-                            exit(2);
-                        }
+                        printf("error with dup2 (%s)\n", strerror(errno));
+                        exit(2);
+                    }
+                    if (dup2(fd[1][WRITE], STDOUT_FILENO) < 0)
+                    {
+                        printf("error with dup2 (%s)\n", strerror(errno));
+                        exit(2);
                     }
                 }
-                close(fd[1]);
-                close(fd[0]);
+
                 char *new_args[argc];
                 ft_trim_args(argv, new_args);
                 if (execve(*argv, new_args, envp) == -1)
@@ -171,15 +201,41 @@ int main(int argc, char *argv[], char **envp)
 
             int status;
             waitpid(0, &status, 0);
-            if (wrote_into_pipe == 0 || next_is_pipe == 1)
-                close(fd[1]);
-            if (wrote_into_pipe == 1)
-                close(fd[0]);
-            wrote_into_pipe = 1;
+            // if (WIFEXITED(status))
+            //     return (WEXITSTATUS(status));
+            if (must_write == 1)
+            {
+                // printf("Closing for must_write\n");
+                if (close(fd[0][WRITE]) == -1)
+                    printf("Error with close (0, WRITE)\n");
+            }
+            else if (must_read == 1)
+            {
+                // printf("Closing for must_read\n");
+                if (close(fd[0][READ]) == -1)
+                    printf("Error with close (0, READ)\n");
+                // if (close(fd[0][WRITE]) == -1)
+                //     printf("Error with close (0, WRITE)\n");
+            }
+            else if (must_write_read == 1)
+            {
+                // printf("Closing for must_write_read\n");
+                fd[0][READ] = fd[1][READ];
+                if (close(fd[1][WRITE]) == -1)
+                    printf("Error with close (0, READ)\n");
+            }
+
+            must_read = 0;
+            must_write = 0;
+            must_write_read = 0;
+
             int num_args = ft_get_num_args(argv);
             argv += num_args;
+            if (!*(argv + 1))
+                exit(1);
+            // printf("\n");
         }
     }
-    // system("leaks microshell");
+    system("leaks microshell");
     return (0);
 }

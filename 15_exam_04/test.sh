@@ -1,22 +1,13 @@
 #!/bin/bash
 
 test_line () {
-	echo $@
-	echo $@ >> out.res
-	./microshell $@ >> out.res &
+	$@ > test_files/out.res
 	sleep .250
-	echo >> out.res
-	leaks microshell > leaks.res 2> /dev/null
-	if grep "ROOT LEAK" < leaks.res > /dev/null 2> /dev/null ; then
-		printf "\e[0;31mLEAKS\n\e[0m"
-	fi
-	pid=$( pgrep microshell )
-	printf "\e[0;31m"
-	lsof -c microshell | grep $pid | grep -v cwd | grep -v txt | grep -v 0r | grep -v 1w | grep -v 2u | grep microshel
-	printf "\e[0m"
-	kill -9 $pid
-	wait $pid 2>/dev/null
-	#cat -e out.res > out
+	./microshell $@ > test_files/microshell.res
+	sleep .250
+	echo "- |$@|: "
+	cmp --silent test_files/microshell.res test_files/out.res || exit 1
+	echo "\t\tOK"
 }
 
 printf "\e[1;32mCompile\n"
