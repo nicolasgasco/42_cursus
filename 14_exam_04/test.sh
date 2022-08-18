@@ -13,7 +13,7 @@ test_line () {
 
 printf "\e[1;32mCompile\n"
 gcc -g -Wall -Werror -Wextra microshell.c -o microshell
-gcc -g -Wall -Werror -Wextra test.c -o test
+gcc -g -Wall -Werror -Wextra ./test_files/test.c -o test
 printf "\e[1;36mTest\n\e[0m"
 rm -f out.res leaks.res out
 test_line /bin/ls
