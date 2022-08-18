@@ -1,6 +1,0 @@
-NO ./tests/textures/path_to_the_north_texture
-SO ./tests/textures/path_to_the_south_texture
-WE ./tests/textures/path_to_the_west_texture
-EA ./tests/textures/path_to_the_east_texture
-F 110,153,15
-C 255,255,255
