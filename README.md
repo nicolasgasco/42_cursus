@@ -13,7 +13,8 @@ Don't copy from this repository. I'm not that good and it's against the spirit o
 |Name|Language|Date|Description|
 |----|--------|----|-----------|
 |**cpp_modules**|C++|In progress|9 mini projects to learn the basics of C++ (98)|
-|**cube3D**|C|In progress|Wolfenstein-inspired minigame using raycasting|
+|**exam_04**|C|August 2022|The exercises I did in order to prepare for the 4th rank exam.|
+|**cube3D**|C|August 2022|Wolfenstein-inspired minigame using raycasting to fake a 3D view. Group project done in a [separate repository](https://github.com/nicolasgasco/42_cub3d) with [@isolinis](https://github.com/isolinis)|
 |**net_practice**|SysAdmin|April 2022|Configure small-scale networks to learn how networking and subnetting work|
 |**minishell**|C|February 2022|Recreate a small Bash-inspired shell for UNIX. Group project done [in a separate repository](https://github.com/nicolasgasco/42_minishell) with [@adelcor](https://github.com/adelcor)|
 |**philosophers**|C|December 2021|42's take on the classic [Dining philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem) using threads and mutexes.|
@@ -29,6 +30,9 @@ Don't copy from this repository. I'm not that good and it's against the spirit o
 
 
 ## Screenshots
+### Cub3D
+![screencast-nimbus-capture-2022_08_12-17_53_56_lqj089](https://user-images.githubusercontent.com/73175085/184505477-a271ac22-ed26-4a7a-bd68-f12efd6a4ced.gif)
+
 ### Minishell
 <img src="https://res.cloudinary.com/ngasco/image/upload/v1649785877/42/minishell/Screenshot_from_2022-04-12_19-47-39_isuenb.png" width="600"/>
 
