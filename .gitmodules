@@ -1,3 +1,6 @@
 [submodule "11_minishell"]
 	path = 11_minishell
 	url = https://github.com/nicolasgasco/42_minishell
+[submodule "13_cub3D"]
+	path = 13_cub3D
+	url = https://github.com/nicolasgasco/42_cub3d
