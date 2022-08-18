@@ -56,7 +56,7 @@ void ft_write_fd(int fd, char *string)
     }
 }
 
-void    ft_cd(char **argv)
+void ft_cd(char **argv)
 {
     int num_args = ft_get_num_args(argv);
     if (num_args != 2)
@@ -75,17 +75,17 @@ void    ft_cd(char **argv)
     argv++;
 }
 
-void    ft_execve_error(char **argv)
+void ft_execve_error(char **argv)
 {
     ft_write_fd(STDERR_FILENO, "error: cannot execute ");
     ft_write_fd(STDERR_FILENO, *argv);
     ft_write_fd(STDERR_FILENO, "\n");
 }
 
-void    ft_fatal_error(void)
+void ft_fatal_error(void)
 {
     ft_write_fd(STDERR_FILENO, "error: fatal\n");
-    exit(2); 
+    exit(2);
 }
 
 int main(int argc, char *argv[], char **envp)
@@ -93,8 +93,6 @@ int main(int argc, char *argv[], char **envp)
     int num_args;
     int i = 0;
     int pipe_opened = 0;
-    int next_is_pipe = 0;
-
 
     argv++;
     while (*argv)
@@ -105,7 +103,7 @@ int main(int argc, char *argv[], char **envp)
 
         if (strcmp(*argv, "|") == 0 && *(argv + 1))
             argv += 1;
-        else if (strcmp(*argv, ";") == 0 && (*(argv + 1) || i != 0))
+        else if (strcmp(*argv, ";") == 0)
             argv += 1;
         else if (strcmp(*argv, "cd") == 0 && *(argv + 1))
             ft_cd(argv);
@@ -116,7 +114,6 @@ int main(int argc, char *argv[], char **envp)
             if (*(argv + num_args) && strcmp(*(argv + num_args), "|") == 0)
             {
                 // printf("Next one is a pipe\n");
-                next_is_pipe = 1;
                 int pipe_num;
                 if (pipe_opened == 0)
                 {
@@ -137,7 +134,6 @@ int main(int argc, char *argv[], char **envp)
             else
             {
                 // printf("Next one is not a pipe (%s)\n", *argv);
-                next_is_pipe = 0;
                 if (pipe_opened == 1)
                 {
                     // printf("Not opening pipe, only reading\n");

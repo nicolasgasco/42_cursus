@@ -1,17 +1,19 @@
 #!/bin/bash
 
 test_line () {
-	$@ > test_files/out.res
+	./test $@ &> test_files/out.res
 	sleep .250
-	./microshell $@ > test_files/microshell.res
+	./microshell $@ &> test_files/microshell.res
 	sleep .250
-	echo "- |$@|: "
 	cmp --silent test_files/microshell.res test_files/out.res || exit 1
-	echo "\t\tOK"
+	diff test_files/out.res test_files/microshell.res
+	lsof -c microshell | grep -v cwd | grep -v txt | grep -v 0r | grep -v 1w | grep -v 2u | grep microshel
+	printf "\e[1;32m[OK]\e[0m"
 }
 
 printf "\e[1;32mCompile\n"
-gcc -g -Wall -Werror -Wextra -DTEST_SH microshell.c -o microshell
+gcc -g -Wall -Werror -Wextra microshell.c -o microshell
+gcc -g -Wall -Werror -Wextra test.c -o test
 printf "\e[1;36mTest\n\e[0m"
 rm -f out.res leaks.res out
 test_line /bin/ls
@@ -40,5 +42,6 @@ test_line /bin/cat subject.fr.txt ";" /bin/cat subject.fr.txt "|" /usr/bin/grep 
 test_line ";" /bin/cat subject.fr.txt ";" /bin/cat subject.fr.txt "|" /usr/bin/grep a "|" /usr/bin/grep b "|" /usr/bin/grep z ";" /bin/cat subject.fr.txt
 test_line blah "|" /bin/echo OK
 test_line blah "|" /bin/echo OK ";"
+printf "\n"
 printf "\e[1;32mDone\e[0m\n"
 rm -rf microshell.dSYM leaks.res

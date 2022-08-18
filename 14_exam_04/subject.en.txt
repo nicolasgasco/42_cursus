@@ -1,3 +1,4 @@
+--------------------------------------------------------------------------------------
 Assignment name  : microshell
 Expected files   : *.c *.h
 Allowed functions: malloc, free, write, close, fork, waitpid, signal, kill, exit, chdir, execve, dup, dup2, pipe, strcmp, strncmp
@@ -22,6 +23,9 @@ for example this should work:
 $>./microshell /bin/ls "|" /usr/bin/grep microshell ";" /bin/echo i love my microshell
 microshell
 i love my microshell
+$>./microshell /bin/echo WOOT "; /bin/echo NOPE;" "; ;" ";" /bin/echo YEAH
+WOOT ; /bin echo NOPE; ; ;
+YEAH
 $>
 
 Hints:
@@ -29,3 +33,4 @@ Don't forget to pass the environment variable to execve
 
 Hints:
 Do not leak file descriptors!
+--------------------------------------------------------------------------------------
