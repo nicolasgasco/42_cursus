@@ -12,7 +12,7 @@ Don't copy from this repository. I'm not that good and it's against the spirit o
 ## Projects
 |Name|Language|Date|Description|
 |----|--------|----|-----------|
-|**cpp_modules**|C++|In progress|9 mini projects to learn the basics of C++ (98)|
+|**[cpp_modules](https://github.com/nicolasgasco/42_cursus/tree/master/15_cpp_modules)**|C++|In progress|9 mini projects to learn the basics of C++ (98)|
 |**exam_04**|C|August 2022|The exercises I did in order to prepare for the 4th rank exam.|
 |**cube3D**|C|August 2022|Wolfenstein-inspired minigame using raycasting to fake a tridimensional view. Group project done in a [separate repository](https://github.com/nicolasgasco/42_cub3d) with [@isolinis](https://github.com/isolinis)|
 |**net_practice**|SysAdmin|April 2022|Configure small-scale networks to learn how networking and subnetting work|
