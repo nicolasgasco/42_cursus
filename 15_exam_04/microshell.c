@@ -56,79 +56,83 @@ void ft_write_fd(int fd, char *string)
     }
 }
 
+void    ft_cd(char **argv)
+{
+    int num_args = ft_get_num_args(argv);
+    if (num_args != 2)
+    {
+        ft_write_fd(STDERR_FILENO, "error: cd: bad arguments\n");
+        exit(2);
+    }
+    argv++;
+    if (chdir(*argv) == -1)
+    {
+        ft_write_fd(STDERR_FILENO, "error: cd: cannot change directory to ");
+        ft_write_fd(STDERR_FILENO, *argv);
+        ft_write_fd(STDERR_FILENO, "\n");
+        exit(2);
+    }
+    argv++;
+}
+
+void    ft_execve_error(char **argv)
+{
+    ft_write_fd(STDERR_FILENO, "error: cannot execute ");
+    ft_write_fd(STDERR_FILENO, *argv);
+    ft_write_fd(STDERR_FILENO, "\n");
+}
+
+void    ft_fatal_error(void)
+{
+    ft_write_fd(STDERR_FILENO, "error: fatal\n");
+    exit(2); 
+}
+
 int main(int argc, char *argv[], char **envp)
 {
     int num_args;
-    // printf("________________________\n\n");
+    int i = 0;
     int pipe_opened = 0;
     int next_is_pipe = 0;
-    int must_write = 0;
-    int must_read = 0;
-    int must_write_read = 0;
+
 
     argv++;
     while (*argv)
     {
+        int must_write = 0;
+        int must_read = 0;
+        int must_write_read = 0;
+
         if (strcmp(*argv, "|") == 0 && *(argv + 1))
-        {
-            // printf("Pipe\n\n");
             argv += 1;
-        }
-        else if (strcmp(*argv, ";") == 0 && *(argv + 1))
-        {
+        else if (strcmp(*argv, ";") == 0 && (*(argv + 1) || i != 0))
             argv += 1;
-        }
         else if (strcmp(*argv, "cd") == 0 && *(argv + 1))
-        {
-            num_args = ft_get_num_args(argv);
-            if (num_args != 2)
-            {
-                ft_write_fd(STDERR_FILENO, "error: cd: bad arguments\n");
-                // system("leaks microshell");
-                exit(2);
-            }
-            argv++;
-            if (chdir(*argv) == -1)
-            {
-                ft_write_fd(STDERR_FILENO, "error: cd: cannot change directory to ");
-                ft_write_fd(STDERR_FILENO, *argv);
-                ft_write_fd(STDERR_FILENO, "\n");
-                // system("leaks microshell");
-                exit(2);
-            }
-            argv++;
-        }
+            ft_cd(argv);
         else
         {
             int fd[2][2];
-            // ft_print_string_array(argv);
             num_args = ft_get_num_args(argv);
             if (*(argv + num_args) && strcmp(*(argv + num_args), "|") == 0)
             {
                 // printf("Next one is a pipe\n");
                 next_is_pipe = 1;
+                int pipe_num;
                 if (pipe_opened == 0)
                 {
                     // printf("Opening first pipe for writing only\n");
-                    if (pipe(fd[0]) == -1)
-                    {
-                        printf("Error with pipe\n");
-                        exit(2);
-                    }
-                    pipe_opened = 1;
+                    pipe_num = 0;
                     must_write = 1;
                 }
-                else if (next_is_pipe == 1)
+                else
                 {
                     // printf("Opening second pipe for reading and writing\n");
-                    if (pipe(fd[1]) == -1)
-                    {
-                        printf("Error with pipe\n");
-                        exit(2);
-                    }
-                    pipe_opened = 1;
+                    pipe_num = 1;
                     must_write_read = 1;
                 }
+                if (pipe(fd[pipe_num]) == -1)
+                    ft_fatal_error();
+                pipe_opened = 1;
             }
             else
             {
@@ -140,80 +144,53 @@ int main(int argc, char *argv[], char **envp)
                     must_read = 1;
                 }
                 else
-                {
                     pipe_opened = 0;
-                }
             }
-            // printf("Fd[0] is %d and %d\n", fd[0][READ], fd[0][WRITE]);
-            // printf("Fd[1] is %d and %d\n", fd[1][READ], fd[1][WRITE]);
             int pid = fork();
             if (pid < 0)
-            {
-                printf("Error with fork\n");
-                exit(2);
-            }
+                ft_fatal_error();
             if (pid == 0)
             {
                 if (must_write == 1)
                 {
                     // printf("Writing into first pipe (%s)\n", *argv);
                     if (dup2(fd[0][WRITE], STDOUT_FILENO) < 0)
-                    {
-                        printf("error with dup2 (%s)\n", strerror(errno));
-                        exit(2);
-                    }
+                        ft_fatal_error();
                 }
                 else if (must_read == 1)
                 {
                     // printf("Reading from first pipe (%s)\n", *argv);
                     if (dup2(fd[0][READ], STDIN_FILENO) < 0)
-                    {
-                        printf("error with dup2 (%s)\n", strerror(errno));
-                        exit(2);
-                    }
+                        ft_fatal_error();
                 }
                 else if (must_write_read == 1)
                 {
                     // printf("Reading from first pipe and writing into one (%s)\n", *argv);
                     if (dup2(fd[0][READ], STDIN_FILENO) < 0)
-                    {
-                        printf("error with dup2 (%s)\n", strerror(errno));
-                        exit(2);
-                    }
+                        ft_fatal_error();
                     if (dup2(fd[1][WRITE], STDOUT_FILENO) < 0)
-                    {
-                        printf("error with dup2 (%s)\n", strerror(errno));
-                        exit(2);
-                    }
+                        ft_fatal_error();
                 }
-
                 char *new_args[argc];
                 ft_trim_args(argv, new_args);
                 if (execve(*argv, new_args, envp) == -1)
-                {
-                    ft_write_fd(STDERR_FILENO, "error: cannot execute ");
-                    ft_write_fd(STDERR_FILENO, *argv);
-                    ft_write_fd(STDERR_FILENO, "\n");
-                    // system("leaks microshell");
-                    exit(2);
-                }
+                    ft_execve_error(argv);
+                exit(2);
             }
 
             int status;
-            waitpid(0, &status, 0);
-            // if (WIFEXITED(status))
-            //     return (WEXITSTATUS(status));
+            waitpid(pid, &status, 0);
             if (must_write == 1)
             {
                 // printf("Closing for must_write\n");
                 if (close(fd[0][WRITE]) == -1)
-                    printf("Error with close (0, WRITE)\n");
+                    ft_fatal_error();
             }
             else if (must_read == 1)
             {
                 // printf("Closing for must_read\n");
-                if (close(fd[0][READ]) == -1)
-                    printf("Error with close (0, READ)\n");
+                // if (close(fd[0][READ]) == -1)
+                //     printf("Error with close (0, READ)\n");
                 // if (close(fd[0][WRITE]) == -1)
                 //     printf("Error with close (0, WRITE)\n");
             }
@@ -222,20 +199,12 @@ int main(int argc, char *argv[], char **envp)
                 // printf("Closing for must_write_read\n");
                 fd[0][READ] = fd[1][READ];
                 if (close(fd[1][WRITE]) == -1)
-                    printf("Error with close (0, READ)\n");
+                    ft_fatal_error();
             }
-
-            must_read = 0;
-            must_write = 0;
-            must_write_read = 0;
-
-            int num_args = ft_get_num_args(argv);
+            num_args = ft_get_num_args(argv);
             argv += num_args;
-            if (!*(argv + 1))
-                exit(1);
-            // printf("\n");
         }
+        i++;
     }
-    system("leaks microshell");
     return (0);
 }
