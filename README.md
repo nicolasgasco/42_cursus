@@ -15,7 +15,7 @@ Don't copy from this repository. I'm not that good and it's against the spirit o
 |**[cpp_modules](https://github.com/nicolasgasco/42_cursus/tree/master/15_cpp_modules)**|C++|In progress|9 mini projects to learn the basics of C++ (98)|
 |**exam_04**|C|August 2022|The exercises I did in order to prepare for the 4th rank exam.|
 |**[cube3D](https://github.com/nicolasgasco/42_cub3d/tree/44910b304e52fb3db0bb541efd611a30d0dd54e1)**|C|August 2022|Wolfenstein-inspired minigame using raycasting to fake a tridimensional view. Group project done in a [separate repository](https://github.com/nicolasgasco/42_cub3d) with [@isolinis](https://github.com/isolinis)|
-|*|*|*|Two months of voluntary account freeze|
+|*|*|*|_Two months of voluntary account freeze_|
 |**[net_practice](https://github.com/nicolasgasco/42_cursus/tree/master/12_net_practice)**|SysAdmin|April 2022|Configure small-scale networks to learn how networking and subnetting work|
 |**[minishell](https://github.com/nicolasgasco/42_minishell/tree/f35fe8834f99547ef71ac62f8b087f9a125796ae)**|C|February 2022|Recreate a small Bash-inspired shell for UNIX. Group project done [in a separate repository](https://github.com/nicolasgasco/42_minishell) with [@adelcor](https://github.com/adelcor)|
 |**[philosophers](https://github.com/nicolasgasco/42_cursus/tree/master/10_philosophers)**|C|December 2021|42's take on the classic [Dining philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem) using threads and mutexes.|
