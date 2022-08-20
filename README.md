@@ -27,7 +27,7 @@ Don't copy from this repository. I'm not that good and it's against the spirit o
 |**[ft_printf](https://github.com/nicolasgasco/42_cursus/tree/master/04_ft_printf)**|C|September 2021|Reproduce basic functioning of `prinft` function (flags implemented: `%c`, `%s`, `%i`, `%d`, `%u`, `%x`, `%X`, `%p`, `%%`)|
 |**[get_next_line](https://github.com/nicolasgasco/42_cursus/tree/master/03_get_next_line)**|C|August 2021|Write a function which returns a line read from a file descriptor (bonus: multiple file descriptors without losing the reading thread on each of them)|
 |**[born2beroot](https://github.com/nicolasgasco/42_cursus/tree/master/01_libft)**|SysAdmin|August 2021|Create a virtual machine under specific instructions. Setting a minimal Debian server implementing strict rules, e.g. strong password policy, UFW firewall, SSH, etc. In the repo there's only a Bash script that had to be broadcasted to all users every 10 minutes using crontab and wall|
-|**libft**|C|July 2021|Re-code useful C functions like `split` or `join` using only `malloc`, `free`, and `write`|
+|**[libft](https://github.com/nicolasgasco/42_cursus/tree/master/01_libft)**|C|July 2021|Re-code useful C functions like `split` or `join` using only `malloc`, `free`, and `write`|
 
 
 ## Screenshots
