@@ -1,4 +1,4 @@
-#42
+# 42
 
 The projects I completed while doing the _Common Core_ at the 42Urduliz campus in Bilbao, Spain.
 
@@ -46,4 +46,4 @@ Don't copy from this repository. I'm not that good and it's against the spirit o
 <img src="https://res.cloudinary.com/ngasco/image/upload/v1635067508/42/Screenshot_from_2021-10-24_11-22-56_mfbq1j.png" width="1000"/>
 
 ### So_long
-<img src="https://res.cloudinary.com/ngasco/image/upload/v1633638518/42/Screenshot_from_2021-10-07_22-25-25_iirvcu.png" width="400"/>
+![so_long](https://user-images.githubusercontent.com/73175085/185759259-7e8af986-6fc9-451f-8f1e-d14fb876d312.gif)
