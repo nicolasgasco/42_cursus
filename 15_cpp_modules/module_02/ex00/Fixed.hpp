@@ -6,9 +6,11 @@ class Fixed
 {
 public:
     Fixed(void);
-    ~Fixed(void);
     Fixed(Fixed const &src);
-    Fixed &operator=(const Fixed &fixed);
+    ~Fixed(void);
+
+    Fixed &operator=(const Fixed &src);
+
     int getRawBits(void) const;
     void setRawBits(int const raw);
 

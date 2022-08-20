@@ -8,9 +8,8 @@ Fixed::Fixed(void) : _FixedPointValue(0)
 
 Fixed::Fixed(Fixed const &src)
 {
-    this->_FixedPointValue = src._FixedPointValue;
     std::cout << "Copy constructor called" << std::endl;
-    this->getRawBits();
+    *this = src;
 }
 
 Fixed::~Fixed(void)
@@ -18,11 +17,10 @@ Fixed::~Fixed(void)
     std::cout << "Destructor called" << std::endl;
 }
 
-Fixed &Fixed::operator=(const Fixed &fixed)
+Fixed &Fixed::operator=(const Fixed &src)
 {
-    this->_FixedPointValue = fixed._FixedPointValue;
     std::cout << "Assignation operator called" << std::endl;
-    this->getRawBits();
+    this->_FixedPointValue = src.getRawBits();
     return *this;
 }
 
