@@ -5,9 +5,8 @@ test_line () {
 	sleep .250
 	./microshell $@ &> test_files/microshell.res
 	sleep .250
-	cmp --silent test_files/microshell.res test_files/out.res || exit 1
-	diff test_files/out.res test_files/microshell.res
-	lsof -c microshell | grep -v cwd | grep -v txt | grep -v 0r | grep -v 1w | grep -v 2u | grep microshel
+	cmp --silent test_files/microshell.res test_files/out.res || diff test_files/out.res test_files/microshell.res
+	# lsof -c microshell | grep -v cwd | grep -v txt | grep -v 0r | grep -v 1w | grep -v 2u | grep microshel
 	printf "\e[1;32m[OK]\e[0m"
 }
 
@@ -33,13 +32,13 @@ test_line /bin/ls "|" /usr/bin/grep microshell "|" /usr/bin/grep micro "|" /usr/
 test_line /bin/ls ewqew "|" /usr/bin/grep micro "|" /bin/cat -n ";" /bin/echo dernier ";" /bin/echo
 test_line /bin/ls "|" /usr/bin/grep micro "|" /bin/cat -n ";" /bin/echo dernier ";" /bin/echo ftest ";"
 test_line /bin/echo ftest ";" /bin/echo ftewerwerwerst ";" /bin/echo werwerwer ";" /bin/echo qweqweqweqew ";" /bin/echo qwewqeqrtregrfyukui ";"
-test_line /bin/ls ftest ";" /bin/ls ";" /bin/ls werwer ";" /bin/ls microshell.c ";" /bin/ls subject.fr.txt ";"
+test_line /bin/ls ftest ";" /bin/ls ";" /bin/ls werwer ";" /bin/ls microshell.c ";" /bin/ls subject.en.txt ";"
 test_line /bin/ls "|" /usr/bin/grep micro ";" /bin/ls "|" /usr/bin/grep micro ";" /bin/ls "|" /usr/bin/grep micro ";" /bin/ls "|" /usr/bin/grep micro ";"
-test_line /bin/cat subject.fr.txt "|" /usr/bin/grep a "|" /usr/bin/grep b ";" /bin/cat subject.fr.txt ";"
-test_line /bin/cat subject.fr.txt "|" /usr/bin/grep a "|" /usr/bin/grep w ";" /bin/cat subject.fr.txt ";"
-test_line /bin/cat subject.fr.txt "|" /usr/bin/grep a "|" /usr/bin/grep w ";" /bin/cat subject.fr.txt
-test_line /bin/cat subject.fr.txt ";" /bin/cat subject.fr.txt "|" /usr/bin/grep a "|" /usr/bin/grep b "|" /usr/bin/grep z ";" /bin/cat subject.fr.txt
-test_line ";" /bin/cat subject.fr.txt ";" /bin/cat subject.fr.txt "|" /usr/bin/grep a "|" /usr/bin/grep b "|" /usr/bin/grep z ";" /bin/cat subject.fr.txt
+test_line /bin/cat subject.en.txt "|" /usr/bin/grep a "|" /usr/bin/grep b ";" /bin/cat subject.en.txt ";"
+test_line /bin/cat subject.en.txt "|" /usr/bin/grep a "|" /usr/bin/grep w ";" /bin/cat subject.en.txt ";"
+test_line /bin/cat subject.en.txt "|" /usr/bin/grep a "|" /usr/bin/grep w ";" /bin/cat subject.en.txt
+test_line /bin/cat subject.en.txt ";" /bin/cat subject.en.txt "|" /usr/bin/grep a "|" /usr/bin/grep b "|" /usr/bin/grep z ";" /bin/cat subject.en.txt
+test_line ";" /bin/cat subject.en.txt ";" /bin/cat subject.en.txt "|" /usr/bin/grep a "|" /usr/bin/grep b "|" /usr/bin/grep z ";" /bin/cat subject.en.txt
 test_line blah "|" /bin/echo OK
 test_line blah "|" /bin/echo OK ";"
 printf "\n"
