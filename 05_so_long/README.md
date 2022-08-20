@@ -3,7 +3,7 @@
 Description:
 > This project is a very small 2D game. It is built to make you work with textures, sprites. And some very basic gameplay elements.
 
-![Screenshot of completed project](https://res.cloudinary.com/ngasco/image/upload/v1633638518/42/Screenshot_from_2021-10-07_22-25-25_iirvcu.png "Screenshot of 42 Escape")
+![so_long](https://user-images.githubusercontent.com/73175085/185759259-7e8af986-6fc9-451f-8f1e-d14fb876d312.gif)
 
 ## Run the game
 
