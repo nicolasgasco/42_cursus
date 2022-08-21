@@ -7,24 +7,27 @@ class Fixed
 {
 public:
     Fixed(void);
-    Fixed(const int intValue);
-    Fixed(const float floatValue);
-    ~Fixed(void);
+    Fixed(int const intValue);
+    Fixed(float const floatValue);
     Fixed(Fixed const &src);
 
+    ~Fixed(void);
+
     Fixed &operator=(const Fixed &fixed);
+
     float toFloat(void) const;
     int toInt(void) const;
 
-private:
-    int _FixedPointValue;
-    static int const _NUM_FRACT_BITS = 8;
-    int _numIntDigits;
-    int _numFractDigits;
+    int getRawBits(void) const;
+    void setRawBits(int const raw);
 
-    int _calcNumIntDigits(int intNum);
-    int _calcNumFractDigits(float floatNum);
-    int _convertToFixedPointValue(float floatNum);
+private:
+    static int const _NUM_FRACT_BITS = 8;
+    int _FixedPointValue;
+    int _numOfDecimals;
+
+    int
+    _floatToFixedPoint(float const floatValue);
 };
 
 std::ostream &operator<<(std::ostream &os, Fixed const &std);

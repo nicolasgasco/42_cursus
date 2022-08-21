@@ -1,31 +1,31 @@
 #include "Fixed.hpp"
 #include <iostream>
 #include <cmath>
+#define EIGHT_ACTIVE_BITS 255
 
-Fixed::Fixed(void) : _FixedPointValue(0), _numFractDigits(0)
+Fixed::Fixed(void) : _FixedPointValue(0)
 {
     std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int intValue) : _FixedPointValue(intValue), _numFractDigits(0)
+Fixed::Fixed(int const intValue) : _FixedPointValue(intValue)
 {
-    std::cout << "Int constructor called" << std::endl;
+    this->_FixedPointValue = (intValue << this->_NUM_FRACT_BITS);
+    std::cout
+        << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(const float floatValue)
+Fixed::Fixed(float const floatValue)
 {
-    this->_numIntDigits = this->_calcNumIntDigits(floatValue);
-    this->_numFractDigits = this->_calcNumFractDigits(floatValue);
-    this->_FixedPointValue = this->_convertToFixedPointValue(floatValue);
     std::cout << "Float constructor called" << std::endl;
+    this->_FixedPointValue = this->_floatToFixedPoint(floatValue);
+    std::cout << "Fixed point value is " << this->_FixedPointValue << std::endl;
 }
 
 Fixed::Fixed(Fixed const &src)
 {
-    this->_FixedPointValue = src._FixedPointValue;
-    this->_numIntDigits = src._numIntDigits;
-    this->_numFractDigits = src._numFractDigits;
     std::cout << "Copy constructor called" << std::endl;
+    *this = src;
 }
 
 Fixed::~Fixed(void)
@@ -33,69 +33,71 @@ Fixed::~Fixed(void)
     std::cout << "Destructor called" << std::endl;
 }
 
-Fixed &Fixed::operator=(const Fixed &fixed)
+Fixed &Fixed::operator=(const Fixed &src)
 {
-    this->_FixedPointValue = fixed._FixedPointValue;
-    this->_numIntDigits = fixed._numIntDigits;
-    this->_numFractDigits = fixed._numFractDigits;
     std::cout << "Assignation operator called" << std::endl;
+    this->_FixedPointValue = src.getRawBits();
+    this->_numOfDecimals = src._numOfDecimals;
     return *this;
+}
+
+int Fixed::getRawBits(void) const
+{
+    std::cout << "getRawBits member function called" << std::endl;
+    return (this->_FixedPointValue);
+}
+
+void Fixed::setRawBits(int const raw)
+{
+    this->_FixedPointValue = raw;
+    std::cout << "setRawBits member function called" << std::endl;
 }
 
 float Fixed::toFloat(void) const
 {
-    float result = (float)this->_FixedPointValue;
-    for (int i = 0; i < this->_numFractDigits; i++)
-    {
-        result /= 10;
-    }
-    return (result);
+    float integralPart = this->toInt();
+
+    float decimalPart = (float)(this->_FixedPointValue & EIGHT_ACTIVE_BITS);
+    if (decimalPart == 0)
+        return (integralPart);
+
+    for (int i = 0; i < this->_numOfDecimals; i++)
+        decimalPart /= 10;
+    return (integralPart + decimalPart);
 }
 
 int Fixed::toInt(void) const
 {
-    int result = this->_FixedPointValue;
-    for (int i = 0; i < this->_numFractDigits; i++)
-    {
-        result /= 10;
-    }
-    return (result);
+    int integralPart = this->_FixedPointValue >> this->_NUM_FRACT_BITS;
+    return (integralPart);
 }
 
-int Fixed::_calcNumIntDigits(int intNum)
+int Fixed::_floatToFixedPoint(float const floatValue)
 {
-    int i;
-    for (i = 0; intNum != 0; i++)
-    {
-        intNum /= 10;
-    }
-    return (i);
-}
+    float floatValueCopy = floatValue;
 
-int Fixed::_calcNumFractDigits(float floatNum)
-{
-    float num = floatNum;
-    int i = 0;
-    while (true)
+    int integralPart = (int)floatValue;
+    int numDecimals = 0;
+    while (floatValueCopy != roundf(floatValueCopy))
     {
-        if (((num - roundf(num)) * 10) <= 1)
-        {
-            break;
-        }
-        num *= 10;
-        i++;
+        floatValueCopy *= 10.0;
+        integralPart *= 10;
+        numDecimals++;
     }
-    return (i);
-}
 
-int Fixed::_convertToFixedPointValue(const float floatNum)
-{
-    float result = floatNum;
-    for (int i = 0; i < this->_numIntDigits; i++)
+    int convertedIntegralPart = (int)roundf(floatValue) << this->_NUM_FRACT_BITS;
+    // Do something for integral part
+
+    int convertedFloatPart = (int)(floatValueCopy - integralPart);
+    // For numbers with higher decimal precision that 8 bits
+    while (convertedFloatPart > EIGHT_ACTIVE_BITS)
     {
-        result *= 10;
+        convertedFloatPart /= 10;
+        numDecimals--;
     }
-    return (roundf(result));
+
+    this->_numOfDecimals = numDecimals;
+    return (convertedIntegralPart + convertedFloatPart);
 }
 
 std::ostream &operator<<(std::ostream &os, Fixed const &std)
