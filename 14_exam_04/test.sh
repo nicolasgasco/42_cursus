@@ -5,7 +5,7 @@ test_line () {
 	sleep .250
 	./microshell $@ &> test_files/microshell.res
 	sleep .250
-	cmp --silent test_files/microshell.res test_files/out.res || diff test_files/out.res test_files/microshell.res
+	cmp --silent test_files/microshell.res test_files/out.res || (diff test_files/out.res test_files/microshell.res ; exit 1)
 	# lsof -c microshell | grep -v cwd | grep -v txt | grep -v 0r | grep -v 1w | grep -v 2u | grep microshel
 	printf "\e[1;32m[OK]\e[0m"
 }
@@ -15,16 +15,23 @@ gcc -g -Wall -Werror -Wextra microshell.c -o microshell
 gcc -g -Wall -Werror -Wextra ./test_files/test.c -o test
 printf "\e[1;36mTest\n\e[0m"
 rm -f out.res leaks.res out
+echo "\nCd errors:"
+test_line cd
+test_line cd ciao miao ";"
+test_line cd ciao
+echo "\nSimple commands:"
 test_line /bin/ls
 test_line /bin/cat microshell.c
 test_line /bin/ls microshell.c
 test_line /bin/ls salut
+echo "\nSemi-colons:"
 test_line ";"
 test_line ";" ";"
 test_line ";" ";" /bin/echo OK
 test_line ";" ";" /bin/echo OK ";"
 test_line ";" ";" /bin/echo OK ";" ";"
 test_line ";" ";" /bin/echo OK ";" ";" ";" /bin/echo OK
+echo "\nPipes"
 test_line /bin/ls "|" /usr/bin/grep microshell
 test_line /bin/ls "|" /usr/bin/grep microshell "|" /usr/bin/grep micro
 test_line /bin/ls "|" /usr/bin/grep microshell "|" /usr/bin/grep micro "|" /usr/bin/grep shell "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro "|" /usr/bin/grep micro
