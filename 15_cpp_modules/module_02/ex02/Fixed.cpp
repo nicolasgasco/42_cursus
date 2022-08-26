@@ -1,130 +1,169 @@
 #include "Fixed.hpp"
 #include <iostream>
 #include <cmath>
+#define EIGHT_ACTIVE_BITS 255
 
-Fixed::Fixed(void) : _FixedPointValue(0), _numFractDigits(0)
+Fixed::Fixed(void) : _FixedPointValue(0)
 {
-    // std::cout << "Default constructor called" << std::endl;
+    std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int intValue) : _FixedPointValue(intValue), _numFractDigits(0)
+Fixed::Fixed(int const intValue) : _FixedPointValue(intValue)
 {
-    // std::cout << "Int constructor called" << std::endl;
+    this->_FixedPointValue = (intValue << this->_NUM_FRACT_BITS);
+    std::cout
+        << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(const float floatValue)
+Fixed::Fixed(float const floatValue)
 {
-    this->_numIntDigits = this->_calcNumIntDigits(floatValue);
-    this->_numFractDigits = this->_calcNumFractDigits(floatValue);
-    this->_FixedPointValue = this->_convertToFixedPointValue(floatValue);
-    // std::cout << "Float constructor called" << std::endl;
+    std::cout << "Float constructor called" << std::endl;
+    this->_FixedPointValue = this->_floatToFixedPoint(floatValue);
 }
 
 Fixed::Fixed(Fixed const &src)
 {
-    this->_FixedPointValue = src._FixedPointValue;
-    this->_numIntDigits = src._numIntDigits;
-    this->_numFractDigits = src._numFractDigits;
-    // std::cout << "Copy constructor called" << std::endl;
+    std::cout << "Copy constructor called" << std::endl;
+    *this = src;
 }
 
 Fixed::~Fixed(void)
 {
-    // std::cout << "Destructor called" << std::endl;
+    std::cout << "Destructor called" << std::endl;
 }
 
-Fixed &Fixed::operator=(const Fixed &rhs)
+int Fixed::getRawBits(void) const
 {
-    this->_FixedPointValue = rhs._FixedPointValue;
-    this->_numIntDigits = rhs._numIntDigits;
-    this->_numFractDigits = rhs._numFractDigits;
-    // std::cout << "Assignation operator called" << std::endl;
-    return *this;
+    return (this->_FixedPointValue);
 }
 
-Fixed Fixed::operator+(const Fixed &rhs) const
+void Fixed::setRawBits(int const raw)
 {
-    std::cout << "+ operator called" << std::endl;
-    return Fixed(this->toFloat() + rhs.toFloat());
-}
-
-Fixed Fixed::operator-(const Fixed &rhs) const
-{
-    std::cout << "- operator called" << std::endl;
-    return Fixed(this->toFloat() - rhs.toFloat());
-}
-
-Fixed Fixed::operator*(const Fixed &rhs) const
-{
-    std::cout << "* operator called" << std::endl;
-    return Fixed(this->toFloat() * rhs.toFloat());
-}
-
-Fixed Fixed::operator/(const Fixed &rhs) const
-{
-    std::cout << "* operator called" << std::endl;
-    return Fixed(this->toFloat() / rhs.toFloat());
+    this->_FixedPointValue = raw;
 }
 
 float Fixed::toFloat(void) const
 {
-    float result = (float)this->_FixedPointValue;
-    for (int i = 0; i < this->_numFractDigits; i++)
+    float integralPart = (float)this->toInt();
+    int fractionalFixedPointPart = (float)(this->_FixedPointValue & EIGHT_ACTIVE_BITS);
+    if (fractionalFixedPointPart == 0)
+        return (integralPart);
+
+    float fractionResult = 0.0f;
+    fractionResult += 1.0f;
+    for (int i = 1; i <= this->_NUM_FRACT_BITS; i++)
     {
-        result /= 10;
+        int currentBitPosition = this->_NUM_FRACT_BITS - i;
+        int bitDecimalValue = 1 << currentBitPosition;
+        int bitBinaryValue = (fractionalFixedPointPart & bitDecimalValue) >> currentBitPosition;
+
+        float multiplier = 2.0f;
+        for (int x = 0; x <= i; x++)
+            multiplier /= 2.0f;
+
+        if (bitBinaryValue == 1)
+            fractionResult += multiplier;
     }
+    float result = integralPart + fractionResult;
+    result -= 1.0f;
     return (result);
 }
 
 int Fixed::toInt(void) const
 {
-    int result = this->_FixedPointValue;
-    for (int i = 0; i < this->_numFractDigits; i++)
-    {
-        result /= 10;
-    }
-    return (result);
+    int integralPart = this->_FixedPointValue >> this->_NUM_FRACT_BITS;
+    return (integralPart);
 }
 
-int Fixed::_calcNumIntDigits(int intNum)
+int Fixed::_floatToFixedPoint(float const floatValue)
 {
-    int i;
-    for (i = 0; intNum != 0; i++)
-    {
-        intNum /= 10;
-    }
-    return (i);
-}
+    int fixedPointResult = 0;
 
-int Fixed::_calcNumFractDigits(float floatNum)
-{
-    float num = floatNum;
-    int i = 0;
-    while (true)
+    int integralPart = (int)floatValue;
+    fixedPointResult += (integralPart << this->_NUM_FRACT_BITS);
+
+    float fractionalPart = floatValue - (int)floatValue;
+
+    float divider = 2.0f;
+    for (int i = 0; i < this->_NUM_FRACT_BITS; i++)
     {
-        if (((num - roundf(num)) * 10) <= 1)
+        float bitFractionValue = (1.0 / divider);
+        bool isBitActivated = (fractionalPart / bitFractionValue) >= 1.0f;
+        if (isBitActivated)
         {
-            i++;
-            break;
+            int bitDecimalValue = (1 << (this->_NUM_FRACT_BITS - i - 1));
+            fixedPointResult |= bitDecimalValue;
+            fractionalPart -= bitFractionValue;
         }
-        num *= 10;
-        i++;
+        divider *= 2.0f;
     }
-    return (i);
+    return (fixedPointResult);
 }
 
-int Fixed::_convertToFixedPointValue(const float floatNum)
+// Assignment operator
+Fixed &Fixed::operator=(const Fixed &src)
 {
-    float result = floatNum;
-    for (int i = 0; i < this->_numIntDigits; i++)
-    {
-        result *= 10;
-    }
-    return (roundf(result));
+    std::cout << "Assignation operator called" << std::endl;
+    this->_FixedPointValue = src.getRawBits();
+    this->_numOfDecimals = src._numOfDecimals;
+    return *this;
 }
 
+// Comparison operators
+bool Fixed::operator>(const Fixed &fixed) const
+{
+    return (this->_FixedPointValue > fixed.getRawBits());
+}
+
+bool Fixed::operator>=(const Fixed &fixed) const
+{
+    return (this->_FixedPointValue >= fixed.getRawBits());
+}
+
+bool Fixed::operator<(const Fixed &fixed) const
+{
+    return (this->_FixedPointValue < fixed.getRawBits());
+}
+
+bool Fixed::operator<=(const Fixed &fixed) const
+{
+    return (this->_FixedPointValue <= fixed.getRawBits());
+}
+
+bool Fixed::operator==(const Fixed &fixed) const
+{
+    return (this->_FixedPointValue == fixed.getRawBits());
+}
+
+bool Fixed::operator!=(const Fixed &fixed) const
+{
+    return (this->_FixedPointValue != fixed.getRawBits());
+}
+
+// Arithmetic operators
+float Fixed::operator+(const Fixed &src) const
+{
+    return (this->toFloat() + src.toFloat());
+}
+
+float Fixed::operator-(const Fixed &src) const
+{
+    return (this->toFloat() - src.toFloat());
+}
+
+float Fixed::operator*(const Fixed &src) const
+{
+    return (this->toFloat() * src.toFloat());
+}
+
+float Fixed::operator/(const Fixed &src) const
+{
+    return (this->toFloat() / src.toFloat());
+}
+
+// Stream oeprator
 std::ostream &operator<<(std::ostream &os, Fixed const &std)
 {
-    std::cout << std.toFloat();
+    std::cout << std.toFloat() << " (" << std.getRawBits() << ")" << std::endl;
     return os;
 }

@@ -7,31 +7,42 @@ class Fixed
 {
 public:
     Fixed(void);
-    Fixed(const int intValue);
-    Fixed(const float floatValue);
-    ~Fixed(void);
+    Fixed(int const intValue);
+    Fixed(float const floatValue);
     Fixed(Fixed const &src);
+
+    ~Fixed(void);
+
+    // Assignation
+    Fixed &operator=(const Fixed &fixed);
+
+    // Comparison
+    bool operator>(const Fixed &fixed) const;
+    bool operator>=(const Fixed &fixed) const;
+    bool operator<(const Fixed &fixed) const;
+    bool operator<=(const Fixed &fixed) const;
+    bool operator==(const Fixed &fixed) const;
+    bool operator!=(const Fixed &fixed) const;
+
+    // Arithmetic
+    float operator+(const Fixed &fixed) const;
+    float operator-(const Fixed &fixed) const;
+    float operator*(const Fixed &fixed) const;
+    float operator/(const Fixed &fixed) const;
 
     float toFloat(void) const;
     int toInt(void) const;
 
-    // Assignment
-    Fixed &operator=(const Fixed &rhs);
-    // Math
-    Fixed operator+(const Fixed &rhs) const;
-    Fixed operator-(const Fixed &rhs) const;
-    Fixed operator*(const Fixed &rhs) const;
-    Fixed operator/(const Fixed &rhs) const;
+    int getRawBits(void) const;
+    void setRawBits(int const raw);
 
 private:
-    int _FixedPointValue;
     static int const _NUM_FRACT_BITS = 8;
-    int _numIntDigits;
-    int _numFractDigits;
+    int _FixedPointValue;
+    int _numOfDecimals;
 
-    int _calcNumIntDigits(int intNum);
-    int _calcNumFractDigits(float floatNum);
-    int _convertToFixedPointValue(float floatNum);
+    int
+    _floatToFixedPoint(float const floatValue);
 };
 
 std::ostream &operator<<(std::ostream &os, Fixed const &std);
