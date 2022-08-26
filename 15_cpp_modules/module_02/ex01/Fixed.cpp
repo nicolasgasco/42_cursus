@@ -42,39 +42,39 @@ Fixed &Fixed::operator=(const Fixed &src)
 
 int Fixed::getRawBits(void) const
 {
-    std::cout << "getRawBits member function called" << std::endl;
     return (this->_FixedPointValue);
 }
 
 void Fixed::setRawBits(int const raw)
 {
     this->_FixedPointValue = raw;
-    std::cout << "setRawBits member function called" << std::endl;
 }
 
 float Fixed::toFloat(void) const
 {
-    float integralPart = this->toInt();
-
-    int decimalPart = (float)(this->_FixedPointValue & EIGHT_ACTIVE_BITS);
-    // std::cout << "DecimalPart is " << decimalPart << std::endl;
-    if (decimalPart == 0)
+    float integralPart = (float)this->toInt();
+    int fractionalFixedPointPart = (float)(this->_FixedPointValue & EIGHT_ACTIVE_BITS);
+    if (fractionalFixedPointPart == 0)
         return (integralPart);
 
-    float decimalResult = 0.0f;
+    float fractionResult = 0.0f;
+    fractionResult += 1.0f;
     for (int i = 1; i <= this->_NUM_FRACT_BITS; i++)
     {
-        int bit = (decimalPart & (1 << (this->_NUM_FRACT_BITS - i))) >> (this->_NUM_FRACT_BITS - i);
-        // std::cout << "Bit is " << (bit) << std::endl;
+        int currentBitPosition = this->_NUM_FRACT_BITS - i;
+        int bitDecimalValue = 1 << currentBitPosition;
+        int bitBinaryValue = (fractionalFixedPointPart & bitDecimalValue) >> currentBitPosition;
+
         float multiplier = 2.0f;
         for (int x = 0; x <= i; x++)
-        {
             multiplier /= 2.0f;
-        }
-        if (bit == 1)
-            decimalResult += multiplier;
+
+        if (bitBinaryValue == 1)
+            fractionResult += multiplier;
     }
-    return (integralPart + decimalResult);
+    float result = integralPart + fractionResult;
+    result -= 1.0f;
+    return (result);
 }
 
 int Fixed::toInt(void) const
@@ -85,47 +85,31 @@ int Fixed::toInt(void) const
 
 int Fixed::_floatToFixedPoint(float const floatValue)
 {
-    float floatValueCopy = floatValue;
+    int fixedPointResult = 0;
 
     int integralPart = (int)floatValue;
-    int convertedIntegralPart = integralPart << this->_NUM_FRACT_BITS;
-    // std::cout << "ConvertedIntegralPart is " << convertedIntegralPart << std::endl;
+    fixedPointResult += (integralPart << this->_NUM_FRACT_BITS);
 
-    floatValueCopy -= (int)(floatValueCopy);
-    // std::cout << "floatValueCopy is " << floatValueCopy << std::endl;
+    float fractionalPart = floatValue - (int)floatValue;
+
     float divider = 2.0f;
     for (int i = 0; i < this->_NUM_FRACT_BITS; i++)
     {
-        // std::cout << "Bit position " << this->_NUM_FRACT_BITS - i << std::endl;
-        // std::cout << "Divider is " << divider << std::endl;
-        float bitValue = (1.0 / divider);
-        // std::cout
-        //     << "Bit value is " << bitValue << std::endl;
-        // std::cout << "FloatValueCopy is " << floatValueCopy << std::endl;
-        float divisionResult = (((floatValueCopy) / bitValue));
-        // std::cout << "divisionResult is " << divisionResult << std::endl;
-        if (divisionResult < 1)
+        float bitFractionValue = (1.0 / divider);
+        bool isBitActivated = (fractionalPart / bitFractionValue) >= 1.0f;
+        if (isBitActivated)
         {
-            // std::cout << "Bit " << this->_NUM_FRACT_BITS - i << " is 0" << std::endl;
-        }
-        else
-        {
-            // std::cout << "Bit " << this->_NUM_FRACT_BITS - i << " is 1" << std::endl;
-            int bitPositionInt = 1;
-            for (int x = 1; x < (this->_NUM_FRACT_BITS - i); x++)
-                bitPositionInt *= 2;
-            // std::cout << "convertedIntegralPart is " << convertedIntegralPart << std::endl;
-            convertedIntegralPart = convertedIntegralPart | bitPositionInt;
-            // std::cout << "convertedIntegralPart is " << convertedIntegralPart << std::endl;
-            floatValueCopy -= bitValue;
+            int bitDecimalValue = (1 << (this->_NUM_FRACT_BITS - i - 1));
+            fixedPointResult |= bitDecimalValue;
+            fractionalPart -= bitFractionValue;
         }
         divider *= 2.0f;
     }
-    return (convertedIntegralPart);
+    return (fixedPointResult);
 }
 
 std::ostream &operator<<(std::ostream &os, Fixed const &std)
 {
-    std::cout << std.toFloat();
+    std::cout << std.toFloat() << " (" << std.getRawBits() << ")" << std::endl;
     return os;
 }
