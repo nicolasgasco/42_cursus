@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cmath>
 #define EIGHT_ACTIVE_BITS 255
-#define LEAST_SIGNIFICANT_FRACION 0.0039625f
+#define LEAST_SIGNIFICANT_FRACTION 0.0039625f
 
 // Constructors
 Fixed::Fixed(void) : _FixedPointValue(0) {}
@@ -158,13 +158,13 @@ Fixed Fixed::operator/(const Fixed &src) const
 Fixed Fixed::operator++(void)
 {
     Fixed temp(this->toFloat());
-    this->setRawBits(Fixed(this->toFloat() + 1.0f + LEAST_SIGNIFICANT_FRACION).getRawBits());
+    this->setRawBits(Fixed(this->toFloat() + 1.0f + LEAST_SIGNIFICANT_FRACTION).getRawBits());
     return (temp);
 }
 
 Fixed Fixed::operator++(int const)
 {
-    this->setRawBits(Fixed(this->toFloat() + 1.0f + LEAST_SIGNIFICANT_FRACION).getRawBits());
+    this->setRawBits(Fixed(this->toFloat() + 1.0f + LEAST_SIGNIFICANT_FRACTION).getRawBits());
     return (*this);
 }
 
@@ -172,13 +172,13 @@ Fixed Fixed::operator++(int const)
 Fixed Fixed::operator--(void)
 {
     Fixed temp(this->toFloat());
-    this->setRawBits(Fixed(this->toFloat() - (1.0f + LEAST_SIGNIFICANT_FRACION)).getRawBits());
+    this->setRawBits(Fixed(this->toFloat() - (1.0f + LEAST_SIGNIFICANT_FRACTION)).getRawBits());
     return (temp);
 }
 
 Fixed Fixed::operator--(int const)
 {
-    this->setRawBits(Fixed(this->toFloat() - (1.0f + LEAST_SIGNIFICANT_FRACION)).getRawBits());
+    this->setRawBits(Fixed(this->toFloat() - (1.0f + LEAST_SIGNIFICANT_FRACTION)).getRawBits());
     return (*this);
 }
 
