@@ -2,35 +2,26 @@
 #include <iostream>
 #include <cmath>
 #define EIGHT_ACTIVE_BITS 255
+#define LEAST_SIGNIFICANT_FRACION 0.0039625f
 
-Fixed::Fixed(void) : _FixedPointValue(0)
-{
-    std::cout << "Default constructor called" << std::endl;
-}
+Fixed::Fixed(void) : _FixedPointValue(0) {}
 
 Fixed::Fixed(int const intValue) : _FixedPointValue(intValue)
 {
     this->_FixedPointValue = (intValue << this->_NUM_FRACT_BITS);
-    std::cout
-        << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(float const floatValue)
 {
-    std::cout << "Float constructor called" << std::endl;
     this->_FixedPointValue = this->_floatToFixedPoint(floatValue);
 }
 
 Fixed::Fixed(Fixed const &src)
 {
-    std::cout << "Copy constructor called" << std::endl;
     *this = src;
 }
 
-Fixed::~Fixed(void)
-{
-    std::cout << "Destructor called" << std::endl;
-}
+Fixed::~Fixed(void) {}
 
 int Fixed::getRawBits(void) const
 {
@@ -103,7 +94,6 @@ int Fixed::_floatToFixedPoint(float const floatValue)
 // Assignment operator
 Fixed &Fixed::operator=(const Fixed &src)
 {
-    std::cout << "Assignation operator called" << std::endl;
     this->_FixedPointValue = src.getRawBits();
     this->_numOfDecimals = src._numOfDecimals;
     return *this;
@@ -141,29 +131,79 @@ bool Fixed::operator!=(const Fixed &fixed) const
 }
 
 // Arithmetic operators
-float Fixed::operator+(const Fixed &src) const
+Fixed Fixed::operator+(const Fixed &src) const
 {
-    return (this->toFloat() + src.toFloat());
+    return (Fixed(this->toFloat() + src.toFloat()));
 }
 
-float Fixed::operator-(const Fixed &src) const
+Fixed Fixed::operator-(const Fixed &src) const
 {
-    return (this->toFloat() - src.toFloat());
+    return (Fixed(this->toFloat() - src.toFloat()));
 }
 
-float Fixed::operator*(const Fixed &src) const
+Fixed Fixed::operator*(const Fixed &src) const
 {
-    return (this->toFloat() * src.toFloat());
+    return (Fixed(this->toFloat() * src.toFloat()));
 }
 
-float Fixed::operator/(const Fixed &src) const
+Fixed Fixed::operator/(const Fixed &src) const
 {
-    return (this->toFloat() / src.toFloat());
+    return (Fixed(this->toFloat() / src.toFloat()));
+}
+
+// Increment
+Fixed Fixed::operator++(void)
+{
+    Fixed temp(this->toFloat());
+    this->setRawBits(Fixed(this->toFloat() + 1.0f + LEAST_SIGNIFICANT_FRACION).getRawBits());
+    return (temp);
+}
+
+Fixed Fixed::operator++(int const)
+{
+    this->setRawBits(Fixed(this->toFloat() + 1.0f + LEAST_SIGNIFICANT_FRACION).getRawBits());
+    return (*this);
+}
+
+// Decrement
+Fixed Fixed::operator--(void)
+{
+    Fixed temp(this->toFloat());
+    this->setRawBits(Fixed(this->toFloat() - (1.0f + LEAST_SIGNIFICANT_FRACION)).getRawBits());
+    return (temp);
+}
+
+Fixed Fixed::operator--(int const)
+{
+    this->setRawBits(Fixed(this->toFloat() - (1.0f + LEAST_SIGNIFICANT_FRACION)).getRawBits());
+    return (*this);
+}
+
+// Min
+Fixed &Fixed::min(Fixed &src1, Fixed &src2)
+{
+    return src1 < src2 ? src1 : src2;
+}
+
+Fixed const &Fixed::min(Fixed const &src1, Fixed const &src2)
+{
+    return src1 < src2 ? src1 : src2;
+}
+
+// Max
+Fixed &Fixed::max(Fixed &src1, Fixed &src2)
+{
+    return src1 > src2 ? src1 : src2;
+}
+
+Fixed const &Fixed::max(Fixed const &src1, Fixed const &src2)
+{
+    return src1 > src2 ? src1 : src2;
 }
 
 // Stream oeprator
 std::ostream &operator<<(std::ostream &os, Fixed const &std)
 {
-    std::cout << std.toFloat() << " (" << std.getRawBits() << ")" << std::endl;
+    std::cout << std.toFloat();
     return os;
 }

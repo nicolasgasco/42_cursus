@@ -25,10 +25,22 @@ public:
     bool operator!=(const Fixed &fixed) const;
 
     // Arithmetic
-    float operator+(const Fixed &fixed) const;
-    float operator-(const Fixed &fixed) const;
-    float operator*(const Fixed &fixed) const;
-    float operator/(const Fixed &fixed) const;
+    Fixed operator+(const Fixed &fixed) const;
+    Fixed operator-(const Fixed &fixed) const;
+    Fixed operator*(const Fixed &fixed) const;
+    Fixed operator/(const Fixed &fixed) const;
+
+    // Increment / Decrement
+    Fixed operator++(void);
+    Fixed operator++(int const);
+    Fixed operator--(void);
+    Fixed operator--(int const);
+
+    // Min / max
+    static Fixed &min(Fixed &src1, Fixed &src2);
+    static Fixed const &min(Fixed const &src1, Fixed const &src2);
+    static Fixed &max(Fixed &src1, Fixed &src2);
+    static Fixed const &max(Fixed const &src1, Fixed const &src2);
 
     float toFloat(void) const;
     int toInt(void) const;
