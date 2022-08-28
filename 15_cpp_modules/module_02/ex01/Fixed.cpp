@@ -3,12 +3,13 @@
 #include <cmath>
 #define EIGHT_ACTIVE_BITS 255
 
+// Constructors
 Fixed::Fixed(void) : _FixedPointValue(0)
 {
     std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(int const intValue) : _FixedPointValue(intValue)
+Fixed::Fixed(int const intValue)
 {
     this->_FixedPointValue = (intValue << this->_NUM_FRACT_BITS);
     std::cout
@@ -17,29 +18,31 @@ Fixed::Fixed(int const intValue) : _FixedPointValue(intValue)
 
 Fixed::Fixed(float const floatValue)
 {
-    std::cout << "Float constructor called" << std::endl;
     this->_FixedPointValue = this->_floatToFixedPoint(floatValue);
+    std::cout << "Float constructor called" << std::endl;
 }
 
 Fixed::Fixed(Fixed const &src)
 {
-    std::cout << "Copy constructor called" << std::endl;
     *this = src;
+    std::cout << "Copy constructor called" << std::endl;
 }
 
+// Destructor
 Fixed::~Fixed(void)
 {
     std::cout << "Destructor called" << std::endl;
 }
 
+// Assignment operator
 Fixed &Fixed::operator=(const Fixed &src)
 {
-    std::cout << "Assignation operator called" << std::endl;
     this->_FixedPointValue = src.getRawBits();
-    this->_numOfDecimals = src._numOfDecimals;
+    std::cout << "Assignation operator called" << std::endl;
     return *this;
 }
 
+// Getter/Setter
 int Fixed::getRawBits(void) const
 {
     return (this->_FixedPointValue);
@@ -50,6 +53,7 @@ void Fixed::setRawBits(int const raw)
     this->_FixedPointValue = raw;
 }
 
+// Conversion
 float Fixed::toFloat(void) const
 {
     float integralPart = (float)this->toInt();
@@ -108,8 +112,9 @@ int Fixed::_floatToFixedPoint(float const floatValue)
     return (fixedPointResult);
 }
 
+// << overload
 std::ostream &operator<<(std::ostream &os, Fixed const &std)
 {
-    std::cout << std.toFloat() << " (" << std.getRawBits() << ")" << std::endl;
+    std::cout << std.toFloat();
     return os;
 }

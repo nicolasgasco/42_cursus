@@ -24,9 +24,6 @@ int main(void)
     std::cout << "b is " << b << std::endl;
     std::cout << "c is " << c << std::endl;
     std::cout << "d is " << d << std::endl;
-
-    std::cout << std::endl;
-
     std::cout << "e is " << e << std::endl;
     std::cout << "f is " << f << std::endl;
     std::cout << "g is " << g << std::endl;
@@ -41,11 +38,6 @@ int main(void)
     std::cout << "b is " << b.toInt() << " as integer" << std::endl;
     std::cout << "c is " << c.toInt() << " as integer" << std::endl;
     std::cout << "d is " << d.toInt() << " as integer" << std::endl;
-
-    std::cout << std::endl;
-
-    std::cout << std::endl;
-
     std::cout << "e is " << e.toInt() << " as integer" << std::endl;
     std::cout << "f is " << f.toInt() << " as integer" << std::endl;
     std::cout << "g is " << g.toInt() << " as integer" << std::endl;

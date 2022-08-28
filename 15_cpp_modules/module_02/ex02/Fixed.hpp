@@ -51,7 +51,6 @@ public:
 private:
     static int const _NUM_FRACT_BITS = 8;
     int _FixedPointValue;
-    int _numOfDecimals;
 
     int
     _floatToFixedPoint(float const floatValue);

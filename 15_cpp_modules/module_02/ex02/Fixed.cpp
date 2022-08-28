@@ -4,9 +4,10 @@
 #define EIGHT_ACTIVE_BITS 255
 #define LEAST_SIGNIFICANT_FRACION 0.0039625f
 
+// Constructors
 Fixed::Fixed(void) : _FixedPointValue(0) {}
 
-Fixed::Fixed(int const intValue) : _FixedPointValue(intValue)
+Fixed::Fixed(int const intValue)
 {
     this->_FixedPointValue = (intValue << this->_NUM_FRACT_BITS);
 }
@@ -21,8 +22,10 @@ Fixed::Fixed(Fixed const &src)
     *this = src;
 }
 
+// Destructor
 Fixed::~Fixed(void) {}
 
+// Getter/Setter
 int Fixed::getRawBits(void) const
 {
     return (this->_FixedPointValue);
@@ -33,6 +36,7 @@ void Fixed::setRawBits(int const raw)
     this->_FixedPointValue = raw;
 }
 
+// Conversion
 float Fixed::toFloat(void) const
 {
     float integralPart = (float)this->toInt();
@@ -95,7 +99,6 @@ int Fixed::_floatToFixedPoint(float const floatValue)
 Fixed &Fixed::operator=(const Fixed &src)
 {
     this->_FixedPointValue = src.getRawBits();
-    this->_numOfDecimals = src._numOfDecimals;
     return *this;
 }
 
