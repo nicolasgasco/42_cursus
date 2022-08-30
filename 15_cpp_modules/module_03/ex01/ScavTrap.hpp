@@ -3,6 +3,8 @@
 #define __SCAVTRAP_H__
 #include <iostream>
 #include "ClapTrap.hpp"
+#define YELLOW "\033[1;33m"
+#define NOCOL "\033[0m"
 
 class ScavTrap : public ClapTrap
 {
@@ -11,6 +13,8 @@ public:
     ScavTrap(std::string name);
 
     ~ScavTrap(void);
+
+    ScavTrap &operator=(ScavTrap const &src);
 
     void attack(std::string const &target);
     void takeDamage(unsigned int amount);

@@ -12,9 +12,15 @@ int main(void)
     ScavTrap namedTrap("Scavvy");
     std::cout << namedTrap << std::endl;
     namedTrap.guardGate();
+    std::cout << std::endl;
+
     defaultTrap.attack(namedTrap.getName());
     namedTrap.takeDamage(defaultTrap.getAttackDamage());
     std::cout << defaultTrap << std::endl;
+    std::cout << std::endl;
+
+    ScavTrap copyTrap;
+    copyTrap = namedTrap;
     std::cout << std::endl;
 
     return 0;

@@ -28,26 +28,18 @@ void ClapTrap::attack(std::string const &target)
 {
     this->_energyPoints--;
     if (this->_name.length())
-    {
         std::cout << "ClapTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
-    }
     else
-    {
         std::cout << "Unnamed ClapTrap attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
-    }
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
     this->_hitpoints -= amount;
     if (this->_name.length())
-    {
         std::cout << "ClapTrap " << this->_name << " takes " << amount << " points of damage!" << std::endl;
-    }
     else
-    {
         std::cout << "Unnamed ClapTrap takes " << amount << " points of damage!" << std::endl;
-    }
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
@@ -80,13 +72,9 @@ int ClapTrap::getAttackDamage(void) const
 std::ostream &operator<<(std::ostream &os, ClapTrap const &std)
 {
     if (std.getName().length())
-    {
         std::cout << "Name: " << std.getName() << std::endl;
-    }
     else
-    {
-        std::cout << "No name" << std::endl;
-    }
+        std::cout << "Name: n/a" << std::endl;
     std::cout << "Hit points: " << std.getHitPoints() << std::endl;
     std::cout << "Damage points: " << std.getAttackDamage() << std::endl;
     std::cout << "Energy points: " << std.getEnergyPoints() << std::endl;
