@@ -24,8 +24,8 @@ Fixed::Fixed(float const floatValue)
 
 Fixed::Fixed(Fixed const &src)
 {
-    *this = src;
     std::cout << "Copy constructor called" << std::endl;
+    *this = src;
 }
 
 // Destructor
@@ -112,7 +112,7 @@ int Fixed::_floatToFixedPoint(float const floatValue)
     return (fixedPointResult);
 }
 
-// << overload
+// stream overload
 std::ostream &operator<<(std::ostream &os, Fixed const &std)
 {
     std::cout << std.toFloat();

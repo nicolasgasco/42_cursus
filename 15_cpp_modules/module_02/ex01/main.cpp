@@ -7,8 +7,10 @@ int main(void)
     Fixed const b(10);
     Fixed const c(42.43f); // FPV should be 10862
     Fixed const d(b);
+    std::cout << std::endl;
 
     a = Fixed(1234.4321f); // FPV should be 316015
+    std::cout << std::endl;
 
     // More float examples
     Fixed const e(24885.438943f); // FVP should be 6370672

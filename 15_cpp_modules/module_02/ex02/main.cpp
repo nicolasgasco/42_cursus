@@ -29,7 +29,12 @@ int main(void)
     std::cout << "a + b + c: " << (a + b + c) << std::endl;
     std::cout << "c - b - a: " << (c - b - a) << std::endl;
     std::cout << "b * a * c: " << (a * b * c) << std::endl;
+    std::cout << "c * b: " << (c * b) << std::endl;
+    std::cout << "c * a: " << (c * a) << std::endl;
     std::cout << "c / a / b: " << (c / a / b) << std::endl;
+    std::cout << "b / a: " << (b / a) << std::endl;
+    std::cout << "c / b: " << (c / b) << std::endl;
+    std::cout << "c / a: " << (c / a) << std::endl;
 
     std::cout << std::endl;
     std::cout << "INCREMENT OPERATORS:" << std::endl;

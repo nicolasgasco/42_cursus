@@ -22,7 +22,7 @@ $(NAME): $(OBJ)
 	@echo "##### Finished compiling! #####"
 	@echo "\n"
 
-$(OBJ_DIR)%.o: %.cpp # $(INCLUDES)
+$(OBJ_DIR)%.o: %.cpp $(INCLUDES)
 	@mkdir -p $(OBJ_DIR)
 	@echo "##### Creating" [ $@ ] " #####"
 	$(CC) $(FLAGS) -c $< -I. -o $@
