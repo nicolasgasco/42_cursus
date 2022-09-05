@@ -23,10 +23,10 @@ public:
     int getAttackDamage(void) const;
 
 protected:
-    std::string _name;
-    int _hitpoints;
-    int _energyPoints;
-    int _attackDamage;
+    std::string Name;
+    int Hitpoints;
+    int EnergyPoints;
+    int AttackDamage;
 };
 
 std::ostream &operator<<(std::ostream &os, ClapTrap const &std);

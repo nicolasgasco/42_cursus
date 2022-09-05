@@ -7,8 +7,8 @@ DiamondTrap::DiamondTrap(void)
 
 DiamondTrap::DiamondTrap(std::string name)
 {
-    this->_name = name;
-    ClapTrap::_name = name + "_clap_name";
+    this->Name = name;
+    ClapTrap::Name = name + "_clapName";
     std::cout << PURPLE << "DiamondTrap parameter constructor called" << NOCOL << std::endl;
 }
 
@@ -19,17 +19,17 @@ DiamondTrap::~DiamondTrap(void)
 
 DiamondTrap &DiamondTrap::operator=(DiamondTrap const &src)
 {
-    this->_name = src.getName();
+    this->Name = src.getName();
     std::cout << PURPLE << "DiamondTrap assignment operator overload called" << NOCOL << std::endl;
     return *this;
 }
 
 std::string DiamondTrap::getName(void) const
 {
-    return this->_name;
+    return this->Name;
 }
 
 void DiamondTrap::whoAmI(void) const
 {
-    std::cout << PURPLE << "DiamondTrap name is " << (this->_name.length() ? this->_name : "n/a") << " and ClapTrap name is " << (ClapTrap::getName().length() ? ClapTrap::getName() : "n/a") << std::endl;
+    std::cout << PURPLE << "DiamondTrap name is " << (this->Name.length() ? this->Name : "n/a") << " and ClapTrap name is " << (ClapTrap::getName().length() ? ClapTrap::getName() : "n/a") << std::endl;
 }

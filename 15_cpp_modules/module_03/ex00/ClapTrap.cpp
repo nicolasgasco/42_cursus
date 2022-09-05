@@ -1,82 +1,77 @@
 #include "ClapTrap.hpp"
+#include <iomanip>
 
-ClapTrap::ClapTrap(void) : _hitpoints(10), _energyPoints(10), _attackDamage(0)
+ClapTrap::ClapTrap(void) : Hitpoints(10), EnergyPoints(10), AttackDamage(0)
 {
-    std::cout << "ClapTrap default constructor called" << std::endl;
+    std::cout << CYAN << "ClapTrap default constructor called" << NOCOL << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name) : _hitpoints(10), _energyPoints(10), _attackDamage(0)
+ClapTrap::ClapTrap(std::string name) : Hitpoints(10), EnergyPoints(10), AttackDamage(0)
 {
-    this->_name = name;
-    std::cout << "ClapTrap paramter constructor called (" << name << ")" << std::endl;
+    this->Name = name;
+    std::cout << CYAN << "ClapTrap paramter constructor called (" << name << ")" << NOCOL << std::endl;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-    std::cout << "ClapTrap destructor called" << std::endl;
+    std::cout << CYAN << "ClapTrap destructor called" << NOCOL << std::endl;
 }
 
 // Assignment operator
 ClapTrap &ClapTrap::operator=(const ClapTrap &src)
 {
-    this->_name = src.getName();
-    std::cout << "Assignment operator overload called" << std::endl;
+    this->Name = src.Name;
+    std::cout << CYAN << "Assignment operator overload called" << NOCOL << std::endl;
     return *this;
 }
 
 void ClapTrap::attack(std::string const &target)
 {
-    this->_energyPoints--;
-    if (this->_name.length())
-        std::cout << "ClapTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
-    else
-        std::cout << "Unnamed ClapTrap attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
+    this->EnergyPoints--;
+    std::cout << CYAN << "ClapTrap " << (this->Name.length() ? this->Name : "without name ")
+              << " attacks " << target << ", causing " << this->AttackDamage << " points of damage!" << NOCOL << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    this->_hitpoints -= amount;
-    if (this->_name.length())
-        std::cout << "ClapTrap " << this->_name << " takes " << amount << " points of damage!" << std::endl;
-    else
-        std::cout << "Unnamed ClapTrap takes " << amount << " points of damage!" << std::endl;
+    this->Hitpoints -= amount;
+    std::cout << CYAN << "ClapTrap " << (this->Name.length() ? this->Name : "without name ") << " takes " << amount << " points of damage!" << NOCOL << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    this->_hitpoints += amount;
-    std::cout << "ClapTrap " << this->_name << " has recovered " << amount << " points of life and has now " << this->_hitpoints << "!" << std::endl;
+    this->Hitpoints += amount;
+    std::cout << CYAN << "ClapTrap " << (this->Name.length() ? this->Name : "without name ") << " has recovered " << amount << " points of life and has now " << this->Hitpoints << "!" << NOCOL << std::endl;
 }
 
 std::string ClapTrap::getName(void) const
 {
-    return this->_name;
+    return this->Name;
 }
 
 int ClapTrap::getHitPoints(void) const
 {
-    return this->_hitpoints;
+    return this->Hitpoints;
 }
 
 int ClapTrap::getEnergyPoints(void) const
 {
-    return this->_energyPoints;
+    return this->EnergyPoints;
 }
 
 int ClapTrap::getAttackDamage(void) const
 {
-    return this->_attackDamage;
+    return this->AttackDamage;
 }
 
 // Stream oeprator
 std::ostream &operator<<(std::ostream &os, ClapTrap const &std)
 {
-    if (std.getName().length())
-        std::cout << "Name: " << std.getName() << std::endl;
-    else
-        std::cout << "Name: n/a" << std::endl;
-    std::cout << "Hit points: " << std.getHitPoints() << std::endl;
-    std::cout << "Damage points: " << std.getAttackDamage() << std::endl;
-    std::cout << "Energy points: " << std.getEnergyPoints() << std::endl;
+    std::cout << "_______________________________" << std::endl;
+    std::cout << "| Name            | " << std::setw(10) << (std.getName().length() ? std.getName() : "n/a") << "|" << std::endl;
+    std::cout << "| Hit points      | " << std::setw(10) << std.getHitPoints() << std::setfill(' ') << "|" << std::endl;
+    std::cout << "| Damage points   | " << std::setw(10) << std.getAttackDamage() << "|" << std::endl;
+    std::cout << "| Energy points   | " << std::setw(10) << std.getEnergyPoints() << "|" << std::endl;
+    std::cout << "-------------------------------" << std::endl;
     return os;
 }

@@ -11,7 +11,7 @@ int main(void)
     ClapTrap namedTrap("Clappy");
     std::cout << namedTrap << std::endl;
 
-    std::cout << "Copycat ClapTrap:" << std::endl;
+    std::cout << "Copycat ClapTrap (assignment):" << std::endl;
     ClapTrap copycat;
     copycat = namedTrap;
     std::cout << copycat << std::endl;
@@ -23,10 +23,6 @@ int main(void)
     std::cout << "One potion later..." << std::endl;
     namedTrap.beRepaired(10);
     std::cout << namedTrap << std::endl;
-
-    std::cout << "Copycat name is... " << copycat.getName() << std::endl;
-    std::cout << copycat << std::endl;
-    std::cout << std::endl;
 
     return 0;
 }

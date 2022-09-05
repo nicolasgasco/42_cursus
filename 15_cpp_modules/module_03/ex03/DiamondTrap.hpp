@@ -21,7 +21,7 @@ public:
     void whoAmI(void) const;
 
 private:
-    std::string _name;
+    std::string Name;
 };
 
 #endif

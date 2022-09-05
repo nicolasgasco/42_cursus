@@ -2,6 +2,8 @@
 #ifndef __CLAPTRAP_H__
 #define __CLAPTRAP_H__
 #include <iostream>
+#define CYAN "\033[1;36m"
+#define NOCOL "\033[0m"
 
 class ClapTrap
 {
@@ -23,10 +25,10 @@ public:
     int getAttackDamage(void) const;
 
 private:
-    std::string _name;
-    int _hitpoints;
-    int _energyPoints;
-    int _attackDamage;
+    std::string Name;
+    int Hitpoints;
+    int EnergyPoints;
+    int AttackDamage;
 };
 
 std::ostream &operator<<(std::ostream &os, ClapTrap const &std);
