@@ -1,6 +1,6 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(void)
+FragTrap::FragTrap(void) : ClapTrap()
 {
     this->Hitpoints = 100;
     this->EnergyPoints = 100;
@@ -8,7 +8,7 @@ FragTrap::FragTrap(void)
     std::cout << BLUE << "FragTrap default constructor called" << NOCOL << std::endl;
 }
 
-FragTrap::FragTrap(std::string name): ClapTrap(name)
+FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
     this->Name = name;
     this->Hitpoints = 100;
@@ -31,8 +31,6 @@ FragTrap &FragTrap::operator=(FragTrap const &src)
 
 void FragTrap::highFivesGuys(void) const
 {
-    if (this->Name.length())
-        std::cout << BLUE << "FragTrap " << this->Name << " gives everyone an high five" << NOCOL << std::endl;
-    else
-        std::cout << BLUE << "Unnamed FragTrap gives everyone an high five" << NOCOL << std::endl;
+    std::cout << BLUE << "FragTrap " << (this->Name.length() ? this->Name : "n/a")
+              << " gives everyone an high five" << NOCOL << std::endl;
 }

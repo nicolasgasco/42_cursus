@@ -1,51 +1,47 @@
 #include "ClapTrap.hpp"
+#include <iomanip>
 
 ClapTrap::ClapTrap(void) : Hitpoints(10), EnergyPoints(10), AttackDamage(0)
 {
-    std::cout << "ClapTrap default constructor called" << std::endl;
+    std::cout << CYAN << "ClapTrap default constructor called" << NOCOL << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name) : Hitpoints(10), EnergyPoints(10), AttackDamage(0)
 {
     this->Name = name;
-    std::cout << "ClapTrap paramter constructor called (" << name << ")" << std::endl;
+    std::cout << CYAN << "ClapTrap paramter constructor called (" << name << ")" << NOCOL << std::endl;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-    std::cout << "ClapTrap destructor called" << std::endl;
+    std::cout << CYAN << "ClapTrap destructor called" << NOCOL << std::endl;
 }
 
 // Assignment operator
 ClapTrap &ClapTrap::operator=(const ClapTrap &src)
 {
-    this->Name = src.getName();
-    std::cout << "Assignment operator overload called" << std::endl;
+    this->Name = src.Name;
+    std::cout << CYAN << "Assignment operator overload called" << NOCOL << std::endl;
     return *this;
 }
 
 void ClapTrap::attack(std::string const &target)
 {
     this->EnergyPoints--;
-    if (this->Name.length())
-        std::cout << "ClapTrap " << this->Name << " attacks " << target << ", causing " << this->AttackDamage << " points of damage!" << std::endl;
-    else
-        std::cout << "Unnamed ClapTrap attacks " << target << ", causing " << this->AttackDamage << " points of damage!" << std::endl;
+    std::cout << CYAN << "ClapTrap " << (this->Name.length() ? this->Name : "without name ")
+              << " attacks " << target << ", causing " << this->AttackDamage << " points of damage!" << NOCOL << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
     this->Hitpoints -= amount;
-    if (this->Name.length())
-        std::cout << "ClapTrap " << this->Name << " takes " << amount << " points of damage!" << std::endl;
-    else
-        std::cout << "Unnamed ClapTrap takes " << amount << " points of damage!" << std::endl;
+    std::cout << CYAN << "ClapTrap " << (this->Name.length() ? this->Name : "without name ") << " takes " << amount << " points of damage!" << NOCOL << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
     this->Hitpoints += amount;
-    std::cout << "ClapTrap " << this->Name << " has recovered " << amount << " points of life and has now " << this->Hitpoints << "!" << std::endl;
+    std::cout << CYAN << "ClapTrap " << (this->Name.length() ? this->Name : "without name ") << " has recovered " << amount << " points of life and has now " << this->Hitpoints << "!" << NOCOL << std::endl;
 }
 
 std::string ClapTrap::getName(void) const
@@ -71,12 +67,11 @@ int ClapTrap::getAttackDamage(void) const
 // Stream oeprator
 std::ostream &operator<<(std::ostream &os, ClapTrap const &std)
 {
-    if (std.getName().length())
-        std::cout << "Name: " << std.getName() << std::endl;
-    else
-        std::cout << "Name: n/a" << std::endl;
-    std::cout << "Hit points: " << std.getHitPoints() << std::endl;
-    std::cout << "Damage points: " << std.getAttackDamage() << std::endl;
-    std::cout << "Energy points: " << std.getEnergyPoints() << std::endl;
+    std::cout << "_______________________________" << std::endl;
+    std::cout << "| Name            | " << std::setw(10) << (std.getName().length() ? std.getName() : "n/a") << "|" << std::endl;
+    std::cout << "| Hit points      | " << std::setw(10) << std.getHitPoints() << std::setfill(' ') << "|" << std::endl;
+    std::cout << "| Damage points   | " << std::setw(10) << std.getAttackDamage() << "|" << std::endl;
+    std::cout << "| Energy points   | " << std::setw(10) << std.getEnergyPoints() << "|" << std::endl;
+    std::cout << "-------------------------------" << std::endl;
     return os;
 }

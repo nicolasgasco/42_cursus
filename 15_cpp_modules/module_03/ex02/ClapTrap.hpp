@@ -2,6 +2,8 @@
 #ifndef __CLAPTRAP_H__
 #define __CLAPTRAP_H__
 #include <iostream>
+#define CYAN "\033[1;36m"
+#define NOCOL "\033[0m"
 
 class ClapTrap
 {

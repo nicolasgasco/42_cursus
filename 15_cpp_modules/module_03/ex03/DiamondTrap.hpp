@@ -7,7 +7,7 @@
 #define PURPLE "\033[0;35m"
 #define NOCOL "\033[0m"
 
-class DiamondTrap : public FragTrap, public ScavTrap
+class DiamondTrap : public ScavTrap, public FragTrap
 {
 public:
     DiamondTrap(void);
@@ -19,6 +19,8 @@ public:
 
     std::string getName(void) const;
     void whoAmI(void) const;
+
+    using ScavTrap::attack;
 
 private:
     std::string Name;
