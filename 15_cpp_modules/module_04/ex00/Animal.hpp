@@ -21,6 +21,4 @@ class Animal {
     std::string type;
 };
 
-std::ostream &operator<<(std::ostream &os, Animal const &std);
-
 #endif

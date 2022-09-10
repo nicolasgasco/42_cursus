@@ -9,12 +9,12 @@ Dog::~Dog(void) {
 }
 
 Dog::Dog(Dog const &src) {
-    std::cout << "Dog copy constructor called" << std::endl;
+    std::cout << BLUE << "Dog copy constructor called" << NOCOL << std::endl;
     *this = src;
 }
 
 Dog &Dog::operator=(const Dog &src) {
-    std::cout << "Dog assignation operator called" << std::endl;
+    std::cout << BLUE << "Dog assignation operator called" << NOCOL << std::endl;
     this->type = src.getType();
     return *this;
 }

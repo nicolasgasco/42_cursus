@@ -9,12 +9,12 @@ Animal::~Animal(void) {
 }
 
 Animal::Animal(Animal const &src) {
-    std::cout << "Animal copy constructor called" << std::endl;
+    std::cout << CYAN << "Animal copy constructor called" << NOCOL << std::endl;
     *this = src;
 }
 
 Animal &Animal::operator=(const Animal &src) {
-    std::cout << "Animal assignation operator called" << std::endl;
+    std::cout << CYAN << "Animal assignation operator called" << NOCOL << std::endl;
     this->type = src.getType();
     return *this;
 }
@@ -24,15 +24,4 @@ std::string Animal::getType(void) const {
 
 void Animal::makeSound(void) const {
     std::cout << CYAN << "I'm a generic animal, I don't have a voice :(" << NOCOL << std::endl;
-}
-
-// Stream oeprator
-std::ostream &operator<<(std::ostream &os, Animal const &std) {
-    std::string type = std.getType();
-    if (type.length()) {
-        std::cout << "Type is: " << std.getType() << std::endl;
-    } else {
-        std::cout << "Class has no type" << std::endl;
-    }
-    return os;
 }

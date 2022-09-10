@@ -19,9 +19,9 @@ int main(void) {
     std::cout << "j type is: " << i->getType() << std::endl;
     std::cout << std::endl;
 
+    meta->makeSound();
     j->makeSound();
     i->makeSound();
-    meta->makeSound();
     std::cout << std::endl;
 
     delete meta;
@@ -52,5 +52,20 @@ int main(void) {
     std::cout << std::endl;
     delete wrongCat;
     std::cout << std::endl;
+
+    std::cout << "Completeness checks:" << std::endl;
+    const Animal* k = new Animal(*meta);
+    std::cout << std::endl;
+
+    const Cat* l = new Cat();
+    const Animal* m = new Cat(*l);
+    std::cout << std::endl;
+
+    const Dog* n = new Dog();
+    const Animal* o = new Dog(*n);
+    std::cout << std::endl;
+    if (k && l && m && n && o) {
+        // Continue
+    }
     return (0);
 }

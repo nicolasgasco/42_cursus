@@ -9,15 +9,16 @@ Cat::~Cat(void) {
 }
 
 Cat::Cat(Cat const &src) {
-    std::cout << "Cat copy constructor called" << std::endl;
+    std::cout << PURPLE << "Cat copy constructor called" << NOCOL << std::endl;
     *this = src;
 }
 
 Cat &Cat::operator=(const Cat &src) {
-    std::cout << "Cat assignation operator called" << std::endl;
+    std::cout << PURPLE << "Cat assignation operator called" << NOCOL << std::endl;
     this->type = src.getType();
     return *this;
 }
+
 std::string Cat::getType(void) const {
     return this->type;
 }
