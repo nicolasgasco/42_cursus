@@ -2,21 +2,29 @@
 
 DiamondTrap::DiamondTrap(void)
 {
-    this->Hitpoints = FragTrap::Hitpoints;
-    this->EnergyPoints = ScavTrap::EnergyPoints;
-    this->AttackDamage = FragTrap::AttackDamage;
+    this->Hitpoints = FragTrap::HitpointsValue;
+    this->EnergyPoints = ScavTrap::EnergyPointsValue;
+    this->AttackDamage = FragTrap::AttackDamageValue;
     std::cout << PURPLE << "DiamondTrap default constructor called" << NOCOL << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string name)
+DiamondTrap::DiamondTrap(std::string name) : ScavTrap(name), FragTrap(name)
 {
     this->Name = name;
     ClapTrap::Name = name + "_clap_name";
-    std::cout << FragTrap::AttackDamage << std::endl;
-    this->Hitpoints = FragTrap::Hitpoints;
-    this->EnergyPoints = ScavTrap::EnergyPoints;
-    this->AttackDamage = FragTrap::AttackDamage;
+    this->Hitpoints = FragTrap::HitpointsValue;
+    this->EnergyPoints = ScavTrap::EnergyPointsValue;
+    this->AttackDamage = FragTrap::AttackDamageValue;
     std::cout << PURPLE << "DiamondTrap parameter constructor called" << NOCOL << std::endl;
+}
+
+DiamondTrap::DiamondTrap(const DiamondTrap &src) : ScavTrap(src.getName()), FragTrap(src.getName())
+{
+    this->Hitpoints = FragTrap::HitpointsValue;
+    this->EnergyPoints = ScavTrap::EnergyPointsValue;
+    this->AttackDamage = FragTrap::AttackDamageValue;
+    *this = src;
+    std::cout << CYAN << "ClapTrap copy constructor called (" << this->Name << ")" << NOCOL << std::endl;
 }
 
 DiamondTrap::~DiamondTrap(void)

@@ -12,6 +12,12 @@ ClapTrap::ClapTrap(std::string name) : Hitpoints(10), EnergyPoints(10), AttackDa
     std::cout << CYAN << "ClapTrap paramter constructor called (" << name << ")" << NOCOL << std::endl;
 }
 
+ClapTrap::ClapTrap(const ClapTrap &src) : Hitpoints(10), EnergyPoints(10), AttackDamage(0)
+{
+    *this = src;
+    std::cout << CYAN << "ClapTrap copy constructor called (" << this->Name << ")" << NOCOL << std::endl;
+}
+
 ClapTrap::~ClapTrap(void)
 {
     std::cout << CYAN << "ClapTrap destructor called" << NOCOL << std::endl;

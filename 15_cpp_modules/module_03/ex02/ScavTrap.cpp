@@ -17,6 +17,15 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
     std::cout << YELLOW << "ScavTrap parameter constructor called (" << name << ")" << NOCOL << std::endl;
 };
 
+ScavTrap::ScavTrap(const ScavTrap &src) : ClapTrap(src.getName())
+{
+    this->Hitpoints = 100;
+    this->EnergyPoints = 50;
+    this->AttackDamage = 20;
+    *this = src;
+    std::cout << CYAN << "ClapTrap copy constructor called (" << this->Name << ")" << NOCOL << std::endl;
+}
+
 ScavTrap::~ScavTrap(void)
 {
     std::cout << YELLOW << "ScavTrap destructor called" << NOCOL << std::endl;

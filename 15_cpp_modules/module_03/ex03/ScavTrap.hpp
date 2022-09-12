@@ -11,6 +11,7 @@ class ScavTrap : virtual public ClapTrap
 public:
     ScavTrap(void);
     ScavTrap(std::string name);
+    ScavTrap(const ScavTrap &src);
 
     ~ScavTrap(void);
 
@@ -21,6 +22,11 @@ public:
     void beRepaired(unsigned int amount);
 
     void guardGate(void) const;
+
+protected:
+    static int const HitpointsValue = 100;
+    static int const EnergyPointsValue = 50;
+    static int const AttackDamageValue = 20;
 };
 
 #endif

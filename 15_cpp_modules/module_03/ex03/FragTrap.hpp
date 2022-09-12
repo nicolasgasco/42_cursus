@@ -11,12 +11,18 @@ class FragTrap : virtual public ClapTrap
 public:
     FragTrap(void);
     FragTrap(std::string name);
+    FragTrap(const FragTrap &src);
 
     ~FragTrap(void);
 
     FragTrap &operator=(FragTrap const &src);
 
     void highFivesGuys(void) const;
+
+protected:
+    static int const HitpointsValue = 100;
+    static int const EnergyPointsValue = 100;
+    static int const AttackDamageValue = 30;
 };
 
 #endif
