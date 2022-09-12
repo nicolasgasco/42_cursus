@@ -5,8 +5,9 @@
 #define NOCOL "\033[0m"
 #include <iostream>
 
-class WrongAnimal {
-   public:
+class WrongAnimal
+{
+public:
     WrongAnimal(void);
     WrongAnimal(WrongAnimal const &src);
 
@@ -17,10 +18,8 @@ class WrongAnimal {
     virtual std::string getType(void) const;
     void makeSound(void) const;
 
-   protected:
+protected:
     std::string type;
 };
-
-std::ostream &operator<<(std::ostream &os, WrongAnimal const &std);
 
 #endif
