@@ -19,10 +19,10 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 
 FragTrap::FragTrap(const FragTrap &src) : ClapTrap(src.getName())
 {
+    *this = src;
     this->Hitpoints = 100;
     this->EnergyPoints = 100;
     this->AttackDamage = 30;
-    *this = src;
     std::cout << CYAN << "ClapTrap copy constructor called (" << this->Name << ")" << NOCOL << std::endl;
 }
 
