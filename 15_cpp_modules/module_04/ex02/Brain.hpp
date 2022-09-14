@@ -5,8 +5,9 @@
 #define NOCOL "\033[0m"
 #include <iostream>
 
-class Brain {
-   public:
+class Brain
+{
+public:
     Brain(void);
     Brain(Brain const &src);
 
@@ -14,11 +15,12 @@ class Brain {
 
     Brain &operator=(Brain const &src);
 
-    std::string getType(void) const;
+    void populateIdeas(std::string animalType);
 
-   private:
-    std::string type;
-    std::string ideas[100];
+    static int const ideasNum = 100;
+
+private:
+    std::string ideas[ideasNum];
 };
 
 #endif

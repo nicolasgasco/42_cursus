@@ -6,11 +6,12 @@
 #include "Dog.hpp"
 #define NUM_ANIMALS
 
-int main(void) {
+int main(void)
+{
     std::cout << std::endl;
-    const Animal* j = new Dog();
+    const Animal *j = new Dog();
     std::cout << std::endl;
-    const Animal* i = new Cat();
+    const Animal *i = new Cat();
     std::cout << std::endl;
 
     std::cout << "j type is: " << j->getType() << std::endl;
