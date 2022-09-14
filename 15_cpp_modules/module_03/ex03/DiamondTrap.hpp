@@ -23,8 +23,13 @@ public:
 
     using ScavTrap::attack;
 
+    using FragTrap::highFivesGuys;
+    using ScavTrap::guardGate;
+
 private:
     std::string Name;
 };
+
+std::ostream &operator<<(std::ostream &os, DiamondTrap const &std);
 
 #endif

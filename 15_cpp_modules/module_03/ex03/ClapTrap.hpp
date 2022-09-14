@@ -32,6 +32,4 @@ protected:
     int AttackDamage;
 };
 
-std::ostream &operator<<(std::ostream &os, ClapTrap const &std);
-
 #endif

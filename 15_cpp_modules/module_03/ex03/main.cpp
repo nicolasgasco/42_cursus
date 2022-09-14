@@ -3,15 +3,34 @@
 
 int main(void)
 {
-    DiamondTrap named("Diamondy");
+    std::cout << "DiamondTrap with default constructor:" << std::endl;
+    DiamondTrap defaultTrap;
+    std::cout << defaultTrap << std::endl;
 
-    std::cout << named << std::endl;
+    std::cout << "DiamondTrap with name:" << std::endl;
+    DiamondTrap *namedTrap = new DiamondTrap("Scavvy");
+    std::cout << *namedTrap << std::endl;
+
+    std::cout << "Copycat DiamondTrap:" << std::endl;
+    DiamondTrap copyTrap;
+    copyTrap = *namedTrap;
+    std::cout << copyTrap << std::endl;
+
+    std::cout << "Attack inherited by ScavTrap:" << std::endl;
+    namedTrap->attack(defaultTrap.getName());
+    defaultTrap.takeDamage(namedTrap->getAttackDamage());
+    std::cout << *namedTrap << std::endl;
+
+    std::cout << "Special inherited functions:" << std::endl;
+    namedTrap->highFivesGuys();
+    namedTrap->guardGate();
     std::cout << std::endl;
 
-    named.getAttackDamage();
-    named.attack("Target");
-    named.whoAmI();
+    std::cout << "whoAmI:" << std::endl;
+    namedTrap->whoAmI();
     std::cout << std::endl;
 
-    return (0);
+    delete namedTrap;
+    std::cout << std::endl;
+    return 0;
 }
