@@ -34,20 +34,20 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &src)
 void ClapTrap::attack(std::string const &target)
 {
     this->EnergyPoints--;
-    std::cout << CYAN << "ClapTrap " << (this->Name.length() ? this->Name : "without name ")
+    std::cout << CYAN << "ClapTrap " << (this->Name.length() ? this->Name : "without name")
               << " attacks " << target << ", causing " << this->AttackDamage << " points of damage!" << NOCOL << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
     this->Hitpoints -= amount;
-    std::cout << CYAN << "ClapTrap " << (this->Name.length() ? this->Name : "without name ") << " takes " << amount << " points of damage!" << NOCOL << std::endl;
+    std::cout << CYAN << "ClapTrap " << (this->Name.length() ? this->Name : "without name") << " takes " << amount << " points of damage!" << NOCOL << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
     this->Hitpoints += amount;
-    std::cout << CYAN << "ClapTrap " << (this->Name.length() ? this->Name : "without name ") << " has recovered " << amount << " points of life and has now " << this->Hitpoints << "!" << NOCOL << std::endl;
+    std::cout << CYAN << "ClapTrap " << (this->Name.length() ? this->Name : "without name") << " has recovered " << amount << " points of life and has now " << this->Hitpoints << "!" << NOCOL << std::endl;
 }
 
 std::string ClapTrap::getName(void) const
