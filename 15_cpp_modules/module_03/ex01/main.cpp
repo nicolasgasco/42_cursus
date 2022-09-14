@@ -11,20 +11,22 @@ int main(void)
     ScavTrap *namedTrap = new ScavTrap("Scavvy");
     std::cout << *namedTrap << std::endl;
 
-    namedTrap->guardGate();
-    std::cout << std::endl;
-
-    defaultTrap.attack(namedTrap->getName());
-    namedTrap->takeDamage(defaultTrap.getAttackDamage());
-
-    std::cout << *namedTrap << std::endl;
-    std::cout << std::endl;
-
     std::cout << "Copycat ScavTrap:" << std::endl;
     ScavTrap copyTrap;
     copyTrap = *namedTrap;
+    std::cout << copyTrap << std::endl;
+
+    defaultTrap.attack(namedTrap->getName());
+    namedTrap->takeDamage(defaultTrap.getAttackDamage());
+    std::cout << *namedTrap << std::endl;
+
+    copyTrap.beRepaired(10);
+    std::cout << copyTrap << std::endl;
+
+    namedTrap->guardGate();
     std::cout << std::endl;
 
     delete namedTrap;
+    std::cout << std::endl;
     return 0;
 }
