@@ -24,8 +24,8 @@ int main(void)
     namedTrap->takeDamage(defaultTrap.getAttackDamage());
     std::cout << *namedTrap << std::endl;
 
-    copyTrap.beRepaired(10);
-    std::cout << copyTrap << std::endl;
+    namedTrap->beRepaired(10);
+    std::cout << *namedTrap << std::endl;
 
     namedTrap->guardGate();
     std::cout << std::endl;
