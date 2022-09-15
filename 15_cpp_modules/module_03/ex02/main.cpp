@@ -11,17 +11,21 @@ int main(void)
     FragTrap *namedTrap = new FragTrap("Fraggy");
     std::cout << *namedTrap << std::endl;
 
-    std::cout << "Copycat FragTrap:" << std::endl;
+    std::cout << "Copycat FragTrap (assignment operator):" << std::endl;
     FragTrap copyTrap;
     copyTrap = *namedTrap;
     std::cout << copyTrap << std::endl;
+
+    std::cout << "Copycat FragTrap (copy constructor):" << std::endl;
+    FragTrap copyTrap2(*namedTrap);
+    std::cout << copyTrap2 << std::endl;
 
     defaultTrap.attack(namedTrap->getName());
     namedTrap->takeDamage(defaultTrap.getAttackDamage());
     std::cout << *namedTrap << std::endl;
 
-    copyTrap.beRepaired(10);
-    std::cout << copyTrap << std::endl;
+    namedTrap->beRepaired(10);
+    std::cout << *namedTrap << std::endl;
 
     namedTrap->highFivesGuys();
     std::cout << std::endl;

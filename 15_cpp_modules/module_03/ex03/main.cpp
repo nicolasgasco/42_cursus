@@ -11,10 +11,14 @@ int main(void)
     DiamondTrap *namedTrap = new DiamondTrap("Scavvy");
     std::cout << *namedTrap << std::endl;
 
-    std::cout << "Copycat DiamondTrap:" << std::endl;
+    std::cout << "Copycat DiamondTrap (assignment operator):" << std::endl;
     DiamondTrap copyTrap;
     copyTrap = *namedTrap;
     std::cout << copyTrap << std::endl;
+
+    std::cout << "Copycat DiamondTrap (copy constructor):" << std::endl;
+    DiamondTrap copyTrap2(*namedTrap);
+    std::cout << copyTrap2 << std::endl;
 
     std::cout << "Attack inherited by ScavTrap:" << std::endl;
     namedTrap->attack(defaultTrap.getName());

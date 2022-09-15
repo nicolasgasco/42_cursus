@@ -23,6 +23,11 @@ protected:
     static int const HitpointsValue = 100;
     static int const EnergyPointsValue = 100;
     static int const AttackDamageValue = 30;
+
+    using ClapTrap::AttackDamage;
+    using ClapTrap::EnergyPoints;
+    using ClapTrap::Hitpoints;
+    using ClapTrap::Name;
 };
 
 #endif

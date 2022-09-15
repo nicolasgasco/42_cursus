@@ -21,11 +21,11 @@ DiamondTrap::DiamondTrap(std::string name) : ScavTrap(name), FragTrap(name)
 
 DiamondTrap::DiamondTrap(const DiamondTrap &src) : ScavTrap(src.getName()), FragTrap(src.getName())
 {
-    *this = src;
     this->Hitpoints = FragTrap::HitpointsValue;
     this->EnergyPoints = ScavTrap::EnergyPointsValue;
     this->AttackDamage = FragTrap::AttackDamageValue;
-    std::cout << CYAN << "ClapTrap copy constructor called (" << this->Name << ")" << NOCOL << std::endl;
+    *this = src;
+    std::cout << PURPLE << "DiamondTrap copy constructor called (" << this->Name << ")" << NOCOL << std::endl;
 }
 
 DiamondTrap::~DiamondTrap(void)

@@ -22,6 +22,12 @@ public:
     void beRepaired(unsigned int amount);
 
     void guardGate(void) const;
+
+private:
+    using ClapTrap::AttackDamage;
+    using ClapTrap::EnergyPoints;
+    using ClapTrap::Hitpoints;
+    using ClapTrap::Name;
 };
 
 #endif

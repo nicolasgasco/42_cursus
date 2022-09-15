@@ -17,7 +17,17 @@ public:
 
     FragTrap &operator=(FragTrap const &src);
 
+    using ClapTrap::attack;
+    using ClapTrap::beRepaired;
+    using ClapTrap::takeDamage;
+
     void highFivesGuys(void) const;
+
+private:
+    using ClapTrap::AttackDamage;
+    using ClapTrap::EnergyPoints;
+    using ClapTrap::Hitpoints;
+    using ClapTrap::Name;
 };
 
 #endif

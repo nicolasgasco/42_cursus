@@ -28,6 +28,10 @@ public:
 
 private:
     std::string Name;
+
+    using ClapTrap::AttackDamage;
+    using ClapTrap::EnergyPoints;
+    using ClapTrap::Hitpoints;
 };
 
 std::ostream &operator<<(std::ostream &os, DiamondTrap const &std);

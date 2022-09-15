@@ -22,7 +22,7 @@ ScavTrap::ScavTrap(const ScavTrap &src) : ClapTrap(src.getName())
     this->Hitpoints = 100;
     this->EnergyPoints = 50;
     this->AttackDamage = 20;
-    std::cout << CYAN << "ClapTrap copy constructor called (" << this->Name << ")" << NOCOL << std::endl;
+    std::cout << YELLOW << "ScavTrap copy constructor called (" << this->Name << ")" << NOCOL << std::endl;
 }
 
 ScavTrap::~ScavTrap(void)
