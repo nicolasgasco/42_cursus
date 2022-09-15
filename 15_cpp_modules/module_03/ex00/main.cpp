@@ -12,9 +12,12 @@ int main(void)
     std::cout << namedTrap << std::endl;
 
     std::cout << "Copycat ClapTrap (assignment):" << std::endl;
-    ClapTrap copycat;
-    copycat = namedTrap;
+    ClapTrap copycat = namedTrap;
     std::cout << copycat << std::endl;
+
+    std::cout << "Copycat ClapTrap (copy constructor):" << std::endl;
+    ClapTrap copycat2(copycat);
+    std::cout << copycat2 << std::endl;
 
     defaultTrap.attack(namedTrap.getName());
     namedTrap.takeDamage(defaultTrap.getAttackDamage());
