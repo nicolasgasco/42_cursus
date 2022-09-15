@@ -1,0 +1,31 @@
+#pragma once
+#ifndef __AMATERIA_H__
+#define __AMATERIA_H__
+#define GREEN "\033[0;32m"
+#define NOCOL "\033[0m"
+#include <iostream>
+
+#include "ICharacter.hpp"
+
+class AMateria
+{
+public:
+    AMateria(void);
+    AMateria(std::string const &type);
+    AMateria(AMateria const &src);
+    virtual ~AMateria(void);
+
+    AMateria &operator=(AMateria const &src);
+
+    virtual AMateria *clone(void) const = 0;
+    virtual void use(ICharacter &target) = 0;
+
+    std::string const &getType(void) const;
+
+protected:
+    std::string type;
+};
+
+std::ostream &operator<<(std::ostream &os, AMateria const &std);
+
+#endif
