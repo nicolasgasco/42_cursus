@@ -11,10 +11,14 @@ int main(void)
     ScavTrap *namedTrap = new ScavTrap("Scavvy");
     std::cout << *namedTrap << std::endl;
 
-    std::cout << "Copycat ScavTrap:" << std::endl;
+    std::cout << "Copycat ScavTrap (assignment operator):" << std::endl;
     ScavTrap copyTrap;
     copyTrap = *namedTrap;
     std::cout << copyTrap << std::endl;
+
+    std::cout << "Copycat ScavTrap (copy constructor):" << std::endl;
+    ScavTrap copyTrap2(copyTrap);
+    std::cout << copyTrap2 << std::endl;
 
     defaultTrap.attack(namedTrap->getName());
     namedTrap->takeDamage(defaultTrap.getAttackDamage());
