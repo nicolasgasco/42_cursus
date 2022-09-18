@@ -8,8 +8,9 @@
 #include "Animal.hpp"
 #include "Brain.hpp"
 
-class Cat : virtual public Animal {
-   public:
+class Cat : virtual public Animal
+{
+public:
     Cat(void);
     Cat(Cat const &src);
 
@@ -18,9 +19,11 @@ class Cat : virtual public Animal {
     Cat &operator=(Cat const &src);
 
     std::string getType(void) const;
+    Brain *getBrain(void) const;
+
     void makeSound(void) const;
 
-   private:
+private:
     std::string type;
     Brain *brain;
 };

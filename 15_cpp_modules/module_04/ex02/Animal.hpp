@@ -14,7 +14,7 @@ class Animal {
 
     Animal &operator=(Animal const &src);
 
-    virtual std::string getType(void) const;
+    virtual std::string getType(void) const = 0;
     virtual void makeSound(void) const = 0;
 
    protected:
