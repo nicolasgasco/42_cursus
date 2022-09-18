@@ -30,5 +30,5 @@ std::string Animal::getType(void) const
 
 void Animal::makeSound(void) const
 {
-    std::cout << CYAN << "I'm a generic animal, I don't have a voice :(" << NOCOL << std::endl;
+    std::cout << CYAN << "I'm a generic animal, I don't have a sound :(" << NOCOL << std::endl;
 }

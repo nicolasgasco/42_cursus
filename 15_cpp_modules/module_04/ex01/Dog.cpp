@@ -21,13 +21,20 @@ Dog::~Dog(void)
 
 Dog &Dog::operator=(const Dog &src)
 {
-    std::cout << BLUE << "Dog assignation operator called" << NOCOL << std::endl;
     this->type = src.getType();
+    this->brain = new Brain(*(src.brain));
+    std::cout << BLUE << "Dog assignation operator called" << NOCOL << std::endl;
     return *this;
 }
+
 std::string Dog::getType(void) const
 {
     return this->type;
+}
+
+Brain *Dog::getBrain(void) const
+{
+    return this->brain;
 }
 
 void Dog::makeSound(void) const

@@ -8,8 +8,8 @@ Cat::Cat(void) : type("Cat")
 
 Cat::Cat(Cat const &src)
 {
-    std::cout << PURPLE << "Cat copy constructor called" << NOCOL << std::endl;
     *this = src;
+    std::cout << PURPLE << "Cat copy constructor called" << NOCOL << std::endl;
 }
 
 Cat::~Cat(void)
@@ -18,11 +18,10 @@ Cat::~Cat(void)
     std::cout << PURPLE << "Cat destructor called" << NOCOL << std::endl;
 }
 
-Cat &Cat::operator=(const Cat &src)
+Cat &Cat::operator=(Cat const &src)
 {
     this->type = src.getType();
-    this->brain = new Brain();
-    this->brain = src.brain;
+    this->brain = new Brain(*(src.brain));
     std::cout << PURPLE << "Cat assignation operator called" << NOCOL << std::endl;
     return *this;
 }
@@ -30,6 +29,11 @@ Cat &Cat::operator=(const Cat &src)
 std::string Cat::getType(void) const
 {
     return this->type;
+}
+
+Brain *Cat::getBrain(void) const
+{
+    return this->brain;
 }
 
 void Cat::makeSound(void) const
