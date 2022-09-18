@@ -63,7 +63,7 @@ void Character::unequip(int idx)
 {
     if (idx >= 0 && idx < this->materiaNum)
     {
-        std::cout << YELLOW << (this->name.length() ? ("Character " + this->name) : "Unnamed Character") << " unequip() function: unequipped slot " << idx << NOCOL << std::endl;
+        std::cout << YELLOW << (this->name.length() ? ("Character '" + this->name + "'") : "Unnamed Character") << " unequip() function: unequipped slot " << idx << NOCOL << std::endl;
         this->inventory[idx] = NULL;
     }
     else
