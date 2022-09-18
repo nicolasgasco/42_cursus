@@ -1,6 +1,5 @@
-#pragma once
-#ifndef __CAT_H__
-#define __CAT_H__
+#ifndef __ICE_HPP__
+#define __ICE_HPP__
 #define PURPLE "\033[0;35m"
 #define NOCOL "\033[0m"
 #include <iostream>

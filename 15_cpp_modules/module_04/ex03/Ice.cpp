@@ -1,15 +1,16 @@
 #include "Ice.hpp"
 #include "ICharacter.hpp"
 
-Ice::Ice(void) : AMateria()
+Ice::Ice(void) : AMateria("ice")
 {
+    this->type = "ice";
     std::cout << PURPLE << "Ice default constructor" << NOCOL << std::endl;
 }
 
 Ice::Ice(std::string const &type) : AMateria(type)
 {
     this->type = type;
-    std::cout << PURPLE << "Ice parameter constructor (" << type << ")" << NOCOL << std::endl;
+    std::cout << PURPLE << "Ice default constructor" << NOCOL << std::endl;
 }
 
 Ice::~Ice(void)
@@ -25,14 +26,14 @@ Ice::Ice(Ice const &src) : AMateria(src.getType())
 
 Ice &Ice::operator=(const Ice &src)
 {
-    this->type = src.getType();
-    std::cout << PURPLE << "Ice assignation operator called" << NOCOL << std::endl;
+    std::cout << PURPLE << "Ice assignation operator called (" << src.getType() << ")" << NOCOL << std::endl;
     return *this;
 }
 
 AMateria *Ice::clone(void) const
 {
-    return new Ice(this->type);
+    std::cout << PURPLE << "Cloning a new Ice Materia" << NOCOL << std::endl;
+    return new Ice();
 }
 
 void Ice::use(ICharacter &target)

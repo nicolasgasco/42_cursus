@@ -1,12 +1,10 @@
-#pragma once
-#ifndef __AMATERIA_H__
-#define __AMATERIA_H__
+#ifndef __AMATERIA_HPP__
+#define __AMATERIA_HPP__
 #define GREEN "\033[0;32m"
 #define NOCOL "\033[0m"
 #include <iostream>
 
-#include "ICharacter.hpp"
-
+class ICharacter;
 class AMateria
 {
 public:

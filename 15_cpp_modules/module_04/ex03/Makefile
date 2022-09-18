@@ -6,13 +6,17 @@ SANITIZE = -g -fsanitize=address
 
 SRC_NAME =	AMateria.cpp \
 			Ice.cpp \
+			Cure.cpp \
 			Character.cpp \
+			MateriaSource.cpp \
 			main.cpp \
 
-INCLUDES =	AMateria.hpp \
+INCLUDES =	ICharacter.hpp \
+			AMateria.hpp \
 			Ice.hpp \
+			Cure.hpp \
 			Character.hpp \
-			ICharacter.hpp \
+			MateriaSource.hpp \
 
 OBJ_NAME = $(SRC_NAME:.cpp=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
