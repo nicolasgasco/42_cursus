@@ -1,15 +1,9 @@
 #include "Ice.hpp"
 #include "ICharacter.hpp"
 
-Ice::Ice(void) : AMateria("ice")
+Ice::Ice(void)
 {
     this->type = "ice";
-    std::cout << PURPLE << "Ice default constructor" << NOCOL << std::endl;
-}
-
-Ice::Ice(std::string const &type) : AMateria(type)
-{
-    this->type = type;
     std::cout << PURPLE << "Ice default constructor" << NOCOL << std::endl;
 }
 
@@ -18,7 +12,7 @@ Ice::~Ice(void)
     std::cout << PURPLE << "Ice destructor" << NOCOL << std::endl;
 }
 
-Ice::Ice(Ice const &src) : AMateria(src.getType())
+Ice::Ice(Ice const &src)
 {
     *this = src;
     std::cout << PURPLE << "Ice copy constructor called" << NOCOL << std::endl;

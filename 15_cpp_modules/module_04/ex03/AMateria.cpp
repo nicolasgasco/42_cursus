@@ -1,6 +1,8 @@
 #include "AMateria.hpp"
 #include <iomanip>
 
+#include "ICharacter.hpp"
+
 AMateria::AMateria(void)
 {
     std::cout << GREEN << "AMateria default constructor" << NOCOL << std::endl;
@@ -35,11 +37,7 @@ std::string const &AMateria::getType(void) const
     return this->type;
 }
 
-// Stream oeprator
-std::ostream &operator<<(std::ostream &os, AMateria const &std)
+void AMateria::use(ICharacter &target)
 {
-    std::cout << "_______________________________" << std::endl;
-    std::cout << "| Type            | " << std::setw(10) << (std.getType().length() ? std.getType() : "n/a") << "|" << std::endl;
-    std::cout << "-------------------------------" << std::endl;
-    return os;
+    std::cout << GREEN << "AMateria does something on" << target.getName() << NOCOL << std::endl;
 }

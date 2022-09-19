@@ -5,6 +5,7 @@
 #include <iostream>
 
 class ICharacter;
+
 class AMateria
 {
 public:
@@ -16,14 +17,12 @@ public:
     AMateria &operator=(AMateria const &src);
 
     virtual AMateria *clone(void) const = 0;
-    virtual void use(ICharacter &target) = 0;
+    virtual void use(ICharacter &target);
 
     std::string const &getType(void) const;
 
 protected:
     std::string type;
 };
-
-std::ostream &operator<<(std::ostream &os, AMateria const &std);
 
 #endif

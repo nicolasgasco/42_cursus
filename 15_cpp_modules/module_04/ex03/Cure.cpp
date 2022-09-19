@@ -7,18 +7,12 @@ Cure::Cure(void) : AMateria("cure")
     std::cout << CYAN << "Cure default constructor" << NOCOL << std::endl;
 }
 
-Cure::Cure(std::string const &type) : AMateria(type)
-{
-    this->type = type;
-    std::cout << CYAN << "Cure default constructor" << NOCOL << std::endl;
-}
-
 Cure::~Cure(void)
 {
     std::cout << CYAN << "Cure destructor" << NOCOL << std::endl;
 }
 
-Cure::Cure(Cure const &src) : AMateria(src.getType())
+Cure::Cure(Cure const &src)
 {
     *this = src;
     std::cout << CYAN << "Cure copy constructor called" << NOCOL << std::endl;

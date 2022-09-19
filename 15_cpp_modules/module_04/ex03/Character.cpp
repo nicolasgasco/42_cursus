@@ -2,34 +2,42 @@
 
 Character::Character(void)
 {
+    for (int i = 0; i < this->materiaNum; i++)
+        this->inventory[i] = NULL;
     std::cout << YELLOW << "Character default constructor" << NOCOL << std::endl;
 }
 
 Character::Character(std::string const &name)
 {
     this->name = name;
+    for (int i = 0; i < this->materiaNum; i++)
+        this->inventory[i] = NULL;
     std::cout << YELLOW << "Character parameter constructor (" << name << ")" << NOCOL << std::endl;
 }
 
 Character::~Character(void)
 {
-    std::cout << YELLOW << "Character destructor" << NOCOL << std::endl;
     for (int i = 0; i < this->materiaNum; i++)
-        delete this->inventory[i];
+    {
+        if (this->inventory[i] != NULL)
+            delete this->inventory[i];
+    }
+    std::cout << YELLOW << "Character destructor" << NOCOL << std::endl;
 }
 
 Character::Character(Character const &src)
 {
-    *this = src;
     std::cout << YELLOW << "Character copy constructor called" << NOCOL << std::endl;
+    for (int i = 0; i < this->materiaNum; i++)
+        this->inventory[i] = NULL;
+    *this = src;
 }
 
 Character &Character::operator=(const Character &src)
 {
     this->name = src.getName();
-    AMateria *newInventory[this->materiaNum];
     for (int i = 0; i < this->materiaNum; i++)
-        newInventory[i] = this->inventory[i];
+        this->inventory[i] = src.inventory[i];
     std::cout << YELLOW << "Character assignation operator called" << NOCOL << std::endl;
     return *this;
 }
@@ -41,6 +49,13 @@ std::string const &Character::getName(void) const
 
 void Character::equip(AMateria *m)
 {
+
+    if (!m)
+    {
+        std::cout << YELLOW << "Character tried to equip invalid Materia" << NOCOL << std::endl;
+        return;
+    }
+
     int i = 0;
     for (; i < this->materiaNum; i++)
     {
@@ -63,6 +78,11 @@ void Character::unequip(int idx)
 {
     if (idx >= 0 && idx < this->materiaNum)
     {
+        if (!this->inventory[idx])
+        {
+            std::cout << YELLOW << (this->name.length() ? ("Character '" + this->name + "'") : "Unnamed Character") << " tried to unequip invalid Materia at slot " << idx << NOCOL << std::endl;
+            return;
+        }
         std::cout << YELLOW << (this->name.length() ? ("Character '" + this->name + "'") : "Unnamed Character") << " unequip() function: unequipped slot " << idx << NOCOL << std::endl;
         this->inventory[idx] = NULL;
     }
@@ -84,4 +104,9 @@ void Character::use(int idx, ICharacter &target)
     }
     else
         std::cout << YELLOW << "Impossible to use Character use() function: index out of range" << NOCOL << std::endl;
+}
+
+void Character::outputInventoryAddress(void) const
+{
+    std::cout << this->inventory << std::endl;
 }

@@ -17,10 +17,13 @@ public:
 
     Character &operator=(Character const &src);
 
-    std::string const &getName(void) const;
     void equip(AMateria *m);
     void unequip(int idx);
     void use(int idx, ICharacter &target);
+
+    std::string const &getName(void) const;
+
+    void outputInventoryAddress(void) const;
 
 private:
     std::string name;

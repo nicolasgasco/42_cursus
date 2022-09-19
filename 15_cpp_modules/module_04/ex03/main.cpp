@@ -61,6 +61,9 @@ int main(void)
     me->equip(tmp);
     std::cout << std::endl;
 
+    me->equip(NULL);
+    std::cout << std::endl;
+
     std::cout << "New character Bob:" << std::endl;
     ICharacter *bob = new Character("bob");
     std::cout << std::endl;
@@ -92,6 +95,9 @@ int main(void)
     me->unequip(0);
     std::cout << std::endl;
 
+    me->unequip(0);
+    std::cout << std::endl;
+
     std::cout << "Unequipping Materias with wrong index:" << std::endl;
     me->unequip(-1);
     std::cout << std::endl;
@@ -103,6 +109,20 @@ int main(void)
     std::cout << std::endl;
 
     delete src;
+    std::cout << std::endl;
+
+    std::cout << "Completeness check:" << std::endl;
+
+    Character origin = Character("Origin");
+    std::cout << std::endl;
+
+    std::cout << "Character copy constructor:" << std::endl;
+    Character copy = Character(origin);
+    std::cout << std::endl;
+
+    std::cout << "Inventory deep check:" << std::endl;
+    origin.outputInventoryAddress();
+    copy.outputInventoryAddress();
     std::cout << std::endl;
 
     return (0);
