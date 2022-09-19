@@ -30,23 +30,25 @@ MateriaSource &MateriaSource::operator=(const MateriaSource &src)
 
 void MateriaSource::learnMateria(AMateria *src)
 {
+    if (!src)
+    {
+        std::cout << RED << "MateriaSource tried to learn invalid Materia" << NOCOL << std::endl;
+        return;
+    }
+
     int i = 0;
     for (; i < this->materiaNum; i++)
     {
         if (!this->materias[i])
         {
             this->materias[i] = src;
-            break;
+            std::cout << RED << "MateriaSource learnt new Materia of type '" << src->getType() << "' at index " << i << NOCOL << std::endl;
+            return;
         }
     }
-    if (i == this->materiaNum)
-    {
-        std::cout << RED << "No slot available to learn new Materia of type '" << src->getType() << "'" << NOCOL << std::endl;
-    }
-    else
-    {
-        std::cout << RED << "MateriaSource learnt new Materia of type '" << src->getType() << "' at index " << i << NOCOL << std::endl;
-    }
+
+    std::cout << RED << "No slot available to learn new Materia of type '" << src->getType() << "'" << NOCOL << std::endl;
+    delete src;
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type)

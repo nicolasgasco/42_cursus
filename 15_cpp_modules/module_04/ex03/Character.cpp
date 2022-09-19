@@ -62,16 +62,14 @@ void Character::equip(AMateria *m)
         if (!this->inventory[i])
         {
             this->inventory[i] = m;
-            break;
+            std::cout << YELLOW << "Character equipped Materia of type '" << m->getType() << "'"
+                      << " at index " << i << NOCOL << std::endl;
+            return;
         }
     }
-    if (i == this->materiaNum)
-        std::cout << YELLOW << "No space left in Character's inventory" << NOCOL << std::endl;
-    else
-    {
-        std::cout << YELLOW << "Character equipped Materia of type '" << m->getType() << "'"
-                  << " at index " << i << NOCOL << std::endl;
-    }
+
+    std::cout << YELLOW << "No space left in Character's inventory" << NOCOL << std::endl;
+    delete m;
 }
 
 void Character::unequip(int idx)
@@ -85,9 +83,9 @@ void Character::unequip(int idx)
         }
         std::cout << YELLOW << (this->name.length() ? ("Character '" + this->name + "'") : "Unnamed Character") << " unequip() function: unequipped slot " << idx << NOCOL << std::endl;
         this->inventory[idx] = NULL;
+        return;
     }
-    else
-        std::cout << YELLOW << "Impossible to use Character unequip() function: index out of range" << NOCOL << std::endl;
+    std::cout << YELLOW << "Impossible to use Character unequip() function: index out of range" << NOCOL << std::endl;
 }
 
 void Character::use(int idx, ICharacter &target)
@@ -97,6 +95,7 @@ void Character::use(int idx, ICharacter &target)
         std::cout << YELLOW << "Impossible to use Character use() function: unequipped slot" << NOCOL << std::endl;
         return;
     }
+
     if (idx >= 0 && idx < this->materiaNum)
     {
         std::cout << YELLOW << (this->name.length() ? ("Character '" + this->name) : "Unnamed Character") << "' use() function:" << NOCOL << std::endl;
