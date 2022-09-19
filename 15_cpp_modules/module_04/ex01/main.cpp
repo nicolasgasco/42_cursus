@@ -30,9 +30,13 @@ int main(void)
     Cat copy = Cat(seed);
     std::cout << std::endl;
 
+    Cat copy2 = seed;
+    std::cout << std::endl;
+
     std::cout << "Brains memory addresses:" << std::endl;
     std::cout << seed.getBrain() << std::endl;
     std::cout << copy.getBrain() << std::endl;
+    std::cout << copy2.getBrain() << std::endl;
     std::cout << std::endl;
 
     return (0);

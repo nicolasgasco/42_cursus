@@ -7,19 +7,20 @@
 
 #include "Animal.hpp"
 
-class Dog : virtual public Animal {
-   public:
+class Dog : virtual public Animal
+{
+public:
     Dog(void);
     Dog(Dog const &src);
 
-    ~Dog(void);
+    virtual ~Dog(void);
 
     Dog &operator=(Dog const &src);
 
     std::string getType(void) const;
     void makeSound(void) const;
 
-   private:
+private:
     std::string type;
 };
 

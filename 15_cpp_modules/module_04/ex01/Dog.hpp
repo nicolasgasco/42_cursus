@@ -14,13 +14,13 @@ public:
     Dog(void);
     Dog(Dog const &src);
 
-    ~Dog(void);
+    virtual ~Dog(void);
 
     Dog &operator=(Dog const &src);
 
     std::string getType(void) const;
     Brain *getBrain(void) const;
-    
+
     void makeSound(void) const;
 
 private:

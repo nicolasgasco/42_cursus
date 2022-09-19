@@ -5,8 +5,9 @@
 #define NOCOL "\033[0m"
 #include <iostream>
 
-class Animal {
-   public:
+class Animal
+{
+public:
     Animal(void);
     Animal(Animal const &src);
 
@@ -17,7 +18,7 @@ class Animal {
     virtual std::string getType(void) const;
     virtual void makeSound(void) const;
 
-   protected:
+protected:
     std::string type;
 };
 

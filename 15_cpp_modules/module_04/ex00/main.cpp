@@ -56,23 +56,37 @@ int main(void)
     const WrongAnimal *wrongCat = new WrongCat();
     std::cout << std::endl;
 
+    std::cout << std::endl;
+    const WrongCat *rightCat = new WrongCat();
+    std::cout << std::endl;
+
     std::cout << "Types:" << std::endl;
     std::cout << "wrong type is: " << wrong->getType() << std::endl;
     std::cout << "wrongCat type is: " << wrongCat->getType() << std::endl;
+    std::cout << "rightCat type is: " << rightCat->getType() << std::endl;
+
     std::cout << std::endl;
 
     std::cout << "Sounds:" << std::endl;
     wrong->makeSound();
     wrongCat->makeSound();
+    rightCat->makeSound();
     std::cout << std::endl;
 
     delete wrong;
     std::cout << std::endl;
+
     delete wrongCat;
     std::cout << std::endl;
 
+    delete rightCat;
+    std::cout << std::endl;
+
     std::cout << "Completeness checks:" << std::endl;
-    const Animal *k = new Animal(*meta);
+    const Animal *src = new Animal();
+    std::cout << std::endl;
+
+    const Animal *k = new Animal(*src);
     std::cout << std::endl;
 
     const Cat *l = new Cat();
@@ -82,6 +96,10 @@ int main(void)
     const Dog *n = new Dog();
     const Animal *o = new Dog(*n);
     std::cout << std::endl;
+
+    delete src;
+    std::cout << std::endl;
+
     if (k && l && m && n && o)
     {
         // Continue
