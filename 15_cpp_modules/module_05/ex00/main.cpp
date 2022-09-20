@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
+
 #define RED "\033[0;31m"
 #define NOCOL "\033[0m"
 

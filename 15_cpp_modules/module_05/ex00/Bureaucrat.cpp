@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
+#include <iomanip>
 
 Bureaucrat::Bureaucrat(void) : name("Unnamed"), grade(150)
 {
@@ -12,7 +13,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade)
         throw Bureaucrat::GradeTooHighException();
     if (grade < 1)
         throw Bureaucrat::GradeTooLowException();
-    this->name = name;
+    static_cast<std::string>(this->name) = name;
     this->grade = grade;
     std::cout << "Bureaucrat parameter constructor called (" << name << ", " << grade << ")" << std::endl;
 }
@@ -30,13 +31,13 @@ Bureaucrat::~Bureaucrat(void)
 
 Bureaucrat &Bureaucrat::operator=(Bureaucrat const &src)
 {
-    this->name = src.getName();
+    static_cast<std::string>(this->name) = src.getName();
     this->grade = src.getGrade();
     std::cout << "Bureaucrat assignment operator" << std::endl;
     return *this;
 }
 
-std::string Bureaucrat::getName(void) const
+std::string const &Bureaucrat::getName(void) const
 {
     return this->name;
 }
@@ -65,6 +66,9 @@ void Bureaucrat::degrade(void)
 // Stream oeprator
 std::ostream &operator<<(std::ostream &os, Bureaucrat const &std)
 {
-    std::cout << std.getName() << ", bureaucrat grade " << std.getGrade() << std::endl;
+    std::cout << "_______________________________" << std::endl;
+    std::cout << "| Name            | " << std::setw(10) << std.getName() << "|" << std::endl;
+    std::cout << "| Grade           | " << std::setw(10) << (std.getGrade() ? "yes" : "no") << std::setfill(' ') << "|" << std::endl;
+    std::cout << "-------------------------------" << std::endl;
     return os;
 }

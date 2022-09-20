@@ -13,14 +13,14 @@ public:
 
     Bureaucrat &operator=(Bureaucrat const &src);
 
-    std::string getName(void) const;
+    std::string const &getName(void) const;
     int getGrade(void) const;
 
     void promote(void);
     void degrade(void);
 
 private:
-    std::string name;
+    std::string const name;
     int grade;
 
     class GradeTooHighException : public std::exception
@@ -28,7 +28,7 @@ private:
     public:
         virtual const char *what() const throw()
         {
-            return ("Grade value too high, must be less than 150");
+            return ("Grade too high");
         }
     };
 
@@ -37,7 +37,7 @@ private:
     public:
         virtual const char *what() const throw()
         {
-            return ("Grade value too low, must be higher than 0");
+            return ("Grade too low");
         }
     };
 };
