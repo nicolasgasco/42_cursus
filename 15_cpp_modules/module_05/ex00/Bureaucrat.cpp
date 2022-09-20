@@ -6,8 +6,14 @@ Bureaucrat::Bureaucrat(void) : name("Unnamed"), grade(150)
     std::cout << "Bureaucrat default constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade)
+Bureaucrat::Bureaucrat(std::string name, int grade)
 {
+    if (grade > 150)
+        throw Bureaucrat::GradeTooHighException();
+    if (grade < 1)
+        throw Bureaucrat::GradeTooLowException();
+    this->name = name;
+    this->grade = grade;
     std::cout << "Bureaucrat parameter constructor called (" << name << ", " << grade << ")" << std::endl;
 }
 
@@ -43,7 +49,7 @@ int Bureaucrat::getGrade(void) const
 void Bureaucrat::promote(void)
 {
     if (this->grade == 1)
-        throw Bureaucrat::GradeTooHighException();
+        throw Bureaucrat::GradeTooLowException();
     std::cout << "Bureaucrat was promoted" << std::endl;
     this->grade--;
 }
@@ -51,7 +57,7 @@ void Bureaucrat::promote(void)
 void Bureaucrat::degrade(void)
 {
     if (this->grade == 150)
-        throw Bureaucrat::GradeTooLowException();
+        throw Bureaucrat::GradeTooHighException();
     std::cout << "Bureaucrat was degraded" << std::endl;
     this->grade++;
 }

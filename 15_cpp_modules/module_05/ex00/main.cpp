@@ -29,6 +29,7 @@ int main(void)
 
     Bureaucrat low("Dallas", 150);
     std::cout << low << std::endl;
+
     try
     {
         low.degrade();
@@ -39,5 +40,27 @@ int main(void)
     }
     std::cout << std::endl;
 
+    std::cout << "Invalid Bureaucrats:" << std::endl;
+    try
+    {
+        Bureaucrat tooHigh("TooHigh", 151);
+        std::cout << tooHigh << std::endl;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << RED << e.what() << NOCOL << std::endl;
+    }
+    std::cout << std::endl;
+
+    try
+    {
+        Bureaucrat tooLow("TooLow", 0);
+        std::cout << tooLow << std::endl;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << RED << e.what() << NOCOL << std::endl;
+    }
+    std::cout << std::endl;
     return (0);
 }

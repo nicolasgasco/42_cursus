@@ -28,7 +28,7 @@ private:
     public:
         virtual const char *what() const throw()
         {
-            return ("Grade too high, impossible to promote further");
+            return ("Grade value too high, must be less than 150");
         }
     };
 
@@ -37,7 +37,7 @@ private:
     public:
         virtual const char *what() const throw()
         {
-            return ("Grade too low, impossible to degrade further");
+            return ("Grade value too low, must be higher than 0");
         }
     };
 };
