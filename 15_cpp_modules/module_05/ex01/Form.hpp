@@ -18,14 +18,14 @@ public:
 
     Form &operator=(Form const &src);
 
-    std::string getName(void) const;
+    std::string const &getName(void) const;
     bool getIsSigned(void) const;
-    int getGradeToSign(void) const;
+    int const &getGradeToSign(void) const;
 
     void beSigned(Bureaucrat const &signee);
 
 private:
-    std::string name;
+    std::string const name;
     bool isSigned;
     int gradeToSign;
 

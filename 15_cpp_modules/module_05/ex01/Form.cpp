@@ -27,14 +27,14 @@ Form::~Form(void)
 
 Form &Form::operator=(Form const &src)
 {
-    this->name = src.getName();
+    static_cast<std::string>(this->name) = src.getName();
     this->gradeToSign = src.getGradeToSign();
     this->isSigned = src.getIsSigned();
     std::cout << YELLOW << "Form assignment operator" << NOCOL << std::endl;
     return *this;
 }
 
-std::string Form::getName(void) const
+std::string const &Form::getName(void) const
 {
     return this->name;
 }
@@ -44,7 +44,7 @@ bool Form::getIsSigned(void) const
     return this->isSigned;
 }
 
-int Form::getGradeToSign(void) const
+int const &Form::getGradeToSign(void) const
 {
     return this->gradeToSign;
 }
