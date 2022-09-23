@@ -2,7 +2,7 @@
 #define __PRESIDENTIAL_HPP__
 #include <iostream>
 
-#define YELLOW "\033[1;33m"
+#define BLUE "\033[1;34m"
 #define NOCOL "\033[0m"
 
 #include "Form.hpp"
@@ -20,7 +20,7 @@ public:
 
     PresidentialPardonForm &operator=(PresidentialPardonForm const &src);
 
-    void execute(Bureaucrat const &executor) const;
+    void action(void) const;
 
     Bureaucrat const *getTarget(void) const;
 

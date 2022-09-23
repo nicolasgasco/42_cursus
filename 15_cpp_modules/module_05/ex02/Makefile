@@ -7,10 +7,14 @@ SANITIZE = -g -fsanitize=address
 SRC_NAME =	Bureaucrat.cpp \
 			Form.cpp \
 			PresidentialPardonForm.cpp \
+			RobotomyRequestForm.cpp \
+			ShrubberyCreationForm.cpp \
 			main.cpp \
 
 INCLUDES =	Bureaucrat.hpp \
 			PresidentialPardonForm.hpp \
+			RobotomyRequestForm.hpp \
+			ShrubberyCreationForm.hpp \
 			Form.hpp
 
 OBJ_NAME = $(SRC_NAME:.cpp=.o)

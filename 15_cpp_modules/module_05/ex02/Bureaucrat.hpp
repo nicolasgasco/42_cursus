@@ -2,6 +2,7 @@
 #define __BUREAUCRAT_HPP__
 #include <iostream>
 #define CYAN "\033[1;36m"
+#define RED "\033[0;31m"
 #define NOCOL "\033[0m"
 
 #include "Form.hpp"
@@ -24,6 +25,8 @@ public:
     void degrade(void);
 
     void signForm(Form &formToSign) const;
+
+    void executeForm(Form const &form) const;
 
 private:
     std::string const name;

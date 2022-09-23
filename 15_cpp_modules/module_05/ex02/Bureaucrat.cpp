@@ -12,7 +12,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade)
     std::cout << CYAN "Bureaucrat parameter constructor called (" << name << ", " << grade << ")" << NOCOL << std::endl;
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat const &src)
+Bureaucrat::Bureaucrat(Bureaucrat const &src) : name(src.getName())
 {
     std::cout << CYAN "Bureaucrat copy constructor called" << NOCOL << std::endl;
     *this = src;
@@ -25,7 +25,6 @@ Bureaucrat::~Bureaucrat(void)
 
 Bureaucrat &Bureaucrat::operator=(Bureaucrat const &src)
 {
-    static_cast<std::string>(this->name) = src.getName();
     this->grade = src.getGrade();
     std::cout << CYAN "Bureaucrat assignment operator" << NOCOL << std::endl;
     return *this;
@@ -69,6 +68,19 @@ void Bureaucrat::signForm(Form &formToSign) const
         return;
     }
     std::cout << CYAN << "Bureaucrat " << this->name << " (grade " << this->grade << ") has signed form " << formToSign.getName() << " (min grade " << formToSign.getGradeToSign() << ")" << NOCOL << std::endl;
+}
+
+void Bureaucrat::executeForm(Form const &form) const
+{
+    try
+    {
+        std::cout << CYAN << this->name << " executes " << form.getName() << NOCOL << std::endl;
+        form.execute(*this);
+    }
+    catch (std::exception &e)
+    {
+        std::cout << RED << "Impossible to execute form: " << e.what() << NOCOL << std::endl;
+    }
 }
 
 // Stream oeprator
