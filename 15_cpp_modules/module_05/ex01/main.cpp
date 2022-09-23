@@ -6,7 +6,7 @@ int main(void)
 
     std::cout << "Create forms:" << std::endl;
 
-    Form named = Form("Formy", 70);
+    Form named = Form("Formy", 70, 70);
     std::cout << named << std::endl;
 
     Form unnnamed;

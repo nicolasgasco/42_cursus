@@ -12,7 +12,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade)
     std::cout << CYAN "Bureaucrat parameter constructor called (" << name << ", " << grade << ")" << NOCOL << std::endl;
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat const &src)
+Bureaucrat::Bureaucrat(Bureaucrat const &src) : name(src.getName())
 {
     std::cout << CYAN "Bureaucrat copy constructor called" << NOCOL << std::endl;
     *this = src;
@@ -25,7 +25,6 @@ Bureaucrat::~Bureaucrat(void)
 
 Bureaucrat &Bureaucrat::operator=(Bureaucrat const &src)
 {
-    static_cast<std::string>(this->name) = src.getName();
     this->grade = src.getGrade();
     std::cout << CYAN "Bureaucrat assignment operator" << NOCOL << std::endl;
     return *this;

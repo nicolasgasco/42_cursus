@@ -11,7 +11,7 @@ class Form
 {
 public:
     Form(void);
-    Form(std::string name, int grade);
+    Form(std::string name, int gradeToSign, int gradeToExec);
     Form(Form const &src);
 
     ~Form(void);
@@ -21,13 +21,15 @@ public:
     std::string const &getName(void) const;
     bool getIsSigned(void) const;
     int const &getGradeToSign(void) const;
+    int const &getGradeToExec(void) const;
 
     void beSigned(Bureaucrat const &signee);
 
 private:
     std::string const name;
     bool isSigned;
-    int gradeToSign;
+    int const gradeToSign;
+    int const gradeToExec;
 
     class GradeTooLowException : public std::exception
     {
