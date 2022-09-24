@@ -18,4 +18,10 @@
 - Upcast and downcast
   - Upcast: from child to parent. Downcast: from parent to child
   - Downcast implicit is flagged by compiler
-  - Classes create new types that are fall into a hierarchy thanks to heritage
+  - Classes create new types that are fall into a hierarchy thanks to inheritance
+- Static cast:
+  - C++-style explicit cast
+  - `static_cast<type>(foo)`
+  - Can be used with user-defined types too
+  - It can detect if the cast doesn't belong to the same heritage line and throws an error
+- 
