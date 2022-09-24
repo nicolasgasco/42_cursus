@@ -3,9 +3,19 @@
 **Topics covered**:
 
 - C-type conversions:
-
   - There are implicit and explicit casts
   - `int a = 42` + `double b = a` is possible thanks to implicit conversion. It would be `double b = (double)a` with explicit cast
   - There is a hierarchy among types, dending on precision
   - With some implicit conversions, there can be a loss of precision if the new type has less precision (e.g. `double` casted to `int`)
   - It is safer to do explicit conversion when the types are different
+- Type reinterpretation:
+  - `void *` is the most generic type
+  - Implicit promotion is fine (e.g. `float` to `void *`), but implicit demotion is dangerous (e.g. `int *` to `void *`)
+  - Explicit cast tells the compiler demotion is wanted
+- Type qualifier reinterpretation:
+  - Implicit demotion not possibile with pointers: compile error (`discards 'const'`)
+  - Implicit cast is always the best choice
+- Upcast and downcast
+  - Upcast: from child to parent. Downcast: from parent to child
+  - Downcast implicit is flagged by compiler
+  - Classes create new types that are fall into a hierarchy thanks to heritage
