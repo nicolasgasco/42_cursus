@@ -4,35 +4,33 @@
 
 Bureaucrat::Bureaucrat(void) : name("Unnamed"), grade(150)
 {
-    std::cout << "Bureaucrat default constructor called" << std::endl;
+    std::cout << CYAN << "Bureaucrat default constructor called" << NOCOL << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string name, int grade)
+Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade)
 {
     if (grade > 150)
-        throw Bureaucrat::GradeTooHighException();
-    if (grade < 1)
         throw Bureaucrat::GradeTooLowException();
-    static_cast<std::string>(this->name) = name;
-    this->grade = grade;
-    std::cout << "Bureaucrat parameter constructor called (" << name << ", " << grade << ")" << std::endl;
+    if (grade < 1)
+        throw Bureaucrat::GradeTooHighException();
+    std::cout << CYAN << "Bureaucrat parameter constructor called (" << name << ", " << grade << ")" << NOCOL << std::endl;
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat const &src) : name(src.getName())
 {
-    std::cout << "Bureaucrat copy constructor called" << std::endl;
+    std::cout << CYAN "Bureaucrat copy constructor called" << NOCOL << std::endl;
     *this = src;
 }
 
 Bureaucrat::~Bureaucrat(void)
 {
-    std::cout << "Bureaucrat destructor called" << std::endl;
+    std::cout << CYAN "Bureaucrat destructor called" << NOCOL << std::endl;
 }
 
 Bureaucrat &Bureaucrat::operator=(Bureaucrat const &src)
 {
     this->grade = src.getGrade();
-    std::cout << "Bureaucrat assignment operator" << std::endl;
+    std::cout << CYAN "Bureaucrat assignment operator" << NOCOL << std::endl;
     return *this;
 }
 
@@ -49,25 +47,25 @@ int Bureaucrat::getGrade(void) const
 void Bureaucrat::promote(void)
 {
     if (this->grade == 1)
-        throw Bureaucrat::GradeTooLowException();
-    std::cout << "Bureaucrat was promoted" << std::endl;
+        throw Bureaucrat::GradeTooHighException();
+    std::cout << CYAN << "Bureaucrat was promoted" << NOCOL << std::endl;
     this->grade--;
 }
 
 void Bureaucrat::degrade(void)
 {
     if (this->grade == 150)
-        throw Bureaucrat::GradeTooHighException();
-    std::cout << "Bureaucrat was degraded" << std::endl;
+        throw Bureaucrat::GradeTooLowException();
+    std::cout << CYAN << "Bureaucrat was degraded" << NOCOL << std::endl;
     this->grade++;
 }
 
 // Stream oeprator
 std::ostream &operator<<(std::ostream &os, Bureaucrat const &std)
 {
-    std::cout << "_______________________________" << std::endl;
+    std::cout << CYAN << "_______________________________" << std::endl;
     std::cout << "| Name            | " << std::setw(10) << std.getName() << "|" << std::endl;
-    std::cout << "| Grade           | " << std::setw(10) << (std.getGrade() ? "yes" : "no") << std::setfill(' ') << "|" << std::endl;
-    std::cout << "-------------------------------" << std::endl;
+    std::cout << "| Grade           | " << std::setw(10) << std.getGrade() << std::setfill(' ') << "|" << std::endl;
+    std::cout << "-------------------------------" << NOCOL << std::endl;
     return os;
 }

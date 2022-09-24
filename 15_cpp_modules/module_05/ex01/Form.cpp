@@ -11,6 +11,10 @@ Form::Form(void) : name("Unnamed"), isSigned(false), gradeToSign(1), gradeToExec
 
 Form::Form(std::string name, int gradeToSign, int gradeToExec) : name(name), isSigned(false), gradeToSign(gradeToSign), gradeToExec(gradeToExec)
 {
+    if (gradeToSign > 150 || gradeToExec > 150)
+        throw Form::GradeTooLowException();
+    if (gradeToSign < 1 || gradeToExec < 1)
+        throw Form::GradeTooHighException();
     std::cout << YELLOW "Form parameter constructor called (" << name << ", sign: " << gradeToSign << ", exec: " << gradeToExec << ")" << NOCOL << std::endl;
 }
 

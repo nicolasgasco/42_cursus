@@ -39,6 +39,15 @@ private:
             return ("Grade too low");
         }
     };
+
+    class GradeTooHighException : public std::exception
+    {
+    public:
+        virtual const char *what() const throw()
+        {
+            return ("Grade too high");
+        }
+    };
 };
 
 std::ostream &operator<<(std::ostream &os, Form const &std);

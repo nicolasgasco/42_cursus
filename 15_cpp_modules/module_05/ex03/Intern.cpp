@@ -36,7 +36,7 @@ Form *Intern::makeForm(std::string form, std::string target)
 {
     std::string formTypes[] = {"pardon", "robotomy", "shrubbery"};
 
-    std::cout << PURPLE << "Intern creates " << form << "form" << NOCOL << std::endl;
+    std::cout << PURPLE << "Intern tries to create " << form << " form" << NOCOL << std::endl;
     for (unsigned long i = 0; i < (sizeof(formTypes) / sizeof(std::string)); i++)
     {
         if (formTypes[i] == form && i == 0)

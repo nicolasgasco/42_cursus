@@ -2,6 +2,9 @@
 #define __BUREAUCRAT_HPP__
 #include <iostream>
 
+#define CYAN "\033[1;36m"
+#define NOCOL "\033[0m"
+
 class Bureaucrat
 {
 public:

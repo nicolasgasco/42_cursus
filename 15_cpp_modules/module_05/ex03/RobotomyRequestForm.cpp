@@ -34,6 +34,7 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &s
 void RobotomyRequestForm::action(Bureaucrat const &executor) const
 {
     srand(time(NULL));
+
     int successfullDrills = 0;
     for (int i = 0; i < 6; i++)
     {
@@ -47,7 +48,7 @@ void RobotomyRequestForm::action(Bureaucrat const &executor) const
             std::cout << " ❌" << NOCOL << std::endl;
     }
     if (successfullDrills >= 3)
-        std::cout << BLUE << executor.getName() << " has been successfully lobotomized" << NOCOL << std::endl;
+        std::cout << BLUE << executor.getName() << " has been successfully robotomized" << NOCOL << std::endl;
     else
-        std::cout << BLUE << "It was not possible to lobotomize " << executor.getName() << NOCOL << std::endl;
+        std::cout << BLUE << "It was not possible to robotomize " << executor.getName() << NOCOL << std::endl;
 }
