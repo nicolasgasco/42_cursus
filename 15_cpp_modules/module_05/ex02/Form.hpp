@@ -14,7 +14,7 @@ public:
     Form(std::string name, int gradeToSign, int gradeToExec);
     Form(Form const &src);
 
-    ~Form(void);
+    virtual ~Form(void);
 
     Form &operator=(Form const &src);
 
@@ -25,7 +25,7 @@ public:
 
     void beSigned(Bureaucrat const &signee);
     void execute(Bureaucrat const &executor) const;
-    virtual void action(void) const = 0;
+    virtual void action(Bureaucrat const &executor) const = 0;
 
 protected:
     std::string name;

@@ -15,12 +15,12 @@ int main(void)
     Bureaucrat min("Min", 150);
     std::cout << min << std::endl;
 
-    PresidentialPardonForm pardon(max);
+    PresidentialPardonForm pardon("pardon");
     std::cout << pardon << std::endl;
 
     try
     {
-        pardon.beSigned(min);
+        min.signForm(pardon);
         std::cout << pardon << std::endl;
     }
     catch (std::exception &e)
@@ -29,7 +29,7 @@ int main(void)
         std::cout << std::endl;
     }
 
-    pardon.beSigned(max);
+    max.signForm(pardon);
     std::cout << pardon << std::endl;
 
     min.executeForm(pardon);
@@ -38,10 +38,10 @@ int main(void)
     max.executeForm(pardon);
     std::cout << std::endl;
 
-    RobotomyRequestForm robot(max);
+    RobotomyRequestForm robot("robotomy");
     std::cout << robot << std::endl;
 
-    robot.beSigned(max);
+    max.signForm(robot);
     std::cout << robot << std::endl;
 
     min.executeForm(robot);
@@ -50,10 +50,10 @@ int main(void)
     max.executeForm(robot);
     std::cout << std::endl;
 
-    ShrubberyCreationForm shrub(max);
+    ShrubberyCreationForm shrub("shrubbery");
     std::cout << shrub << std::endl;
 
-    shrub.beSigned(max);
+    max.signForm(shrub);
     std::cout << shrub << std::endl;
 
     min.executeForm(shrub);

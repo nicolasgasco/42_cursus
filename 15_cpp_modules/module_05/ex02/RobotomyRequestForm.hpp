@@ -13,19 +13,14 @@ class RobotomyRequestForm : public virtual Form
 {
 public:
     RobotomyRequestForm(void);
-    RobotomyRequestForm(Bureaucrat const &target);
+    RobotomyRequestForm(std::string const &target);
     RobotomyRequestForm(RobotomyRequestForm const &src);
 
     ~RobotomyRequestForm(void);
 
     RobotomyRequestForm &operator=(RobotomyRequestForm const &src);
 
-    void action(void) const;
-
-    Bureaucrat const *getTarget(void) const;
-
-private:
-    Bureaucrat const *target;
+    void action(Bureaucrat const &executor) const;
 };
 
 #endif

@@ -13,19 +13,14 @@ class ShrubberyCreationForm : public virtual Form
 {
 public:
     ShrubberyCreationForm(void);
-    ShrubberyCreationForm(Bureaucrat const &target);
+    ShrubberyCreationForm(std::string const &target);
     ShrubberyCreationForm(ShrubberyCreationForm const &src);
 
     ~ShrubberyCreationForm(void);
 
     ShrubberyCreationForm &operator=(ShrubberyCreationForm const &src);
 
-    void action(void) const;
-
-    Bureaucrat const *getTarget(void) const;
-
-private:
-    Bureaucrat const *target;
+    void action(Bureaucrat const &executor) const;
 };
 
 #endif
