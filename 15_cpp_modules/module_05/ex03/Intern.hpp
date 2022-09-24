@@ -18,6 +18,16 @@ public:
     Intern &operator=(Intern const &src);
 
     Form *makeForm(std::string form, std::string target);
+
+private:
+    class FormNotFoundException : public std::exception
+    {
+    public:
+        virtual const char *what() const throw()
+        {
+            return ("Form not found");
+        }
+    };
 };
 
 #endif

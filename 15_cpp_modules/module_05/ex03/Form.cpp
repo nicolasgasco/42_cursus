@@ -71,7 +71,7 @@ void Form::execute(Bureaucrat const &executor) const
     if (executor.getGrade() > this->gradeToExec)
         throw Form::GradeTooLowException();
 
-    this->action();
+    this->action(executor);
 }
 
 // Stream oeprator

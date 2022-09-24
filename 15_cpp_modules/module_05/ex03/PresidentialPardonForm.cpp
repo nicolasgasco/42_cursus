@@ -6,42 +6,32 @@
 
 PresidentialPardonForm::PresidentialPardonForm(void) : Form("Pardon", 25, 5)
 {
-    std::cout << BLUE << "PresidentialPardonForm default constructor called" << NOCOL << std::endl;
+    std::cout << PURPLE << "PresidentialPardonForm default constructor called" << NOCOL << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(Bureaucrat const &target) : Form("Pardon", 25, 5)
+PresidentialPardonForm::PresidentialPardonForm(std::string const &target) : Form(target, 25, 5)
 {
-    this->target = &target;
-    std::cout << BLUE "PresidentialPardonForm parameter constructor called (" << name << ", " << gradeToSign << ")" << NOCOL << std::endl;
+    std::cout << PURPLE << "PresidentialPardonForm parameter constructor called (" << name << ", sign: " << gradeToSign << ", exec: " << gradeToExec << ")" << NOCOL << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &src) : Form("Pardon", 25, 5)
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &src) : Form(src.getName(), 25, 5)
 {
-    std::cout << BLUE << "PresidentialPardonForm copy constructor called" << NOCOL << std::endl;
+    std::cout << PURPLE << "PresidentialPardonForm copy constructor called" << NOCOL << std::endl;
     *this = src;
 }
 
 PresidentialPardonForm::~PresidentialPardonForm(void)
 {
-    std::cout << BLUE << "PresidentialPardonForm destructor called" << NOCOL << std::endl;
+    std::cout << PURPLE << "PresidentialPardonForm destructor called" << NOCOL << std::endl;
 }
 
 PresidentialPardonForm &PresidentialPardonForm::operator=(PresidentialPardonForm const &src)
 {
-    std::cout << BLUE << "PresidentialPardonForm assignment operator (" << src.getName() << ")" << NOCOL << std::endl;
-    this->target = src.getTarget();
+    std::cout << PURPLE << "PresidentialPardonForm assignment operator (" << src.getName() << ")" << NOCOL << std::endl;
     return *this;
 }
 
-Bureaucrat const *PresidentialPardonForm::getTarget(void) const
+void PresidentialPardonForm::action(Bureaucrat const &executor) const
 {
-    return this->target;
-}
-
-void PresidentialPardonForm::action(void) const
-{
-    if (!this->target)
-        std::cout << BLUE << "Impossible to execute. No target" << NOCOL << std::endl;
-
-    std::cout << BLUE << this->target->getName() << " has been pardoned by Zafod Beeblebrox" << NOCOL << std::endl;
+    std::cout << PURPLE << executor.getName() << " has been pardoned by Zafod Beeblebrox" << NOCOL << std::endl;
 }

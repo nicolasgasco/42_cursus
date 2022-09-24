@@ -34,20 +34,17 @@ Intern &Intern::operator=(Intern const &src)
 
 Form *Intern::makeForm(std::string form, std::string target)
 {
-    Bureaucrat *targetBureaucrat = new Bureaucrat(target, 1);
-    std::cout << PURPLE << "Intern creates <form>" << NOCOL << std::endl;
-
     std::string formTypes[] = {"pardon", "robotomy", "shrubbery"};
 
+    std::cout << PURPLE << "Intern creates " << form << "form" << NOCOL << std::endl;
     for (unsigned long i = 0; i < (sizeof(formTypes) / sizeof(std::string)); i++)
     {
-        if (formTypes[i] == form)
-        {
-
-            std::cout << PURPLE << "Intern creates form " << NOCOL << std::endl;
-            return (new PresidentialPardonForm(*targetBureaucrat));
-        }
+        if (formTypes[i] == form && i == 0)
+            return (new PresidentialPardonForm(target));
+        if (formTypes[i] == form && i == 1)
+            return (new RobotomyRequestForm(target));
+        else if (formTypes[i] == form && i == 2)
+            return (new ShrubberyCreationForm(target));
     }
-    std::cout << form << std::endl;
-    return (new PresidentialPardonForm());
+    throw FormNotFoundException();
 }

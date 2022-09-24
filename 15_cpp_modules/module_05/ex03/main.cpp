@@ -16,57 +16,81 @@ int main(void)
     Bureaucrat min("Min", 150);
     std::cout << min << std::endl;
 
-    PresidentialPardonForm pardon(max);
-    std::cout << pardon << std::endl;
+    Intern intern;
+    std::cout << std::endl;
+
+    Form *pardon = intern.makeForm("pardon", "Ben");
+    std::cout << *pardon << std::endl;
 
     try
     {
-        pardon.beSigned(min);
-        std::cout << pardon << std::endl;
+        min.signForm(*pardon);
     }
     catch (std::exception &e)
     {
         std::cout << RED << "Impossible to sign form: " << e.what() << NOCOL << std::endl;
         std::cout << std::endl;
+        std::cout << *pardon << std::endl;
     }
 
-    pardon.beSigned(max);
-    std::cout << pardon << std::endl;
+    max.signForm(*pardon);
+    std::cout << *pardon << std::endl;
 
-    min.executeForm(pardon);
+    min.executeForm(*pardon);
     std::cout << std::endl;
 
-    max.executeForm(pardon);
+    max.executeForm(*pardon);
     std::cout << std::endl;
 
-    RobotomyRequestForm robot(max);
-    std::cout << robot << std::endl;
+    Form *robot = intern.makeForm("robotomy", "Jon");
+    std::cout << *robot << std::endl;
 
-    robot.beSigned(max);
-    std::cout << robot << std::endl;
+    max.signForm(*robot);
+    std::cout << *robot << std::endl;
 
-    min.executeForm(robot);
+    min.executeForm(*robot);
     std::cout << std::endl;
 
-    max.executeForm(robot);
+    max.executeForm(*robot);
     std::cout << std::endl;
 
-    ShrubberyCreationForm shrub(max);
-    std::cout << shrub << std::endl;
+    Form *shrub = intern.makeForm("shrubbery", "Mary");
+    std::cout << *shrub << std::endl;
 
-    shrub.beSigned(max);
-    std::cout << shrub << std::endl;
+    max.signForm(*shrub);
+    std::cout << *shrub << std::endl;
 
-    min.executeForm(shrub);
+    min.executeForm(*shrub);
     std::cout << std::endl;
 
-    max.executeForm(shrub);
+    max.executeForm(*shrub);
     std::cout << std::endl;
 
-    Intern intern;
+    Form *ghost;
+    std::cout << std::endl;
+    try
+    {
+        ghost = intern.makeForm("ghost", "Mary");
+    }
+    catch (std::exception &e)
+    {
+        std::cout << RED << "Error: " << e.what() << NOCOL << std::endl;
+        std::cout << std::endl;
+
+        delete pardon;
+        std::cout << std::endl;
+
+        delete shrub;
+        std::cout << std::endl;
+        return (0);
+    }
+    delete ghost;
     std::cout << std::endl;
 
-    intern.makeForm("pardon", "Ben");
+    delete pardon;
+    std::cout << std::endl;
+
+    delete pardon;
     std::cout << std::endl;
 
     return (0);
