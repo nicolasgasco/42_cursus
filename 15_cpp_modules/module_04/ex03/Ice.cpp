@@ -14,6 +14,7 @@ Ice::~Ice(void)
 
 Ice::Ice(Ice const &src)
 {
+    this->type = "ice";
     *this = src;
     std::cout << PURPLE << "Ice copy constructor called" << NOCOL << std::endl;
 }
