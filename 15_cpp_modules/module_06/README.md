@@ -24,4 +24,9 @@
   - `static_cast<type>(foo)`
   - Can be used with user-defined types too
   - It can detect if the cast doesn't belong to the same heritage line and throws an error
-- 
+- Dynamic cast:
+  - Cast happens at runtime and not during compiling
+  - Used for virtual classes 
+  - Returns `null` if cast is not possible
+  - It possible to cast by pointer `dynamic_cast<Child *>(foo)` or by reference `dynamic_cast<Child &>(foo)`
+  - When it's by reference, it can't return a `null` reference, so there's a specific type of exception: `std:bad_cast &bc`
