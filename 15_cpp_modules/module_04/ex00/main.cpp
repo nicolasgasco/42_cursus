@@ -90,19 +90,34 @@ int main(void)
     std::cout << std::endl;
 
     const Cat *l = new Cat();
+    std::cout << std::endl;
+
     const Animal *m = new Cat(*l);
     std::cout << std::endl;
 
     const Dog *n = new Dog();
+    std::cout << std::endl;
+
     const Animal *o = new Dog(*n);
     std::cout << std::endl;
 
     delete src;
     std::cout << std::endl;
 
-    if (k && l && m && n && o)
-    {
-        // Continue
-    }
+    delete k;
+    std::cout << std::endl;
+
+    delete l;
+    std::cout << std::endl;
+
+    delete m;
+    std::cout << std::endl;
+
+    delete n;
+    std::cout << std::endl;
+
+    delete o;
+    std::cout << std::endl;
+
     return (0);
 }

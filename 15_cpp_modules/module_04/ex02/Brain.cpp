@@ -18,14 +18,8 @@ Brain::~Brain(void)
 
 Brain &Brain::operator=(const Brain &src)
 {
+    std::cout << GREEN << "Brain assignation operator called" << NOCOL << std::endl;
     for (int i = 0; i < this->ideasNum; i++)
         this->ideas[i] = src.ideas[i];
-    std::cout << GREEN << "Brain assignation operator called" << NOCOL << std::endl;
     return *this;
-}
-
-void Brain::populateIdeas(std::string animalType)
-{
-    for (int i = 0; i < this->ideasNum; i++)
-        this->ideas[i] = animalType + "_" + std::to_string(i + 1);
 }

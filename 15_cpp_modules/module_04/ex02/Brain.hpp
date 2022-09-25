@@ -15,11 +15,8 @@ public:
 
     Brain &operator=(Brain const &src);
 
-    void populateIdeas(std::string animalType);
-
-    static int const ideasNum = 100;
-
 private:
+    static int const ideasNum = 100;
     std::string ideas[ideasNum];
 };
 

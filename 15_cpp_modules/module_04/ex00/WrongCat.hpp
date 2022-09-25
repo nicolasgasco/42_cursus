@@ -7,8 +7,9 @@
 
 #include "WrongAnimal.hpp"
 
-class WrongCat : virtual public WrongAnimal {
-   public:
+class WrongCat : virtual public WrongAnimal
+{
+public:
     WrongCat(void);
     WrongCat(WrongCat const &src);
 
@@ -19,7 +20,7 @@ class WrongCat : virtual public WrongAnimal {
     std::string getType(void) const;
     void makeSound(void) const;
 
-   private:
+private:
     std::string type;
 };
 

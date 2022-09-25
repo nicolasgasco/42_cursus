@@ -39,5 +39,20 @@ int main(void)
     std::cout << copy2.getBrain() << std::endl;
     std::cout << std::endl;
 
+    Dog seedDog;
+    std::cout << std::endl;
+
+    Dog copyDog = Dog(seedDog);
+    std::cout << std::endl;
+
+    Dog copy2Dog = seedDog;
+    std::cout << std::endl;
+
+    std::cout << "Brains memory addresses:" << std::endl;
+    std::cout << seedDog.getBrain() << std::endl;
+    std::cout << copyDog.getBrain() << std::endl;
+    std::cout << copy2Dog.getBrain() << std::endl;
+    std::cout << std::endl;
+
     return (0);
 }

@@ -1,6 +1,6 @@
 #include "Animal.hpp"
 
-Animal::Animal(void) : type("animal")
+Animal::Animal(void) : type("Animal")
 {
     std::cout << CYAN << "Animal default constructor called" << NOCOL << std::endl;
 }

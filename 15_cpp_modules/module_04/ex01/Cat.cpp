@@ -8,6 +8,7 @@ Cat::Cat(void) : type("Cat")
 
 Cat::Cat(Cat const &src)
 {
+    this->brain = new Brain();
     *this = src;
     std::cout << PURPLE << "Cat copy constructor called" << NOCOL << std::endl;
 }
@@ -21,7 +22,7 @@ Cat::~Cat(void)
 Cat &Cat::operator=(Cat const &src)
 {
     this->type = src.getType();
-    this->brain = new Brain(*(src.brain));
+    *(this->brain) = *(src.brain);
     std::cout << PURPLE << "Cat assignation operator called" << NOCOL << std::endl;
     return *this;
 }
