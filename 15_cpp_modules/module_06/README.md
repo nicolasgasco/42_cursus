@@ -30,3 +30,7 @@
   - Returns `null` if cast is not possible
   - It possible to cast by pointer `dynamic_cast<Child *>(foo)` or by reference `dynamic_cast<Child &>(foo)`
   - When it's by reference, it can't return a `null` reference, so there's a specific type of exception: `std:bad_cast &bc`
+- Reinterpret cast
+  - Reinterpretation both in updown and downcast
+  - `reinterpret_cast<type>(foo)`
+  - It can perform dangerous conversions and force them
