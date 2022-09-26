@@ -26,7 +26,7 @@
   - It can detect if the cast doesn't belong to the same heritage line and throws an error
 - Dynamic cast:
   - Cast happens at runtime and not during compiling
-  - Used for virtual classes 
+  - Used for virtual classes
   - Returns `null` if cast is not possible
   - It possible to cast by pointer `dynamic_cast<Child *>(foo)` or by reference `dynamic_cast<Child &>(foo)`
   - When it's by reference, it can't return a `null` reference, so there's a specific type of exception: `std:bad_cast &bc`
@@ -34,3 +34,13 @@
   - Reinterpretation both in updown and downcast
   - `reinterpret_cast<type>(foo)`
   - It can perform dangerous conversions and force them
+- Const cast
+  - It allows to cast the type qualifier `const`
+  - It can be symptom of bad design
+- Cast operators
+  - Overload, but for casting
+  - `operator int() { return static_cast<int>(this->v)}`
+  - Once the operator is defined, it can be used for implicit casts as well, e.g. to cast a class representing a `float` to a native `float`
+- `explicit` keyboard
+  - Doesn't allow implicit conversions when they keyword is provided
+  - Forces you to use an explicit cast
