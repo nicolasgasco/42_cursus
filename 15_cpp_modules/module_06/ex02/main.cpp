@@ -32,16 +32,15 @@ Base *generate(void)
 void identify(Base *p)
 {
     if (dynamic_cast<A *>(p))
-        std::cout << "Pointer is A" << std::endl;
+        std::cout << "Pointer is A (" << p << ")" << std::endl;
     else if (dynamic_cast<B *>(p))
-        std::cout << "Pointer is B" << std::endl;
+        std::cout << "Pointer is B (" << p << ")" << std::endl;
     else if (dynamic_cast<C *>(p))
-        std::cout << "Pointer is C" << std::endl;
+        std::cout << "Pointer is C (" << p << ")" << std::endl;
     else if (dynamic_cast<Base *>(p))
-        std::cout << "Pointer is base" << std::endl;
-
+        std::cout << "Pointer is base (" << p << ")" << std::endl;
     else
-        std::cout << "Unknown pointer" << std::endl;
+        std::cout << "Unknown pointer (" << p << ")" << std::endl;
 }
 
 void identify(Base &p)
