@@ -19,6 +19,10 @@ public:
 
     Form *makeForm(std::string form, std::string target);
 
+    Form *makePardon(std::string const &target);
+    Form *makeRobotomy(std::string const &target);
+    Form *makeShrubbery(std::string const &target);
+
 private:
     class FormNotFoundException : public std::exception
     {

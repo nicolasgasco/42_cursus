@@ -32,19 +32,35 @@ Intern &Intern::operator=(Intern const &src)
     return *this;
 }
 
+Form *Intern::makePardon(std::string const &target)
+{
+    return (new PresidentialPardonForm(target));
+}
+
+Form *Intern::makeRobotomy(std::string const &target)
+{
+    return (new RobotomyRequestForm(target));
+}
+
+Form *Intern::makeShrubbery(std::string const &target)
+{
+    return (new ShrubberyCreationForm(target));
+}
+
 Form *Intern::makeForm(std::string form, std::string target)
 {
     std::string formTypes[] = {"pardon", "robotomy", "shrubbery"};
 
+    Form *(Intern::*actions[3])(std::string const &) = {
+        &Intern::makePardon, &Intern::makeRobotomy, &Intern::makeShrubbery
+
+    };
+
     std::cout << PURPLE << "Intern tries to create " << form << " form" << NOCOL << std::endl;
     for (unsigned long i = 0; i < (sizeof(formTypes) / sizeof(std::string)); i++)
     {
-        if (formTypes[i] == form && i == 0)
-            return (new PresidentialPardonForm(target));
-        if (formTypes[i] == form && i == 1)
-            return (new RobotomyRequestForm(target));
-        else if (formTypes[i] == form && i == 2)
-            return (new ShrubberyCreationForm(target));
+        if (formTypes[i] == form)
+            return ((this->*(actions[i]))(target));
     }
     throw FormNotFoundException();
 }
