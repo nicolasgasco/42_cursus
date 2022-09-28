@@ -24,11 +24,6 @@ Data &Data::operator=(const Data &src)
     return *this;
 }
 
-Data::operator int(void)
-{
-    return static_cast<uintptr_t>(this->value);
-}
-
 int Data::getValue(void) const
 {
     return (this->value);
