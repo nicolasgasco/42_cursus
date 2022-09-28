@@ -37,8 +37,6 @@ void identify(Base *p)
         std::cout << "Pointer is B (" << p << ")" << std::endl;
     else if (dynamic_cast<C *>(p))
         std::cout << "Pointer is C (" << p << ")" << std::endl;
-    else if (dynamic_cast<Base *>(p))
-        std::cout << "Pointer is base (" << p << ")" << std::endl;
     else
         std::cout << "Unknown pointer (" << p << ")" << std::endl;
 }
@@ -78,7 +76,7 @@ void identify(Base &p)
     {
     }
 
-    // std::cout << "Pointer is unknown" << std::endl;
+    std::cout << "Pointer is unknown" << std::endl;
 }
 
 int main(void)
