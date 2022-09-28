@@ -41,6 +41,18 @@ Type ScalarConversion::getType(void) const
             return (t_char);
     }
 
+    if (strArg.find(".") == std::string::npos)
+    {
+        try
+        {
+            std::stoi(strArg);
+            return (t_int);
+        }
+        catch (...)
+        {
+        }
+    }
+
     if (strArg.find("inff") != std::string::npos || strArg.find("nanf") != std::string::npos)
         return (t_float);
 
@@ -88,8 +100,8 @@ void ScalarConversion::outputConversions(char value) const
         std::cout << "char: Non displayable" << std::endl;
 
     std::cout << "int: " << static_cast<int>(value) << std::endl;
-    std::cout << std::setprecision(1) << std::fixed << "float: " << static_cast<float>(value) << (value == static_cast<int>(value) ? ".0" : "") << "f" << std::endl;
-    std::cout << std::setprecision(1) << std::fixed << "double: " << static_cast<double>(value) << (value == static_cast<int>(value) ? ".0" : "") << std::endl;
+    std::cout << "float: " << static_cast<float>(value) << (value == static_cast<int>(value) ? ".0" : "") << "f" << std::endl;
+    std::cout << "double: " << static_cast<double>(value) << (value == static_cast<int>(value) ? ".0" : "") << std::endl;
 }
 
 void ScalarConversion::outputConversions(float value) const
@@ -146,6 +158,7 @@ void ScalarConversion::outputConversions(double value) const
 
     // FLOAT
     std::cout << "float: " << static_cast<float>(value) << (value == static_cast<int>(value) ? ".0" : "") << "f" << std::endl;
+
     // DOUBLE
     std::cout << "double: " << value << (value == static_cast<int>(value) ? ".0" : "") << std::endl;
 }
