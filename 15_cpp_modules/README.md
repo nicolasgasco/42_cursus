@@ -12,3 +12,4 @@ Nine "mini" projects to get to know the basics of OOP in C++.
 | 04 | Subtyping, abstract classes and interfaces |
 | 05 | Nested classes, exceptions |
 | 06 | C-style conversions, type reinterpretation, type qualifier reinterpretation, upcast and downcast, static cast, dynamic cast, reinterpret cast, const cast, cast operator, `explicit` keyword |
+| 07 | Template functions and structures |
