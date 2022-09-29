@@ -1,7 +1,7 @@
 # CPP 04
 
 **Topics covered**:
-- Sub-typing polymorphism
+- Subtyping polymorphism
     - When a class inherit from another one, you can initialize the child class as a pointer using as a type either the parent or child class
     - You can't initialize a parent class as a pointer using the child class as a type
     - If you initialize a child class as pointer using the parent class as a type, all methods refer then to the parent
