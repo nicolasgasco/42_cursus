@@ -18,6 +18,10 @@
     - There can be more than one type inside chevrons
   - Standard library makes vast use of templates
 
-- Parametric macros (from C)
 - Default types
+  - It is possible to establish a default type, e.g. `template<typename T = float>`
+  - `.tpp` is the extension for template class
+  - If default constructor is private, it is not possible to explicitly instanciate a class with the default constructor
+  - If there is a default value, there's no need to establish a type when instantiating, e.g. `Class<>`
+- Parametric macros (from C)
 - Specialization
