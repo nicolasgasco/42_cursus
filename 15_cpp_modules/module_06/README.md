@@ -2,7 +2,7 @@
 
 **Topics covered**:
 
-- C-type conversions:
+- C-style conversions:
   - There are implicit and explicit casts
   - `int a = 42` + `double b = a` is possible thanks to implicit conversion. It would be `double b = (double)a` with explicit cast
   - There is a hierarchy among types, dending on precision
