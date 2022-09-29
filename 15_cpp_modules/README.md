@@ -12,4 +12,5 @@ Nine "mini" projects to get to know the basics of OOP in C++.
 | [04](https://github.com/nicolasgasco/42_cursus/tree/master/15_cpp_modules/module_04) | Subtyping, abstract classes and interfaces |
 | [05](https://github.com/nicolasgasco/42_cursus/tree/master/15_cpp_modules/module_05) | Nested classes, exceptions |
 | [06](https://github.com/nicolasgasco/42_cursus/tree/master/15_cpp_modules/module_06) | C-style conversions, type reinterpretation, type qualifier reinterpretation, upcast and downcast, static cast, dynamic cast, reinterpret cast, const cast, cast operator, `explicit` keyword |
-| [07](https://github.com/nicolasgasco/42_cursus/tree/master/15_cpp_modules/module_07) | Template functions and structures |
+| [07](https://github.com/nicolasgasco/42_cursus/tree/master/15_cpp_modules/module_07) | Template functions and structures, default types |
+| 08 | |
