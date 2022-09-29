@@ -84,9 +84,16 @@ void ScalarConversion::outputConversions(int value) const
         std::cout << "char: impossible" << std::endl;
     }
 
+    // INT
     std::cout << "int: " << value << std::endl;
-    std::cout << "float: " << static_cast<float>(value) << (value == static_cast<int>(value) ? ".0" : "") << "f" << std::endl;
-    std::cout << "double: " << static_cast<double>(value) << (value == static_cast<int>(value) ? ".0" : "") << std::endl;
+
+    // FLOAT
+    float floatValue = static_cast<float>(value);
+    std::cout << "float: " << floatValue << "f" << std::endl;
+
+    // DOUBLE
+    double doubleValue = static_cast<double>(value);
+    std::cout << "double: " << doubleValue << std::endl;
 }
 
 void ScalarConversion::outputConversions(char value) const
@@ -99,9 +106,16 @@ void ScalarConversion::outputConversions(char value) const
     else
         std::cout << "char: Non displayable" << std::endl;
 
+    // INT
     std::cout << "int: " << static_cast<int>(value) << std::endl;
-    std::cout << "float: " << static_cast<float>(value) << (value == static_cast<int>(value) ? ".0" : "") << "f" << std::endl;
-    std::cout << "double: " << static_cast<double>(value) << (value == static_cast<int>(value) ? ".0" : "") << std::endl;
+
+    // FLOAT
+    float floatValue = static_cast<float>(value);
+    std::cout << "float: " << floatValue << "f" << std::endl;
+
+    // DOUBLE
+    double doubleValue = static_cast<double>(value);
+    std::cout << "double: " << doubleValue << std::endl;
 }
 
 void ScalarConversion::outputConversions(float value) const
