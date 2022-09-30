@@ -41,5 +41,19 @@ int main(void)
     c = 100.0009f;
     d = 100.0009f;
     std::cout << "Max between 100.0009 and 100.0009 is: " << max(c, d) << std::endl;
+
+    std::cout << std::endl;
+    a = 2;
+    b = 3;
+    ::swap(a, b);
+    std::cout << "a = " << a << ", b = " << b << std::endl;
+    std::cout << "min( a, b ) = " << ::min(a, b) << std::endl;
+    std::cout << "max( a, b ) = " << ::max(a, b) << std::endl;
+    std::string c1 = "chaine1";
+    std::string d1 = "chaine2";
+    ::swap(c1, d1);
+    std::cout << "c = " << c1 << ", d = " << d1 << std::endl;
+    std::cout << "min( c, d ) = " << ::min(c1, d1) << std::endl;
+    std::cout << "max( c, d ) = " << ::max(c1, d1) << std::endl;
     return (0);
 }
