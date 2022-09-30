@@ -4,11 +4,11 @@
 
 - Templates
 
-  - Template functions
+  - Function templates
     - Use a placeholder for any type, e.g. `T max(T x, T y)` where `T` simply stands for a placeholder type
-    - To declare a template function, you have to write before `template<typename T>`
+    - To declare a function template, you have to write before `template<typename T>`
     - You can pass/return the template type by reference too
-    - A template function can be instantiated both implicitly and explicitly
+    - A function template can be instantiated both implicitly and explicitly
       - Explicit: `max<int>(a, b)`
       - Implicit: `max(a, b)`
   - Template structures and classes
@@ -20,7 +20,7 @@
 
 - Default types
   - It is possible to establish a default type, e.g. `template<typename T = float>`
-  - `.tpp` is the extension for template class
+  - `.tpp` is the extension for class template
   - If default constructor is private, it is not possible to explicitly instanciate a class with the default constructor
   - If there is a default value, there's no need to establish a type when instantiating, e.g. `Class<>`
 - Parametric macros (from C)
