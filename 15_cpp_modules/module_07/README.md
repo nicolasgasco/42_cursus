@@ -2,6 +2,10 @@
 
 **Topics covered**:
 
+- Parametric macros (from C)
+  - A solution to functions with the same logic, but flexible enough to accept differnt types (e.g. `max` function that works with `int`, `float`, `double`...)
+  - `#define max(x, y) ( ((x)>=(y)) ? (x) : (y) )`
+  - You can substitute placeholder with anything, even functions
 - Templates
 
   - Function templates
@@ -19,9 +23,10 @@
   - Standard library makes vast use of templates
 
 - Default types
+
   - It is possible to establish a default type, e.g. `template<typename T = float>`
   - `.tpp` is the extension for class template
   - If default constructor is private, it is not possible to explicitly instanciate a class with the default constructor
   - If there is a default value, there's no need to establish a type when instantiating, e.g. `Class<>`
-- Parametric macros (from C)
+
 - Specialization
