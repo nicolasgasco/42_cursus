@@ -1,89 +1,80 @@
 #include <iostream>
-#include "Base.hpp"
+
 #include "A.hpp"
 #include "B.hpp"
+#include "Base.hpp"
 #include "C.hpp"
 
-Base *generate(void)
-{
+#define GREEN "\033[0;32m"
+#define YELLOW "\033[0;33m"
+#define BLUE "\033[0;34m"
+#define NOCOL "\033[0m"
+
+Base *generate(void) {
     Base *result;
 
-    switch (std::rand() % 3)
-    {
-    case (0):
-        std::cout << "New A pointer" << std::endl;
-        result = new A();
-        return result;
-    case (1):
-        std::cout << "New B pointer" << std::endl;
-        result = new B();
-        return result;
-    case (2):
-        std::cout << "New C pointer" << std::endl;
-        result = new C();
-        return result;
-    default:
-        std::cout << "new A pointer" << std::endl;
-        result = new A();
-        return result;
+    switch (std::rand() % 3) {
+        case (0):
+            std::cout << GREEN << "New A pointer" << NOCOL << std::endl;
+            result = new A();
+            return result;
+        case (1):
+            std::cout << YELLOW << "New B pointer" << NOCOL << std::endl;
+            result = new B();
+            return result;
+        case (2):
+            std::cout << BLUE << "New C pointer" << NOCOL << std::endl;
+            result = new C();
+            return result;
+        default:
+            std::cout << GREEN << "new A pointer" << NOCOL << std::endl;
+            result = new A();
+            return result;
     }
 }
 
-void identify(Base *p)
-{
+void identify(Base *p) {
     if (dynamic_cast<A *>(p))
-        std::cout << "Pointer is A (" << p << ")" << std::endl;
+        std::cout << GREEN << "Pointer is A (" << p << ")" << NOCOL << std::endl;
     else if (dynamic_cast<B *>(p))
-        std::cout << "Pointer is B (" << p << ")" << std::endl;
+        std::cout << YELLOW << "Pointer is B (" << p << ")" << NOCOL << std::endl;
     else if (dynamic_cast<C *>(p))
-        std::cout << "Pointer is C (" << p << ")" << std::endl;
+        std::cout << BLUE << "Pointer is C (" << p << ")" << NOCOL << std::endl;
     else
-        std::cout << "Unknown pointer (" << p << ")" << std::endl;
+        std::cout << "Unknown pointer (" << p << ")" << NOCOL << std::endl;
 }
 
-void identify(Base &p)
-{
+void identify(Base &p) {
     // A
-    try
-    {
+    try {
         A &result = dynamic_cast<A &>(p);
-        std::cout << "Pointer is A (" << &result << ")" << std::endl;
+        std::cout << GREEN << "Pointer is A (" << &result << ")" << NOCOL << std::endl;
         return;
-    }
-    catch (...)
-    {
+    } catch (...) {
     }
 
     // B
-    try
-    {
+    try {
         B &result = dynamic_cast<B &>(p);
-        std::cout << "Pointer is B (" << &result << ")" << std::endl;
+        std::cout << YELLOW << "Pointer is B (" << &result << ")" << NOCOL << std::endl;
         return;
-    }
-    catch (...)
-    {
+    } catch (...) {
     }
 
     // C
-    try
-    {
+    try {
         C &result = dynamic_cast<C &>(p);
-        std::cout << "Pointer is C (" << &result << ")" << std::endl;
+        std::cout << BLUE << "Pointer is C (" << &result << ")" << NOCOL << std::endl;
         return;
-    }
-    catch (...)
-    {
+    } catch (...) {
     }
 
     std::cout << "Pointer is unknown" << std::endl;
 }
 
-int main(void)
-{
+int main(void) {
     std::srand(time(NULL));
-    for (int i = 0; i < 10; i++)
-    {
+    for (int i = 0; i < 10; i++) {
         Base *pointer = generate();
         std::cout << std::endl;
 
@@ -93,7 +84,7 @@ int main(void)
         identify(*pointer);
 
         delete pointer;
-        std::cout << "_______________________\n"
+        std::cout << "__________________________________\n"
                   << std::endl;
     }
 
