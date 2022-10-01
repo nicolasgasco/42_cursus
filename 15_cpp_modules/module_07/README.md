@@ -30,3 +30,7 @@
   - If there is a default value, there's no need to establish a type when instantiating, e.g. `Class<>`
 
 - Specialization
+  - Way to optmize a little with partial or full specialization of a template
+  - Instead of declaring a placeholder type, you can say a specific one, e.g. `class Pair< int, U >`
+  - It can be fully specialized: `template<>` + `class Pair<bool, bool>`, so that both parameters have to be of that type (e.g. in a class constructor)
+  - It's a sort of "class overload" based on types, e.g. same class but invoked with int + generic type, two generic types, or two specific types.
