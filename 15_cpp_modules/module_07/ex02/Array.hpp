@@ -9,18 +9,20 @@ template <typename T>
 class Array
 {
 public:
-    Array<T>(unsigned int n)
-    {
-        std::cout << PURPLE << "New array (parameter constructor)" << NOCOL << std::endl;
-        this->arrSize = n;
-        this->values = new T[n];
-    }
-    Array<T>(void)
+    Array<T>(void) : arrSize(0)
     {
         std::cout << PURPLE << "New array (default constructor)" << NOCOL << std::endl;
-        this->arrSize = 0;
         this->values = new T[0];
     }
+
+    Array<T>(unsigned int n) : arrSize(n)
+    {
+        std::cout << PURPLE << "New array (parameter constructor)" << NOCOL << std::endl;
+        this->values = new T[n];
+        for (unsigned int i = 0; i < arrSize; ++i)
+            this->values[i] = 0;
+    }
+
     Array<T>(Array<T> const &src)
     {
         std::cout << PURPLE << "New array (copy constructor)" << NOCOL << std::endl;
@@ -37,9 +39,7 @@ public:
         this->arrSize = src.arrSize;
         this->values = new T[arrSize];
         for (unsigned int i = 0; i < arrSize; i++)
-        {
             this->values[i] = src.values[i];
-        }
         return (*this);
     }
 

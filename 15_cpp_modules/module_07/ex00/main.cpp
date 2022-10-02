@@ -43,6 +43,7 @@ int main(void)
     std::cout << "Max between 100.0009 and 100.0009 is: " << max(c, d) << std::endl;
 
     std::cout << std::endl;
+    std::cout << "MAIN PROVIDED BY 42" << std::endl;
     a = 2;
     b = 3;
     ::swap(a, b);
@@ -55,5 +56,12 @@ int main(void)
     std::cout << "c = " << c1 << ", d = " << d1 << std::endl;
     std::cout << "min( c, d ) = " << ::min(c1, d1) << std::endl;
     std::cout << "max( c, d ) = " << ::max(c1, d1) << std::endl;
+
+    // std::cout << std::endl;
+    // Awesome aa(2), bb(4);
+    // swap(aa, bb);
+    // std::cout << aa << " " << bb << std::endl;
+    // std::cout << max(aa, bb) << std::endl;
+    // std::cout << min(aa, bb) << std::endl;
     return (0);
 }

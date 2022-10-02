@@ -3,15 +3,39 @@
 
 #include "iter.hpp"
 
-void outputToUpper(std::string &str) {
+void outputToUpper(std::string const &str)
+{
     std::cout << "- ";
-    for (unsigned int i = 0; i < str.length(); i++) {
+    for (unsigned int i = 0; i < str.length(); i++)
+    {
         std::cout << static_cast<char>(toupper(str[i]));
     }
     std::cout << std::endl;
 }
 
-int main(void) {
+// class Awesome
+// {
+// public:
+//     Awesome(void) : _n(42) { return; }
+//     int get(void) const { return this->_n; }
+
+// private:
+//     int _n;
+// };
+// std::ostream &operator<<(std::ostream &o, Awesome const &rhs)
+// {
+//     o << rhs.get();
+//     return o;
+// }
+// template <typename T>
+// void print(T const &x)
+// {
+//     std::cout << x << std::endl;
+//     return;
+// }
+
+int main(void)
+{
     std::cout << "STRING ARRAY:" << std::endl;
 
     std::string strArr[] = {"ciao", "hola", "hallo"};
@@ -51,6 +75,12 @@ int main(void) {
     char charArray[] = {'a', 'b', 'c'};
 
     iter(charArray, sizeof(charArray) / sizeof(char), outputArrayValue);
+
+    std::cout << std::endl;
+    // int tab[] = {0, 1, 2, 3, 4}; // <--- I never understood why you can't write int[] tab. Wouldn't that make more sense?
+    // Awesome tab2[5];
+    // iter(tab, 5, print);
+    // iter(tab2, 5, print);
 
     return (0);
 }

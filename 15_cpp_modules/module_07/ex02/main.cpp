@@ -85,7 +85,13 @@ int main(void)
         std::cout << std::endl;
     }
 
+    std::cout << std::endl;
+    std::cout << "Copying Arrays:" << std::endl;
+    Array<int> array3(array2);
+    std::cout << array3 << std::endl;
+
     // PROVIDED MAIN
+    std::cout << std::endl;
     std::cout << "42 PROVIDED MAIN" << std::endl;
 
     Array<int>
