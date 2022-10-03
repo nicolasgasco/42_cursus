@@ -1,52 +1,34 @@
-#pragma once
-#ifndef __STACK_H__
-#define __STACK_H__
+#ifndef __MUTANTSTACK_H__
+#define __MUTANTSTACK_H__
 
 #include <stack>
 #include <iostream>
-#include <iterator>
 
 template <typename T>
 class MutantStack : public std::stack<T>
 {
 public:
-    MutantStack<T>(void)
-    {
-        std::cout << "Mutant stack default constructor" << std::endl;
-    }
+    MutantStack<T>(void);
+    MutantStack<T>(MutantStack<T> const &src);
 
-    ~MutantStack<T>(void)
-    {
-        std::cout << "Mutant stack destructor" << std::endl;
-    }
+    ~MutantStack<T>(void);
 
-    MutantStack<T>(MutantStack<T> const &src)
-    {
-        std::cout << "Mutant stack copy constructor" << std::endl;
-        *this = src;
-    }
-
-    MutantStack &operator=(const MutantStack &src)
-    {
-        if (src.values.size())
-        {
-            // Contineu
-        }
-    }
+    MutantStack<T> &operator=(const MutantStack<T> &src); 
 
     typedef typename MutantStack<T>::container_type::iterator iterator;
 
-    iterator begin(void)
-    {
-        return this->c.begin();
-    }
+    iterator begin(void);
 
-    iterator end(void)
-    {
-        return this->c.end();
-    }
+    iterator end(void);
+
+    using std::stack<T>::empty;
+    using std::stack<T>::pop;
+    using std::stack<T>::push;
+    using std::stack<T>::size;
+    using std::stack<T>::top;
 
 private:
+    using std::stack<T>::c;
 };
 
 #endif
