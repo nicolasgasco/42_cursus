@@ -6,7 +6,14 @@
 #include <iterator>
 #include <vector>
 #include <limits>
+#include <cstdlib>
+#include <numeric>
+#include <algorithm>
 
+void absoluteValue(int &n)
+{
+    n = abs(n);
+}
 class Span
 {
 
@@ -15,8 +22,10 @@ public:
     {
         std::cout << "Span parameter constructor called (" << N << ")" << std::endl;
     }
+
     Span(Span const &src)
     {
+        *this = src;
         std::cout << "Span copy constructor called" << &src << std::endl;
     }
 
@@ -38,29 +47,44 @@ public:
         if (ints.size() == size)
             throw Span::ListAlreadyFull();
         ints.push_back(value);
-        std::cout << value << " was added to the vector" << std::endl;
     }
 
-    unsigned int shortestSpan(void) const
+    unsigned int shortestSpan(void)
     {
-        unsigned int size = ints.size();
-        if (size <= 1)
+        if (this->ints.size() <= 1)
             throw Span::NoSpanToFind();
 
-        // unsigned int result = std::numeric_limits<int>::max();
+        std::vector<int>::const_iterator start = this->ints.begin();
+        std::vector<int>::const_iterator end = this->ints.end();
 
-        // for (int i = 0; i < (static_cast<int>(size) - 1); i++)
-        //     for (int j = i + 1; j < static_cast<int>(size); j++)
-        //     {
-        //         std::list<int>::const_iterator it = ints.begin();
-        //         std::list<int>::const_iterator firstValueIt = std::advance(it, i);
-        //         std::cout
-        //             << "mierda " << *firstValueIt << std::endl;
-        //         // unsigned diff = std::abs(*(std::advance(it, i)) - *(std::advance(it, j)));
-        //         // if (diff < result)
-        //         //     result = diff;
-        //     }
-        return (10);
+        std::vector<int> differences(this->size);
+        std::vector<int>::iterator differencesStart = differences.begin();
+
+        std::adjacent_difference(start, end, differencesStart);
+
+        std::for_each(
+            differences.begin(), differences.end(), absoluteValue);
+
+        return (*(std::min_element(differences.begin(), differences.end())));
+    }
+
+    unsigned int longestSpan(void) const
+    {
+        if (this->ints.size() <= 1)
+            throw Span::NoSpanToFind();
+
+        std::vector<int>::const_iterator start = this->ints.begin();
+        std::vector<int>::const_iterator end = this->ints.end();
+
+        std::vector<int> differences(this->size);
+        std::vector<int>::iterator differencesStart = differences.begin();
+
+        std::adjacent_difference(start, end, differencesStart);
+
+        std::for_each(
+            differences.begin(), differences.end(), absoluteValue);
+
+        return (*(std::max_element(differences.begin(), differences.end())));
     }
 
 private:
