@@ -32,9 +32,9 @@ int main(void)
     {
         easyfind(myList, randInt);
     }
-    catch (std::exception &e)
+    catch (const char *e)
     {
-        std::cout << "Error: " << e.what() << std::endl;
+        std::cout << "Error: " << e << std::endl;
     }
     return (0);
 }
