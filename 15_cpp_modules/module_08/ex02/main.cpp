@@ -85,7 +85,7 @@ int main(void)
     std::cout << std::endl;
 
     std::cout << "TESTING EMPTY:" << std::endl;
-    std::cout << "Stack is empty: " << std::boolalpha << mlist.empty() << std::endl;
+    std::cout << "List is empty: " << std::boolalpha << mlist.empty() << std::endl;
     std::cout << std::endl;
 
     std::cout << "TESTING PUSH:" << std::endl;
@@ -105,7 +105,7 @@ int main(void)
     mlist.push_back(99);
 
     std::cout << std::endl;
-    std::cout << "Stack is empty: " << std::boolalpha << mlist.empty() << std::endl;
+    std::cout << "List is empty: " << std::boolalpha << mlist.empty() << std::endl;
 
     std::cout << std::endl;
     std::cout << "TESTING SIZE:" << std::endl;

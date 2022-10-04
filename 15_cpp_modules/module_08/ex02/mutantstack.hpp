@@ -13,12 +13,10 @@ public:
 
     ~MutantStack<T>(void);
 
-    MutantStack<T> &operator=(const MutantStack<T> &src); 
+    MutantStack<T> &operator=(const MutantStack<T> &src);
 
     typedef typename MutantStack<T>::container_type::iterator iterator;
-
     iterator begin(void);
-
     iterator end(void);
 
     using std::stack<T>::empty;
