@@ -69,13 +69,7 @@ int main(void)
     Span sp4 = Span(2000);
     std::cout << std::endl;
 
-    srand(time(NULL));
-    for (int i = 0; i < 2000; i++)
-    {
-        int randInt = rand() % 5000 + 1;
-        sp4.addNumber(randInt);
-        std::cout << randInt << ", ";
-    }
+    sp4.addRandomNumbers(2000);
     std::cout << std::endl;
 
     std::cout << std::endl;
@@ -84,5 +78,21 @@ int main(void)
 
     std::cout << "Longest span of sp4 is: " << sp4.longestSpan() << std::endl;
     std::cout << std::endl;
+
+    std::cout << "TESTING COPY SPAN:" << std::endl;
+    Span sp5 = Span(sp4);
+    std::cout << std::endl;
+
+    std::cout << "Printing copy:" << std::endl;
+    sp5.outputVector();
+    std::cout << std::endl;
+
+    std::cout << std::endl;
+    std::cout << "Shortest span of sp5 is: " << sp5.shortestSpan() << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "Longest span of sp5 is: " << sp5.longestSpan() << std::endl;
+    std::cout << std::endl;
+
     return (0);
 }
