@@ -5,10 +5,11 @@
 #include <iostream>
 #include <iterator>
 #include <vector>
-#include <limits>
-#include <cstdlib>
 #include <numeric>
 #include <algorithm>
+
+#define PURPLE "\033[0;35m"
+#define NOCOL "\033[0m"
 
 class Span
 {
@@ -35,24 +36,6 @@ private:
     unsigned int size;
 
     Span(void);
-
-    class ListAlreadyFull : public std::exception
-    {
-    public:
-        virtual const char *what() const throw()
-        {
-            return ("List is already full");
-        }
-    };
-
-    class NoSpanToFind : public std::exception
-    {
-    public:
-        virtual const char *what() const throw()
-        {
-            return ("There is no Span to find");
-        }
-    };
 };
 
 std::ostream &operator<<(std::ostream &os, Span const &std);

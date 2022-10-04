@@ -5,7 +5,9 @@
 
 int main(void)
 {
+    std::cout << std::endl;
     std::cout << "TESTING FUNC TO ADD NUMBERS:" << std::endl;
+    std::cout << "New Span with size 5:" << std::endl;
     Span sp = Span(5);
     std::cout << std::endl;
 
@@ -24,13 +26,15 @@ int main(void)
         std::cout << "Add number 12" << std::endl;
         sp.addNumber(12);
     }
-    catch (std::exception &e)
+    catch (const char *e)
     {
-        std::cout << RED << "Error: " << e.what() << NOCOL << std::endl;
+        std::cout << RED << "Error: " << e << NOCOL << std::endl;
     }
+    std::cout << sp << std::endl;
 
     std::cout << std::endl;
     std::cout << "TESTING SHORTEST SPAN:" << std::endl;
+    std::cout << "Creating new Span with size 0:" << std::endl;
     Span sp2 = Span(0);
     std::cout << std::endl;
 
@@ -39,12 +43,13 @@ int main(void)
     {
         sp2.shortestSpan();
     }
-    catch (std::exception &e)
+    catch (const char *e)
     {
-        std::cout << RED << "Error: " << e.what() << NOCOL << std::endl;
+        std::cout << RED << "Error: " << e << NOCOL << std::endl;
     }
     std::cout << std::endl;
 
+    std::cout << "Creating new Span with size 1:" << std::endl;
     Span sp3 = Span(1);
     std::cout << std::endl;
 
@@ -53,12 +58,14 @@ int main(void)
     {
         sp3.shortestSpan();
     }
-    catch (std::exception &e)
+    catch (const char *e)
     {
-        std::cout << RED << "Error: " << e.what() << NOCOL << std::endl;
+        std::cout << RED << "Error: " << e << NOCOL << std::endl;
     }
     std::cout << std::endl;
 
+    std::cout << "Span of vector with 5 values:" << std::endl;
+    std::cout << sp << std::endl;
     std::cout << "Shortest span of sp is: " << sp.shortestSpan() << std::endl;
     std::cout << std::endl;
 
@@ -69,29 +76,62 @@ int main(void)
     Span sp4 = Span(2000);
     std::cout << std::endl;
 
-    sp4.addRandomNumbers(2000);
+    try
+    {
+        sp4.addRandomNumbers(2000);
+    }
+    catch (const char *e)
+    {
+        std::cout << RED << "Error: " << e << NOCOL << std::endl;
+    }
+
+    std::cout << sp4 << std::endl;
+
+    try
+    {
+        std::cout << "Shortest span of sp4 is: " << sp4.shortestSpan() << std::endl;
+    }
+    catch (const char *e)
+    {
+        std::cout << RED << "Error: " << e << NOCOL << std::endl;
+    }
     std::cout << std::endl;
 
-    std::cout << std::endl;
-    std::cout << "Shortest span of sp4 is: " << sp4.shortestSpan() << std::endl;
-    std::cout << std::endl;
-
-    std::cout << "Longest span of sp4 is: " << sp4.longestSpan() << std::endl;
+    try
+    {
+        std::cout << "Longest span of sp4 is: " << sp4.longestSpan() << std::endl;
+    }
+    catch (const char *e)
+    {
+        std::cout << RED << "Error: " << e << NOCOL << std::endl;
+    }
     std::cout << std::endl;
 
     std::cout << "TESTING COPY SPAN:" << std::endl;
     Span sp5 = Span(sp4);
     std::cout << std::endl;
 
-    std::cout << "Printing copy:" << std::endl;
-    sp5.outputVector();
-    std::cout << std::endl;
+    std::cout << sp5 << std::endl;
 
     std::cout << std::endl;
-    std::cout << "Shortest span of sp5 is: " << sp5.shortestSpan() << std::endl;
+    try
+    {
+        std::cout << "Shortest span of sp5 is: " << sp5.shortestSpan() << std::endl;
+    }
+    catch (const char *e)
+    {
+        std::cout << RED << "Error: " << e << NOCOL << std::endl;
+    }
     std::cout << std::endl;
 
-    std::cout << "Longest span of sp5 is: " << sp5.longestSpan() << std::endl;
+    try
+    {
+        std::cout << "Longest span of sp5 is: " << sp5.longestSpan() << std::endl;
+    }
+    catch (const char *e)
+    {
+        std::cout << RED << "Error: " << e << NOCOL << std::endl;
+    }
     std::cout << std::endl;
 
     return (0);
