@@ -12,17 +12,12 @@ int main(void)
     std::list<int> myList;
     srand(time(0));
     for (int i = 0; i < 10; ++i)
-    {
         myList.push_back(rand() % 10 + 1);
-    }
 
     std::list<int>::iterator it = myList.begin();
     std::list<int>::iterator ite = myList.end();
-
     for (; it != ite; ++it)
-    {
         std::cout << *it << ", ";
-    }
     std::cout << std::endl;
 
     std::cout << std::endl;
