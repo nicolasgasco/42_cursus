@@ -22,8 +22,8 @@ private:
     std::string title;
 
     Warlock(void);
-    Warlock(Warlock &src);
-    Warlock &operator=(Warlock &src);
+    Warlock(Warlock const &src);
+    Warlock &operator=(Warlock const &src);
 };
 
 #endif
