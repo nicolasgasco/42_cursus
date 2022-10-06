@@ -27,7 +27,7 @@ std::string const &ASpell::getEffects(void) const
     return this->effects;
 }
 
-void ASpell::launch(ATarget const &target)
+void ASpell::launch(ATarget const &target) const
 {
     target.getHitBySpell(const_cast<ASpell const &>(*this));
 }

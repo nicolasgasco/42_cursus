@@ -21,7 +21,7 @@ public:
 
     virtual ASpell *clone(void) = 0;
 
-    void launch(ATarget const &target);
+    void launch(ATarget const &target) const;
 
 protected:
     std::string const name;

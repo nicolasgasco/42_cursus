@@ -8,7 +8,7 @@ class Fwoosh : public ASpell
 public:
     Fwoosh(void);
     ~Fwoosh(void);
-    Fwoosh *clone(void);
+    virtual Fwoosh *clone(void);
 };
 
 #endif

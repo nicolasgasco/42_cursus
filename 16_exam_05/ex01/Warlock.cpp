@@ -43,7 +43,9 @@ void Warlock::forgetSpell(std::string const &spellType)
     for (unsigned i = 0; i < this->spells.size(); i++)
     {
         if (this->spells[i]->getName() == spellType)
+        {
             this->spells.erase(this->spells.begin() + i);
+        }
     }
 }
 
@@ -52,6 +54,8 @@ void Warlock::launchSpell(std::string const &spellName, ATarget &target) const
     for (unsigned i = 0; i < this->spells.size(); i++)
     {
         if (this->spells[i]->getName() == spellName)
+        {
             this->spells[i]->launch(target);
+        }
     }
 }

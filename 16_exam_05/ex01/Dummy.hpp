@@ -8,6 +8,6 @@ class Dummy : public ATarget
 public:
     Dummy(void);
     ~Dummy(void);
-    Dummy *clone(void);
+    virtual Dummy *clone(void);
 };
 #endif
