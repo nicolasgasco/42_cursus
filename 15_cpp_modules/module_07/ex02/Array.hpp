@@ -19,7 +19,7 @@ public:
     {
         std::cout << PURPLE << "New array (parameter constructor)" << NOCOL << std::endl;
         this->values = new T[n];
-        for (unsigned int i = 0; i < arrSize; ++i)
+        for (unsigned int i = 0; i < this->arrSize; ++i)
             this->values[i] = 0;
     }
 
