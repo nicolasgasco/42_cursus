@@ -45,7 +45,7 @@ public:
 
     T &operator[](int index)
     {
-        if (index < 0 || index > (static_cast<int>(arrSize) - 1))
+        if (index < 0 || index >= (static_cast<int>(arrSize)))
             throw Array<T>::IndexOutOfBound();
         return (this->values[index]);
     }
