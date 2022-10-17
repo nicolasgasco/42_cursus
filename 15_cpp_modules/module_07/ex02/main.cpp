@@ -168,6 +168,46 @@ int main(void)
 
         std::cout << std::endl;
         delete[] mirror;
+
+        std::cout << std::endl;
+        std::cout << YELLOW << "CONST TESTS:" << std::endl;
+
+        Array<int> anotherArray(10);
+        std::cout << "Fill up anotherArray with rand values:" << std::endl;
+        for (int i = 0; i < 10; i++)
+        {
+            anotherArray[i] = rand();
+        }
+        std::cout << anotherArray << std::endl;
+
+        std::cout << "Casting array to const..." << std::endl;
+        Array<int> const constArray = const_cast<Array<int> const &>(anotherArray);
+        std::cout << std::endl;
+
+        std::cout << "Trying to reassign elements of const array with [] (uncomment to see error):" << std::endl;
+        // for (int i = 0; i < 10; i++)
+        // {
+        //     constArray[i] = rand();
+        // }
+        std::cout << std::endl;
+
+        std::cout << "Accessing elements of const array with []:" << std::endl;
+        for (int i = 0; i < 10; i++)
+        {
+            std::cout << "- " << constArray[i] << std::endl;
+        }
+
+        std::cout << std::endl;
+        std::cout << YELLOW << "COMPLEX TYPES TEST" << NOCOL << std::endl;
+        std::cout << std::endl;
+
+        Array<Awesome> complex(10);
+        std::cout << std::endl;
+
+        std::cout << "Filling in complex array of Awesome with sequential numbers..." << std::endl;
+        for (unsigned int i = 0; i < 10; i++)
+            complex[i] = i + 1;
+        std::cout << complex << std::endl;
     }
 
     return (0);

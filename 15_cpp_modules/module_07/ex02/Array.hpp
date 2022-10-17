@@ -17,7 +17,7 @@ public:
 
     Array<T>(unsigned int n) : arrSize(n)
     {
-        std::cout << PURPLE << "New array (parameter constructor)" << NOCOL << std::endl;
+        std::cout << PURPLE << "New array (parameter constructor of size " << n << ")" << NOCOL << std::endl;
         this->values = new T[n];
         for (unsigned int i = 0; i < this->arrSize; ++i)
             this->values[i] = 0;
@@ -44,6 +44,13 @@ public:
     }
 
     T &operator[](int index)
+    {
+        if (index < 0 || index >= (static_cast<int>(arrSize)))
+            throw Array<T>::IndexOutOfBound();
+        return (this->values[index]);
+    }
+
+    T const &operator[](int index) const
     {
         if (index < 0 || index >= (static_cast<int>(arrSize)))
             throw Array<T>::IndexOutOfBound();
@@ -87,6 +94,35 @@ std::ostream &operator<<(std::ostream &os, Array<T> const &std)
     std::cout << std::endl;
     std::cout << "--------------------------------------------------------------------------------------------------------" << NOCOL << std::endl;
     return os;
+}
+
+// This is not part of the subject-required code
+// It's there to test code with complex types
+class Awesome
+{
+public:
+    Awesome(void) : _n(0) {}
+    Awesome(int n) : _n(n) {}
+    Awesome &operator=(Awesome &a)
+    {
+        _n = a._n;
+        return *this;
+    }
+
+    Awesome &operator=(int a)
+    {
+        _n = a;
+        return *this;
+    }
+    int get_n() const { return _n; }
+
+private:
+    int _n;
+};
+std::ostream &operator<<(std::ostream &o, const Awesome &a)
+{
+    o << a.get_n();
+    return o;
 }
 
 #endif
