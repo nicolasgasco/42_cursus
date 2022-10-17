@@ -12,7 +12,7 @@ Don't copy from this repository. I'm not that good and it's against the spirit o
 ## Projects
 |Name|Language|End date|Description|
 |----|--------|----|-----------|
-|**[inception](https://github.com/nicolasgasco/42_cursus/tree/master/17_inception)**|Docker|In progress|Set up a small infrastructure composed of different services under specific rules using Docker.|
+|**[inception](https://github.com/nicolasgasco/42_cursus/tree/master/17_inception)**|Docker 🐳|In progress|Set up a small infrastructure composed of different services under specific rules using Docker.|
 |**[exam_05](https://github.com/nicolasgasco/42_cursus/tree/master/16_exam_05)**|C++|In progress|New circle, new exam!|
 |**[cpp_modules](https://github.com/nicolasgasco/42_cursus/tree/master/15_cpp_modules)**|C++|In progress|9 "mini" projects to learn the basics of C++ (98 standard 👴), especially OOP|
 |**exam_04**|C|August 2022|The exercises I did in order to prepare for the 4th rank exam.|
