@@ -43,6 +43,7 @@ int main(void)
     std::cout << "Max between 100.0009 and 100.0009 is: " << max(c, d) << std::endl;
 
     std::cout << std::endl;
+    std::cout << "-----------------------------------------------------\n" << std::endl;
     std::cout << "MAIN PROVIDED BY SUBJECT" << std::endl;
     a = 2;
     b = 3;
@@ -70,6 +71,7 @@ int main(void)
     std::cout << "max( c, d ) = " << ::max(c1, d1) << std::endl;
 
     std::cout << std::endl;
+    std::cout << "-----------------------------------------------------\n" << std::endl;
     std::cout << "TEST WITH COMPLEX TYPES:" << std::endl;
     Awesome aa(2), bb(4);
     std::cout << "aa = " << aa << ", bb = " << bb << std::endl;
