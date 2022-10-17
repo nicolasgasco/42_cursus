@@ -3,13 +3,13 @@
 The projects of the _Common Core_ that I completed while being a student at 42Urduliz campus in Bilbao, Spain.
 
 ---
-**DISCLAIMER FOR FELLOW STUDENTS OF 42!**
+⚠️ **DISCLAIMER FOR FELLOW STUDENTS OF 42!** ⚠️
 
 Don't copy from this repository. I'm not that good and it's against the spirit of 42. Ask your classmates for help. I only created this repository to keep track of my progress.
 
 ---
 
-## Projects
+## Projects from newest to oldest
 |Name|Language|End date|Description|
 |----|--------|----|-----------|
 |**[inception  🐳](https://github.com/nicolasgasco/42_cursus/tree/master/17_inception)**|Docker|In progress|Set up a small infrastructure composed of different services under specific rules using Docker.|
