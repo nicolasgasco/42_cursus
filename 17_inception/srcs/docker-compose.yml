@@ -1,0 +1,10 @@
+services:
+  nginx:
+    build: ./requirements/nginx
+    restart: always
+    ports:
+      - 443
+
+  # wordpress:
+  #   build: ./requirements/wordpress
+  #   restart: always

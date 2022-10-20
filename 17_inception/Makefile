@@ -1,10 +1,16 @@
 NAME = inception
 
+
 NGINX_IMAGE_NAME = nginx-image
 NGINX_PATH = srcs/requirements/nginx/
 
 WORDPRESS_IMAGE_NAME = wordpress-image
 WORDPRESS_PATH = srcs/requirements/wordpress/
+
+DATABASE_VOLUME_NAME = wordpress-database-volume
+WEBSITE_VOLUME_NAME = wordpress-website-volume
+
+VOLUME_HOST_PATH = /home/ngasco/data
 
 ALL_CONTAINERS := $(docker ps -q)
 
@@ -16,8 +22,14 @@ $(NAME):
 	@docker run -dit --name nginx $(NGINX_IMAGE_NAME)
 	@echo "✅ nginx image created"
 
+	@docker volume create $(DATABASE_VOLUME_NAME)
+	@echo "✅ wordpress database volume created"
+
+	@docker volume create $(WEBSITE_VOLUME_NAME)
+	@echo "✅ wordpress website volume created"
+
 	@docker build -t $(WORDPRESS_IMAGE_NAME) $(WORDPRESS_PATH)
-	@docker run -dit --name wordpress $(WORDPRESS_IMAGE_NAME)
+	@docker run -dit --name wordpress -v $(DATABASE_VOLUME_NAME):$(VOLUME_HOST_PATH)/wordpress_database_volume -v $(WEBSITE_VOLUME_NAME):$(VOLUME_HOST_PATH)/wordpress_website_volume $(WORDPRESS_IMAGE_NAME)
 	@echo "✅ wordpress image created"
 
 clean:
