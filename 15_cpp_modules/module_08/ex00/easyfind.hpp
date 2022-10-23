@@ -6,14 +6,11 @@
 template <typename T>
 void easyfind(T container, int value)
 {
-    typename T::iterator startIt = container.begin();
-    typename T::iterator endIt = container.end();
+    typename T::iterator foundIt = std::find(container.begin(), container.end(), value);
 
-    typename T::iterator foundIt = std::find(startIt, endIt, value);
-
-    if (foundIt == endIt)
+    if (foundIt == container.end())
         throw("Index value out of bound");
 
-    std::cout << "Found value " << value << " at index " << std::distance(startIt, foundIt) << std::endl;
+    std::cout << "Found value " << value << " at index " << std::distance(container.begin(), foundIt) << std::endl;
 }
 #endif
