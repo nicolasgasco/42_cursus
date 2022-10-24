@@ -112,12 +112,12 @@ int main(void)
     std::cout << "Size is: " << mlist.size() << std::endl;
 
     std::cout << std::endl;
-    std::cout << "TESTING TOP:" << std::endl;
+    std::cout << "TESTING FRONT:" << std::endl;
     std::cout << "Newest number is: " << mlist.front() << std::endl;
     std::cout << std::endl;
 
     std::cout << "TESTING POP:" << std::endl;
-    mlist.pop_back();
+    mlist.pop_front();
 
     std::cout << "Newest number after pop is: " << mlist.front() << std::endl;
     std::cout << std::endl;
@@ -173,5 +173,28 @@ int main(void)
     std::cout << std::endl;
 
     std::cout << std::endl;
+    std::cout << YELLOW << "MUTANT STACK SWAP FUNCTION TEST:" << NOCOL << std::endl;
+
+    MutantStack<int> foo, bar;
+    foo.push(10);
+    foo.push(20);
+    foo.push(30);
+    bar.push(111);
+    bar.push(222);
+
+    std::cout << std::endl;
+    std::cout << "size of foo: " << foo.size() << std::endl;
+    std::cout << "size of bar: " << bar.size() << std::endl;
+
+    std::cout << std::endl;
+    std::cout << "SWAPPING MUTANTSTACKS:" << std::endl;
+    foo.swap(bar);
+
+    std::cout << std::endl;
+    std::cout << "size of foo: " << foo.size() << std::endl;
+    std::cout << "size of bar: " << bar.size() << std::endl;
+    std::cout << std::endl;
+
+    return 0;
     return (0);
 }

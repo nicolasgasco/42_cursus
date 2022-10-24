@@ -24,6 +24,7 @@ public:
     using std::stack<T>::push;
     using std::stack<T>::size;
     using std::stack<T>::top;
+    using std::stack<T>::swap;
 
 private:
     using std::stack<T>::c;
