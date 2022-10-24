@@ -23,7 +23,9 @@ int main(void)
         sp.addNumber(9);
         std::cout << "Add number 11" << std::endl;
         sp.addNumber(11);
-        std::cout << "Add number 12" << std::endl;
+
+        std::cout << std::endl;
+        std::cout << "Add number 12?" << std::endl;
         sp.addNumber(12);
     }
     catch (const char *e)
@@ -33,12 +35,12 @@ int main(void)
     std::cout << sp << std::endl;
 
     std::cout << std::endl;
-    std::cout << "TESTING SHORTEST SPAN:" << std::endl;
+    std::cout << "TESTING SHORTEST AND LONGEST SPAN:" << std::endl;
     std::cout << "Creating new Span with size 0:" << std::endl;
     Span sp2 = Span(0);
     std::cout << std::endl;
 
-    std::cout << "Trying to find the short span of an empty vector:" << std::endl;
+    std::cout << "Trying to find the shortest span of an empty vector:" << std::endl;
     try
     {
         sp2.shortestSpan();
@@ -49,11 +51,22 @@ int main(void)
     }
     std::cout << std::endl;
 
-    std::cout << "Creating new Span with size 1:" << std::endl;
+    std::cout << "Trying to find the longest span of an empty vector:" << std::endl;
+    try
+    {
+        sp2.longestSpan();
+    }
+    catch (const char *e)
+    {
+        std::cout << RED << "Error: " << e << NOCOL << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout << "Creating new Span of size 1:" << std::endl;
     Span sp3 = Span(1);
     std::cout << std::endl;
 
-    std::cout << "Trying to find the short span of a vector with 1 element:" << std::endl;
+    std::cout << "Trying to find the shortest span of a vector with 1 element:" << std::endl;
     try
     {
         sp3.shortestSpan();
@@ -64,7 +77,18 @@ int main(void)
     }
     std::cout << std::endl;
 
-    std::cout << "Span of vector with 5 values:" << std::endl;
+    std::cout << "Trying to find the longest span of a vector with 1 element:" << std::endl;
+    try
+    {
+        sp3.longestSpan();
+    }
+    catch (const char *e)
+    {
+        std::cout << RED << "Error: " << e << NOCOL << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout << "SPAN VECTOR WITH 5 VALUES:" << std::endl;
     std::cout << sp << std::endl;
     std::cout << "Shortest span of sp is: " << sp.shortestSpan() << std::endl;
     std::cout << std::endl;
@@ -72,7 +96,7 @@ int main(void)
     std::cout << "Longest span of sp is: " << sp.longestSpan() << std::endl;
     std::cout << std::endl;
 
-    std::cout << "SPAN WITH 2000 INTS:" << std::endl;
+    std::cout << "SPAN OF SIZE 2000:" << std::endl;
     Span sp4 = Span(2000);
     std::cout << std::endl;
 
