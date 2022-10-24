@@ -78,7 +78,7 @@ int main(void)
 
     try
     {
-        sp4.addRandomNumbers(2000);
+        sp4.addRandomNumbers();
     }
     catch (const char *e)
     {

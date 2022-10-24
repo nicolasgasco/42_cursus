@@ -27,7 +27,7 @@ public:
     unsigned int shortestSpan(void);
     unsigned int longestSpan(void) const;
 
-    void addRandomNumbers(unsigned int quantity);
+    void addRandomNumbers(void);
 
     void outputVector(void) const;
 

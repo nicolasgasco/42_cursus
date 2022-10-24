@@ -1,13 +1,9 @@
 #include "span.hpp"
 
-void absoluteValue(int &n)
-{
-    n = abs(n);
-}
-
 Span::Span(unsigned int N) : size(N)
 {
     std::cout << PURPLE << "Span parameter constructor called (" << N << ")" << NOCOL << std::endl;
+    this->ints.reserve(N);
 }
 
 Span::Span(Span const &src) : size(src.size)
@@ -39,8 +35,14 @@ void Span::addNumber(int value)
     ints.push_back(value);
 }
 
+void absoluteValue(int &n)
+{
+    n = abs(n);
+}
+
 unsigned int Span::shortestSpan(void)
 {
+
     if (this->ints.size() <= 1)
         throw("There is no Span to find");
 
@@ -55,7 +57,9 @@ unsigned int Span::shortestSpan(void)
     std::for_each(
         differences.begin(), differences.end(), absoluteValue);
 
-    return (*(std::min_element(differences.begin(), differences.end())));
+    int minValue = *(std::min_element(differences.begin(), differences.end()));
+
+    return (minValue);
 }
 
 unsigned int Span::longestSpan(void) const
@@ -74,18 +78,25 @@ unsigned int Span::longestSpan(void) const
     std::for_each(
         differences.begin(), differences.end(), absoluteValue);
 
-    return (*(std::max_element(differences.begin(), differences.end())));
+    int maxValue = *(std::max_element(differences.begin(), differences.end()));
+    return (maxValue);
 }
 
-void Span::addRandomNumbers(unsigned int quantity)
+int generateRandInt(void)
 {
-    std::cout << PURPLE << "Adding " << quantity << " numbers in bulk" << NOCOL << std::endl;
+    return (rand() % 5000 + 1);
+}
+
+void Span::addRandomNumbers(void)
+{
+    std::cout << PURPLE << "Filling up vector with random numbers" << NOCOL << std::endl;
+
     srand(time(NULL));
-    for (unsigned int i = 0; i < quantity; i++)
-    {
-        int randInt = rand() % 5000 + 1;
-        this->addNumber(randInt);
-    }
+
+    std::vector<int> temp(this->size);
+    std::generate(temp.begin(), temp.end(), generateRandInt);
+
+    this->ints = temp;
 }
 
 Span::Span(void) : size(0)
