@@ -1,4 +1,4 @@
 FROM alpine:3.14
-RUN apk add nginx
-COPY ./conf/conf.default /etc/nginx/conf.d/
-RUN nginx -c /etc/nginx/conf.d/conf.default
+RUN apk update && apk add nginx && apk add php-fpm 
+COPY ./conf/default.conf /etc/nginx/conf.d/
+RUN nginx -c /etc/nginx/conf.d/default.conf

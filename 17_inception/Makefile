@@ -18,30 +18,37 @@ all: $(NAME)
 
 $(NAME):
 	@echo "Making inception..."
-	@docker build -t $(NGINX_IMAGE_NAME) $(NGINX_PATH)
-	@docker run -dit --name nginx $(NGINX_IMAGE_NAME)
-	@echo "✅ nginx image created"
+	@docker compose up -d
 
-	@docker volume create $(DATABASE_VOLUME_NAME)
-	@echo "✅ wordpress database volume created"
+# # NGINX
+# @docker build -t $(NGINX_IMAGE_NAME) $(NGINX_PATH)
+# @docker run -dit --name nginx $(NGINX_IMAGE_NAME)
+# @echo "✅ nginx image created"
 
-	@docker volume create $(WEBSITE_VOLUME_NAME)
-	@echo "✅ wordpress website volume created"
+# # DATABASE VOLUME
+# @docker volume create $(DATABASE_VOLUME_NAME)
+# @echo "✅ wordpress database volume created"
 
-	@docker build -t $(WORDPRESS_IMAGE_NAME) $(WORDPRESS_PATH)
-	@docker run -dit --name wordpress -v $(DATABASE_VOLUME_NAME):$(VOLUME_HOST_PATH)/wordpress_database_volume -v $(WEBSITE_VOLUME_NAME):$(VOLUME_HOST_PATH)/wordpress_website_volume $(WORDPRESS_IMAGE_NAME)
-	@echo "✅ wordpress image created"
+# # WORDPRESS WEBSITE VOLUME
+# @docker volume create $(WEBSITE_VOLUME_NAME)
+# @echo "✅ wordpress website volume created"
+
+# # WORDPRESS
+# @docker build -t $(WORDPRESS_IMAGE_NAME) $(WORDPRESS_PATH)
+# @docker run -dit --name wordpress -v $(DATABASE_VOLUME_NAME):$(VOLUME_HOST_PATH)/wordpress_database_volume -v $(WEBSITE_VOLUME_NAME):$(VOLUME_HOST_PATH)/wordpress_website_volume $(WORDPRESS_IMAGE_NAME)
+# @echo "✅ wordpress image created"
 
 clean:
-	@docker kill nginx
-	@docker rm nginx
-	@docker image rm $(NGINX_IMAGE_NAME)
-	@echo "🧹 Deleted nginx"
+	@docker compose down
+# @docker kill nginx
+# @docker rm nginx
+# @docker image rm $(NGINX_IMAGE_NAME)
+# @echo "🧹 Deleted nginx"
 
-	@docker kill wordpress
-	@docker rm wordpress
-	@docker image rm $(WORDPRESS_IMAGE_NAME)
-	@echo "🧹 Deleted wordpress"
+# @docker kill wordpress
+# @docker rm wordpress
+# @docker image rm $(WORDPRESS_IMAGE_NAME)
+# @echo "🧹 Deleted wordpress"
 
 fclean: clean
 
