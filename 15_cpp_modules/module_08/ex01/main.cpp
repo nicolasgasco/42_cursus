@@ -96,8 +96,8 @@ int main(void)
     std::cout << "Longest span of sp is: " << sp.longestSpan() << std::endl;
     std::cout << std::endl;
 
-    std::cout << "SPAN OF SIZE 2000:" << std::endl;
-    Span sp4 = Span(2000);
+    std::cout << "SPAN OF SIZE 10000:" << std::endl;
+    Span sp4 = Span(10000);
     std::cout << std::endl;
 
     try
