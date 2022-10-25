@@ -1,0 +1,1 @@
+clang++ -Wall -Wextra -Werror *.cpp -o 02 && ./02

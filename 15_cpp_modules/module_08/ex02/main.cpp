@@ -66,92 +66,92 @@ int main(void)
         std::cout << *it << ", ";
         ++it;
     }
+    --it;
     std::cout << std::endl;
 
     std::cout << std::endl;
     std::cout << "Printing stack using iterators from end to begin: " << std::endl;
-    --it;
     while (it != mstack.begin())
     {
         std::cout << *it << ", ";
         --it;
     }
-    std::cout << *it << ", ";
+    std::cout << *it << std::endl;
     std::cout << std::endl;
 
-    std::cout << std::endl;
-    std::cout << YELLOW << "NOW THE SAME BUT WITH LIST:" << NOCOL << std::endl;
-    std::list<int> mlist;
-    std::cout << std::endl;
+    // std::cout << std::endl;
+    // std::cout << YELLOW << "NOW THE SAME BUT WITH LIST:" << NOCOL << std::endl;
+    // std::list<int> mlist;
+    // std::cout << std::endl;
 
-    std::cout << "TESTING EMPTY:" << std::endl;
-    std::cout << "List is empty: " << std::boolalpha << mlist.empty() << std::endl;
-    std::cout << std::endl;
+    // std::cout << "TESTING EMPTY:" << std::endl;
+    // std::cout << "List is empty: " << std::boolalpha << mlist.empty() << std::endl;
+    // std::cout << std::endl;
 
-    std::cout << "TESTING PUSH:" << std::endl;
-    std::cout << "Pushing 5" << std::endl;
-    mlist.push_back(5);
-    std::cout << "Pushing 17" << std::endl;
-    mlist.push_back(17);
-    std::cout << "Pushing 211" << std::endl;
-    mlist.push_back(211);
-    std::cout << "Pushing 9234" << std::endl;
-    mlist.push_back(9234);
-    std::cout << "Pushing 57" << std::endl;
-    mlist.push_back(57);
-    std::cout << "Pushing 0" << std::endl;
-    mlist.push_back(0);
-    std::cout << "Pushing 99" << std::endl;
-    mlist.push_back(99);
+    // std::cout << "TESTING PUSH:" << std::endl;
+    // std::cout << "Pushing 5" << std::endl;
+    // mlist.push_back(5);
+    // std::cout << "Pushing 17" << std::endl;
+    // mlist.push_back(17);
+    // std::cout << "Pushing 211" << std::endl;
+    // mlist.push_back(211);
+    // std::cout << "Pushing 9234" << std::endl;
+    // mlist.push_back(9234);
+    // std::cout << "Pushing 57" << std::endl;
+    // mlist.push_back(57);
+    // std::cout << "Pushing 0" << std::endl;
+    // mlist.push_back(0);
+    // std::cout << "Pushing 99" << std::endl;
+    // mlist.push_back(99);
 
-    std::cout << std::endl;
-    std::cout << "List is empty: " << std::boolalpha << mlist.empty() << std::endl;
+    // std::cout << std::endl;
+    // std::cout << "List is empty: " << std::boolalpha << mlist.empty() << std::endl;
 
-    std::cout << std::endl;
-    std::cout << "TESTING SIZE:" << std::endl;
-    std::cout << "Size is: " << mlist.size() << std::endl;
+    // std::cout << std::endl;
+    // std::cout << "TESTING SIZE:" << std::endl;
+    // std::cout << "Size is: " << mlist.size() << std::endl;
 
-    std::cout << std::endl;
-    std::cout << "TESTING FRONT:" << std::endl;
-    std::cout << "Newest number is: " << mlist.front() << std::endl;
-    std::cout << std::endl;
+    // std::cout << std::endl;
+    // std::cout << "TESTING FRONT:" << std::endl;
+    // std::cout << "Newest number is: " << mlist.front() << std::endl;
+    // std::cout << std::endl;
 
-    std::cout << "TESTING POP:" << std::endl;
-    mlist.pop_front();
+    // std::cout << "TESTING POP:" << std::endl;
+    // mlist.pop_front();
 
-    std::cout << "Newest number after pop is: " << mlist.front() << std::endl;
-    std::cout << std::endl;
+    // std::cout << "Newest number after pop is: " << mlist.front() << std::endl;
+    // std::cout << std::endl;
 
-    std::cout << "Size after pop is: " << mlist.size() << std::endl;
-    std::cout << std::endl;
+    // std::cout << "Size after pop is: " << mlist.size() << std::endl;
+    // std::cout << std::endl;
 
-    std::cout << "TESTING INTERATORS:" << std::endl;
-    std::list<int>::iterator itl = mlist.begin();
-    std::cout << "Value of begin iterator is: " << *itl << std::endl;
-    std::list<int>::iterator itel = mlist.end();
-    std::cout << "Value of end iterator is: " << *ite << std::endl;
+    // std::cout << "TESTING INTERATORS:" << std::endl;
+    // std::list<int>::iterator itl = mlist.begin();
+    // std::cout << "Value of begin iterator is: " << *itl << std::endl;
+    // std::list<int>::iterator itel = mlist.end();
+    // std::cout << "Value of end iterator is: " << *ite << std::endl;
 
-    std::cout << std::endl;
-    std::cout << "Printing stack using iterators from begin to end: " << std::endl;
-    while (itl != itel)
-    {
-        std::cout << *itl << ", ";
-        ++itl;
-    }
-    std::cout << std::endl;
+    // std::cout << std::endl;
+    // std::cout << "Printing stack using iterators from begin to end: " << std::endl;
+    // while (itl != itel)
+    // {
+    //     std::cout << *itl << ", ";
+    //     ++itl;
+    // }
+    // std::cout << std::endl;
 
-    std::cout << std::endl;
-    std::cout << "Printing stack using iterators from end to begin: " << std::endl;
-    --itl;
-    while (itl != mlist.begin())
-    {
-        std::cout << *itl << ", ";
-        --itl;
-    }
-    std::cout << *itl << ", ";
-    std::cout << std::endl;
+    // std::cout << std::endl;
+    // std::cout << "Printing stack using iterators from end to begin: " << std::endl;
+    // --itl;
+    // while (itl != mlist.begin())
+    // {
+    //     std::cout << *itl << ", ";
+    //     --itl;
+    // }
+    // std::cout << *itl << ", ";
+    // std::cout << std::endl;
 
-    std::cout << std::endl;
+    // std::cout << std::endl;
 
     std::cout << YELLOW << "MUTANT STACK COPY CONSTRUCTOR TEST:" << NOCOL << std::endl;
     MutantStack<int> copy(mstack);
