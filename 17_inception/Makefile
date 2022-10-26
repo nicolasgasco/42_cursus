@@ -18,7 +18,7 @@ all: $(NAME)
 
 $(NAME):
 	@echo "Making inception..."
-	@docker compose up -d
+	@docker compose -f srcs/docker-compose.yml up -d
 
 # # NGINX
 # @docker build -t $(NGINX_IMAGE_NAME) $(NGINX_PATH)
@@ -39,7 +39,7 @@ $(NAME):
 # @echo "✅ wordpress image created"
 
 clean:
-	@docker compose down
+	@docker compose -f srcs/docker-compose.yml down
 # @docker kill nginx
 # @docker rm nginx
 # @docker image rm $(NGINX_IMAGE_NAME)

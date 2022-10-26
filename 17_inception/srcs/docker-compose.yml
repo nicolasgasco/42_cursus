@@ -1,0 +1,32 @@
+version: '1'
+name: inception
+services:
+  nginx:
+    build:
+      context: requirements/nginx
+    container_name: nginx
+    restart: always
+    tty: true
+    ports:
+      - "43"
+    #   networks:
+    #     - private
+    #   wordpress-fpm:
+    #     build:
+    #       context: srcs/requirements/wordpress
+    #     tty: true
+    #     depends_on:
+    #       ['db']
+    #     networks:
+    #       - private
+    #     restart: always
+    # ports: ['8000:80']
+    # networks:
+    #   private:
+    # volumes:
+    #   wordpress-website-volume:
+    #   wordpress-database-volume:
+    # secrets:
+    #   db-password:
+    #     file: srcs/requirements/mariadb/conf/password.txt
+
