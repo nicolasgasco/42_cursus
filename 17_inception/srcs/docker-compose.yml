@@ -7,8 +7,7 @@ services:
     restart: always
     tty: true
     ports:
-      - "8000:43"
-    depends_on: [ 'wordpress' ]
+      - 80:80
     #   networks:
     #     - private
   wordpress:
@@ -16,15 +15,29 @@ services:
       context: requirements/wordpress
     container_name: wordpress
     tty: true
+    depends_on: [ 'mysql' ]
     #     networks:
     #       - private
     #     restart: always
     # ports: ['8000:80']
     # networks:
     #   private:
-volumes:
-  wordpress-website-volume:
-  wordpress-database-volume:
+    volumes:
+      - ../tools/website-files:/wordpress-files
+  mysql:
+    build:
+      context: requirements/mariadb
+    container_name: mariadb
+    tty: true
+    environment:
+      MYSQL_DATABASE: wp
+    env_file:
+      - .env
+    volumes:
+      - ./tools:/etc/
+    # volumes:
+    #   wordpress-website-volume:
+    #   wordpress-database-volume:
     # secrets:
     #   db-password:
     #     file: srcs/requirements/mariadb/conf/password.txt
