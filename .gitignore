@@ -4,7 +4,6 @@ a.out
 .dist/
 libft-unit-test
 libft/libft.so
-.*
 *.gch
 .gitignore
 server
