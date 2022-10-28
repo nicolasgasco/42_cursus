@@ -1,3 +1,4 @@
+version: "3.9"
 name: inception
 services:
   nginx:
@@ -8,37 +9,32 @@ services:
     tty: true
     ports:
       - 80:80
-    #   networks:
-    #     - private
+    volumes:
+      - ./requirements/tools/website-files:/var/www/html
   wordpress:
     build:
       context: requirements/wordpress
     container_name: wordpress
     tty: true
+    restart: always
     depends_on: [ 'mysql' ]
-    #     networks:
-    #       - private
-    #     restart: always
-    # ports: ['8000:80']
-    # networks:
-    #   private:
     volumes:
-      - ../tools/website-files:/wordpress-files
+      - ./requirements/tools/website-files:/var/www/html/
   mysql:
     build:
       context: requirements/mariadb
     container_name: mariadb
     tty: true
+    restart: always
     environment:
       MYSQL_DATABASE: wp
     env_file:
       - .env
-    volumes:
-      - ./tools:/etc/
-    # volumes:
-    #   wordpress-website-volume:
-    #   wordpress-database-volume:
-    # secrets:
-    #   db-password:
-    #     file: srcs/requirements/mariadb/conf/password.txt
+      # - ./tools:/etc/
+      # volumes:
+      #   wordpress-website-volume:
+      #   wordpress-database-volume:
+      # secrets:
+      #   db-password:
+      #     file: srcs/requirements/mariadb/conf/password.txt
 
