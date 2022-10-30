@@ -3,38 +3,51 @@ name: inception
 services:
   nginx:
     build:
-      context: requirements/nginx
+      dockerfile: ./nginx/Dockerfile
+      context: requirements/
     container_name: nginx
     restart: always
     tty: true
+    depends_on:
+      - wordpress
     ports:
-      - 80:80
-    volumes:
-      - ./requirements/tools/website-files:/var/www/html
+      - "80:80"
+      - "443:443"
+    networks:
+      - frontend
   wordpress:
     build:
       context: requirements/wordpress
     container_name: wordpress
     tty: true
     restart: always
-    depends_on: [ 'mysql' ]
+    depends_on:
+      - mariadb
+    ports:
+      - "9000:9000"
     volumes:
-      - ./requirements/tools/website-files:/var/www/html/
-  mysql:
+      - ./requirements/tools/website-files:/var/www/html
+    networks:
+      - frontend
+      - backend
+  mariadb:
     build:
       context: requirements/mariadb
     container_name: mariadb
     tty: true
     restart: always
+    volumes:
+      - ./requirements/tools/db:/var/lib/mysql
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_DATABASE: wp
     env_file:
       - .env
-      # - ./tools:/etc/
-      # volumes:
-      #   wordpress-website-volume:
-      #   wordpress-database-volume:
-      # secrets:
-      #   db-password:
-      #     file: srcs/requirements/mariadb/conf/password.txt
+    networks:
+      - backend
+networks:
+  frontend:
+  backend:
+
 
