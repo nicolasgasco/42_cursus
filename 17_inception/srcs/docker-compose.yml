@@ -5,50 +5,57 @@ services:
     build:
       dockerfile: ./nginx/Dockerfile
       context: requirements/
-    image: nginx:stable-alpine
     container_name: nginx
     restart: always
-    # depends_on:
-    #   - wordpress
+    depends_on:
+      - wordpress
     ports:
-      - "80:80"
-    networks:
-      - frontend
+      - 80:80
+    # networks:
+    #   - frontend
     volumes:
-      - ./requirements/nginx/conf/index.html:/usr/share/nginx/html/index.html
-    # wordpress:
-    #   build:
-    #     context: requirements/wordpress
-    #   container_name: wordpress
-    #   tty: true
-    #   restart: always
-    #   depends_on:
-    #     - mariadb
-    #   ports:
-    #     - "9000:9000"
-    #   volumes:
-    #     - ./requirements/tools/website-files:/var/www/html
+      - ./requirements/nginx/conf/default.conf:/etc/nginx/conf.d/default.conf
+      - ./requirements/tools/website-files:/var/www/html
+  wordpress:
+    build:
+      context: requirements/wordpress
+    restart: always
+    container_name: wordpress
+    tty: true
+    depends_on:
+      - mariadb
+    ports:
+      - 9000:9000
+    volumes:
+      - ./requirements/tools/website-files:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: mariadb:3306
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: secret
     # networks:
     #   - frontend
     #   - backend
-    # mariadb:
-    #   build:
-    #     context: requirements/mariadb
-    #   container_name: mariadb
-    #   tty: true
-    #   restart: always
-    #   volumes:
-    #     - ./requirements/tools/db:/var/lib/mysql
-    #   ports:
-    #     - "3306:3306"
-    #   environment:
-    #     MYSQL_DATABASE: wp
-    #   env_file:
-    #     - .env
+  mariadb:
+    # build:
+    #   context: requirements/mariadb
+    image: mysql:latest
+    container_name: mariadb
+    restart: always
+    volumes:
+      - ./requirements/tools/db:/var/lib/mysql
+    # ports:
+    #   - "3306:3306"
+    environment:
+      MYSQL_DATABASE: wp
+      MYSQL_USER: wp
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    # env_file:
+    #   - .env
     # networks:
     #   - backend
-networks:
-  frontend:
-  backend:
+    # networks:
+    #   frontend:
+    #   backend:
 
 
