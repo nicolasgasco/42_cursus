@@ -1,4 +1,11 @@
-FROM alpine:3.14
-RUN apk update && apk add nginx && apk add php-fpm
-ADD ./conf/default.conf ./etc/nginx/conf.d/default.conf
-# ADD ./tools/certs /etc/nginx/certs/self-signed
+FROM alpine:3.13
+
+RUN	apk update \
+    && apk upgrade \
+    && apk add --no-cache \
+    nginx
+
+RUN mkdir -p /run/nginx
+COPY ./nginx/conf/default.conf /etc/nginx/conf.d/default.conf
+
+CMD ["nginx", "-g", "daemon off;"]
