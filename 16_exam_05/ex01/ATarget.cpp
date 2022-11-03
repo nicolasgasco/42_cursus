@@ -1,7 +1,10 @@
 #include "ATarget.hpp"
+#include "ASpell.hpp"
 
 ATarget::ATarget(void){};
+
 ATarget::ATarget(std::string const &type) : type(type) {}
+
 ATarget::ATarget(ATarget const &src) : type(src.type)
 {
     *this = src;
@@ -11,10 +14,7 @@ ATarget::~ATarget(void) {}
 
 ATarget const &ATarget::operator=(ATarget const &src)
 {
-    if (src.type.length())
-    {
-        // Continue
-    }
+    this->type = src.type;
     return *this;
 }
 

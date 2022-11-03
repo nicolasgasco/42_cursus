@@ -2,10 +2,11 @@
 #define WARLOCK_HPP
 
 #include <iostream>
-#include <vector>
 
 #include "ASpell.hpp"
 #include "ATarget.hpp"
+
+#include <list>
 
 class Warlock
 {
@@ -22,13 +23,14 @@ public:
     void introduce(void) const;
 
     void learnSpell(ASpell *spell);
-    void forgetSpell(std::string const &spellType);
-    void launchSpell(std::string const &spellName, ATarget &target) const;
+    void forgetSpell(std::string const spellName);
+    void launchSpell(std::string const spellName, ATarget &target);
 
 private:
     std::string name;
     std::string title;
-    std::vector<ASpell *> spells;
+
+    std::list<ASpell *> spells;
 
     Warlock(void);
     Warlock(Warlock const &src);
