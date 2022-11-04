@@ -5,8 +5,7 @@
 
 #include "ASpell.hpp"
 #include "ATarget.hpp"
-
-#include <list>
+#include "SpellBook.hpp"
 
 class Warlock
 {
@@ -30,7 +29,7 @@ private:
     std::string name;
     std::string title;
 
-    std::list<ASpell *> spells;
+    SpellBook *book;
 
     Warlock(void);
     Warlock(Warlock const &src);

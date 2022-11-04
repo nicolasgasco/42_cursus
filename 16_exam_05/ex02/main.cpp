@@ -4,6 +4,7 @@
 #include "BrickWall.hpp"
 #include "Polymorph.hpp"
 #include "Fireball.hpp"
+#include "TargetGenerator.hpp"
 
 int main(void)
 {
@@ -12,18 +13,18 @@ int main(void)
     BrickWall model1;
 
     Polymorph *polymorph = new Polymorph();
-    // TargetGenerator tarGen;
+    TargetGenerator tarGen;
 
-    // tarGen.learnTargetType(&model1);
+    tarGen.learnTargetType(&model1);
     richard.learnSpell(polymorph);
 
     Fireball *fireball = new Fireball();
 
     richard.learnSpell(fireball);
 
-    // ATarget *wall = tarGen.createTarget("Inconspicuous Red-brick Wall");
+    ATarget *wall = tarGen.createTarget("Inconspicuous Red-brick Wall");
 
-    // richard.introduce();
-    // richard.launchSpell("Polymorph", *wall);
-    // richard.launchSpell("Fireball", *wall);
+    richard.introduce();
+    richard.launchSpell("Polymorph", *wall);
+    richard.launchSpell("Fireball", *wall);
 }

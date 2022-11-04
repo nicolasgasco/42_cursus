@@ -1,28 +1,24 @@
-#ifndef SPELL_HPP
-#define SPELL_HPP
+#ifndef SPELLBOOK_HPP
+#define SPELLBOOK_HPP
 
 #include <iostream>
 
-class ATarget;
+#include <list>
+
+class ASpell;
 
 class SpellBook
 {
 public:
-    SpellBook(std::string const &name, std::string const &effects);
+    SpellBook(void);
     virtual ~SpellBook(void);
-
-    std::string const &getName(void) const;
-    std::string const &getEffects(void) const;
-
-    virtual SpellBook *clone(void) const = 0;
-
-    void launch(ATarget const &target) const;
+    void learnSpell(ASpell *);
+    void forgetSpell(std::string const &);
+    ASpell *createSpell(std::string const &);
 
 protected:
-    std::string name;
-    std::string effects;
+    std::list<ASpell *> spells;
 
-    SpellBook(void);
     SpellBook(SpellBook const &src);
     SpellBook const &operator=(SpellBook const &src);
 };
