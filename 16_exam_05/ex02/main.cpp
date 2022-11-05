@@ -27,4 +27,9 @@ int main(void)
     richard.introduce();
     richard.launchSpell("Polymorph", *wall);
     richard.launchSpell("Fireball", *wall);
+
+    richard.forgetSpell("Polymorph");
+    richard.forgetSpell("Fireball");
+
+    // system("leaks a.out");
 }

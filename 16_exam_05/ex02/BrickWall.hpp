@@ -10,7 +10,7 @@ class BrickWall : public ATarget
 public:
     BrickWall(void);
 
-    ATarget *clone(void) const;
+    virtual ATarget *clone(void) const;
 
     BrickWall(BrickWall const &src);
     BrickWall const &operator=(BrickWall const &src);

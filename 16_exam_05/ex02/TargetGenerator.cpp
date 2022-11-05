@@ -5,11 +5,31 @@
 
 TargetGenerator::TargetGenerator(void) {}
 
-TargetGenerator::~TargetGenerator(void) {}
+TargetGenerator::~TargetGenerator(void)
+{
+    std::list<ATarget *>::iterator start = this->targets.begin();
+    std::list<ATarget *>::iterator end = this->targets.end();
+    for (; start != end; ++start)
+        delete *start;
+    this->targets.clear();
+}
 
 void TargetGenerator::learnTargetType(ATarget *target)
 {
-    this->targets.push_back(target);
+    this->targets.push_back(target->clone());
+
+    std::list<ATarget *>::iterator start = this->targets.begin();
+    std::list<ATarget *>::iterator end = this->targets.end();
+    for (; start != end; ++start)
+    {
+        if ((*start)->getType() == target->getType())
+        {
+            std::cout << "Target type already learnt" << std::endl;
+            return;
+        }
+    }
+    this->targets.push_back(target->clone());
+    std::cout << "Learnt target type " << target->getType() << std::endl;
 }
 
 void TargetGenerator::forgetTargetType(std::string const &targetType)
@@ -20,19 +40,22 @@ void TargetGenerator::forgetTargetType(std::string const &targetType)
     {
         if ((*start)->getType() == targetType)
         {
+            std::cout << "Target deleted: " << targetType << std::endl;
+            delete *start;
             this->targets.erase(start);
         }
     }
+    std::cout << "No target to forget" << std::endl;
 }
 
 ATarget *TargetGenerator::createTarget(std::string const &targetType)
 {
-    if (targetType == "Inconspicuous Red-brick Wall")
+    std::list<ATarget *>::iterator start = this->targets.begin();
+    std::list<ATarget *>::iterator end = this->targets.end();
+    for (; start != end; ++start)
     {
-        return (new BrickWall());
+        if ((*start)->getType() == targetType)
+            break;
     }
-    else
-    {
-        return (new Dummy());
-    }
+    return (*start);
 }

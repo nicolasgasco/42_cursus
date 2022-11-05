@@ -6,31 +6,56 @@
 
 SpellBook::SpellBook(void) {}
 
-SpellBook::~SpellBook(void) {}
-
-
-void SpellBook::learnSpell(ASpell *spell) {
-    this->spells.push_back(this->createSpell(spell->getName()));
+SpellBook::~SpellBook(void)
+{
+    std::list<ASpell *>::iterator start = this->spells.begin();
+    std::list<ASpell *>::iterator end = this->spells.end();
+    for (; start != end; ++start)
+        delete *start;
+    this->spells.clear();
 }
 
-void SpellBook::forgetSpell(std::string const &spellName) {
+void SpellBook::learnSpell(ASpell *spell)
+{
+    std::list<ASpell *>::iterator start = this->spells.begin();
+    std::list<ASpell *>::iterator end = this->spells.end();
+    for (; start != end; ++start)
+    {
+        if ((*start)->getName() == spell->getName())
+        {
+            std::cout << "Spell already learnt" << std::endl;
+            return;
+        }
+    }
+    this->spells.push_back(spell->clone());
+    std::cout << "Learnt spell " << spell->getName() << std::endl;
+}
+
+void SpellBook::forgetSpell(std::string const &spellName)
+{
     std::list<ASpell *>::iterator start = this->spells.begin();
     std::list<ASpell *>::iterator end = this->spells.end();
     for (; start != end; ++start)
     {
         if ((*start)->getName() == spellName)
         {
+            std::cout << "Spell deleted: " << spellName << std::endl;
+            delete *start;
             this->spells.erase(start);
+            return;
         }
     }
+    std::cout << "No spell to forget" << std::endl;
 }
 
-ASpell *SpellBook::createSpell(std::string const &spellName) {
-    if (spellName == "Fwoosh") {
-        return (new Fwoosh());
-    } else if (spellName == "Fireball") {
-        return (new Fireball());
-    } else {
-        return (new Polymorph());
+ASpell *SpellBook::createSpell(std::string const &spellName)
+{
+    std::list<ASpell *>::iterator start = this->spells.begin();
+    std::list<ASpell *>::iterator end = this->spells.end();
+    for (; start != end; ++start)
+    {
+        if ((*start)->getName() == spellName)
+            break;
     }
+    return (*start);
 }

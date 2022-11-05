@@ -1,5 +1,4 @@
-#ifndef WARLOCK_HPP
-#define WARLOCK_HPP
+#pragma once
 
 #include <iostream>
 
@@ -29,11 +28,9 @@ private:
     std::string name;
     std::string title;
 
-    SpellBook *book;
+    SpellBook book;
 
     Warlock(void);
     Warlock(Warlock const &src);
     Warlock &operator=(Warlock const &src);
 };
-
-#endif

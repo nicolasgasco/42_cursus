@@ -1,5 +1,4 @@
-#ifndef SPELLBOOK_HPP
-#define SPELLBOOK_HPP
+#pragma once
 
 #include <iostream>
 
@@ -12,6 +11,7 @@ class SpellBook
 public:
     SpellBook(void);
     virtual ~SpellBook(void);
+
     void learnSpell(ASpell *);
     void forgetSpell(std::string const &);
     ASpell *createSpell(std::string const &);
@@ -22,5 +22,3 @@ protected:
     SpellBook(SpellBook const &src);
     SpellBook const &operator=(SpellBook const &src);
 };
-
-#endif

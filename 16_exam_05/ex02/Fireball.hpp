@@ -12,7 +12,7 @@ class Fireball : public ASpell
 public:
     Fireball(void);
 
-    ASpell *clone(void) const;
+    virtual ASpell *clone(void) const;
 
     Fireball(Fireball const &src);
     Fireball const &operator=(Fireball const &src);
