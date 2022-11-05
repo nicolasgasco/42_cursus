@@ -16,6 +16,7 @@ std::string const &Warlock::getName(void) const
 {
     return this->name;
 }
+
 std::string const &Warlock::getTitle(void) const
 {
     return this->title;

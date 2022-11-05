@@ -1,5 +1,4 @@
-#ifndef WARLOCK_HPP
-#define WARLOCK_HPP
+#pragma once
 
 #include <iostream>
 
@@ -25,5 +24,3 @@ private:
     Warlock(Warlock const &src);
     Warlock &operator=(Warlock const &src);
 };
-
-#endif
