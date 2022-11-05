@@ -1,5 +1,4 @@
-#ifndef SPELL_HPP
-#define SPELL_HPP
+#pragma once
 
 #include <iostream>
 
@@ -26,5 +25,3 @@ protected:
     ASpell(ASpell const &src);
     ASpell const &operator=(ASpell const &src);
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef TARGET_HPP
-#define TARGET_HPP
+#pragma once
 
 #include <iostream>
 
@@ -24,5 +23,3 @@ protected:
     ATarget(ATarget const &src);
     ATarget const &operator=(ATarget const &src);
 };
-
-#endif
