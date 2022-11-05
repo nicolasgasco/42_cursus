@@ -1,22 +1,17 @@
-#ifndef FWOOSH_HPP
-#define FWOOSH_HPP
+#pragma once
 
 #include <iostream>
 
 #include "ASpell.hpp"
-
-class ATarget;
 
 class Fwoosh : public ASpell
 {
 public:
     Fwoosh(void);
 
-    ASpell *clone(void) const;
+    virtual ASpell *clone(void) const;
 
     Fwoosh(Fwoosh const &src);
     Fwoosh const &operator=(Fwoosh const &src);
     ~Fwoosh(void);
 };
-
-#endif

@@ -24,6 +24,13 @@ Warlock &Warlock::operator=(Warlock const &src)
 Warlock::~Warlock(void)
 {
     std::cout << name << ": My job here is done!" << std::endl;
+    std::list<ASpell *>::iterator start = this->spells.begin();
+    std::list<ASpell *>::iterator end = this->spells.end();
+    for (; start != end; ++start)
+    {
+        delete *start;
+    }
+    this->spells.clear();
 }
 
 std::string const &Warlock::getName(void) const
@@ -47,7 +54,18 @@ void Warlock::introduce(void) const
 
 void Warlock::learnSpell(ASpell *spell)
 {
-    this->spells.push_back(spell);
+    std::list<ASpell *>::iterator start = this->spells.begin();
+    std::list<ASpell *>::iterator end = this->spells.end();
+    for (; start != end; ++start)
+    {
+        if ((*start)->getName() == spell->getName())
+        {
+            std::cout << "Spell already learnt" << std::endl;
+            return;
+        }
+    }
+    this->spells.push_back(spell->clone());
+    std::cout << "Learnt spell " << spell->getName() << std::endl;
 }
 
 void Warlock::forgetSpell(std::string const spellName)
@@ -58,9 +76,13 @@ void Warlock::forgetSpell(std::string const spellName)
     {
         if ((*start)->getName() == spellName)
         {
+            std::cout << "Spell deleted: " << spellName << std::endl;
+            delete *start;
             this->spells.erase(start);
+            return;
         }
     }
+    std::cout << "No spell to forget" << std::endl;
 }
 
 void Warlock::launchSpell(std::string const spellName, ATarget &target)
@@ -71,7 +93,9 @@ void Warlock::launchSpell(std::string const spellName, ATarget &target)
     {
         if ((*start)->getName() == spellName)
         {
-            target.getHitBySpell(*(*start));
+            (*start)->launch(target);
+            return;
         }
     }
+    std::cout << "No spell to launch" << std::endl;
 }

@@ -7,13 +7,13 @@ Dummy::Dummy(Dummy const &src)
     *this = src;
 }
 
-Dummy::~Dummy(void) {}
-
 Dummy const &Dummy::operator=(Dummy const &src)
 {
     this->type = src.type;
     return *this;
 }
+
+Dummy::~Dummy(void) {}
 
 ATarget *Dummy::clone(void) const
 {
