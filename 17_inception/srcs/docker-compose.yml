@@ -10,52 +10,49 @@ services:
     depends_on:
       - wordpress
     ports:
-      - 80:80
-    # networks:
-    #   - frontend
+      - 443:443
+    networks:
+      - frontend
     volumes:
-      - ./requirements/nginx/conf/default.conf:/etc/nginx/conf.d/default.conf
       - ./requirements/tools/website-files:/var/www/html
   wordpress:
-    build:
-      context: requirements/wordpress
-    restart: always
+    build: ./requirements/wordpress
     container_name: wordpress
+    restart: always
     tty: true
-    depends_on:
-      - mariadb
     ports:
       - 9000:9000
     volumes:
       - ./requirements/tools/website-files:/var/www/html
+    depends_on:
+      - mariadb
+    # links:
+    #   - mariadb
     environment:
-      WORDPRESS_DB_HOST: mariadb:3306
+      # WORDPRESS_DB_HOST: mariadb:3260
       WORDPRESS_DB_USER: wp
       WORDPRESS_DB_PASSWORD: secret
-    # networks:
-    #   - frontend
-    #   - backend
+    networks:
+      - frontend
+      - backend
   mariadb:
-    # build:
-    #   context: requirements/mariadb
-    image: mysql:latest
+    build: ./requirements/mariadb
     container_name: mariadb
     restart: always
     volumes:
       - ./requirements/tools/db:/var/lib/mysql
-    # ports:
-    #   - "3306:3306"
+    ports:
+      - "3306:3306"
+    tty: true
     environment:
       MYSQL_DATABASE: wp
       MYSQL_USER: wp
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
+    networks:
+      - backend
     # env_file:
     #   - .env
-    # networks:
-    #   - backend
-    # networks:
-    #   frontend:
-    #   backend:
-
-
+networks:
+  frontend:
+  backend:

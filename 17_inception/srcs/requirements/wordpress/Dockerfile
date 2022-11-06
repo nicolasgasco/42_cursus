@@ -55,3 +55,6 @@ RUN apk update && apk upgrade \
     php7-zlib			
 
 RUN cp -r wordpress/* var/www/html/
+COPY ./conf/php-fpm.conf /etc/php7/php-fpm.conf
+COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
+
