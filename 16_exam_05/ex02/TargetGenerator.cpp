@@ -3,7 +3,10 @@
 #include "BrickWall.hpp"
 #include "Dummy.hpp"
 
-TargetGenerator::TargetGenerator(void) {}
+TargetGenerator::TargetGenerator(void)
+{
+    std::cout << "Creating new TargetGenerator" << std::endl;
+}
 
 TargetGenerator::~TargetGenerator(void)
 {
@@ -16,8 +19,6 @@ TargetGenerator::~TargetGenerator(void)
 
 void TargetGenerator::learnTargetType(ATarget *target)
 {
-    this->targets.push_back(target->clone());
-
     std::list<ATarget *>::iterator start = this->targets.begin();
     std::list<ATarget *>::iterator end = this->targets.end();
     for (; start != end; ++start)
@@ -55,7 +56,10 @@ ATarget *TargetGenerator::createTarget(std::string const &targetType)
     for (; start != end; ++start)
     {
         if ((*start)->getType() == targetType)
-            break;
+        {
+            std::cout << "Generated new spell: " << targetType << std::endl;
+            return (*start);
+        }
     }
-    return (*start);
+    return (nullptr);
 }

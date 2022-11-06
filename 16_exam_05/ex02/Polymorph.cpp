@@ -1,7 +1,10 @@
 #include "Polymorph.hpp"
 #include "ATarget.hpp"
 
-Polymorph::Polymorph(void) : ASpell("Polymorph", "turned into a critter") {}
+Polymorph::Polymorph(void) : ASpell("Polymorph", "turned into a critter")
+{
+    std::cout << "Creating new Brickwall: " << this->name << ", " << this->effects << std::endl;
+}
 
 Polymorph::Polymorph(Polymorph const &src)
 {

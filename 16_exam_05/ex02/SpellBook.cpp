@@ -13,6 +13,7 @@ SpellBook::~SpellBook(void)
     for (; start != end; ++start)
         delete *start;
     this->spells.clear();
+    std::cout << "Cleared SpellBook" << std::endl;
 }
 
 void SpellBook::learnSpell(ASpell *spell)
@@ -55,7 +56,10 @@ ASpell *SpellBook::createSpell(std::string const &spellName)
     for (; start != end; ++start)
     {
         if ((*start)->getName() == spellName)
-            break;
+        {
+            std::cout << "Created new spell: " << spellName << std::endl;
+            return (*start);
+        }
     }
-    return (*start);
+    return (nullptr);
 }

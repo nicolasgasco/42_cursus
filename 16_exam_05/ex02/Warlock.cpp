@@ -37,6 +37,7 @@ std::string const &Warlock::getTitle(void) const
 
 void Warlock::setTitle(std::string const &str)
 {
+    std::cout << "Set new title: " << str << std::endl;
     this->title = str;
 }
 
@@ -58,5 +59,8 @@ void Warlock::forgetSpell(std::string const spellName)
 void Warlock::launchSpell(std::string const spellName, ATarget &target)
 {
     ASpell *spell = this->book.createSpell(spellName);
-    spell->launch(target);
+    if (spell)
+        spell->launch(target);
+    else
+        std::cout << "Spell wasn't learnt yet" << std::endl;
 }

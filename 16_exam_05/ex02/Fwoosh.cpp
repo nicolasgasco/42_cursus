@@ -1,7 +1,10 @@
 #include "Fwoosh.hpp"
 #include "ATarget.hpp"
 
-Fwoosh::Fwoosh(void) : ASpell("Fwoosh", "fwooshed") {}
+Fwoosh::Fwoosh(void) : ASpell("Fwoosh", "fwooshed")
+{
+    std::cout << "Creating new Fwoosh: " << this->name << ", " << this->effects << std::endl;
+}
 
 Fwoosh::Fwoosh(Fwoosh const &src)
 {

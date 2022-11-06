@@ -1,6 +1,9 @@
 #include "BrickWall.hpp"
 
-BrickWall::BrickWall(void) : ATarget("Inconspicuous Red-brick Wall") {}
+BrickWall::BrickWall(void) : ATarget("Inconspicuous Red-brick Wall")
+{
+    std::cout << "Creating new Brickwall: " << this->type << std::endl;
+}
 
 BrickWall::BrickWall(BrickWall const &src)
 {

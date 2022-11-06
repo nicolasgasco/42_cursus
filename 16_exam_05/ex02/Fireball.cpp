@@ -1,7 +1,10 @@
 #include "Fireball.hpp"
 #include "ATarget.hpp"
 
-Fireball::Fireball(void) : ASpell("Fireball", "burnt to a crisp") {}
+Fireball::Fireball(void) : ASpell("Fireball", "burnt to a crisp")
+{
+    std::cout << "Creating new Fireball: " << this->name << ", " << this->effects << std::endl;
+}
 
 Fireball::Fireball(Fireball const &src)
 {

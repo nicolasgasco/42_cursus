@@ -3,7 +3,10 @@
 
 ATarget::ATarget(void){};
 
-ATarget::ATarget(std::string const &type) : type(type) {}
+ATarget::ATarget(std::string const &type) : type(type)
+{
+    std::cout << "Creating new ATarget: " << this->type << std::endl;
+}
 
 ATarget::ATarget(ATarget const &src) : type(src.type)
 {
