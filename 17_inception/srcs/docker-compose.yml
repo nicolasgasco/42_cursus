@@ -29,7 +29,7 @@ services:
     # links:
     #   - mariadb
     environment:
-      # WORDPRESS_DB_HOST: mariadb:3260
+      WORDPRESS_DB_HOST: mariadb:3306
       WORDPRESS_DB_USER: wp
       WORDPRESS_DB_PASSWORD: secret
     networks:
@@ -43,7 +43,6 @@ services:
       - ./requirements/tools/db:/var/lib/mysql
     ports:
       - "3306:3306"
-    tty: true
     environment:
       MYSQL_DATABASE: wp
       MYSQL_USER: wp
