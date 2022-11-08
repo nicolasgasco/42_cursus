@@ -57,4 +57,8 @@ RUN apk update && apk upgrade \
 RUN cp -r wordpress/* var/www/html/
 COPY ./conf/php-fpm.conf /etc/php7/php-fpm.conf
 COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
+COPY ./conf/wp-config.php /var/www/html/wp-config.php
 
+COPY ./tools/docker-entrypoint.sh /tmp/docker-entrypoint.sh
+
+ENTRYPOINT ["sh", "/tmp/docker-entrypoint.sh"]

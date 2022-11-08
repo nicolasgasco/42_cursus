@@ -29,6 +29,7 @@ services:
     # links:
     #   - mariadb
     environment:
+      WORDPRESS_DB_NAME: cacca
       WORDPRESS_DB_HOST: mariadb:3306
       WORDPRESS_DB_USER: wp
       WORDPRESS_DB_PASSWORD: secret

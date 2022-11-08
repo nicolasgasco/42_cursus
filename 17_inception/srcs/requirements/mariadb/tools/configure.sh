@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # From https://github.com/yobasystems/alpine-mariadb/blob/master/alpine-mariadb-armhf/files/run.sh
-# rm -rf /run/mysqld && rm -rf /var/lib/mysql/mysql
+rm -rf /run/mysqld && rm -rf /var/lib/mysql/mysql
 
 if [ -d "/run/mysqld" ]; then
     echo "[i] mysqld already present, skipping creation"
@@ -26,6 +26,9 @@ else
     
     mysql_install_db --user=mysql --ldata=/var/lib/mysql > /dev/null
     
+    MYSQL_DATABASE=${MYSQL_DATABASE:-""}
+    MYSQL_USER=${MYSQL_USER:-""}
+    MYSQL_PASSWORD=${MYSQL_PASSWORD:-""}
     
     tfile=`mktemp`
     
@@ -52,8 +55,20 @@ EOF
     /usr/bin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < $tfile
     rm -f $tfile
     
-    echo 'MySQL init process done. Ready for start up.'
+    for f in /docker-entrypoint-initdb.d/*; do
+        case "$f" in
+            *.sql)    echo "$0: running $f"; /usr/bin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < "$f"; echo ;;
+            *.sql.gz) echo "$0: running $f"; gunzip -c "$f" | /usr/bin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < "$f"; echo ;;
+            *)        echo "$0: ignoring or entrypoint initdb empty $f" ;;
+        esac
+        echo
+    done
     
+    echo
+    echo 'MySQL init process done. Ready for start up.'
+    echo
+    
+    echo "exec /usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0" "$@"
 fi
 
 # allow remote connections
