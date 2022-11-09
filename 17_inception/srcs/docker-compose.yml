@@ -25,9 +25,11 @@ services:
     volumes:
       - ./requirements/tools/website-files:/var/www/html
     depends_on:
+      mariadb:
+        condition: service_healthy
+
+    links:
       - mariadb
-    # links:
-    #   - mariadb
     environment:
       WORDPRESS_DB_NAME: cacca
       WORDPRESS_DB_HOST: mariadb:3306
@@ -44,6 +46,8 @@ services:
       - ./requirements/tools/db:/var/lib/mysql
     ports:
       - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "--silent" ]
     environment:
       MYSQL_DATABASE: wp
       MYSQL_USER: wp

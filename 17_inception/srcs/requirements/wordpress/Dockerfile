@@ -6,6 +6,8 @@ RUN mkdir -p /var/www/html
 
 RUN apk update && apk upgrade \
     && apk add --no-cache \
+    mariadb-client		\
+    curl                \
     php7				\
     php7-fpm			\
     php7-bcmath			\
@@ -60,5 +62,10 @@ COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
 COPY ./conf/wp-config.php /var/www/html/wp-config.php
 
 COPY ./tools/docker-entrypoint.sh /tmp/docker-entrypoint.sh
+
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN php wp-cli.phar --allow-root
+RUN chmod +x wp-cli.phar
+RUN mv wp-cli.phar /usr/local/bin/wp
 
 ENTRYPOINT ["sh", "/tmp/docker-entrypoint.sh"]
