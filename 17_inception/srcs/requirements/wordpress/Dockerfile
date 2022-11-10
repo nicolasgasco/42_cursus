@@ -1,11 +1,10 @@
 FROM alpine:3.14
-RUN wget https://wordpress.org/latest.tar.gz \
-    && tar -xzvf latest.tar.gz \
-    && rm -rf latest.tar.gz
-RUN mkdir -p /var/www/html
+# RUN wget https://wordpress.org/latest.tar.gz \
+#     && tar -xzvf latest.tar.gz \
+#     && rm -rf latest.tar.gz
+# RUN mkdir -p /var/www/html
 
-RUN apk update && apk upgrade \
-    && apk add --no-cache \
+RUN apk update && apk upgrade && apk add --no-cache \
     mariadb-client		\
     curl                \
     php7				\
@@ -56,16 +55,16 @@ RUN apk update && apk upgrade \
     php7-zip			\
     php7-zlib			
 
-RUN cp -r wordpress/* var/www/html/
-COPY ./conf/php-fpm.conf /etc/php7/php-fpm.conf
-COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
-COPY ./conf/wp-config.php /var/www/html/wp-config.php
-
-COPY ./tools/docker-entrypoint.sh /tmp/docker-entrypoint.sh
+RUN	adduser -S nginx &&	addgroup -S nginx
+COPY conf/php-fpm.conf /etc/php7/php-fpm.conf
+COPY conf/www.conf /etc/php7/php-fpm.d/www.conf
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN php wp-cli.phar --allow-root
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
+WORKDIR /var/www/html/wordpress
+
+COPY ./tools/docker-entrypoint.sh /tmp/docker-entrypoint.sh
 ENTRYPOINT ["sh", "/tmp/docker-entrypoint.sh"]

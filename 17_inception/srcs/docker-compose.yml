@@ -30,11 +30,21 @@ services:
 
     links:
       - mariadb
-    environment:
-      WORDPRESS_DB_NAME: cacca
-      WORDPRESS_DB_HOST: mariadb:3306
-      WORDPRESS_DB_USER: wp
-      WORDPRESS_DB_PASSWORD: secret
+    # environment:
+    #   MYSQL_HOST: ${MYSQL_HOST}
+    #   WP_DATABASE_NAME: ${WP_DATABASE_NAME}
+    #   WP_DATABASE_USR: ${WP_DATABASE_USR}
+    #   WP_DATABASE_PWD: ${WP_DATABASE_PWD}
+    #   DOMAIN_NAME: ${DOMAIN_NAME}
+    #   WP_TITLE: ${WP_TITLE}
+    #   WP_ADMIN_USR: ${WP_ADMIN_USR}
+    #   WP_ADMIN_PWD: ${WP_ADMIN_PWD}
+    #   WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL}
+    #   WP_USR: ${WP_USR}
+    #   WP_PWD: ${WP_PWD}
+    #   WP_EMAIL: ${WP_EMAIL}
+    env_file:
+      - .env
     networks:
       - frontend
       - backend
@@ -48,15 +58,15 @@ services:
       - "3306:3306"
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "--silent" ]
-    environment:
-      MYSQL_DATABASE: wp
-      MYSQL_USER: wp
-      MYSQL_PASSWORD: secret
-      MYSQL_ROOT_PASSWORD: secret
+    # environment:
+    #   MYSQL_ROOT_PWD: ${MYSQL_ROOT_PWD}
+    #   WP_DATABASE_NAME: ${WP_DATABASE_NAME}
+    #   WP_DATABASE_USR: ${WP_DATABASE_USR}
+    #   WP_DATABASE_PWD: ${WP_DATABASE_PWD}
     networks:
       - backend
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
 networks:
   frontend:
   backend:
