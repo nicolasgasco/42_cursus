@@ -57,7 +57,15 @@ services:
     ports:
       - "3306:3306"
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "--silent" ]
+      test:
+        [
+          "CMD",
+          "mariadb",
+          "-h$MYSQL_HOST",
+          "-u$WP_DATABASE_USR",
+          "-p$WP_DATABASE_PWD",
+          "$WP_DATABASE_NAME"
+        ]
     # environment:
     #   MYSQL_ROOT_PWD: ${MYSQL_ROOT_PWD}
     #   WP_DATABASE_NAME: ${WP_DATABASE_NAME}
