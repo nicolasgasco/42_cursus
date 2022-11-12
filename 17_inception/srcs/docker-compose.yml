@@ -14,7 +14,7 @@ services:
     networks:
       - frontend
     volumes:
-      - ./requirements/tools/website-files:/var/www/html
+      - ./requirements/tools/website-files/:/var/www/html
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
@@ -66,6 +66,9 @@ services:
           "-p$WP_DATABASE_PWD",
           "$WP_DATABASE_NAME"
         ]
+      interval: 1s
+      retries: 10
+      start_period: 30s
     # environment:
     #   MYSQL_ROOT_PWD: ${MYSQL_ROOT_PWD}
     #   WP_DATABASE_NAME: ${WP_DATABASE_NAME}

@@ -24,6 +24,8 @@ clean:
 	@docker compose -f srcs/docker-compose.yml down
 
 fclean: clean
+	@docker image prune -a
+	@rm -rf ./srcs/requirements/tools/*
 
 re: fclean all
 
