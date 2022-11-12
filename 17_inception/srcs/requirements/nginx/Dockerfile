@@ -11,8 +11,8 @@ EXPOSE 443
 
 COPY ./nginx/conf/default.conf /etc/nginx/conf.d/default.conf
 
+# SSL
 RUN mkdir /etc/nginx/ssl && chmod 700 /etc/nginx/ssl 
-
 COPY ./nginx/tools/certs /etc/nginx/ssl
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

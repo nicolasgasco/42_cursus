@@ -14,7 +14,7 @@ services:
     networks:
       - frontend
     volumes:
-      - ./requirements/tools/website-files/:/var/www/html
+      - ./requirements/tools/website-files:/var/www/html
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress

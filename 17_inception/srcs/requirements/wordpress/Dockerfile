@@ -62,5 +62,7 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 
 WORKDIR /var/www/html/wordpress
 
+COPY tools/homepage/index.html /tmp/index.html
+
 COPY ./tools/docker-entrypoint.sh /tmp/docker-entrypoint.sh
 ENTRYPOINT ["sh", "/tmp/docker-entrypoint.sh"]

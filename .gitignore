@@ -15,6 +15,7 @@ exam_rank_03
 minipaint_tester
 micropaint_tester
 !.gitkeep
+.DS_STORE
 17_inception/srcs/tools
 17_inception/srcs/requirements/tools/.gitkeep
 17_inception/srcs/requirements/tools/db/aria_log_control
@@ -3068,3 +3069,5 @@ micropaint_tester
 17_inception/srcs/requirements/tools/website-files/wordpress/wp-includes/widgets/class-wp-widget-tag-cloud.php
 17_inception/srcs/requirements/tools/website-files/wordpress/wp-includes/widgets/class-wp-widget-text.php
 17_inception/srcs/requirements/tools/db/9a52d1fefb06.pid
+17_inception/srcs/requirements/tools/db/a82327ebc4f3.pid
+17_inception/srcs/requirements/tools/db/cd3eec52a0dc.pid
