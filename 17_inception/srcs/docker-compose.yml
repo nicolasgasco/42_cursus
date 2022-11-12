@@ -30,19 +30,6 @@ services:
 
     links:
       - mariadb
-    # environment:
-    #   MYSQL_HOST: ${MYSQL_HOST}
-    #   WP_DATABASE_NAME: ${WP_DATABASE_NAME}
-    #   WP_DATABASE_USR: ${WP_DATABASE_USR}
-    #   WP_DATABASE_PWD: ${WP_DATABASE_PWD}
-    #   DOMAIN_NAME: ${DOMAIN_NAME}
-    #   WP_TITLE: ${WP_TITLE}
-    #   WP_ADMIN_USR: ${WP_ADMIN_USR}
-    #   WP_ADMIN_PWD: ${WP_ADMIN_PWD}
-    #   WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL}
-    #   WP_USR: ${WP_USR}
-    #   WP_PWD: ${WP_PWD}
-    #   WP_EMAIL: ${WP_EMAIL}
     env_file:
       - .env
     networks:
@@ -67,13 +54,8 @@ services:
           "$WP_DATABASE_NAME"
         ]
       interval: 1s
-      retries: 10
+      retries: 3
       start_period: 30s
-    # environment:
-    #   MYSQL_ROOT_PWD: ${MYSQL_ROOT_PWD}
-    #   WP_DATABASE_NAME: ${WP_DATABASE_NAME}
-    #   WP_DATABASE_USR: ${WP_DATABASE_USR}
-    #   WP_DATABASE_PWD: ${WP_DATABASE_PWD}
     networks:
       - backend
     env_file:

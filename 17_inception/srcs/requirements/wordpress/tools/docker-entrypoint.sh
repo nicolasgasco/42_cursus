@@ -13,4 +13,4 @@ echo "[i] Wordpress started"
 /usr/sbin/php-fpm7 -F -R
 
 # Move custom index file
-mv ../../../../tmp/index.html ../
+cp ../../../../tmp/index.html ../
