@@ -13,6 +13,8 @@ services:
       - 443:443
     networks:
       - frontend
+    extra_hosts:
+      - "$DOMAIN_NAME:127.0.0.1"
     volumes:
       - /Users/dev/Documents/42_cursus/17_inception/website-files:/var/www/html
   wordpress:
@@ -26,6 +28,8 @@ services:
     networks:
       - frontend
       - backend
+    extra_hosts:
+      - "$DOMAIN_NAME:127.0.0.1"
     volumes:
       - /Users/dev/Documents/42_cursus/17_inception/website-files:/var/www/html
     env_file:
