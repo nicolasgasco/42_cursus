@@ -13,10 +13,8 @@ services:
       - 443:443
     networks:
       - frontend
-    extra_hosts:
-      - "$DOMAIN_NAME:127.0.0.1"
     volumes:
-      - ./requirements/tools/website-files:/var/www/html
+      - /Users/dev/Documents/42_cursus/17_inception/website-files:/var/www/html
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
@@ -29,7 +27,7 @@ services:
       - frontend
       - backend
     volumes:
-      - ./requirements/tools/website-files:/var/www/html
+      - /Users/dev/Documents/42_cursus/17_inception/website-files:/var/www/html
     env_file:
       - .env
   mariadb:
@@ -41,7 +39,7 @@ services:
     networks:
       - backend
     volumes:
-      - ./requirements/tools/db:/var/lib/mysql
+      - /Users/dev/Documents/42_cursus/17_inception/db:/var/lib/mysql
     env_file:
       - .env
 networks:

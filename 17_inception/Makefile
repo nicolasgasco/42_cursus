@@ -1,23 +1,9 @@
 NAME = inception
 
-
-NGINX_IMAGE_NAME = nginx-image
-NGINX_PATH = srcs/requirements/nginx/
-
-WORDPRESS_IMAGE_NAME = wordpress-image
-WORDPRESS_PATH = srcs/requirements/wordpress/
-
-DATABASE_VOLUME_NAME = wordpress-database-volume
-WEBSITE_VOLUME_NAME = wordpress-website-volume
-
-VOLUME_HOST_PATH = /home/ngasco/data
-
-ALL_CONTAINERS := $(docker ps -q)
-
 all: $(NAME)
 
 $(NAME):
-	@echo "Making inception..."
+	@echo "Bulding containers..."
 	@docker compose -f srcs/docker-compose.yml up --build
 
 clean:
@@ -28,9 +14,9 @@ fclean: clean
 	@echo "Pruning images..."
 	@docker image prune -af > /dev/null 2>&1
 	@echo "Removing db files..."
-	@rm -rf ./srcs/requirements/tools/db/*
+	@rm -rf /Users/dev/Documents/42_cursus/17_inception/db/*
 	@echo "Removing Wordpress files..."
-	@rm -rf ./srcs/requirements/tools/website-files
+	@rm -rf /Users/dev/Documents/42_cursus/17_inception/website-files
 
 re: fclean all
 
