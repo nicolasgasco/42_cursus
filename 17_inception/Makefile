@@ -18,14 +18,21 @@ all: $(NAME)
 
 $(NAME):
 	@echo "Making inception..."
+	@echo "Setting env variables..."
+	@export $(grep -v '^#' ./srcs/.env | xargs)
 	@docker compose -f srcs/docker-compose.yml up --build
 
 clean:
+	@echo "Shutting down containers..."
 	@docker compose -f srcs/docker-compose.yml down
 
 fclean: clean
-	@docker image prune -a
-	@rm -rf ./srcs/requirements/tools/*
+	@echo "Pruning images..."
+	@docker image prune -af
+	@echo "Removing db files..."
+	@rm -rf ./srcs/requirements/tools/db/*
+	@echo "Removing Wordpress files..."
+	@rm -rf ./srcs/requirements/tools/website-files
 
 re: fclean all
 

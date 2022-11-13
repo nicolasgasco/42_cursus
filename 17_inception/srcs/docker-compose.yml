@@ -27,9 +27,6 @@ services:
     depends_on:
       mariadb:
         condition: service_healthy
-
-    links:
-      - mariadb
     env_file:
       - .env
     networks:
@@ -60,6 +57,12 @@ services:
       - backend
     env_file:
       - .env
+    environment:
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_ROOT_PWD: ${MYSQL_ROOT_PWD}
+      WP_DATABASE_NAME: ${WP_DATABASE_NAME}
+      WP_DATABASE_USR: ${WP_DATABASE_USR}
+      WP_DATABASE_PWD: ${WP_DATABASE_PWD}
 networks:
   frontend:
   backend:
