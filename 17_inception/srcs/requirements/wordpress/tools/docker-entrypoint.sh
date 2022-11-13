@@ -1,5 +1,12 @@
 #!/bin/sh
 
+echo "[i] Wordpress env variables check:"
+echo "    MYSQL_HOST: $MYSQL_HOST"
+echo "    MYSQL_ROOT_PWD: $MYSQL_ROOT_PWD"
+echo "    WP_DATABASE_NAME: $WP_DATABASE_NAME"
+echo "    WP_DATABASE_USR: $WP_DATABASE_USR"
+echo "    tWP_DATABASE_PWD: $WP_DATABASE_PWD"
+
 if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
     echo "[i] Installing Wordpress with CLI"
     wp core download --allow-root
@@ -11,8 +18,8 @@ else
     echo "[i] Wordpress already installed"
 fi
 
+echo "[i] Home page copied"
+cp /tmp/index.html /var/www/html/
+
 echo "[i] Wordpress started"
 /usr/sbin/php-fpm7 -F -R
-
-# Move custom index file
-cp ../../../../tmp/index.html ../

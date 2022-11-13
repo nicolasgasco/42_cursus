@@ -6,13 +6,12 @@ RUN	apk update && apk upgrade && apk add --no-cache \
 
 # Nginx
 RUN mkdir -p /run/nginx
-
-EXPOSE 443 
-
 COPY ./nginx/conf/default.conf /etc/nginx/conf.d/default.conf
 
 # SSL
 RUN mkdir /etc/nginx/ssl && chmod 700 /etc/nginx/ssl 
 COPY ./nginx/tools/certs /etc/nginx/ssl
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+COPY ./nginx/tools/docker-entrypoint.sh /tmp/docker-entrypoint.sh
+
+ENTRYPOINT ["sh", "/tmp/docker-entrypoint.sh"]

@@ -60,11 +60,8 @@ RUN php wp-cli.phar --allow-root
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
-
-# Custom home page file
-COPY ./tools/homepage/index.html /tmp/index.html
-
 COPY ./tools/docker-entrypoint.sh /tmp/docker-entrypoint.sh
+COPY ./tools/homepage/index.html /tmp/index.html
 
 WORKDIR /var/www/html/wordpress
 

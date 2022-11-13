@@ -1,7 +1,13 @@
 #!/bin/sh
 
-# From https://github.com/yobasystems/alpine-mariadb/blob/master/alpine-mariadb-armhf/files/run.sh
+echo "[i] mariadb env variables check:"
+echo "    MYSQL_HOST: $MYSQL_HOST"
+echo "    MYSQL_ROOT_PWD: $MYSQL_ROOT_PWD"
+echo "    WP_DATABASE_NAME: $WP_DATABASE_NAME"
+echo "    WP_DATABASE_USR: $WP_DATABASE_USR"
+echo "    tWP_DATABASE_PWD: $WP_DATABASE_PWD"
 
+# From https://github.com/yobasystems/alpine-mariadb/blob/master/alpine-mariadb-armhf/files/run.sh
 if [ -d "/run/mysqld" ]; then
     echo "[i] mysqld already present, skipping creation"
     chown -R mysql:mysql /run/mysqld
@@ -15,10 +21,6 @@ if [ -d /var/lib/mysql/mysql ]; then
     echo "[i] MySQL directory already present, skipping creation"
     chown -R mysql:mysql /var/lib/mysql
     
-    echo "[i] MySQL root Password: $MYSQL_ROOT_PWD"
-    echo "[i] MySQL database name is: $WP_DATABASE_NAME"
-    echo "[i] MySQL user is: $WP_DATABASE_USR"
-    echo "[i] MySQL password is: $WP_DATABASE_PWD"
 else
     echo "[i] MySQL data directory not found, creating initial DBs"
     chown -R mysql:mysql /var/lib/mysql

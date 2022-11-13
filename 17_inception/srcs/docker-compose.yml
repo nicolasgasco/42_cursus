@@ -13,56 +13,37 @@ services:
       - 443:443
     networks:
       - frontend
+    extra_hosts:
+      - "$DOMAIN_NAME:127.0.0.1"
     volumes:
       - ./requirements/tools/website-files:/var/www/html
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
     restart: always
-    tty: true
+    depends_on:
+      - mariadb
     ports:
       - 9000:9000
-    volumes:
-      - ./requirements/tools/website-files:/var/www/html
-    depends_on:
-      mariadb:
-        condition: service_healthy
-    env_file:
-      - .env
     networks:
       - frontend
       - backend
+    volumes:
+      - ./requirements/tools/website-files:/var/www/html
+    env_file:
+      - .env
   mariadb:
     build: ./requirements/mariadb
     container_name: mariadb
     restart: always
-    volumes:
-      - ./requirements/tools/db:/var/lib/mysql
     ports:
       - "3306:3306"
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "mariadb",
-          "-h$MYSQL_HOST",
-          "-u$WP_DATABASE_USR",
-          "-p$WP_DATABASE_PWD",
-          "$WP_DATABASE_NAME"
-        ]
-      interval: 1s
-      retries: 3
-      start_period: 30s
     networks:
       - backend
+    volumes:
+      - ./requirements/tools/db:/var/lib/mysql
     env_file:
       - .env
-    environment:
-      MYSQL_HOST: ${MYSQL_HOST}
-      MYSQL_ROOT_PWD: ${MYSQL_ROOT_PWD}
-      WP_DATABASE_NAME: ${WP_DATABASE_NAME}
-      WP_DATABASE_USR: ${WP_DATABASE_USR}
-      WP_DATABASE_PWD: ${WP_DATABASE_PWD}
 networks:
   frontend:
   backend:
