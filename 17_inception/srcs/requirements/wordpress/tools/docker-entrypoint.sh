@@ -36,6 +36,9 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
     echo "    role=author"
     echo "    user_pass=$WP_PWD"
     wp user create $WP_USR $WP_EMAIL --role=author --user_pass=$WP_PWD --allow-root
+    
+    echo "[i] Installing theme"
+    wp theme install water-sports-club --activate --allow-root
 else
     echo "[i] Wordpress already installed"
 fi

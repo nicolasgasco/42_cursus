@@ -9,10 +9,10 @@ echo "    tWP_DATABASE_PWD: $WP_DATABASE_PWD"
 
 # From https://github.com/yobasystems/alpine-mariadb/blob/master/alpine-mariadb-armhf/files/run.sh
 if [ -d "/run/mysqld" ]; then
-    echo "[i] mysqld already present, skipping creation"
+    echo "[i] mysqld directory already present, skipping creation"
     chown -R mysql:mysql /run/mysqld
 else
-    echo "[i] mysqld not found, creating...."
+    echo "[i] mysqld directory not found, creating"
     mkdir -p /run/mysqld
     chown -R mysql:mysql /run/mysqld
 fi
@@ -22,9 +22,10 @@ if [ -d /var/lib/mysql/mysql ]; then
     chown -R mysql:mysql /var/lib/mysql
     
 else
-    echo "[i] MySQL data directory not found, creating initial DBs"
+    echo "[i] MySQL directory not found, creating initial DBs"
     chown -R mysql:mysql /var/lib/mysql
     
+    echo "[i] Creating system tables"
     mysql_install_db --user=mysql --ldata=/var/lib/mysql > /dev/null
     
     tfile=`mktemp`
@@ -50,9 +51,6 @@ EOF
     fi
     
     /usr/bin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < $tfile
-    rm -f $tfile
-    
-    /usr/bin/mysqld --user=mysql --bootstrap < $tfile
     rm -f $tfile
     echo 'MySQL init process done. Ready for start up.'
 fi
