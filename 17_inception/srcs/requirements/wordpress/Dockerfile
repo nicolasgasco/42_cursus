@@ -51,17 +51,21 @@ RUN apk update && apk upgrade && apk add --no-cache \
     php7-zip			\
     php7-zlib			
 
+# Conf
 RUN	adduser -S nginx &&	addgroup -S nginx
 COPY conf/php-fpm.conf /etc/php7/php-fpm.conf
 COPY conf/www.conf /etc/php7/php-fpm.d/www.conf
 
+# Install WP CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN php wp-cli.phar --allow-root
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
-COPY ./tools/docker-entrypoint.sh /tmp/docker-entrypoint.sh
+# Custom index page
 COPY ./tools/homepage/index.html /tmp/index.html
+
+COPY ./tools/docker-entrypoint.sh /tmp/docker-entrypoint.sh
 
 WORKDIR /var/www/html/wordpress
 
