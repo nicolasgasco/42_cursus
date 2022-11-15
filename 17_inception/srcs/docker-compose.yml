@@ -6,6 +6,7 @@ services:
       dockerfile: ./nginx/Dockerfile
       context: requirements/
     container_name: nginx
+    init: true
     restart: always
     depends_on:
       - wordpress
@@ -20,11 +21,10 @@ services:
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
+    init: true
     restart: always
     depends_on:
       - mariadb
-    ports:
-      - 9000:9000
     networks:
       - frontend
       - backend
@@ -37,9 +37,8 @@ services:
   mariadb:
     build: ./requirements/mariadb
     container_name: mariadb
+    init: true
     restart: always
-    ports:
-      - "3306:3306"
     networks:
       - backend
     volumes:

@@ -4,6 +4,8 @@ RUN	apk update && apk upgrade && apk add --no-cache \
     nginx      \
     openssl
 
+EXPOSE 443
+
 # Nginx
 RUN mkdir -p /run/nginx
 COPY ./nginx/conf/default.conf /etc/nginx/conf.d/default.conf
