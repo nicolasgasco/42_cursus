@@ -17,7 +17,7 @@ services:
     extra_hosts:
       - "$DOMAIN_NAME:127.0.0.1"
     volumes:
-      - /Users/dev/Documents/42_cursus/17_inception/website-files:/var/www/html
+      - wordpress_data:/var/www/html
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
@@ -31,7 +31,7 @@ services:
     extra_hosts:
       - "$DOMAIN_NAME:127.0.0.1"
     volumes:
-      - /Users/dev/Documents/42_cursus/17_inception/website-files:/var/www/html
+      - wordpress_data:/var/www/html
     env_file:
       - .env
   mariadb:
@@ -42,9 +42,23 @@ services:
     networks:
       - backend
     volumes:
-      - /Users/dev/Documents/42_cursus/17_inception/db:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
     env_file:
       - .env
 networks:
   frontend:
   backend:
+
+volumes:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ngasco/data/db
+      o: bind
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ngasco/data/wordpress
+      o: bind
