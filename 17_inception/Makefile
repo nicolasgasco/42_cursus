@@ -2,9 +2,8 @@ NAME = inception
 
 all: $(NAME)
 
-USER_DATA_PATH = /home/ngasco/data
-DB_VOLUME_PATH = $(USER_DATA_PATH)/db
-WP_VOLUME_PATH = $(USER_DATA_PATH)/website-files
+DB_VOLUME_PATH = /home/ngasco/data/db
+WP_VOLUME_PATH = /home/ngasco/data/website-files
 
 $(NAME):
 	@echo "Creating volume folders..."
