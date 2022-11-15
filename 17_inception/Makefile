@@ -2,7 +2,14 @@ NAME = inception
 
 all: $(NAME)
 
+USER_DATA_PATH = /home/ngasco/data
+DB_VOLUME_PATH = $(USER_DATA_PATH)/db
+WP_VOLUME_PATH = $(USER_DATA_PATH)/website-files
+
 $(NAME):
+	@echo "Creating volume folders..."
+	@mkdir -p $(DB_VOLUME_PATH)
+	@mkdir -p $(WP_VOLUME_PATH)
 	@echo "Bulding containers..."
 	@docker compose -f srcs/docker-compose.yml up --build
 
@@ -14,9 +21,9 @@ fclean: clean
 	@echo "Pruning images..."
 	@docker image prune -af > /dev/null 2>&1
 	@echo "Removing db files..."
-	@rm -rf /home/ngasco/data/db
+	@rm -rf  $(DB_VOLUME_PATH)
 	@echo "Removing Wordpress files..."
-	@rm -rf /home/ngasco/data/wordpress
+	@rm -rf $(WP_VOLUME_PATH)
 
 re: fclean all
 

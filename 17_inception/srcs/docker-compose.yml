@@ -60,5 +60,5 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/ngasco/data/wordpress
+      device: /home/ngasco/data/website-files
       o: bind
