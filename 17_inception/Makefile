@@ -1,9 +1,9 @@
 NAME = inception
 
-all: $(NAME)
-
 DB_VOLUME_PATH = /home/ngasco/data/db
 WP_VOLUME_PATH = /home/ngasco/data/website-files
+
+all: $(NAME)
 
 $(NAME):
 	@echo "Creating volume folders..."
@@ -20,7 +20,7 @@ fclean: clean
 	@echo "Pruning images..."
 	@docker image prune -af > /dev/null 2>&1
 	@echo "Removing db files..."
-	@rm -rf  $(DB_VOLUME_PATH)
+	@rm -rf $(DB_VOLUME_PATH)
 	@echo "Removing Wordpress files..."
 	@rm -rf $(WP_VOLUME_PATH)
 
