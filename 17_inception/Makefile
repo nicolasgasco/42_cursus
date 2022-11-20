@@ -1,7 +1,7 @@
 NAME = inception
 
-DB_VOLUME_PATH = /home/ngasco/data/db
-WP_VOLUME_PATH = /home/ngasco/data/website-files
+DB_VOLUME_PATH = /Users/dev/Documents/42_cursus/17_inception/db
+WP_VOLUME_PATH = /Users/dev/Documents/42_cursus/17_inception/website-files
 
 all: $(NAME)
 
@@ -20,10 +20,19 @@ fclean: clean
 	@echo "Pruning images..."
 	@docker image prune -af > /dev/null 2>&1
 	@echo "Removing db files..."
-	@rm -rf $(DB_VOLUME_PATH)
+	@docker volume rm -f mariadb_data > /dev/null 2>&1
 	@echo "Removing Wordpress files..."
-	@rm -rf $(WP_VOLUME_PATH)
+	@docker volume rm -f wordpress_data > /dev/null 2>&1
 
 re: fclean all
 
-.PHONY: all clean fclean re
+exec_wordpress:
+	@docker exec -it wordpress sh
+
+exec_nginx:
+	@docker exec -it nginx sh
+
+exec_mariadb:
+	@docker exec -it mariadb sh
+
+.PHONY: all clean fclean re exec_wordpress exec_nginx exec_mariadb
