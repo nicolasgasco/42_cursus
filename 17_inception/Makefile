@@ -3,8 +3,8 @@ NAME = inception
 all: $(NAME)
 
 $(NAME):
-	@mkdir /home/ngasco/data/db
-	@mkdir /home/ngasco/data/website-files
+	@mkdir -p /home/ngasco/data/db
+	@mkdir -p /home/ngasco/data/website-files
 	@echo "Bulding containers..."
 	@docker compose -f srcs/docker-compose.yml up --build
 
