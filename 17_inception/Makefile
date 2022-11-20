@@ -15,8 +15,10 @@ fclean: clean
 	@docker image prune -af > /dev/null 2>&1
 	@echo "Removing db files..."
 	@docker volume rm -f mariadb_data > /dev/null 2>&1
+	@rm -rf /home/ngasco/data/db
 	@echo "Removing Wordpress files..."
 	@docker volume rm -f wordpress_data > /dev/null 2>&1
+	@rm -rf /home/ngasco/data/website-files
 
 re: fclean all
 
