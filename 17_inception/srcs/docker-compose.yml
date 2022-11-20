@@ -54,13 +54,8 @@ volumes:
     driver: local
     name: mariadb_data
     driver_opts:
-      type: none
       device: /home/ngasco/data/db
-      o: bind
   wordpress_data:
-    driver: local
     name: wordpress_data
     driver_opts:
-      type: none
       device: /home/ngasco/data/website-files
-      o: bind
