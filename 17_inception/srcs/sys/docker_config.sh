@@ -1,4 +1,5 @@
 apt-get update
+apt-get install make
 apt-get install \
     ca-certificates \
     curl \
