@@ -1,14 +1,8 @@
 NAME = inception
 
-DB_VOLUME_PATH = /Users/dev/Documents/42_cursus/17_inception/db
-WP_VOLUME_PATH = /Users/dev/Documents/42_cursus/17_inception/website-files
-
 all: $(NAME)
 
 $(NAME):
-	@echo "Creating volume folders..."
-	@mkdir -p $(DB_VOLUME_PATH)
-	@mkdir -p $(WP_VOLUME_PATH)
 	@echo "Bulding containers..."
 	@docker compose -f srcs/docker-compose.yml up --build
 
