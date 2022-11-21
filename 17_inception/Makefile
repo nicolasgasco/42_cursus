@@ -33,4 +33,4 @@ exec_nginx:
 exec_mariadb:
 	@docker exec -it mariadb sh
 
-.PHONY: all clean fclean re exec_wordpress exec_nginx exec_mariadb
+.PHONY: inception all clean fclean re exec_wordpress exec_nginx exec_mariadb
