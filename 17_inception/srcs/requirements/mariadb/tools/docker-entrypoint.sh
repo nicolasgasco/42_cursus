@@ -40,15 +40,15 @@ DROP DATABASE IF EXISTS test ;
 FLUSH PRIVILEGES ;
 EOF
     
-    if [ "$WP_DATABASE_NAME" != "" ]; then
-        echo "[i] Creating database: $WP_DATABASE_NAME"
-        
+	if [ "$WP_DATABASE_NAME" != "" ]; then
+	    echo "[i] Creating database: $WP_DATABASE_NAME"
         echo "[i] with character set: 'utf8' and collation: 'utf8_general_ci'"
         echo "CREATE DATABASE IF NOT EXISTS \`$WP_DATABASE_NAME\` CHARACTER SET utf8 COLLATE utf8_general_ci;" >> $tfile
-        
-        echo "[i] Creating user: $WP_DATABASE_USR with password $WP_DATABASE_PWD"
-        echo "GRANT ALL ON \`$WP_DATABASE_NAME\`.* to '$WP_DATABASE_USR'@'%' IDENTIFIED BY '$WP_DATABASE_PWD';" >> $tfile
-    fi
+	 if [ "$WP_DATABASE_USR" != "" ]; then
+		echo "[i] Creating user: $WP_DATABASE_USR with password $WP_DATABASE_PWD"
+		echo "GRANT ALL ON \`$WP_DATABASE_NAME\`.* to '$WP_DATABASE_USR'@'%' IDENTIFIED BY '$WP_DATABASE_PWD';" >> $tfile
+	    fi
+	fi
     
     /usr/bin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < $tfile
     rm -f $tfile
@@ -59,4 +59,4 @@ fi
 sed -i "s|skip-networking|# skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
 sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/my.cnf.d/mariadb-server.cnf
 
-exec /usr/bin/mysqld --user=mysql --console
+exec /usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0
