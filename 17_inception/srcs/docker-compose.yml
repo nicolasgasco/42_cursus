@@ -2,9 +2,7 @@ version: "3.8"
 name: inception
 services:
   nginx:
-    build:
-      dockerfile: ./nginx/Dockerfile
-      context: requirements/
+    build: ./requirements/nginx
     container_name: nginx
     init: true
     restart: always
