@@ -1,2 +1,2 @@
 apt update
-apt install task-xfce-desktop
+apt install -yq task-xfce-desktop
