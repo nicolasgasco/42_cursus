@@ -12,7 +12,6 @@ COPY ./nginx/conf/default.conf /etc/nginx/conf.d/default.conf
 
 # SSL
 RUN mkdir /etc/nginx/ssl && chmod 700 /etc/nginx/ssl 
-# COPY ./nginx/tools/certs /etc/nginx/ssl
 RUN openssl req -newkey rsa:4096 -sha256 -x509 -nodes -days 365 \
     -subj "/C=ES/O=42/L=Urduliz\CN=Inception" \
     -keyout /etc/nginx/ssl/inception.key \
