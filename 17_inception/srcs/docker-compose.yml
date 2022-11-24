@@ -3,6 +3,7 @@ name: inception
 services:
   nginx:
     build: ./requirements/nginx
+    image: nginx
     container_name: nginx
     init: true
     restart: always
@@ -18,6 +19,7 @@ services:
       - wordpress_data:/var/www/html
   wordpress:
     build: ./requirements/wordpress
+    image: wordpress
     container_name: wordpress
     init: true
     restart: always
@@ -34,6 +36,7 @@ services:
       - .env
   mariadb:
     build: ./requirements/mariadb
+    image: mariadb
     container_name: mariadb
     init: true
     restart: always
