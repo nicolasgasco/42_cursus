@@ -5,11 +5,12 @@ machine.
 
 This project consists in having you set up a small infrastructure composed of different services under specific rules: mariadb, Wordpress, and nginx as reverse proxy.
 
+<img width="550" alt="Screen Shot 2022-11-26 at 2 58 46 PM" src="https://user-images.githubusercontent.com/73175085/204092508-81c52dea-60bc-431d-a758-0e809e121f61.png">
 
 ## Run
-Add `127.0.0.1  ngasco.42.fr` in your `/etc/hosts`. That is the domain name that the project expects.
+Add `127.0.0.1  ngasco.42.fr` in your `/etc/hosts`. That is the domain name that the project expects to work correctly.
 
-Then, inside the folder:
+Then, inside the project folder:
 ```
 make inception
 ```
