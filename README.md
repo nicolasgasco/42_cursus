@@ -10,6 +10,7 @@ The projects of the _Common Core_ that I completed while being a student at 42Ur
 ## Projects from newest to oldest
 |Name|Language|End date|Description|Estimated effort (h)|
 |----|--------|--------|-----------|----------|
+|**[ft_containers](https://github.com/nicolasgasco/42_cursus/tree/master/18_ft_containers)**|C++|In progress|Reimplement `vector`, `map`, and `stack` containers from the STL.|210|
 |**[inception  🐳](https://github.com/nicolasgasco/42_cursus/tree/master/17_inception)**|Docker|November 2022|Set up a small infrastructure composed of different services under specific rules using Docker.|210|
 |**[exam_05](https://github.com/nicolasgasco/42_cursus/tree/master/16_exam_05)**|C++|November 2022|The exercises I did in order to prepare for the 5th rank exam.|-|
 |**[cpp_modules](https://github.com/nicolasgasco/42_cursus/tree/master/15_cpp_modules)**|C++|In progress|9 "mini" projects to learn the basics of C++ (98 standard 👴) with a strong focus on OOP|9 days|
