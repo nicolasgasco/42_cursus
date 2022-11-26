@@ -8,9 +8,10 @@ This project consists in having you set up a small infrastructure composed of di
 <img width="550" alt="Screen Shot 2022-11-26 at 2 58 46 PM" src="https://user-images.githubusercontent.com/73175085/204092508-81c52dea-60bc-431d-a758-0e809e121f61.png">
 
 ## Run
-Add `127.0.0.1  ngasco.42.fr` in your `/etc/hosts`. That is the domain name that the project expects to work correctly.
+Create a VM with a user called `ngasco` (`/home/ngasco` folder is required`).
+Add `127.0.0.1  ngasco.42.fr` in `/etc/hosts`. That is the domain name that the project expects to work correctly.
 
-Then, inside the project folder:
+Then, download the project folder and inside run:
 ```
 make inception
 ```
