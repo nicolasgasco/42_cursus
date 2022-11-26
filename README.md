@@ -11,7 +11,7 @@ The projects of the _Common Core_ that I completed while being a student at 42Ur
 |Name|Language|End date|Description|Estimated effort (h)|
 |----|--------|--------|-----------|----------|
 |**[inception  🐳](https://github.com/nicolasgasco/42_cursus/tree/master/17_inception)**|Docker|November 2022|Set up a small infrastructure composed of different services under specific rules using Docker.|210|
-|**[exam_05](https://github.com/nicolasgasco/42_cursus/tree/master/16_exam_05)**|C++|November 2022|New circle, new exam!|-|
+|**[exam_05](https://github.com/nicolasgasco/42_cursus/tree/master/16_exam_05)**|C++|November 2022|The exercises I did in order to prepare for the 5th rank exam.|-|
 |**[cpp_modules](https://github.com/nicolasgasco/42_cursus/tree/master/15_cpp_modules)**|C++|In progress|9 "mini" projects to learn the basics of C++ (98 standard 👴) with a strong focus on OOP|9 days|
 |**[exam_04](https://github.com/nicolasgasco/42_cursus/tree/master/14_exam_04)**|C|August 2022|The exercises I did in order to prepare for the 4th rank exam.|-|
 |**[cube3D 🕹️](https://github.com/nicolasgasco/42_cub3d/tree/44910b304e52fb3db0bb541efd611a30d0dd54e1)**|C|August 2022|Wolfenstein-inspired minigame using raycasting to fake a tridimensional view. Group project done in a [separate repository](https://github.com/nicolasgasco/42_cub3d) with [@isolinis](https://github.com/isolinis)|280|
