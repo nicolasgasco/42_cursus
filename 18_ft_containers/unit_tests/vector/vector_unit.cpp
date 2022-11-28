@@ -22,13 +22,13 @@ int main(int argc, char *argv[])
 
     std::cout << YELLOW << "VECTOR UNIT TESTS" << NOCOL << std::endl;
 
-    /*
-     * MEMBER FUNCTIONS
-     */
+    // Capacity
     sizeUnitTests(IS_DEBUG);
     capacityUnitTests(IS_DEBUG);
     emptyUnitTests(IS_DEBUG);
     maxSizeUnitTests(IS_DEBUG);
+
+    // Allocator
     getAllocatorUnitTests(IS_DEBUG);
 
     // Access
