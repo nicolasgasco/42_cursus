@@ -28,7 +28,7 @@ namespace ft
          * LIFECYCLE
          */
         // Empty constructor
-        vector() : _size(0), _capacity(0), _isEmpty(true), _maxSize(calcMaxSize()) {}
+        vector() : _size(0), _capacity(0), _isEmpty(true), _maxSize(SIZE_T_MAX / sizeof(value_type)) {}
         // Fill constructor
         // Range constructor
         // Copy constructor
@@ -59,10 +59,6 @@ namespace ft
         size_type max_size() const
         {
             return _maxSize;
-        }
-        size_type calcMaxSize() const
-        {
-            return (SIZE_T_MAX / sizeof(value_type));
         }
 
     private:
