@@ -1,9 +1,13 @@
 
 #include <iostream>
-#include "size_tests.hpp"
-#include "capacity_tests.hpp"
-#include "empy_test.hpp"
-#include "max_size_test.hpp"
+
+// Capacity
+#include "capacity/size_tests.hpp"
+#include "capacity/capacity_tests.hpp"
+#include "capacity/empy_test.hpp"
+#include "capacity/max_size_test.hpp"
+
+// Allocator
 #include "get_allocator_tests.hpp"
 
 int main(int argc, char *argv[])
