@@ -10,6 +10,9 @@
 // Allocator
 #include "get_allocator_tests.hpp"
 
+// Access
+#include "access/random_access_tests.hpp"
+
 int main(int argc, char *argv[])
 {
     bool IS_DEBUG = false;
@@ -26,6 +29,9 @@ int main(int argc, char *argv[])
     emptyUnitTests(IS_DEBUG);
     maxSizeUnitTests(IS_DEBUG);
     getAllocatorUnitTests();
+
+    // Access
+    randomAccessUnitTests(IS_DEBUG);
 
     std::cout
         << std::endl;

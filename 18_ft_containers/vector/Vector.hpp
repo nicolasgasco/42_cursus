@@ -75,11 +75,31 @@ namespace ft
         }
 
         /*
+         * Capacity
+         */
+        void push_back(const T &value)
+        {
+            this->_array[this->_size] = value;
+        }
+
+        /*
          * Allocator
          */
         allocator_type get_allocator() const
         {
             return this->_alloc;
+        }
+
+        /* ----------------------------------
+         * Access
+         * ---------------------------------- */
+        reference operator[](size_type pos)
+        {
+            return *(this->_array + pos);
+        }
+        const_reference operator[](size_type pos) const
+        {
+            return *(this->_array + pos);
         }
 
     private:
