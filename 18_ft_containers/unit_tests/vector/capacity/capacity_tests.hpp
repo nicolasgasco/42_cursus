@@ -11,10 +11,11 @@ void capacityUnitTests(bool isDebug)
     {
         ft::vector<int> own;
         std::vector<int> original;
-        outputAssertion("when empty:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        outputAssertion("with empty constructor:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
     }
-    // Should be 3
-    // Should be 100
-    // Should be 99
-    // for (int i=0; i<100; i++) myvector.push_back(i);
+    {
+        ft::vector<int> own(9);
+        std::vector<int> original(9);
+        outputAssertion("with fill constructor:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
 }

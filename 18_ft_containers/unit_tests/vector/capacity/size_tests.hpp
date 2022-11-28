@@ -11,17 +11,11 @@ void sizeUnitTests(bool isDebug)
     {
         ft::vector<int> own;
         std::vector<int> original;
-        outputAssertion("when empty:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+        outputAssertion("with empty constructor:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
     }
-    // {
-    //     std::vector<int> original = returnPopulatedVector<std::vector<int>, int>(1, 1);
-    //     outputAssertion("when populated with 1 int:", isStrictEqual<std::size_t>(0, original.size(), isDebug));
-    // }
-    // {
-    //     std::vector<int> original = returnPopulatedVector<std::vector<int>, int>(3, 1);
-    //     outputAssertion("when populated with 3 int:", isStrictEqual<std::size_t>(0, original.size(), isDebug));
-    // }
-    // Should be 3
-    // Should be 100
-    // Should be 99
+    {
+        ft::vector<int> own(9);
+        std::vector<int> original(9);
+        outputAssertion("with fill constructor:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+    }
 }
