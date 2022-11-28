@@ -35,7 +35,14 @@ namespace ft
 
             this->_maxSize = this->_alloc.max_size();
         }
-        // Fill constructor
+        // Fill constructors
+        vector(size_type count) : _size(count), _capacity(count), _isEmpty(false)
+        {
+            this->_alloc = *(new allocator_type);
+            this->_array = this->_alloc.allocate(count);
+
+            this->_maxSize = this->_alloc.max_size();
+        }
         // Range constructor
         // Copy constructor
 

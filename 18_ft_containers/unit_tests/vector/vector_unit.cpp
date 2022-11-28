@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     capacityUnitTests(IS_DEBUG);
     emptyUnitTests(IS_DEBUG);
     maxSizeUnitTests(IS_DEBUG);
-    getAllocatorUnitTests(IS_DEBUG);
+    getAllocatorUnitTests();
 
     std::cout
         << std::endl;

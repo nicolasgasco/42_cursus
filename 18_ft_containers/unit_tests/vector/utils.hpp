@@ -24,6 +24,11 @@ bool isStrictEqual(T value, T reference, bool printValue)
         std::cout << std::boolalpha << "=====own===== " << value << " | " << reference << " =====ref=====" << std::endl;
     return (value == reference) ? true : false;
 }
+template <typename T>
+bool isStrictEqual(T value, T reference)
+{
+    return (value == reference) ? true : false;
+}
 
 template <typename T, typename V>
 T returnPopulatedVector(int numOfEls, V value)
