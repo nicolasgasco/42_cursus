@@ -31,7 +31,7 @@ namespace ft
         vector() : _size(0), _capacity(0), _isEmpty(true)
         {
             this->_alloc = *(new allocator_type);
-            this->_array = this->_alloc.allocate(0);
+            this->_data = this->_alloc.allocate(0);
 
             this->_maxSize = this->_alloc.max_size();
         }
@@ -39,17 +39,17 @@ namespace ft
         vector(size_type count) : _size(count), _capacity(count), _isEmpty(false)
         {
             this->_alloc = *(new allocator_type);
-            this->_array = this->_alloc.allocate(count);
+            this->_data = this->_alloc.allocate(count);
             for (size_type i = 0; i < count; ++i)
-                this->_alloc.construct((this->_array + i));
+                this->_alloc.construct((this->_data + i));
             this->_maxSize = this->_alloc.max_size();
         }
         vector(size_type count, const T &value) : _size(count), _capacity(count), _isEmpty(false)
         {
             this->_alloc = *(new allocator_type);
-            this->_array = this->_alloc.allocate(count);
+            this->_data = this->_alloc.allocate(count);
             for (size_type i = 0; i < count; ++i)
-                this->_alloc.construct((this->_array + i), value);
+                this->_alloc.construct((this->_data + i), value);
 
             this->_maxSize = this->_alloc.max_size();
         }
@@ -59,8 +59,8 @@ namespace ft
         ~vector()
         {
             for (size_type i = 0; i < this->_size; ++i)
-                this->_array[i] = 0;
-            this->_alloc.destroy(this->_array);
+                this->_data[i] = 0;
+            this->_alloc.destroy(this->_data);
         }
 
         /* ----------------------------------
@@ -96,7 +96,7 @@ namespace ft
          */
         // void push_back(const T &value)
         // {
-        //     this->_array[this->_size] = value;
+        //     this->_data[this->_size] = value;
         // }
 
         /*
@@ -112,25 +112,25 @@ namespace ft
          * ---------------------------------- */
         reference operator[](size_type pos)
         {
-            return *(this->_array + pos);
+            return *(this->_data + pos);
         }
         // const_reference operator[](size_type pos) const
         // {
-        //     return *(this->_array + pos);
+        //     return *(this->_data + pos);
         // }
 
         T *data()
         {
-            return this->_array;
+            return this->_data;
         }
         const T *data() const
         {
-            return const_cast<T *>(this->_array);
+            return const_cast<T *>(this->_data);
         }
 
     private:
         allocator_type _alloc;
-        T *_array;
+        T *_data;
 
         size_type _size;
         size_type _capacity;
