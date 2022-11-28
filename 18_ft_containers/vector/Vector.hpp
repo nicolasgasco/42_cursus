@@ -67,7 +67,7 @@ namespace ft
         }
 
         /*
-         * Capacity
+         * Allocator
          */
         allocator_type get_allocator() const
         {
