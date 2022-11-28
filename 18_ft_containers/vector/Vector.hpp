@@ -28,11 +28,12 @@ namespace ft
          * LIFECYCLE
          * ---------------------------------- */
         // Empty constructor
-        vector() : _size(0), _capacity(0), _isEmpty(true), _maxSize(SIZE_T_MAX / sizeof(value_type))
+        vector() : _size(0), _capacity(0), _isEmpty(true)
         {
-            allocator_type alloc;
-            this->_alloc = alloc;
-            this->_array = alloc.allocate(0);
+            this->_alloc = *(new allocator_type);
+            this->_array = this->_alloc.allocate(0);
+
+            this->_maxSize = this->_alloc.max_size();
         }
         // Fill constructor
         // Range constructor
