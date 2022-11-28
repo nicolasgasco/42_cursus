@@ -8,7 +8,7 @@
 #include "capacity/max_size_test.hpp"
 
 // Allocator
-#include "get_allocator_tests.hpp"
+#include "allocator/get_allocator_tests.hpp"
 
 // Access
 #include "access/random_access_tests.hpp"
