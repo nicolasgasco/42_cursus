@@ -92,7 +92,7 @@ namespace ft
         }
 
         /*
-         * Capacity
+         * Modifiers
          */
         // void push_back(const T &value)
         // {
