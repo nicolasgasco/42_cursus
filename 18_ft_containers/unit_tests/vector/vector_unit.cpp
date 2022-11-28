@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     capacityUnitTests(IS_DEBUG);
     emptyUnitTests(IS_DEBUG);
     maxSizeUnitTests(IS_DEBUG);
-    getAllocatorUnitTests();
+    getAllocatorUnitTests(IS_DEBUG);
 
     // Access
     randomAccessUnitTests(IS_DEBUG);
