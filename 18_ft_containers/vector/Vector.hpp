@@ -1,6 +1,6 @@
-#ifndef __VECTOR_HPP__
-#define __VECTOR_HPP__
+#pragma once
 
+#include "utils/max_size.hpp"
 #include <iostream>
 
 namespace ft
@@ -29,7 +29,7 @@ namespace ft
          * LIFECYCLE
          */
         // Empty constructor
-        vector() : _size(0), _capacity(0), _isEmpty(true) {}
+        vector() : _size(0), _capacity(0), _isEmpty(true), _maxSize(COUNT) {}
         // Fill constructor
         // Range constructor
         // Copy constructor
@@ -57,12 +57,16 @@ namespace ft
             return this->_isEmpty;
         }
 
+        size_type max_size() const
+        {
+            return this->_maxSize;
+        }
+
     private:
         T *_array;
         size_type _size;
         size_type _capacity;
         bool _isEmpty;
+        size_t _maxSize;
     };
 }
-
-#endif

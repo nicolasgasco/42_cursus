@@ -3,6 +3,7 @@
 #include "size_tests.hpp"
 #include "capacity_tests.hpp"
 #include "empy_test.hpp"
+#include "max_size_test.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -18,6 +19,7 @@ int main(int argc, char *argv[])
     sizeUnitTests(IS_DEBUG);
     capacityUnitTests(IS_DEBUG);
     emptyUnitTests(IS_DEBUG);
+    maxSizeUnitTests(IS_DEBUG);
 
     return (0);
 }
