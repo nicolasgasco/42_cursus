@@ -7,7 +7,6 @@ SANITIZE = -g -fsanitize=address
 SRC_NAME =	main.cpp \
 
 INCLUDES =	vector/Vector.hpp \
-			utils\max_size.hpp
 
 OBJ_NAME = $(SRC_NAME:.cpp=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))

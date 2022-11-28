@@ -1,6 +1,5 @@
 #pragma once
 
-#include "utils/max_size.hpp"
 #include <iostream>
 
 namespace ft
@@ -29,7 +28,7 @@ namespace ft
          * LIFECYCLE
          */
         // Empty constructor
-        vector() : _size(0), _capacity(0), _isEmpty(true), _maxSize(COUNT) {}
+        vector() : _size(0), _capacity(0), _isEmpty(true), _maxSize(calcMaxSize()) {}
         // Fill constructor
         // Range constructor
         // Copy constructor
@@ -59,7 +58,11 @@ namespace ft
 
         size_type max_size() const
         {
-            return this->_maxSize;
+            return _maxSize;
+        }
+        size_type calcMaxSize() const
+        {
+            return (SIZE_T_MAX / sizeof(value_type));
         }
 
     private:
@@ -67,6 +70,6 @@ namespace ft
         size_type _size;
         size_type _capacity;
         bool _isEmpty;
-        size_t _maxSize;
+        size_type _maxSize;
     };
 }

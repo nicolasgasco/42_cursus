@@ -1,16 +1,16 @@
 #pragma once
 
 #include "utils.hpp"
+#include <vector>
 #include "../../vector/Vector.hpp"
 
 void maxSizeUnitTests(bool isDebug)
 {
     std::cout << YELLOW << "MAX SIZE" << NOCOL << std::endl;
-    std::cout << "Is strictly equal to 42-provided value:" << std::endl;
+    std::cout << "Is strictly equal to STL vector value:" << std::endl;
     {
         ft::vector<int> own;
-        // Mock max_size is provided by 42
-        outputAssertion("when empty:", isStrictEqual<int>(own.max_size(), 1047552, isDebug));
+        std::vector<int> original;
+        outputAssertion("when empty:", isStrictEqual<std::size_t>(own.max_size(), original.max_size(), isDebug));
     }
-    // with more elements
 }
