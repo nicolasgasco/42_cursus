@@ -94,10 +94,10 @@ namespace ft
         /*
          * Capacity
          */
-        void push_back(const T &value)
-        {
-            this->_array[this->_size] = value;
-        }
+        // void push_back(const T &value)
+        // {
+        //     this->_array[this->_size] = value;
+        // }
 
         /*
          * Allocator
