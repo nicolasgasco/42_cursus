@@ -16,13 +16,13 @@ OBJ_DIR = ./obj/
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJ)
+	$(CC) $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ)
 	@echo "##### $(NAME) compiled! #####"
 
 $(OBJ_DIR)%.o: %.cpp $(INCLUDES)
 	@mkdir -p $(OBJ_DIR)
 	@echo "##### Creating" [ $@ ] " #####"
-	$(CC) $(FLAGS) -c $< -I. -o $@
+	$(CC) $(FLAGS) $(SANITIZE) -c $< -I. -o $@
 
 clean:
 	@rm -f $(OBJ)
