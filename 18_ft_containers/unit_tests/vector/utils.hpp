@@ -15,7 +15,7 @@ template <typename T>
 bool isStrictEqual(T value, T reference, bool printValue)
 {
     if (printValue)
-        std::cout << " (" << value << ", " << reference << ")" << std::endl;
+        std::cout << std::boolalpha << "========== " << value << ", " << reference << " ==========" << std::endl;
     return (value == reference) ? true : false;
 }
 

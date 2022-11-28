@@ -11,7 +11,7 @@ void capacityUnitTests(bool isDebug)
     {
         ft::vector<int> own;
         std::vector<int> original;
-        outputAssertion("when empty:", isStrictEqual<int>(own.capacity(), original.capacity(), isDebug));
+        outputAssertion("when empty:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
     }
     // Should be 3
     // Should be 100

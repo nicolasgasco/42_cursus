@@ -11,7 +11,7 @@ void emptyUnitTests(bool isDebug)
     {
         ft::vector<int> own;
         std::vector<int> original;
-        outputAssertion("when empty:", isStrictEqual<int>(own.empty(), original.empty(), isDebug));
+        outputAssertion("when empty:", isStrictEqual<bool>(own.empty(), original.empty(), isDebug));
     }
     // Should be 3
     // Should be 100
