@@ -15,16 +15,6 @@
 
 #include <stdlib.h>
 
-#define MAX_RAM 4294967296
-#define BUFFER_SIZE 4096
-struct Buffer
-{
-    int idx;
-    char buff[BUFFER_SIZE];
-};
-
-#define COUNT (MAX_RAM / (int)sizeof(Buffer))
-
 #define YELLOW "\033[0;33m"
 #define NOCOL "\033[0m"
 // template <typename T>
@@ -46,7 +36,8 @@ struct Buffer
 //     iterator end() { return this->c.end(); }
 // };
 
+#include <iostream>
 int main()
 {
-    return (0);
+    return 0;
 }
