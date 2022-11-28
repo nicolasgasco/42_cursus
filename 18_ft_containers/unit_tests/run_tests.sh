@@ -1,2 +1,2 @@
 cd vector
-make re && ./vector $1
+make re && ./vector_tests $1

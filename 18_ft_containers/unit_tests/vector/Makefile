@@ -1,4 +1,4 @@
-NAME = vector
+NAME = vector_tests
 CC = clang++
 FLAGS = -Wall -Wextra -Werror
 NINETYEIGHT = -std=c++98 -pedantic
