@@ -6,7 +6,7 @@
 
 void emptyUnitTests(bool isDebug)
 {
-    std::cout << YELLOW << "EMPTY" << NOCOL << std::endl;
+    outputSuiteTitle("EMPTY");
     std::cout << "Is strictly equal to STL vector value:" << std::endl;
     {
         ft::vector<int> own;

@@ -6,7 +6,7 @@
 
 void capacityUnitTests(bool isDebug)
 {
-    std::cout << YELLOW << "CAPACITY" << NOCOL << std::endl;
+    outputSuiteTitle("CAPACITY");
     std::cout << "Is strictly equal to STL vector value:" << std::endl;
     {
         ft::vector<int> own;

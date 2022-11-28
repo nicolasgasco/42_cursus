@@ -6,7 +6,7 @@
 
 void maxSizeUnitTests(bool isDebug)
 {
-    std::cout << YELLOW << "MAX SIZE" << NOCOL << std::endl;
+    outputSuiteTitle("MAX SIZE");
     std::cout << "Is strictly equal to STL vector value:" << std::endl;
     {
         ft::vector<int> own;

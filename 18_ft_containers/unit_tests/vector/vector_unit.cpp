@@ -21,5 +21,6 @@ int main(int argc, char *argv[])
     emptyUnitTests(IS_DEBUG);
     maxSizeUnitTests(IS_DEBUG);
 
+    std::cout << std::endl;
     return (0);
 }

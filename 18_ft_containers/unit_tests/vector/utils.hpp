@@ -11,11 +11,17 @@ void outputAssertion(std::string description, bool value)
     std::cout << "  - " << description << " " << ((value == true) ? "✅" : "❌") << std::endl;
 }
 
+void outputSuiteTitle(std::string title)
+{
+    std::cout << std::endl
+              << YELLOW << title << NOCOL << std::endl;
+}
+
 template <typename T>
 bool isStrictEqual(T value, T reference, bool printValue)
 {
     if (printValue)
-        std::cout << std::boolalpha << "========== " << value << ", " << reference << " ==========" << std::endl;
+        std::cout << std::boolalpha << "=====own===== " << value << " | " << reference << " =====ref=====" << std::endl;
     return (value == reference) ? true : false;
 }
 
