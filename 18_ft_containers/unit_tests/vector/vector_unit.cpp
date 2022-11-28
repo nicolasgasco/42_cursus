@@ -12,6 +12,7 @@
 
 // Access
 #include "access/random_access_tests.hpp"
+#include "access/data.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -32,6 +33,7 @@ int main(int argc, char *argv[])
 
     // Access
     randomAccessUnitTests(IS_DEBUG);
+    dataUnitTests(IS_DEBUG);
 
     std::cout
         << std::endl;

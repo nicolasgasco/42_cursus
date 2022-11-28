@@ -41,7 +41,7 @@ namespace ft
             this->_alloc = *(new allocator_type);
             this->_array = this->_alloc.allocate(count);
             for (size_type i = 0; i < count; ++i)
-                this->_array[i] = *(new T());
+                this->_alloc.construct((this->_array + i));
             this->_maxSize = this->_alloc.max_size();
         }
         vector(size_type count, const T &value) : _size(count), _capacity(count), _isEmpty(false)
@@ -114,9 +114,18 @@ namespace ft
         {
             return *(this->_array + pos);
         }
-        const_reference operator[](size_type pos) const
+        // const_reference operator[](size_type pos) const
+        // {
+        //     return *(this->_array + pos);
+        // }
+
+        T *data()
         {
-            return *(this->_array + pos);
+            return this->_array;
+        }
+        const T *data() const
+        {
+            return const_cast<T *>(this->_array);
         }
 
     private:

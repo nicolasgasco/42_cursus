@@ -29,6 +29,18 @@ bool isStrictEqual(T value, T reference)
 {
     return (value == reference) ? true : false;
 }
+template <typename T>
+bool isStrictEqual(T const *ownArr, T const *refArr, unsigned int len, bool printValue)
+{
+    for (unsigned int i = 0; i < len; ++i)
+    {
+        if (printValue)
+            std::cout << ownArr[i] << " | " << refArr[i] << std::endl;
+        if (ownArr[i] != refArr[i])
+            return false;
+    }
+    return true;
+}
 
 template <typename T, typename V>
 T returnPopulatedVector(int numOfEls, V value)

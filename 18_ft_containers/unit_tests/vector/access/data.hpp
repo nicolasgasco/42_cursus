@@ -1,0 +1,45 @@
+#pragma once
+
+#include <vector>
+
+#include "utils.hpp"
+#include "../../vector/Vector.hpp"
+
+void dataUnitTests(bool isDebug)
+{
+    outputSuiteTitle("DATA");
+    std::cout << "Is initialized equal to STL vector value:" << std::endl;
+    std::cout << "  NOT CONST" << std::endl;
+    {
+        ft::vector<int> own;
+        std::vector<int> original;
+        outputAssertion("with empty constructor:", isStrictEqual<int>(own.data(), original.data(), 0, isDebug));
+    }
+    {
+        ft::vector<int> own(3);
+        std::vector<int> original(3);
+        outputAssertion("with fill constructor:", isStrictEqual<int>(own.data(), original.data(), 3, isDebug));
+    }
+    {
+        ft::vector<int> own(3, 5);
+        std::vector<int> original(3, 5);
+        outputAssertion("with fill constructor + value (5):", isStrictEqual<int>(own.data(), original.data(), 3, isDebug));
+    }
+    std::cout << std::endl
+              << "  CONST" << std::endl;
+    {
+        ft::vector<int> const own;
+        std::vector<int> const original;
+        outputAssertion("with empty constructor:", isStrictEqual<int>(own.data(), original.data(), 0, isDebug));
+    }
+    {
+        ft::vector<int> const own(3);
+        std::vector<int> const original(3);
+        outputAssertion("with fill constructor:", isStrictEqual<int>(own.data(), original.data(), 3, isDebug));
+    }
+    {
+        ft::vector<int> const own(3, 5);
+        std::vector<int> const original(3, 5);
+        outputAssertion("with fill constructor + value (5):", isStrictEqual<int>(own.data(), original.data(), 3, isDebug));
+    }
+}
