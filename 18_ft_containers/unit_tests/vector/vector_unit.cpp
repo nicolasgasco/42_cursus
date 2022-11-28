@@ -4,6 +4,7 @@
 #include "capacity_tests.hpp"
 #include "empy_test.hpp"
 #include "max_size_test.hpp"
+#include "get_allocator_tests.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -20,7 +21,9 @@ int main(int argc, char *argv[])
     capacityUnitTests(IS_DEBUG);
     emptyUnitTests(IS_DEBUG);
     maxSizeUnitTests(IS_DEBUG);
+    getAllocatorUnitTests(IS_DEBUG);
 
-    std::cout << std::endl;
+    std::cout
+        << std::endl;
     return (0);
 }

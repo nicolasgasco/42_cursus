@@ -24,18 +24,23 @@ namespace ft
         // typedef std::reverse_iterator<iterator> reverse_iterator;
         // typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
 
-        /*
+        /* ----------------------------------
          * LIFECYCLE
-         */
+         * ---------------------------------- */
         // Empty constructor
-        vector() : _size(0), _capacity(0), _isEmpty(true), _maxSize(SIZE_T_MAX / sizeof(value_type)) {}
+        vector() : _size(0), _capacity(0), _isEmpty(true), _maxSize(SIZE_T_MAX / sizeof(value_type))
+        {
+            allocator_type alloc;
+            this->_alloc = alloc;
+            this->_array = alloc.allocate(0);
+        }
         // Fill constructor
         // Range constructor
         // Copy constructor
 
-        /*
-         * MEMBER FUNCTIONS
-         */
+        /* ----------------------------------
+         * Member functions
+         * ---------------------------------- */
 
         /*
          * Capacity
@@ -61,8 +66,18 @@ namespace ft
             return _maxSize;
         }
 
+        /*
+         * Capacity
+         */
+        allocator_type get_allocator() const
+        {
+            return this->_alloc;
+        }
+
     private:
+        allocator_type _alloc;
         T *_array;
+
         size_type _size;
         size_type _capacity;
         bool _isEmpty;
