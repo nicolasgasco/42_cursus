@@ -66,4 +66,17 @@ void dataUnitTests(bool isDebug)
         std::vector<int> const original(3, 5, alloc);
         outputAssertion("with fill constructor + value (5) + custom allocator:", isStrictEqual<int>(own.data(), original.data(), 3, isDebug));
     }
+
+    std::cout << std::endl
+              << "Const check compared to STL vector value:" << std::endl;
+    {
+        ft::vector<int> own(5, 10);
+        std::vector<int> original(5, 10);
+        outputAssertion("is const with fill costructor (num: 5, value:10):", isStrictEqual<bool>(isConst(*(own.data())), isConst(*(original.data())), isDebug));
+    }
+    {
+        ft::vector<int> const own(5, 10);
+        std::vector<int> const original(5, 10);
+        outputAssertion("is const with fill costructor (num: 5, value:10):", isStrictEqual<bool>(isConst(*(own.data())), isConst(*(original.data())), isDebug));
+    }
 }
