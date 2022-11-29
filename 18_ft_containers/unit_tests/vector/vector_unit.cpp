@@ -15,6 +15,7 @@
 #include "access/data.hpp"
 #include "access/front.hpp"
 #include "access/back.hpp"
+#include "access/at.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -38,6 +39,7 @@ int main(int argc, char *argv[])
     dataUnitTests(IS_DEBUG);
     frontUnitTests(IS_DEBUG);
     backUnitTests(IS_DEBUG);
+    atUnitTests(IS_DEBUG);
 
     std::cout
         << std::endl;

@@ -145,6 +145,19 @@ namespace ft
             return *(this->_data + (this->_size - 1));
         }
 
+        reference at(size_type pos)
+        {
+            if (pos < 0 || pos > (this->_size - 1))
+                throw std::out_of_range("vector");
+            return *(this->_data + pos);
+        }
+        const_reference at(size_type pos) const
+        {
+            if (pos < 0 || pos > (this->_size - 1))
+                throw std::out_of_range("vector");
+            return *(this->_data + pos);
+        }
+
     private:
         allocator_type _alloc;
         T *_data;
