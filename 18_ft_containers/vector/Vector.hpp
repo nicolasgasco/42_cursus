@@ -27,15 +27,8 @@ namespace ft
         /* ----------------------------------
          * LIFECYCLE
          * ---------------------------------- */
-        // Empty constructors
-        vector() : _size(0), _capacity(0), _isEmpty(true)
-        {
-            this->_alloc = *(new allocator_type);
-            this->_data = this->_alloc.allocate(0);
-
-            this->_maxSize = this->_alloc.max_size();
-        }
-        vector(const Allocator &alloc) : _size(0), _capacity(0), _isEmpty(true)
+        // Empty constructor
+        vector(const allocator_type &alloc = allocator_type()) : _size(0), _capacity(0), _isEmpty(true)
         {
             this->_alloc = alloc;
             this->_data = this->_alloc.allocate(0);
