@@ -69,9 +69,19 @@ namespace ft
         /*
          * Capacity
          */
+        bool empty() const
+        {
+            return this->_isEmpty;
+        }
+
         size_type size() const
         {
             return this->_size;
+        }
+
+        size_type max_size() const
+        {
+            return _maxSize;
         }
 
         size_type capacity() const
@@ -80,15 +90,13 @@ namespace ft
             return this->_capacity;
         }
 
-        bool empty() const
-        {
-            return this->_isEmpty;
-        }
-
-        size_type max_size() const
-        {
-            return _maxSize;
-        }
+        // void reserve(size_type new_cap)
+        // {
+        //     if (new_cap > this->_maxSize)
+        //     {
+        //         throw std::length_error;
+        //     }
+        // }
 
         /*
          * Modifiers
@@ -109,6 +117,19 @@ namespace ft
         /* ----------------------------------
          * Access
          * ---------------------------------- */
+        reference at(size_type pos)
+        {
+            if (pos < 0 || pos > (this->_size - 1))
+                throw std::out_of_range("vector");
+            return *(this->_data + pos);
+        }
+        const_reference at(size_type pos) const
+        {
+            if (pos < 0 || pos > (this->_size - 1))
+                throw std::out_of_range("vector");
+            return *(this->_data + pos);
+        }
+
         reference operator[](size_type pos)
         {
             return *(this->_data + pos);
@@ -117,15 +138,6 @@ namespace ft
         // {
         //     return *(this->_data + pos);
         // }
-
-        value_type *data()
-        {
-            return this->_data;
-        }
-        const value_type *data() const
-        {
-            return const_cast<T *>(this->_data);
-        }
 
         reference front()
         {
@@ -145,17 +157,13 @@ namespace ft
             return *(this->_data + (this->_size - 1));
         }
 
-        reference at(size_type pos)
+        value_type *data()
         {
-            if (pos < 0 || pos > (this->_size - 1))
-                throw std::out_of_range("vector");
-            return *(this->_data + pos);
+            return this->_data;
         }
-        const_reference at(size_type pos) const
+        const value_type *data() const
         {
-            if (pos < 0 || pos > (this->_size - 1))
-                throw std::out_of_range("vector");
-            return *(this->_data + pos);
+            return const_cast<T *>(this->_data);
         }
 
     private:
