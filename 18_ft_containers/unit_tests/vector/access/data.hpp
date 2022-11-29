@@ -31,6 +31,12 @@ void dataUnitTests(bool isDebug)
         std::vector<int> original(3, 5);
         outputAssertion("with fill constructor + value (5):", isStrictEqual<int>(own.data(), original.data(), 3, isDebug));
     }
+    {
+        std::allocator<int> alloc = std::allocator<int>();
+        ft::vector<int> own(3, 5, alloc);
+        std::vector<int> original(3, 5, alloc);
+        outputAssertion("with fill constructor + value (5) + custom allocator:", isStrictEqual<int>(own.data(), original.data(), 3, isDebug));
+    }
     std::cout << std::endl
               << "  CONST" << std::endl;
     {
@@ -39,7 +45,7 @@ void dataUnitTests(bool isDebug)
         outputAssertion("with empty constructor:", isStrictEqual<int>(own.data(), original.data(), 0, isDebug));
     }
     {
-        std::allocator<int> alloc = std::allocator<int>();
+        std::allocator<int> const alloc = std::allocator<int>();
         ft::vector<int> const own(alloc);
         std::vector<int> const original(alloc);
         outputAssertion("with empty constructor (custom allocator):", isStrictEqual<int>(own.data(), original.data(), 0, isDebug));
@@ -53,5 +59,11 @@ void dataUnitTests(bool isDebug)
         ft::vector<int> const own(3, 5);
         std::vector<int> const original(3, 5);
         outputAssertion("with fill constructor + value (5):", isStrictEqual<int>(own.data(), original.data(), 3, isDebug));
+    }
+    {
+        std::allocator<int> const alloc = std::allocator<int>();
+        ft::vector<int> const own(3, 5, alloc);
+        std::vector<int> const original(3, 5, alloc);
+        outputAssertion("with fill constructor + value (5) + custom allocator:", isStrictEqual<int>(own.data(), original.data(), 3, isDebug));
     }
 }

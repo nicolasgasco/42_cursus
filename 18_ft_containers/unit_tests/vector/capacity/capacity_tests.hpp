@@ -29,4 +29,10 @@ void capacityUnitTests(bool isDebug)
         std::vector<int> original(9, 5);
         outputAssertion("with fill constructor + value:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
     }
+    {
+        std::allocator<int> alloc = std::allocator<int>();
+        ft::vector<int> own(9, 5, alloc);
+        std::vector<int> original(9, 5, alloc);
+        outputAssertion("with fill constructor + value + custom allocator:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
 }

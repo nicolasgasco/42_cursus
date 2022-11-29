@@ -29,4 +29,10 @@ void emptyUnitTests(bool isDebug)
         std::vector<int> original(9, 5);
         outputAssertion("with fill constructor + value:", isStrictEqual<bool>(own.empty(), original.empty(), isDebug));
     }
+    {
+        std::allocator<int> alloc = std::allocator<int>();
+        ft::vector<int> own(9, 5, alloc);
+        std::vector<int> original(9, 5, alloc);
+        outputAssertion("with fill constructor + value + custom allocator:", isStrictEqual<bool>(own.empty(), original.empty(), isDebug));
+    }
 }

@@ -37,23 +37,16 @@ namespace ft
         }
 
         // Fill constructors
-        vector(size_type count) : _size(count), _capacity(count), _isEmpty(false)
+        vector(size_type count, const value_type &value = value_type(), const allocator_type &alloc = allocator_type()) : _size(count), _capacity(count), _isEmpty(false)
         {
-            this->_alloc = *(new allocator_type);
-            this->_data = this->_alloc.allocate(count);
-            for (size_type i = 0; i < count; ++i)
-                this->_alloc.construct((this->_data + i));
-            this->_maxSize = this->_alloc.max_size();
-        }
-        vector(size_type count, const T &value) : _size(count), _capacity(count), _isEmpty(false)
-        {
-            this->_alloc = *(new allocator_type);
+            this->_alloc = alloc;
             this->_data = this->_alloc.allocate(count);
             for (size_type i = 0; i < count; ++i)
                 this->_alloc.construct((this->_data + i), value);
 
             this->_maxSize = this->_alloc.max_size();
         }
+
         // Range constructor
         // Copy constructor
         // Destructor
