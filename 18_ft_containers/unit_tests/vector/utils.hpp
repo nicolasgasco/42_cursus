@@ -18,7 +18,7 @@ void outputSuiteTitle(std::string title)
 }
 
 template <typename T>
-bool isStrictEqual(T value, T reference, bool printValue)
+bool isStrictEqual(T const &value, T const &reference, bool printValue)
 {
     if (printValue)
         std::cout << std::boolalpha << "=====own===== " << value << " | " << reference << " =====ref=====" << std::endl;
@@ -49,4 +49,23 @@ T returnPopulatedVector(int numOfEls, V value)
     for (int i = 0; i < numOfEls; ++i)
         vector.push_back(value);
     return vector;
+}
+
+template <typename T>
+bool isConst(T &x)
+{
+    if (x)
+    {
+        // Not used
+    }
+    return false;
+}
+template <typename T>
+bool isConst(T const &x)
+{
+    if (x)
+    {
+        // Not used
+    }
+    return true;
 }

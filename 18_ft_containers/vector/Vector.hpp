@@ -136,6 +136,11 @@ namespace ft
             return *(this->_data);
         }
 
+        // reference back() {
+        //     return *(this->)
+        // }
+        // const_reference back() const {}
+
     private:
         allocator_type _alloc;
         T *_data;
