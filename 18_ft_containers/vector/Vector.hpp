@@ -4,7 +4,7 @@
 
 namespace ft
 {
-    template <class T, class Allocator = std::allocator<T> >
+    template <class T, class Allocator = std::allocator<T>>
     class vector
     {
     public:
@@ -48,7 +48,12 @@ namespace ft
         }
 
         // Range constructor
+        // template <class InputIterator>
+        // vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type());
+
         // Copy constructor
+        // vector(const vector &x) {}
+
         // Destructor
         ~vector()
         {
