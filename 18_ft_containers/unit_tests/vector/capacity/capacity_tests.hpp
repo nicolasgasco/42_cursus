@@ -14,6 +14,12 @@ void capacityUnitTests(bool isDebug)
         outputAssertion("with empty constructor:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
     }
     {
+        std::allocator<int> alloc = std::allocator<int>();
+        ft::vector<int> own(alloc);
+        std::vector<int> original(alloc);
+        outputAssertion("with empty constructor (custom allocator):", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
         ft::vector<int> own(9);
         std::vector<int> original(9);
         outputAssertion("with fill constructor:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));

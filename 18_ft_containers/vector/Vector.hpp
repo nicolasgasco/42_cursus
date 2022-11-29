@@ -4,7 +4,7 @@
 
 namespace ft
 {
-    template <class T>
+    template <class T, class Allocator = std::allocator<T> >
     class vector
     {
     public:
@@ -12,7 +12,7 @@ namespace ft
          * MEMBER TYPES
          */
         typedef T value_type;
-        typedef std::allocator<T> allocator_type;
+        typedef Allocator allocator_type;
         typedef typename allocator_type::reference reference;
         typedef typename allocator_type::const_reference const_reference;
         // typedef implementation - defined iterator;
@@ -27,7 +27,7 @@ namespace ft
         /* ----------------------------------
          * LIFECYCLE
          * ---------------------------------- */
-        // Empty constructor
+        // Empty constructors
         vector() : _size(0), _capacity(0), _isEmpty(true)
         {
             this->_alloc = *(new allocator_type);
@@ -35,6 +35,14 @@ namespace ft
 
             this->_maxSize = this->_alloc.max_size();
         }
+        vector(const Allocator &alloc) : _size(0), _capacity(0), _isEmpty(true)
+        {
+            this->_alloc = alloc;
+            this->_data = this->_alloc.allocate(0);
+
+            this->_maxSize = this->_alloc.max_size();
+        }
+
         // Fill constructors
         vector(size_type count) : _size(count), _capacity(count), _isEmpty(false)
         {

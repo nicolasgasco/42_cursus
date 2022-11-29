@@ -16,6 +16,12 @@ void getAllocatorUnitTests(bool isDebug)
         outputAssertion("when initialized with empty constructor:", isStrictEqual<std::allocator<int> >(own.get_allocator(), original.get_allocator()));
     }
     {
+        std::allocator<int> alloc = std::allocator<int>();
+        ft::vector<int> own(alloc);
+        std::vector<int> original(alloc);
+        outputAssertion("when initialized with empty constructor (custom allocator):", isStrictEqual<std::allocator<int> >(own.get_allocator(), original.get_allocator()));
+    }
+    {
         ft::vector<int> own(10);
         std::vector<int> original(10);
         outputAssertion("when initialized with fill constructor:", isStrictEqual<std::allocator<int> >(own.get_allocator(), original.get_allocator()));
