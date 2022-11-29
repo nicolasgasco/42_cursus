@@ -127,6 +127,15 @@ namespace ft
             return const_cast<T *>(this->_data);
         }
 
+        reference front()
+        {
+            return *(this->_data);
+        }
+        const_reference front() const
+        {
+            return *(this->_data);
+        }
+
     private:
         allocator_type _alloc;
         T *_data;
