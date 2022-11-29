@@ -4,7 +4,7 @@
 
 namespace ft
 {
-    template <class T, class Allocator = std::allocator<T>>
+    template <class T, class Allocator = std::allocator<T> >
     class vector
     {
     public:
@@ -118,11 +118,11 @@ namespace ft
         //     return *(this->_data + pos);
         // }
 
-        T *data()
+        value_type *data()
         {
             return this->_data;
         }
-        const T *data() const
+        const value_type *data() const
         {
             return const_cast<T *>(this->_data);
         }
