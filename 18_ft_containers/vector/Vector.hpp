@@ -91,14 +91,9 @@ namespace ft
         void reserve(size_type new_cap)
         {
             if (new_cap > this->_maxSize || new_cap < 0)
-            {
                 throw std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size");
-            }
             if (new_cap <= this->_capacity)
-            {
                 return;
-            }
-            // allocate new space, copy and substitute
             value_type *tmp = this->_alloc.allocate(new_cap);
             this->_capacity = new_cap;
             for (size_type i = 0; i < this->_size; ++i)
