@@ -130,14 +130,14 @@ namespace ft
             return *(this->_data + pos);
         }
 
-        reference operator[](size_type pos)
+        reference operator[](size_type n)
         {
-            return *(this->_data + pos);
+            return *(this->_data + n);
         }
-        // const_reference operator[](size_type pos) const
-        // {
-        //     return *(this->_data + pos);
-        // }
+        const_reference operator[](size_type n) const
+        {
+            return *(this->_data + n);
+        }
 
         reference front()
         {
