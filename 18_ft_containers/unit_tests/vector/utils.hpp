@@ -8,7 +8,10 @@
 
 void outputAssertion(std::string description, bool value)
 {
-    std::cout << "  - " << description << " " << ((value == true) ? "✅" : "❌") << std::endl;
+    bool isErr = value != true;
+    std::cout << "  - " << description << " " << (isErr ? "❌" : "✅") << std::endl;
+    if (isErr)
+        exit(1);
 }
 
 void outputSuiteTitle(std::string title)
