@@ -90,13 +90,24 @@ namespace ft
             return this->_capacity;
         }
 
-        // void reserve(size_type new_cap)
-        // {
-        //     if (new_cap > this->_maxSize)
-        //     {
-        //         throw std::length_error;
-        //     }
-        // }
+        void reserve(size_type new_cap)
+        {
+            if (new_cap > this->_maxSize || new_cap < 0)
+            {
+                throw std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size");
+            }
+            if (new_cap <= this->_capacity)
+            {
+                return;
+            }
+            // allocate new space, copy and substitute
+            value_type *tmp = this->_alloc.allocate(new_cap);
+            this->_capacity = new_cap;
+            for (size_type i = 0; i < this->_size; ++i)
+                this->_alloc.construct((tmp + i), this->_data[i]);
+            this->destroyAllocatedData();
+            this->_data = tmp;
+        }
 
         /*
          * Modifiers
@@ -174,5 +185,12 @@ namespace ft
         size_type _capacity;
         bool _isEmpty;
         size_type _maxSize;
+
+        void destroyAllocatedData()
+        {
+            for (size_type i = 0; i < this->_size; ++i)
+                this->_data[i] = 0;
+            this->_alloc.destroy(this->_data);
+        }
     };
 }

@@ -6,6 +6,7 @@
 #include "capacity/capacity_tests.hpp"
 #include "capacity/empy_test.hpp"
 #include "capacity/max_size_test.hpp"
+#include "capacity/reserve.hpp"
 
 // Allocator
 #include "allocator/get_allocator_tests.hpp"
@@ -30,6 +31,7 @@ int main(int argc, char *argv[])
     capacityUnitTests(IS_DEBUG);
     emptyUnitTests(IS_DEBUG);
     maxSizeUnitTests(IS_DEBUG);
+    reserveUnitTests(IS_DEBUG);
 
     // Allocator
     getAllocatorUnitTests(IS_DEBUG);
