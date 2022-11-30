@@ -4,7 +4,7 @@
 
 namespace ft
 {
-    template <class T, class Allocator = std::allocator<T> >
+    template <class T, class Allocator = std::allocator<T>>
     class vector
     {
     public:
@@ -57,9 +57,7 @@ namespace ft
         // Destructor
         ~vector()
         {
-            for (size_type i = 0; i < this->_size; ++i)
-                this->_data[i] = 0;
-            this->_alloc.destroy(this->_data);
+            this->destroyAllocatedData();
         }
 
         /* ----------------------------------
