@@ -172,7 +172,7 @@ namespace ft
         }
         const value_type *data() const
         {
-            return const_cast<value_type *>(this->_data);
+            return this->_data;
         }
 
     private:
