@@ -79,4 +79,42 @@ void dataUnitTests(bool isDebug)
         std::vector<int> const original(5, 10);
         outputAssertion("is const with fill costructor (num: 5, value:10):", isStrictEqual<bool>(isConst(*(own.data())), isConst(*(original.data())), isDebug));
     }
+
+    std::cout << std::endl
+              << "Is equal to STL vector value:" << std::endl;
+    {
+        ft::vector<int> own(5, 10);
+        own.reserve(100);
+        std::vector<int> original(5, 10);
+        original.reserve(100);
+        outputAssertion("after reserve() with reallocation:", isStrictEqual<int>(own.data(), original.data(), 5, isDebug));
+    }
+    {
+        ft::vector<int> own;
+        own.push_back(100);
+        std::vector<int> original;
+        original.push_back(100);
+        outputAssertion("after push_back() with reallocation:", isStrictEqual<int>(own.data(), original.data(), 1, isDebug));
+    }
+    {
+        ft::vector<int> own;
+        own.push_back(100);
+        std::vector<int> original;
+        original.push_back(100);
+        outputAssertion("after push_back() with size = 0:", isStrictEqual<int>(own.data(), original.data(), 1, isDebug));
+    }
+    {
+        ft::vector<int> own(1, 10);
+        own.push_back(100);
+        std::vector<int> original(1, 10);
+        original.push_back(100);
+        outputAssertion("after push_back() with size = 1:", isStrictEqual<int>(own.data(), original.data(), 2, isDebug));
+    }
+    {
+        ft::vector<int> own(5, 10);
+        own.push_back(100);
+        std::vector<int> original(5, 10);
+        original.push_back(100);
+        outputAssertion("after push_back() with size = 5:", isStrictEqual<int>(own.data(), original.data(), 6, isDebug));
+    }
 }

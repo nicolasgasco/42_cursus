@@ -93,12 +93,8 @@ namespace ft
                 throw std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size");
             if (new_cap <= this->_capacity)
                 return;
-            value_type *tmp = this->_alloc.allocate(new_cap);
+            this->allocateBiggerDataCopy(new_cap);
             this->_capacity = new_cap;
-            for (size_type i = 0; i < this->_size; ++i)
-                this->_alloc.construct((tmp + i), this->_data[i]);
-            this->destroyAllocatedData();
-            this->_data = tmp;
         }
 
         /*
@@ -189,15 +185,19 @@ namespace ft
             this->_alloc.destroy(this->_data);
         }
 
-        void increaseCapacity()
+        void allocateBiggerDataCopy(size_type newCapacity)
         {
-            size_type newCapacity = this->_capacity ? this->_capacity * 2 : 1;
-
             value_type *tmp = this->_alloc.allocate(newCapacity);
             for (size_type i = 0; i < this->_size; ++i)
                 this->_alloc.construct((tmp + i), this->_data[i]);
             this->destroyAllocatedData();
             this->_data = tmp;
+        }
+
+        void increaseCapacity()
+        {
+            size_type newCapacity = this->_capacity ? this->_capacity * 2 : 1;
+            this->allocateBiggerDataCopy(newCapacity);
             this->_capacity = newCapacity;
         }
     };
