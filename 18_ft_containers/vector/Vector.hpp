@@ -183,6 +183,7 @@ namespace ft
             for (size_type i = 0; i < this->_size; ++i)
                 this->_data[i] = 0;
             this->_alloc.destroy(this->_data);
+            this->_alloc.deallocate(this->_data, this->_capacity);
         }
 
         void allocateBiggerDataCopy(size_type newCapacity)
