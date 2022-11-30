@@ -117,4 +117,16 @@ void dataUnitTests(bool isDebug)
         original.push_back(100);
         outputAssertion("after push_back() with size = 5:", isStrictEqual<int>(own.data(), original.data(), 6, isDebug));
     }
+    {
+        ft::vector<int> own;
+        std::vector<int> original;
+        srand(time(0));
+        for (int i = 0; i < 50; ++i)
+        {
+            int randInt = rand();
+            own.push_back(randInt);
+            original.push_back(randInt);
+        }
+        outputAssertion("after 50 random push_back() calls:", isStrictEqual<int>(own.data(), original.data(), 50, isDebug));
+    }
 }

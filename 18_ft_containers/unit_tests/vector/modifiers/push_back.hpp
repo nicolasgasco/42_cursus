@@ -38,4 +38,19 @@ void pushBackUnitTests(bool isDebug)
         original.push_back(5);
         outputAssertion("with allocation (size = 10):", isStrictEqual<int>(own.back(), original.back(), isDebug));
     }
+
+    std::cout << std::endl
+              << "Array content is equal to STL vector value:" << std::endl;
+    {
+        ft::vector<int> own;
+        std::vector<int> original;
+        srand(time(0));
+        for (int i = 0; i < 100; ++i)
+        {
+            int randInt = rand();
+            own.push_back(randInt);
+            original.push_back(randInt);
+        }
+        outputAssertion("after 100 random push_back() calls:", isStrictEqual<int>(own.data(), original.data(), 100, isDebug));
+    }
 }
