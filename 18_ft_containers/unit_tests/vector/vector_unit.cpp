@@ -18,6 +18,9 @@
 #include "access/back.hpp"
 #include "access/at.hpp"
 
+// Modifiers
+#include "modifiers/push_back.hpp"
+
 int main(int argc, char *argv[])
 {
     bool IS_DEBUG = false;
@@ -42,6 +45,9 @@ int main(int argc, char *argv[])
     frontUnitTests(IS_DEBUG);
     backUnitTests(IS_DEBUG);
     atUnitTests(IS_DEBUG);
+
+    // Modifiers
+    pushBackUnitTests(IS_DEBUG);
 
     std::cout
         << std::endl;

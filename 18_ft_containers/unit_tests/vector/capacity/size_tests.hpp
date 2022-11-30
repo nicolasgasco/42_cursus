@@ -35,4 +35,37 @@ void sizeUnitTests(bool isDebug)
         std::vector<int> original(9, 5, alloc);
         outputAssertion("with fill constructor + value + custom allocator:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
     }
+
+    std::cout << std::endl
+              << "Is incremented like STL vector value:" << std::endl;
+    {
+        ft::vector<int> own;
+        own.reserve(1);
+        own.push_back(1);
+        std::vector<int> original;
+        original.reserve(1);
+        original.push_back(1);
+        outputAssertion("after a push_back inside reserved memory:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+    }
+    {
+        ft::vector<int> own;
+        own.push_back(1);
+        std::vector<int> original;
+        original.push_back(1);
+        outputAssertion("after a push_back without memory preservation and capacity = 0:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+    }
+    {
+        ft::vector<int> own(1, 5);
+        own.push_back(1);
+        std::vector<int> original(1, 5);
+        original.push_back(1);
+        outputAssertion("after a push_back without memory preservation and capacity = 1:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+    }
+    {
+        ft::vector<int> own(2, 5);
+        own.push_back(1);
+        std::vector<int> original(2, 5);
+        original.push_back(1);
+        outputAssertion("after a push_back without memory preservation and capacity = 2:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+    }
 }

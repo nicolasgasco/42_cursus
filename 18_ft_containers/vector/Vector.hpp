@@ -84,7 +84,6 @@ namespace ft
 
         size_type capacity() const
         {
-            // pow(2, ceil(log(i) / log(2)))
             return this->_capacity;
         }
 
@@ -105,10 +104,14 @@ namespace ft
         /*
          * Modifiers
          */
-        // void push_back(const T &value)
-        // {
-        //     this->_data[this->_size] = value;
-        // }
+        void push_back(const value_type &value)
+        {
+            size_type newSize = this->_size + 1;
+            if (newSize > this->_capacity)
+                this->increaseCapacity();
+            this->_data[this->_size] = value;
+            this->_size++;
+        }
 
         /*
          * Allocator
@@ -184,6 +187,18 @@ namespace ft
             for (size_type i = 0; i < this->_size; ++i)
                 this->_data[i] = 0;
             this->_alloc.destroy(this->_data);
+        }
+
+        void increaseCapacity()
+        {
+            size_type newCapacity = this->_capacity ? this->_capacity * 2 : 1;
+
+            value_type *tmp = this->_alloc.allocate(newCapacity);
+            for (size_type i = 0; i < this->_size; ++i)
+                this->_alloc.construct((tmp + i), this->_data[i]);
+            this->destroyAllocatedData();
+            this->_data = tmp;
+            this->_capacity = newCapacity;
         }
     };
 }
