@@ -6,10 +6,7 @@
 void equalUnitTests(bool isDebug)
 {
     outputSuiteTitle("EQUAL");
-    //    int values[5] = {1, 2, 3, 4, 5};
 
-    //     ft::vector<int> seedOwn(;
-    //     fillVectorWithValues<int>(seedOwn, values, 5);)
     std::cout
         << "Return value is equal to STL vector value:" << std::endl;
     {
