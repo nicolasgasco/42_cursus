@@ -24,6 +24,9 @@
 #include "modifiers/resize.hpp"
 #include "modifiers/clear.hpp"
 
+// Operators
+#include "operators/equal.hpp"
+
 int main(int argc, char *argv[])
 {
     bool IS_DEBUG = false;
@@ -54,6 +57,9 @@ int main(int argc, char *argv[])
     popBackUnitTests(IS_DEBUG);
     resizeUnitTests(IS_DEBUG);
     clearUnitTests(IS_DEBUG);
+
+    // Operators
+    equalUnitTests(IS_DEBUG);
 
     std::cout
         << std::endl;

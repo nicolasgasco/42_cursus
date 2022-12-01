@@ -47,6 +47,26 @@ namespace ft
             this->_maxSize = this->_alloc.max_size();
         }
 
+        vector &operator=(const vector &other)
+        {
+            if (this->size())
+            {
+                for (size_type i = 0; i < this->_size; ++i)
+                    this->_data[i] = 0;
+                this->_alloc.destroy(this->_data);
+            }
+            this->_maxSize = other.max_size();
+            if (this->_capacity < other.size())
+            {
+                this->reserve(other.size());
+                this->_capacity = other.size();
+            }
+            for (size_type i = 0; i < other.size(); ++i)
+                this->_alloc.construct((this->_data + i), other[i]);
+            this->_size = other.size();
+            return *this;
+        }
+
         // Range constructor
         // template <class InputIterator>
         // vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type());

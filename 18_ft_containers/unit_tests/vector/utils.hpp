@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include "../../vector/Vector.hpp"
 
 #define YELLOW "\033[0;33m"
 #define NOCOL "\033[0m"
@@ -71,4 +72,20 @@ bool isConst(T const &x)
         // Not used
     }
     return true;
+}
+
+template <typename T>
+void fillVectorWithValues(ft::vector<T> &vector, T valuesArray[], int size)
+{
+    for (int i = 0; i < size; ++i)
+    {
+        vector.push_back(valuesArray[i]);
+    }
+}
+
+template <typename T>
+void fillVectorWithValues(std::vector<T> &vector, T valuesArray[], int size)
+{
+    for (int i = 0; i < size; ++i)
+        vector.push_back(valuesArray[i]);
 }
