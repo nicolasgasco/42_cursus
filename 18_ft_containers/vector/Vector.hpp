@@ -142,6 +142,13 @@ namespace ft
             return;
         }
 
+        void clear()
+        {
+            for (size_type i = 0; i < this->_size; ++i)
+                this->_alloc.destroy(this->_data + i);
+            this->_size = 0;
+        }
+
         /*
          * Allocator
          */
