@@ -1,6 +1,6 @@
 #include "utils.hpp"
 #include <vector>
-#include "../../vector/Vector.hpp"
+#include "../../vector/vector.hpp"
 
 void randomAccessUnitTests(bool isDebug)
 {

@@ -1,7 +1,7 @@
 #include <vector>
 
 #include "utils.hpp"
-#include "../../vector/Vector.hpp"
+#include "../../vector/vector.hpp"
 
 void notEqualUnitTests(bool isDebug)
 {
