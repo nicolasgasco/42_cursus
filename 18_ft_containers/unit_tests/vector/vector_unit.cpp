@@ -8,8 +8,9 @@
 #include "capacity/max_size.cpp"
 #include "capacity/reserve.cpp"
 
-// Allocator
-#include "allocator/get_allocator.cpp"
+// Other
+#include "other/get_allocator.cpp"
+#include "other/assign.cpp"
 
 // Access
 #include "access/random_access.cpp"
@@ -25,7 +26,6 @@
 #include "modifiers/clear.cpp"
 
 // Operators
-#include "operators/equal.cpp"
 
 int main(int argc, char *argv[])
 {
@@ -42,8 +42,9 @@ int main(int argc, char *argv[])
     maxSizeUnitTests(IS_DEBUG);
     reserveUnitTests(IS_DEBUG);
 
-    // Allocator
+    // Other
     getAllocatorUnitTests(IS_DEBUG);
+    assignUnitTests(IS_DEBUG);
 
     // Access
     randomAccessUnitTests(IS_DEBUG);
@@ -59,7 +60,6 @@ int main(int argc, char *argv[])
     clearUnitTests(IS_DEBUG);
 
     // Operators
-    equalUnitTests(IS_DEBUG);
 
     std::cout
         << std::endl;

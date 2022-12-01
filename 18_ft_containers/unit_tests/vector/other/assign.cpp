@@ -3,7 +3,7 @@
 #include "utils.hpp"
 #include "../../vector/Vector.hpp"
 
-void equalUnitTests(bool isDebug)
+void assignUnitTests(bool isDebug)
 {
     outputSuiteTitle("EQUAL OPERATOR");
     std::cout
