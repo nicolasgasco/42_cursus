@@ -175,33 +175,130 @@ void capacityUnitTests(bool isDebug)
     }
 
     std::cout << std::endl
-              << "Stays constant like STL vector value:" << std::endl;
+              << "Stays constant after a pop_back like STL vector value:" << std::endl;
     {
         ft::vector<int> own(1, 10);
         own.pop_back();
         std::vector<int> original(1, 10);
         original.pop_back();
-        outputAssertion("after a pop_back with capacity = 1:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        outputAssertion("with capacity = 1:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
     }
     {
         ft::vector<int> own(2, 10);
         own.pop_back();
         std::vector<int> original(2, 10);
         original.pop_back();
-        outputAssertion("after a pop_back with capacity = 2:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        outputAssertion("with capacity = 2:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
     }
     {
         ft::vector<int> own(3, 10);
         own.pop_back();
         std::vector<int> original(3, 10);
         original.pop_back();
-        outputAssertion("after a pop_back with capacity = 3:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        outputAssertion("with capacity = 3:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
     }
     {
         ft::vector<int> own(4, 10);
         own.pop_back();
         std::vector<int> original(4, 10);
         original.pop_back();
-        outputAssertion("after a pop_back with capacity = 4:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        outputAssertion("with capacity = 4:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
+        ft::vector<int> own(4, 10);
+        own.pop_back();
+        std::vector<int> original(4, 10);
+        original.pop_back();
+        outputAssertion("with capacity = 4:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+
+    std::cout << std::endl
+              << "Stays constant after resize like STL vector value:" << std::endl;
+    {
+        ft::vector<int> own(10, 5);
+        own.resize(5);
+        std::vector<int> original(10, 5);
+        original.resize(5);
+        outputAssertion("with capacity = 10 and resize = 5:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
+        ft::vector<int> own(1, 5);
+        own.resize(0);
+        std::vector<int> original(1, 5);
+        original.resize(0);
+        outputAssertion("with capacity = 1 and resize = 0:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
+        ft::vector<int> own(1, 5);
+        own.resize(1);
+        std::vector<int> original(1, 5);
+        original.resize(1);
+        outputAssertion("with capacity = 1 and resize = 1:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+
+    std::cout << std::endl
+              << "Increases after resize like STL vector value:" << std::endl;
+    {
+        ft::vector<int> own(1, 5);
+        own.resize(10);
+        std::vector<int> original(1, 5);
+        original.resize(10);
+        outputAssertion("with capacity = 1 and resize = 10:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
+        ft::vector<int> own(1, 5);
+        own.resize(2);
+        std::vector<int> original(1, 5);
+        original.resize(2);
+        outputAssertion("with capacity = 1 and resize = 2:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
+        ft::vector<int> own;
+        own.resize(1);
+        std::vector<int> original;
+        original.resize(1);
+        outputAssertion("with capacity = 0 and resize = 1:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
+        ft::vector<int> own;
+        own.resize(100);
+        std::vector<int> original;
+        original.resize(100);
+        outputAssertion("with capacity = 0 and resize = 100:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
+        ft::vector<int> own;
+        own.resize(63);
+        std::vector<int> original;
+        original.resize(63);
+        outputAssertion("with capacity = 0 and resize = 63:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
+        ft::vector<int> own(5, 10);
+        own.resize(9);
+        std::vector<int> original(5, 10);
+        original.resize(9);
+        outputAssertion("with capacity = 5 and resize = 9:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
+        ft::vector<int> own(5, 10);
+        own.resize(6);
+        std::vector<int> original(5, 10);
+        original.resize(6);
+        outputAssertion("with capacity = 5 and resize = 9:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
+        ft::vector<int> own(5, 10);
+        own.resize(11);
+        std::vector<int> original(5, 10);
+        original.resize(11);
+        outputAssertion("with capacity = 5 and resize = 11:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
+        ft::vector<int> own(50, 10);
+        own.resize(77);
+        std::vector<int> original(50, 10);
+        original.resize(77);
+        outputAssertion("with capacity = 50 and resize = 77:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
     }
 }

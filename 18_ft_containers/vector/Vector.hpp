@@ -115,6 +115,33 @@ namespace ft
             this->_size--;
         }
 
+        void resize(size_type count, value_type value = value_type())
+        {
+            if (count < 0 || count > this->_maxSize)
+                throw std::length_error("vector");
+            if (count < this->_size)
+            {
+                for (size_type i = count; i < this->_size; ++i)
+                    this->_alloc.destroy(this->_data + i);
+                this->_size = count;
+                return;
+            }
+            if (count > this->_size)
+            {
+                if (count > this->_capacity)
+                {
+                    size_type newCapacity = (count > (this->_capacity * 2)) ? count : this->_capacity * 2;
+                    this->allocateBiggerDataCopy(newCapacity);
+                    this->_capacity = newCapacity;
+                }
+                for (size_type i = this->_size; i < count; ++i)
+                    this->_alloc.construct(this->_data + i, value);
+                this->_size = count;
+                return;
+            }
+            return;
+        }
+
         /*
          * Allocator
          */
