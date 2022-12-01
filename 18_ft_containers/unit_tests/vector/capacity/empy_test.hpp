@@ -39,6 +39,20 @@ void emptyUnitTests(bool isDebug)
     std::cout << std::endl
               << "Is equal to STL vector value:" << std::endl;
     {
+        ft::vector<int> own;
+        own.push_back(10);
+        std::vector<int> original;
+        original.push_back(10);
+        outputAssertion("after push_back with size = 0:", isStrictEqual<bool>(own.empty(), original.empty(), isDebug));
+    }
+    {
+        ft::vector<int> own(1, 10);
+        own.push_back(10);
+        std::vector<int> original(1, 10);
+        original.push_back(10);
+        outputAssertion("after push_back with size = 2:", isStrictEqual<bool>(own.empty(), original.empty(), isDebug));
+    }
+    {
         ft::vector<int> own(1, 10);
         own.pop_back();
         std::vector<int> original(1, 10);
