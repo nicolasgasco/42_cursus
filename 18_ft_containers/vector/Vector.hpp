@@ -261,4 +261,21 @@ namespace ft
             this->_capacity = newCapacity;
         }
     };
+
+    /* ----------------------------------
+     * Relational operators
+     * ---------------------------------- */
+    template <class T, class Alloc>
+    bool operator==(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+    {
+        if (lhs.size() != rhs.size())
+            return false;
+        typedef typename Alloc::size_type size_type;
+        for (size_type i = 0; i < lhs.size(); ++i)
+        {
+            if (lhs[i] != rhs[i])
+                return false;
+        }
+        return true;
+    }
 }

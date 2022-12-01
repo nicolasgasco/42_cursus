@@ -26,6 +26,7 @@
 #include "modifiers/clear.cpp"
 
 // Operators
+#include "operators/equal.cpp"
 
 int main(int argc, char *argv[])
 {
@@ -60,6 +61,7 @@ int main(int argc, char *argv[])
     clearUnitTests(IS_DEBUG);
 
     // Operators
+    equalUnitTests(IS_DEBUG);
 
     std::cout
         << std::endl;

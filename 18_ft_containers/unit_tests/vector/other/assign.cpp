@@ -5,7 +5,7 @@
 
 void assignUnitTests(bool isDebug)
 {
-    outputSuiteTitle("EQUAL OPERATOR");
+    outputSuiteTitle("ASSIGN OPERATOR");
     std::cout
         << "Values are equal to STL vector value:" << std::endl;
     {
