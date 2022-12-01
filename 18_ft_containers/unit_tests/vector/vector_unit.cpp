@@ -20,6 +20,7 @@
 
 // Modifiers
 #include "modifiers/push_back.hpp"
+#include "modifiers/pop_back.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -48,6 +49,7 @@ int main(int argc, char *argv[])
 
     // Modifiers
     pushBackUnitTests(IS_DEBUG);
+    popBackUnitTests(IS_DEBUG);
 
     std::cout
         << std::endl;

@@ -28,7 +28,7 @@ namespace ft
          * LIFECYCLE
          * ---------------------------------- */
         // Empty constructor
-        vector(const allocator_type &alloc = allocator_type()) : _size(0), _capacity(0), _isEmpty(true)
+        vector(const allocator_type &alloc = allocator_type()) : _size(0), _capacity(0)
         {
             this->_alloc = alloc;
             this->_data = this->_alloc.allocate(0);
@@ -37,7 +37,7 @@ namespace ft
         }
 
         // Fill constructors
-        vector(size_type count, const value_type &value = value_type(), const allocator_type &alloc = allocator_type()) : _size(count), _capacity(count), _isEmpty(false)
+        vector(size_type count, const value_type &value = value_type(), const allocator_type &alloc = allocator_type()) : _size(count), _capacity(count)
         {
             this->_alloc = alloc;
             this->_data = this->_alloc.allocate(count);
@@ -69,7 +69,7 @@ namespace ft
          */
         bool empty() const
         {
-            return this->_isEmpty;
+            return (this->_size == 0) ? true : false;
         }
 
         size_type size() const
@@ -107,6 +107,12 @@ namespace ft
                 this->increaseCapacity();
             this->_data[this->_size] = value;
             this->_size++;
+        }
+
+        void pop_back()
+        {
+            this->_alloc.destroy(this->_data + (this->_size - 1));
+            this->_size--;
         }
 
         /*
@@ -175,7 +181,6 @@ namespace ft
 
         size_type _size;
         size_type _capacity;
-        bool _isEmpty;
         size_type _maxSize;
 
         void destroyAllocatedData()

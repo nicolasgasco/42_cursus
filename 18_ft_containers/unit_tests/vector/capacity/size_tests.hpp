@@ -68,4 +68,35 @@ void sizeUnitTests(bool isDebug)
         original.push_back(1);
         outputAssertion("after a push_back without memory preservation and capacity = 2:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
     }
+
+    std::cout << std::endl
+              << "Is decremented like STL vector value:" << std::endl;
+    {
+        ft::vector<int> own(1, 10);
+        own.pop_back();
+        std::vector<int> original(1, 10);
+        original.pop_back();
+        outputAssertion("after a pop_back with size = 1:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+    }
+    {
+        ft::vector<int> own(2, 10);
+        own.pop_back();
+        std::vector<int> original(2, 10);
+        original.pop_back();
+        outputAssertion("after a pop_back with size = 2:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+    }
+    {
+        ft::vector<int> own(3, 10);
+        own.pop_back();
+        std::vector<int> original(3, 10);
+        original.pop_back();
+        outputAssertion("after a pop_back with size = 3:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+    }
+    {
+        ft::vector<int> own(4, 10);
+        own.pop_back();
+        std::vector<int> original(4, 10);
+        original.pop_back();
+        outputAssertion("after a pop_back with size = 4:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+    }
 }

@@ -35,4 +35,21 @@ void emptyUnitTests(bool isDebug)
         std::vector<int> original(9, 5, alloc);
         outputAssertion("with fill constructor + value + custom allocator:", isStrictEqual<bool>(own.empty(), original.empty(), isDebug));
     }
+
+    std::cout << std::endl
+              << "Is equal to STL vector value:" << std::endl;
+    {
+        ft::vector<int> own(1, 10);
+        own.pop_back();
+        std::vector<int> original(1, 10);
+        original.pop_back();
+        outputAssertion("after pop_back with size = 1:", isStrictEqual<bool>(own.empty(), original.empty(), isDebug));
+    }
+    {
+        ft::vector<int> own(2, 10);
+        own.pop_back();
+        std::vector<int> original(2, 10);
+        original.pop_back();
+        outputAssertion("after pop_back with size = 2:", isStrictEqual<bool>(own.empty(), original.empty(), isDebug));
+    }
 }
