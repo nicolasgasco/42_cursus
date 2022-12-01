@@ -278,4 +278,19 @@ namespace ft
         }
         return true;
     }
+
+    template <class T, class Alloc>
+    bool operator!=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+    {
+        if (lhs.size() != rhs.size())
+            return true;
+        typedef typename Alloc::size_type size_type;
+        for (size_type i = 0; i < lhs.size(); ++i)
+        {
+            if (lhs[i] != rhs[i])
+                return true;
+        }
+        return false;
+    }
+
 }

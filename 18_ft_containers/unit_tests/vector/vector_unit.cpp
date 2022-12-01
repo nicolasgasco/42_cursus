@@ -27,6 +27,7 @@
 
 // Operators
 #include "operators/equal.cpp"
+#include "operators/not_equal.cpp"
 
 int main(int argc, char *argv[])
 {
@@ -62,6 +63,7 @@ int main(int argc, char *argv[])
 
     // Operators
     equalUnitTests(IS_DEBUG);
+    notEqualUnitTests(IS_DEBUG);
 
     std::cout
         << std::endl;
