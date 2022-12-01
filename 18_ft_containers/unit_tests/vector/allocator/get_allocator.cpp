@@ -1,5 +1,3 @@
-#pragma once
-
 #include <vector>
 #include <limits.h>
 

@@ -2,30 +2,30 @@
 #include <iostream>
 
 // Capacity
-#include "capacity/size_tests.hpp"
-#include "capacity/capacity_tests.hpp"
-#include "capacity/empy_test.hpp"
-#include "capacity/max_size_test.hpp"
-#include "capacity/reserve.hpp"
+#include "capacity/size.cpp"
+#include "capacity/capacity.cpp"
+#include "capacity/empy.cpp"
+#include "capacity/max_size.cpp"
+#include "capacity/reserve.cpp"
 
 // Allocator
-#include "allocator/get_allocator_tests.hpp"
+#include "allocator/get_allocator.cpp"
 
 // Access
-#include "access/random_access_tests.hpp"
-#include "access/data.hpp"
-#include "access/front.hpp"
-#include "access/back.hpp"
-#include "access/at.hpp"
+#include "access/random_access.cpp"
+#include "access/data.cpp"
+#include "access/front.cpp"
+#include "access/back.cpp"
+#include "access/at.cpp"
 
 // Modifiers
-#include "modifiers/push_back.hpp"
-#include "modifiers/pop_back.hpp"
-#include "modifiers/resize.hpp"
-#include "modifiers/clear.hpp"
+#include "modifiers/push_back.cpp"
+#include "modifiers/pop_back.cpp"
+#include "modifiers/resize.cpp"
+#include "modifiers/clear.cpp"
 
 // Operators
-#include "operators/equal.hpp"
+#include "operators/equal.cpp"
 
 int main(int argc, char *argv[])
 {
