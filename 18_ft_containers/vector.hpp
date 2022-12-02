@@ -179,6 +179,14 @@ namespace ft
             this->_size = 0;
         }
 
+        void swap(vector &other)
+        {
+            ft::swap(this->_size, other._size);
+            ft::swap(this->_capacity, other._capacity);
+            ft::swap(this->_maxSize, other._maxSize);
+            ft::swap(this->_data, other._data);
+        }
+
         /*
          * Allocator
          */

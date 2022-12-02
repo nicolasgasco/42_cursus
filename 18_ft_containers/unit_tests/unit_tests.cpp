@@ -27,6 +27,7 @@
 #include "vector/modifiers/pop_back.cpp"
 #include "vector/modifiers/resize.cpp"
 #include "vector/modifiers/clear.cpp"
+#include "vector/modifiers/swap.cpp"
 
 // Operators
 #include "vector/operators/equal.cpp"
@@ -68,14 +69,15 @@ int main(int argc, char *argv[])
     popBackUnitTests(IS_DEBUG);
     resizeUnitTests(IS_DEBUG);
     clearUnitTests(IS_DEBUG);
+    swapUnitTests(IS_DEBUG);
 
     // Operators
     equalUnitTests(IS_DEBUG);
     notEqualUnitTests(IS_DEBUG);
 
-    std::cout << std::endl << YELLOW << "ALGORITHMS UNIT TESTS" << NOCOL << std::endl;
+    std::cout << std::endl
+              << YELLOW << "ALGORITHMS UNIT TESTS" << NOCOL << std::endl;
     ftSwapUnitTests(IS_DEBUG);
-
 
     std::cout
         << std::endl;

@@ -41,4 +41,47 @@ void maxSizeUnitTests(bool isDebug)
         std::vector<int> original(originalSeed);
         outputAssertion("with copy constructor:", isStrictEqual<std::size_t>(own.max_size(), original.max_size(), isDebug));
     }
+
+    std::cout << std::endl
+              << "Is swapped after a ft::swap like STL vector value:" << std::endl;
+    {
+        ft::vector<int> oneOwn;
+        ft::vector<int> twoOwn(5, 2);
+        oneOwn.swap(twoOwn);
+
+        std::vector<int> oneOriginal;
+        std::vector<int> twoOriginal(5, 2);
+        oneOriginal.swap(twoOriginal);
+        outputAssertion("with two vectors of different size (0, 5):", isStrictEqual<std::size_t>(oneOwn.max_size(), oneOriginal.max_size(), isDebug));
+    }
+    {
+        ft::vector<int> oneOwn(5, 2);
+        ft::vector<int> twoOwn;
+        oneOwn.swap(twoOwn);
+
+        std::vector<int> oneOriginal(5, 2);
+        std::vector<int> twoOriginal;
+        oneOriginal.swap(twoOriginal);
+        outputAssertion("with two vectors of different size (5, 0):", isStrictEqual<std::size_t>(oneOwn.max_size(), oneOriginal.max_size(), isDebug));
+    }
+    {
+        ft::vector<int> oneOwn(1, 2);
+        ft::vector<int> twoOwn(100, 2);
+        oneOwn.swap(twoOwn);
+
+        std::vector<int> oneOriginal(1, 2);
+        std::vector<int> twoOriginal(100, 2);
+        oneOriginal.swap(twoOriginal);
+        outputAssertion("with two vectors of different size (1, 100):", isStrictEqual<std::size_t>(oneOwn.max_size(), oneOriginal.max_size(), isDebug));
+    }
+    {
+        ft::vector<int> oneOwn(1, 2);
+        ft::vector<int> twoOwn(1, 2);
+        oneOwn.swap(twoOwn);
+
+        std::vector<int> oneOriginal(1, 2);
+        std::vector<int> twoOriginal(1, 2);
+        oneOriginal.swap(twoOriginal);
+        outputAssertion("with two vectors of different size (100, 1):", isStrictEqual<std::size_t>(oneOwn.max_size(), oneOriginal.max_size(), isDebug));
+    }
 }
