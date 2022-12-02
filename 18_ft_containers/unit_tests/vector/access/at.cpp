@@ -1,7 +1,7 @@
 #include <vector>
 
 #include "utils.hpp"
-#include "../../vector.hpp"
+#include "../vector.hpp"
 
 void atUnitTests(bool isDebug)
 {

@@ -1,6 +1,6 @@
 #include "utils.hpp"
 #include <vector>
-#include "../../vector.hpp"
+#include "../vector.hpp"
 
 void emptyUnitTests(bool isDebug)
 {

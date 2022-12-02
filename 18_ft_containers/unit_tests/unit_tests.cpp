@@ -2,32 +2,32 @@
 #include <iostream>
 
 // Capacity
-#include "capacity/size.cpp"
-#include "capacity/capacity.cpp"
-#include "capacity/empy.cpp"
-#include "capacity/max_size.cpp"
-#include "capacity/reserve.cpp"
+#include "vector/capacity/size.cpp"
+#include "vector/capacity/capacity.cpp"
+#include "vector/capacity/empy.cpp"
+#include "vector/capacity/max_size.cpp"
+#include "vector/capacity/reserve.cpp"
 
 // Other
-#include "other/get_allocator.cpp"
-#include "other/assign.cpp"
+#include "vector/other/get_allocator.cpp"
+#include "vector/other/assign.cpp"
 
 // Access
-#include "access/random_access.cpp"
-#include "access/data.cpp"
-#include "access/front.cpp"
-#include "access/back.cpp"
-#include "access/at.cpp"
+#include "vector/access/random_access.cpp"
+#include "vector/access/data.cpp"
+#include "vector/access/front.cpp"
+#include "vector/access/back.cpp"
+#include "vector/access/at.cpp"
 
 // Modifiers
-#include "modifiers/push_back.cpp"
-#include "modifiers/pop_back.cpp"
-#include "modifiers/resize.cpp"
-#include "modifiers/clear.cpp"
+#include "vector/modifiers/push_back.cpp"
+#include "vector/modifiers/pop_back.cpp"
+#include "vector/modifiers/resize.cpp"
+#include "vector/modifiers/clear.cpp"
 
 // Operators
-#include "operators/equal.cpp"
-#include "operators/not_equal.cpp"
+#include "vector/operators/equal.cpp"
+#include "vector/operators/not_equal.cpp"
 
 int main(int argc, char *argv[])
 {

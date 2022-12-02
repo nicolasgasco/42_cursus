@@ -4,9 +4,9 @@ FLAGS = -Wall -Wextra -Werror
 NINETYEIGHT = -std=c++98 -pedantic
 SANITIZE = -g -fsanitize=address
 
-SRC_NAME =	vector_unit.cpp \
+SRC_NAME =	unit_tests.cpp \
 
-INCLUDES =	../../vector.hpp
+INCLUDES =	../vector.hpp
 
 OBJ_NAME = $(SRC_NAME:.cpp=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
