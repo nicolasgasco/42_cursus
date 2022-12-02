@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../iterators/iterator_traits.hpp"
+#include "iterators/iterator_traits.hpp"
 
 #include <iostream>
 

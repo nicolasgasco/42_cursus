@@ -2,7 +2,7 @@
 #include <limits.h>
 
 #include "utils.hpp"
-#include "../../vector/vector.hpp"
+#include "../../vector.hpp"
 
 void getAllocatorUnitTests(bool isDebug)
 {

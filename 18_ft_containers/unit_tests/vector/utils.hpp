@@ -2,7 +2,7 @@
 
 #include <string>
 #include <iostream>
-#include "../../vector/vector.hpp"
+#include "../../vector.hpp"
 
 #define YELLOW "\033[0;33m"
 #define NOCOL "\033[0m"
