@@ -5,12 +5,16 @@
 #include <map>
 #include <stack>
 #include <vector>
+#include <iterator>
 // 	namespace ft = std;
 // #else
 // #include <map.hpp>
 // #include <stack.hpp>
 
-#include "vector/vector.hpp"
+#include "vector.hpp"
+#include "algorithms.hpp"
+#include "iterator_traits.hpp"
+#include "reverse_iterator.hpp"
 // #endif
 
 #include <stdlib.h>
@@ -39,5 +43,6 @@
 #include <iostream>
 int main()
 {
+    // ft::reverse_iterator<ft::vector<int>::iterator> it;
     return 0;
 }
