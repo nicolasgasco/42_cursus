@@ -53,7 +53,8 @@ namespace ft
             {
                 for (size_type i = 0; i < this->_size; ++i)
                     this->_data[i] = 0;
-                this->_alloc.destroy(this->_data);
+                if (this->_data)
+                    this->_alloc.destroy(this->_data);
             }
             this->_maxSize = other.max_size();
             if (this->_capacity < other.size())
@@ -72,7 +73,13 @@ namespace ft
         // vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type());
 
         // Copy constructor
-        // vector(const vector &x) {}
+        vector(const vector &x)
+        {
+            this->_alloc = x.get_allocator();
+            this->_size = 0;
+            this->_capacity = 0;
+            *this = x;
+        }
 
         // Destructor
         ~vector()
@@ -239,10 +246,14 @@ namespace ft
 
         void destroyAllocatedData()
         {
-            for (size_type i = 0; i < this->_size; ++i)
-                this->_data[i] = 0;
-            this->_alloc.destroy(this->_data);
-            this->_alloc.deallocate(this->_data, this->_capacity);
+            if (this->size())
+            {
+                for (size_type i = 0; i < this->_size; ++i)
+                    this->_data[i] = 0;
+                this->_alloc.destroy(this->_data);
+            }
+            if (this->capacity())
+                this->_alloc.deallocate(this->_data, this->_capacity);
         }
 
         void allocateBiggerDataCopy(size_type newCapacity)

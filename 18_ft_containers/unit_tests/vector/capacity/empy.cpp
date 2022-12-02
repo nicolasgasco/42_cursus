@@ -33,6 +33,14 @@ void emptyUnitTests(bool isDebug)
         std::vector<int> original(9, 5, alloc);
         outputAssertion("with fill constructor + value + custom allocator:", isStrictEqual<bool>(own.empty(), original.empty(), isDebug));
     }
+    {
+        ft::vector<int> ownSeed(10, 5);
+        ft::vector<int> own(ownSeed);
+
+        std::vector<int> originalSeed(10, 5);
+        std::vector<int> original(originalSeed);
+        outputAssertion("with copy constructor:", isStrictEqual<bool>(own.empty(), original.empty(), isDebug));
+    }
 
     std::cout << std::endl
               << "Is equal to STL vector value:" << std::endl;

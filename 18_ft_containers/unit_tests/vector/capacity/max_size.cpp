@@ -33,4 +33,12 @@ void maxSizeUnitTests(bool isDebug)
         std::vector<int> original(9, 5, alloc);
         outputAssertion("with fill constructor + value + allocator:", isStrictEqual<std::size_t>(own.max_size(), original.max_size(), isDebug));
     }
+    {
+        ft::vector<int> ownSeed(10, 5);
+        ft::vector<int> own(ownSeed);
+
+        std::vector<int> originalSeed(10, 5);
+        std::vector<int> original(originalSeed);
+        outputAssertion("with copy constructor:", isStrictEqual<std::size_t>(own.max_size(), original.max_size(), isDebug));
+    }
 }
