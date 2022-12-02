@@ -1,6 +1,9 @@
 
 #include <iostream>
 
+// ===========================================
+// VECTOR
+// ===========================================
 // Capacity
 #include "vector/capacity/size.cpp"
 #include "vector/capacity/capacity.cpp"
@@ -28,6 +31,11 @@
 // Operators
 #include "vector/operators/equal.cpp"
 #include "vector/operators/not_equal.cpp"
+
+// ===========================================
+// ALGORITHM
+// ===========================================
+#include "algorithms/swap.cpp"
 
 int main(int argc, char *argv[])
 {
@@ -64,6 +72,10 @@ int main(int argc, char *argv[])
     // Operators
     equalUnitTests(IS_DEBUG);
     notEqualUnitTests(IS_DEBUG);
+
+    std::cout << std::endl << YELLOW << "ALGORITHMS UNIT TESTS" << NOCOL << std::endl;
+    ftSwapUnitTests(IS_DEBUG);
+
 
     std::cout
         << std::endl;

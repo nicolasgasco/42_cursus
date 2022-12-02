@@ -1,6 +1,7 @@
 #pragma once
 
 #include "iterator_traits.hpp"
+#include "algorithms.hpp"
 
 #include <iostream>
 
@@ -304,5 +305,12 @@ namespace ft
                 return true;
         }
         return false;
+    }
+
+    template <class T, class Alloc>
+    void swap(ft::vector<T, Alloc> &lhs,
+              ft::vector<T, Alloc> &rhs)
+    {
+        lhs.swap(rhs);
     }
 }
