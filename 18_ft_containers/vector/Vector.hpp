@@ -47,6 +47,19 @@ namespace ft
             this->_maxSize = this->_alloc.max_size();
         }
 
+        // Range constructor
+        // template <class InputIterator>
+        // vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type());
+
+        // Copy constructor
+        vector(const vector &x)
+        {
+            this->_alloc = x.get_allocator();
+            this->_size = 0;
+            this->_capacity = 0;
+            *this = x;
+        }
+
         vector &operator=(const vector &other)
         {
             if (this->size())
@@ -66,19 +79,6 @@ namespace ft
                 this->_alloc.construct((this->_data + i), other[i]);
             this->_size = other.size();
             return *this;
-        }
-
-        // Range constructor
-        // template <class InputIterator>
-        // vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type());
-
-        // Copy constructor
-        vector(const vector &x)
-        {
-            this->_alloc = x.get_allocator();
-            this->_size = 0;
-            this->_capacity = 0;
-            *this = x;
         }
 
         // Destructor
