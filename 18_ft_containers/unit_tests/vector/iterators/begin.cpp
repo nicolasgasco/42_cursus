@@ -5,7 +5,24 @@
 void beginUnitTests(bool isDebug)
 {
     outputSuiteTitle("BEGIN");
-    std::cout << "Has same type of STL iterator value:" << std::endl;
+    std::cout << "Is const/ not const like STL iterator value:" << std::endl;
+    {
+        ft::vector<int> own(1, 10);
+        ft::vector<int>::iterator ownIt = own.begin();
+
+        std::cout << typeid(ownIt).name() << std::endl;
+        outputAssertion("is not const with ::iterator:", !strcmp(typeid(ownIt).name(), "Pi"));
+    }
+    {
+        ft::vector<int> own(1, 10);
+        ft::vector<int>::const_iterator ownIt = own.begin();
+
+        std::cout << typeid(ownIt).name() << std::endl;
+        outputAssertion("is const with ::const_iterator:", !strcmp(typeid(ownIt).name(), "PKi"));
+    }
+
+    std::cout << std::endl
+              << "Has same type of STL iterator value:" << std::endl;
     {
         ft::vector<int> own(1, 10);
         ft::vector<int>::iterator ownIt = own.begin();
