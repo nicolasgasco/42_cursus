@@ -22,7 +22,7 @@ void beginUnitTests(bool isDebug)
     }
 
     std::cout << std::endl
-              << "Has same type of STL iterator value:" << std::endl;
+              << "Has same value of STL iterator value:" << std::endl;
     {
         ft::vector<int> own(1, 10);
         ft::vector<int>::iterator ownIt = own.begin();

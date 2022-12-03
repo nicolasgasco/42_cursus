@@ -31,6 +31,7 @@
 
 // Iterator
 #include "vector/iterators/begin.cpp"
+#include "vector/iterators/end.cpp"
 
 // Operators
 #include "vector/operators/equal.cpp"
@@ -76,6 +77,7 @@ int main(int argc, char *argv[])
 
     // Iterator
     beginUnitTests(IS_DEBUG);
+    endUnitTests(IS_DEBUG);
 
     // Operators
     equalUnitTests(IS_DEBUG);

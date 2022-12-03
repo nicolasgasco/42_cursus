@@ -102,6 +102,15 @@ namespace ft
             return iterator(this->_data);
         }
 
+        iterator end()
+        {
+            return iterator(this->_data + this->_size);
+        }
+        const_iterator end() const
+        {
+            return iterator(this->_data + this->_size);
+        }
+
         /* ----------------------------------
          * Member functions
          * ---------------------------------- */
