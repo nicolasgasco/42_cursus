@@ -259,6 +259,40 @@ namespace ft
             return position;
         }
 
+        iterator insert(iterator position, iterator first, iterator last)
+        {
+            if ((last - first) == 0)
+                return position;
+
+            int positionI = 0;
+            for (iterator it = this->begin(); it != position; ++it)
+                positionI++;
+
+            if (this->capacity() == this->_size)
+            {
+                size_type newMinCapacity = this->_capacity + (last - first);
+                size_type newCapacity = (newMinCapacity > (this->_capacity * 2)) ? newMinCapacity : this->_capacity * 2;
+                this->allocateBiggerDataCopy(newCapacity);
+                this->_capacity = newCapacity;
+                position = this->_data + positionI;
+            }
+            ft::vector<value_type> tmp(position, this->end());
+
+            for (iterator it = first; it != last; ++it)
+            {
+                this->_data[positionI] = *it;
+                positionI++;
+                this->_size++;
+            }
+            for (size_type i = 0; i < tmp.size(); ++i)
+            {
+                this->_data[positionI] = tmp[i];
+                positionI++;
+            }
+
+            return position;
+        }
+
         void clear()
         {
             for (size_type i = 0; i < this->_size; ++i)

@@ -104,6 +104,54 @@ void insertUnitTests(bool isDebug)
                 outputAssertion("after inserting 100 value at index 10 in a vector with size 20:", isStrictEqual<int>(*ownIt, *originalIt, isDebug));
             }
         }
+        {
+            std::cout << std::endl
+                      << "  ITERATORS" << std::endl;
+            {
+                ft::vector<int> own(2, 5);
+                ft::vector<int> ownRef(3, 1);
+                ft::vector<int>::iterator ownIt = own.insert(own.begin(), ownRef.begin(), ownRef.end());
+
+                std::vector<int> original(2, 5);
+                std::vector<int> originalRef(3, 1);
+                std::vector<int>::iterator originalIt = original.insert(original.begin(), originalRef.begin(), originalRef.end());
+
+                outputAssertion("after inserting 3 values at index 0 in a vector with size 2:", isStrictEqual<int>(*ownIt, *originalIt, isDebug));
+            }
+            {
+                ft::vector<int> own;
+                ft::vector<int> ownRef(5, 1);
+                ft::vector<int>::iterator ownIt = own.insert(own.begin(), ownRef.begin(), ownRef.end());
+
+                std::vector<int> original;
+                std::vector<int> originalRef(5, 1);
+                std::vector<int>::iterator originalIt = original.insert(original.begin(), originalRef.begin(), originalRef.end());
+
+                outputAssertion("after inserting 5 values at index 0 in a vector with size 0:", isStrictEqual<int>(*ownIt, *originalIt, isDebug));
+            }
+            {
+                ft::vector<int> own(2, 5);
+                ft::vector<int> ownRef(10, 1);
+                ft::vector<int>::iterator ownIt = own.insert(own.begin() + 1, ownRef.begin(), ownRef.end());
+
+                std::vector<int> original(2, 5);
+                std::vector<int> originalRef(10, 1);
+                std::vector<int>::iterator originalIt = original.insert(original.begin() + 1, originalRef.begin(), originalRef.end());
+
+                outputAssertion("after inserting 10 values at index 1 in a vector with size 2:", isStrictEqual<int>(*ownIt, *originalIt, isDebug));
+            }
+            {
+                ft::vector<int> own(20, 5);
+                ft::vector<int> ownRef(100, 1);
+                ft::vector<int>::iterator ownIt = own.insert(own.begin() + 10, ownRef.begin(), ownRef.end());
+
+                std::vector<int> original(20, 5);
+                std::vector<int> originalRef(100, 1);
+                std::vector<int>::iterator originalIt = original.insert(original.begin() + 10, originalRef.begin(), originalRef.end());
+
+                outputAssertion("after inserting 100 value at index 10 in a vector with size 20:", isStrictEqual<int>(*ownIt, *originalIt, isDebug));
+            }
+        }
     }
 
     std::cout << std::endl
@@ -202,6 +250,65 @@ void insertUnitTests(bool isDebug)
 
                 std::vector<int> original(20, 5);
                 original.insert(original.begin() + 10, 100, 10);
+
+                outputAssertion("after inserting 100 value at index 10 in a vector with size 20:", isStrictEqual<int>(own.data(), original.data(), 120, isDebug));
+            }
+        }
+        {
+            std::cout << std::endl
+                      << "  ITERATORS" << std::endl;
+            {
+                ft::vector<int> own(2, 5);
+                ft::vector<int> ownRef(3, 1);
+                own.insert(own.begin(), ownRef.begin(), ownRef.end());
+
+                std::vector<int> original(2, 5);
+                std::vector<int> originalRef(3, 1);
+                original.insert(original.begin(), originalRef.begin(), originalRef.end());
+
+                outputAssertion("after inserting 3 values at index 0 in a vector with size 2:", isStrictEqual<int>(own.data(), original.data(), 5, isDebug));
+            }
+            {
+                ft::vector<int> own;
+                ft::vector<int> ownRef(5, 1);
+                own.insert(own.begin(), ownRef.begin(), ownRef.end());
+
+                std::vector<int> original;
+                std::vector<int> originalRef(5, 1);
+                original.insert(original.begin(), originalRef.begin(), originalRef.end());
+
+                outputAssertion("after inserting 5 values at index 0 in a vector with size 0:", isStrictEqual<int>(own.data(), original.data(), 5, isDebug));
+            }
+            {
+                ft::vector<int> own(2, 5);
+                ft::vector<int> ownRef(10, 1);
+                own.insert(own.begin() + 1, ownRef.begin(), ownRef.end());
+
+                std::vector<int> original(2, 5);
+                std::vector<int> originalRef(10, 1);
+                original.insert(original.begin() + 1, originalRef.begin(), originalRef.end());
+
+                outputAssertion("after inserting 10 values at index 1 in a vector with size 2:", isStrictEqual<int>(own.data(), original.data(), 12, isDebug));
+            }
+            {
+                ft::vector<int> own(2, 5);
+                ft::vector<int> ownRef;
+                own.insert(own.begin() + 1, ownRef.begin(), ownRef.end());
+
+                std::vector<int> original(2, 5);
+                std::vector<int> originalRef;
+                original.insert(original.begin() + 1, originalRef.begin(), originalRef.end());
+
+                outputAssertion("after inserting 0 values at index 1 in a vector with size 2:", isStrictEqual<int>(own.data(), original.data(), 2, isDebug));
+            }
+            {
+                ft::vector<int> own(20, 5);
+                ft::vector<int> ownRef(100, 1);
+                own.insert(own.begin() + 10, ownRef.begin(), ownRef.end());
+
+                std::vector<int> original(20, 5);
+                std::vector<int> originalRef(100, 1);
+                original.insert(original.begin() + 10, originalRef.begin(), originalRef.end());
 
                 outputAssertion("after inserting 100 value at index 10 in a vector with size 20:", isStrictEqual<int>(own.data(), original.data(), 120, isDebug));
             }

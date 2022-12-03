@@ -230,7 +230,7 @@ void capacityUnitTests(bool isDebug)
 
             std::vector<int> original;
             original.insert(original.begin(), 1);
-            outputAssertion("after adding 1 value with insert in a vector with size 0:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+            outputAssertion("after adding 1 value with insert (1 value) in a vector with size 0:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
         }
         {
             ft::vector<int> own(2, 5);
@@ -238,7 +238,7 @@ void capacityUnitTests(bool isDebug)
 
             std::vector<int> original(2, 5);
             original.insert(original.begin(), 1, 1);
-            outputAssertion("after adding 1 value with insert in a vector with size 2:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+            outputAssertion("after adding 1 value with insert (1 value) in a vector with size 2:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
         }
         {
             ft::vector<int> own(50, 5);
@@ -246,7 +246,7 @@ void capacityUnitTests(bool isDebug)
 
             std::vector<int> original(50, 5);
             original.insert(original.begin(), 3, 1);
-            outputAssertion("after adding 3 values with insert in a vector with size 50:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+            outputAssertion("after adding 3 values with insert (n values) in a vector with size 50:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
         }
         {
             ft::vector<int> own(50, 5);
@@ -254,7 +254,7 @@ void capacityUnitTests(bool isDebug)
 
             std::vector<int> original(50, 5);
             original.insert(original.begin(), 0, 1);
-            outputAssertion("after adding 0 values with insert in a vector with size 50:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+            outputAssertion("after adding 0 values with insert (n values) in a vector with size 50:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
         }
         {
             ft::vector<int> own;
@@ -262,7 +262,7 @@ void capacityUnitTests(bool isDebug)
 
             std::vector<int> original;
             original.insert(original.begin(), 120, 1);
-            outputAssertion("after adding 120 values with insert in a vector with size 0:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+            outputAssertion("after adding 120 values with insert (n values) in a vector with size 0:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
         }
         {
             ft::vector<int> own(63, 5);
@@ -270,7 +270,47 @@ void capacityUnitTests(bool isDebug)
 
             std::vector<int> original(63, 5);
             original.insert(original.begin(), 17, 1);
-            outputAssertion("after adding 17 values with insert in a vector with size 63:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+            outputAssertion("after adding 17 values with insert (n values) in a vector with size 63:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            ft::vector<int> own(50, 5);
+            ft::vector<int> ownRef(3, 1);
+            own.insert(own.begin(), ownRef.begin(), ownRef.end());
+
+            std::vector<int> original(50, 5);
+            ft::vector<int> originalRef(3, 1);
+            original.insert(original.begin(), originalRef.begin(), originalRef.end());
+            outputAssertion("after adding 3 values with insert (iterators) in a vector with size 50:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            ft::vector<int> own(50, 5);
+            ft::vector<int> ownRef;
+            own.insert(own.begin(), ownRef.begin(), ownRef.end());
+
+            std::vector<int> original(50, 5);
+            ft::vector<int> originalRef;
+            original.insert(original.begin(), originalRef.begin(), originalRef.end());
+            outputAssertion("after adding 0 values with insert (iterators) in a vector with size 50:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            ft::vector<int> own;
+            ft::vector<int> ownRef(120, 1);
+            own.insert(own.begin(), ownRef.begin(), ownRef.end());
+
+            std::vector<int> original;
+            ft::vector<int> originalRef(120, 1);
+            original.insert(original.begin(), originalRef.begin(), originalRef.end());
+            outputAssertion("after adding 120 values with insert (iterators) in a vector with size 0:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            ft::vector<int> own(63, 5);
+            ft::vector<int> ownRef(17, 1);
+            own.insert(own.begin(), ownRef.begin(), ownRef.end());
+
+            std::vector<int> original(63, 5);
+            ft::vector<int> originalRef(17, 1);
+            original.insert(original.begin(), originalRef.begin(), originalRef.end());
+            outputAssertion("after adding 17 values with insert (iterators) in a vector with size 63:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
         }
     }
 
