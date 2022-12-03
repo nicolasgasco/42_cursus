@@ -218,8 +218,6 @@ namespace ft
             int tmp = this->_size ? *position : 0;
             *position = val;
             this->_size++;
-            if (!this->_size)
-                return position;
 
             for (iterator it = (position + 1); it != this->end(); ++it)
             {
@@ -230,9 +228,36 @@ namespace ft
             return position;
         }
 
-        void insert(iterator position, size_type n, const value_type &val);
-        template <class InputIterator>
-        void insert(iterator position, InputIterator first, InputIterator last);
+        iterator insert(iterator position, size_type n, const value_type &val)
+        {
+            if (n == 0)
+                return position;
+
+            int positionI = 0;
+            for (iterator it = this->begin(); it != position; ++it)
+                positionI++;
+
+            if (this->capacity() == this->_size)
+            {
+                size_type newMinCapacity = this->_capacity + n;
+                size_type newCapacity = (newMinCapacity > (this->_capacity * 2)) ? newMinCapacity : this->_capacity * 2;
+                this->allocateBiggerDataCopy(newCapacity);
+                this->_capacity = newCapacity;
+                position = this->_data + positionI;
+            }
+
+            ft::vector<value_type> tmp(position, this->end());
+
+            for (size_type i = 0; i < n; ++i)
+            {
+                *(position + i) = val;
+                this->_size++;
+            }
+            for (size_type i = 0; i < tmp.size(); ++i)
+                this->_data[positionI + n + i] = tmp[i];
+
+            return position;
+        }
 
         void clear()
         {
