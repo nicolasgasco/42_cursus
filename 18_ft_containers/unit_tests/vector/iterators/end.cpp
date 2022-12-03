@@ -26,12 +26,12 @@ void endUnitTests(bool isDebug)
     {
         ft::vector<int> own;
         int ownLast = 0;
-        for (ft::vector<int>::iterator it = own.begin(); it != own.end(); it++)
+        for (ft::vector<int>::iterator it = own.begin(); it < own.end(); it++)
             ownLast = *it;
 
         std::vector<int> original;
         int originalLast = 0;
-        for (std::vector<int>::iterator it = original.begin(); it != original.end(); it++)
+        for (std::vector<int>::iterator it = original.begin(); it < original.end(); it++)
             originalLast = *it;
 
         outputAssertion("with default constructor:", isStrictEqual<int>(ownLast, originalLast, isDebug));
@@ -39,12 +39,12 @@ void endUnitTests(bool isDebug)
     {
         ft::vector<int> own(1, 10);
         int ownLast = 0;
-        for (ft::vector<int>::iterator it = own.begin(); it != own.end(); it++)
+        for (ft::vector<int>::iterator it = own.begin(); it < own.end(); it++)
             ownLast = *it;
 
         std::vector<int> original(1, 10);
         int originalLast = 0;
-        for (std::vector<int>::iterator it = original.begin(); it != original.end(); it++)
+        for (std::vector<int>::iterator it = original.begin(); it < original.end(); it++)
             originalLast = *it;
 
         outputAssertion("with fill constructor (1, 10):", isStrictEqual<int>(ownLast, originalLast, isDebug));
@@ -52,12 +52,12 @@ void endUnitTests(bool isDebug)
     {
         ft::vector<int> own(5, 10);
         int ownLast = 0;
-        for (ft::vector<int>::iterator it = own.begin(); it != own.end(); it++)
+        for (ft::vector<int>::iterator it = own.begin(); it < own.end(); it++)
             ownLast = *it;
 
         std::vector<int> original(5, 10);
         int originalLast = 0;
-        for (std::vector<int>::iterator it = original.begin(); it != original.end(); it++)
+        for (std::vector<int>::iterator it = original.begin(); it < original.end(); it++)
             originalLast = *it;
 
         outputAssertion("with fill constructor (5, 10):", isStrictEqual<int>(ownLast, originalLast, isDebug));
@@ -67,13 +67,13 @@ void endUnitTests(bool isDebug)
         ft::vector<int> own;
         own.push_back(10);
         int ownLast = 0;
-        for (ft::vector<int>::iterator it = own.begin(); it != own.end(); it++)
+        for (ft::vector<int>::iterator it = own.begin(); it < own.end(); it++)
             ownLast = *it;
 
         std::vector<int> original(5, 10);
         original.push_back(10);
         int originalLast = 0;
-        for (std::vector<int>::iterator it = original.begin(); it != original.end(); it++)
+        for (std::vector<int>::iterator it = original.begin(); it < original.end(); it++)
             originalLast = *it;
 
         outputAssertion("with default constructor + push_back(10):", isStrictEqual<int>(ownLast, originalLast, isDebug));
@@ -83,14 +83,14 @@ void endUnitTests(bool isDebug)
         own.push_back(5);
         own.push_back(10);
         int ownLast = 0;
-        for (ft::vector<int>::iterator it = own.begin(); it != own.end(); it++)
+        for (ft::vector<int>::iterator it = own.begin(); it < own.end(); it++)
             ownLast = *it;
 
         std::vector<int> original(5, 10);
         original.push_back(10);
         own.push_back(5);
         int originalLast = 0;
-        for (std::vector<int>::iterator it = original.begin(); it != original.end(); it++)
+        for (std::vector<int>::iterator it = original.begin(); it < original.end(); it++)
             originalLast = *it;
 
         outputAssertion("with default constructor + push_back(10) + push_back(5):", isStrictEqual<int>(ownLast, originalLast, isDebug));
