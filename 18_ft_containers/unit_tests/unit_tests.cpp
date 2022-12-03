@@ -28,6 +28,7 @@
 #include "vector/modifiers/resize.cpp"
 #include "vector/modifiers/clear.cpp"
 #include "vector/modifiers/swap.cpp"
+#include "vector/modifiers/insert.cpp"
 
 // Iterator
 #include "vector/iterators/begin.cpp"
@@ -74,6 +75,7 @@ int main(int argc, char *argv[])
     resizeUnitTests(IS_DEBUG);
     clearUnitTests(IS_DEBUG);
     swapUnitTests(IS_DEBUG);
+    insertUnitTests(IS_DEBUG);
 
     // Iterator
     beginUnitTests(IS_DEBUG);

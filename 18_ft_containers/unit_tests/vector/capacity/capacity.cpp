@@ -205,6 +205,30 @@ void capacityUnitTests(bool isDebug)
         original.push_back(1);
         outputAssertion("after a push_back without memory preservation and capacity = 2023:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
     }
+    {
+        ft::vector<int> own(2, 5);
+        own.insert(own.begin(), 1);
+
+        std::vector<int> original(2, 5);
+        original.insert(original.begin(), 1);
+        outputAssertion("after adding 1 value with insert in a vector with size 2:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
+        ft::vector<int> own(50, 5);
+        own.insert(own.begin(), 1);
+
+        std::vector<int> original(50, 5);
+        original.insert(original.begin(), 1);
+        outputAssertion("after adding 1 value with insert in a vector with size 50:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
+        ft::vector<int> own;
+        own.insert(own.begin(), 1);
+
+        std::vector<int> original;
+        original.insert(original.begin(), 1);
+        outputAssertion("after adding 1 value with insert in a vector with size 0:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
 
     std::cout << std::endl
               << "Stays constant after a pop_back like STL vector value:" << std::endl;

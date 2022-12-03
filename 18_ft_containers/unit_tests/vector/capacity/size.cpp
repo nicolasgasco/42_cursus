@@ -100,6 +100,22 @@ void sizeUnitTests(bool isDebug)
         original.push_back(1);
         outputAssertion("after a push_back without memory preservation and capacity = 2:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
     }
+    {
+        ft::vector<int> own(2, 5);
+        own.insert(own.begin(), 1);
+
+        std::vector<int> original(2, 5);
+        original.insert(original.begin(), 1);
+        outputAssertion("after adding 1 value with insert in a vector with size 2:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+    }
+    {
+        ft::vector<int> own;
+        own.insert(own.begin(), 1);
+
+        std::vector<int> original;
+        original.insert(original.begin(), 1);
+        outputAssertion("after adding 1 value with insert in a vector with size 0:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+    }
 
     std::cout << std::endl
               << "Is decremented after a pop_back like STL vector value:" << std::endl;

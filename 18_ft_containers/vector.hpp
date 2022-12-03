@@ -204,6 +204,36 @@ namespace ft
             return;
         }
 
+        iterator insert(iterator position, const value_type &val)
+        {
+            int positionI = 0;
+            for (iterator it = this->begin(); it != position; ++it)
+                positionI++;
+            if (this->capacity() == this->_size)
+            {
+                this->increaseCapacity();
+                position = this->_data + positionI;
+            }
+
+            int tmp = this->_size ? *position : 0;
+            *position = val;
+            this->_size++;
+            if (!this->_size)
+                return position;
+
+            for (iterator it = (position + 1); it != this->end(); ++it)
+            {
+                int tmpCurr = *it;
+                *it = tmp;
+                tmp = tmpCurr;
+            }
+            return position;
+        }
+
+        void insert(iterator position, size_type n, const value_type &val);
+        template <class InputIterator>
+        void insert(iterator position, InputIterator first, InputIterator last);
+
         void clear()
         {
             for (size_type i = 0; i < this->_size; ++i)
