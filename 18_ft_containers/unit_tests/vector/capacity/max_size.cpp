@@ -34,6 +34,32 @@ void maxSizeUnitTests(bool isDebug)
         outputAssertion("with fill constructor + value + allocator:", isStrictEqual<std::size_t>(own.max_size(), original.max_size(), isDebug));
     }
     {
+        ft::vector<int> ownRef(10, 5);
+        ft::vector<int> own(ownRef.begin(), ownRef.end());
+
+        std::vector<int> originalRef(10, 5);
+        std::vector<int> original(originalRef.begin(), originalRef.end());
+        outputAssertion("with range constructor + fill constructor (10, 5):", isStrictEqual<std::size_t>(own.max_size(), original.max_size(), isDebug));
+    }
+    {
+        ft::vector<int> ownRef;
+        ft::vector<int> own(ownRef.begin(), ownRef.end());
+
+        std::vector<int> originalRef;
+        std::vector<int> original(originalRef.begin(), originalRef.end());
+        outputAssertion("with range constructor + default constructor:", isStrictEqual<std::size_t>(own.max_size(), original.max_size(), isDebug));
+    }
+    {
+        std::allocator<int> alloc = std::allocator<int>();
+
+        ft::vector<int> ownRef(10, 5, alloc);
+        ft::vector<int> own(ownRef.begin(), ownRef.end());
+
+        std::vector<int> originalRef(10, 5, alloc);
+        std::vector<int> original(originalRef.begin(), originalRef.end());
+        outputAssertion("with range constructor + fill constructor (10, 5) + custom allocator:", isStrictEqual<std::size_t>(own.max_size(), original.max_size(), isDebug));
+    }
+    {
         ft::vector<int> ownSeed(10, 5);
         ft::vector<int> own(ownSeed);
 

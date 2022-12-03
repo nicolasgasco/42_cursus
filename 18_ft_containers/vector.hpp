@@ -51,8 +51,19 @@ namespace ft
         }
 
         // Range constructor
-        // template <class InputIterator>
-        // vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type());
+        vector(iterator first, iterator last, const allocator_type &alloc = allocator_type())
+        {
+            size_type rangeSize = last - first;
+            this->_alloc = alloc;
+
+            this->_data = this->_alloc.allocate(rangeSize);
+            this->_capacity = rangeSize;
+            for (size_type i = 0; i < rangeSize; ++i, ++first)
+                this->_alloc.construct((this->_data + i), *first);
+            this->_size = rangeSize;
+
+            this->_maxSize = this->_alloc.max_size();
+        }
 
         // Copy constructor
         vector(const vector &x)
