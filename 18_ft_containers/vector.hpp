@@ -22,8 +22,8 @@ namespace ft
         typedef typename allocator_type::const_reference const_reference;
         typedef typename allocator_type::pointer pointer;
         typedef typename allocator_type::const_pointer const_pointer;
-        typedef typename ft::iterator_traits<pointer>::iterator_category iterator;
-        typedef typename ft::iterator_traits<const_pointer>::iterator_category const_iterator;
+        typedef typename ft::iterator_traits<pointer>::pointer iterator;
+        typedef typename ft::iterator_traits<const_pointer>::pointer const_iterator;
         // typedef std::reverse_iterator<iterator> reverse_iterator;
         // typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
 
@@ -88,6 +88,18 @@ namespace ft
         ~vector()
         {
             this->destroyAllocatedData();
+        }
+
+        /* ----------------------------------
+         * Iterators
+         * ---------------------------------- */
+        iterator begin()
+        {
+            return iterator(this->_data);
+        }
+        const_iterator begin() const
+        {
+            return iterator(this->_data);
         }
 
         /* ----------------------------------

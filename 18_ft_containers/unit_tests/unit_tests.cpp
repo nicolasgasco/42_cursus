@@ -29,6 +29,9 @@
 #include "vector/modifiers/clear.cpp"
 #include "vector/modifiers/swap.cpp"
 
+// Iterator
+#include "vector/iterators/begin.cpp"
+
 // Operators
 #include "vector/operators/equal.cpp"
 #include "vector/operators/not_equal.cpp"
@@ -70,6 +73,9 @@ int main(int argc, char *argv[])
     resizeUnitTests(IS_DEBUG);
     clearUnitTests(IS_DEBUG);
     swapUnitTests(IS_DEBUG);
+
+    // Iterator
+    beginUnitTests(IS_DEBUG);
 
     // Operators
     equalUnitTests(IS_DEBUG);
