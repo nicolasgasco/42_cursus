@@ -35,6 +35,24 @@ void dataUnitTests(bool isDebug)
         std::vector<int> original(3, 5, alloc);
         outputAssertion("with fill constructor + value (5) + custom allocator:", isStrictEqual<int>(own.data(), original.data(), 3, isDebug));
     }
+    {
+        ft::vector<int> ownRef(10, 5);
+        ft::vector<int> own(ownRef.begin(), ownRef.end());
+
+        std::vector<int> originalRef(10, 5);
+        std::vector<int> original(originalRef.begin(), originalRef.end());
+        outputAssertion("with range constructor + fill constructor (10, 5):", isStrictEqual<int>(own.data(), original.data(), 5, isDebug));
+    }
+    {
+        std::allocator<int> alloc = std::allocator<int>();
+
+        ft::vector<int> ownRef(10, 5, alloc);
+        ft::vector<int> own(ownRef.begin(), ownRef.end());
+
+        std::vector<int> originalRef(10, 5, alloc);
+        std::vector<int> original(originalRef.begin(), originalRef.end());
+        outputAssertion("with range constructor + fill constructor (10, 5) + custom allocator:", isStrictEqual<int>(own.data(), original.data(), 5, isDebug));
+    }
     std::cout << std::endl
               << "  CONST" << std::endl;
     {
@@ -63,6 +81,24 @@ void dataUnitTests(bool isDebug)
         ft::vector<int> const own(3, 5, alloc);
         std::vector<int> const original(3, 5, alloc);
         outputAssertion("with fill constructor + value (5) + custom allocator:", isStrictEqual<int>(own.data(), original.data(), 3, isDebug));
+    }
+    {
+        ft::vector<int> ownRef(10, 5);
+        ft::vector<int> const own(ownRef.begin(), ownRef.end());
+
+        std::vector<int> originalRef(10, 5);
+        std::vector<int> const original(originalRef.begin(), originalRef.end());
+        outputAssertion("with range constructor + fill constructor (10, 5):", isStrictEqual<int>(own.data(), original.data(), 5, isDebug));
+    }
+    {
+        std::allocator<int> const alloc = std::allocator<int>();
+
+        ft::vector<int> ownRef(10, 5, alloc);
+        ft::vector<int> const own(ownRef.begin(), ownRef.end());
+
+        std::vector<int> originalRef(10, 5, alloc);
+        std::vector<int> const original(originalRef.begin(), originalRef.end());
+        outputAssertion("with range constructor + fill constructor (10, 5) + custom allocator:", isStrictEqual<int>(own.data(), original.data(), 5, isDebug));
     }
 
     std::cout << std::endl
@@ -126,5 +162,21 @@ void dataUnitTests(bool isDebug)
             original.push_back(randInt);
         }
         outputAssertion("after 50 random push_back() calls:", isStrictEqual<int>(own.data(), original.data(), 50, isDebug));
+    }
+    {
+        std::vector<int> originalRef;
+        ft::vector<int> ownRef;
+        srand(time(0));
+        for (int i = 0; i < 10; ++i)
+        {
+            int randInt = rand();
+            originalRef.push_back(randInt);
+            ownRef.push_back(randInt);
+        }
+
+        ft::vector<int> const own(ownRef.begin(), ownRef.end());
+        std::vector<int> const original(originalRef.begin(), originalRef.end());
+
+        outputAssertion("after range constructor from randomly-filled vector:", isStrictEqual<int>(own.data(), original.data(), 50, isDebug));
     }
 }
