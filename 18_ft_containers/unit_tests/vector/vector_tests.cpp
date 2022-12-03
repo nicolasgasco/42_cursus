@@ -1,0 +1,74 @@
+#include <iostream>
+
+// Capacity
+#include "capacity/size.cpp"
+#include "capacity/capacity.cpp"
+#include "capacity/empy.cpp"
+#include "capacity/max_size.cpp"
+#include "capacity/reserve.cpp"
+
+// Other
+#include "other/get_allocator.cpp"
+#include "other/assign.cpp"
+
+// Access
+#include "access/random_access.cpp"
+#include "access/data.cpp"
+#include "access/front.cpp"
+#include "access/back.cpp"
+#include "access/at.cpp"
+
+// Modifiers
+#include "modifiers/push_back.cpp"
+#include "modifiers/pop_back.cpp"
+#include "modifiers/resize.cpp"
+#include "modifiers/clear.cpp"
+#include "modifiers/swap.cpp"
+#include "modifiers/insert.cpp"
+
+// Iterator
+#include "iterators/begin.cpp"
+#include "iterators/end.cpp"
+
+// Operators
+#include "operators/equal.cpp"
+#include "operators/not_equal.cpp"
+
+void vectorUnitTests(bool IS_DEBUG)
+{
+    std::cout << YELLOW << "VECTOR UNIT TESTS" << NOCOL << std::endl;
+
+    // Capacity
+    sizeUnitTests(IS_DEBUG);
+    capacityUnitTests(IS_DEBUG);
+    emptyUnitTests(IS_DEBUG);
+    maxSizeUnitTests(IS_DEBUG);
+    reserveUnitTests(IS_DEBUG);
+
+    // Other
+    getAllocatorUnitTests(IS_DEBUG);
+    assignUnitTests(IS_DEBUG);
+
+    // Access
+    randomAccessUnitTests(IS_DEBUG);
+    dataUnitTests(IS_DEBUG);
+    frontUnitTests(IS_DEBUG);
+    backUnitTests(IS_DEBUG);
+    atUnitTests(IS_DEBUG);
+
+    // Modifiers
+    pushBackUnitTests(IS_DEBUG);
+    popBackUnitTests(IS_DEBUG);
+    resizeUnitTests(IS_DEBUG);
+    clearUnitTests(IS_DEBUG);
+    swapUnitTests(IS_DEBUG);
+    insertUnitTests(IS_DEBUG);
+
+    // Iterator
+    beginUnitTests(IS_DEBUG);
+    endUnitTests(IS_DEBUG);
+
+    // Operators
+    equalUnitTests(IS_DEBUG);
+    notEqualUnitTests(IS_DEBUG);
+}
