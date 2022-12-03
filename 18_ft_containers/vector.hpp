@@ -216,13 +216,13 @@ namespace ft
             }
 
             int tmp = this->_size ? *position : 0;
-            *position = val;
+            this->_alloc.construct(position, val);
             this->_size++;
 
             for (iterator it = (position + 1); it != this->end(); ++it)
             {
                 int tmpCurr = *it;
-                *it = tmp;
+                this->_alloc.construct(it, tmp);
                 tmp = tmpCurr;
             }
             return position;
@@ -250,11 +250,11 @@ namespace ft
 
             for (size_type i = 0; i < n; ++i)
             {
-                *(position + i) = val;
+                this->_alloc.construct(position + i, val);
                 this->_size++;
             }
             for (size_type i = 0; i < tmp.size(); ++i)
-                this->_data[positionI + n + i] = tmp[i];
+                this->_alloc.construct(this->_data + positionI + n + i, tmp[i]);
 
             return position;
         }
@@ -280,13 +280,13 @@ namespace ft
 
             for (iterator it = first; it != last; ++it)
             {
-                this->_data[positionI] = *it;
+                this->_alloc.construct(this->_data + positionI, *it);
                 positionI++;
                 this->_size++;
             }
             for (size_type i = 0; i < tmp.size(); ++i)
             {
-                this->_data[positionI] = tmp[i];
+                this->_alloc.construct(this->_data + positionI, tmp[i]);
                 positionI++;
             }
 
