@@ -177,6 +177,6 @@ void dataUnitTests(bool isDebug)
         ft::vector<int> const own(ownRef.begin(), ownRef.end());
         std::vector<int> const original(originalRef.begin(), originalRef.end());
 
-        outputAssertion("after range constructor from randomly-filled vector:", isStrictEqual<int>(own.data(), original.data(), 50, isDebug));
+        outputAssertion("after range constructor from randomly-filled vector:", isStrictEqual<int>(own.data(), original.data(), 10, isDebug));
     }
 }
