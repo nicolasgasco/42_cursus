@@ -42,14 +42,14 @@ void ftEqualUnitTests(bool isDebug)
         }
         {
             ft::vector<int> oneOwn(5, 2);
-            ft::vector<int> twoOwn(5, 1);
+            ft::vector<int> twoOwn(6, 1);
             bool ownEqual = ft::equal(oneOwn.begin(), oneOwn.end(), twoOwn.begin());
 
             std::vector<int> oneOriginal(5, 2);
-            std::vector<int> twoOriginal(5, 1);
+            std::vector<int> twoOriginal(6, 1);
             bool originalEqual = std::equal(oneOriginal.begin(), oneOriginal.end(), twoOriginal.begin());
 
-            outputAssertion("returns false with two differnets vector<int>:", isStrictEqual<bool>(ownEqual, originalEqual, isDebug));
+            outputAssertion("returns false with two different vector<int>:", isStrictEqual<bool>(ownEqual, originalEqual, isDebug));
         }
         {
             ft::vector<std::string> oneOwn(5, "ciao");
@@ -86,11 +86,11 @@ void ftEqualUnitTests(bool isDebug)
         }
         {
             ft::vector<float> oneOwn(5, 1.0f);
-            ft::vector<float> twoOwn(5, 2.0f);
+            ft::vector<float> twoOwn(1, 2.0f);
             bool ownEqual = ft::equal(oneOwn.begin(), oneOwn.end(), twoOwn.begin());
 
             std::vector<float> oneOriginal(5, 1.0f);
-            std::vector<float> twoOriginal(5, 2.0f);
+            std::vector<float> twoOriginal(1, 2.0f);
             bool originalEqual = std::equal(oneOriginal.begin(), oneOriginal.end(), twoOriginal.begin());
 
             outputAssertion("returns false with two different vector<float>:", isStrictEqual<bool>(ownEqual, originalEqual, isDebug));
@@ -130,11 +130,11 @@ void ftEqualUnitTests(bool isDebug)
         }
         {
             ft::vector<long> oneOwn(5, 2147483647);
-            ft::vector<long> twoOwn(5, 0);
+            ft::vector<long> twoOwn(100, 0);
             bool ownEqual = ft::equal(oneOwn.begin(), oneOwn.end(), twoOwn.begin());
 
             std::vector<long> oneOriginal(5, 2147483647);
-            std::vector<long> twoOriginal(5, 0);
+            std::vector<long> twoOriginal(100, 0);
             bool originalEqual = std::equal(oneOriginal.begin(), oneOriginal.end(), twoOriginal.begin());
 
             outputAssertion("returns false with two different vector<long>:", isStrictEqual<bool>(ownEqual, originalEqual, isDebug));
