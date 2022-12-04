@@ -9,7 +9,7 @@
 
 // Other
 #include "other/get_allocator.cpp"
-#include "other/assign.cpp"
+#include "other/assign_operator.cpp"
 
 // Access
 #include "access/random_access.cpp"
@@ -25,6 +25,7 @@
 #include "modifiers/clear.cpp"
 #include "modifiers/swap.cpp"
 #include "modifiers/insert.cpp"
+#include "modifiers/assign.cpp"
 
 // Iterator
 #include "iterators/begin.cpp"
@@ -51,7 +52,7 @@ void vectorUnitTests(bool IS_DEBUG)
 
     // Other
     getAllocatorUnitTests(IS_DEBUG);
-    assignUnitTests(IS_DEBUG);
+    assignOperatorUnitTests(IS_DEBUG);
 
     // Access
     randomAccessUnitTests(IS_DEBUG);
@@ -67,6 +68,7 @@ void vectorUnitTests(bool IS_DEBUG)
     clearUnitTests(IS_DEBUG);
     swapUnitTests(IS_DEBUG);
     insertUnitTests(IS_DEBUG);
+    assignUnitTests(IS_DEBUG);
 
     // Iterator
     beginUnitTests(IS_DEBUG);

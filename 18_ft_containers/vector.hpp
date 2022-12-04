@@ -170,6 +170,23 @@ namespace ft
         /*
          * Modifiers
          */
+
+        template <class InputIterator>
+        void assign(InputIterator first, InputIterator last)
+        {
+            this->_alloc.destroy(this->_data);
+
+            size_type newSize = last - first;
+            if (newSize > this->_capacity)
+            {
+                this->allocateBiggerDataCopy(newSize);
+                this->_capacity = newSize;
+            }
+            for (size_type i = 0; i < newSize; ++i)
+                this->_alloc.construct(this->_data + i, *(first + i));
+            this->_size = newSize;
+        }
+
         void push_back(const value_type &value)
         {
             size_type newSize = this->_size + 1;

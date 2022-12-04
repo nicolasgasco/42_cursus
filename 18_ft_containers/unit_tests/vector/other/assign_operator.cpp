@@ -3,7 +3,7 @@
 #include "utils.hpp"
 #include "../vector.hpp"
 
-void assignUnitTests(bool isDebug)
+void assignOperatorUnitTests(bool isDebug)
 {
     outputSuiteTitle("ASSIGN OPERATOR");
     std::cout
