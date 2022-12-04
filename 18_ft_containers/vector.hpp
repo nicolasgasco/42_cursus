@@ -444,6 +444,15 @@ namespace ft
         return (!isLessThan && !isEqual) ? true : false;
     }
 
+    template <class T, class Alloc>
+    bool operator>=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+    {
+        bool isLessThan = ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+        bool isEqual = (lhs.size() != rhs.size()) ? false : ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+
+        return (!isLessThan || isEqual) ? true : false;
+    }
+
     /* ----------------------------------
      * Swap
      * ---------------------------------- */

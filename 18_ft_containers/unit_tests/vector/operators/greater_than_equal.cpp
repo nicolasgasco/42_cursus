@@ -3,9 +3,9 @@
 #include "utils.hpp"
 #include "../vector.hpp"
 
-void lessThanEqualUnitTests(bool isDebug)
+void greaterThanEqualUnitTests(bool isDebug)
 {
-    outputSuiteTitle("LESS THAN EQUAL");
+    outputSuiteTitle("GREATER THAN EQUAL");
     {
         std::cout
             << "Return value is equal to STL vector value:" << std::endl;
@@ -15,7 +15,7 @@ void lessThanEqualUnitTests(bool isDebug)
 
             std::vector<int> seedOriginal(5, 10);
             std::vector<int> original(5, 10);
-            outputAssertion("returns true when same size and v1 == v2", isStrictEqual<bool>((own <= seedOwn), (original <= seedOriginal), isDebug));
+            outputAssertion("returns true when same size and v1 == v2", isStrictEqual<bool>((own >= seedOwn), (original >= seedOriginal), isDebug));
         }
         {
             ft::vector<int> seedOwn(5, 10);
@@ -23,7 +23,7 @@ void lessThanEqualUnitTests(bool isDebug)
 
             std::vector<int> seedOriginal(5, 10);
             std::vector<int> original(5, 1);
-            outputAssertion("returns true when same size and v1 < v2", isStrictEqual<bool>((own <= seedOwn), (original <= seedOriginal), isDebug));
+            outputAssertion("returns false when same size and v1 < v2", isStrictEqual<bool>((own >= seedOwn), (original >= seedOriginal), isDebug));
         }
         {
             ft::vector<int> seedOwn(5, 10);
@@ -31,7 +31,7 @@ void lessThanEqualUnitTests(bool isDebug)
 
             std::vector<int> seedOriginal(5, 10);
             std::vector<int> original(6, 10);
-            outputAssertion("returns false when different size and v1 > v2", isStrictEqual<bool>((own <= seedOwn), (original <= seedOriginal), isDebug));
+            outputAssertion("returns true when different size and v1 > v2", isStrictEqual<bool>((own >= seedOwn), (original >= seedOriginal), isDebug));
         }
         {
             int values[5] = {1, 2, 3, 4, 5};
@@ -45,7 +45,7 @@ void lessThanEqualUnitTests(bool isDebug)
             fillVectorWithValues<int>(seedOriginal, values, 5);
             std::vector<int> original;
             fillVectorWithValues<int>(original, values, 5);
-            outputAssertion("returns true when same size and v1 == v2", isStrictEqual<bool>((own <= seedOwn), (original <= seedOriginal), isDebug));
+            outputAssertion("returns true when same size and v1 == v2", isStrictEqual<bool>((own >= seedOwn), (original >= seedOriginal), isDebug));
         }
         {
             int values[5] = {1, 2, 3, 4, 5};
@@ -59,7 +59,7 @@ void lessThanEqualUnitTests(bool isDebug)
             fillVectorWithValues<int>(seedOriginal, values, 5);
             std::vector<int> original;
             fillVectorWithValues<int>(original, values, 4);
-            outputAssertion("returns true when different size and v1 < v2", isStrictEqual<bool>((own <= seedOwn), (original <= seedOriginal), isDebug));
+            outputAssertion("returns false when different size and v1 < v2", isStrictEqual<bool>((own >= seedOwn), (original >= seedOriginal), isDebug));
         }
         {
             int values[5] = {1, 2, 3, 4, 5};
@@ -71,7 +71,7 @@ void lessThanEqualUnitTests(bool isDebug)
             std::vector<int> seedOriginal;
             fillVectorWithValues<int>(seedOriginal, values, 5);
             std::vector<int> original(5, 10);
-            outputAssertion("returns false when same size and v1 > v2", isStrictEqual<bool>((own <= seedOwn), (original <= seedOriginal), isDebug));
+            outputAssertion("returns true when same size and v1 > v2", isStrictEqual<bool>((own >= seedOwn), (original >= seedOriginal), isDebug));
         }
         {
             ft::vector<int> seedOwn;
@@ -79,7 +79,7 @@ void lessThanEqualUnitTests(bool isDebug)
 
             std::vector<int> seedOriginal;
             std::vector<int> original;
-            outputAssertion("returns true when size = 0", isStrictEqual<bool>((own <= seedOwn), (original <= seedOriginal), isDebug));
+            outputAssertion("returns true when size = 0", isStrictEqual<bool>((own >= seedOwn), (original >= seedOriginal), isDebug));
         }
         {
             ft::vector<int> seedOwn(5, 10);
@@ -87,7 +87,7 @@ void lessThanEqualUnitTests(bool isDebug)
 
             std::vector<int> seedOriginal(5, 10);
             std::vector<int> original(4, 10);
-            outputAssertion("returns true when same values and size v1 < v2", isStrictEqual<bool>((own <= seedOwn), (original <= seedOriginal), isDebug));
+            outputAssertion("returns false when same values and size v1 < v2", isStrictEqual<bool>((own >= seedOwn), (original >= seedOriginal), isDebug));
         }
         {
             int values1[4] = {1, 2, 3, 4};
@@ -102,19 +102,19 @@ void lessThanEqualUnitTests(bool isDebug)
             fillVectorWithValues<int>(seedOriginal, values2, 4);
             std::vector<int> original;
             fillVectorWithValues<int>(original, values1, 4);
-            outputAssertion("returns true when same size and v1 < v2", isStrictEqual<bool>((own <= seedOwn), (original <= seedOriginal), isDebug));
+            outputAssertion("returns false when same size and v1 < v2", isStrictEqual<bool>((own >= seedOwn), (original >= seedOriginal), isDebug));
         }
         {
             int values[4] = {1, 2, 4, 3};
 
             ft::vector<int> seedOwn;
-            fillVectorWithValues<int>(seedOwn, values, 4);
             ft::vector<int> own;
+            fillVectorWithValues<int>(own, values, 4);
 
             std::vector<int> seedOriginal;
-            fillVectorWithValues<int>(seedOriginal, values, 4);
             std::vector<int> original;
-            outputAssertion("returns true when v1 is size 0 and v2 size > 0", isStrictEqual<bool>((own <= seedOwn), (original <= seedOriginal), isDebug));
+            fillVectorWithValues<int>(original, values, 4);
+            outputAssertion("returns true when v2 is size 0 and v1 size > 0", isStrictEqual<bool>((own >= seedOwn), (original >= seedOriginal), isDebug));
         }
     }
 }

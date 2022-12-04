@@ -36,6 +36,7 @@
 #include "operators/less_than.cpp"
 #include "operators/less_than_equal.cpp"
 #include "operators/greater_than.cpp"
+#include "operators/greater_than_equal.cpp"
 
 void vectorUnitTests(bool IS_DEBUG)
 {
@@ -77,4 +78,5 @@ void vectorUnitTests(bool IS_DEBUG)
     lessThanUnitTests(IS_DEBUG);
     lessThanEqualUnitTests(IS_DEBUG);
     greaterThanUnitTests(IS_DEBUG);
+    greaterThanEqualUnitTests(IS_DEBUG);
 }
