@@ -7,7 +7,7 @@
 
 namespace ft
 {
-    template <class T, class Allocator = std::allocator<T> >
+    template <class T, class Allocator = std::allocator<T>>
     class vector
     {
     public:
@@ -409,13 +409,7 @@ namespace ft
     {
         if (lhs.size() != rhs.size())
             return false;
-        typedef typename Alloc::size_type size_type;
-        for (size_type i = 0; i < lhs.size(); ++i)
-        {
-            if (lhs[i] != rhs[i])
-                return false;
-        }
-        return true;
+        return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
     }
 
     template <class T, class Alloc>
@@ -432,6 +426,9 @@ namespace ft
         return false;
     }
 
+    /* ----------------------------------
+     * Swap
+     * ---------------------------------- */
     template <class T, class Alloc>
     void swap(ft::vector<T, Alloc> &lhs,
               ft::vector<T, Alloc> &rhs)
