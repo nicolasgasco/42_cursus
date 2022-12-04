@@ -33,9 +33,9 @@ void notEqualUnitTests(bool isDebug)
             ft::vector<int> own;
             fillVectorWithValues<int>(own, values, 5);
 
-            ft::vector<int> seedOriginal;
+            std::vector<int> seedOriginal;
             fillVectorWithValues<int>(seedOriginal, values, 5);
-            ft::vector<int> original;
+            std::vector<int> original;
             fillVectorWithValues<int>(original, values, 5);
             outputAssertion("when same size and varied values", isStrictEqual<bool>((own != seedOwn), (original != seedOriginal), isDebug));
         }
@@ -47,9 +47,9 @@ void notEqualUnitTests(bool isDebug)
             ft::vector<int> own;
             fillVectorWithValues<int>(own, values, 4);
 
-            ft::vector<int> seedOriginal;
+            std::vector<int> seedOriginal;
             fillVectorWithValues<int>(seedOriginal, values, 5);
-            ft::vector<int> original;
+            std::vector<int> original;
             fillVectorWithValues<int>(original, values, 4);
             outputAssertion("when different size and same varied values", isStrictEqual<bool>((own != seedOwn), (original != seedOriginal), isDebug));
         }
@@ -60,25 +60,25 @@ void notEqualUnitTests(bool isDebug)
             fillVectorWithValues<int>(seedOwn, values, 5);
             ft::vector<int> own(5, 10);
 
-            ft::vector<int> seedOriginal;
+            std::vector<int> seedOriginal;
             fillVectorWithValues<int>(seedOriginal, values, 5);
-            ft::vector<int> original(5, 10);
+            std::vector<int> original(5, 10);
             outputAssertion("when same size and differnet values", isStrictEqual<bool>((own != seedOwn), (original != seedOriginal), isDebug));
         }
         {
             ft::vector<int> seedOwn;
             ft::vector<int> own;
 
-            ft::vector<int> seedOriginal;
-            ft::vector<int> original;
+            std::vector<int> seedOriginal;
+            std::vector<int> original;
             outputAssertion("when size = 0", isStrictEqual<bool>((own != seedOwn), (original != seedOriginal), isDebug));
         }
         {
             ft::vector<int> seedOwn(5);
             ft::vector<int> own(5);
 
-            ft::vector<int> seedOriginal(5);
-            ft::vector<int> original(5);
+            std::vector<int> seedOriginal(5);
+            std::vector<int> original(5);
             outputAssertion("when same size and default filled", isStrictEqual<bool>((own != seedOwn), (original != seedOriginal), isDebug));
         }
     }
