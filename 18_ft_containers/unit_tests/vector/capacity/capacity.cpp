@@ -580,6 +580,61 @@ void capacityUnitTests(bool isDebug)
             outputAssertion("after assigning 17 values (iterators) in a vector with reserved capacity of 17:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
         }
     }
+
+    {
+
+        std::cout << std::endl
+                  << "Stays constant after an erase like STL vector value:" << std::endl;
+        {
+            ft::vector<int> own(2, 5);
+            own.erase(own.begin());
+
+            std::vector<int> original(2, 5);
+            original.erase(original.begin());
+
+            outputAssertion("after erasing index 0 (iterator) in a vector with size 2:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            ft::vector<int> own(2, 5);
+            own.erase(own.begin() + 1);
+
+            std::vector<int> original(2, 5);
+            original.erase(original.begin() + 1);
+
+            outputAssertion("after erasing index 1 (iterator) in a vector with size 2 (is equal to end()):", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            int values[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+            ft::vector<int> own(values, values + 10);
+            own.erase(own.begin() + 9);
+
+            std::vector<int> original(values, values + 10);
+            original.erase(original.begin() + 9);
+
+            outputAssertion("after erasing index 9 (iterator) in a vector with size 10 (varied values):", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            ft::vector<int> own(10, 5);
+            own.erase(own.begin() + 5);
+
+            std::vector<int> original(10, 5);
+            original.erase(original.begin() + 5);
+
+            outputAssertion("after erasing index 5 (iterator) in a vector with size 10:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            int values[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+            ft::vector<int> own(values, values + 10);
+            own.erase(own.begin() + 5);
+
+            std::vector<int> original(values, values + 10);
+            original.erase(original.begin() + 5);
+
+            outputAssertion("after erasing index 5 (iterator) in a vector with size 10 (varied values):", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+    }
     std::cout << std::endl
               << "Is swapped after a ft::swap like STL vector value:" << std::endl;
     {

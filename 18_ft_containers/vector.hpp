@@ -330,6 +330,23 @@ namespace ft
             return position;
         }
 
+        iterator erase(iterator position)
+        {
+            ft::vector<value_type> tmp(position + 1, this->end());
+
+            for (iterator it = position; it < this->end(); ++it)
+                this->_alloc.destroy(it);
+
+            for (size_type i = 0; i < tmp.size(); ++i)
+                this->_alloc.construct(position + i, tmp[i]);
+
+            this->_size--;
+
+            if (this->end() - position == 1)
+                return this->end();
+            return position;
+        }
+
         void clear()
         {
             for (size_type i = 0; i < this->_size; ++i)

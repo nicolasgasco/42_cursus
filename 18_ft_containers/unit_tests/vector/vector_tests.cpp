@@ -26,6 +26,7 @@
 #include "modifiers/swap.cpp"
 #include "modifiers/insert.cpp"
 #include "modifiers/assign.cpp"
+#include "modifiers/erase.cpp"
 
 // Iterator
 #include "iterators/begin.cpp"
@@ -69,6 +70,7 @@ void vectorUnitTests(bool IS_DEBUG)
     swapUnitTests(IS_DEBUG);
     insertUnitTests(IS_DEBUG);
     assignUnitTests(IS_DEBUG);
+    eraseUnitTests(IS_DEBUG);
 
     // Iterator
     beginUnitTests(IS_DEBUG);
