@@ -9,8 +9,11 @@ int main(int argc, char *argv[])
     if (argc > 1)
         IS_DEBUG = (static_cast<std::string>(argv[1]) == "debug") ? true : false;
 
-    vectorUnitTests(IS_DEBUG);
+    // ALGORITHMS
     algorithmsUnitTests(IS_DEBUG);
+
+    // VECTOR
+    vectorUnitTests(IS_DEBUG);
 
     std::cout << std::endl;
     return (0);
