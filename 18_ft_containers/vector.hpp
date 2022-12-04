@@ -45,7 +45,7 @@ namespace ft
             this->_alloc = alloc;
             this->_data = this->_alloc.allocate(count);
             for (size_type i = 0; i < count; ++i)
-                this->_alloc.construct((this->_data + i), value);
+                this->_alloc.construct((this->_data + i), value_type(value));
 
             this->_maxSize = this->_alloc.max_size();
         }
@@ -77,12 +77,7 @@ namespace ft
         vector &operator=(const vector &other)
         {
             if (this->size())
-            {
-                for (size_type i = 0; i < this->_size; ++i)
-                    this->_data[i] = 0;
-                if (this->_data)
-                    this->_alloc.destroy(this->_data);
-            }
+                this->_alloc.destroy(this->_data);
             this->_maxSize = other.max_size();
             if (this->_capacity < other.size())
             {
