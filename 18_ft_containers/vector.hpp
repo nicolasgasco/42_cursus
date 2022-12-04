@@ -336,11 +336,10 @@ namespace ft
 
             for (iterator it = position; it < this->end(); ++it)
                 this->_alloc.destroy(it);
+            this->_size--;
 
             for (size_type i = 0; i < tmp.size(); ++i)
                 this->_alloc.construct(position + i, tmp[i]);
-
-            this->_size--;
 
             if (this->end() - position == 1)
                 return this->end();
