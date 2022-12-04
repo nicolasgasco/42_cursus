@@ -171,12 +171,13 @@ namespace ft
          * Modifiers
          */
 
-        template <class InputIterator>
-        void assign(InputIterator first, InputIterator last)
+        void assign(iterator first, iterator last)
         {
             this->_alloc.destroy(this->_data);
-
             size_type newSize = last - first;
+            if (newSize == 0)
+                return;
+
             if (newSize > this->_capacity)
             {
                 this->allocateBiggerDataCopy(newSize);
@@ -185,6 +186,24 @@ namespace ft
             for (size_type i = 0; i < newSize; ++i)
                 this->_alloc.construct(this->_data + i, *(first + i));
             this->_size = newSize;
+        }
+        void assign(size_type n, const value_type &val)
+        {
+            this->_alloc.destroy(this->_data);
+
+            if (n == 0)
+            {
+                std::cout << "cacca" << std::endl;
+                return;
+            }
+            if (n > this->_capacity)
+            {
+                this->allocateBiggerDataCopy(n);
+                this->_capacity = n;
+            }
+            for (size_type i = 0; i < n; ++i)
+                this->_alloc.construct(this->_data + i, value_type(val));
+            this->_size = n;
         }
 
         void push_back(const value_type &value)

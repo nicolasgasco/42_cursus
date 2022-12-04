@@ -504,7 +504,7 @@ void capacityUnitTests(bool isDebug)
             std::vector<int> original(50, 10);
             original.assign(values, values + 5);
 
-            outputAssertion("after inserting 5 values (iterators) in a vector with size 50:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+            outputAssertion("after assigning 5 values (iterators) in a vector with size 50:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
         }
         {
             int values[] = {};
@@ -515,7 +515,7 @@ void capacityUnitTests(bool isDebug)
             std::vector<int> original(5, 10);
             original.assign(values, values);
 
-            outputAssertion("after inserting 0 values (iterators) in a vector with size 5:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+            outputAssertion("after assigning 0 values (iterators) in a vector with size 5:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
         }
         {
             int values[17] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
@@ -526,7 +526,7 @@ void capacityUnitTests(bool isDebug)
             std::vector<int> original(63, 10);
             original.assign(values, values + 17);
 
-            outputAssertion("after inserting 17 values (iterators) in a vector with size 63:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+            outputAssertion("after assigning 17 values (iterators) in a vector with size 63:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
         }
         {
             int values[17] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
@@ -539,7 +539,45 @@ void capacityUnitTests(bool isDebug)
             original.reserve(17);
             original.assign(values, values + 17);
 
-            outputAssertion("after inserting 17 values (iterators) in a vector with reserved capacity of 17:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+            outputAssertion("after assigning 17 values (iterators) in a vector with reserved capacity of 17:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            ft::vector<int> own(50, 10);
+            own.assign(5, 1);
+
+            std::vector<int> original(50, 10);
+            original.assign(5, 1);
+
+            outputAssertion("after assigning 5 values (iterators) in a vector with size 50:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            ft::vector<int> own(5, 10);
+            own.assign(0, 1);
+
+            std::vector<int> original(5, 10);
+            original.assign(0, 1);
+
+            outputAssertion("after assigning 0 values (iterators) in a vector with size 5:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            ft::vector<int> own(63, 10);
+            own.assign(17, 1);
+
+            std::vector<int> original(63, 10);
+            original.assign(17, 1);
+
+            outputAssertion("after assigning 17 values (iterators) in a vector with size 63:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            ft::vector<int> own;
+            own.reserve(17);
+            own.assign(17, 1);
+
+            std::vector<int> original;
+            original.reserve(17);
+            original.assign(17, 1);
+
+            outputAssertion("after assigning 17 values (iterators) in a vector with reserved capacity of 17:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
         }
     }
     std::cout << std::endl

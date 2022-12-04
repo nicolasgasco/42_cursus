@@ -158,83 +158,150 @@ void sizeUnitTests(bool isDebug)
     std::cout << std::endl
               << "Is incremented after an assign like STL vector value:" << std::endl;
     {
-        int values[5] = {1, 2, 3, 4, 5};
+        {
+            int values[5] = {1, 2, 3, 4, 5};
 
-        ft::vector<int> own(50, 10);
-        own.assign(values, values + 5);
+            ft::vector<int> own(50, 10);
+            own.assign(values, values + 5);
 
-        std::vector<int> original(50, 10);
-        original.assign(values, values + 5);
+            std::vector<int> original(50, 10);
+            original.assign(values, values + 5);
 
-        outputAssertion("after inserting 5 values (iterators) in a vector with size 50:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
-    }
-    {
-        int values[17] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
+            outputAssertion("after assigning 5 values (iterators) in a vector with size 50:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+        }
+        {
+            int values[17] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
 
-        ft::vector<int> own(63, 10);
-        own.assign(values, values + 17);
+            ft::vector<int> own(63, 10);
+            own.assign(values, values + 17);
 
-        std::vector<int> original(63, 10);
-        original.assign(values, values + 17);
+            std::vector<int> original(63, 10);
+            original.assign(values, values + 17);
 
-        outputAssertion("after inserting 17 values (iterators) in a vector with size 63:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
-    }
-    {
-        int values[17] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
+            outputAssertion("after assigning 17 values (iterators) in a vector with size 63:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+        }
+        {
+            int values[17] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
 
-        ft::vector<int> own;
-        own.reserve(17);
-        own.assign(values, values + 17);
+            ft::vector<int> own;
+            own.reserve(17);
+            own.assign(values, values + 17);
 
-        std::vector<int> original;
-        original.reserve(17);
-        original.assign(values, values + 17);
+            std::vector<int> original;
+            original.reserve(17);
+            original.assign(values, values + 17);
 
-        outputAssertion("after inserting 17 values (iterators) in a vector with reserved capacity of 17:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
-    }
-    {
-        int values[5] = {1, 2, 3, 4, 5};
+            outputAssertion("after assigning 17 values (iterators) in a vector with reserved capacity of 17:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+        }
+        {
+            int values[5] = {1, 2, 3, 4, 5};
 
-        ft::vector<int> own(1, 5);
-        own.assign(values, values + 5);
+            ft::vector<int> own(1, 5);
+            own.assign(values, values + 5);
 
-        std::vector<int> original(1, 5);
-        original.assign(values, values + 5);
+            std::vector<int> original(1, 5);
+            original.assign(values, values + 5);
 
-        outputAssertion("after assigning 5 values (iterators) in a vector with size 1:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
-    }
-    {
-        int values[5] = {1, 2, 3, 4, 5};
+            outputAssertion("after assigning 5 values (iterators) in a vector with size 1:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            int values[5] = {1, 2, 3, 4, 5};
 
-        ft::vector<int> own;
-        own.assign(values, values + 5);
+            ft::vector<int> own;
+            own.assign(values, values + 5);
 
-        std::vector<int> original;
-        original.assign(values, values + 5);
+            std::vector<int> original;
+            original.assign(values, values + 5);
 
-        outputAssertion("after inserting 5 values (iterators) a vector with size 0:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
-    }
-    {
-        int values[5] = {1, 2, 3, 4, 5};
+            outputAssertion("after assigning 5 values (iterators) a vector with size 0:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            int values[5] = {1, 2, 3, 4, 5};
 
-        ft::vector<int> own(3, 10);
-        own.assign(values, values + 5);
+            ft::vector<int> own(3, 10);
+            own.assign(values, values + 5);
 
-        std::vector<int> original(3, 10);
-        original.assign(values, values + 5);
+            std::vector<int> original(3, 10);
+            original.assign(values, values + 5);
 
-        outputAssertion("after inserting 5 values (iterators) in a vector with size 3:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
-    }
-    {
-        int values[17] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
+            outputAssertion("after assigning 5 values (iterators) in a vector with size 3:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            int values[17] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
 
-        ft::vector<int> own(3, 10);
-        own.assign(values, values + 17);
+            ft::vector<int> own(3, 10);
+            own.assign(values, values + 17);
 
-        std::vector<int> original(3, 10);
-        original.assign(values, values + 17);
+            std::vector<int> original(3, 10);
+            original.assign(values, values + 17);
 
-        outputAssertion("after inserting 17 values (iterators) in a vector with size 3:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+            outputAssertion("after assigning 17 values (iterators) in a vector with size 3:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            ft::vector<int> own(50, 10);
+            own.assign(5, 1);
+
+            std::vector<int> original(50, 10);
+            original.assign(5, 1);
+
+            outputAssertion("after assigning 5 values (range) in a vector with size 50:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+        }
+        {
+            ft::vector<int> own(63, 10);
+            own.assign(17, 1);
+
+            std::vector<int> original(63, 10);
+            original.assign(17, 1);
+
+            outputAssertion("after assigning 17 values (range) in a vector with size 63:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+        }
+        {
+            ft::vector<int> own;
+            own.reserve(17);
+            own.assign(17, 1);
+
+            std::vector<int> original;
+            original.reserve(17);
+            original.assign(17, 1);
+
+            outputAssertion("after assigning 17 values (range) in a vector with reserved capacity of 17:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+        }
+        {
+            ft::vector<int> own(1, 5);
+            own.assign(5, 1);
+
+            std::vector<int> original(1, 5);
+            original.assign(5, 1);
+
+            outputAssertion("after assigning 5 values (range) in a vector with size 1:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            ft::vector<int> own;
+            own.assign(5, 1);
+
+            std::vector<int> original;
+            original.assign(5, 1);
+
+            outputAssertion("after assigning 5 values (range) a vector with size 0:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            ft::vector<int> own(3, 10);
+            own.assign(5, 1);
+
+            std::vector<int> original(3, 10);
+            original.assign(5, 1);
+
+            outputAssertion("after assigning 5 values (range) in a vector with size 3:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
+        {
+            ft::vector<int> own(3, 10);
+            own.assign(17, 1);
+
+            std::vector<int> original(3, 10);
+            original.assign(17, 1);
+
+            outputAssertion("after assigning 17 values (range) in a vector with size 3:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+        }
     }
 }
 
@@ -319,20 +386,30 @@ std::cout << std::endl
         original.resize(1);
         outputAssertion("with size = 1 and resize = 1:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
     }
+}
+
+{
+    std::cout << std::endl
+              << "Stays constant after an assign like STL vector value:" << std::endl;
     {
-        std::cout << std::endl
-                  << "Stays constant after an assign like STL vector value:" << std::endl;
-        {
-            int values[] = {};
+        int values[] = {};
 
-            ft::vector<int> own(5, 10);
-            own.assign(values, values);
+        ft::vector<int> own(5, 10);
+        own.assign(values, values);
 
-            std::vector<int> original(5, 10);
-            original.assign(values, values);
+        std::vector<int> original(5, 10);
+        original.assign(values, values);
 
-            outputAssertion("after inserting 0 values in a vector with size 5:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
-        }
+        outputAssertion("after inserting 0 values (iterators) in a vector with size 5:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
+    }
+    {
+        ft::vector<int> own(5, 10);
+        own.assign(0, 1);
+
+        std::vector<int> original(5, 10);
+        original.assign(0, 1);
+
+        outputAssertion("after inserting 0 values (range) in a vector with size 5:", isStrictEqual<std::size_t>(own.capacity(), original.capacity(), isDebug));
     }
 }
 
