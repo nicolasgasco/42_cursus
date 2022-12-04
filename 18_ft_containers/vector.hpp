@@ -7,7 +7,7 @@
 
 namespace ft
 {
-    template <class T, class Allocator = std::allocator<T>>
+    template <class T, class Allocator = std::allocator<T> >
     class vector
     {
     public:
@@ -417,13 +417,7 @@ namespace ft
     {
         if (lhs.size() != rhs.size())
             return true;
-        typedef typename Alloc::size_type size_type;
-        for (size_type i = 0; i < lhs.size(); ++i)
-        {
-            if (lhs[i] != rhs[i])
-                return true;
-        }
-        return false;
+        return !(ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
     }
 
     /* ----------------------------------
