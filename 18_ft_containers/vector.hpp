@@ -345,6 +345,22 @@ namespace ft
                 return this->end();
             return position;
         }
+        iterator erase(iterator first, iterator last)
+        {
+            if (last - first == 1)
+                return last;
+
+            ft::vector<value_type> tmp(last, this->end());
+
+            for (iterator it = first; it < this->end(); ++it)
+                this->_alloc.destroy(it);
+            this->_size -= last - first;
+
+            for (size_type i = 0; i < tmp.size(); ++i)
+                this->_alloc.construct(first + i, tmp[i]);
+
+            return first;
+        }
 
         void clear()
         {
