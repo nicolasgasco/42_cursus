@@ -235,7 +235,6 @@ namespace ft
             }
             return position;
         }
-
         iterator insert(iterator position, size_type n, const value_type &val)
         {
             if (n == 0)
@@ -266,7 +265,6 @@ namespace ft
 
             return position;
         }
-
         iterator insert(iterator position, iterator first, iterator last)
         {
             if ((last - first) == 0)
