@@ -35,4 +35,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+report: re
+	@./vector_tests > report.md
+.PHONY: all clean fclean re report
