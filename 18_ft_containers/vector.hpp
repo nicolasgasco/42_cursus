@@ -379,11 +379,7 @@ namespace ft
         void destroyAllocatedData()
         {
             if (this->size())
-            {
-                for (size_type i = 0; i < this->_size; ++i)
-                    this->_data[i] = 0;
                 this->_alloc.destroy(this->_data);
-            }
             if (this->capacity())
                 this->_alloc.deallocate(this->_data, this->_capacity);
         }
