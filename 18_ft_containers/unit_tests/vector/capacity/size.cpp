@@ -152,6 +152,30 @@ void sizeUnitTests(bool isDebug)
     original.insert(original.begin(), originalRef.begin(), originalRef.end());
     outputAssertion("after adding 0 values with insert (with iterators) in a vector with size 0:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
 }
+{
+    int values[10] = {30, 27, 24, 21, 18, 15, 12, 9, 6, 3};
+
+    ft::vector<int> own;
+    own.insert(own.end(), 42);
+    own.insert(own.begin(), 2, 21);
+    own.insert(own.end() - 2, 42);
+    own.insert(own.end(), 2, 84);
+    own.resize(4);
+
+    ft::vector<int> ownRef(values, values + 10);
+    own.insert(own.begin() + 2, ownRef.begin(), ownRef.end());
+
+    ft::vector<int> original;
+    original.insert(original.end(), 42);
+    original.insert(original.begin(), 2, 21);
+    original.insert(original.end() - 2, 42);
+    original.insert(original.end(), 2, 84);
+    original.resize(4);
+
+    ft::vector<int> originalRef(values, values + 10);
+    original.insert(original.begin() + 2, originalRef.begin(), originalRef.end());
+    outputAssertion("after adding 10 values at index 2 with insert (iterators) in a vector with size 4:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
+}
 }
 
 {
