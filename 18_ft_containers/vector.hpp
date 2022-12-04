@@ -127,6 +127,14 @@ namespace ft
          * ---------------------------------- */
 
         /*
+         * Allocator
+         */
+        allocator_type get_allocator() const
+        {
+            return this->_alloc;
+        }
+
+        /*
          * Capacity
          */
         bool empty() const
@@ -306,14 +314,6 @@ namespace ft
             ft::swap(this->_capacity, other._capacity);
             ft::swap(this->_maxSize, other._maxSize);
             ft::swap(this->_data, other._data);
-        }
-
-        /*
-         * Allocator
-         */
-        allocator_type get_allocator() const
-        {
-            return this->_alloc;
         }
 
         /* ----------------------------------
