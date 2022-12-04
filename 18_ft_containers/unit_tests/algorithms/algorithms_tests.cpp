@@ -2,6 +2,7 @@
 
 #include "algorithms/swap.cpp"
 #include "algorithms/equal.cpp"
+#include "algorithms/lexicographical_compare.cpp"
 
 void algorithmsUnitTests(bool IS_DEBUG)
 {
@@ -10,4 +11,5 @@ void algorithmsUnitTests(bool IS_DEBUG)
 
     ftSwapUnitTests(IS_DEBUG);
     ftEqualUnitTests(IS_DEBUG);
+    ftLexicoGraphicalCompareUnitTests(IS_DEBUG);
 }
