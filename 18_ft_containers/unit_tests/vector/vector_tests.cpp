@@ -31,6 +31,8 @@
 // Iterator
 #include "iterators/begin.cpp"
 #include "iterators/end.cpp"
+#include "iterators/rbegin.cpp"
+#include "iterators/rend.cpp"
 
 // Operators
 #include "operators/equal.cpp"
@@ -75,6 +77,8 @@ void vectorUnitTests(bool IS_DEBUG)
     // Iterator
     beginUnitTests(IS_DEBUG);
     endUnitTests(IS_DEBUG);
+    rBeginUnitTests(IS_DEBUG);
+    rEndUnitTests(IS_DEBUG);
 
     // Operators
     equalUnitTests(IS_DEBUG);

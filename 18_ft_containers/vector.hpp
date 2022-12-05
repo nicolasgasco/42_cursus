@@ -2,6 +2,7 @@
 
 #include "iterator_traits.hpp"
 #include "algorithms.hpp"
+#include "reverse_iterator.hpp"
 
 #include <iostream>
 
@@ -24,8 +25,8 @@ namespace ft
         typedef typename allocator_type::const_pointer const_pointer;
         typedef typename ft::iterator_traits<pointer>::pointer iterator;
         typedef typename ft::iterator_traits<const_pointer>::pointer const_iterator;
-        // typedef std::reverse_iterator<iterator> reverse_iterator;
-        // typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
+        typedef ft::reverse_iterator<iterator> reverse_iterator;
+        typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
         /* ----------------------------------
          * LIFECYCLE
@@ -115,6 +116,24 @@ namespace ft
         const_iterator end() const
         {
             return iterator(this->_data + this->_size);
+        }
+
+        reverse_iterator rbegin()
+        {
+            return reverse_iterator(this->end());
+        }
+        const_reverse_iterator rbegin() const
+        {
+            return const_reverse_iterator(this->end());
+        }
+
+        reverse_iterator rend()
+        {
+            return reverse_iterator(this->begin());
+        }
+        const_reverse_iterator rend() const
+        {
+            return const_reverse_iterator(this->begin());
         }
 
         /* ----------------------------------
