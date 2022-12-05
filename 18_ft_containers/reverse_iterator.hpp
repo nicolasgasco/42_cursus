@@ -46,9 +46,15 @@ namespace ft
         {
             return *(this->_current - 1);
         }
+
         pointer operator->() const
         {
             return *(this->_current - 1);
+        }
+
+        reference operator[](difference_type n) const
+        {
+            return reference(base()[-n - 1]);
         }
 
         // Operators
