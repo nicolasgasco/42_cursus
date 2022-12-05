@@ -31,7 +31,6 @@ void beginUnitTests(bool isDebug)
         std::vector<int>::iterator originalIt = original.begin();
         outputAssertion("with fill constructor (1, 10):", isStrictEqual<int>(*ownIt, *originalIt, isDebug));
     }
-    std::cout << "Has same type of STL iterator value:" << std::endl;
     {
         ft::vector<int> own;
         own.push_back(10);
