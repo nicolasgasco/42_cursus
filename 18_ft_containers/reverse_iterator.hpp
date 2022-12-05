@@ -49,7 +49,7 @@ namespace ft
 
         pointer operator->() const
         {
-            return *(this->_current - 1);
+            return std::addressof(operator*());
         }
 
         reference operator[](difference_type n) const
