@@ -2,6 +2,7 @@
 #include <iostream>
 #include "vector/vector_tests.cpp"
 #include "algorithms/algorithms_tests.cpp"
+#include "reverse_iterator/reverse_iterator.cpp"
 
 int main(int argc, char *argv[])
 {
@@ -11,6 +12,9 @@ int main(int argc, char *argv[])
 
     // ALGORITHMS
     algorithmsUnitTests(IS_DEBUG);
+
+    // REVERSE ITERATOR
+    reverseIteratorUnitTests(IS_DEBUG);
 
     // VECTOR
     vectorUnitTests(IS_DEBUG);
