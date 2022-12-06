@@ -1,9 +1,9 @@
 #pragma once
 
-#include "iterator_traits.hpp"
 #include "algorithms.hpp"
+#include "enable_if.hpp"
+#include "iterator_traits.hpp"
 #include "reverse_iterator.hpp"
-
 #include <iostream>
 
 namespace ft
@@ -52,9 +52,11 @@ namespace ft
         }
 
         // Range constructor
-        vector(iterator first, iterator last, const allocator_type &alloc = allocator_type())
+        template <class InputIterator>
+        vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type(),
+               typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
         {
-            size_type rangeSize = last - first;
+            size_type rangeSize = std::distance(first, last);
             this->_alloc = alloc;
 
             this->_data = this->_alloc.allocate(rangeSize);
@@ -184,11 +186,12 @@ namespace ft
         /*
          * Modifiers
          */
-
-        void assign(iterator first, iterator last)
+        template <class InputIterator>
+        void assign(InputIterator first, InputIterator last,
+                    typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
         {
             this->_alloc.destroy(this->_data);
-            size_type newSize = last - first;
+            size_type newSize = std::distance(first, last);
             if (newSize == 0)
                 return;
 
@@ -198,7 +201,7 @@ namespace ft
                 this->_capacity = newSize;
             }
             for (size_type i = 0; i < newSize; ++i)
-                this->_alloc.construct(this->_data + i, *(first + i));
+                this->_alloc.construct(this->_data + i, *(std::next(first, i)));
             this->_size = newSize;
         }
         void assign(size_type n, const value_type &val)
@@ -206,10 +209,7 @@ namespace ft
             this->_alloc.destroy(this->_data);
 
             if (n == 0)
-            {
-                std::cout << "cacca" << std::endl;
                 return;
-            }
             if (n > this->_capacity)
             {
                 this->allocateBiggerDataCopy(n);
@@ -315,16 +315,19 @@ namespace ft
 
             return position;
         }
-        iterator insert(iterator position, iterator first, iterator last)
+        template <class InputIterator>
+        iterator insert(iterator position, InputIterator first, InputIterator last,
+                        typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
         {
-            if ((last - first) == 0)
+            size_type iteratorsDistance = std::distance(first, last);
+            if (iteratorsDistance == 0)
                 return position;
 
             int positionI = 0;
             for (iterator it = this->begin(); it != position; ++it)
                 positionI++;
 
-            size_type newMinCapacity = this->_capacity + (last - first);
+            size_type newMinCapacity = this->_capacity + iteratorsDistance;
             if (this->capacity() < newMinCapacity)
             {
                 size_type newCapacity = (newMinCapacity > (this->_capacity * 2)) ? newMinCapacity : this->_capacity * 2;
@@ -334,7 +337,7 @@ namespace ft
             }
             ft::vector<value_type> tmp(position, this->end());
 
-            for (iterator it = first; it != last; ++it)
+            for (InputIterator it = first; it != last; ++it)
             {
                 this->_alloc.construct(this->_data + positionI, *it);
                 positionI++;
