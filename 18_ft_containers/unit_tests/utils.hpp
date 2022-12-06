@@ -2,9 +2,15 @@
 
 #include <string>
 #include <iostream>
+#include <chrono>
+#include <iomanip>
+#include <cmath>
+
 #include "../vector.hpp"
 
 #define YELLOW "\033[0;33m"
+#define BLUE "\033[0;34m"
+#define GREEN "\033[0;32m"
 #define NOCOL "\033[0m"
 
 void outputAssertion(std::string description, bool value)
@@ -88,4 +94,45 @@ void fillVectorWithValues(std::vector<T> &vector, T valuesArray[], int size)
 {
     for (int i = 0; i < size; ++i)
         vector.push_back(valuesArray[i]);
+}
+
+std::chrono::microseconds getFunctionDuration(void(func1)())
+{
+#undef TESTED_ENV
+#define TESTED_ENV ft
+    std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
+    func1();
+    std::chrono::time_point<std::chrono::high_resolution_clock> stop = std::chrono::high_resolution_clock::now();
+    std::chrono::microseconds duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+    return duration;
+}
+
+void calculateSpeedRatio(void(func1)(), void(func2)(), bool isDebug)
+{
+    std::chrono::microseconds ownDuration = getFunctionDuration(func1);
+
+    std::chrono::microseconds originalDuration = getFunctionDuration(func2);
+
+    std::cout << " ";
+
+    float ratio;
+    if (ownDuration.count() < originalDuration.count())
+    {
+        ratio = static_cast<float>(originalDuration.count()) / static_cast<float>(ownDuration.count());
+        std::cout
+            << std::fixed << std::setprecision(1) << BLUE << ratio << "x times faster" << NOCOL;
+    }
+    else if (ownDuration.count() > originalDuration.count())
+    {
+        ratio = ownDuration.count() / originalDuration.count();
+        std::cout << std::fixed << std::setprecision(1) << YELLOW << ratio << "x times slower" << NOCOL;
+    }
+    else
+    {
+        std::cout << GREEN << "same speed" << NOCOL;
+    }
+    if (isDebug)
+        std::cout << " (own: " << ownDuration.count() << " ms, seed: " << originalDuration.count() << " ms)";
+
+    std::cout << std::endl;
 }

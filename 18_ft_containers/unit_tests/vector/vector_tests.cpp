@@ -42,6 +42,9 @@
 #include "operators/greater_than.cpp"
 #include "operators/greater_than_equal.cpp"
 
+// SPEED
+#include "vector_speed_tests.cpp"
+
 void vectorUnitTests(bool IS_DEBUG)
 {
     std::cout << YELLOW << "VECTOR UNIT TESTS" << NOCOL << std::endl;
@@ -87,4 +90,8 @@ void vectorUnitTests(bool IS_DEBUG)
     lessThanEqualUnitTests(IS_DEBUG);
     greaterThanUnitTests(IS_DEBUG);
     greaterThanEqualUnitTests(IS_DEBUG);
+
+    // SPEED
+    speedUnitTests(IS_DEBUG);
+
 }
