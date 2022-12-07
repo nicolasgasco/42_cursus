@@ -43,7 +43,7 @@
 #include "operators/greater_than_equal.cpp"
 
 // SPEED
-#include "vector_speed_tests.cpp"
+#include "speed/vector_speed_tests.cpp"
 
 void vectorUnitTests(bool IS_DEBUG)
 {
