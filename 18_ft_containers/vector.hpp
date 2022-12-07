@@ -56,14 +56,15 @@ namespace ft
         vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type(),
                typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
         {
-            size_type rangeSize = std::distance(first, last);
-            this->_alloc = alloc;
+            size_type rangeDistance = std::distance(first, last);
 
-            this->_data = this->_alloc.allocate(rangeSize);
-            this->_capacity = rangeSize;
-            for (size_type i = 0; i < rangeSize; ++i, ++first)
+            this->_alloc = alloc;
+            this->_data = this->_alloc.allocate(rangeDistance);
+            this->_capacity = rangeDistance;
+
+            for (size_type i = 0; i < rangeDistance; ++i, ++first)
                 this->_alloc.construct((this->_data + i), *first);
-            this->_size = rangeSize;
+            this->_size = rangeDistance;
 
             this->_maxSize = this->_alloc.max_size();
         }
@@ -104,20 +105,20 @@ namespace ft
          * ---------------------------------- */
         iterator begin()
         {
-            return iterator(this->_data);
+            return this->_data;
         }
         const_iterator begin() const
         {
-            return iterator(this->_data);
+            return this->_data;
         }
 
         iterator end()
         {
-            return iterator(this->_data + this->_size);
+            return this->_data + this->_size;
         }
         const_iterator end() const
         {
-            return iterator(this->_data + this->_size);
+            return this->_data + this->_size;
         }
 
         reverse_iterator rbegin()
@@ -179,6 +180,7 @@ namespace ft
                 throw std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size");
             if (new_cap <= this->_capacity)
                 return;
+            
             this->allocateBiggerDataCopy(new_cap);
             this->_capacity = new_cap;
         }
@@ -242,6 +244,7 @@ namespace ft
         {
             if (count < 0 || count > this->_maxSize)
                 throw std::length_error("vector");
+
             if (count < this->_size)
             {
                 for (size_type i = count; i < this->_size; ++i)
@@ -267,7 +270,7 @@ namespace ft
 
         iterator insert(iterator position, const value_type &val)
         {
-            int positionI = 0;
+            size_type positionI = 0;
             for (iterator it = this->begin(); it != position; ++it)
                 positionI++;
             if (this->capacity() == this->_size)
@@ -276,13 +279,13 @@ namespace ft
                 position = this->_data + positionI;
             }
 
-            int tmp = this->_size ? *position : 0;
+            value_type tmp = this->_size ? *position : 0;
             this->_alloc.construct(position, val);
             this->_size++;
 
             for (iterator it = (position + 1); it != this->end(); ++it)
             {
-                int tmpCurr = *it;
+                value_type tmpCurr = *it;
                 this->_alloc.construct(it, tmp);
                 tmp = tmpCurr;
             }
@@ -293,7 +296,7 @@ namespace ft
             if (n == 0)
                 return position;
 
-            int positionI = 0;
+            size_type positionI = 0;
             for (iterator it = this->begin(); it != position; ++it)
                 positionI++;
 
@@ -326,7 +329,7 @@ namespace ft
             if (iteratorsDistance == 0)
                 return position;
 
-            int positionI = 0;
+            size_type positionI = 0;
             for (iterator it = this->begin(); it != position; ++it)
                 positionI++;
 
