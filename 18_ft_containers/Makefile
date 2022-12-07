@@ -16,7 +16,7 @@ OBJ_DIR = ./obj/
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ)
+	$(CC) $(NINETYEIGHT) $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ)
 	@echo "##### $(NAME) compiled! #####"
 
 $(OBJ_DIR)%.o: %.cpp $(INCLUDES)
