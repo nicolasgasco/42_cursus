@@ -103,6 +103,34 @@ void insertUnitTests(bool isDebug)
 
                 outputAssertion("after inserting 100 value at index 10 in a vector with size 20:", isStrictEqual<int>(*ownIt, *originalIt, isDebug));
             }
+            {
+                ft::vector<int> ownTest(1, 1);
+                ft::vector<int> ownTest2(5, 5);
+                ownTest.insert(ownTest.begin(), 200, 12);
+                std::cout << ownTest.capacity() << " - " << ownTest.size() << std::endl;
+                ownTest.insert(ownTest.begin() + 12, 200, 30);
+                std::cout << ownTest.capacity() << " - " << ownTest.size() << std::endl;
+                ownTest.insert(ownTest.end(), 12, 50);
+                std::cout << ownTest.capacity() << " - " << ownTest.size() << std::endl;
+                ownTest.insert(ownTest.end() - 1, 0, 60);
+                std::cout << ownTest.capacity() << " - " << ownTest.size() << std::endl;
+                ownTest.insert(ownTest.end() - 1, 1, 70);
+                std::cout << ownTest.capacity() << " - " << ownTest.size() << std::endl;
+
+                std::vector<int> originalTest(1, 1);
+                std::vector<int> originalTest2(5, 5);
+                originalTest.insert(originalTest.begin(), 200, 12);
+                std::cout << originalTest.capacity() << " - " << originalTest.size() << std::endl;
+                originalTest.insert(originalTest.begin() + 12, 200, 30);
+                std::cout << originalTest.capacity() << " - " << originalTest.size() << std::endl;
+                originalTest.insert(originalTest.end(), 12, 50);
+                std::cout << originalTest.capacity() << " - " << originalTest.size() << std::endl;
+                originalTest.insert(originalTest.end() - 1, 0, 60);
+                std::cout << originalTest.capacity() << " - " << originalTest.size() << std::endl;
+                originalTest.insert(originalTest.end() - 1, 1, 70);
+                std::cout << originalTest.capacity() << " - " << originalTest.size() << std::endl;
+                outputAssertion("after insert values 5 times in a row:", isStrictEqual<int>(ownTest.capacity(), originalTest.capacity(), isDebug));
+            }
         }
         {
             std::cout << std::endl

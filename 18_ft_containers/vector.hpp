@@ -294,7 +294,7 @@ namespace ft
             for (iterator it = this->begin(); it != position; ++it)
                 positionI++;
 
-            size_type newMinCapacity = this->_capacity + n;
+            size_type newMinCapacity = this->_size + n;
             if (this->capacity() < newMinCapacity)
             {
                 size_type newCapacity = (newMinCapacity > (this->_capacity * 2)) ? newMinCapacity : this->_capacity * 2;
@@ -327,7 +327,7 @@ namespace ft
             for (iterator it = this->begin(); it != position; ++it)
                 positionI++;
 
-            size_type newMinCapacity = this->_capacity + iteratorsDistance;
+            size_type newMinCapacity = this->_size + iteratorsDistance;
             if (this->capacity() < newMinCapacity)
             {
                 size_type newCapacity = (newMinCapacity > (this->_capacity * 2)) ? newMinCapacity : this->_capacity * 2;
