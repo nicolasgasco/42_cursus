@@ -190,7 +190,9 @@ namespace ft
         void assign(InputIterator first, InputIterator last,
                     typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
         {
-            this->_alloc.destroy(this->_data);
+            if (this->size())
+                this->_alloc.destroy(this->_data);
+
             size_type newSize = std::distance(first, last);
             if (newSize == 0)
                 return;
@@ -206,7 +208,8 @@ namespace ft
         }
         void assign(size_type n, const value_type &val)
         {
-            this->_alloc.destroy(this->_data);
+            if (this->size())
+                this->_alloc.destroy(this->_data);
 
             if (n == 0)
                 return;
