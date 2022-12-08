@@ -5,8 +5,8 @@
 void capacityUnitTests(bool isDebug)
 {
     outputSuiteTitle("CAPACITY");
-    std::cout << "Is initialized equal to STL vector value:" << std::endl;
     {
+        std::cout << "Is initialized equal to STL vector value:" << std::endl;
         {
             ft::vector<int> own;
             std::vector<int> original;
@@ -70,9 +70,9 @@ void capacityUnitTests(bool isDebug)
         }
     }
 
-    std::cout << std::endl
-              << "Is incremented like STL vector value:" << std::endl;
     {
+        std::cout << std::endl
+                  << "Is incremented like STL vector value:" << std::endl;
         {
             ft::vector<int> own;
             own.reserve(1);
@@ -384,9 +384,9 @@ void capacityUnitTests(bool isDebug)
         }
     }
 
-    std::cout << std::endl
-              << "Stays constant after a pop_back like STL vector value:" << std::endl;
     {
+        std::cout << std::endl
+                  << "Stays constant after a pop_back like STL vector value:" << std::endl;
         {
             ft::vector<int> own(1, 10);
             own.pop_back();
@@ -424,9 +424,9 @@ void capacityUnitTests(bool isDebug)
         }
     }
 
-    std::cout << std::endl
-              << "Stays constant after resize like STL vector value:" << std::endl;
     {
+        std::cout << std::endl
+                  << "Stays constant after resize like STL vector value:" << std::endl;
         {
             ft::vector<int> own(10, 5);
             own.resize(5);
@@ -606,7 +606,6 @@ void capacityUnitTests(bool isDebug)
     }
 
     {
-
         std::cout << std::endl
                   << "Stays constant after an erase like STL vector value:" << std::endl;
         {
@@ -802,9 +801,9 @@ void capacityUnitTests(bool isDebug)
         }
     }
 
-    std::cout << std::endl
-              << "Is swapped after a ft::swap like STL vector value:" << std::endl;
     {
+        std::cout << std::endl
+                  << "Is swapped after a ft::swap like STL vector value:" << std::endl;
         {
             ft::vector<int> oneOwn;
             ft::vector<int> twoOwn(5, 2);

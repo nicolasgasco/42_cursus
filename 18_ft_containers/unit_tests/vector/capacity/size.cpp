@@ -4,8 +4,8 @@
 
 void sizeUnitTests(bool isDebug)
 {
+    outputSuiteTitle("SIZE");
     {
-        outputSuiteTitle("SIZE");
         std::cout << "Is initialized equal to STL vector value:" << std::endl;
         {
             ft::vector<int> own;
