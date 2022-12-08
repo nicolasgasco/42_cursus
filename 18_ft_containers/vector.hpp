@@ -97,7 +97,8 @@ namespace ft
         // Destructor
         ~vector()
         {
-            this->destroyAllocatedData();
+            this->_alloc.destroy(this->_data);
+            this->_alloc.deallocate(this->_data, this->_capacity);
         }
 
         /* ----------------------------------
@@ -180,7 +181,7 @@ namespace ft
                 throw std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size");
             if (new_cap <= this->_capacity)
                 return;
-            
+
             this->allocateBiggerDataCopy(new_cap);
             this->_capacity = new_cap;
         }
@@ -229,7 +230,16 @@ namespace ft
         {
             size_type newSize = this->_size + 1;
             if (newSize > this->_capacity)
-                this->increaseCapacity();
+            {
+                size_type newCapacity = this->_capacity ? this->_capacity * 2 : 1;
+                value_type *tmp = this->_alloc.allocate(newCapacity);
+                for (size_type i = 0; i < this->_size; ++i)
+                    this->_alloc.construct((tmp + i), this->_data[i]);
+                this->_alloc.destroy(this->_data);
+                this->_alloc.deallocate(this->_data, this->_capacity);
+                this->_data = tmp;
+                this->_capacity = newCapacity;
+            }
             this->_data[this->_size] = value;
             this->_size++;
         }

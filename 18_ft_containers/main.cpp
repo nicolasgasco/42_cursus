@@ -43,6 +43,13 @@
 #include <iostream>
 int main()
 {
-    // ft::reverse_iterator<ft::vector<int>::iterator> it;
+    ft::vector<int> own;
+    own.reserve(1);
+    own.push_back(1);
+    std::vector<int> original;
+    original.reserve(1);
+    original.push_back(1);
+
+    system("leaks ft_containers");
     return 0;
 }
