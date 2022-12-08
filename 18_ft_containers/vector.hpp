@@ -60,12 +60,12 @@ namespace ft
 
             this->_alloc = alloc;
             this->_data = this->_alloc.allocate(rangeDistance);
-            this->_capacity = rangeDistance;
 
             for (size_type i = 0; i < rangeDistance; ++i, ++first)
                 this->_alloc.construct((this->_data + i), *first);
             this->_size = rangeDistance;
 
+            this->_capacity = rangeDistance;
             this->_maxSize = this->_alloc.max_size();
         }
 
@@ -86,9 +86,11 @@ namespace ft
             if (*this == other)
                 return (*this);
 
+            this->_maxSize = other.max_size();
+
             if (this->size())
                 this->_alloc.destroy(this->_data);
-            this->_maxSize = other.max_size();
+
             if (this->_capacity < other.size())
             {
                 this->reserve(other.size());
