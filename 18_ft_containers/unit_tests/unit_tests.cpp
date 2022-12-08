@@ -3,6 +3,7 @@
 #include "vector/vector_tests.cpp"
 #include "algorithms/algorithms_tests.cpp"
 #include "reverse_iterator/reverse_iterator.cpp"
+#include "pair/pair.cpp"
 
 int main(int argc, char *argv[])
 {
@@ -12,6 +13,9 @@ int main(int argc, char *argv[])
 
     // ALGORITHMS
     algorithmsUnitTests(IS_DEBUG);
+
+    // PAIR
+    pairUnitTests(IS_DEBUG);
 
     // REVERSE ITERATOR
     reverseIteratorUnitTests(IS_DEBUG);

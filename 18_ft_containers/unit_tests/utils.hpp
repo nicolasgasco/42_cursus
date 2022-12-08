@@ -7,6 +7,7 @@
 #include <cmath>
 
 #include "../vector.hpp"
+#include "../pair.hpp"
 
 #define YELLOW "\033[0;33m"
 #define BLUE "\033[0;34m"
@@ -50,6 +51,20 @@ bool isStrictEqual(T const *ownArr, T const *refArr, unsigned int len, bool prin
             return false;
     }
     return true;
+}
+template <typename T1, typename T2>
+bool isStrictEqual(ft::pair<T1, T2> pair1, std::pair<T1, T2> pair2, bool printValue)
+{
+    if (printValue)
+        std::cout << "=====own===== "
+                  << "(" << pair1.first << ", " << pair2.first << ") "
+                  << " | "
+                  << "(" << pair1.second << ", " << pair2.second << ") "
+                                                                    " =====ref====="
+                  << std::endl;
+    if (pair1.first == pair2.first && pair1.second == pair2.second)
+        return true;
+    return false;
 }
 
 template <typename T, typename V>

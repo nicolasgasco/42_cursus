@@ -11,34 +11,41 @@ namespace ft
         typedef T1 first_type;
         typedef T2 second_type;
 
+        first_type first;
+        second_type second;
+
         pair()
         {
-            this->_first = first_type();
-            this->_second = second_type();
+            this->first = first_type();
+            this->second = second_type();
         }
 
         template <class U, class V>
-        pair(const pair<U, V> &pr)
+        pair(const ft::pair<U, V> &pr)
         {
-            this->_first = first_type(pr._first);
-            this->_second = second_type(pr._second);
+            this->first = first_type(pr.first);
+            this->second = second_type(pr.second);
+        }
+
+        // Not required but useful
+        template <class U, class V>
+        pair(const std::pair<U, V> &pr)
+        {
+            this->first = first_type(pr.first);
+            this->second = second_type(pr.second);
         }
 
         pair(const first_type &a, const second_type &b)
         {
-            this->_first = first_type(a);
-            this->_second = second_type(b);
+            this->first = first_type(a);
+            this->second = second_type(b);
         }
 
         pair &operator=(const pair &pr)
         {
-            this->_first = pr._first;
-            this->_second = pr._second;
+            this->first = pr.first;
+            this->second = pr.second;
         }
-
-    private:
-        first_type _first;
-        second_type _second;
     };
 
     template <class T1, class T2>
