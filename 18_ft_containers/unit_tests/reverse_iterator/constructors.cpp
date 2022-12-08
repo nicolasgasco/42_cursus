@@ -47,21 +47,21 @@ void constructorsUnitTests(bool isDebug)
                 outputAssertion("returns same value of (begin() + 2) with int:", isStrictEqual<bool>(*ownRit, *originalRit, isDebug));
             }
         }
-        // {
-        //     std::cout << "  COPY CONSTRUCTOR" << std::endl;
-        //     {
-        //         int values[5] = {1, 2, 3, 4, 5};
+        {
+            std::cout << "  COPY CONSTRUCTOR" << std::endl;
+            {
+                int values[5] = {1, 2, 3, 4, 5};
 
-        //         ft::vector<int> own(values, values + 5);
-        //         ft::vector<int>::reverse_iterator ownCopy(own.end() - 1);
-        //         ft::vector<int>::reverse_iterator ownRit = ownCopy;
+                ft::vector<int> own(values, values + 5);
+                ft::vector<int>::reverse_iterator ownCopy(own.end() - 1);
+                ft::vector<int>::reverse_iterator ownRit = ownCopy;
 
-        //         std::vector<int> original(values, values + 5);
-        //         std::vector<int>::reverse_iterator originalCopy(original.end() - 1);
-        //         std::vector<int>::reverse_iterator originalRit = originalCopy;
+                std::vector<int> original(values, values + 5);
+                std::vector<int>::reverse_iterator originalCopy(original.end() - 1);
+                std::vector<int>::reverse_iterator originalRit = originalCopy;
 
-        //         outputAssertion("returns same value of (end() - 1) with int:", isStrictEqual<int>(*ownRit, *originalRit, isDebug));
-        //     }
-        // }
+                outputAssertion("returns same value of (end() - 1) with int:", isStrictEqual<int>(*ownRit, *originalRit, isDebug));
+            }
+        }
     }
 }
