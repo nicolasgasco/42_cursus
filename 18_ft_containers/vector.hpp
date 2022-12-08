@@ -72,6 +72,9 @@ namespace ft
         // Copy constructor
         vector(const vector &x)
         {
+            if (*this == x)
+                return;
+
             this->_alloc = x.get_allocator();
             this->_size = 0;
             this->_capacity = 0;
@@ -80,6 +83,9 @@ namespace ft
 
         vector &operator=(const vector &other)
         {
+            if (*this == other)
+                return (*this);
+
             if (this->size())
                 this->_alloc.destroy(this->_data);
             this->_maxSize = other.max_size();
