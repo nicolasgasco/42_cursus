@@ -103,8 +103,7 @@ namespace ft
         // Destructor
         ~vector()
         {
-            this->_alloc.destroy(this->_data);
-            this->_alloc.deallocate(this->_data, this->_capacity);
+            this->destroyAllocatedData();
         }
 
         /* ----------------------------------
