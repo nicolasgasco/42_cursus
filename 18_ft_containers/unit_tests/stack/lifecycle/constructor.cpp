@@ -10,7 +10,7 @@ void constructorUnitTests(bool isDebug)
     outputSuiteTitle("CONSTRUCTOR:");
     {
         std::cout
-            << "stacks are equal:" << std::endl;
+            << "Stacks are equal:" << std::endl;
         {
             ft::stack<int> ownStack;
 

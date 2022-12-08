@@ -60,8 +60,59 @@ namespace ft
             return c.size();
         }
 
+        /* ----------------------------------
+         * MODIFIERS
+         * ---------------------------------- */
+        void push(const value_type &val)
+        {
+            this->c.push_back(value_type(val));
+        }
+
+        void pop()
+        {
+            this->c.pop_back();
+        }
+
     private:
         container_type c;
     };
 
+    /* ----------------------------------
+     * RELATIONAL OPERATORS
+     * ---------------------------------- */
+    template <class T, class Container>
+    bool operator==(const stack<T, Container> &lhs, const stack<T, Container> &rhs)
+    {
+        return lhs == rhs;
+    }
+
+    template <class T, class Container>
+    bool operator!=(const stack<T, Container> &lhs, const stack<T, Container> &rhs)
+    {
+        return lhs != rhs;
+    }
+
+    template <class T, class Container>
+    bool operator<(const stack<T, Container> &lhs, const stack<T, Container> &rhs)
+    {
+        return lhs < rhs;
+    }
+
+    template <class T, class Container>
+    bool operator<=(const stack<T, Container> &lhs, const stack<T, Container> &rhs)
+    {
+        return lhs <= rhs;
+    }
+
+    template <class T, class Container>
+    bool operator>(const stack<T, Container> &lhs, const stack<T, Container> &rhs)
+    {
+        return lhs > rhs;
+    }
+
+    template <class T, class Container>
+    bool operator>=(const stack<T, Container> &lhs, const stack<T, Container> &rhs)
+    {
+        return lhs >= rhs;
+    }
 }
