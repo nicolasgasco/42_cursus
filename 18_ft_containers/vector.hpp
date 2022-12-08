@@ -467,7 +467,7 @@ namespace ft
             return this->_data;
         }
 
-    private:
+    protected:
         allocator_type _alloc;
         value_type *_data;
 
