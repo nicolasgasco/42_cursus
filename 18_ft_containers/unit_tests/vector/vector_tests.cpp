@@ -93,5 +93,4 @@ void vectorUnitTests(bool IS_DEBUG)
 
     // SPEED
     speedUnitTests(IS_DEBUG);
-
 }

@@ -1,12 +1,14 @@
 #pragma once
 
 #include <string>
+#include <stack>
 #include <iostream>
 #include <chrono>
 #include <iomanip>
 #include <cmath>
 
 #include "../vector.hpp"
+#include "../stack.hpp"
 #include "../pair.hpp"
 
 #define YELLOW "\033[0;33m"
@@ -64,6 +66,74 @@ bool isStrictEqual(ft::pair<T1, T2> pair1, std::pair<T1, T2> pair2, bool printVa
                   << std::endl;
     if (pair1.first == pair2.first && pair1.second == pair2.second)
         return true;
+    return false;
+}
+
+template <typename T1, typename T2>
+bool areStacksStrictEqual(ft::stack<T1, T2> ownStack, std::stack<T1, T2> originalStack, bool printValue)
+{
+    if (ownStack.empty())
+    {
+        if (printValue)
+            std::cout << "=====own===== "
+                      << "(empty: " << ownStack.empty() << ", size: " << ownStack.size()
+                      << ") "
+                      << " | "
+                      << "(empty: " << originalStack.empty() << ", size: " << originalStack.size()
+                      << ") "
+                      << " =====ref====="
+                      << std::endl;
+        if ((ownStack.empty() == originalStack.empty()) && (ownStack.size() == originalStack.size()))
+            return true;
+    }
+    else
+    {
+        if (printValue)
+            std::cout << "=====own===== "
+                      << "(top: " << ownStack.top() << ", empty: " << ownStack.empty() << ", size: " << ownStack.size()
+                      << ") "
+                      << " | "
+                      << "(top: " << originalStack.top() << ", empty: " << originalStack.empty() << ", size: " << originalStack.size()
+                      << ") "
+                      << " =====ref====="
+                      << std::endl;
+        if ((ownStack.top() == originalStack.top()) && (ownStack.empty() == originalStack.empty()) && (ownStack.size() == originalStack.size()))
+            return true;
+    }
+    return false;
+}
+
+template <typename T1>
+bool areStacksStrictEqual(ft::stack<T1> ownStack, std::stack<T1> originalStack, bool printValue)
+{
+    if (ownStack.empty())
+    {
+        if (printValue)
+            std::cout << "=====own===== "
+                      << "(empty: " << ownStack.empty() << ", size: " << ownStack.size()
+                      << ") "
+                      << " | "
+                      << "(empty: " << originalStack.empty() << ", size: " << originalStack.size()
+                      << ") "
+                      << " =====ref====="
+                      << std::endl;
+        if ((ownStack.empty() == originalStack.empty()) && (ownStack.size() == originalStack.size()))
+            return true;
+    }
+    else
+    {
+        if (printValue)
+            std::cout << "=====own===== "
+                      << "(top: " << ownStack.top() << ", empty: " << ownStack.empty() << ", size: " << ownStack.size()
+                      << ") "
+                      << " | "
+                      << "(top: " << originalStack.top() << ", empty: " << originalStack.empty() << ", size: " << originalStack.size()
+                      << ") "
+                      << " =====ref====="
+                      << std::endl;
+        if ((ownStack.top() == originalStack.top()) && (ownStack.empty() == originalStack.empty()) && (ownStack.size() == originalStack.size()))
+            return true;
+    }
     return false;
 }
 
