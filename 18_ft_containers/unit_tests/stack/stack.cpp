@@ -7,6 +7,7 @@
 #include "capacity/size.cpp"
 #include "modifiers/push.cpp"
 #include "modifiers/pop.cpp"
+#include "operators/relational_operators.cpp"
 
 void stackUnitTests(bool IS_DEBUG)
 {
@@ -19,4 +20,5 @@ void stackUnitTests(bool IS_DEBUG)
     sizeStackUnitTests(IS_DEBUG);
     pushStackUnitTests(IS_DEBUG);
     popStackUnitTests(IS_DEBUG);
+    reletionalOperatorStackUnitTests(IS_DEBUG);
 }
