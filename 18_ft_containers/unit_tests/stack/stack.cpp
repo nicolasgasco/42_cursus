@@ -9,6 +9,8 @@
 #include "modifiers/pop.cpp"
 #include "operators/relational_operators.cpp"
 
+#include "speed/stack_speed_tests.cpp"
+
 void stackUnitTests(bool IS_DEBUG)
 {
     std::cout << std::endl
@@ -21,4 +23,7 @@ void stackUnitTests(bool IS_DEBUG)
     pushStackUnitTests(IS_DEBUG);
     popStackUnitTests(IS_DEBUG);
     reletionalOperatorStackUnitTests(IS_DEBUG);
+
+    // Speed
+    speedStackUnitTests(IS_DEBUG);
 }
