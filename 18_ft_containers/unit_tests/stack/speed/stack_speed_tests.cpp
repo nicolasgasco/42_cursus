@@ -4,8 +4,8 @@
 
 #include "constructors.cpp"
 #include "capacity.cpp"
-// #include "modifiers.cpp"
-// #include "access.cpp"
+#include "modifiers.cpp"
+#include "access.cpp"
 
 void speedStackUnitTests(bool isDebug)
 {
@@ -13,5 +13,7 @@ void speedStackUnitTests(bool isDebug)
     {
         constructorsStackSpeedTest(isDebug);
         capacityStackSpeedTest(isDebug);
+        modifiersStackSpeedTest(isDebug);
+        accessStackSpeedTest(isDebug);
     }
 }
