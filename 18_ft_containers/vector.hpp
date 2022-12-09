@@ -247,7 +247,7 @@ namespace ft
                 this->_data = tmp;
                 this->_capacity = newCapacity;
             }
-            this->_data[this->_size] = value;
+            this->_alloc.construct((this->_data + this->_size), value);
             this->_size++;
         }
 
