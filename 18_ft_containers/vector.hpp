@@ -214,7 +214,7 @@ namespace ft
                 this->_capacity = newSize;
             }
             for (size_type i = 0; i < newSize; ++i)
-                this->_alloc.construct(this->_data + i, *(std::next(first, i)));
+                this->_alloc.construct(this->_data + i, *(std::next(&(*first), i)));
             this->_size = newSize;
         }
         void assign(size_type n, const value_type &val)
