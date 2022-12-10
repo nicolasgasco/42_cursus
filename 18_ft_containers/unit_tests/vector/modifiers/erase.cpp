@@ -4,7 +4,7 @@
 
 void eraseUnitTests(bool isDebug)
 {
-    outputSuiteTitle("ERASE");
+    outputSuiteTitle("ERASE:");
     {
         std::cout << "Return value is equal to STL vector:" << std::endl;
         {
@@ -139,8 +139,7 @@ void eraseUnitTests(bool isDebug)
         std::cout << std::endl
                   << "Values are equal to STL vector:" << std::endl;
         {
-            std::cout << std::endl
-                      << "  ITERATOR" << std::endl;
+            std::cout << "  ITERATOR" << std::endl;
             {
                 ft::vector<int> own(2, 5);
                 own.erase(own.begin());
