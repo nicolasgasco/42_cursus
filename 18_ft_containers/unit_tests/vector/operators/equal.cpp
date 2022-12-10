@@ -5,7 +5,7 @@
 
 void equalUnitTests(bool isDebug)
 {
-    outputSuiteTitle("EQUAL");
+    outputSuiteTitle("EQUAL:");
     {
         std::cout
             << "Return value is equal to STL vector value:" << std::endl;

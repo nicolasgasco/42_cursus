@@ -5,7 +5,7 @@
 
 void lessThanUnitTests(bool isDebug)
 {
-    outputSuiteTitle("LESS THAN");
+    outputSuiteTitle("LESS THAN:");
     {
         std::cout
             << "Return value is equal to STL vector value:" << std::endl;
