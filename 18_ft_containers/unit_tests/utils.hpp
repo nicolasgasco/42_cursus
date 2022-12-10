@@ -201,23 +201,26 @@ void calculateSpeedRatio(void(func1)(), void(func2)(), bool isDebug)
     std::cout << " ";
 
     float ratio;
-    if (ownDuration.count() < originalDuration.count())
-    {
-        ratio = static_cast<float>(originalDuration.count()) / static_cast<float>(ownDuration.count());
-        std::cout
-            << std::fixed << std::setprecision(1) << BLUE << ratio << "x times faster" << NOCOL;
-    }
-    else if (ownDuration.count() > originalDuration.count())
-    {
-        ratio = ownDuration.count() / originalDuration.count();
-        std::cout << std::fixed << std::setprecision(1) << YELLOW << ratio << "x times slower" << NOCOL;
-    }
-    else
+
+    long long ownDurationCount = ownDuration.count();
+    long long originalDurationCount = originalDuration.count();
+    if (ownDurationCount == originalDurationCount)
     {
         std::cout << GREEN << "same speed" << NOCOL;
     }
+    else if (ownDurationCount < originalDurationCount)
+    {
+        ratio = static_cast<float>(originalDurationCount) / static_cast<float>(ownDurationCount);
+        std::cout
+            << std::fixed << std::setprecision(1) << BLUE << ratio << "x times faster" << NOCOL;
+    }
+    else if (ownDurationCount > originalDurationCount)
+    {
+        ratio = ownDurationCount / (originalDurationCount ? originalDurationCount : 1);
+        std::cout << std::fixed << std::setprecision(1) << YELLOW << ratio << "x times slower" << NOCOL;
+    }
     if (isDebug)
-        std::cout << " (own: " << ownDuration.count() << " ms, seed: " << originalDuration.count() << " ms)";
+        std::cout << " (own: " << ownDurationCount << " ms, seed: " << originalDurationCount << " ms)";
 
     std::cout << std::endl;
 }
