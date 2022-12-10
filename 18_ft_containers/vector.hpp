@@ -3,6 +3,7 @@
 #include "algorithms.hpp"
 #include "enable_if.hpp"
 #include "iterator_traits.hpp"
+#include "iterator.hpp"
 #include "reverse_iterator.hpp"
 #include <iostream>
 
@@ -23,8 +24,8 @@ namespace ft
         typedef typename allocator_type::const_reference const_reference;
         typedef typename allocator_type::pointer pointer;
         typedef typename allocator_type::const_pointer const_pointer;
-        typedef typename ft::iterator_traits<pointer>::pointer iterator;
-        typedef typename ft::iterator_traits<const_pointer>::pointer const_iterator;
+        typedef ft::iterator<value_type> iterator;
+        typedef ft::iterator<value_type const> const_iterator;
         typedef ft::reverse_iterator<iterator> reverse_iterator;
         typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
@@ -56,7 +57,7 @@ namespace ft
         vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type(),
                typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
         {
-            size_type rangeDistance = std::distance(first, last);
+            size_type rangeDistance = std::distance(&(*first), &(*last));
 
             this->_alloc = alloc;
             this->_data = this->_alloc.allocate(rangeDistance);
@@ -113,20 +114,20 @@ namespace ft
          * ---------------------------------- */
         iterator begin()
         {
-            return this->_data;
+            return iterator(this->_data);
         }
         const_iterator begin() const
         {
-            return this->_data;
+            return const_iterator(this->_data);
         }
 
         iterator end()
         {
-            return this->_data + this->_size;
+            return iterator(this->_data + this->_size);
         }
         const_iterator end() const
         {
-            return this->_data + this->_size;
+            return const_iterator(this->_data + this->_size);
         }
 
         reverse_iterator rbegin()
@@ -203,7 +204,7 @@ namespace ft
             if (this->size())
                 this->_alloc.destroy(this->_data);
 
-            size_type newSize = std::distance(first, last);
+            size_type newSize = std::distance(&(*first), &(*last));
             if (newSize == 0)
                 return;
 
@@ -293,17 +294,17 @@ namespace ft
             if (this->capacity() == this->_size)
             {
                 this->increaseCapacity();
-                position = this->_data + positionI;
+                position = this->begin() + positionI;
             }
 
             value_type tmp = this->_size ? *position : 0;
-            this->_alloc.construct(position, val);
+            this->_alloc.construct(&(*position), val);
             this->_size++;
 
             for (iterator it = (position + 1); it != this->end(); ++it)
             {
                 value_type tmpCurr = *it;
-                this->_alloc.construct(it, tmp);
+                this->_alloc.construct(&(*it), tmp);
                 tmp = tmpCurr;
             }
             return position;
@@ -323,14 +324,14 @@ namespace ft
                 size_type newCapacity = (newMinCapacity > (this->_capacity * 2)) ? newMinCapacity : this->_capacity * 2;
                 this->allocateBiggerDataCopy(newCapacity);
                 this->_capacity = newCapacity;
-                position = this->_data + positionI;
+                position = this->begin() + positionI;
             }
 
             ft::vector<value_type> tmp(position, this->end());
 
             for (size_type i = 0; i < n; ++i)
             {
-                this->_alloc.construct(position + i, val);
+                this->_alloc.construct(&(*(position + i)), val);
                 this->_size++;
             }
             for (size_type i = 0; i < tmp.size(); ++i)
@@ -342,7 +343,7 @@ namespace ft
         iterator insert(iterator position, InputIterator first, InputIterator last,
                         typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
         {
-            size_type iteratorsDistance = std::distance(first, last);
+            size_type iteratorsDistance = std::distance(&(*first), &(*last));
             if (iteratorsDistance == 0)
                 return position;
 
@@ -356,7 +357,7 @@ namespace ft
                 size_type newCapacity = (newMinCapacity > (this->_capacity * 2)) ? newMinCapacity : this->_capacity * 2;
                 this->allocateBiggerDataCopy(newCapacity);
                 this->_capacity = newCapacity;
-                position = this->_data + positionI;
+                position = this->begin() + positionI;
             }
             ft::vector<value_type> tmp(position, this->end());
 
@@ -380,11 +381,11 @@ namespace ft
             ft::vector<value_type> tmp(position + 1, this->end());
 
             for (iterator it = position; it < this->end(); ++it)
-                this->_alloc.destroy(it);
+                this->_alloc.destroy(&(*it));
             this->_size--;
 
             for (size_type i = 0; i < tmp.size(); ++i)
-                this->_alloc.construct(position + i, tmp[i]);
+                this->_alloc.construct(&(*(position + i)), tmp[i]);
 
             if (this->end() - position == 1)
                 return this->end();
@@ -398,11 +399,11 @@ namespace ft
             ft::vector<value_type> tmp(last, this->end());
 
             for (iterator it = first; it < this->end(); ++it)
-                this->_alloc.destroy(it);
+                this->_alloc.destroy(&(*it));
             this->_size -= last - first;
 
             for (size_type i = 0; i < tmp.size(); ++i)
-                this->_alloc.construct(first + i, tmp[i]);
+                this->_alloc.construct(&(*(first + i)), tmp[i]);
 
             return first;
         }
