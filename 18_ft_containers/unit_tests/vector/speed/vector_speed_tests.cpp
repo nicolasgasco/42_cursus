@@ -1,6 +1,5 @@
+#include "../../../vector.hpp"
 #include <vector>
-
-#include "../vector.hpp"
 
 #include "constructors.cpp"
 #include "modifiers.cpp"

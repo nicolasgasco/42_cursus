@@ -45,8 +45,12 @@
 // SPEED
 #include "speed/vector_speed_tests.cpp"
 
-void vectorUnitTests(bool IS_DEBUG)
+int main(int argc, char *argv[])
 {
+    bool IS_DEBUG = false;
+    if (argc > 1)
+        IS_DEBUG = (static_cast<std::string>(argv[1]) == "debug") ? true : false;
+
     std::cout << YELLOW << "VECTOR UNIT TESTS" << NOCOL << std::endl;
 
     // Capacity
@@ -93,4 +97,6 @@ void vectorUnitTests(bool IS_DEBUG)
 
     // SPEED
     speedUnitTests(IS_DEBUG);
+
+    return (0);
 }

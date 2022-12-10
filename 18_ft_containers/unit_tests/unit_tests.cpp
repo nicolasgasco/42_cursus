@@ -23,8 +23,6 @@ int main(int argc, char *argv[])
     // REVERSE ITERATOR
     reverseIteratorUnitTests(IS_DEBUG);
 
-    // VECTOR
-    vectorUnitTests(IS_DEBUG);
 
     // STACK
     // stackUnitTests(IS_DEBUG);
