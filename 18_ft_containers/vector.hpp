@@ -431,6 +431,7 @@ namespace ft
 
         void swap(vector &other)
         {
+            ft::swap(this->_alloc, other._alloc);
             ft::swap(this->_size, other._size);
             ft::swap(this->_capacity, other._capacity);
             ft::swap(this->_data, other._data);
