@@ -1,9 +1,9 @@
 #include <stack>
-#include <deque>
 #include <list>
+#include <vector>
 
-#include "utils.hpp"
-#include "../stack.hpp"
+#include "../../utils.hpp"
+#include "../../../stack.hpp"
 
 void constructorUnitTests(bool isDebug)
 {

@@ -7,7 +7,7 @@ do
     case "${flag}" in
         d) DEBUG="debug";;
         v) $CC $FLAGS vector/vector_tests.cpp -o vector/vector_tests  && ./vector/vector_tests $DEBUG;;
-        s) echo "stack";;
+        s) $CC $FLAGS stack/stack.cpp -o stack/stack_tests && ./stack/stack_tests $DEBUG;;
         a) echo "algorithms";;
         r) echo "reverse iterator";;
         p) echo "pair";;

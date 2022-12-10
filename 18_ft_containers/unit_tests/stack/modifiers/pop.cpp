@@ -2,8 +2,8 @@
 #include <deque>
 #include <list>
 
-#include "utils.hpp"
-#include "../stack.hpp"
+#include "../../utils.hpp"
+#include "../../../stack.hpp"
 
 void popStackUnitTests(bool isDebug)
 {
