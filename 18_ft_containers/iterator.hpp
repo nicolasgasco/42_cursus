@@ -127,31 +127,59 @@ namespace ft
         {
             return (this->p - other.p);
         }
-
-        // Reletional operator
-        bool operator==(iterator const &other) const
-        {
-            return (this->p == other.p);
-        }
-        bool operator!=(iterator const &other) const
-        {
-            return (this->p != other.p);
-        }
-        bool operator<(iterator const &other) const
-        {
-            return (this->p < other.p);
-        }
-        bool operator<=(iterator const &other) const
-        {
-            return (this->p <= other.p);
-        }
-        bool operator>(iterator const &other) const
-        {
-            return (this->p > other.p);
-        }
-        bool operator>=(iterator const &other) const
-        {
-            return (this->p >= other.p);
-        }
     };
+
+    template <class Iter>
+    Iter operator+(typename Iter::difference_type n, const Iter &it)
+    {
+        return Iter(it + n);
+    }
+    template <class T1, class T2>
+    typename ft::iterator<T1>::difference_type operator+(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    {
+        return (&(*lhs) + &(*rhs));
+    }
+
+    template <class Iter>
+    Iter operator-(typename Iter::difference_type n, const Iter &it)
+    {
+        return Iter(it - n);
+    }
+    template <class T1, class T2>
+    typename ft::iterator<T1>::difference_type operator-(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    {
+        return (&(*lhs) - &(*rhs));
+    }
+
+    // Reletional operator
+    template <class T1, class T2>
+    bool operator==(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    {
+        return &(*lhs) == &(*rhs);
+    }
+    template <class T1, class T2>
+    bool operator!=(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    {
+        return &(*lhs) != &(*rhs);
+    }
+    template <class T1, class T2>
+    bool operator<(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    {
+        return &(*lhs) < &(*rhs);
+    }
+    template <class T1, class T2>
+    bool operator<=(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    {
+        return &(*lhs) <= &(*rhs);
+    }
+    template <class T1, class T2>
+    bool operator>(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    {
+        return &(*lhs) > &(*rhs);
+    }
+    template <class T1, class T2>
+    bool operator>=(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    {
+        return &(*lhs) >= &(*rhs);
+    }
 }
