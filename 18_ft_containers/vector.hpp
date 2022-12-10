@@ -210,6 +210,21 @@ namespace ft
         /*
          * Modifiers
          */
+        void assign(size_type n, const value_type &val)
+        {
+            if (n <= 0)
+                return;
+
+            if (this->size())
+                this->_alloc.destroy(this->_data);
+
+            if (n > this->_capacity)
+                this->reserve(n);
+
+            for (size_type i = 0; i < n; ++i)
+                this->_alloc.construct(this->_data + i, value_type(val));
+            this->_size = n;
+        }
         template <class InputIterator>
         void assign(InputIterator first, InputIterator last,
                     typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
@@ -232,20 +247,6 @@ namespace ft
                 this->_alloc.construct(this->_data + i, *it);
 
             this->_size = newSize;
-        }
-        void assign(size_type n, const value_type &val)
-        {
-            if (this->size())
-                this->_alloc.destroy(this->_data);
-
-            if (n == 0)
-                return;
-            if (n > this->_capacity)
-                this->reserve(n);
-
-            for (size_type i = 0; i < n; ++i)
-                this->_alloc.construct(this->_data + i, value_type(val));
-            this->_size = n;
         }
 
         void push_back(const value_type &value)
