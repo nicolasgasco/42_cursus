@@ -3,67 +3,67 @@
 
 void ownSize()
 {
-    ft::vector<char> myVector(100000, 10);
+    ft::vector<char> myVector(100000, 'a');
     myVector.size();
 }
 void seedSize()
 {
-    std::vector<char> myVector(100000, 10);
+    std::vector<char> myVector(100000, 'a');
     myVector.size();
 }
 
 void ownMaxSize()
 {
-    ft::vector<char> myVector(100000, 10);
+    ft::vector<int> myVector(100000, 10);
     myVector.max_size();
 }
 void seedMaxSize()
 {
-    std::vector<char> myVector(100000, 10);
+    std::vector<int> myVector(100000, 10);
     myVector.max_size();
 }
 
 void ownCapacitySize()
 {
-    ft::vector<char> myVector(100000, 10);
+    ft::vector<std::string> myVector(100000, "foo");
     myVector.capacity();
 }
 void seedCapacitySize()
 {
-    std::vector<char> myVector(100000, 10);
+    std::vector<std::string> myVector(100000, "foo");
     myVector.capacity();
 }
 
 void ownEmptySize()
 {
-    ft::vector<char> myVector(100000, 10);
+    ft::vector<unsigned int> myVector(100000, 42);
     myVector.empty();
 }
 void seedEmptySize()
 {
-    std::vector<char> myVector(100000, 10);
+    std::vector<unsigned int> myVector(100000, 42);
     myVector.empty();
 }
 
 void ownReserve()
 {
-    ft::vector<char> myVector;
+    ft::vector<long> myVector;
     myVector.reserve(100000);
 }
 void seedReserve()
 {
-    std::vector<char> myVector;
+    std::vector<long> myVector;
     myVector.reserve(100000);
 }
 
 void ownResize()
 {
-    ft::vector<char> myVector(1, 10);
+    ft::vector<float> myVector(1, 10.10f);
     myVector.resize(100000, 5);
 }
 void seedResize()
 {
-    std::vector<char> myVector(1, 10);
+    std::vector<float> myVector(1, 10.10f);
     myVector.resize(100000, 5);
 }
 

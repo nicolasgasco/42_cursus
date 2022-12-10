@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     vectorUnitTests(IS_DEBUG);
 
     // STACK
-    stackUnitTests(IS_DEBUG);
+    // stackUnitTests(IS_DEBUG);
 
     std::cout << std::endl;
     return (0);

@@ -51,23 +51,23 @@ void seedInsert()
 
 void ownErase()
 {
-    ft::vector<long> myVector(100000, 42);
+    ft::vector<std::string> myVector(100000, "foo");
     myVector.erase(myVector.begin(), myVector.end());
 }
 void seedErase()
 {
-    std::vector<long> myVector(100000, 42);
+    std::vector<std::string> myVector(100000, "foo");
     myVector.erase(myVector.begin(), myVector.end());
 }
 
 void ownEraseValue()
 {
-    ft::vector<long> myVector(100000, 42);
+    ft::vector<unsigned int> myVector(100000, 42);
     myVector.erase(myVector.begin() + 8 * 10000);
 }
 void seedEraseValue()
 {
-    std::vector<long> myVector(100000, 42);
+    std::vector<unsigned int> myVector(100000, 42);
     myVector.erase(myVector.begin() + 8 * 10000);
 }
 

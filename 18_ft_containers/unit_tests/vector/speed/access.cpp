@@ -3,12 +3,12 @@
 
 void ownRandomAccessOperator()
 {
-    ft::vector<char> myVector(100000, 10);
+    ft::vector<char> myVector(100000, 'a');
     myVector[10];
 }
 void seedRandomAccessOperator()
 {
-    std::vector<char> myVector(100000, 10);
+    std::vector<char> myVector(100000, 'a');
     myVector[10];
 }
 
@@ -25,34 +25,34 @@ void seedAtOperator()
 
 void ownFront()
 {
-    ft::vector<int> myVector(100000, 10);
+    ft::vector<std::string> myVector(100000, "foo");
     myVector.front();
 }
 void seedFront()
 {
-    std::vector<int> myVector(100000, 10);
+    std::vector<std::string> myVector(100000, "foo");
     myVector.front();
 }
 
 void ownBack()
 {
-    ft::vector<int> myVector(100000, 10);
+    ft::vector<long> myVector(100000, 10);
     myVector.back();
 }
 void seedBack()
 {
-    std::vector<int> myVector(100000, 10);
+    std::vector<long> myVector(100000, 10);
     myVector.back();
 }
 
 void ownData()
 {
-    ft::vector<int> myVector(100000, 10);
+    ft::vector<float> myVector(100000, 10.10f);
     myVector.data();
 }
 void seedData()
 {
-    std::vector<int> myVector(100000, 10);
+    std::vector<float> myVector(100000, 10.10f);
     myVector.data();
 }
 
