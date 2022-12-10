@@ -33,7 +33,7 @@ void seedCopyConstructor()
 void ownRangeConstructor()
 {
     ft::vector<float> myVector(100000, 2.0f);
-    std::vector<float> copy(myVector.begin(), myVector.end());
+    ft::vector<float> copy(myVector.begin(), myVector.end());
 }
 void seedRangeConstructor()
 {

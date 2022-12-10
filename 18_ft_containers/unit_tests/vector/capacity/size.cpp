@@ -141,7 +141,7 @@ void sizeUnitTests(bool isDebug)
             own.insert(own.begin(), ownRef.begin(), ownRef.end());
 
             std::vector<int> original(2, 5);
-            ft::vector<int> originalRef(3, 1);
+            std::vector<int> originalRef(3, 1);
             original.insert(original.begin(), originalRef.begin(), originalRef.end());
             outputAssertion("after adding 3 values with insert (with iterators) in a vector with size 2:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
         }
@@ -151,7 +151,7 @@ void sizeUnitTests(bool isDebug)
             own.insert(own.begin(), ownRef.begin(), ownRef.end());
 
             std::vector<int> original;
-            ft::vector<int> originalRef;
+            std::vector<int> originalRef;
             original.insert(original.begin(), originalRef.begin(), originalRef.end());
             outputAssertion("after adding 0 values with insert (with iterators) in a vector with size 0:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
         }
@@ -168,14 +168,14 @@ void sizeUnitTests(bool isDebug)
             ft::vector<int> ownRef(values, values + 10);
             own.insert(own.begin() + 2, ownRef.begin(), ownRef.end());
 
-            ft::vector<int> original;
+            std::vector<int> original;
             original.insert(original.end(), 42);
             original.insert(original.begin(), 2, 21);
             original.insert(original.end() - 2, 42);
             original.insert(original.end(), 2, 84);
             original.resize(4);
 
-            ft::vector<int> originalRef(values, values + 10);
+            std::vector<int> originalRef(values, values + 10);
             original.insert(original.begin() + 2, originalRef.begin(), originalRef.end());
             outputAssertion("after adding 10 values at index 2 with insert (iterators) in a vector with size 4:", isStrictEqual<std::size_t>(own.size(), original.size(), isDebug));
         }

@@ -13,14 +13,14 @@ void rEndUnitTests(bool isDebug)
                 ft::vector<int>::reverse_iterator ownIt = own.rend();
 
                 std::cout << typeid(ownIt).name() << std::endl;
-                outputAssertion("is not const with ::iterator:", !strcmp(typeid(ownIt).name(), "N2ft16reverse_iteratorIPiEE"));
+                outputAssertion("is not const with ::iterator:", !strcmp(typeid(ownIt).name(), "N2ft16reverse_iteratorINS_8iteratorIiEEEE"));
             }
             {
                 ft::vector<int> own(1, 10);
                 ft::vector<int>::const_reverse_iterator ownIt = own.rend();
 
                 std::cout << typeid(ownIt).name() << std::endl;
-                outputAssertion("is const with ::const_iterator:", !strcmp(typeid(ownIt).name(), "N2ft16reverse_iteratorIPKiEE"));
+                outputAssertion("is const with ::const_iterator:", !strcmp(typeid(ownIt).name(), "N2ft16reverse_iteratorINS_8iteratorIKiEEEE"));
             }
         }
         {

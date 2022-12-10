@@ -11,14 +11,14 @@ void beginUnitTests(bool isDebug)
         ft::vector<int>::iterator ownIt = own.begin();
 
         std::cout << typeid(ownIt).name() << std::endl;
-        outputAssertion("is not const with ::iterator:", !strcmp(typeid(ownIt).name(), "Pi"));
+        outputAssertion("is not const with ::iterator:", !strcmp(typeid(ownIt).name(), "N2ft8iteratorIiEE"));
     }
     {
-        ft::vector<int> own(1, 10);
+        ft::vector<int> const own(1, 10);
         ft::vector<int>::const_iterator ownIt = own.begin();
 
         std::cout << typeid(ownIt).name() << std::endl;
-        outputAssertion("is const with ::const_iterator:", !strcmp(typeid(ownIt).name(), "PKi"));
+        outputAssertion("is const with ::const_iterator:", !strcmp(typeid(ownIt).name(), "N2ft8iteratorIKiEE"));
     }
 
     std::cout << std::endl
