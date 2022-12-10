@@ -4,7 +4,7 @@
 
 void rBeginUnitTests(bool isDebug)
 {
-    outputSuiteTitle("RBEGIN");
+    outputSuiteTitle("RBEGIN:");
     {
         std::cout << "Is const/ not const like STL iterator value:" << std::endl;
         {
