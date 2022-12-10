@@ -60,6 +60,17 @@ void seedErase()
     myVector.erase(myVector.begin(), myVector.end());
 }
 
+void ownEraseValue()
+{
+    ft::vector<long> myVector(100000, 42);
+    myVector.erase(myVector.begin() + 8 * 10000);
+}
+void seedEraseValue()
+{
+    std::vector<long> myVector(100000, 42);
+    myVector.erase(myVector.begin() + 8 * 10000);
+}
+
 void ownClear()
 {
     int values[2] = {1, 2};
@@ -109,8 +120,12 @@ void modifiersSpeedTest(bool isDebug)
         calculateSpeedRatio(ownInsert, seedInsert, isDebug);
     }
     {
-        std::cout << "  - erase with 100000 values:";
-        calculateSpeedRatio(ownInsert, seedInsert, isDebug);
+        std::cout << "  - erase (value) with 100000 values:";
+        calculateSpeedRatio(ownErase, seedErase, isDebug);
+    }
+    {
+        std::cout << "  - erase (range) with 100000 values:";
+        calculateSpeedRatio(ownEraseValue, seedEraseValue, isDebug);
     }
     {
         std::cout << "  - swap with 100000 values:";

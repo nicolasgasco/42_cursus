@@ -216,7 +216,7 @@ void calculateSpeedRatio(void(func1)(), void(func2)(), bool isDebug)
     }
     else if (ownDurationCount > originalDurationCount)
     {
-        ratio = ownDurationCount / (originalDurationCount ? originalDurationCount : 1);
+        ratio = static_cast<float>(ownDurationCount) / static_cast<float>(originalDurationCount ? originalDurationCount : 1);
         std::cout << std::fixed << std::setprecision(1) << YELLOW << ratio << "x times slower" << NOCOL;
     }
     if (isDebug)
