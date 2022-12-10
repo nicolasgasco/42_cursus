@@ -37,8 +37,6 @@ namespace ft
         {
             this->_alloc = alloc;
             this->_data = this->_alloc.allocate(0);
-
-            this->_maxSize = this->_alloc.max_size();
         }
 
         // Fill constructors
@@ -48,8 +46,6 @@ namespace ft
             this->_data = this->_alloc.allocate(count);
             for (size_type i = 0; i < count; ++i)
                 this->_alloc.construct((this->_data + i), value_type(value));
-
-            this->_maxSize = this->_alloc.max_size();
         }
 
         // Range constructor
@@ -69,7 +65,6 @@ namespace ft
             this->_size = rangeDistance;
 
             this->_capacity = rangeDistance;
-            this->_maxSize = this->_alloc.max_size();
         }
 
         // Copy constructor
@@ -88,8 +83,6 @@ namespace ft
         {
             if (*this == other)
                 return (*this);
-
-            this->_maxSize = other.max_size();
 
             if (this->size())
                 this->_alloc.destroy(this->_data);
@@ -177,7 +170,7 @@ namespace ft
 
         size_type max_size() const
         {
-            return _maxSize;
+            return this->_alloc.max_size();
         }
 
         size_type capacity() const
@@ -187,7 +180,7 @@ namespace ft
 
         void reserve(size_type new_cap)
         {
-            if (new_cap > this->_maxSize || new_cap < 0)
+            if (new_cap > this->max_size() || new_cap < 0)
                 throw std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size");
             if (new_cap <= this->_capacity)
                 return;
@@ -245,6 +238,9 @@ namespace ft
         void push_back(const value_type &value)
         {
             size_type newSize = this->_size + 1;
+            if (newSize > this->max_size())
+                return;
+
             if (newSize > this->_capacity)
             {
                 size_type newCapacity = this->_capacity ? this->_capacity * 2 : 1;
@@ -271,7 +267,7 @@ namespace ft
 
         void resize(size_type count, value_type value = value_type())
         {
-            if (count < 0 || count > this->_maxSize)
+            if (count < 0 || count > this->max_size())
                 throw std::length_error("vector");
 
             if (count < this->_size)
@@ -434,7 +430,6 @@ namespace ft
         {
             ft::swap(this->_size, other._size);
             ft::swap(this->_capacity, other._capacity);
-            ft::swap(this->_maxSize, other._maxSize);
             ft::swap(this->_data, other._data);
         }
 
@@ -496,7 +491,6 @@ namespace ft
 
         size_type _size;
         size_type _capacity;
-        size_type _maxSize;
 
         void destroyAllocatedData()
         {
