@@ -300,7 +300,8 @@ namespace ft
                 positionI++;
             if (this->capacity() == this->_size)
             {
-                this->increaseCapacity();
+                size_type newCapacity = this->_capacity ? this->_capacity * 2 : 1;
+                this->reserve(newCapacity);
                 position = this->begin() + positionI;
             }
 
@@ -329,8 +330,7 @@ namespace ft
             if (this->capacity() < newMinCapacity)
             {
                 size_type newCapacity = (newMinCapacity > (this->_capacity * 2)) ? newMinCapacity : this->_capacity * 2;
-                this->allocateBiggerDataCopy(newCapacity);
-                this->_capacity = newCapacity;
+                this->reserve(newCapacity);
                 position = this->begin() + positionI;
             }
 
@@ -350,7 +350,6 @@ namespace ft
         iterator insert(iterator position, InputIterator first, InputIterator last,
                         typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
         {
-
             size_type iteratorsDistance = 0;
             for (InputIterator it = first; it != last; ++it)
                 iteratorsDistance++;
@@ -358,30 +357,30 @@ namespace ft
             if (iteratorsDistance == 0)
                 return position;
 
-            size_type positionI = 0;
+            size_type positionIndex = 0;
             for (iterator it = this->begin(); it != position; ++it)
-                positionI++;
+                positionIndex++;
 
             size_type newMinCapacity = this->_size + iteratorsDistance;
             if (this->capacity() < newMinCapacity)
             {
                 size_type newCapacity = (newMinCapacity > (this->_capacity * 2)) ? newMinCapacity : this->_capacity * 2;
-                this->allocateBiggerDataCopy(newCapacity);
-                this->_capacity = newCapacity;
-                position = this->begin() + positionI;
+                this->reserve(newCapacity);
+                position = this->begin() + positionIndex;
             }
+
             ft::vector<value_type> tmp(position, this->end());
 
             for (InputIterator it = first; it != last; ++it)
             {
-                this->_alloc.construct(this->_data + positionI, *it);
-                positionI++;
+                this->_alloc.construct(this->_data + positionIndex, *it);
+                positionIndex++;
                 this->_size++;
             }
             for (size_type i = 0; i < tmp.size(); ++i)
             {
-                this->_alloc.construct(this->_data + positionI, tmp[i]);
-                positionI++;
+                this->_alloc.construct(this->_data + positionIndex, tmp[i]);
+                positionIndex++;
             }
 
             return position;
