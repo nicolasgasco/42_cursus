@@ -209,10 +209,7 @@ namespace ft
                 return;
 
             if (newSize > this->_capacity)
-            {
-                this->allocateBiggerDataCopy(newSize);
-                this->_capacity = newSize;
-            }
+                this->reserve(newSize);
 
             size_type i = 0;
             for (InputIterator it = first; it != last; ++it, ++i)
@@ -228,10 +225,8 @@ namespace ft
             if (n == 0)
                 return;
             if (n > this->_capacity)
-            {
-                this->allocateBiggerDataCopy(n);
-                this->_capacity = n;
-            }
+                this->reserve(n);
+
             for (size_type i = 0; i < n; ++i)
                 this->_alloc.construct(this->_data + i, value_type(val));
             this->_size = n;
@@ -284,8 +279,7 @@ namespace ft
                 if (count > this->_capacity)
                 {
                     size_type newCapacity = (count > (this->_capacity * 2)) ? count : this->_capacity * 2;
-                    this->allocateBiggerDataCopy(newCapacity);
-                    this->_capacity = newCapacity;
+                    this->reserve(newCapacity);
                 }
                 for (size_type i = this->_size; i < count; ++i)
                     this->_alloc.construct(this->_data + i, value);
@@ -494,15 +488,6 @@ namespace ft
                 this->_alloc.destroy(this->_data);
             if (this->capacity())
                 this->_alloc.deallocate(this->_data, this->_capacity);
-        }
-
-        void allocateBiggerDataCopy(size_type newCapacity)
-        {
-            value_type *tmp = this->_alloc.allocate(newCapacity);
-            for (size_type i = 0; i < this->_size; ++i)
-                this->_alloc.construct((tmp + i), this->_data[i]);
-            this->destroyAllocatedData();
-            this->_data = tmp;
         }
     };
 
