@@ -1,9 +1,8 @@
 #include <vector>
 
 #include "../utils.hpp"
-#include "../vector.hpp"
-
-#include "../algorithms.hpp"
+#include "../../vector.hpp"
+#include "../../algorithms.hpp"
 
 bool intPredLex(int &a, int &b)
 {
