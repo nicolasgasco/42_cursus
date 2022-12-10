@@ -17,6 +17,10 @@ namespace ft
         typedef typename container_type::value_type value_type;
         typedef typename container_type::size_type size_type;
 
+    private:
+        container_type c;
+
+    public:
         /* ----------------------------------
          * LIFECYCLE
          * ---------------------------------- */
@@ -93,9 +97,6 @@ namespace ft
 
         template <class T1, class Container1>
         friend bool operator>=(const stack<T1, Container1> &lhs, const stack<T1, Container1> &rhs);
-
-    private:
-        container_type c;
     };
 
     /* ----------------------------------
