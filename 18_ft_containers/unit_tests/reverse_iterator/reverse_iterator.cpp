@@ -5,8 +5,12 @@
 #include "modifiers.cpp"
 #include "non-member.cpp"
 
-void reverseIteratorUnitTests(bool IS_DEBUG)
+int main(int argc, char *argv[])
 {
+    bool IS_DEBUG = false;
+    if (argc > 1)
+        IS_DEBUG = (static_cast<std::string>(argv[1]) == "debug") ? true : false;
+
     std::cout << std::endl
               << YELLOW << "REVERSE ITERATOR UNIT TESTS" << NOCOL << std::endl;
     constructorsUnitTests(IS_DEBUG);
