@@ -99,7 +99,10 @@ namespace ft
         // Destructor
         ~vector()
         {
-            this->destroyAllocatedData();
+            if (this->size())
+                this->_alloc.destroy(this->_data);
+            if (this->capacity())
+                this->_alloc.deallocate(this->_data, this->_capacity);
         }
 
         /* ----------------------------------
@@ -186,7 +189,12 @@ namespace ft
             value_type *tmp = this->_alloc.allocate(new_cap);
             for (size_type i = 0; i < this->_size; ++i)
                 this->_alloc.construct((tmp + i), this->_data[i]);
-            this->destroyAllocatedData();
+
+            if (this->size())
+                this->_alloc.destroy(this->_data);
+            if (this->capacity())
+                this->_alloc.deallocate(this->_data, this->_capacity);
+
             this->_data = tmp;
             this->_capacity = new_cap;
         }
@@ -481,14 +489,6 @@ namespace ft
 
         size_type _size;
         size_type _capacity;
-
-        void destroyAllocatedData()
-        {
-            if (this->size())
-                this->_alloc.destroy(this->_data);
-            if (this->capacity())
-                this->_alloc.deallocate(this->_data, this->_capacity);
-        }
     };
 
     /* ----------------------------------
