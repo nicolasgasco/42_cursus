@@ -388,21 +388,11 @@ namespace ft
 
         iterator erase(iterator position)
         {
-            if (position == (this->end() - 1))
-            {
-                this->_alloc.destroy(&(*(this->end() - 1)));
-                this->_size--;
-                return this->end();
-            }
-
-            ft::vector<value_type> tmp(position + 1, this->end());
-
-            for (iterator it = position; it < this->end(); ++it)
-                this->_alloc.destroy(&(*it));
+            this->_alloc.destroy(&(*position));
+            for (iterator it = position; it < (this->end() - 1); ++it)
+                this->_alloc.construct(&(*(it)), *(it + 1));
+            this->_alloc.destroy(this->_data + this->_size - 1);
             this->_size--;
-
-            for (size_type i = 0; i < tmp.size(); ++i)
-                this->_alloc.construct(&(*(position + i)), tmp[i]);
             return position;
         }
         iterator erase(iterator first, iterator last)
