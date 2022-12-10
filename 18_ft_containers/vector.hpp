@@ -502,13 +502,6 @@ namespace ft
             this->destroyAllocatedData();
             this->_data = tmp;
         }
-
-        void increaseCapacity()
-        {
-            size_type newCapacity = this->_capacity ? this->_capacity * 2 : 1;
-            this->allocateBiggerDataCopy(newCapacity);
-            this->_capacity = newCapacity;
-        }
     };
 
     /* ----------------------------------
