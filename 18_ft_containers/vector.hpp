@@ -183,7 +183,11 @@ namespace ft
             if (new_cap <= this->_capacity)
                 return;
 
-            this->allocateBiggerDataCopy(new_cap);
+            value_type *tmp = this->_alloc.allocate(new_cap);
+            for (size_type i = 0; i < this->_size; ++i)
+                this->_alloc.construct((tmp + i), this->_data[i]);
+            this->destroyAllocatedData();
+            this->_data = tmp;
             this->_capacity = new_cap;
         }
 
