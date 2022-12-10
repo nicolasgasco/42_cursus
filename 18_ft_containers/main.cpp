@@ -6,6 +6,7 @@
 #include <stack>
 #include <vector>
 #include <iterator>
+#include <list>
 // 	namespace ft = std;
 // #else
 // #include <map.hpp>
@@ -43,13 +44,35 @@
 #include <iostream>
 int main()
 {
-    ft::vector<int> own;
-    own.reserve(1);
-    own.push_back(1);
-    std::vector<int> original;
-    original.reserve(1);
-    original.push_back(1);
+	ft::vector<int> v1(100, 1);
 
-    system("leaks ft_containers");
-    return 0;
+	ft::vector<int> v2;
+	v2.push_back(101);
+	v2.push_back(102);
+	v2.push_back(103);
+	v2.push_back(104);
+	v2.push_back(105);
+
+	v1.insert(v1.begin() + 0, v2.begin(), v2.end());
+	int i = 0;
+	for (ft::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it, ++i)
+		std::cout << *it << " (" << i << "), ";
+	std::cout << std::endl;
+
+	std::vector<int> vo1(100, 1);
+
+	std::cout << std::endl;
+
+	std::vector<int> vo2;
+	vo2.push_back(101);
+	vo2.push_back(102);
+	vo2.push_back(103);
+	vo2.push_back(104);
+	vo2.push_back(105);
+
+	vo1.insert(vo1.begin() + 0, vo2.begin(), vo2.end());
+	int i2 = 0;
+	for (std::vector<int>::iterator it = vo1.begin(); it != vo1.end(); ++it, ++i2)
+		std::cout << *it << " (" << i2 << "), ";
+	return 0;
 }
