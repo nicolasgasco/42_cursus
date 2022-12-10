@@ -57,7 +57,9 @@ namespace ft
         vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type(),
                typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
         {
-            size_type rangeDistance = std::distance(&(*first), &(*last));
+            size_type rangeDistance = 0;
+            for (InputIterator it = first; it != last; ++it)
+                rangeDistance++;
 
             this->_alloc = alloc;
             this->_data = this->_alloc.allocate(rangeDistance);
@@ -204,7 +206,10 @@ namespace ft
             if (this->size())
                 this->_alloc.destroy(this->_data);
 
-            size_type newSize = std::distance(&(*first), &(*last));
+            size_type newSize = 0;
+            for (InputIterator it = first; it != last; ++it)
+                newSize++;
+
             if (newSize == 0)
                 return;
 
@@ -213,8 +218,11 @@ namespace ft
                 this->allocateBiggerDataCopy(newSize);
                 this->_capacity = newSize;
             }
-            for (size_type i = 0; i < newSize; ++i)
-                this->_alloc.construct(this->_data + i, *(std::next(&(*first), i)));
+            
+            size_type i = 0;
+            for (InputIterator it = first; it != last; ++it, ++i)
+                this->_alloc.construct(this->_data + i, *it);
+
             this->_size = newSize;
         }
         void assign(size_type n, const value_type &val)
@@ -343,7 +351,11 @@ namespace ft
         iterator insert(iterator position, InputIterator first, InputIterator last,
                         typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
         {
-            size_type iteratorsDistance = std::distance(&(*first), &(*last));
+
+            size_type iteratorsDistance = 0;
+            for (InputIterator it = first; it != last; ++it)
+                iteratorsDistance++;
+
             if (iteratorsDistance == 0)
                 return position;
 
