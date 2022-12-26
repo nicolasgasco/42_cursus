@@ -71,6 +71,7 @@ namespace ft
             this->root = new node_type(value);
         }
 
+        // Search for pair
         node_type *search(node_type *root, value_type value)
         {
             if (root == NULL || root->data == value)
@@ -86,9 +87,38 @@ namespace ft
             return search(this->root, value);
         }
 
+        // Search for first value
+        node_type *search(node_type *root, first_type first)
+        {
+            if (root == NULL || root->data.first == first)
+                return root;
+
+            if (root->data.first < first)
+                return search(root->right, first);
+
+            return search(root->left, first);
+        }
+        node_type *search(first_type first)
+        {
+            return search(this->root, first);
+        }
+
         node_type *insert(value_type value)
         {
             return root->insert(this->root, value);
+        }
+
+        void inorder(node_type *root)
+        {
+            if (root == nullptr)
+                return;
+            inorder(root->left);
+            std::cout << root->data << std::endl;
+            inorder(root->right);
+        }
+        void inorder()
+        {
+            this->inorder(this->root);
         }
 
     private:

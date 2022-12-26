@@ -99,10 +99,12 @@ int main()
 
 	ft::bst<std::string, int> myBst(ft::pair<std::string, int>("ciao", 42));
 
-	// std::cout << "Inserting values" << std::endl;
-	// myBst.insert(ft::pair<std::string, int>("ciao", 42));
+	std::cout << "Inserting values" << std::endl;
+	myBst.insert(ft::pair<std::string, int>("miao", 10));
 
 	std::cout << "First node: " << myBst.search(ft::pair<std::string, int>("ciao", 42))->data.first << ", " << myBst.search(ft::pair<std::string, int>("ciao", 42))->data.second << std::endl;
-	// std::cout << "Second node: " << myBst.front()->right->first << ", " << myBst.front()->right->second << std::endl;
+	std::cout << "Second node: " << myBst.search("miao")->data.first << ", " << myBst.search(ft::pair<std::string, int>("miao", 10))->data.second << std::endl;
+	
+	myBst.inorder();
 	return 0;
 }
