@@ -7,64 +7,91 @@
 namespace ft
 {
     template <class T1, class T2, class P = ft::pair<T1, T2> >
-    class bst
+    class bst_node
     {
-    private:
-        struct node
-        {
-            P *data;
-            node *left;
-            node *right;
-        };
 
     public:
         /*
          * MEMBER TYPES
          */
-        typedef bst<T1, T2> bst_type;
-        typedef typename bst::node node_type;
-        typedef node_type *node_ptr;
+        typedef bst_node<T1, T2> node_type;
         typedef T1 first_type;
         typedef T2 second_type;
         typedef P value_type;
+        typedef std::size_t size_type;
 
-        /* ----------------------------------
-         * LIFECYCLE
-         * ---------------------------------- */
+        bst_node() : data(value_type()), left(nullptr), right(nullptr)
+        {
+        }
+
+        bst_node(value_type value)
+        {
+            this->data = value;
+            this->left = this->right = nullptr;
+        }
+
+        node_type *insert(node_type *root, value_type value)
+        {
+            if (root == nullptr)
+                return new node_type(value);
+
+            if (value > root->data)
+                root->right = insert(root->right, value);
+            else if (value < root->data)
+                root->left = insert(root->left, value);
+
+            return root;
+        }
+
+    public:
+        value_type data;
+        bst_node *left, *right;
+    };
+
+    template <class T1, class T2, class P = ft::pair<T1, T2> >
+    class bst
+    {
+    public:
+        /*
+         * MEMBER TYPES
+         */
+        typedef bst_node<T1, T2> node_type;
+        typedef T1 first_type;
+        typedef T2 second_type;
+        typedef P value_type;
+        typedef std::size_t size_type;
+
         bst()
         {
-            std::cout << "BST default constructor" << std::endl;
-            root = nullptr;
+            this->root = new node_type();
         }
 
-        bst(first_type first, second_type second)
+        bst(value_type value)
         {
-            std::cout << "BST default constructor" << std::endl;
-            this->root = new node();
-            this->root->data = new value_type(first, second);
-            this->root->left = nullptr;
-            this->root->right = nullptr;
+            this->root = new node_type(value);
         }
 
-        /* ----------------------------------
-         * Member functions
-         * ---------------------------------- */
-        bool empty() const
+        node_type *search(node_type *root, value_type value)
         {
-            return this->root == nullptr ? true : false;
+            if (root == NULL || root->data == value)
+                return root;
+
+            if (root->data < value)
+                return search(root->right, value);
+
+            return search(root->left, value);
+        }
+        node_type *search(value_type value)
+        {
+            return search(this->root, value);
         }
 
-        first_type first() const
+        node_type *insert(value_type value)
         {
-            return this->root->data->first;
-        }
-
-        second_type second() const
-        {
-            return this->root->data->second;
+            return root->insert(this->root, value);
         }
 
     private:
-        node_ptr root;
+        node_type *root;
     };
 }

@@ -12,16 +12,23 @@
 // #include <map.hpp>
 // #include <stack.hpp>
 
+#include "stack.hpp"
 #include "vector.hpp"
+// #include "map.hpp"
 #include "algorithms.hpp"
 #include "iterator_traits.hpp"
 #include "reverse_iterator.hpp"
+#include "bst.hpp"
+#include "pair.hpp"
 // #endif
 
 #include <stdlib.h>
 
 #define YELLOW "\033[0;33m"
 #define NOCOL "\033[0m"
+
+using namespace std;
+
 // template <typename T>
 // class MutantStack : public ft::stack<T>
 // {
@@ -44,35 +51,58 @@
 #include <iostream>
 int main()
 {
-	ft::vector<int> v1(100, 1);
+	// ft::vector<int> v1(100, 1);
 
-	ft::vector<int> v2;
-	v2.push_back(101);
-	v2.push_back(102);
-	v2.push_back(103);
-	v2.push_back(104);
-	v2.push_back(105);
+	// ft::vector<int> v2;
+	// v2.push_back(101);
+	// v2.push_back(102);
+	// v2.push_back(103);
+	// v2.push_back(104);
+	// v2.push_back(105);
 
-	v1.insert(v1.begin() + 0, v2.begin(), v2.end());
-	int i = 0;
-	for (ft::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it, ++i)
-		std::cout << *it << " (" << i << "), ";
-	std::cout << std::endl;
+	// v1.insert(v1.begin() + 0, v2.begin(), v2.end());
+	// int i = 0;
+	// for (ft::vector<int>::iterator it = v1.begin(); it != v1.end(); ++it, ++i)
+	// 	std::cout << *it << " (" << i << "), ";
+	// std::cout << std::endl;
 
-	std::vector<int> vo1(100, 1);
+	// std::vector<int> vo1(100, 1);
 
-	std::cout << std::endl;
+	// std::cout << std::endl;
 
-	std::vector<int> vo2;
-	vo2.push_back(101);
-	vo2.push_back(102);
-	vo2.push_back(103);
-	vo2.push_back(104);
-	vo2.push_back(105);
+	// std::vector<int> vo2;
+	// vo2.push_back(101);
+	// vo2.push_back(102);
+	// vo2.push_back(103);
+	// vo2.push_back(104);
+	// vo2.push_back(105);
 
-	vo1.insert(vo1.begin() + 0, vo2.begin(), vo2.end());
-	int i2 = 0;
-	for (std::vector<int>::iterator it = vo1.begin(); it != vo1.end(); ++it, ++i2)
-		std::cout << *it << " (" << i2 << "), ";
+	// vo1.insert(vo1.begin() + 0, vo2.begin(), vo2.end());
+	// int i2 = 0;
+	// for (std::vector<int>::iterator it = vo1.begin(); it != vo1.end(); ++it, ++i2)
+	// 	std::cout << *it << " (" << i2 << "), ";
+
+	// init
+
+	// std::vector<int> v1(100, 1);
+	// std::vector<int> v4(10, 5);
+
+	// ft::vector<int> v2(4050000, 2);
+	// ft::vector<int> v3(2600, 5);
+
+	// // v1.insert(v1.end() + 1, v4.begin(), v4.end());
+	// v2.insert(v2.begin() -1, v3.begin(), v3.end());
+	// for (int i = 0; i < int(v2.size()); ++i)
+	// {
+	// 	std::cout << v2[i] << ", ";
+	// }
+
+	ft::bst<std::string, int> myBst(ft::pair<std::string, int>("ciao", 42));
+
+	// std::cout << "Inserting values" << std::endl;
+	// myBst.insert(ft::pair<std::string, int>("ciao", 42));
+
+	std::cout << "First node: " << myBst.search(ft::pair<std::string, int>("ciao", 42))->data.first << ", " << myBst.search(ft::pair<std::string, int>("ciao", 42))->data.second << std::endl;
+	// std::cout << "Second node: " << myBst.front()->right->first << ", " << myBst.front()->right->second << std::endl;
 	return 0;
 }
