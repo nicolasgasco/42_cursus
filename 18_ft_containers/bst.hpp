@@ -32,7 +32,7 @@ namespace ft
 
         bst_node(const bst_node &other)
         {
-            (*this = other);
+            *this = other;
         }
 
         bst_node &operator=(const bst_node &other)
@@ -99,7 +99,18 @@ namespace ft
             this->_root = new node_type(value);
         }
 
-        node_type *root()
+        bst(const bst &other)
+        {
+            *this = other;
+        }
+
+        bst &operator=(const bst &other)
+        {
+            this->_root = new node_type(other.root()->data());
+            return *this;
+        }
+
+        node_type *root() const
         {
             return this->_root;
         }
@@ -143,12 +154,10 @@ namespace ft
 
         void inorder(node_type *root)
         {
-            static size_type i = 0;
             if (root == nullptr)
                 return;
             inorder(root->left());
-            std::cout << i << ") " << root->data() << std::endl;
-            ++i;
+            std::cout << root->data() << std::endl;
             inorder(root->right());
         }
         void inorder()
