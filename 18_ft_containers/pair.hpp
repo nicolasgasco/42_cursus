@@ -94,7 +94,7 @@ namespace ft
     template <class T1, class T2>
     std::ostream &operator<<(std::ostream &os, pair<T1, T2> const &std)
     {
-        std::cout << std.first << ", " << std.second << std::endl;
+        std::cout << std.first << ": " << std.second;
         return os;
     }
 

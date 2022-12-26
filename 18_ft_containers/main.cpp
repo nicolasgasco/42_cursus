@@ -97,14 +97,16 @@ int main()
 	// 	std::cout << v2[i] << ", ";
 	// }
 
-	ft::bst<std::string, int> myBst(ft::pair<std::string, int>("ciao", 42));
+	ft::bst<std::string, int> myBst(ft::pair<std::string, int>("CCC", 42));
 
 	std::cout << "Inserting values" << std::endl;
-	myBst.insert(ft::pair<std::string, int>("miao", 10));
+	myBst.insert(ft::pair<std::string, int>("DDD", 42));
+	myBst.insert(ft::pair<std::string, int>("AAA", 42));
+	myBst.insert(ft::pair<std::string, int>("ZZZ", 42));
 
-	std::cout << "First node: " << myBst.search(ft::pair<std::string, int>("ciao", 42))->data.first << ", " << myBst.search(ft::pair<std::string, int>("ciao", 42))->data.second << std::endl;
-	std::cout << "Second node: " << myBst.search("miao")->data.first << ", " << myBst.search(ft::pair<std::string, int>("miao", 10))->data.second << std::endl;
-	
+	std::cout << "First node: " << myBst.search(ft::pair<std::string, int>("DDD", 42))->_data << std::endl;
+	std::cout << "Second node: " << myBst.search("ZZZ")->_data << std::endl;
+
 	myBst.inorder();
 	return 0;
 }
