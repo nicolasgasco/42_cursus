@@ -30,6 +30,34 @@ namespace ft
             this->_left = this->_right = nullptr;
         }
 
+        bst_node(const bst_node &other)
+        {
+            (*this = other);
+        }
+
+        bst_node &operator=(const bst_node &other)
+        {
+            this->_data = value_type(other.data());
+            this->_left = other.left();
+            this->_right = other.right();
+            return *this;
+        }
+
+        value_type data() const
+        {
+            return this->_data;
+        }
+
+        bst_node *left() const
+        {
+            return this->_left;
+        }
+
+        bst_node *right() const
+        {
+            return this->_right;
+        }
+
         node_type *insert(node_type *root, value_type value)
         {
             if (root == nullptr)
@@ -41,21 +69,6 @@ namespace ft
                 root->_left = insert(root->left(), value);
 
             return root;
-        }
-
-        value_type data()
-        {
-            return this->_data;
-        }
-
-        bst_node *left()
-        {
-            return this->_left;
-        }
-
-        bst_node *right()
-        {
-            return this->_right;
         }
 
     private:
@@ -134,7 +147,7 @@ namespace ft
             if (root == nullptr)
                 return;
             inorder(root->left());
-            std::cout << i <<  ") " << root->data() << std::endl;
+            std::cout << i << ") " << root->data() << std::endl;
             ++i;
             inorder(root->right());
         }
