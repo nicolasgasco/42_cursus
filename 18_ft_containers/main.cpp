@@ -14,7 +14,7 @@
 
 #include "stack.hpp"
 #include "vector.hpp"
-// #include "map.hpp"
+#include "map.hpp"
 #include "algorithms.hpp"
 #include "iterator_traits.hpp"
 #include "reverse_iterator.hpp"
@@ -97,18 +97,36 @@ int main()
 	// 	std::cout << v2[i] << ", ";
 	// }
 
-	ft::bst<std::string, int> myBst(ft::pair<std::string, int>("CCC", 42));
+	// ft::bst<std::string, int> myBst(ft::pair<std::string, int>("CCC", 42));
 
-	std::cout << "Inserting values" << std::endl;
-	myBst.insert(ft::pair<std::string, int>("DDD", 42));
-	myBst.insert(ft::pair<std::string, int>("AAA", 42));
-	myBst.insert(ft::pair<std::string, int>("ZZZ", 42));
-	myBst.insert(ft::pair<std::string, int>("AAAA", 42));
-	myBst.insert(ft::pair<std::string, int>("A", 42));
+	// std::cout << "Inserting values" << std::endl;
+	// myBst.insert(ft::pair<std::string, int>("DDD", 42));
+	// myBst.insert(ft::pair<std::string, int>("AAA", 42));
+	// myBst.insert(ft::pair<std::string, int>("ZZZ", 42));
+	// myBst.insert(ft::pair<std::string, int>("AAAA", 42));
+	// myBst.insert(ft::pair<std::string, int>("A", 42));
 
-	std::cout << "First node: " << myBst.search(ft::pair<std::string, int>("DDD", 42))->data() << std::endl;
-	std::cout << "Second node: " << myBst.search("ZZZ")->data() << std::endl;
+	// std::cout << "First node: " << myBst.search(ft::pair<std::string, int>("DDD", 42))->data() << std::endl;
+	// std::cout << "Second node: " << myBst.search("ZZZ")->data() << std::endl;
 
+	// myBst.inorder();
+
+	// ft::bst<std::string, int> second(ft::pair<std::string, int>("CCC", 42));
+	// ft::bst<std::string, int> other(second);
+	// second.inorder();
+	// other.inorder();
+
+	// ft::vector<ft::pair<std::string, int> > myVector;
+	// myVector.push_back(ft::pair<std::string, int>("ciao", 42));
+	// myVector.push_back(ft::pair<std::string, int>("miao", 10));
+	// myVector.push_back(ft::pair<std::string, int>("biao", 200));
+	// ft::map<std::string, int> myMap(myVector.begin(), myVector.end());
+
+
+	ft::bst<std::string, int> myBst;
+	myBst.insert(ft::pair<std::string, int>("zzz", 42));
+	myBst.insert(ft::pair<std::string, int>("rrr", 42));
+	myBst.insert(ft::pair<std::string, int>("aaa", 42));
 	myBst.inorder();
 	return 0;
 }

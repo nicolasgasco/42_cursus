@@ -15,9 +15,9 @@ namespace ft
          * MEMBER TYPES
          */
         typedef bst_node<T1, T2> node_type;
-        typedef T1 first_type;
-        typedef T2 second_type;
         typedef P value_type;
+        typedef typename value_type::first_type first_type;
+        typedef typename value_type::second_type second_type;
         typedef std::size_t size_type;
 
         bst_node() : _data(value_type()), _left(nullptr), _right(nullptr)
@@ -67,7 +67,6 @@ namespace ft
                 root->_right = insert(root->right(), value);
             else if (value < root->data())
                 root->_left = insert(root->left(), value);
-
             return root;
         }
 

@@ -5,6 +5,7 @@
 #include "iterator_traits.hpp"
 #include "reverse_iterator.hpp"
 #include "pair.hpp"
+#include "bst.hpp"
 #include <iostream>
 
 namespace ft
@@ -29,6 +30,7 @@ namespace ft
         typedef typename ft::iterator_traits<iterator>::difference_type difference_type;
         typedef typename ft::reverse_iterator<iterator> reverse_iterator;
         typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
+        typedef typename ft::bst<typename value_type::first_type, typename value_type::second_type, value_type> container_type;
 
     protected:
         /*
@@ -55,13 +57,14 @@ namespace ft
 
         allocator_type _alloc;
         key_compare _comp;
+        container_type _data;
 
     public:
         /* ----------------------------------
          * LIFECYCLE
          * ---------------------------------- */
         // Empty
-        explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _alloc(alloc), _comp(comp)
+        explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _alloc(alloc), _comp(comp), _data(value_type())
         {
         }
 
@@ -69,6 +72,8 @@ namespace ft
         template <class InputIterator>
         map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _alloc(alloc), _comp(comp)
         {
+            for (InputIterator it = first; it < last; ++it)
+                this->_data.insert(*it);
         }
 
         // Copy
