@@ -17,7 +17,8 @@ namespace ft
     public:
         typedef Key key_type;
         typedef T mapped_type;
-        typedef typename ft::pair<const key_type, mapped_type> value_type;
+        // typedef typename ft::pair<const key_type, mapped_type> value_type;
+        typedef typename ft::pair<key_type, mapped_type> value_type;
         typedef Allocator allocator_type;
         typedef typename allocator_type::size_type size_type;
         typedef Compare key_compare;

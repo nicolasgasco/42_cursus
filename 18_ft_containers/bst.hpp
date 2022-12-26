@@ -20,7 +20,7 @@ namespace ft
         typedef typename value_type::second_type second_type;
         typedef std::size_t size_type;
 
-        bst_node() : _data(value_type()), _left(nullptr), _right(nullptr)
+        bst_node() : _left(nullptr), _right(nullptr)
         {
         }
 
@@ -61,7 +61,10 @@ namespace ft
         node_type *insert(node_type *root, value_type value)
         {
             if (root == nullptr)
-                return new node_type(value);
+            {
+                root = new node_type(value);
+                return root;
+            }
 
             if (value > root->data())
                 root->_right = insert(root->right(), value);
@@ -90,7 +93,7 @@ namespace ft
 
         bst()
         {
-            this->_root = new node_type();
+            this->_root = nullptr;
         }
 
         bst(value_type value)
@@ -146,9 +149,14 @@ namespace ft
             return search(this->_root, first);
         }
 
-        node_type *insert(value_type value)
+        void insert(value_type value)
         {
-            return this->_root->insert(this->_root, value);
+            if (this->_root == nullptr)
+            {
+                this->_root = new node_type(value);
+                return;
+            }
+            this->_root->insert(this->_root, value);
         }
 
         void inorder(node_type *root)
