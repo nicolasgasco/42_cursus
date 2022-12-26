@@ -78,12 +78,17 @@ namespace ft
 
         bst()
         {
-            this->root = new node_type();
+            this->_root = new node_type();
         }
 
         bst(value_type value)
         {
-            this->root = new node_type(value);
+            this->_root = new node_type(value);
+        }
+
+        node_type *root()
+        {
+            return this->_root;
         }
 
         // Search for pair
@@ -99,7 +104,7 @@ namespace ft
         }
         node_type *search(value_type value)
         {
-            return search(this->root, value);
+            return search(this->_root, value);
         }
 
         // Search for first value
@@ -115,12 +120,12 @@ namespace ft
         }
         node_type *search(first_type first)
         {
-            return search(this->root, first);
+            return search(this->_root, first);
         }
 
         node_type *insert(value_type value)
         {
-            return root->insert(this->root, value);
+            return this->_root->insert(this->_root, value);
         }
 
         void inorder(node_type *root)
@@ -135,10 +140,10 @@ namespace ft
         }
         void inorder()
         {
-            this->inorder(this->root);
+            this->inorder(this->_root);
         }
 
     private:
-        node_type *root;
+        node_type *_root;
     };
 }
