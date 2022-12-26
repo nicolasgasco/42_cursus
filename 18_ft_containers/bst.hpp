@@ -35,15 +35,30 @@ namespace ft
             if (root == nullptr)
                 return new node_type(value);
 
-            if (value > root->_data)
-                root->_right = insert(root->_right, value);
-            else if (value < root->_data)
-                root->_left = insert(root->_left, value);
+            if (value > root->data())
+                root->_right = insert(root->right(), value);
+            else if (value < root->data())
+                root->_left = insert(root->left(), value);
 
             return root;
         }
 
-    public:
+        value_type data()
+        {
+            return this->_data;
+        }
+
+        bst_node *left()
+        {
+            return this->_left;
+        }
+
+        bst_node *right()
+        {
+            return this->_right;
+        }
+
+    private:
         value_type _data;
         bst_node *_left, *_right;
     };
@@ -74,13 +89,13 @@ namespace ft
         // Search for pair
         node_type *search(node_type *root, value_type value)
         {
-            if (root == nullptr || root->_data == value)
+            if (root == nullptr || root->data() == value)
                 return root;
 
-            if (root->_data < value)
-                return search(root->_right, value);
+            if (root->data() < value)
+                return search(root->right(), value);
 
-            return search(root->_left, value);
+            return search(root->left(), value);
         }
         node_type *search(value_type value)
         {
@@ -90,13 +105,13 @@ namespace ft
         // Search for first value
         node_type *search(node_type *root, first_type first)
         {
-            if (root == nullptr || root->_data.first == first)
+            if (root == nullptr || root->data().first == first)
                 return root;
 
-            if (root->_data.first < first)
-                return search(root->_right, first);
+            if (root->data().first < first)
+                return search(root->right(), first);
 
-            return search(root->_left, first);
+            return search(root->left(), first);
         }
         node_type *search(first_type first)
         {
@@ -113,10 +128,10 @@ namespace ft
             static size_type i = 0;
             if (root == nullptr)
                 return;
-            inorder(root->_left);
-            std::cout << i <<  ") " << root->_data << std::endl;
+            inorder(root->left());
+            std::cout << i <<  ") " << root->data() << std::endl;
             ++i;
-            inorder(root->_right);
+            inorder(root->right());
         }
         void inorder()
         {

@@ -104,8 +104,8 @@ int main()
 	myBst.insert(ft::pair<std::string, int>("AAA", 42));
 	myBst.insert(ft::pair<std::string, int>("ZZZ", 42));
 
-	std::cout << "First node: " << myBst.search(ft::pair<std::string, int>("DDD", 42))->_data << std::endl;
-	std::cout << "Second node: " << myBst.search("ZZZ")->_data << std::endl;
+	std::cout << "First node: " << myBst.search(ft::pair<std::string, int>("DDD", 42))->data() << std::endl;
+	std::cout << "Second node: " << myBst.search("ZZZ")->data() << std::endl;
 
 	myBst.inorder();
 	return 0;
