@@ -23,9 +23,8 @@ int main(int argc, char *argv[])
     // REVERSE ITERATOR
     reverseIteratorUnitTests(IS_DEBUG);
 
-
     // STACK
-    // stackUnitTests(IS_DEBUG);
+    stackUnitTests(IS_DEBUG);
 
     std::cout << std::endl;
     return (0);
