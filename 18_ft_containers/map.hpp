@@ -59,13 +59,14 @@ namespace ft
         allocator_type _alloc;
         key_compare _comp;
         container_type _data;
+        size_type _size;
 
     public:
         /* ----------------------------------
          * LIFECYCLE
          * ---------------------------------- */
         // Empty
-        explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _alloc(alloc), _comp(comp), _data(value_type())
+        explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _alloc(alloc), _comp(comp), _data(value_type()), _size(0)
         {
         }
 
