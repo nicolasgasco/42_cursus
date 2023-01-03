@@ -1,1 +1,0 @@
-make re && ./vector_tests DEBUG > report.md
