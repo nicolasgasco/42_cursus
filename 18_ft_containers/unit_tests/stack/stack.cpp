@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
         IS_DEBUG = (static_cast<std::string>(argv[1]) == "debug") ? true : false;
 
     std::cout << std::endl
-              << YELLOW << "STACK UNIT TESTS" << NOCOL << std::endl;
+              << TITLE << "STACK UNIT TESTS" << NOCOL_H1 << std::endl;
     constructorUnitTests(IS_DEBUG);
     assignStackUnitTests(IS_DEBUG);
     topStackUnitTests(IS_DEBUG);

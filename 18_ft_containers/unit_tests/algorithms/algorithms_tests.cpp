@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
         IS_DEBUG = (static_cast<std::string>(argv[1]) == "debug") ? true : false;
 
     std::cout << std::endl
-              << YELLOW << "ALGORITHMS UNIT TESTS" << NOCOL << std::endl;
+              << TITLE << "ALGORITHMS UNIT TESTS" << NOCOL_H1 << std::endl;
 
     ftSwapUnitTests(IS_DEBUG);
     ftEqualUnitTests(IS_DEBUG);

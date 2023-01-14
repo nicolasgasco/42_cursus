@@ -11,10 +11,14 @@
 #include "../stack.hpp"
 #include "../pair.hpp"
 
-#define YELLOW "\033[0;33m"
-#define BLUE "\033[0;34m"
-#define GREEN "\033[0;32m"
-#define NOCOL "\033[0m"
+#define TITLE "<h1 style='color: #0092FF;'>🥼 "
+#define NOCOL_H1 " 🧪</h1>"
+#define YELLOW "<h2 style='color: #F9F871; font-weight: bold'>"
+#define NOCOL_H2 "</h2>"
+#define BLUE "<span style='color: #3592FA; font-weight: bold'>"
+#define GREEN "<span style='color: #88D581; font-weight: bold'>"
+#define RED "<span style='color: #F7BE3B; font-weight: bold'>"
+#define NOCOL "</span>"
 
 void outputAssertion(std::string description, bool value)
 {
@@ -27,7 +31,7 @@ void outputAssertion(std::string description, bool value)
 void outputSuiteTitle(std::string title)
 {
     std::cout << std::endl
-              << YELLOW << title << NOCOL << std::endl;
+              << YELLOW << title << NOCOL_H2 << std::endl;
 }
 
 template <typename T>
@@ -217,7 +221,7 @@ void calculateSpeedRatio(void(func1)(), void(func2)(), bool isDebug)
     else if (ownDurationCount > originalDurationCount)
     {
         ratio = static_cast<float>(ownDurationCount) / static_cast<float>(originalDurationCount ? originalDurationCount : 1);
-        std::cout << std::fixed << std::setprecision(1) << YELLOW << ratio << "x times slower" << NOCOL;
+        std::cout << std::fixed << std::setprecision(1) << RED << ratio << "x times slower" << NOCOL;
     }
     if (isDebug)
         std::cout << " (own: " << ownDurationCount << " ms, seed: " << originalDurationCount << " ms)";

@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
         IS_DEBUG = (static_cast<std::string>(argv[1]) == "debug") ? true : false;
 
     std::cout << std::endl
-              << YELLOW << "PAIR UNIT TESTS" << NOCOL << std::endl;
+              << TITLE << "PAIR UNIT TESTS" << NOCOL_H1 << std::endl;
     pairUnitTests(IS_DEBUG);
     makePairUnitTests(IS_DEBUG);
 }

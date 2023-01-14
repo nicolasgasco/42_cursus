@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     if (argc > 1)
         IS_DEBUG = (static_cast<std::string>(argv[1]) == "debug") ? true : false;
 
-    std::cout << YELLOW << "MAP UNIT TESTS" << NOCOL << std::endl;
+    std::cout << TITLE << "MAP UNIT TESTS" << NOCOL_H1 << std::endl;
 
     // Capacity
     sizeUnitTests(IS_DEBUG);
