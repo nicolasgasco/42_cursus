@@ -7,7 +7,7 @@
 
 void popStackUnitTests(bool isDebug)
 {
-    outputSuiteTitle("PUSH:");
+    outputSuiteTitle("PUSH");
     {
         std::cout
             << "Container is equal:" << std::endl;

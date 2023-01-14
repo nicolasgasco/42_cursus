@@ -7,7 +7,7 @@
 
 void empyStackUnitTests(bool isDebug)
 {
-    outputSuiteTitle("EMPTY:");
+    outputSuiteTitle("EMPTY");
     {
         std::cout
             << "Return value is equal:" << std::endl;

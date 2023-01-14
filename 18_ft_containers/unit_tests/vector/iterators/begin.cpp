@@ -4,7 +4,7 @@
 
 void beginUnitTests(bool isDebug)
 {
-    outputSuiteTitle("BEGIN:");
+    outputSuiteTitle("BEGIN");
     {
         std::cout << "Is const/ not const like STL iterator value:" << std::endl;
         {

@@ -8,7 +8,7 @@
 
 void speedUnitTests(bool isDebug)
 {
-    outputSuiteTitle("SPEED:");
+    outputSuiteTitle("SPEED");
     {
         constructorsSpeedTest(isDebug);
         modifiersSpeedTest(isDebug);

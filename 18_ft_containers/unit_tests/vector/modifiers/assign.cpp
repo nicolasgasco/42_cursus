@@ -4,7 +4,7 @@
 
 void assignUnitTests(bool isDebug)
 {
-    outputSuiteTitle("ASSIGN:");
+    outputSuiteTitle("ASSIGN");
     {
         std::cout << std::endl
                   << "Values are equal to STL vector values:" << std::endl;

@@ -4,7 +4,7 @@
 
 void eraseUnitTests(bool isDebug)
 {
-    outputSuiteTitle("ERASE:");
+    outputSuiteTitle("ERASE");
     {
         std::cout << "Return value is equal to STL vector:" << std::endl;
         {

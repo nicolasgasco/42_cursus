@@ -7,7 +7,7 @@
 
 void topStackUnitTests(bool isDebug)
 {
-    outputSuiteTitle("TOP:");
+    outputSuiteTitle("TOP");
     {
         std::cout
             << "Return value is equal:" << std::endl;

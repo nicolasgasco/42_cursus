@@ -4,7 +4,7 @@
 
 void greaterThanUnitTests(bool isDebug)
 {
-    outputSuiteTitle("GREATER THAN:");
+    outputSuiteTitle("GREATER THAN");
     {
         std::cout
             << "Return value is equal to STL vector value:" << std::endl;

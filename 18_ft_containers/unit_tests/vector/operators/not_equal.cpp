@@ -4,7 +4,7 @@
 
 void notEqualUnitTests(bool isDebug)
 {
-    outputSuiteTitle("NOT EQUAL:");
+    outputSuiteTitle("NOT EQUAL");
     {
         std::cout
             << "Return value is equal to STL vector value:" << std::endl;

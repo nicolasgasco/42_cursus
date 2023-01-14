@@ -7,7 +7,7 @@
 
 void constructorUnitTests(bool isDebug)
 {
-    outputSuiteTitle("CONSTRUCTOR:");
+    outputSuiteTitle("CONSTRUCTOR");
     {
         std::cout
             << "Stacks are equal:" << std::endl;

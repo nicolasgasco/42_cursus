@@ -9,7 +9,7 @@
 
 void speedStackUnitTests(bool isDebug)
 {
-    outputSuiteTitle("SPEED:");
+    outputSuiteTitle("SPEED");
     {
         constructorsStackSpeedTest(isDebug);
         capacityStackSpeedTest(isDebug);

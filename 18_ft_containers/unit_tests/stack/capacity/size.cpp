@@ -7,7 +7,7 @@
 
 void sizeStackUnitTests(bool isDebug)
 {
-    outputSuiteTitle("SIZE:");
+    outputSuiteTitle("SIZE");
     {
         std::cout
             << "Return value is equal:" << std::endl;

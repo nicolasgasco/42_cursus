@@ -7,7 +7,7 @@
 
 void reletionalOperatorStackUnitTests(bool isDebug)
 {
-    outputSuiteTitle("RELETIONAL OPERATORS:");
+    outputSuiteTitle("RELETIONAL OPERATORS");
     {
         {
             std::cout << std::endl

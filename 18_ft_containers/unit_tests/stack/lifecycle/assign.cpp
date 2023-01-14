@@ -7,7 +7,7 @@
 
 void assignStackUnitTests(bool isDebug)
 {
-    outputSuiteTitle("ASSIGN:");
+    outputSuiteTitle("ASSIGN");
     {
         std::cout
             << "Stacks are equal:" << std::endl;

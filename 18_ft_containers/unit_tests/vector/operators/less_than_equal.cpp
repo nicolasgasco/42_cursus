@@ -4,7 +4,7 @@
 
 void lessThanEqualUnitTests(bool isDebug)
 {
-    outputSuiteTitle("LESS THAN EQUAL:");
+    outputSuiteTitle("LESS THAN EQUAL");
     {
         std::cout
             << "Return value is equal to STL vector value:" << std::endl;
