@@ -15,15 +15,20 @@ buildHtmlFile() {
         font-family: "Roboto", sans-serif;
         background-color: #202124;
         color: #F5F9FF;
+        font-weight: bold;
         line-height: 1.6;
     }
     h1 {
-        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
         margin: 0;
     }
 
     h2 {
         display: inline-block;
+        font-size: 1.3rem;
         margin: 0;
         margin: 10px;
     }
@@ -45,8 +50,7 @@ buildHtmlFile() {
     
     sed -e 's/$/<br>/g' -e 's/<\/h1><br>/<\/h1>/g' -e 's/<h2/<\/details><details><h2/g' -e 's/<h2/<summary><h2/g' -e 's/<\/h2>/<\/h2><\/summary>/g' -e 's/<\/summary>/<\/summary><div>/g' -e 's/<\/details>/<\/div><\/details>/g' $1 >> $HTML_FILE;
     echo '</details>' >> $HTML_FILE;
-    echo '<br>
-    <p><small>ft_containers project unit tests by Nicolas Gasco</small></p>
+    echo '<p><small>ft_containers project unit tests by Nicolas Gasco</small></p>
   </body>
 </html>
     ' >> $HTML_FILE;

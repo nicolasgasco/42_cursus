@@ -13,17 +13,18 @@
 
 #define TITLE "<h1 style='color: #0092FF;'>🥼 "
 #define NOCOL_H1 " 🧪</h1>"
-#define YELLOW "<h2 style='color: #F9F871; font-weight: bold'>"
+#define YELLOW "<h2 style='color: #F9F871;'>"
 #define NOCOL_H2 "</h2>"
-#define BLUE "<span style='color: #3592FA; font-weight: bold'>"
-#define GREEN "<span style='color: #88D581; font-weight: bold'>"
-#define RED "<span style='color: #F7BE3B; font-weight: bold'>"
+#define BLUE "<span style='color: #3592FA;'>"
+#define GREEN "<span style='color: #88D581;'>"
+#define RED "<span style='color: #F7BE3B;'>"
+#define ASSERTION "<span style='padding-left: 25px; font-weight: 400'>"
 #define NOCOL "</span>"
 
 void outputAssertion(std::string description, bool value)
 {
     bool isErr = value != true;
-    std::cout << "  - " << description << " " << (isErr ? "❌" : "✅") << std::endl;
+    std::cout << ASSERTION << "  - " << description << " " << (isErr ? "❌" : "✅") << NOCOL << std::endl;
     if (isErr)
         exit(1);
 }
