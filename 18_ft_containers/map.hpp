@@ -53,7 +53,8 @@ namespace ft
             key_compare _comp;
 
             value_compare(key_compare c) : _comp(c)
-            {}
+            {
+            }
         };
 
         allocator_type _alloc;
@@ -87,6 +88,18 @@ namespace ft
 
         virtual ~map()
         {
+        }
+
+        /* ----------------------------------
+         * Member functions
+         * ---------------------------------- */
+        /*
+         * Capacity
+         */
+
+        size_type size() const
+        {
+            return this->_size;
         }
     };
 }
