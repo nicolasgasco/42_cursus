@@ -3,7 +3,7 @@
 // Capacity
 #include "capacity/size.cpp"
 #include "capacity/capacity.cpp"
-#include "capacity/empy.cpp"
+#include "capacity/empty.cpp"
 #include "capacity/max_size.cpp"
 #include "capacity/reserve.cpp"
 
