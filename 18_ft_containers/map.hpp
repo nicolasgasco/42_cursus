@@ -101,5 +101,10 @@ namespace ft
         {
             return this->_size;
         }
+
+        size_type max_size() const
+        {
+            return this->_alloc.max_size() / 2;
+        }
     };
 }

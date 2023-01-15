@@ -2,10 +2,9 @@
 
 // Capacity
 #include "capacity/size.cpp"
+#include "capacity/max_size.cpp"
 // #include "capacity/capacity.cpp"
 // #include "capacity/empy.cpp"
-// #include "capacity/max_size.cpp"
-// #include "capacity/reserve.cpp"
 
 // // Other
 // #include "other/get_allocator.cpp"
@@ -55,9 +54,8 @@ int main(int argc, char *argv[])
 
     // Capacity
     sizeUnitTests(IS_DEBUG);
-    // capacityUnitTests(IS_DEBUG);
+    maxSizeUnitTests(IS_DEBUG);
     // emptyUnitTests(IS_DEBUG);
-    // maxSizeUnitTests(IS_DEBUG);
     // reserveUnitTests(IS_DEBUG);
 
     // // Other
