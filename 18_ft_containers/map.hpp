@@ -26,8 +26,8 @@ namespace ft
         typedef typename allocator_type::const_reference const_reference;
         typedef typename allocator_type::pointer pointer;
         typedef typename allocator_type::const_pointer const_pointer;
-        typedef typename ft::iterator<typename ft::pair<Key, T> > iterator;
-        typedef typename ft::iterator<typename ft::pair<const Key, T> > const_iterator;
+        typedef typename ft::iterator<value_type> iterator;
+        typedef typename ft::iterator<value_type const> const_iterator;
         typedef typename ft::iterator_traits<iterator>::difference_type difference_type;
         typedef typename ft::reverse_iterator<iterator> reverse_iterator;
         typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
@@ -69,6 +69,7 @@ namespace ft
         // Empty
         explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _alloc(alloc), _comp(comp), _data(value_type()), _size(0)
         {
+            this->_data = container_type();
         }
 
         // Range
@@ -118,6 +119,20 @@ namespace ft
         bool empty() const
         {
             return this->_size == 0;
+        }
+
+        /*
+         * Modifiers
+         */
+        pair<iterator, bool> insert(const value_type &val)
+        {
+            if (!this->_data.search(val))
+            {
+                this->_data.insert(val);
+                this->_data.inorder();
+                // return pair<iterator,bool>(iterator(this->_data), true);
+            }
+            return pair<iterator, bool>(iterator(), false);
         }
     };
 }

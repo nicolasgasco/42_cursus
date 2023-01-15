@@ -16,13 +16,13 @@
 // #include "access/back.cpp"
 // #include "access/at.cpp"
 
-// // Modifiers
+// Modifiers
 // #include "modifiers/push_back.cpp"
 // #include "modifiers/pop_back.cpp"
 // #include "modifiers/resize.cpp"
 // #include "modifiers/clear.cpp"
 // #include "modifiers/swap.cpp"
-// #include "modifiers/insert.cpp"
+#include "modifiers/insert.cpp"
 // #include "modifiers/assign.cpp"
 // #include "modifiers/erase.cpp"
 
@@ -67,13 +67,13 @@ int main(int argc, char *argv[])
     // backUnitTests(IS_DEBUG);
     // atUnitTests(IS_DEBUG);
 
-    // // Modifiers
+    // Modifiers
     // pushBackUnitTests(IS_DEBUG);
     // popBackUnitTests(IS_DEBUG);
     // resizeUnitTests(IS_DEBUG);
     // clearUnitTests(IS_DEBUG);
     // swapUnitTests(IS_DEBUG);
-    // insertUnitTests(IS_DEBUG);
+    insertUnitTests(IS_DEBUG);
     // assignUnitTests(IS_DEBUG);
     // eraseUnitTests(IS_DEBUG);
 
