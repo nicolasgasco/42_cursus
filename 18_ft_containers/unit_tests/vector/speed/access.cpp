@@ -62,23 +62,23 @@ void accessSpeedTest(bool isDebug)
     std::cout << std::endl
               << "  ACCESS:" << std::endl;
     {
-        std::cout << "  - [] operator:";
+        std::cout << ASSERTION << "  - [] operator:";
         calculateSpeedRatio(ownRandomAccessOperator, seedRandomAccessOperator, isDebug);
     }
     {
-        std::cout << "  - at:";
+        std::cout << ASSERTION << "  - at:";
         calculateSpeedRatio(ownAtOperator, seedAtOperator, isDebug);
     }
     {
-        std::cout << "  - front:";
+        std::cout << ASSERTION << "  - front:";
         calculateSpeedRatio(ownFront, seedFront, isDebug);
     }
     {
-        std::cout << "  - back:";
+        std::cout << ASSERTION << "  - back:";
         calculateSpeedRatio(ownBack, seedBack, isDebug);
     }
     {
-        std::cout << "  - data:";
+        std::cout << ASSERTION << "  - data:";
         calculateSpeedRatio(ownData, seedData, isDebug);
     }
 }

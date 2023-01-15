@@ -105,35 +105,35 @@ void modifiersSpeedTest(bool isDebug)
     std::cout << std::endl
               << "  MODIFIERS:" << std::endl;
     {
-        std::cout << "  - assign 100000 values:";
+        std::cout << ASSERTION << "  - assign 100000 values:";
         calculateSpeedRatio(ownAssign, seedAssign, isDebug);
     }
     {
-        std::cout << "  - push_back 100000 times:";
+        std::cout << ASSERTION << "  - push_back 100000 times:";
         calculateSpeedRatio(ownPushBack, seedPushBack, isDebug);
     }
     {
-        std::cout << "  - pop_back 100000 times:";
+        std::cout << ASSERTION << "  - pop_back 100000 times:";
         calculateSpeedRatio(ownPopBack, seedPopBack, isDebug);
     }
     {
-        std::cout << "  - insert with 100000 values:";
+        std::cout << ASSERTION << "  - insert with 100000 values:";
         calculateSpeedRatio(ownInsert, seedInsert, isDebug);
     }
     {
-        std::cout << "  - erase (value) with 100000 values:";
+        std::cout << ASSERTION << "  - erase (value) with 100000 values:";
         calculateSpeedRatio(ownErase, seedErase, isDebug);
     }
     {
-        std::cout << "  - erase (range) with 100000 values:";
+        std::cout << ASSERTION << "  - erase (range) with 100000 values:";
         calculateSpeedRatio(ownEraseValue, seedEraseValue, isDebug);
     }
     {
-        std::cout << "  - swap with 100000 values:";
+        std::cout << ASSERTION << "  - swap with 100000 values:";
         calculateSpeedRatio(ownSwap, seedSwap, isDebug);
     }
     {
-        std::cout << "  - clear with 100000 values:";
+        std::cout << ASSERTION << "  - clear with 100000 values:";
         calculateSpeedRatio(ownClear, seedClear, isDebug);
     }
 }

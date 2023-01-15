@@ -228,5 +228,5 @@ void calculateSpeedRatio(void(func1)(), void(func2)(), bool isDebug)
     if (isDebug)
         std::cout << " (own: " << ownDurationCount << " ms, seed: " << originalDurationCount << " ms)";
 
-    std::cout << std::endl;
+    std::cout << NOCOL << std::endl;
 }

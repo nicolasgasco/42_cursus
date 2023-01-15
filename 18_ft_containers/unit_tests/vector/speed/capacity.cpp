@@ -73,27 +73,27 @@ void capacitySpeedTest(bool isDebug)
     std::cout << std::endl
               << "  CAPACITY:" << std::endl;
     {
-        std::cout << "  - size of vector with 100000 elements:";
+        std::cout << ASSERTION << "  - size of vector with 100000 elements:";
         calculateSpeedRatio(ownSize, seedSize, isDebug);
     }
     {
-        std::cout << "  - max_size of vector with 100000 elements:";
+        std::cout << ASSERTION << "  - max_size of vector with 100000 elements:";
         calculateSpeedRatio(ownMaxSize, seedMaxSize, isDebug);
     }
     {
-        std::cout << "  - resize from 1 element to 100000:";
+        std::cout << ASSERTION << "  - resize from 1 element to 100000:";
         calculateSpeedRatio(ownCapacitySize, seedCapacitySize, isDebug);
     }
     {
-        std::cout << "  - capacity of vector with 100000 elements:";
+        std::cout << ASSERTION << "  - capacity of vector with 100000 elements:";
         calculateSpeedRatio(ownResize, seedResize, isDebug);
     }
     {
-        std::cout << "  - empty of vector with 100000 elements:";
+        std::cout << ASSERTION << "  - empty of vector with 100000 elements:";
         calculateSpeedRatio(ownEmptySize, seedEmptySize, isDebug);
     }
     {
-        std::cout << "  - reserve 100000 elements:";
+        std::cout << ASSERTION << "  - reserve 100000 elements:";
         calculateSpeedRatio(ownReserve, seedReserve, isDebug);
     }
 }

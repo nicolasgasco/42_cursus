@@ -46,19 +46,19 @@ void constructorsSpeedTest(bool isDebug)
 {
     std::cout << "  CONSTRUCTORS:" << std::endl;
     {
-        std::cout << "  - Default constructor:";
+        std::cout << ASSERTION << "  - Default constructor:";
         calculateSpeedRatio(ownDefaultConstructor, seedDefaultConstructor, isDebug);
     }
     {
-        std::cout << "  - Fill constructor with 100000 values:";
+        std::cout << ASSERTION << "  - Fill constructor with 100000 values:";
         calculateSpeedRatio(ownFillConstructor, seedFillConstructor, isDebug);
     }
     {
-        std::cout << "  - Copy constructor with 100000 values:";
+        std::cout << ASSERTION << "  - Copy constructor with 100000 values:";
         calculateSpeedRatio(ownCopyConstructor, seedCopyConstructor, isDebug);
     }
     {
-        std::cout << "  - Range constructor with 100000 values:";
+        std::cout << ASSERTION << "  - Range constructor with 100000 values:";
         calculateSpeedRatio(ownRangeConstructor, seedRangeConstructor, isDebug);
     }
 }
