@@ -168,7 +168,7 @@ namespace ft
          */
         bool empty() const
         {
-            return (this->_size == 0) ? true : false;
+            return this->_size == 0;
         }
 
         size_type size() const

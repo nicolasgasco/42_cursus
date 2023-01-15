@@ -93,10 +93,10 @@ namespace ft
         /* ----------------------------------
          * Member functions
          * ---------------------------------- */
+
         /*
          * Capacity
          */
-
         size_type size() const
         {
             return this->_size;
@@ -105,6 +105,10 @@ namespace ft
         size_type max_size() const
         {
             return this->_alloc.max_size() / 2;
+        }
+
+        bool empty() const {
+            return this->_size == 0;
         }
     };
 }
