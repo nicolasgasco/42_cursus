@@ -19,6 +19,7 @@
 #define GREEN "<span style='color: #88D581;'>"
 #define RED "<span style='color: #F7BE3B;'>"
 #define ASSERTION "<span style='padding-left: 25px; font-weight: 400'>"
+#define DEBUG "<span style='padding-left: 25px; font-weight: 400; opacity: 0.8;'>"
 #define NOCOL "</span>"
 
 void outputAssertion(std::string description, bool value)
@@ -39,7 +40,7 @@ template <typename T>
 bool isStrictEqual(T const &value, T const &reference, bool printValue)
 {
     if (printValue)
-        std::cout << std::boolalpha << "=====own===== " << value << " | " << reference << " =====ref=====" << std::endl;
+        std::cout << std::boolalpha << DEBUG << "=====own===== " << value << " | " << reference << " =====ref=====" << NOCOL << std::endl;
     return (value == reference) ? true : false;
 }
 template <typename T>
