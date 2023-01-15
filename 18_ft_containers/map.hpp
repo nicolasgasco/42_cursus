@@ -95,6 +95,14 @@ namespace ft
          * ---------------------------------- */
 
         /*
+         * Allocator
+         */
+        allocator_type get_allocator() const
+        {
+            return this->_alloc;
+        }
+
+        /*
          * Capacity
          */
         size_type size() const

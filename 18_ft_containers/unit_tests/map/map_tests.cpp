@@ -5,8 +5,8 @@
 #include "capacity/max_size.cpp"
 #include "capacity/empty.cpp"
 
-// // Other
-// #include "other/get_allocator.cpp"
+// Other
+#include "other/get_allocator.cpp"
 // #include "other/assign_operator.cpp"
 
 // // Access
@@ -56,8 +56,8 @@ int main(int argc, char *argv[])
     maxSizeUnitTests(IS_DEBUG);
     emptyUnitTests(IS_DEBUG);
 
-    // // Other
-    // getAllocatorUnitTests(IS_DEBUG);
+    // Other
+    getAllocatorUnitTests();
     // assignOperatorUnitTests(IS_DEBUG);
 
     // // Access
