@@ -107,7 +107,8 @@ namespace ft
             return this->_alloc.max_size() / 2;
         }
 
-        bool empty() const {
+        bool empty() const
+        {
             return this->_size == 0;
         }
     };
