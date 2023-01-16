@@ -122,8 +122,10 @@ int main()
 	// myVector.push_back(ft::pair<std::string, int>("biao", 200));
 	// ft::map<std::string, int> myMap(myVector.begin(), myVector.end());
 
-	ft::map<std::string, int> own;
-	ft::pair<std::string, int> ownPair("one", 1);
+	ft::map<std::string, int> seed;
+	seed.insert(ft::pair<std::string, int>("one", 1));
+	ft::map<std::string, int> const own = const_cast<ft::map<std::string, int> const &>(seed);
+	ft::map<std::string, int>::const_iterator ownIt = own.begin();
 
 	return 0;
 }

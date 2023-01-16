@@ -26,8 +26,8 @@
 // #include "modifiers/assign.cpp"
 // #include "modifiers/erase.cpp"
 
-// // Iterator
-// #include "iterators/begin.cpp"
+// Iterator
+#include "iterators/begin.cpp"
 // #include "iterators/end.cpp"
 // #include "iterators/rbegin.cpp"
 // #include "iterators/rend.cpp"
@@ -77,8 +77,8 @@ int main(int argc, char *argv[])
     // assignUnitTests(IS_DEBUG);
     // eraseUnitTests(IS_DEBUG);
 
-    // // Iterator
-    // beginUnitTests(IS_DEBUG);
+    // Iterator
+    beginUnitTests(IS_DEBUG);
     // endUnitTests(IS_DEBUG);
     // rBeginUnitTests(IS_DEBUG);
     // rEndUnitTests(IS_DEBUG);

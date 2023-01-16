@@ -91,6 +91,19 @@ namespace ft
         }
 
         /* ----------------------------------
+         * Iterators
+         * ---------------------------------- */
+        iterator begin()
+        {
+            return iterator(this->_data.root());
+        }
+        const_iterator begin() const
+        {
+            return const_iterator(this->_data.root());
+        }
+
+
+        /* ----------------------------------
          * Member functions
          * ---------------------------------- */
 
