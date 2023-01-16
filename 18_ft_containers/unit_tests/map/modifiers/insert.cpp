@@ -14,11 +14,11 @@ void insertUnitTests(bool isDebug)
                 ft::pair<std::string, int> ownPair("one", 1);
                 ft::pair<ft::map<std::string, int>::iterator, bool> ownRes = own.insert(ownPair);
 
-                // std::map<std::string, int> original;
-                // std::pair<std::string, int> originalPair("one", 1);
-                // std::pair<std::map<std::string, int>::iterator, bool> originalRes = own.insert(originalPair);
+                std::map<std::string, int> original;
+                std::pair<std::string, int> originalPair("one", 1);
+                std::pair<std::map<std::string, int>::iterator, bool> originalRes = original.insert(originalPair);
 
-                outputAssertion("after inserting 1 value in a map with size 0:", isStrictEqual<bool>(false, true, isDebug));
+                outputAssertion("after inserting 1 value in a map with size 0:", isStrictEqual<std::string, int>(*(ownRes.first), *(originalRes.first), isDebug));
             }
         }
     }

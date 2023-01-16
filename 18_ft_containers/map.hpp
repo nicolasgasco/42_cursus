@@ -17,7 +17,6 @@ namespace ft
     public:
         typedef Key key_type;
         typedef T mapped_type;
-        // typedef typename ft::pair<const key_type, mapped_type> value_type;
         typedef typename ft::pair<key_type, mapped_type> value_type;
         typedef Allocator allocator_type;
         typedef typename allocator_type::size_type size_type;
@@ -26,12 +25,12 @@ namespace ft
         typedef typename allocator_type::const_reference const_reference;
         typedef typename allocator_type::pointer pointer;
         typedef typename allocator_type::const_pointer const_pointer;
-        typedef typename ft::iterator<value_type> iterator;
-        typedef typename ft::iterator<value_type const> const_iterator;
+        typedef typename ft::bst<typename value_type::first_type, typename value_type::second_type, value_type> container_type;
+        typedef typename ft::iterator<typename container_type::node_type::value_type> iterator;
+        typedef typename ft::iterator<typename container_type::node_type::value_type const> const_iterator;
         typedef typename ft::iterator_traits<iterator>::difference_type difference_type;
         typedef typename ft::reverse_iterator<iterator> reverse_iterator;
         typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
-        typedef typename ft::bst<typename value_type::first_type, typename value_type::second_type, value_type> container_type;
 
     protected:
         /*
@@ -67,7 +66,7 @@ namespace ft
          * LIFECYCLE
          * ---------------------------------- */
         // Empty
-        explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _alloc(alloc), _comp(comp), _data(value_type()), _size(0)
+        explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _alloc(alloc), _comp(comp), _data(container_type()), _size(0)
         {
             this->_data = container_type();
         }
@@ -128,9 +127,8 @@ namespace ft
         {
             if (!this->_data.search(val))
             {
-                this->_data.insert(val);
-                this->_data.inorder();
-                // return pair<iterator,bool>(iterator(this->_data), true);
+                iterator insertedValueIt = iterator(this->_data.insert(val));
+                return pair<iterator, bool>(insertedValueIt, true);
             }
             return pair<iterator, bool>(iterator(), false);
         }

@@ -20,13 +20,13 @@ namespace ft
         typedef typename value_type::second_type second_type;
         typedef std::size_t size_type;
 
-        bst_node() : _left(nullptr), _right(nullptr)
+        bst_node() : _left(nullptr), _right(nullptr), _data(new value_type())
         {
         }
 
         bst_node(value_type value)
         {
-            this->_data = value;
+            this->_data = new value_type(value);
             this->_left = this->_right = nullptr;
         }
 
@@ -37,13 +37,18 @@ namespace ft
 
         bst_node &operator=(const bst_node &other)
         {
-            this->_data = value_type(other.data());
+            this->_data = new value_type(other.data());
             this->_left = other.left();
             this->_right = other.right();
             return *this;
         }
 
         value_type data() const
+        {
+            return *(this->_data);
+        }
+
+        value_type *raw_data() const
         {
             return this->_data;
         }
@@ -74,9 +79,17 @@ namespace ft
         }
 
     private:
-        value_type _data;
+        value_type *_data;
         bst_node *_left, *_right;
     };
+
+    // TODO remove when done
+    template <class T1, class T2>
+    std::ostream &operator<<(std::ostream &os, bst_node<T1, T2> const &std)
+    {
+        std::cout << std.data();
+        return os;
+    }
 
     template <class T1, class T2, class P = ft::pair<T1, T2> >
     class bst
@@ -91,6 +104,10 @@ namespace ft
         typedef P value_type;
         typedef std::size_t size_type;
 
+    private:
+        node_type *_root;
+
+    public:
         bst()
         {
             this->_root = nullptr;
@@ -108,8 +125,18 @@ namespace ft
 
         bst &operator=(const bst &other)
         {
-            this->_root = new node_type(other.root()->data());
+            // TODO check this with node_type()
+            this->_root = other.root();
             return *this;
+        }
+
+        /* ----------------------------------
+         * MEMBER FUNCTIONS
+         * ---------------------------------- */
+        // Access
+        value_type operator*()
+        {
+            return this->root()->data();
         }
 
         node_type *root() const
@@ -149,14 +176,14 @@ namespace ft
             return search(this->_root, first);
         }
 
-        void insert(value_type value)
+        node_type *insert(value_type value)
         {
             if (this->_root == nullptr)
             {
                 this->_root = new node_type(value);
-                return;
+                return this->_root;
             }
-            this->_root->insert(this->_root, value);
+            return this->_root->insert(this->_root, value);
         }
 
         void inorder(node_type *root)
@@ -171,8 +198,13 @@ namespace ft
         {
             this->inorder(this->_root);
         }
-
-    private:
-        node_type *_root;
     };
+
+    // TODO remove when done
+    template <class T1, class T2>
+    std::ostream &operator<<(std::ostream &os, bst<T1, T2> const &std)
+    {
+        std::cout << std.root()->data();
+        return os;
+    }
 }

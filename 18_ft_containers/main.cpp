@@ -116,11 +116,14 @@ int main()
 	// second.inorder();
 	// other.inorder();
 
-	ft::vector<ft::pair<std::string, int> > myVector;
-	myVector.push_back(ft::pair<std::string, int>("ciao", 42));
-	myVector.push_back(ft::pair<std::string, int>("miao", 10));
-	myVector.push_back(ft::pair<std::string, int>("biao", 200));
-	ft::map<std::string, int> myMap(myVector.begin(), myVector.end());
+	// ft::vector<ft::pair<std::string, int> > myVector;
+	// myVector.push_back(ft::pair<std::string, int>("ciao", 42));
+	// myVector.push_back(ft::pair<std::string, int>("miao", 10));
+	// myVector.push_back(ft::pair<std::string, int>("biao", 200));
+	// ft::map<std::string, int> myMap(myVector.begin(), myVector.end());
+
+	ft::map<std::string, int> own;
+	ft::pair<std::string, int> ownPair("one", 1);
 
 	return 0;
 }

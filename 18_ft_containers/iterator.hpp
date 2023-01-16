@@ -1,6 +1,7 @@
 #pragma once
 
 #include "iterator_traits.hpp"
+#include "bst.hpp"
 
 namespace ft
 {
@@ -29,6 +30,12 @@ namespace ft
             this->p = nullptr;
         }
 
+        template <class T1, class T2>
+        iterator(typename ft::bst_node<T1, T2> *p)
+        {
+            this->p = p->raw_data();
+        }
+        
         explicit iterator(pointer p) : p(p)
         {
         }
