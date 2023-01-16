@@ -65,9 +65,9 @@ bool isStrictEqual(ft::pair<T1, T2> pair1, std::pair<T1, T2> pair2, bool printVa
 {
     if (printValue)
         std::cout << "=====own===== "
-                  << "(" << pair1.first << ", " << pair2.first << ") "
+                  << "(" << pair1.first << ", " << pair1.second << ") "
                   << " | "
-                  << "(" << pair1.second << ", " << pair2.second << ") "
+                  << "(" << pair2.first << ", " << pair2.second << ") "
                                                                     " =====ref====="
                   << std::endl;
     if (pair1.first == pair2.first && pair1.second == pair2.second)
