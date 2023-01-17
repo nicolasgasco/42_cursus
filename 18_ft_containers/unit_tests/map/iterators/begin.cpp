@@ -13,7 +13,7 @@ void beginUnitTests(bool isDebug)
             ft::map<std::string, int>::iterator ownIt = own.begin();
 
             std::cout << typeid(ownIt).name() << std::endl;
-            outputAssertion("is not const with ::iterator:", !strcmp(typeid(ownIt).name(), "N2ft8iteratorINS_4pairINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEiEEEE"));
+            outputAssertion("is not const with ::iterator:", !strcmp(typeid(ownIt).name(), "N2ft12map_iteratorINS_4pairINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEiEEEE"));
         }
         {
             // TODO fix this
@@ -26,7 +26,6 @@ void beginUnitTests(bool isDebug)
             // outputAssertion("is const with ::const_iterator:", !strcmp(typeid(ownIt).name(), "N2ft8iteratorINS_4pairINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEiEEEE"));
         }
     }
-
     {
         std::cout << std::endl
                   << "Has same value of STL iterator value:" << std::endl;

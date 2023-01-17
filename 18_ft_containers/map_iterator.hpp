@@ -7,7 +7,7 @@ namespace ft
 {
 
     template <class T>
-    class iterator
+    class map_iterator
     {
     public:
         typedef typename ft::iterator_traits<T *>::value_type value_type;
@@ -25,27 +25,33 @@ namespace ft
         /* ----------------------------------
          * LIFECYCLE
          * ---------------------------------- */
-        iterator()
+        map_iterator()
         {
             this->p = nullptr;
         }
-   
-        explicit iterator(pointer p) : p(p)
+
+        template <class T1, class T2>
+        map_iterator(typename ft::bst_node<T1, T2> *p)
+        {
+            this->p = p->raw_data();
+        }
+
+        explicit map_iterator(pointer p) : p(p)
         {
         }
 
-        iterator(const iterator<value_type> &it)
+        map_iterator(const map_iterator<value_type> &it)
         {
             this->p = &(*it);
         }
 
-        iterator &operator=(iterator const &other)
+        map_iterator &operator=(map_iterator const &other)
         {
             this->p = &(*other);
             return (*this);
         }
 
-        virtual ~iterator() {}
+        virtual ~map_iterator() {}
 
         /* ----------------------------------
          * MEMBER FUNCTIONS
@@ -79,107 +85,107 @@ namespace ft
         }
 
         // Operators
-        iterator &operator++()
+        map_iterator &operator++()
         {
             ++this->p;
             return *this;
         }
-        iterator operator++(int)
+        map_iterator operator++(int)
         {
-            iterator tmp = *this;
+            map_iterator tmp = *this;
             ++(*this);
             return tmp;
         }
 
-        iterator &operator--()
+        map_iterator &operator--()
         {
             --this->p;
             return *this;
         }
-        iterator operator--(int)
+        map_iterator operator--(int)
         {
-            iterator tmp = *this;
+            map_iterator tmp = *this;
             --(*this);
             return tmp;
         }
 
-        iterator operator+(difference_type n) const
+        map_iterator operator+(difference_type n) const
         {
-            return iterator(this->p + n);
+            return map_iterator(this->p + n);
         }
-        iterator operator-(difference_type n) const
+        map_iterator operator-(difference_type n) const
         {
-            return iterator(this->p - n);
+            return map_iterator(this->p - n);
         }
 
-        iterator &operator+=(difference_type n)
+        map_iterator &operator+=(difference_type n)
         {
             this->p += n;
             return *this;
         }
-        iterator &operator-=(difference_type n)
+        map_iterator &operator-=(difference_type n)
         {
             this->p -= n;
             return *this;
         }
 
         // Distance operators
-        difference_type operator-(iterator const &other) const
+        difference_type operator-(map_iterator const &other) const
         {
             return (this->p - other.p);
         }
     };
 
-    template <class Iter>
-    Iter operator+(typename Iter::difference_type n, const Iter &it)
-    {
-        return Iter(it + n);
-    }
+    // template <class Iter>
+    // Iter operator+(typename Iter::difference_type n, const Iter &it)
+    // {
+    //     return Iter(it + n);
+    // }
     template <class T1, class T2>
-    typename ft::iterator<T1>::difference_type operator+(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    typename ft::map_iterator<T1>::difference_type operator+(const ft::map_iterator<T1> &lhs, const ft::map_iterator<T2> &rhs)
     {
         return (&(*lhs) + &(*rhs));
     }
 
-    template <class Iter>
-    Iter operator-(typename Iter::difference_type n, const Iter &it)
-    {
-        return Iter(it - n);
-    }
+    // template <class Iter>
+    // Iter operator-(typename Iter::difference_type n, const Iter &it)
+    // {
+    //     return Iter(it - n);
+    // }
     template <class T1, class T2>
-    typename ft::iterator<T1>::difference_type operator-(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    typename ft::map_iterator<T1>::difference_type operator-(const ft::map_iterator<T1> &lhs, const ft::map_iterator<T2> &rhs)
     {
         return (&(*lhs) - &(*rhs));
     }
 
     // Reletional operator
     template <class T1, class T2>
-    bool operator==(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    bool operator==(const ft::map_iterator<T1> &lhs, const ft::map_iterator<T2> &rhs)
     {
         return &(*lhs) == &(*rhs);
     }
     template <class T1, class T2>
-    bool operator!=(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    bool operator!=(const ft::map_iterator<T1> &lhs, const ft::map_iterator<T2> &rhs)
     {
         return &(*lhs) != &(*rhs);
     }
     template <class T1, class T2>
-    bool operator<(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    bool operator<(const ft::map_iterator<T1> &lhs, const ft::map_iterator<T2> &rhs)
     {
         return &(*lhs) < &(*rhs);
     }
     template <class T1, class T2>
-    bool operator<=(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    bool operator<=(const ft::map_iterator<T1> &lhs, const ft::map_iterator<T2> &rhs)
     {
         return &(*lhs) <= &(*rhs);
     }
     template <class T1, class T2>
-    bool operator>(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    bool operator>(const ft::map_iterator<T1> &lhs, const ft::map_iterator<T2> &rhs)
     {
         return &(*lhs) > &(*rhs);
     }
     template <class T1, class T2>
-    bool operator>=(const ft::iterator<T1> &lhs, const ft::iterator<T2> &rhs)
+    bool operator>=(const ft::map_iterator<T1> &lhs, const ft::map_iterator<T2> &rhs)
     {
         return &(*lhs) >= &(*rhs);
     }
