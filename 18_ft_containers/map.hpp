@@ -142,6 +142,7 @@ namespace ft
             if (!this->_data.search(val))
             {
                 iterator insertedValueIt = iterator(this->_data.insert(val));
+                this->_size++;
                 return pair<iterator, bool>(insertedValueIt, true);
             }
             return pair<iterator, bool>(iterator(), false);
