@@ -19,6 +19,11 @@ namespace ft
         typedef typename value_type::first_type first_type;
         typedef typename value_type::second_type second_type;
         typedef std::size_t size_type;
+        typedef value_type &reference;
+        typedef node_type *pointer;
+        typedef node_type const & const_pointer;
+        typedef std::ptrdiff_t difference_type;
+        typedef ft::random_access_iterator_tag iterator_category;
 
         bst_node() : _left(nullptr), _right(nullptr), _data(new value_type())
         {

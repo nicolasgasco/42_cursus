@@ -11,12 +11,12 @@ namespace ft
     public:
         typedef T node_type;
         typedef typename node_type::value_type value_type;
-        typedef typename ft::iterator_traits<node_type *>::difference_type difference_type;
-        typedef typename ft::iterator_traits<node_type *>::pointer pointer;
-        typedef typename ft::iterator_traits<node_type *>::pointer const const_pointer;
-        typedef value_type reference;
-        typedef value_type const const_reference;
-        typedef typename ft::iterator_traits<node_type *>::iterator_category iterator_category;
+        typedef typename ft::iterator_traits<node_type>::difference_type difference_type;
+        typedef typename ft::iterator_traits<node_type>::pointer pointer;
+        typedef typename ft::iterator_traits<node_type>::pointer const const_pointer;
+        typedef typename ft::iterator_traits<node_type>::reference reference;
+        typedef typename ft::iterator_traits<node_type>::reference const const_reference;
+        typedef typename ft::iterator_traits<node_type>::iterator_category iterator_category;
 
     protected:
         pointer p;
