@@ -5,11 +5,11 @@
 
 namespace ft
 {
-    template <class T1, class T2>
+    template <class T>
     class map_iterator
     {
     public:
-        typedef typename ft::bst_node<T1, T2> node_type;
+        typedef T node_type;
         typedef typename node_type::value_type value_type;
         typedef typename ft::iterator_traits<node_type *>::difference_type difference_type;
         typedef typename ft::iterator_traits<node_type *>::pointer pointer;

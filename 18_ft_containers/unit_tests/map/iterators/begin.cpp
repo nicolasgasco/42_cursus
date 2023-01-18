@@ -13,7 +13,7 @@ void beginUnitTests(bool isDebug)
             ft::map<std::string, int>::iterator ownIt = own.begin();
 
             std::cout << typeid(ownIt).name() << std::endl;
-            outputAssertion("is not const with ::iterator:", !strcmp(typeid(ownIt).name(), "N2ft12map_iteratorINSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEiEE"));
+            outputAssertion("is not const with ::iterator:", !strcmp(typeid(ownIt).name(), "N2ft12map_iteratorINS_8bst_nodeINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEiNS_4pairIS8_iEEEEEE"));
         }
         {
             // TODO fix this
