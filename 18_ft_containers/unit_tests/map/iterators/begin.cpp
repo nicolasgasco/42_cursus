@@ -16,27 +16,27 @@ void beginUnitTests(bool isDebug)
             outputAssertion("is not const with ::iterator:", !strcmp(typeid(ownIt).name(), "N2ft12map_iteratorINS_8bst_nodeINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEiNS_4pairIS8_iEEEEEE"));
         }
         {
-            // TODO fix this
-            // ft::map<std::string, int> seed;
-            // seed.insert(ft::pair<std::string, int>("one", 1));
-            // ft::map<std::string, int> const own = const_cast<ft::map<std::string, int> const &>(seed);
-            // ft::map<std::string, int>::const_iterator ownIt = own.begin();
+            ft::map<std::string, int> seed;
+            seed.insert(ft::pair<std::string, int>("one", 1));
+            ft::map<std::string, int> const own = const_cast<ft::map<std::string, int> const &>(seed);
+            ft::map<std::string, int>::const_iterator ownIt = own.begin();
 
-            // std::cout << typeid(ownIt).name() << std::endl;
-            // outputAssertion("is const with ::const_iterator:", !strcmp(typeid(ownIt).name(), "N2ft8iteratorINS_4pairINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEiEEEE"));
+            std::cout << typeid(ownIt).name() << std::endl;
+            outputAssertion("is const with ::const_iterator:", !strcmp(typeid(ownIt).name(), "N2ft12map_iteratorIKNS_8bst_nodeINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEiNS_4pairIS8_iEEEEEE"));
         }
     }
     {
         std::cout << std::endl
                   << "Has same value of STL iterator value:" << std::endl;
+        // {
+        //     // TODO test this
+        //     ft::map<std::string, int> own;
+
+        //     std::map<std::string, int> original;
+
+        //     outputAssertion("when no element is inserted:", isStrictEqual<std::string, int>(*(own.begin()), *(original.begin()), isDebug));
+        // }
         {
-            // TODO test this
-            // ft::map<std::string, int> own;
-
-            // std::map<std::string, int> original;
-
-            // outputAssertion("after inserting 1 element:", isStrictEqual<std::string, int>(*(own.begin()), *(original.begin()), isDebug));
-        } {
             ft::map<std::string, int> own;
             own.insert(ft::pair<std::string, int>("one", 1));
 
