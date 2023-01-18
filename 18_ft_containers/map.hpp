@@ -11,7 +11,7 @@
 
 namespace ft
 {
-    template <class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<typename ft::pair<const Key, T> > >
+    template <class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<typename ft::pair<const Key, T > > >
     class map
     {
 
@@ -26,9 +26,9 @@ namespace ft
         typedef typename allocator_type::const_reference const_reference;
         typedef typename allocator_type::pointer pointer;
         typedef typename allocator_type::const_pointer const_pointer;
-        typedef typename ft::bst<typename value_type::first_type, typename value_type::second_type, value_type> container_type;
-        typedef typename ft::map_iterator<typename container_type::node_type::value_type> iterator;
-        typedef typename ft::map_iterator<typename container_type::node_type::value_type const> const_iterator;
+        typedef typename ft::bst<key_type, mapped_type, value_type> container_type;
+        typedef typename ft::map_iterator<key_type, mapped_type> iterator;
+        typedef typename ft::map_iterator<key_type, mapped_type const> const_iterator;
         typedef typename ft::iterator_traits<iterator>::difference_type difference_type;
         typedef typename ft::reverse_iterator<iterator> reverse_iterator;
         typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
@@ -102,7 +102,6 @@ namespace ft
         {
             return const_iterator(this->_data.root());
         }
-
 
         /* ----------------------------------
          * Member functions
