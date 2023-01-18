@@ -11,7 +11,7 @@
 
 namespace ft
 {
-    template <class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<typename ft::pair<const Key, T > > >
+    template <class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<typename ft::bst_node<const Key, T > > >
     class map
     {
 
@@ -26,7 +26,7 @@ namespace ft
         typedef typename allocator_type::const_reference const_reference;
         typedef typename allocator_type::pointer pointer;
         typedef typename allocator_type::const_pointer const_pointer;
-        typedef typename ft::bst<key_type, mapped_type, value_type> container_type;
+        typedef typename ft::bst<key_type, mapped_type> container_type;
         typedef typename container_type::node_type node_type;
         typedef typename ft::map_iterator<node_type> iterator;
         typedef typename ft::map_iterator<node_type const> const_iterator;
@@ -126,7 +126,7 @@ namespace ft
 
         size_type max_size() const
         {
-            return this->_alloc.max_size() / 2;
+            return this->_alloc.max_size();
         }
 
         bool empty() const

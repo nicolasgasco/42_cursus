@@ -6,7 +6,7 @@
 
 namespace ft
 {
-    template <class T1, class T2, class P = ft::pair<T1, T2> >
+    template <class T1, class T2, class P = ft::pair<T1, T2>, class Alloc = std::allocator<P> >
     class bst_node
     {
 
@@ -16,16 +16,23 @@ namespace ft
          */
         typedef bst_node<T1, T2> node_type;
         typedef P value_type;
+        typedef Alloc allocator_type;
         typedef typename value_type::first_type first_type;
         typedef typename value_type::second_type second_type;
         typedef std::size_t size_type;
         typedef value_type &reference;
         typedef node_type *pointer;
-        typedef node_type const & const_pointer;
+        typedef node_type const &const_pointer;
         typedef std::ptrdiff_t difference_type;
         typedef ft::random_access_iterator_tag iterator_category;
 
-        bst_node() : _left(nullptr), _right(nullptr), _data(new value_type())
+    private:
+        allocator_type _alloc;
+        value_type *_data;
+        node_type *_left, *_right;
+
+    public:
+        bst_node() : _left(nullptr), _right(nullptr), _data(new value_type()), _alloc(allocator_type())
         {
         }
 
@@ -33,6 +40,7 @@ namespace ft
         {
             this->_data = new value_type(value);
             this->_left = this->_right = nullptr;
+            this->_alloc = allocator_type();
         }
 
         bst_node(const bst_node &other)
@@ -82,10 +90,6 @@ namespace ft
                 root->_left = insert(root->left(), value);
             return root;
         }
-
-    private:
-        value_type *_data;
-        bst_node *_left, *_right;
     };
 
     // TODO remove when done
@@ -96,7 +100,7 @@ namespace ft
         return os;
     }
 
-    template <class T1, class T2, class P = ft::pair<T1, T2> >
+    template <class T1, class T2, class P = ft::pair<T1, T2>, class Allocator = std::allocator<ft::bst_node<T1, T2> > >
     class bst
     {
     public:
@@ -104,23 +108,27 @@ namespace ft
          * MEMBER TYPES
          */
         typedef bst_node<T1, T2> node_type;
+        typedef Allocator allocator_type;
         typedef T1 first_type;
         typedef T2 second_type;
         typedef P value_type;
         typedef std::size_t size_type;
 
     private:
+        allocator_type _alloc;
         node_type *_root;
 
     public:
         bst()
         {
             this->_root = nullptr;
+            this->_alloc = allocator_type();
         }
 
         bst(value_type value)
         {
             this->_root = new node_type(value);
+            this->_alloc = allocator_type();
         }
 
         bst(const bst &other)
