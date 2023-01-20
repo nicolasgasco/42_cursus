@@ -80,15 +80,15 @@ namespace ft
         }
 
         // Operators
-        map_iterator &operator++()
+        map_iterator operator++()
         {
-            ++this->p;
+            this->p = this->p->right();
             return *this;
         }
         map_iterator operator++(int)
         {
             map_iterator tmp = *this;
-            ++(*this);
+            this->p = this->p->right();
             return tmp;
         }
 
