@@ -88,7 +88,7 @@ namespace ft
         map_iterator operator++(int)
         {
             map_iterator tmp = *this;
-            this->p = this->p->right();
+            ++(*this);
             return tmp;
         }
 
