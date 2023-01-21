@@ -35,18 +35,18 @@ namespace ft
             this->p = p;
         }
 
-        map_iterator(const map_iterator &it)
-        {
-            this->p = &(*it);
-        }
+        // map_iterator(const map_iterator &it)
+        // {
+        //     this->p = &(*it);
+        // }
 
-        map_iterator &operator=(map_iterator const &other)
+        pointer &operator=(pointer const other)
         {
-            this->p = &(*other);
+            this->p = other;
             return (*this);
         }
 
-        virtual ~map_iterator() {}
+        ~map_iterator() {}
 
         /* ----------------------------------
          * MEMBER FUNCTIONS
@@ -79,7 +79,7 @@ namespace ft
         map_iterator operator++(int)
         {
             map_iterator tmp = *this;
-            ++(*this);
+            this->p = this->p->right();
             return tmp;
         }
 
