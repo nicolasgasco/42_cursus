@@ -1,10 +1,11 @@
 #pragma once
 
 #include "iterator_tags.hpp"
+
 namespace ft
 {
     template <class Iter>
-    struct iterator_traits
+    struct iterator_traits_map
     {
         typedef typename Iter::value_type value_type;
         typedef typename Iter::difference_type difference_type;
@@ -14,22 +15,22 @@ namespace ft
     };
 
     template <class T>
-    struct iterator_traits<T *>
+    struct iterator_traits_map<T *>
     {
         typedef T value_type;
         typedef std::ptrdiff_t difference_type;
         typedef T *pointer;
         typedef T &reference;
-        typedef ft::random_access_iterator_tag iterator_category;
+        typedef ft::bidirectional_iterator_tag iterator_category;
     };
 
     template <class T>
-    struct iterator_traits<const T *>
+    struct iterator_traits_map<const T *>
     {
         typedef T value_type;
         typedef std::ptrdiff_t difference_type;
         typedef const T *pointer;
         typedef const T &reference;
-        typedef ft::random_access_iterator_tag iterator_category;
+        typedef ft::bidirectional_iterator_tag iterator_category;
     };
 }

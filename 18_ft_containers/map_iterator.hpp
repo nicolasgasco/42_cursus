@@ -1,6 +1,6 @@
 #pragma once
 
-#include "iterator_traits.hpp"
+#include "iterator_traits_map.hpp"
 #include "bst.hpp"
 
 namespace ft
@@ -11,12 +11,12 @@ namespace ft
     public:
         typedef T node_type;
         typedef typename node_type::value_type value_type;
-        typedef typename ft::iterator_traits<node_type>::difference_type difference_type;
-        typedef typename ft::iterator_traits<node_type>::pointer pointer;
-        typedef typename ft::iterator_traits<node_type>::pointer const const_pointer;
-        typedef typename ft::iterator_traits<node_type>::reference reference;
-        typedef typename ft::iterator_traits<node_type>::reference const const_reference;
-        typedef typename ft::iterator_traits<node_type>::iterator_category iterator_category;
+        typedef typename ft::iterator_traits_map<node_type>::difference_type difference_type;
+        typedef typename ft::iterator_traits_map<node_type>::pointer pointer;
+        typedef typename ft::iterator_traits_map<node_type>::pointer const const_pointer;
+        typedef typename ft::iterator_traits_map<node_type>::reference reference;
+        typedef typename ft::iterator_traits_map<node_type>::reference const const_reference;
+        typedef typename ft::iterator_traits_map<node_type>::iterator_category iterator_category;
 
     protected:
         pointer p;
@@ -35,16 +35,16 @@ namespace ft
             this->p = p;
         }
 
-        // map_iterator(const map_iterator &it)
-        // {
-        //     this->p = &(*it);
-        // }
+        map_iterator(const map_iterator &it)
+        {
+            this->p = &(*it);
+        }
 
-        // map_iterator &operator=(map_iterator const &other)
-        // {
-        //     this->p = &(*other);
-        //     return (*this);
-        // }
+        map_iterator &operator=(map_iterator const &other)
+        {
+            this->p = &(*other);
+            return (*this);
+        }
 
         virtual ~map_iterator() {}
 
@@ -70,15 +70,6 @@ namespace ft
             return (this->p);
         }
 
-        reference operator[](difference_type n)
-        {
-            return *(this->p + n);
-        }
-        const_reference operator[](difference_type n) const
-        {
-            return *(this->p + n);
-        }
-
         // Operators
         map_iterator operator++()
         {
@@ -102,32 +93,6 @@ namespace ft
             map_iterator tmp = *this;
             --(*this);
             return tmp;
-        }
-
-        map_iterator operator+(difference_type n) const
-        {
-            return map_iterator(this->p + n);
-        }
-        map_iterator operator-(difference_type n) const
-        {
-            return map_iterator(this->p - n);
-        }
-
-        map_iterator &operator+=(difference_type n)
-        {
-            this->p += n;
-            return *this;
-        }
-        map_iterator &operator-=(difference_type n)
-        {
-            this->p -= n;
-            return *this;
-        }
-
-        // Distance operators
-        difference_type operator-(map_iterator const &other) const
-        {
-            return (this->p - other.p);
         }
     };
 }

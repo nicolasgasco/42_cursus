@@ -1,7 +1,7 @@
 #pragma once
 
 #include "pair.hpp"
-
+#include "iterator_traits_map.hpp"
 #include <iostream>
 
 namespace ft
@@ -24,7 +24,7 @@ namespace ft
         typedef node_type *pointer;
         typedef node_type const &const_pointer;
         typedef std::ptrdiff_t difference_type;
-        typedef ft::random_access_iterator_tag iterator_category;
+        typedef ft::iterator_traits_map<pointer> iterator_category;
 
     private:
         allocator_type _alloc;
