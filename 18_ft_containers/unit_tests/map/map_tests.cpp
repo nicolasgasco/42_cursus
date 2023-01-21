@@ -28,6 +28,7 @@
 
 // Iterator
 #include "iterators/begin.cpp"
+#include "iterators/increment.cpp"
 // #include "iterators/end.cpp"
 // #include "iterators/rbegin.cpp"
 // #include "iterators/rend.cpp"
@@ -79,6 +80,7 @@ int main(int argc, char *argv[])
 
     // Iterator
     beginUnitTests(IS_DEBUG);
+    incrementUnitTests(IS_DEBUG);
     // endUnitTests(IS_DEBUG);
     // rBeginUnitTests(IS_DEBUG);
     // rEndUnitTests(IS_DEBUG);
