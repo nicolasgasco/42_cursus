@@ -184,3 +184,5 @@ System calls necessary for networking:
 1. `gethostname` to get the name of the host
 
 ## Client-server background
+- A server can handle multiple clients with `fork`
+- See POC for live example
