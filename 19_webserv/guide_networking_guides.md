@@ -215,6 +215,7 @@ System calls necessary for networking:
 - Blocking is techie jargon for sleeping
 - When setting a socket to non-blocking, you can "poll" for information
 - `poll` can be used to see if there's data waiting to be read
+
   - You can monitor more sockets at once and handle those with data ready
   - It is not otpmised for a big number of connections
   - In `struct pollfd` we can specify which sockets to monitor and what kind of events
@@ -227,4 +228,22 @@ System calls necessary for networking:
   - `FD_ISSET`: returns `true` if `fd` is in set
   - `FD_ZERO`: clear all entries
 
-## Handling partial `send`s
+## Serialization
+
+- `send` might not send all the data in one go
+- Sending a pointer to data is not always portable
+- You can pack the data into a known format before sending for decoding
+- `structs` can't be sent in one go, so each field must be packed independently
+
+## Data encapsulation
+
+- You can add a header to data to give info like length or ID
+- Both server and client know how to marshal and unmarshal such data with a protocol
+- You can read one packet at the time or potentially more than one if there is some overflow
+
+## Broadcast packets
+
+- It is possible to send to multiple hosts at the same time
+- With UDP and IPv4, it's called broadcasting (`SO_BROADCAST` option)
+- When broadcoasting, work is multiplicated by the number of machines and there could be a lot of waste
+-
