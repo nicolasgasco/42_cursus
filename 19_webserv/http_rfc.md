@@ -98,3 +98,7 @@ Host: www.example.org
 ```
 
 #### Absolute form
+- When making request to a proxy
+```
+  absolute-form  = absolute-URI
+```
