@@ -1,0 +1,1 @@
+clang++ -Wall -Wextra -Werror Sockets/*.cpp *.cpp -o socket && ./socket
