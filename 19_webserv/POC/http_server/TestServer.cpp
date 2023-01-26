@@ -35,7 +35,8 @@ void TestServer::handler()
 
 void TestServer::responder()
 {
-    char message[] = "Hello world";
+    char message[] = "<!DOCTYPE HTML PUBLIC '-//IETF//DTD HTML 2.0//EN'><html><head><title>Hola caciok</title></head><body><h1>Welcome to my test page</h1><p>Hello world!</p></body></html> ";
+
     write(this->newSocket, message, sizeof(message));
     close(this->newSocket);
 }
