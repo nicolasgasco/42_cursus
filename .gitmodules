@@ -4,3 +4,9 @@
 [submodule "13_cub3D"]
 	path = 13_cub3D
 	url = https://github.com/nicolasgasco/42_cub3d
+[submodule "13_cub3D"]
+	path = 13_cub3D
+	url = https://github.com/nicolasgasco/42_cub3d
+[submodule "19_webserv"]
+	path = 19_webserv
+	url = https://github.com/nicolasgasco/42_webserv
