@@ -11,7 +11,7 @@ The projects of the _Common Core_ that I completed while being a student at 42Ur
 |Name|Language|End date|Description|Estimated effort (h)|
 |----|--------|--------|-----------|----------|
 |**[webserv](https://github.com/nicolasgasco/42_cursus/tree/master/19_webserv)**|C++/C|In progress| Write your own HTTP server than can be tested with an actual browser|210|
-|**[ft_containers](https://github.com/nicolasgasco/42_cursus/tree/master/18_ft_containers)**|C++|In progress|Reimplement `vector`, `map`, and `stack` containers from the STL.|210|
+|**[ft_containers](https://github.com/nicolasgasco/42_cursus/tree/master/18_ft_containers)**|C++|Removed from Cursus|Reimplement `vector`, `map`, and `stack` containers from the STL.|210|
 |**[inception  🐳](https://github.com/nicolasgasco/42_cursus/tree/master/17_inception)**|Docker|November 2022|Set up a small infrastructure composed of different services under specific rules using Docker.|210|
 |**[cpp_modules](https://github.com/nicolasgasco/42_cursus/tree/master/15_cpp_modules)**|C++|In progress|9 "mini" projects to learn the basics of C++ (98 standard 👴) with a strong focus on OOP|9 days|
 |**[cube3D 🕹️](https://github.com/nicolasgasco/42_cub3d/tree/44910b304e52fb3db0bb541efd611a30d0dd54e1)**|C|August 2022|Wolfenstein-inspired minigame using raycasting to fake a tridimensional view. Group project done in a [separate repository](https://github.com/nicolasgasco/42_cub3d) with [@isolinis](https://github.com/isolinis)|280|
