@@ -1,7 +1,6 @@
 #include "BitcoinExchange.hpp"
-#include <iostream>
 
-BitcoinExchange::BitcoinExchange(void)
+BitcoinExchange::BitcoinExchange()
 {
     this->_parse_db();
 }
@@ -11,7 +10,7 @@ BitcoinExchange::BitcoinExchange(BitcoinExchange const &src)
     *this = src;
 }
 
-BitcoinExchange::~BitcoinExchange(void)
+BitcoinExchange::~BitcoinExchange()
 {
 }
 
