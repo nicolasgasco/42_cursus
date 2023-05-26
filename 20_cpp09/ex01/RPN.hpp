@@ -3,7 +3,7 @@
 #define __RPN_H__
 
 #include <iostream>
-#include <vector>
+#include <queue>
 
 class RPN
 {
@@ -14,10 +14,13 @@ public:
 
     ~RPN();
 
-    int calculate(std::string const &input) const;
+    void calculate(std::string const &input);
 
 private:
-    std::vector<std::string> _signs;
+    std::queue<std::string> _ops;
+    bool _has_err;
+
+    void _parse_input(std::string const &input);
 };
 
 #endif
