@@ -10,7 +10,7 @@ The projects of the _Common Core_ that I completed while being a student at 42Ur
 ## Projects from newest to oldest
 |Name|Language|End date|Description|Estimated effort (h)|
 |----|--------|--------|-----------|----------|
-|**[CPP09](https://github.com/nicolasgasco/42_cursus/tree/master/20_cpp09)**|C++ containers|In progress| New project in the cursus. Exercises to get to know better C++ containers.|40|
+|**[CPP09](https://github.com/nicolasgasco/42_cursus/tree/master/20_cpp09)**|C++ containers|In progress| Introduction to C++ containers.|40|
 |**[webserv](https://github.com/nicolasgasco/42_cursus/tree/master/19_webserv)**|C++/C|In progress| Write your own HTTP server than can be tested with an actual browser|175|
 |**[ft_containers](https://github.com/nicolasgasco/42_cursus/tree/master/18_ft_containers)**|C++|Removed from Cursus|Reimplement `vector`, `map`, and `stack` containers from the STL.|210|
 |**[inception  🐳](https://github.com/nicolasgasco/42_cursus/tree/master/17_inception)**|Docker|November 2022|Set up a small infrastructure composed of different services under specific rules using Docker.|210|
