@@ -27,19 +27,15 @@ void RPN::_calc_total(std::string const &input)
         std::string token = tmp.substr(0, pos);
         tmp = tmp.substr(pos + 1);
 
-        // Skip an extra space
-        if (token.empty() && !tmp.empty())
+        if (this->_is_space_to_skip(token, tmp))
             continue;
-        // Found space at the end of the string
-        else if (token.empty() && tmp.empty())
+        if (this->_is_trailing_space(token, tmp))
             break;
 
         if (this->_operators.find(token) != std::string::npos)
             this->_calc_partial_result(token);
         else
-        {
             this->_push_operand(token);
-        }
 
         if (pos == std::string::npos || this->_err_message.size())
             break;
@@ -84,14 +80,10 @@ void RPN::_calc_partial_result(std::string const &token)
 
 void RPN::_push_operand(std::string const &token)
 {
-    // Check that the token is a number
-    for (size_t i = 0; i < token.size(); i++)
+    if (this->_is_token_numeric(token) == false)
     {
-        if (!isdigit(token[i]) && token[i] != '-')
-        {
-            this->_set_err_message("Invalid value (not numerical)");
-            return;
-        }
+        this->_set_err_message("Invalid value (not numerical)");
+        return;
     }
 
     float num;
@@ -143,4 +135,28 @@ void RPN::output_result() const
         std::cout << result << std::endl;
     else
         std::cout << std::fixed << std::setprecision(2) << result << std::endl;
+}
+
+bool RPN::_is_space_to_skip(std::string const &token, std::string const &tmp) const
+{
+    if (token.empty() && !tmp.empty())
+        return true;
+    return false;
+}
+
+bool RPN::_is_token_numeric(std::string const &token) const
+{
+    for (size_t i = 0; i < token.size(); i++)
+    {
+        if (!isdigit(token[i]) && token[i] != '-')
+            return false;
+    }
+    return true;
+}
+
+bool RPN::_is_trailing_space(std::string const &token, std::string const &tmp) const
+{
+    if (token.empty() && tmp.empty())
+        return true;
+    return false;
 }
