@@ -1,123 +1,146 @@
 #include "RPN.hpp"
 
-RPN::RPN()
+RPN::RPN(std::string const &input)
 {
-    this->_has_err = false;
+    this->_operators = "+-*/";
+
+    this->_calc_total(input);
 }
 
 RPN::~RPN()
 {
-    this->_has_err = false;
 }
 
-void RPN::_parse_input(std::string const &input)
+void RPN::_calc_total(std::string const &input)
 {
-    std::string tmp = input;
 
     if (input.empty())
     {
-        this->_has_err = true;
+        this->_set_err_message("Please provide a non-empty argument");
         return;
     }
 
-    std::string signs[4] = {"+", "-", "*", "/"};
-
-    while (tmp.size() > 0)
+    std::string tmp = input;
+    while (1)
     {
-        size_t index = tmp.size();
-        size_t signs_len = (sizeof(signs) / sizeof(std::string));
-        for (size_t i = 0; i < signs_len; ++i)
+        size_t pos = tmp.find(" ");
+        std::string token = tmp.substr(0, pos);
+        tmp = tmp.substr(pos + 1);
+
+        // Skip an extra space
+        if (token.empty() && !tmp.empty())
+            continue;
+        // Found space at the end of the string
+        else if (token.empty() && tmp.empty())
+            break;
+
+        if (this->_operators.find(token) != std::string::npos)
+            this->_calc_partial_result(token);
+        else
         {
-            size_t found_index = tmp.find_first_of(signs[i]);
-            if (found_index != std::string::npos && found_index < index)
-                index = found_index;
+            this->_push_operand(token);
         }
 
-        std::string operation = (tmp[0] == ' ') ? tmp.substr(1, index + 1) : tmp.substr(0, index + 1);
-        this->_ops.push(operation);
+        if (pos == std::string::npos || this->_err_message.size())
+            break;
+    }
 
-        try
+    if (this->_operands.size() != 1)
+        this->_set_err_message("Invalid expression");
+}
+
+void RPN::_calc_partial_result(std::string const &token)
+{
+    if (this->_operands.size() < 2)
+    {
+        this->_set_err_message("Invalid expression");
+        return;
+    }
+
+    float b = this->_operands.top();
+    this->_operands.pop();
+    float a = this->_operands.top();
+    this->_operands.pop();
+    // std::cout << "a: " << a << " b: " << b << std::endl;
+
+    float partial_result = -1;
+    if (token == "+")
+        partial_result = a + b;
+    else if (token == "-")
+        partial_result = a - b;
+    else if (token == "*")
+        partial_result = a * b;
+    else if (token == "/")
+        partial_result = a / b;
+    else
+    {
+        this->_set_err_message("Invalid operator");
+        return;
+    }
+
+    // std::cout << "partial_result: " << partial_result << std::endl;
+    this->_operands.push(partial_result);
+}
+
+void RPN::_push_operand(std::string const &token)
+{
+    // Check that the token is a number
+    for (size_t i = 0; i < token.size(); i++)
+    {
+        if (!isdigit(token[i]) && token[i] != '-')
         {
-            // Remove parsed operation
-            tmp = tmp.substr(index + 1);
-        }
-        catch (std::exception &e)
-        {
-            this->_has_err = true;
+            this->_set_err_message("Invalid value (not numerical)");
             return;
         }
     }
-}
 
-void RPN::calculate(std::string const &input)
-{
-    this->_parse_input(input);
-
-    if (this->_has_err)
+    float num;
+    try
     {
-        std::cerr << "Error";
+        num = std::stof(token);
+
+        if (token == "5a")
+        {
+            std::cout << "mierda:" << num << std::endl;
+        }
+    }
+    catch (std::out_of_range &e)
+    {
+        this->_set_err_message("Invalid value (not an int)");
+        return;
+    }
+    catch (std::invalid_argument &e)
+    {
+        this->_set_err_message("Invalid value (not numerical)");
         return;
     }
 
-    int sum = 0;
-    bool is_first_run = true;
-    for (size_t i = 0; i < this->_ops.size(); ++i)
+    if (num >= 10 || num <= -10)
     {
-        std::string current_ops = this->_ops.front();
-        std::queue<int> ops_values;
-
-        while (1)
-        {
-            std::cout << "current op: ." << current_ops << "." << std::endl;
-            // If string is not correctly trimmed
-            int start = current_ops.find_first_not_of(" ");
-            current_ops = current_ops.substr(start);
-
-            int end = current_ops.find_first_of(" ");
-            std::string value = current_ops.substr(0, end);
-
-            bool value_is_sign = value == "+" || value == "-" || value == "*" || value == "/";
-            if (value_is_sign)
-            {
-                if (ops_values.empty())
-                    break;
-
-                // Cannot have more than 2 numbers before sign
-                if (ops_values.size() > 2)
-                {
-                    std::cerr << "Error" << std::endl;
-                    return;
-                }
-
-                // Initialize sum
-                if (is_first_run)
-                {
-                    sum = ops_values.front();
-                    ops_values.pop();
-                    is_first_run = false;
-                }
-
-                if (value == "+")
-                    sum += ops_values.front();
-                else if (value == "-")
-                    sum -= ops_values.front();
-                else if (value == "*")
-                    sum *= ops_values.front();
-                else if (value == "/")
-                    sum /= ops_values.front();
-
-                std::cout << "sum is: ." << sum << "." << std::endl;
-
-                ops_values.pop();
-                break;
-            }
-            else
-                ops_values.push(stoi(value));
-
-            // Remove parse value
-            current_ops = current_ops.substr(end);
-        }
-        this->_ops.pop();
+        this->_set_err_message("Invalid value (greather than 9)");
+        return;
     }
-    std::cout << sum;
+
+    this->_operands.push(num);
+}
+
+void RPN::_set_err_message(std::string const &err_message)
+{
+    if (this->_err_message.empty())
+        this->_err_message = err_message;
+}
+
+void RPN::output_result() const
+{
+    if (this->_err_message.size())
+    {
+        std::cerr << this->_err_message << std::endl;
+        return;
+    }
+
+    float result = this->_operands.top();
+    if (static_cast<int>(result) == result)
+        std::cout << result << std::endl;
+    else
+        std::cout << std::fixed << std::setprecision(2) << result << std::endl;
 }
