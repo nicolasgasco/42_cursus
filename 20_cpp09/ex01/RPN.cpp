@@ -90,11 +90,6 @@ void RPN::_push_operand(std::string const &token)
     try
     {
         num = std::stof(token);
-
-        if (token == "5a")
-        {
-            std::cout << "mierda:" << num << std::endl;
-        }
     }
     catch (std::out_of_range &e)
     {
