@@ -1,8 +1,7 @@
-# 42
+# 42 Common Core cursus
 
 The _Common Core_ projects I completed while being a student at 42Urduliz campus in Bilbao, Spain.
 
-## Projects from newest to oldest
 |Name|Language|End date|Description|Estimated effort (h)|
 |----|--------|--------|-----------|----------|
 |**[CPP09](https://github.com/nicolasgasco/42_cursus/tree/master/20_cpp09)**|C++ containers|In progress| Introduction to C++ containers.|40|
