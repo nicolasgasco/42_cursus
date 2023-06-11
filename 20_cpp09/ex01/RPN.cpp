@@ -1,17 +1,33 @@
 #include "RPN.hpp"
 
+RPN::RPN()
+{
+    this->_operators = "+-*/";
+}
+
 RPN::RPN(std::string const &input)
 {
     this->_operators = "+-*/";
 
-    this->_calc_total(input);
+    this->_calc_result(input);
+}
+
+RPN::RPN(RPN const &src)
+{
+    *this = src;
 }
 
 RPN::~RPN()
 {
 }
 
-void RPN::_calc_total(std::string const &input)
+RPN &RPN::operator=(const RPN &src)
+{
+    this->_operators = src._operators;
+    return *this;
+}
+
+void RPN::_calc_result(std::string const &input)
 {
 
     if (input.empty())
@@ -122,6 +138,35 @@ void RPN::output_result() const
     if (this->_err_message.size())
     {
         std::cerr << this->_err_message << std::endl;
+        return;
+    }
+
+    if (!this->_operands.size())
+    {
+        std::cerr << "Error" << std::endl;
+        return;
+    }
+
+    float result = this->_operands.top();
+    if (static_cast<int>(result) == result)
+        std::cout << result << std::endl;
+    else
+        std::cout << std::fixed << std::setprecision(2) << result << std::endl;
+}
+
+void RPN::output_result(std::string const &input)
+{
+    this->_calc_result(input);
+
+    if (this->_err_message.size())
+    {
+        std::cerr << this->_err_message << std::endl;
+        return;
+    }
+
+    if (!this->_operands.size())
+    {
+        std::cerr << "Error" << std::endl;
         return;
     }
 

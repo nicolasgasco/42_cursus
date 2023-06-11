@@ -59,6 +59,9 @@ test_assertion "(1 1 +)" "$NOT_NUMERICAL_ERR"
 test_assertion "1 a +" "$NOT_NUMERICAL_ERR"
 test_assertion "1 4 * 1 + 8 - 2)" "$NOT_NUMERICAL_ERR"
 test_assertion "1 2 3 4 5a + * - +" "$NOT_NUMERICAL_ERR"
+test_assertion "1, 2, 3, 4, 5, + * - +" "$NOT_NUMERICAL_ERR"
+test_assertion "1 2 3 4 5 + ^ - +" "$NOT_NUMERICAL_ERR"
+
 
 echo "\n"
 INVALID_EXPRESSION_ERR="Invalid expression"

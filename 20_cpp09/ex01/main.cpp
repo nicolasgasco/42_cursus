@@ -12,5 +12,17 @@ int main(int argc, char *argv[])
     RPN rpn(argv[1]);
     rpn.output_result();
 
+    // RPN rpn1;
+    // rpn1.output_result(argv[1]);
+
+    // RPN rpn2 = rpn1;
+    // rpn2.output_result(argv[1]);
+
+    // RPN rpn3(argv[1]);
+    // rpn3.output_result();
+
+    // RPN rpn4(rpn3);
+    // rpn4.output_result(argv[1]);
+
     return 0;
 }
