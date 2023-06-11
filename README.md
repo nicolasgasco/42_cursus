@@ -1,6 +1,6 @@
 # 42
 
-The projects of the _Common Core_ that I completed while being a student at 42Urduliz campus in Bilbao, Spain.
+The _Common Core_ projects I completed while being a student at 42Urduliz campus in Bilbao, Spain.
 
 ## Projects from newest to oldest
 |Name|Language|End date|Description|Estimated effort (h)|
