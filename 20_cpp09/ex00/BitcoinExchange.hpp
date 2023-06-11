@@ -4,9 +4,13 @@
 
 #include <fstream>
 #include <iostream>
-#include <list>
 #include <sstream>
 #include <string>
+#include <iomanip>
+
+#include <list>
+
+#define DB_NAME "data.csv"
 
 #define GREEN "\033[0;32m"
 #define NOCOL "\033[0m"
@@ -35,7 +39,8 @@ private:
     std::list<DbLine> _rates;
 
     void _parse_db();
-    std::string _calc_value(std::string const &line) const;
+    float _calc_value(std::string const &line) const;
+    void _output_formatted_value(std::string const &line, float const &value) const;
 
     bool _is_date_valid(std::string const &date_str) const;
     bool _is_input_line_valid(std::string const &line) const;

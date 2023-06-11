@@ -13,10 +13,10 @@ int main(int argc, char *argv[])
 
         exchange.output_values(argv[1]);
 
-        std::cout << std::endl << "COPY CONSTRUCTOR TEST:" << std::endl;
-        BitcoinExchange exchange2(exchange);
+        // std::cout << std::endl << "COPY CONSTRUCTOR TEST:" << std::endl;
+        // BitcoinExchange exchange2(exchange);
 
-        exchange2.output_values(argv[1]);
+        // exchange2.output_values(argv[1]);
     }
     catch (std::exception &e)
     {

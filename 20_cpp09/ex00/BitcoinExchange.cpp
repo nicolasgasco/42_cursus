@@ -23,32 +23,19 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &src)
 void BitcoinExchange::_parse_db()
 {
     std::fstream data_file;
-    data_file.open("data.csv");
+    data_file.open(DB_NAME);
 
     if (!data_file.is_open())
         throw std::runtime_error(std::string("Could not open file"));
 
     std::string line;
-    unsigned int i = 0;
+    std::getline(data_file, line); // Skip first line (header)
     while (std::getline(data_file, line))
     {
-        if (i == 0)
-        {
-            i++;
-            continue;
-        }
-
         DbLine db_line;
-
-        std::string date_str = line.substr(0, line.find(","));
-
-        float value = std::stof(line.substr(line.find(",") + 1));
-
-        db_line.date = date_str;
-        db_line.value = value;
+        db_line.date = line.substr(0, line.find(","));
+        db_line.value = std::stof(line.substr(line.find(",") + 1));
         this->_rates.push_back(db_line);
-
-        i++;
     }
     data_file.close();
 }
@@ -59,73 +46,66 @@ void BitcoinExchange::output_values(std::string const &input_file_name)
     input_file.open(input_file_name);
 
     if (!input_file.is_open())
-        throw std::runtime_error(std::string("Could not open input file"));
+        throw std::runtime_error(std::string("Error: Could not open input file"));
 
     std::string line;
-    unsigned int i = 0;
+    std::getline(input_file, line); // Skip first line (header)
     while (std::getline(input_file, line))
     {
-        if (i == 0)
-        {
-            i++;
-            continue;
-        }
-
         if (this->_is_input_line_valid(line))
-            std::cout << "✅: " << GREEN << this->_calc_value(line) << NOCOL << std::endl;
+        {
+            float value = this->_calc_value(line);
+            if (value == -1)
+                std::cout << RED << "❌ Invalid input: " << (line.size() ? line : "n/a") << NOCOL << std::endl;
+            else
+                this->_output_formatted_value(line, value);
+        }
         else
-            std::cout << RED << "❌ Invalid input: " << line << NOCOL << std::endl;
-        i++;
+            std::cout << RED << "❌ Invalid input: " << (line.size() ? line : "n/a") << NOCOL << std::endl;
     }
     input_file.close();
 }
 
-std::string BitcoinExchange::_calc_value(std::string const &line) const
+float BitcoinExchange::_calc_value(std::string const &line) const
 {
-    std::string date_str = line.substr(0, line.find(" |"));
+    std::string date_str = line.substr(line.find_first_not_of(" "));
+    date_str = line.substr(0, line.find(" |"));
+
     float value = std::stof(line.substr(line.find("| ") + 2));
 
-    std::string result_line = date_str + " ......................................................";
-
-    std::string formatted_value;
+    float result = -1;
     std::list<DbLine>::const_iterator it = this->_rates.begin();
     while (it != this->_rates.end())
     {
-        std::string rate_date_str = it->date;
-        if (date_str == rate_date_str)
+        if (date_str == it->date)
         {
-            float result = value * it->value;
-            formatted_value = std::to_string(result);
+            result = value * it->value;
             break;
         }
-        else if (date_str < rate_date_str || it->date == this->_rates.back().date)
+        else if (date_str < it->date || it == this->_rates.end())
         {
+            // If date is before first date in db
             if (it == this->_rates.begin())
             {
-                formatted_value = "N/A";
+                result = -1;
                 break;
             }
 
-            std::list<DbLine>::const_iterator it_rev = it;
-            it_rev--;
-
-            float result = value * it_rev->value;
-            formatted_value = std::to_string(result);
+            it--;
+            result = value * it->value;
             break;
         }
         it++;
     }
+    return result;
+}
 
-    // Remove trailing zeros
-    if (formatted_value.find(".") != std::string::npos)
-    {
-        formatted_value = formatted_value.substr(0, formatted_value.find(".") + 3);
-        formatted_value = formatted_value.substr(0, formatted_value.find_last_not_of('0') + 1);
-    }
+void BitcoinExchange::_output_formatted_value(std::string const &line, float const &value) const
+{
+    std::string date_str = line.substr(line.find_first_not_of(" "));
+    date_str = line.substr(0, line.find(" |"));
 
-    result_line += formatted_value;
-
-    return result_line;
+    std::cout << "✅: " << GREEN << date_str << " ............................................." << std::fixed << std::setprecision(2) << value << NOCOL << std::endl;
 }
 
 bool BitcoinExchange::_is_input_line_valid(std::string const &line) const
