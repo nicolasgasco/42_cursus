@@ -38,6 +38,8 @@ test_assertion "7 3 /" 2.33
 test_assertion "-7 3 /" -2.33
 test_assertion "7 2 * 2 + 9 - 4 5 * + 3 / 1 * 5 7 + * 4 / 2 3 4 5 6 + + * * * 6 / 3 4 + * 3 / 5 / 3 / 4 / 2 /" 7.88
 test_assertion "7 2 * 2 + 9 - 4 5 * + 3 / 1 * 5 7 + * 4 / 2 3 4 5 6 + + * * * 6 / 3 4 + * -3 / -5 / -3 / -4 / -2 /" -7.88
+test_assertion "9 8 * 4 * 4 / 2 + 9 - 8 - 8 - 1 - 6 -" 42
+test_assertion '1 2 * 2 / 2 + 5 * 6 - 1 3 * - 4 5 * * 8 /' 15
 
 echo "\n"
 
@@ -46,6 +48,8 @@ MORE_ONE_DIGIT_ERR="Invalid value (greather than 9)"
 test_assertion "12 9 * 9 - 9 - 18 - 14 - 11 +" "$MORE_ONE_DIGIT_ERR"
 test_assertion "1000 69 +" "$MORE_ONE_DIGIT_ERR"
 test_assertion "500 8 *" "$MORE_ONE_DIGIT_ERR"
+test_assertion '1 2 * 2 / 2 + 5 * 6 - 13 * - 4 5 * * 8 /' "$MORE_ONE_DIGIT_ERR"
+
 
 echo "\n"
 
