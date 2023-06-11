@@ -2,11 +2,6 @@
 
 The projects of the _Common Core_ that I completed while being a student at 42Urduliz campus in Bilbao, Spain.
 
----
-⚠️ Don't copy from this repository. I'm not that good and it's against the spirit of 42. Ask your classmates for help. I only created this repository to keep track of my progress. ⚠️
-
----
-
 ## Projects from newest to oldest
 |Name|Language|End date|Description|Estimated effort (h)|
 |----|--------|--------|-----------|----------|
@@ -27,22 +22,7 @@ The projects of the _Common Core_ that I completed while being a student at 42Ur
 |**[born2beroot](https://github.com/nicolasgasco/42_cursus/tree/master/02_born2beroot)**|SysAdmin|August 2021|Create a virtual machine under specific instructions. Setting a minimal Debian server implementing strict rules, e.g. strong password policy, UFW firewall, SSH, etc. In the repo there's only a Bash script that had to be broadcasted to all users every 10 minutes using crontab and wall|40|
 |**[libft](https://github.com/nicolasgasco/42_cursus/tree/master/01_libft)**|C|July 2021|Re-code useful C functions like `split` or `join` using only `malloc`, `free`, and `write`|70|
 
+---
+⚠️ Don't copy from this repository. I'm not that good and it's against the spirit of 42. Ask your classmates for help. I only created this repository to keep track of my progress. ⚠️
 
-## Screenshots
-### Cub3D
-![screencast-nimbus-capture-2022_08_12-17_53_56_lqj089](https://user-images.githubusercontent.com/73175085/184505477-a271ac22-ed26-4a7a-bd68-f12efd6a4ced.gif)
-
-### Minishell
-<img src="https://res.cloudinary.com/ngasco/image/upload/v1649785877/42/minishell/Screenshot_from_2022-04-12_19-47-39_isuenb.png" width="600"/>
-
-### Philosophers
-<img src="https://res.cloudinary.com/ngasco/image/upload/v1639432723/42/Screenshot_from_2021-12-13_22-57-45_jy9pa7.png" width="700"/>
-
-### Push_swap
-<img src="https://res.cloudinary.com/ngasco/image/upload/v1637695175/42/Screenshot_from_2021-11-23_20-19-22_itr7wd.png" width="600"/>
-
-### Minitalk
-<img src="https://res.cloudinary.com/ngasco/image/upload/v1635067508/42/Screenshot_from_2021-10-24_11-22-56_mfbq1j.png" width="1000"/>
-
-### So_long
-![so_long](https://user-images.githubusercontent.com/73175085/185759259-7e8af986-6fc9-451f-8f1e-d14fb876d312.gif)
+---
