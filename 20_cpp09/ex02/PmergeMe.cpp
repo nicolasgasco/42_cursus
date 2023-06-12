@@ -1,6 +1,6 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe()
+PmergeMe::PmergeMe() : _elapsed_time_vec(0), _elapsed_time_list(0)
 {
 }
 
@@ -20,14 +20,23 @@ void PmergeMe::store_numbers(int argc, char *argv[])
     }
     this->_sorted_vec = this->_unsorted_vec;
     this->_sorted_list = this->_unsorted_list;
+
+    this->_sort_numbers_vec();
+    this->_sort_numbers_list();
 }
 
 void PmergeMe::output_sorted_result()
 {
-    this->_sort_numbers_vec();
-    this->_sort_numbers_list();
+    std::cout << "Before: ";
+    this->_output_formatted_vector(this->_unsorted_vec);
 
-    this->_output_result();
+    std::cout << std::endl;
+    std::cout << "After: ";
+    this->_output_formatted_list(this->_sorted_list);
+
+    std::cout << std::endl;
+    std::cout << "Time to process a range of " << this->_unsorted_vec.size() << " elements with std::vector: " << this->_elapsed_time_vec << " ms" << std::endl;
+    std::cout << "Time to process a range of " << this->_unsorted_vec.size() << " elements with std::list: " << this->_elapsed_time_list << " ms" << std::endl;
 }
 
 void PmergeMe::_sort_numbers_vec()
@@ -192,20 +201,6 @@ void PmergeMe::_insertion_sort_list(std::list<unsigned int> &numbers_list)
         if (is_sorted)
             break;
     }
-}
-
-void PmergeMe::_output_result()
-{
-    std::cout << "Before: ";
-    this->_output_formatted_vector(this->_unsorted_vec);
-
-    std::cout << std::endl;
-    std::cout << "After: ";
-    this->_output_formatted_list(this->_sorted_list);
-
-    std::cout << std::endl;
-    std::cout << "Time to process a range of " << this->_unsorted_vec.size() << " elements with std::vector: " << this->_elapsed_time_vec << " ms" << std::endl;
-    std::cout << "Time to process a range of " << this->_unsorted_vec.size() << " elements with std::list: " << this->_elapsed_time_list << " ms" << std::endl;
 }
 
 void PmergeMe::_output_formatted_vector(std::vector<unsigned int> const &numbers)

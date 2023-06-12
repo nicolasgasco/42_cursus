@@ -44,7 +44,6 @@ private:
     void _sort_numbers_vec();
     void _sort_numbers_list();
 
-    void _output_result();
     void _output_formatted_vector(std::vector<unsigned int> const &numbers);
     void _output_formatted_list(std::list<unsigned int> const &numbers);
 };
