@@ -27,6 +27,7 @@ private:
     std::vector<unsigned int> _numbers_vec;
 
     std::vector<unsigned int> _split_numbers(std::vector<unsigned int> &numbers_vec);
+    void _insertion_sort(std::vector<unsigned int> &numbers_vec);
 };
 
 #endif
