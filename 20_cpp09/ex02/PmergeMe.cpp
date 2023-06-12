@@ -21,36 +21,48 @@ void PmergeMe::sort_numbers()
 {
     std::vector<unsigned int> tmp = this->_numbers_vec;
     std::cout << "tmp vec size: " << this->_numbers_vec.size() << std::endl;
-    this->_split_numbers(tmp);
+    std::vector<unsigned int> result = this->_split_numbers(tmp);
+    this->output_vector(result);
 }
 
-void PmergeMe::_split_numbers(std::vector<unsigned int> &numbers_vec)
+std::vector<unsigned int> PmergeMe::_split_numbers(std::vector<unsigned int> &numbers_vec)
 {
-    std::vector<unsigned int> tmp = numbers_vec;
-    if (tmp.size() == 2)
+    std::cout << GREEN << "Down (start of function): ";
+    this->output_vector(numbers_vec);
+
+    if (numbers_vec.size() == 2)
     {
-        std::cout << "Left with 2 elements: ";
+        if (numbers_vec.front() > numbers_vec.back())
+        {
+            std::cout << "Down: Swapping " << numbers_vec.front() << " and " << numbers_vec.back() << std::endl;
+            std::swap(numbers_vec.front(), numbers_vec.back());
+        }
+
+        return numbers_vec;
     }
-    for (std::vector<unsigned int>::iterator it = tmp.begin(); it != tmp.end(); it++)
+
+    std::vector<unsigned int> numbers_vec_left(numbers_vec.begin(), numbers_vec.begin() + numbers_vec.size() / 2);
+    std::vector<unsigned int> left = this->_split_numbers(numbers_vec_left);
+    std::cout << YELLOW << "Up left: ";
+    this->output_vector(left);
+
+    std::vector<unsigned int> numbers_vec_right(numbers_vec.begin() + numbers_vec.size() / 2, numbers_vec.end());
+    std::vector<unsigned int> right = this->_split_numbers(numbers_vec_right);
+    std::cout << YELLOW << "Up right: ";
+    this->output_vector(right);
+
+    std::vector<unsigned int> result;
+    result.reserve(left.size() + right.size());
+    result.insert(result.end(), left.begin(), left.end());
+    result.insert(result.end(), right.begin(), right.end());
+    return result;
+}
+
+void PmergeMe::output_vector(std::vector<unsigned int> vector)
+{
+    for (std::vector<unsigned int>::iterator it = vector.begin(); it != vector.end(); it++)
     {
         std::cout << *it << ", ";
     }
-    std::cout << std::endl;
-
-    if (tmp.size() == 2)
-    {
-        if (tmp.front() > tmp.back())
-        {
-            std::cout << "Swapping " << tmp.front() << " and " << tmp.back() << std::endl;
-            std::swap(tmp.front(), tmp.back());
-        }
-    }
-    else
-    {
-        std::vector<unsigned int> left(tmp.begin(), tmp.begin() + tmp.size() / 2);
-        std::vector<unsigned int> right(tmp.begin() + tmp.size() / 2, tmp.end());
-
-        this->_split_numbers(left);
-        this->_split_numbers(right);
-    }
+    std::cout << NC << std::endl;
 }
