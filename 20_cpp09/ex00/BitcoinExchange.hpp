@@ -8,7 +8,7 @@
 #include <string>
 #include <iomanip>
 
-#include <list>
+#include <deque>
 
 #define DB_NAME "data.csv"
 
@@ -36,7 +36,7 @@ public:
     void output_values(std::string const &input_file_name);
 
 private:
-    std::list<DbLine> _rates;
+    std::deque<DbLine> _rates;
 
     void _parse_db();
     float _calc_value(std::string const &line) const;

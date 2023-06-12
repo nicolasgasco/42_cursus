@@ -74,7 +74,7 @@ float BitcoinExchange::_calc_value(std::string const &line) const
     float value = std::stof(line.substr(line.find("| ") + 2));
 
     float result = -1;
-    std::list<DbLine>::const_iterator it = this->_rates.begin();
+    std::deque<DbLine>::const_iterator it = this->_rates.begin();
     while (it != this->_rates.end())
     {
         if (date_str == it->date)
