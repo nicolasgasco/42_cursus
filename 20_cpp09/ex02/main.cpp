@@ -56,6 +56,8 @@ int main(int argc, char *argv[])
     output_args(argc, argv);
 
     PmergeMe pmergeMe;
+    pmergeMe.store_numbers(argc, argv);
+    pmergeMe.sort_numbers();
 
     return 0;
 }
