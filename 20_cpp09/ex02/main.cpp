@@ -1,6 +1,8 @@
 #include <iostream>
 #include "PmergeMe.hpp"
 
+#define MAX_ACCEPTED_NUMS 3000
+
 bool is_input_valid(int argc, char *argv[])
 {
     for (int i = 1; i < argc; i++)
@@ -27,7 +29,12 @@ int main(int argc, char *argv[])
     }
     else if (argc == 2)
     {
-        std::cerr << "Provide more than one number" << std::endl;
+        std::cerr << "Provide more than one argument" << std::endl;
+        return 1;
+    }
+    else if (argc > MAX_ACCEPTED_NUMS + 1)
+    {
+        std::cerr << "Too many arguments" << std::endl;
         return 1;
     }
 
