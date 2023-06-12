@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 
     PmergeMe pmergeMe;
     pmergeMe.store_numbers(argc, argv);
-    pmergeMe.sort_numbers();
+    pmergeMe.output_sorted_result();
 
     return 0;
 }
