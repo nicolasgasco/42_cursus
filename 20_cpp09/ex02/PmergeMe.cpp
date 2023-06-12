@@ -32,7 +32,6 @@ void PmergeMe::store_numbers(int argc, char *argv[])
     {
         int value = std::atoi(argv[i]);
         this->_unsorted_vec.push_back(value);
-
         this->_unsorted_list.push_back(value);
     }
     this->_sorted_vec = this->_unsorted_vec;
@@ -54,6 +53,7 @@ void PmergeMe::output_sorted_result()
     std::cout << std::endl;
     std::cout << "Time to process a range of " << this->_unsorted_vec.size() << " elements with std::vector: " << this->_elapsed_time_vec << " ms" << std::endl;
     std::cout << "Time to process a range of " << this->_unsorted_vec.size() << " elements with std::list: " << this->_elapsed_time_list << " ms" << std::endl;
+    std::cout << std::endl;
 }
 
 void PmergeMe::_sort_numbers_vec()
@@ -61,10 +61,11 @@ void PmergeMe::_sort_numbers_vec()
     struct timeval start_vec, stop_vec;
 
     gettimeofday(&start_vec, NULL);
+
     this->_sorted_vec = this->_split_numbers_vec(this->_sorted_vec);
     this->_insertion_sort_vec(this->_sorted_vec);
-    gettimeofday(&stop_vec, NULL);
 
+    gettimeofday(&stop_vec, NULL);
     this->_elapsed_time_vec = (stop_vec.tv_sec - start_vec.tv_sec) * 1000.0; // sec to ms
     this->_elapsed_time_vec += (stop_vec.tv_usec - start_vec.tv_usec) / 1000.0;
 }
@@ -74,16 +75,18 @@ void PmergeMe::_sort_numbers_list()
     struct timeval start_list, stop_list;
 
     gettimeofday(&start_list, NULL);
+
     this->_sorted_list = this->_split_numbers_list(this->_sorted_list);
     this->_insertion_sort_list(this->_sorted_list);
-    gettimeofday(&stop_list, NULL);
 
+    gettimeofday(&stop_list, NULL);
     this->_elapsed_time_list = (stop_list.tv_sec - start_list.tv_sec) * 1000.0; // sec to ms
     this->_elapsed_time_list += (stop_list.tv_usec - start_list.tv_usec) / 1000.0;
 }
 
 std::vector<unsigned int> PmergeMe::_split_numbers_vec(std::vector<unsigned int> &numbers_vec)
 {
+    // Only 1 or 2 elements are left, stop recursion
     if (numbers_vec.size() <= 2)
     {
         if (numbers_vec.front() > numbers_vec.back())
@@ -109,6 +112,7 @@ std::vector<unsigned int> PmergeMe::_split_numbers_vec(std::vector<unsigned int>
 
 std::list<unsigned int> PmergeMe::_split_numbers_list(std::list<unsigned int> &numbers_list)
 {
+    // Only 1 or 2 elements are left, stop recursion
     if (numbers_list.size() <= 2)
     {
         if (numbers_list.front() > numbers_list.back())
@@ -129,6 +133,7 @@ std::list<unsigned int> PmergeMe::_split_numbers_list(std::list<unsigned int> &n
             numbers_list_right.push_back(*it);
         i++;
     }
+
     std::list<unsigned int> left = this->_split_numbers_list(numbers_list_left);
     this->_insertion_sort_list(left);
     std::list<unsigned int> right = this->_split_numbers_list(numbers_list_right);
@@ -137,12 +142,12 @@ std::list<unsigned int> PmergeMe::_split_numbers_list(std::list<unsigned int> &n
     std::list<unsigned int> result;
     result.splice(result.end(), left);
     result.splice(result.end(), right);
-
     return result;
 }
 
 void PmergeMe::_insertion_sort_vec(std::vector<unsigned int> &numbers_vec)
 {
+    // Nothing to sort
     if (numbers_vec.size() <= 2)
         return;
 
@@ -151,12 +156,14 @@ void PmergeMe::_insertion_sort_vec(std::vector<unsigned int> &numbers_vec)
         bool is_sorted = true;
         for (std::vector<unsigned int>::iterator it = numbers_vec.begin(); it != numbers_vec.end() - 1; it++)
         {
+            // If current element is not ordered
             if (*it > *(it + 1))
             {
                 is_sorted = false;
                 bool is_found_it2 = false;
                 for (std::vector<unsigned int>::iterator it2 = numbers_vec.begin(); it2 != numbers_vec.end(); it2++)
                 {
+                    // Place in correct position
                     if (*it < *it2)
                     {
                         is_found_it2 = true;
@@ -166,6 +173,7 @@ void PmergeMe::_insertion_sort_vec(std::vector<unsigned int> &numbers_vec)
                         break;
                     }
                 }
+                // Current element is the biggest
                 if (!is_found_it2)
                 {
                     unsigned int value = *it;
@@ -175,6 +183,7 @@ void PmergeMe::_insertion_sort_vec(std::vector<unsigned int> &numbers_vec)
                 break;
             }
         }
+        // If no element was moved, the vector is sorted
         if (is_sorted)
             break;
     }
@@ -182,6 +191,7 @@ void PmergeMe::_insertion_sort_vec(std::vector<unsigned int> &numbers_vec)
 
 void PmergeMe::_insertion_sort_list(std::list<unsigned int> &numbers_list)
 {
+    // Nothing to sort
     if (numbers_list.size() <= 2)
         return;
 
@@ -190,6 +200,7 @@ void PmergeMe::_insertion_sort_list(std::list<unsigned int> &numbers_list)
         bool is_sorted = true;
         for (std::list<unsigned int>::iterator it = numbers_list.begin(), second_to_last = std::prev(numbers_list.end()); it != second_to_last; it++)
         {
+            // If current element is not ordered
             std::list<unsigned int>::iterator next_it = std::next(it);
             if (*it > *(next_it))
             {
@@ -197,6 +208,7 @@ void PmergeMe::_insertion_sort_list(std::list<unsigned int> &numbers_list)
                 bool is_found_it2 = false;
                 for (std::list<unsigned int>::iterator it2 = numbers_list.begin(); it2 != numbers_list.end(); it2++)
                 {
+                    // Place in correct position
                     if (*it < *it2)
                     {
                         is_found_it2 = true;
@@ -206,6 +218,7 @@ void PmergeMe::_insertion_sort_list(std::list<unsigned int> &numbers_list)
                         break;
                     }
                 }
+                // Current element is the biggest
                 if (!is_found_it2)
                 {
                     unsigned int value = *it;
@@ -215,6 +228,7 @@ void PmergeMe::_insertion_sort_list(std::list<unsigned int> &numbers_list)
                 break;
             }
         }
+        // If no element was moved, the list is sorted
         if (is_sorted)
             break;
     }
@@ -224,7 +238,7 @@ void PmergeMe::_output_formatted_vector(std::vector<unsigned int> const &numbers
 {
     for (size_t i = 0; i < numbers.size(); i++)
     {
-        if (i == MAX_ITEMS)
+        if (i == MAX_SHOW_ITEMS)
         {
             std::cout << "[...]";
             break;
@@ -239,7 +253,7 @@ void PmergeMe::_output_formatted_list(std::list<unsigned int> const &numbers)
     unsigned int i = 0;
     for (std::list<unsigned int>::const_iterator it = numbers.begin(); it != numbers.end(); it++)
     {
-        if (i == MAX_ITEMS)
+        if (i == MAX_SHOW_ITEMS)
         {
             std::cout << "[...]";
             break;

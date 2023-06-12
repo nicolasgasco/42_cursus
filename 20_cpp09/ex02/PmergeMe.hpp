@@ -5,15 +5,10 @@
 #include <iostream>
 #include <sys/time.h>
 
-#define MAX_ITEMS 30
-
 #include <vector>
 #include <list>
 
-// Remove after testing
-#define GREEN "\033[0;32m"
-#define YELLOW "\033[0;33m"
-#define NC "\033[0m"
+#define MAX_SHOW_ITEMS 30
 
 class PmergeMe
 {
