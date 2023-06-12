@@ -4,8 +4,25 @@ PmergeMe::PmergeMe() : _elapsed_time_vec(0), _elapsed_time_list(0)
 {
 }
 
+PmergeMe::PmergeMe(PmergeMe const &src)
+{
+    *this = src;
+}
+
 PmergeMe::~PmergeMe()
 {
+}
+
+PmergeMe &PmergeMe::operator=(const PmergeMe &src)
+{
+    this->_unsorted_vec = src._unsorted_vec;
+    this->_sorted_vec = src._sorted_vec;
+    this->_elapsed_time_vec = src._elapsed_time_vec;
+
+    this->_unsorted_list = src._unsorted_list;
+    this->_sorted_list = src._sorted_list;
+    this->_elapsed_time_list = src._elapsed_time_list;
+    return *this;
 }
 
 void PmergeMe::store_numbers(int argc, char *argv[])

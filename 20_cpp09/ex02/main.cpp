@@ -48,5 +48,9 @@ int main(int argc, char *argv[])
     pmergeMe.store_numbers(argc, argv);
     pmergeMe.output_sorted_result();
 
+    // std::cout << std::endl;
+    // PmergeMe pmergeMe2(pmergeMe);
+    // pmergeMe2.output_sorted_result();
+
     return 0;
 }

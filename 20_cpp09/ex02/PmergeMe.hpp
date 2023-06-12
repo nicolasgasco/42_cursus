@@ -20,8 +20,11 @@ class PmergeMe
 
 public:
     PmergeMe();
+    PmergeMe(PmergeMe const &src);
 
     ~PmergeMe();
+
+    PmergeMe &operator=(const PmergeMe &src);
 
     void store_numbers(int argc, char *argv[]);
     void output_sorted_result();
