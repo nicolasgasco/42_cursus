@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
-        std::cerr << "Please provide exactly one argument" << std::endl;
+        std::cout << "Please provide exactly one argument" << std::endl;
         return 1;
     }
 

@@ -137,13 +137,13 @@ void RPN::output_result() const
 {
     if (this->_err_message.size())
     {
-        std::cerr << this->_err_message << std::endl;
+        std::cout << this->_err_message << std::endl;
         return;
     }
 
     if (!this->_operands.size())
     {
-        std::cerr << "Error" << std::endl;
+        std::cout << "Error" << std::endl;
         return;
     }
 
@@ -160,13 +160,13 @@ void RPN::output_result(std::string const &input)
 
     if (this->_err_message.size())
     {
-        std::cerr << this->_err_message << std::endl;
+        std::cout << this->_err_message << std::endl;
         return;
     }
 
     if (!this->_operands.size())
     {
-        std::cerr << "Error" << std::endl;
+        std::cout << "Error" << std::endl;
         return;
     }
 

@@ -22,18 +22,18 @@ int main(int argc, char *argv[])
 {
     if (argc < 2)
     {
-        std::cerr << "Please provide an argument" << std::endl;
+        std::cout << "Please provide an argument" << std::endl;
         return 1;
     }
     else if (argc == 2)
     {
-        std::cerr << "Provide more than one argument" << std::endl;
+        std::cout << "Provide more than one argument" << std::endl;
         return 1;
     }
 
     if (!is_input_valid(argc, argv))
     {
-        std::cerr << "Invalid input" << std::endl;
+        std::cout << "Invalid input" << std::endl;
         return 1;
     }
 
