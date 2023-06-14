@@ -1,5 +1,5 @@
 NAME = btc
-CC = clang++
+CC = c++
 FLAGS = -Wall -Wextra -Werror
 NINETYEIGHT = -std=c++98 -pedantic
 SANITIZE = -g -fsanitize=address
@@ -18,14 +18,14 @@ OBJ_DIR = ./obj/
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJ)
+	$(CC) $(FLAGS) $(NINETYEIGHT) -o $(NAME) $(OBJ)
 	@echo "##### Finished compiling! #####"
 	@echo "\n"
 
 $(OBJ_DIR)%.o: %.cpp $(INCLUDES)
 	@mkdir -p $(OBJ_DIR)
 	@echo "##### Creating" [ $@ ] " #####"
-	$(CC) $(FLAGS) -c $< -I. -o $@
+	$(CC) $(FLAGS) $(NINETYEIGHT) -c $< -I. -o $@
 
 clean:
 	@rm -f $(OBJ)
