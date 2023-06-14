@@ -49,9 +49,11 @@ void BitcoinExchange::output_values(std::string const &input_file_name)
         throw std::runtime_error(std::string("Error: Could not open input file"));
 
     std::string line;
-    std::getline(input_file, line); // Skip first line (header)
     while (std::getline(input_file, line))
     {
+        // Skip header if present
+        if (line.find_first_of("0123456789") == std::string::npos)
+            continue;
         if (this->_is_input_line_valid(line))
         {
             float value = this->_calc_value(line);
