@@ -3,9 +3,9 @@
 #define __RPN_H__
 
 #include <iostream>
-#include <stack>
-
 #include <iomanip>
+
+#include <stack>
 
 class RPN
 {
