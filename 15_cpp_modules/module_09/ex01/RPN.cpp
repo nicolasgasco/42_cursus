@@ -102,21 +102,7 @@ void RPN::_push_operand(std::string const &token)
         return;
     }
 
-    float num;
-    try
-    {
-        num = std::stof(token);
-    }
-    catch (std::out_of_range &e)
-    {
-        this->_set_err_message("Invalid value (not an int)");
-        return;
-    }
-    catch (std::invalid_argument &e)
-    {
-        this->_set_err_message("Invalid value (not numerical)");
-        return;
-    }
+    float num = std::atof(token.c_str());
 
     if (num >= 10 || num <= -10)
     {
