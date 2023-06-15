@@ -34,7 +34,7 @@ void BitcoinExchange::_parse_db()
     {
         DbLine db_line;
         db_line.date = line.substr(0, line.find(","));
-        db_line.value = std::stof(line.substr(line.find(",") + 1));
+        db_line.value = std::atof(line.substr(line.find(",") + 1).c_str());
         this->_rates.push_back(db_line);
     }
     data_file.close();
@@ -52,8 +52,12 @@ void BitcoinExchange::output_values(std::string const &input_file_name)
     while (std::getline(input_file, line))
     {
         // Skip header if present
-        if (line.find_first_of("0123456789") == std::string::npos)
+        if (line.find_first_of("0123456789,.") == std::string::npos)
             continue;
+
+        // Replace , before parsing to float
+        if (line.find(",") != std::string::npos)
+            line.replace(line.find(","), 1, ".");
         if (this->_is_input_line_valid(line))
         {
             float value = this->_calc_value(line);
@@ -73,7 +77,8 @@ float BitcoinExchange::_calc_value(std::string const &line) const
     std::string date_str = line.substr(line.find_first_not_of(" "));
     date_str = line.substr(0, line.find(" |"));
 
-    float value = std::stof(line.substr(line.find("| ") + 2));
+    std::string line_str = line.substr(line.find("| ") + 2);
+    float value = std::atof(line_str.c_str());
 
     float result = -1;
     std::deque<DbLine>::const_iterator it = this->_rates.begin();
@@ -143,17 +148,24 @@ bool BitcoinExchange::_is_date_valid(std::string const &date_str) const
 
 bool BitcoinExchange::_is_value_valid(std::string const &value_str) const
 {
-    float num_float;
-    try
+    unsigned int dot_count = 0;
+    for (size_t i = 0; i < value_str.size(); i++)
     {
-        num_float = std::stof(value_str);
-    }
-    catch (std::exception &e)
-    {
-        return false;
+        if (value_str[i] == '.')
+        {
+            dot_count++;
+            continue;
+        }
+        if (!std::isdigit(value_str[i]))
+            return false;
     }
 
-    if (num_float < 0 || num_float > 1000)
+    if (dot_count > 1)
+        return false;
+
+    double num_double = std::atof(value_str.c_str());
+
+    if (num_double < 0 || num_double > 1000)
         return false;
 
     return true;
