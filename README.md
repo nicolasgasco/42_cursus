@@ -4,7 +4,7 @@ The _Common Core_ projects I completed while being a student at 42Urduliz campus
 
 |Name|Language|End date|Description|Estimated effort (h)|
 |----|--------|--------|-----------|----------|
-|**[webserv 🌐](https://github.com/nicolasgasco/42_cursus/tree/master/19_webserv)**|C++/Python/HTML+CSS|June 2023| Write your own HTTP server than can be tested with an actual browser|175|
+|**[webserv 🌐](https://github.com/nicolasgasco/42_webserv)**|C++/Python/HTML+CSS|June 2023| Write your own HTTP server than can be tested with an actual browser|175|
 |**[~~ft_containers~~](https://github.com/nicolasgasco/42_cursus/tree/master/18_ft_containers)**|~~C++~~|Removed from Cursus|~~Reimplement `vector`, `map`, and `stack` containers from the STL.~~|~~210~~|
 |**[inception  🐳](https://github.com/nicolasgasco/42_cursus/tree/master/17_inception)**|Docker|November 2022|Set up a small infrastructure composed of different services under specific rules using Docker.|210|
 |**[cpp_modules](https://github.com/nicolasgasco/42_cursus/tree/master/15_cpp_modules)**|C++|June 2023|10 "mini" projects to learn the basics of C++ (98 standard 👴) with a strong focus on OOP|~10 days|
