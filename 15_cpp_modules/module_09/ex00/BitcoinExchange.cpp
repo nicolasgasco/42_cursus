@@ -105,7 +105,8 @@ float BitcoinExchange::_calc_value(std::string const &line) const
 void BitcoinExchange::_output_formatted_value(std::string const &line, float const &value) const
 {
     std::string date_str = line.substr(line.find_first_not_of(" "));
-    date_str = line.substr(0, line.find(" |"));
+    date_str = line.substr(0, line.find("|"));
+    date_str = date_str.substr(0, date_str.find_last_not_of(" ") + 1);
 
     std::cout << "✅: " << GREEN << date_str << " ............................................." << std::fixed << std::setprecision(2) << value << NOCOL << std::endl;
 }
