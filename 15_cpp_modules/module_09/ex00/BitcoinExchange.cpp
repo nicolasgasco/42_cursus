@@ -141,6 +141,9 @@ bool BitcoinExchange::_is_date_valid(std::string const &date_str) const
     std::istringstream ss(date_str.c_str());
     ss >> std::get_time(&t, "%Y-%m-%d");
 
+    if (t.tm_mon == -1 || t.tm_mday == -1 || t.tm_year == -1)
+        return false;
+
     if (ss.fail())
         return false;
     return true;
