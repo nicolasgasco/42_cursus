@@ -110,10 +110,11 @@ int main(int argc, char **argv)
     FD_ZERO(&write_fds_cpy);
 
     struct timeval timeout;
-    timeout.tv_sec = 30;
+    timeout.tv_sec = 5;
     timeout.tv_usec = 0;
 
     FD_SET(sockfd, &read_fds_cpy);
+
     int *active_connections = (int *)malloc(sizeof(int) * FD_SETSIZE);
     bzero(active_connections, FD_SETSIZE);
 
@@ -123,8 +124,10 @@ int main(int argc, char **argv)
         read_fds = read_fds_cpy;
         write_fds = write_fds_cpy;
 
-        if (select(sockfd + 1, &read_fds, &write_fds, NULL, &timeout) < 0)
+        if (select(FD_SETSIZE, &read_fds, &write_fds, NULL, &timeout) < 0)
             printf("Error with select\n");
+
+        printf("Select returned\n");
 
         for (int i = 3; i <= FD_SETSIZE; ++i)
         {
@@ -132,6 +135,8 @@ int main(int argc, char **argv)
             {
                 if (i == sockfd)
                 {
+                    printf("Socket %d is ready to accept new connections\n", i);
+
                     struct sockaddr_in cli;
                     len = sizeof(cli);
                     // ACCEPT CONNECTION
@@ -142,12 +147,23 @@ int main(int argc, char **argv)
                         exit(0);
                     }
                     else
-                        printf("server: client %d just arrived\n", i);
+                    {
+                        int i = 0;
+                        while (active_connections[i])
+                        {
+                            write(active_connections[i], "server: client x just arrived\n", 30);
+                            i++;
+                        }
+                    }
+
+                    add_to_array(active_connections, connfd);
 
                     FD_SET(connfd, &read_fds_cpy);
                 }
                 else
                 {
+                    printf("Socket %d is ready to be read\n", i);
+
                     char *msg = (char *)malloc(sizeof(char) * BUFF_SIZE);
                     char *buf = (char *)malloc(sizeof(char) * BUFF_SIZE);
                     if (msg == NULL || buf == NULL)
@@ -161,7 +177,10 @@ int main(int argc, char **argv)
                     switch (bytes_recv)
                     {
                     case 0:
-                        continue;
+                    {
+                        FD_CLR(i, &read_fds_cpy);
+                        break;
+                    }
                     default:
                         printf("Received %d bytes\n", bytes_recv);
                     }
