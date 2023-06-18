@@ -110,7 +110,7 @@ int main(int argc, char **argv)
 
     // assign IP, PORT
     servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = htonl(2130706433); // 127.0.0.1
+    servaddr.sin_addr.s_addr = 16777343;
     servaddr.sin_port = htons(port);
 
     // Binding newly created socket to given IP and verification
@@ -131,26 +131,21 @@ int main(int argc, char **argv)
         printf("Server listening..\n"); // Remove before submission
 
     // SELECT
-    fd_set read_fds, read_fds_cpy, write_fds, write_fds_cpy;
+    fd_set read_fds, read_fds_cpy;
     FD_ZERO(&read_fds);
     FD_ZERO(&read_fds_cpy);
-    FD_ZERO(&write_fds);
-    FD_ZERO(&write_fds_cpy);
 
     FD_SET(sockfd, &read_fds_cpy);
 
     int active_connections[FD_SETSIZE];
     bzero(active_connections, FD_SETSIZE);
 
-    char *msg = NULL;
-
     while (1)
     {
         // Necessary because select is destructive
         read_fds = read_fds_cpy;
-        write_fds = write_fds_cpy;
 
-        if (select(FD_SETSIZE, &read_fds, &write_fds, NULL, NULL) < 0)
+        if (select(FD_SETSIZE, &read_fds, NULL, NULL, NULL) < 0)
             ft_print_str(1, "Error with select\n");
 
         for (int i = 3; i <= FD_SETSIZE; ++i)
@@ -163,7 +158,6 @@ int main(int argc, char **argv)
 
                     struct sockaddr_in cli;
                     len = sizeof(cli);
-                    // ACCEPT CONNECTION
                     connfd = accept(sockfd, (struct sockaddr *)&cli, (socklen_t *)&len);
                     ft_print_int(1, "New connection accepted on socket: %d\n", connfd);
                     if (connfd < 0)
@@ -187,7 +181,7 @@ int main(int argc, char **argv)
                 {
                     ft_print_int(1, "Socket %d is ready to be read\n", i);
 
-                    msg = (char *)malloc(sizeof(char) * BUFF_SIZE);
+                    char *msg = (char *)malloc(sizeof(char) * BUFF_SIZE);
                     char *buf = (char *)malloc(sizeof(char) * BUFF_SIZE);
                     if (msg == NULL || buf == NULL)
                     {
@@ -203,6 +197,7 @@ int main(int argc, char **argv)
                     {
                     case -1:
                         printf("Error recv: %s\n", strerror(errno));
+                        // FREE here
                         break;
                     case 0:
                     {
@@ -216,6 +211,7 @@ int main(int argc, char **argv)
                             j++;
                         }
                         FD_CLR(i, &read_fds_cpy);
+                        // FREE here
                         break;
                     }
                     default:
@@ -229,18 +225,16 @@ int main(int argc, char **argv)
                         ft_print_str(1, "Fatal error\n");
                         return 1;
                     }
+                    free(buf);
 
                     if (extract_res == 0)
+                    {
+                        // FREE here
                         break;
+                    }
 
                     printf("Message: .%s.\n", msg);
                     ft_print_str(1, "\n------------------\n");
-
-                    if (buf != NULL)
-                    {
-                        free(buf);
-                        buf = NULL;
-                    }
 
                     char string[] = "client %d: ";
                     char *output = (char *)malloc(sizeof(char) * (strlen(string) + strlen(msg) + 50));
@@ -249,23 +243,13 @@ int main(int argc, char **argv)
                     int j = 0;
                     while (active_connections[j])
                     {
-                        printf("j is %d, value is %d\n", j, active_connections[j]);
                         if (active_connections[j] != i)
                             ft_print_int(active_connections[j], output, i);
                         j++;
                     }
                     free(output);
-
-                    if (msg != NULL)
-                    {
-                        free(msg);
-                        msg = NULL;
-                    }
+                    free(msg);
                 }
-            }
-            if (FD_ISSET(i, &write_fds))
-            {
-                ft_print_int(1, "Socket %d is ready to be written\n", i);
             }
         }
     }
