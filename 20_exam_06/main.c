@@ -8,8 +8,6 @@
 #include <printf.h>
 #include <stdio.h>
 
-#define BUFF_SIZE 30000
-
 int extract_message(char **buf, char **msg)
 {
     char *newbuf;
@@ -47,29 +45,25 @@ void add_to_array(int *array, int value)
 
 void remove_from_array(int *array, int value)
 {
-    int tmp[FD_SETSIZE];
-    bzero(tmp, FD_SETSIZE);
-
     int i = 0;
-    int j = 0;
     while (array[i])
     {
-        if (array[i] != value)
-        {
-            tmp[j] = array[i];
-            j++;
-        }
+        if (array[i] == value)
+            array[i] = -1;
         i++;
     }
+}
 
-    bzero(array, FD_SETSIZE);
-
-    i = 0;
-    while (tmp[i])
+int ft_find_value_in_arr(int *array, int value)
+{
+    int i = 0;
+    while (array[i])
     {
-        array[i] = tmp[i];
+        if (array[i] == value)
+            return i;
         i++;
     }
+    return -1;
 }
 
 void ft_print_int(int fd, char *msg, int value)
@@ -167,13 +161,14 @@ int main(int argc, char **argv)
                     }
                     else
                     {
+                        add_to_array(active_connections, connfd);
                         int j = 0;
                         while (active_connections[j])
                         {
-                            ft_print_int(active_connections[j], "\033[0;33mserver: client %d just arrived\n\033[0m", connfd);
+                            if (active_connections[j] != connfd && active_connections[j] != -1)
+                                ft_print_int(active_connections[j], "\033[0;33mserver: client %d just arrived\n\033[0m", ft_find_value_in_arr(active_connections, connfd));
                             j++;
                         }
-                        add_to_array(active_connections, connfd);
                         FD_SET(connfd, &read_fds_cpy);
                     }
                 }
@@ -181,17 +176,17 @@ int main(int argc, char **argv)
                 {
                     ft_print_int(1, "Socket %d is ready to be read\n", i);
 
-                    char *msg = (char *)malloc(sizeof(char) * BUFF_SIZE);
-                    char *buf = (char *)malloc(sizeof(char) * BUFF_SIZE);
+                    char *msg = (char *)malloc(sizeof(char) * 30000);
+                    char *buf = (char *)malloc(sizeof(char) * 30000);
                     if (msg == NULL || buf == NULL)
                     {
                         ft_print_str(1, "Fatal error\n");
                         return 1;
                     }
-                    bzero(msg, BUFF_SIZE);
-                    bzero(buf, BUFF_SIZE);
+                    bzero(msg, 30000);
+                    bzero(buf, 30000);
 
-                    int bytes_recv = recv(i, buf, BUFF_SIZE, 0);
+                    int bytes_recv = recv(i, buf, 30000, 0);
 
                     switch (bytes_recv)
                     {
@@ -201,13 +196,14 @@ int main(int argc, char **argv)
                         break;
                     case 0:
                     {
+                        int conn_index = ft_find_value_in_arr(active_connections, i);
                         remove_from_array(active_connections, i);
-
+                        printf("%d removed from active connections\n", i);
                         int j = 0;
                         while (active_connections[j])
                         {
-                            if (active_connections[j] != i)
-                                ft_print_int(active_connections[j], "\033[0;33mserver: client %d just left\n\033[0m", i);
+                            if (active_connections[j] != i && active_connections[j] != -1)
+                                ft_print_int(active_connections[j], "\033[0;33mserver: client %d just left\n\033[0m", conn_index);
                             j++;
                         }
                         FD_CLR(i, &read_fds_cpy);
@@ -243,8 +239,8 @@ int main(int argc, char **argv)
                     int j = 0;
                     while (active_connections[j])
                     {
-                        if (active_connections[j] != i)
-                            ft_print_int(active_connections[j], output, i);
+                        if (active_connections[j] != i && active_connections[j] != -1)
+                            ft_print_int(active_connections[j], output, ft_find_value_in_arr(active_connections, i));
                         j++;
                     }
                     free(output);
