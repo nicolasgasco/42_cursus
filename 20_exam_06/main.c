@@ -6,6 +6,7 @@
 #include <netinet/in.h>
 #include <stdlib.h>
 #include <printf.h>
+#include <stdio.h>
 
 #define BUFF_SIZE 30000
 
@@ -109,14 +110,12 @@ int main(int argc, char **argv)
     FD_ZERO(&write_fds);
     FD_ZERO(&write_fds_cpy);
 
-    struct timeval timeout;
-    timeout.tv_sec = 5;
-    timeout.tv_usec = 0;
-
     FD_SET(sockfd, &read_fds_cpy);
 
     int *active_connections = (int *)malloc(sizeof(int) * FD_SETSIZE);
     bzero(active_connections, FD_SETSIZE);
+
+    char *msg = NULL;
 
     while (1)
     {
@@ -124,7 +123,7 @@ int main(int argc, char **argv)
         read_fds = read_fds_cpy;
         write_fds = write_fds_cpy;
 
-        if (select(FD_SETSIZE, &read_fds, &write_fds, NULL, &timeout) < 0)
+        if (select(FD_SETSIZE, &read_fds, &write_fds, NULL, NULL) < 0)
             printf("Error with select\n");
 
         printf("Select returned\n");
@@ -141,6 +140,7 @@ int main(int argc, char **argv)
                     len = sizeof(cli);
                     // ACCEPT CONNECTION
                     connfd = accept(sockfd, (struct sockaddr *)&cli, (socklen_t *)&len);
+                    printf("Connection accepted on socket %d: %d\n", sockfd, connfd);
                     if (connfd < 0)
                     {
                         printf("server acccept failed...\n");
@@ -148,23 +148,21 @@ int main(int argc, char **argv)
                     }
                     else
                     {
-                        int i = 0;
-                        while (active_connections[i])
+                        int j = 0;
+                        while (active_connections[j])
                         {
-                            write(active_connections[i], "server: client x just arrived\n", 30);
-                            i++;
+                            write(active_connections[j], "server: client x just arrived\n", 30);
+                            j++;
                         }
+                        add_to_array(active_connections, connfd);
+                        FD_SET(connfd, &read_fds_cpy);
                     }
-
-                    add_to_array(active_connections, connfd);
-
-                    FD_SET(connfd, &read_fds_cpy);
                 }
                 else
                 {
                     printf("Socket %d is ready to be read\n", i);
 
-                    char *msg = (char *)malloc(sizeof(char) * BUFF_SIZE);
+                    msg = (char *)malloc(sizeof(char) * BUFF_SIZE);
                     char *buf = (char *)malloc(sizeof(char) * BUFF_SIZE);
                     if (msg == NULL || buf == NULL)
                     {
@@ -196,13 +194,31 @@ int main(int argc, char **argv)
                         break;
 
                     printf("Message: .%s.\n", msg);
-                    free(msg);
-                    free(buf);
+
+                    if (buf != NULL)
+                    {
+                        free(buf);
+                        buf = NULL;
+                    }
+
+                    int j = 0;
+                    while (active_connections[j])
+                    {
+                        if (active_connections[j] != i)
+                            write(active_connections[j], msg, strlen(msg));
+                        j++;
+                    }
+
+                    if (msg != NULL)
+                    {
+                        free(msg);
+                        msg = NULL;
+                    }
                 }
             }
-            else if (FD_ISSET(i, &write_fds))
+            if (FD_ISSET(i, &write_fds))
             {
-                printf("Set for writing\n");
+                printf("Set for writing: %d\n", i);
             }
         }
     }
