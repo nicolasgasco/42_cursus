@@ -57,6 +57,18 @@ int find_in_array(int *array, int value)
     return 0;
 }
 
+void ft_print_int(int fd, char *msg, int value)
+{
+    char print_msg[100];
+    sprintf(print_msg, msg, value);
+    write(fd, print_msg, strlen(print_msg));
+}
+
+void ft_print_str(int fd, char *msg)
+{
+    write(fd, msg, strlen(msg));
+}
+
 int main(int argc, char **argv)
 {
     if (argc != 2)
@@ -134,16 +146,16 @@ int main(int argc, char **argv)
             {
                 if (i == sockfd)
                 {
-                    printf("Socket %d is ready to accept new connections\n", i);
+                    ft_print_int(1, "Socket %d is ready to accept new connections\n", i);
 
                     struct sockaddr_in cli;
                     len = sizeof(cli);
                     // ACCEPT CONNECTION
                     connfd = accept(sockfd, (struct sockaddr *)&cli, (socklen_t *)&len);
-                    printf("Connection accepted on socket %d: %d\n", sockfd, connfd);
+                    ft_print_int(1, "New connection accepted on socket: %d\n", connfd);
                     if (connfd < 0)
                     {
-                        printf("server acccept failed...\n");
+                        ft_print_str(1, "server acccept failed...\n");
                         exit(0);
                     }
                     else
@@ -151,7 +163,7 @@ int main(int argc, char **argv)
                         int j = 0;
                         while (active_connections[j])
                         {
-                            write(active_connections[j], "server: client x just arrived\n", 30);
+                            ft_print_int(active_connections[j], "server: client %d just arrived\n", i);
                             j++;
                         }
                         add_to_array(active_connections, connfd);
@@ -160,13 +172,13 @@ int main(int argc, char **argv)
                 }
                 else
                 {
-                    printf("Socket %d is ready to be read\n", i);
+                    ft_print_int(1, "Socket %d is ready to be read\n", i);
 
                     msg = (char *)malloc(sizeof(char) * BUFF_SIZE);
                     char *buf = (char *)malloc(sizeof(char) * BUFF_SIZE);
                     if (msg == NULL || buf == NULL)
                     {
-                        printf("Fatal error\n");
+                        ft_print_str(1, "Fatal error\n");
                         return 1;
                     }
 
@@ -180,13 +192,13 @@ int main(int argc, char **argv)
                         break;
                     }
                     default:
-                        printf("Received %d bytes\n", bytes_recv);
+                        ft_print_int(1, "Received %d bytes\n", bytes_recv);
                     }
 
                     int extract_res = extract_message(&buf, &msg);
                     if (extract_res == -1)
                     {
-                        printf("Error: %s\n", strerror(errno));
+                        ft_print_str(1, "Fatal error\n");
                         return 1;
                     }
 
@@ -218,7 +230,7 @@ int main(int argc, char **argv)
             }
             if (FD_ISSET(i, &write_fds))
             {
-                printf("Set for writing: %d\n", i);
+                ft_print_int(1, "Socket %d is ready to be written\n", i);
             }
         }
     }
