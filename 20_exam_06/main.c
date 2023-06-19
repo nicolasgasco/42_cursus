@@ -78,11 +78,22 @@ void ft_print_str(int fd, char *msg)
     write(fd, msg, strlen(msg));
 }
 
+void print_to_clients(char *msg, int *active_connections, int connfd)
+{
+    int j = 0;
+    while (active_connections[j])
+    {
+        if (active_connections[j] != connfd && active_connections[j] != -1)
+            ft_print_int(active_connections[j], msg, ft_find_value_in_arr(active_connections, connfd));
+        j++;
+    }
+}
+
 int main(int argc, char **argv)
 {
     if (argc != 2)
     {
-        printf("Wrong number of arguments\n");
+        ft_print_str(2, "Wrong number of arguments\n");
         return 1;
     }
 
@@ -90,17 +101,15 @@ int main(int argc, char **argv)
 
     int sockfd, connfd, len;
     struct sockaddr_in servaddr;
+    bzero(&servaddr, sizeof(servaddr));
 
     // socket create and verification
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd == -1)
     {
-        printf("Fatal error\n");
+        ft_print_str(2, "Fatal error\n");
         exit(1);
     }
-    else
-        printf("Socket successfully created: %d..\n", sockfd); // Remove before submission
-    bzero(&servaddr, sizeof(servaddr));
 
     // assign IP, PORT
     servaddr.sin_family = AF_INET;
@@ -110,19 +119,15 @@ int main(int argc, char **argv)
     // Binding newly created socket to given IP and verification
     if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
     {
-        printf("Fatal error\n");
+        ft_print_str(2, "Fatal error\n");
         exit(1);
     }
-    else
-        printf("Socket successfully binded..\n"); // Remove before submission
 
     if (listen(sockfd, 10) != 0)
     {
-        printf("Fatal error\n");
+        ft_print_str(2, "Fatal error\n");
         exit(1);
     }
-    else
-        printf("Server listening..\n"); // Remove before submission
 
     // SELECT
     fd_set read_fds, read_fds_cpy;
@@ -140,114 +145,93 @@ int main(int argc, char **argv)
         read_fds = read_fds_cpy;
 
         if (select(FD_SETSIZE, &read_fds, NULL, NULL, NULL) < 0)
-            ft_print_str(1, "Error with select\n");
+        {
+            ft_print_str(2, "Fatal error\n");
+            exit(1);
+        }
 
         for (int i = 3; i <= FD_SETSIZE; ++i)
         {
             if (FD_ISSET(i, &read_fds))
             {
+                // New connection waiting to be accepted
                 if (i == sockfd)
                 {
-                    ft_print_int(1, "Socket %d is ready to accept new connections\n", i);
-
                     struct sockaddr_in cli;
                     len = sizeof(cli);
                     connfd = accept(sockfd, (struct sockaddr *)&cli, (socklen_t *)&len);
-                    ft_print_int(1, "New connection accepted on socket: %d\n", connfd);
                     if (connfd < 0)
                     {
-                        ft_print_str(1, "server acccept failed...\n");
-                        exit(0);
+                        ft_print_str(2, "Fatal error\n");
+                        exit(1);
                     }
                     else
                     {
                         add_to_array(active_connections, connfd);
-                        int j = 0;
-                        while (active_connections[j])
-                        {
-                            if (active_connections[j] != connfd && active_connections[j] != -1)
-                                ft_print_int(active_connections[j], "\033[0;33mserver: client %d just arrived\n\033[0m", ft_find_value_in_arr(active_connections, connfd));
-                            j++;
-                        }
                         FD_SET(connfd, &read_fds_cpy);
+                        print_to_clients("server: client %d just arrived\n", active_connections, connfd);
                     }
                 }
+                // Existing connection sending data
                 else
                 {
-                    ft_print_int(1, "Socket %d is ready to be read\n", i);
-
-                    char *msg = (char *)malloc(sizeof(char) * 30000);
                     char *buf = (char *)malloc(sizeof(char) * 30000);
-                    if (msg == NULL || buf == NULL)
-                    {
-                        ft_print_str(1, "Fatal error\n");
-                        return 1;
-                    }
-                    bzero(msg, 30000);
                     bzero(buf, 30000);
 
                     int bytes_recv = recv(i, buf, 30000, 0);
-
                     switch (bytes_recv)
                     {
                     case -1:
-                        printf("Error recv: %s\n", strerror(errno));
-                        // FREE here
-                        break;
+                        ft_print_str(2, "Fatal error\n");
+                        if (buf)
+                            free(buf);
+                        exit(1);
                     case 0:
                     {
-                        int conn_index = ft_find_value_in_arr(active_connections, i);
+                        print_to_clients("server: client %d just left\n", active_connections, i);
                         remove_from_array(active_connections, i);
-                        printf("%d removed from active connections\n", i);
-                        int j = 0;
-                        while (active_connections[j])
-                        {
-                            if (active_connections[j] != i && active_connections[j] != -1)
-                                ft_print_int(active_connections[j], "\033[0;33mserver: client %d just left\n\033[0m", conn_index);
-                            j++;
-                        }
                         FD_CLR(i, &read_fds_cpy);
-                        // FREE here
+                        close(i);
+
+                        if (buf)
+                            free(buf);
                         break;
                     }
-                    default:
-                        ft_print_str(1, "\n------------------\n");
-                        ft_print_int(1, "Received %d bytes\n", bytes_recv);
                     }
 
-                    int extract_res = extract_message(&buf, &msg);
-                    if (extract_res == -1)
+                    while (1)
                     {
-                        ft_print_str(1, "Fatal error\n");
-                        return 1;
-                    }
-                    free(buf);
+                        char *msg = (char *)malloc(sizeof(char) * 30000);
+                        bzero(msg, 30000);
 
-                    if (extract_res == 0)
-                    {
-                        // FREE here
-                        break;
-                    }
+                        int extract_res = extract_message(&buf, &msg);
+                        if (extract_res == -1)
+                        {
+                            ft_print_str(2, "Fatal error\n");
+                            if (msg)
+                                free(msg);
+                            return 1;
+                        }
+                        else if (extract_res == 0)
+                        {
+                            if (msg)
+                                free(msg);
+                            break;
+                        }
 
-                    printf("Message: .%s.\n", msg);
-                    ft_print_str(1, "\n------------------\n");
+                        char string[] = "client %d: ";
+                        char *output = (char *)malloc(sizeof(char) * (strlen(string) + strlen(msg) + 50));
+                        strcat(output, string);
+                        strcat(output, msg);
+                        print_to_clients(output, active_connections, i);
 
-                    char string[] = "client %d: ";
-                    char *output = (char *)malloc(sizeof(char) * (strlen(string) + strlen(msg) + 50));
-                    strcat(output, string);
-                    strcat(output, msg);
-                    int j = 0;
-                    while (active_connections[j])
-                    {
-                        if (active_connections[j] != i && active_connections[j] != -1)
-                            ft_print_int(active_connections[j], output, ft_find_value_in_arr(active_connections, i));
-                        j++;
+                        free(msg);
+                        free(output);
                     }
-                    free(output);
-                    free(msg);
+                    if (buf)
+                        free(buf);
                 }
             }
         }
     }
-    return 1;
 }
