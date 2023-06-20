@@ -87,6 +87,7 @@ void print_to_clients(char *msg, int *active_connections, int connfd)
             ft_print_int(active_connections[j], msg, ft_find_value_in_arr(active_connections, connfd));
         j++;
     }
+    ft_print_int(1, msg, ft_find_value_in_arr(active_connections, connfd));
 }
 
 int main(int argc, char **argv)
@@ -100,7 +101,7 @@ int main(int argc, char **argv)
     int port = atoi(argv[1]);
 
     int sockfd, connfd, len;
-    struct sockaddr_in servaddr;
+    struct sockaddr_in servaddr = {0};
     bzero(&servaddr, sizeof(servaddr));
 
     // socket create and verification
@@ -123,7 +124,7 @@ int main(int argc, char **argv)
         exit(1);
     }
 
-    if (listen(sockfd, 10) != 0)
+    if (listen(sockfd, 128) != 0)
     {
         ft_print_str(2, "Fatal error\n");
         exit(1);
@@ -193,13 +194,14 @@ int main(int argc, char **argv)
                         FD_CLR(i, &read_fds_cpy);
                         close(i);
 
-                        if (buf)
-                            free(buf);
+                        // if (buf)
+                        //     free(buf);
                         break;
                     }
                     }
 
-                    while (1)
+                    int must_break = 0;
+                    while (!must_break)
                     {
                         char *msg = (char *)malloc(sizeof(char) * 30000);
                         bzero(msg, 30000);
@@ -214,9 +216,11 @@ int main(int argc, char **argv)
                         }
                         else if (extract_res == 0)
                         {
-                            if (msg)
-                                free(msg);
-                            break;
+                            must_break = 1;
+                            if (strlen(buf) == 0)
+                                break;
+
+                            msg = buf;
                         }
 
                         char string[] = "client %d: ";
@@ -224,9 +228,12 @@ int main(int argc, char **argv)
                         strcat(output, string);
                         strcat(output, msg);
                         print_to_clients(output, active_connections, i);
+                        free(output);
+
+                        if (must_break)
+                            break;
 
                         free(msg);
-                        free(output);
                     }
                     if (buf)
                         free(buf);
