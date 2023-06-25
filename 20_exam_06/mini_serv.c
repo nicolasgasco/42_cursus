@@ -189,7 +189,6 @@ int main(int argc, char **argv)
 						exit(1);
 					}
 
-					printf("server acccept the client %d...\n", connfd);
 					FD_SET(connfd, &read_fds_cpy);
 					ft_add_connection(active_fds, connfd);
 
@@ -203,10 +202,10 @@ int main(int argc, char **argv)
 				}
 				else
 				{
-					char *buf = (char *)malloc(sizeof(char) * 30000);
-					bzero(buf, 30000);
+					char *buf = (char *)malloc(sizeof(char) * 900000);
+					bzero(buf, 900000);
 
-					int bytes_rec = recv(i, buf, 30000, 0);
+					int bytes_rec = recv(i, buf, 900000, 0);
 					if (bytes_rec < 0)
 					{
 						ft_putstr(2, "Error with recv\n");
@@ -224,6 +223,7 @@ int main(int argc, char **argv)
 
 						FD_CLR(i, &read_fds_cpy);
 						ft_remove_connection(active_fds, i);
+						free(buf);
 						close(i);
 
 						continue;
@@ -231,12 +231,13 @@ int main(int argc, char **argv)
 
 					while (buf && strlen(buf) != 0)
 					{
-						char *msg = (char *)malloc(sizeof(char) * 30000);
-						bzero(msg, 30000);
+						char *msg = (char *)malloc(sizeof(char) * 900000);
+						bzero(msg, 900000);
 						if (ft_find_newline(buf) == -1)
 						{
 							strcpy(msg, buf);
 							free(buf);
+							buf = NULL;
 						}
 						else
 						{
@@ -244,13 +245,11 @@ int main(int argc, char **argv)
 							if (ret == -1)
 							{
 								ft_putstr(2, "Error with extract_message\n");
+								close(sockfd);
+								close(i);
+								free(msg);
+								free(buf);
 								exit(1);
-							}
-							else if (ret == 0)
-							{
-								printf("msg is .%s.\n", msg);
-								printf("buf is .%s.\n", buf);
-								printf("Is zero:\n");
 							}
 						}
 
@@ -259,10 +258,12 @@ int main(int argc, char **argv)
 						{
 							if (active_fds[j] != i && active_fds[j] != -1)
 							{
-								ft_putint(active_fds[j], "Client %d: ", i);
+								ft_putint(active_fds[j], "client %d: ", ft_find_connection(active_fds, i));
 								if (send(active_fds[j], msg, strlen(msg), 0) < 0)
 								{
 									ft_putstr(2, "Error with send\n");
+									close(sockfd);
+									close(i);
 									exit(1);
 								}
 							}
