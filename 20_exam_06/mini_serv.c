@@ -68,14 +68,6 @@ void ft_putint(int fd, char *str, int value)
 	ft_putstr(fd, output);
 }
 
-void ft_add_connection(int *active_fds, int connfd)
-{
-	int i = 0;
-	while (active_fds[i])
-		i++;
-	active_fds[i] = connfd;
-}
-
 int ft_find_connection(int *active_fds, int connfd)
 {
 	int i = 0;
@@ -88,8 +80,32 @@ int ft_find_connection(int *active_fds, int connfd)
 	return -1;
 }
 
+void ft_add_connection(int *active_fds, int connfd)
+{
+	int i = 0;
+	while (active_fds[i])
+		i++;
+	active_fds[i] = connfd;
+
+	int j = 0;
+	while (active_fds[j])
+	{
+		if (active_fds[j] != connfd && active_fds[j] != -1)
+			ft_putint(active_fds[j], "server: client %d just arrived\n", ft_find_connection(active_fds, connfd));
+		j++;
+	}
+}
+
 void ft_remove_connection(int *active_fds, int connfd)
 {
+	int j = 0;
+	while (active_fds[j])
+	{
+		if (active_fds[j] != connfd && active_fds[j] != -1)
+			ft_putint(active_fds[j], "server: client %d just left\n", ft_find_connection(active_fds, connfd));
+		j++;
+	}
+
 	int i = 0;
 	while (active_fds[i])
 	{
@@ -191,14 +207,6 @@ int main(int argc, char **argv)
 
 					FD_SET(connfd, &read_fds_cpy);
 					ft_add_connection(active_fds, connfd);
-
-					int j = 0;
-					while (active_fds[j])
-					{
-						if (active_fds[j] != connfd && active_fds[j] != -1)
-							ft_putint(active_fds[j], "server: client %d just arrived\n", ft_find_connection(active_fds, connfd));
-						j++;
-					}
 				}
 				else
 				{
@@ -213,14 +221,6 @@ int main(int argc, char **argv)
 					}
 					else if (bytes_rec == 0)
 					{
-						int j = 0;
-						while (active_fds[j])
-						{
-							if (active_fds[j] != i && active_fds[j] != -1)
-								ft_putint(active_fds[j], "server: client %d just left\n", ft_find_connection(active_fds, i));
-							j++;
-						}
-
 						FD_CLR(i, &read_fds_cpy);
 						ft_remove_connection(active_fds, i);
 						free(buf);
