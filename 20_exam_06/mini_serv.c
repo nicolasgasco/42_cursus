@@ -233,24 +233,23 @@ int main(int argc, char **argv)
 					{
 						char *msg = (char *)malloc(sizeof(char) * 900000);
 						bzero(msg, 900000);
-						if (ft_find_newline(buf) == -1)
+
+						int ret = extract_message(&buf, &msg);
+						if (ret == -1)
 						{
-							strcpy(msg, buf);
+							ft_putstr(2, "Error with extract_message\n");
+							close(sockfd);
+							close(i);
+							free(msg);
+							free(buf);
+							exit(1);
+						}
+						else if (ret == 0)
+						{
+							free(msg);
 							free(buf);
 							buf = NULL;
-						}
-						else
-						{
-							int ret = extract_message(&buf, &msg);
-							if (ret == -1)
-							{
-								ft_putstr(2, "Error with extract_message\n");
-								close(sockfd);
-								close(i);
-								free(msg);
-								free(buf);
-								exit(1);
-							}
+							break;
 						}
 
 						int j = 0;
