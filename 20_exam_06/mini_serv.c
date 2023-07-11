@@ -4,274 +4,216 @@
 #include <netdb.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <stdio.h>
 #include <stdlib.h>
-#include <printf.h>
+
+int fd_max = 0;
+fd_set read_fds, read_fds_copy;
+int fds[10000] = {0};
+char buf[1024] = {0};
+char output_buf[100] = {0};
+char *msg[10000];
 
 int extract_message(char **buf, char **msg)
 {
-	char *newbuf;
-	int i;
+    char *newbuf;
+    int i;
 
-	*msg = 0;
-	if (*buf == 0)
-		return (0);
-	i = 0;
-	while ((*buf)[i])
-	{
-		if ((*buf)[i] == '\n')
-		{
-			newbuf = calloc(1, sizeof(*newbuf) * (strlen(*buf + i + 1) + 1));
-			if (newbuf == 0)
-				return (-1);
-			strcpy(newbuf, *buf + i + 1);
-			*msg = *buf;
-			(*msg)[i + 1] = 0;
-			*buf = newbuf;
-			return (1);
-		}
-		i++;
-	}
-	return (0);
+    *msg = 0;
+    if (*buf == 0)
+        return (0);
+    i = 0;
+    while ((*buf)[i])
+    {
+        if ((*buf)[i] == '\n')
+        {
+            newbuf = calloc(1, sizeof(*newbuf) * (strlen(*buf + i + 1) + 1));
+            if (newbuf == 0)
+                return (-1);
+            strcpy(newbuf, *buf + i + 1);
+            *msg = *buf;
+            (*msg)[i + 1] = 0;
+            *buf = newbuf;
+            return (1);
+        }
+        i++;
+    }
+    return (0);
 }
 
 char *str_join(char *buf, char *add)
 {
-	char *newbuf;
-	int len;
+    char *newbuf;
+    int len;
 
-	if (buf == 0)
-		len = 0;
-	else
-		len = strlen(buf);
-	newbuf = malloc(sizeof(*newbuf) * (len + strlen(add) + 1));
-	if (newbuf == 0)
-		return (0);
-	newbuf[0] = 0;
-	if (buf != 0)
-		strcat(newbuf, buf);
-	free(buf);
-	strcat(newbuf, add);
-	return (newbuf);
+    if (buf == 0)
+        len = 0;
+    else
+        len = strlen(buf);
+    newbuf = malloc(sizeof(*newbuf) * (len + strlen(add) + 1));
+    if (newbuf == 0)
+        return (0);
+    newbuf[0] = 0;
+    if (buf != 0)
+        strcat(newbuf, buf);
+    free(buf);
+    strcat(newbuf, add);
+    return (newbuf);
 }
 
-void ft_putstr(int fd, char *str)
+int ft_add_client(int connfd)
 {
-	write(fd, str, strlen(str));
+    int i = 0;
+    while (fds[i])
+        i++;
+    fds[i] = connfd;
+    return (i);
 }
 
-void ft_putint(int fd, char *str, int value)
+int ft_remove_client(int fd)
 {
-	char output[100];
-	bzero(output, sizeof(output));
-
-	sprintf(output, str, value);
-	ft_putstr(fd, output);
+    int i = 0;
+    while (fds[i])
+    {
+        if (fds[i] == fd)
+        {
+            fds[i] = -1;
+            return i;
+        }
+        i++;
+    }
+    return i;
 }
 
-int ft_find_connection(int *active_fds, int connfd)
+void ft_output_message(int fd, char *output_buf)
 {
-	int i = 0;
-	while (active_fds[i])
-	{
-		if (active_fds[i] == connfd)
-			return i;
-		i++;
-	}
-	return -1;
+    int i = 0;
+    while (fds[i])
+    {
+        if (fds[i] != fd && fds[i] != -1)
+            send(fds[i], output_buf, strlen(output_buf), 0);
+        i++;
+    }
 }
 
-void ft_add_connection(int *active_fds, int connfd)
+void ft_print_str(int fd, char *str)
 {
-	int i = 0;
-	while (active_fds[i])
-		i++;
-	active_fds[i] = connfd;
-
-	int j = 0;
-	while (active_fds[j])
-	{
-		if (active_fds[j] != connfd && active_fds[j] != -1)
-			ft_putint(active_fds[j], "server: client %d just arrived\n", ft_find_connection(active_fds, connfd));
-		j++;
-	}
+    write(fd, str, strlen(str));
 }
 
-void ft_remove_connection(int *active_fds, int connfd)
+int ft_fd_pos(int fd)
 {
-	int j = 0;
-	while (active_fds[j])
-	{
-		if (active_fds[j] != connfd && active_fds[j] != -1)
-			ft_putint(active_fds[j], "server: client %d just left\n", ft_find_connection(active_fds, connfd));
-		j++;
-	}
-
-	int i = 0;
-	while (active_fds[i])
-	{
-		if (active_fds[i] == connfd)
-			active_fds[i] = -1;
-		i++;
-	}
+    int i = 0;
+    while (fds[i])
+    {
+        if (fds[i] == fd)
+            return i;
+        i++;
+    }
+    return i;
 }
 
-int ft_find_newline(char *buf)
+int main(int argc, char *argv[])
 {
-	int i = 0;
-	while (buf[i])
-	{
-		if (buf[i] == '\n')
-			return i;
-		i++;
-	}
-	return -1;
-}
+    if (argc != 2)
+    {
+        ft_print_str(2, "Wrong number of arguments\n");
+        exit(1);
+    }
 
-int main(int argc, char **argv)
-{
-	if (argc != 2)
-	{
-		ft_putstr(2, "Wrong number of arguments\n");
-		exit(1);
-	}
+    // socket create and verification
+    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd == -1)
+    {
+        ft_print_str(2, "Fatal error\n");
+        exit(1);
+    }
 
-	int port = atoi(argv[1]);
+    fd_max = sockfd;
 
-	// socket create and verification
-	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (sockfd == -1)
-	{
-		ft_putstr(2, "Fatal error\n");
-		exit(1);
-	}
+    struct sockaddr_in servaddr;
+    bzero(&servaddr, sizeof(servaddr));
+    // assign IP, PORT
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr = htonl(2130706433); // 127.0.0.1
+    servaddr.sin_port = htons(atoi(argv[1]));
 
-	struct sockaddr_in servaddr;
-	bzero(&servaddr, sizeof(servaddr));
+    // Binding newly created socket to given IP and verification
+    if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
+    {
+        ft_print_str(2, "Fatal error\n");
+        exit(1);
+    }
 
-	// assign IP, PORT
-	servaddr.sin_family = AF_INET;
-	servaddr.sin_addr.s_addr = htonl(2130706433); // 127.0.0.1
-	servaddr.sin_port = htons(port);
+    if (listen(sockfd, 128) != 0)
+    {
+        write(2, "Fatal error\n", 12);
+        exit(1);
+    }
 
-	// Binding newly created socket to given IP and verification
-	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
-	{
-		ft_putstr(2, "Fatal error\n");
-		close(sockfd);
-		exit(1);
-	}
+    FD_ZERO(&read_fds);
+    FD_ZERO(&read_fds_copy);
+    FD_SET(sockfd, &read_fds_copy);
 
-	if (listen(sockfd, 10) != 0)
-	{
-		ft_putstr(2, "Fatal error\n");
-		close(sockfd);
-		exit(1);
-	}
+    while (1)
+    {
+        read_fds = read_fds_copy;
 
-	fd_set read_fds, read_fds_cpy;
-	FD_ZERO(&read_fds);
-	FD_ZERO(&read_fds_cpy);
+        if (select(fd_max + 1, &read_fds, 0, 0, 0) == -1)
+        {
+            write(2, "Fatal error\n", 12);
+            exit(1);
+        }
 
-	FD_SET(sockfd, &read_fds_cpy);
+        for (int i = 3; i <= fd_max; i++)
+        {
+            if (FD_ISSET(i, &read_fds))
+            {
+                if (i == sockfd)
+                {
+                    struct sockaddr_in cli;
+                    socklen_t len = sizeof(cli);
+                    int connfd = accept(sockfd, (struct sockaddr *)&cli, &len);
+                    if (connfd < 0)
+                        exit(1);
 
-	int active_fds[124];
-	bzero(active_fds, sizeof(active_fds));
+                    fd_max = connfd > fd_max ? connfd : fd_max;
+                    FD_SET(connfd, &read_fds_copy);
+                    msg[connfd] = NULL;
+                    int new_client_pos = ft_add_client(connfd);
+                    sprintf(output_buf, "server: client %d just arrived\n", new_client_pos);
+                    ft_output_message(connfd, output_buf);
+                    break;
+                }
+                else
+                {
+                    int ret = recv(i, buf, 1024, 0);
+                    if (ret <= 0)
+                    {
+                        close(i);
+                        free(msg[i]);
+                        msg[i] = NULL;
+                        FD_CLR(i, &read_fds_copy);
+                        int removed_client_pos = ft_remove_client(i);
+                        sprintf(output_buf, "server: client %d just left\n", removed_client_pos);
+                        ft_output_message(i, output_buf);
+                        break;
+                    }
 
-	while (1)
-	{
-		read_fds = read_fds_cpy;
-
-		if (select(124, &read_fds, 0, 0, 0) < 0)
-		{
-			ft_putstr(2, "Fatal error\n");
-			close(sockfd);
-			exit(1);
-		}
-
-		for (int i = 3; i < 124; ++i)
-		{
-			if (FD_ISSET(i, &read_fds))
-			{
-				if (i == sockfd)
-				{
-					struct sockaddr_in cli;
-					bzero(&cli, sizeof(cli));
-					int len = sizeof(cli);
-					int connfd = accept(sockfd, (struct sockaddr *)&cli, (socklen_t *)&len);
-					if (connfd < 0)
-					{
-						ft_putstr(2, "Fatal error\n");
-						close(sockfd);
-						exit(1);
-					}
-
-					FD_SET(connfd, &read_fds_cpy);
-					ft_add_connection(active_fds, connfd);
-				}
-				else
-				{
-					char *buf = (char *)malloc(sizeof(char) * 900000);
-					bzero(buf, 900000);
-
-					int bytes_rec = recv(i, buf, 900000, 0);
-					if (bytes_rec < 0)
-					{
-						ft_putstr(2, "Error with recv\n");
-						exit(1);
-					}
-					else if (bytes_rec == 0)
-					{
-						FD_CLR(i, &read_fds_cpy);
-						ft_remove_connection(active_fds, i);
-						free(buf);
-						close(i);
-
-						continue;
-					}
-
-					while (buf && strlen(buf) != 0)
-					{
-						char *msg = (char *)malloc(sizeof(char) * 900000);
-						bzero(msg, 900000);
-
-						int ret = extract_message(&buf, &msg);
-						if (ret == -1)
-						{
-							ft_putstr(2, "Error with extract_message\n");
-							close(sockfd);
-							close(i);
-							free(msg);
-							free(buf);
-							exit(1);
-						}
-						else if (ret == 0)
-						{
-							free(msg);
-							free(buf);
-							buf = NULL;
-							break;
-						}
-
-						int j = 0;
-						while (active_fds[j])
-						{
-							if (active_fds[j] != i && active_fds[j] != -1)
-							{
-								ft_putint(active_fds[j], "client %d: ", ft_find_connection(active_fds, i));
-								if (send(active_fds[j], msg, strlen(msg), 0) < 0)
-								{
-									ft_putstr(2, "Error with send\n");
-									close(sockfd);
-									close(i);
-									exit(1);
-								}
-							}
-							j++;
-						}
-						free(msg);
-					}
-				}
-			}
-		}
-	}
+                    buf[ret] = '\0';
+                    msg[i] = str_join(msg[i], buf);
+                    char *msg_to_send;
+                    while (extract_message(&(msg[i]), &msg_to_send))
+                    {
+                        sprintf(output_buf, "client %d: ", ft_fd_pos(i));
+                        ft_output_message(i, output_buf);
+                        ft_output_message(i, msg_to_send);
+                        free(msg_to_send);
+                        msg_to_send = NULL;
+                    }
+                }
+            }
+        }
+    }
+    return 0;
 }
