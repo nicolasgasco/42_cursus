@@ -10,3 +10,6 @@
 [submodule "19_webserv"]
 	path = 19_webserv
 	url = https://github.com/nicolasgasco/42_webserv
+[submodule "21_transcendence"]
+	path = 21_transcendence
+	url = https://github.com/iker-gonzalez/ft_transcendence.git
