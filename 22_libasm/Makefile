@@ -10,5 +10,13 @@ exec:
 
 $(NAME):
 	@ echo "Compiling ${NAME}..."
-	@ nasm -f elf -o first.o first.s
-	@ ld -m elf_i386 -s -o $(NAME) first.o
+	@ nasm -f elf64 -o first.o first.s
+	@ echo "Creating executable..."
+	@ ld -o $(NAME) first.o
+
+clean:
+	@ echo "Cleaning up files"
+	@ rm -rf ${NAME}
+	@ rm -rf first.o
+
+re: clean all
