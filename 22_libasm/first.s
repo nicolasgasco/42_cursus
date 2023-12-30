@@ -1,6 +1,16 @@
-global _start
+extern printf
+extern exit
 
-_start:
-    MOV al,2
-    MOV bl,2
-    MUL bl
+section .data
+    msg DD "Hello, World!",0
+    ftm DB "Output is: %s",10,0
+section .text
+global main:
+
+main:
+    PUSH msg
+    PUSH ftm
+    CALL printf
+
+    PUSH 1
+    CALL exit
