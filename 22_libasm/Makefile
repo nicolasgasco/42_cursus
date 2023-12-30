@@ -15,8 +15,11 @@ $(NAME):
 	@ ld -o $(NAME) first.o
 
 clean:
-	@ echo "Cleaning up files"
-	@ rm -rf ${NAME}
+	@ echo "Cleaning up object files"
 	@ rm -rf first.o
+
+fclean: clean
+	@ echo "Cleaning up executable"
+	@ rm -rf ${NAME}
 
 re: clean all
