@@ -1,4 +1,8 @@
-NAME = ft_libasm
+NAME = ft_libasm.a
+
+SRCS = ft_strlen.s
+
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
@@ -10,9 +14,11 @@ exec:
 
 $(NAME):
 	@ echo "Compiling ${NAME}..."
-	@ nasm -f elf64 -o first.o first.s
-	@ echo "Creating executable..."
-	@ ld -o $(NAME) first.o
+	@ nasm -f elf64 ${SRCS}
+	@ echo "Creating library file"
+	@ ar -rcs $(NAME) ft_strlen.o
+	@ echo "Compiling test file"
+	@ gcc -Wall -Wextra -Werror main.c ${NAME} -o test
 
 clean:
 	@ echo "Cleaning up object files"
@@ -22,4 +28,4 @@ fclean: clean
 	@ echo "Cleaning up executable"
 	@ rm -rf ${NAME}
 
-re: clean all
+re: fclean all

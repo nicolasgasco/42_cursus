@@ -1,16 +1,18 @@
 extern printf
 extern exit
+extern test
 
 section .data
-    msg DD "Hello, World!",0
-    ftm DB "Output is: %s",10,0
+a db 78
+b dw 678 
 section .text
-global main:
+global _start
 
-main:
-    PUSH msg
-    PUSH ftm
-    CALL printf
+_start:
+    push rax
+    mov rbx, 0
 
-    PUSH 1
-    CALL exit
+_printLoop:
+    inc rax
+    inc rbx
+    mov cl, [rax]
