@@ -33,4 +33,4 @@ The _Outer Core_ projects I completed after completing the _Common Core_ at 42Ur
 
 |Name|Language|End date|Description|Estimated effort (h)|
 |----|--------|--------|-----------|----------|
-|ft_libasm|asm||||
+|ft_libasm|asm||The aim of this project is to get familiar with assembly language.||
