@@ -1,5 +1,6 @@
-# 42 Common Core cursus
+# 42 Cursus
 
+## Common Core
 The _Common Core_ projects I completed while being a student at 42Urduliz campus in Bilbao, Spain.
 
 |Name|Language|End date|Description|Estimated effort (h)|
@@ -25,3 +26,11 @@ The _Common Core_ projects I completed while being a student at 42Urduliz campus
 ⚠️ Don't copy from this repository. I'm not that good and it's against the spirit of 42. Ask your classmates for help. I only created this repository to keep track of my progress. ⚠️
 
 ---
+
+## Outer Core
+The _Outer Core_ projects I completed after completing the _Common Core_ at 42Urduliz in Bilbao, Spain.
+
+
+|Name|Language|End date|Description|Estimated effort (h)|
+|----|--------|--------|-----------|----------|
+|ft_libasm|asm||||
