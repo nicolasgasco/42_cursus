@@ -1,17 +1,17 @@
-section .rodata
-  msg: db "Message from inside ft_strlen", 10
-  msglen: equ $ - msg
-
 section .text
-
-extern printf
-global ft_strlen
+global  ft_strlen
 
 ft_strlen:
-    mov rax, 1        ; write(
-    mov rdi, 1        ;   STDOUT_FILENO,
-    mov rsi, msg      ;   "Hello, world!\n",
-    mov rdx, msglen   ;   sizeof("Hello, world!\n")
-    syscall           ; );
-    mov rax, 42
+    mov rbx, rax ; get the first argument
+    mov rax, 0d  ; initialize the counter
+    jmp .loop
+
+.loop:
+    cmp byte [rbx], 0d ; check if the current byte is 0
+    je  .end           ; if it is, jump to the end
+    inc rbx            ; increment the pointer
+    inc rax            ; increment the counter
+    jmp .loop          ; jump back to the loop
+
+.end:
     ret
