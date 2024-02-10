@@ -1,12 +1,17 @@
 #include <stdio.h>
 #include <string.h>
+#include "ft_libasm.h"
+#include "test_seeds.h"
 
 #define YELLOW "\033[0;33m"
 #define BLUE "\033[0;34m"
 #define NC "\033[0m"
 
-size_t ft_strlen(const char *s);
-char *ft_strcpy(char *restrict dst, const char *restrict src);
+char *STRING_SEEDS[] = {NORMAL_STRING,
+                        EMPTY_STRING,
+                        EMOJI_STRING,
+                        LONG_STRING,
+                        NULL};
 
 void ft_print_test_title(char *title)
 {
@@ -18,54 +23,61 @@ void ft_strlen_assertion(char *str)
     size_t expected = strlen(str);
     size_t actual = ft_strlen(str);
 
-    printf("  - When string is %.50s\n", str);
-    printf("    strlen: %s%lu%s, ft_strlen: %s%lu%s\n", YELLOW, expected, NC, BLUE, actual, NC);
+    printf("  - When string is %s%.50s%s\n", BLUE, str, NC);
+    printf("    strlen: %s%lu%s, ft_strlen: %s%lu%s\n", YELLOW, expected, NC, YELLOW, actual, NC);
     printf("\n");
 }
 
 void ft_strlen_tests()
 {
-    ft_print_test_title("ft_strlen");
+    ft_print_test_title("FT_STRLEN");
 
-    ft_strlen_assertion("Hello World!");
-    ft_strlen_assertion("");
-    ft_strlen_assertion("cmvgmblxmhwdenvyyltnhfcuqlyvkldxjcfczezekdyhxfpgfmzchdahfbghgzxzhxbswalnyeasxpbbcrdwtwkqqqspzstpswgkcjyrgjezbyxncnpacknscagjwbvkryoladtdrvcttpjethsrxmmyycuqoykfuyodgnqnlvzdevfdpziniljvrtvxgtpkuxoodlrtgnyviifkyjpybphtjwjzgofacckcslsagpbsbuhlkmcxazefvbzmtkgciloeopqnzljjbmuntstjdtdqkcefwrbnjiqxkclfqmbxigykeagquooapkeeftawzctydistntkeioaweswvbflwfzazcramnmjrncecspudzuisksukmbgqoxionyvhctipplavajbtgbtlhrhrkyehdvnrplwpycvxaejframiboceruuopjcugajtynrgblkyycpxqapcvmrnsvuwbjsabfpsdfchfksrbpwyguetazxdgwipfafpoytadixikcttnujsggrkucneilksodtnptlzsjzsdbbhisainzdwnilgxchvpfygqtzcflpjxtmxhyrnmxdqfabxvzgkkmbrmjfjtgybmxrwodynglnddowjzhxdcvktuvowdsyqdtztpwdrjcsbakcwwgsmzhesycpyxhpplagsffnukxsxgvsvndgvifniicmpafdvicbyrlhumyygetnvwxtitpwptwzkyxrsdrhpyethmlsziwcxmfxsvfbldzrygeyxrrmtcxpmrdxuhqxjskzxdcctotmblybhxxysvqfxcmonqqcziwhymmqavsjvkacruexxwegtcdxmjcdksoiiiployyugglnrfyzkavrywaxjfvkbhltaobflvxrvyzqcaytfdxitoggtynpaeqrwquorzaxfjbcletikacwvjwviipfoxsknbkbppumxqkcymmnssomenaygkeidggehumtmavtiuvdkwyzmwgssoosmqknhhfvdneoogdevwuytrejkajtqzdzbgawjhooalxtdijosrqumvngxpiwksqibhmcempnwiuuenqnklujnawxwcpoxyluibqiyvrtyehktgjmncyxdmjjvbvrhfpyiantjybttjnjpmpcxcvindlnyigaeogzhqtbbfjeolqnffvikmxxsunbfivhzdfmconxmfysjurenwlezzwjxqheibufrxqgpfjuitdznbheqebztfcwfywwunznrgoncnfmbdrwhesuwshqyrxbmqvrfhjtrrizjmuckgqetmiwedhiiouuiekryxwxjnhsuwdwynmpruepssntotllukwibfrmyhiijywohnirlzraxchcthstjlniggdgujqsiflkzgmxiiyqukvnmhhtjeylmoboxmkyvnhetrblahmxgcwopwujdoizutagywaptzeibduxmvbzyzormelqjnrctaykxjzepvqxmvovxrgsoeowtiqyqpzpnzryvcxessiwxrhlodmqecrvmysqovywiqkahsrsglnptovbdrosqfrflxezwwcisltqugkkutruutedmgiamaigyhgwkklwicyemmolcloxowkfjisfcmavppbeabgeronafyqpbozsxgpqfcniltxvtzebrgybydresnxyppnxdbbjlqytnrzfrgbludppmydwirjzdcvppspwgxkqmnsijhbqfvnwganhrqentevyiwmwxtbpitjfysishwetsbnzzgogvpywsgdvrgmgwuctkzkpwzmuwsuizjggpuzsxkusdjllfcxietlezivqdyxyvoyfkaqcyajhykieqsrgutnsccbtgwtfhxzovidnnyvbnppnhmdadlpkojqzyhpjhohnmgehbxvhpuzbzdezaynnpfoitneeudqudihiundwvepxasozoyriizapabgpepwntawvjuqooucxaigjerpsntalurihzuczmgilxvckydldbsuvtsrjayvhfmyfttytnkbohtxswjkkdamfcegikhbldahfbujveotunpyemhbkmjnhlfozhoqlzkdidquhuvhepwjjxovcqriqdwaycbnakzygoxhdseawmgtmcxcpcjszaxfqginctqcueqwgndnraxsgfbgypowwxqlzgkhjazzgvbtocodsuzllachmskhfkftuyxgtjbuqhqopniacdinfntjhetuvobiezzgtnsjmaexphplbqjgditycumvlbwlbjappwzbpuguorjvyjlkvuurxfiiilhonvndttizwlqncjsvpxgklkcmglftyobwgoyxnpntvwpzuhnvejgnjuqwchyjgzfipcmntzuijjpwtkkqwiqmondmstjynkhlouwgawhdgdmhiyqrruybtdyumhaabzswpgzwqdqqrrllryofrxhudfczghbullfblbdyojhkcyzhxjjvlyxyfmbwulusbbjqrtkhoacfbknxatwuubcgsmqzzcwwxaphlfnptdcbownhpwvguxikrlrjwgcmudrkitkdqudakhooxjcrpjbnaffdwuecoaitebyoybkesijpfxpxdgvnyoikqjkbnogabxnpvcqorfiyxxunhzppdnixsoymlbpawmwbbkltcgcbouoddquesaaqbdodxfksrikaquvkipyafhdccglmieagvvvwgniocbryqedauzqzqofhykdadcikzjotajzwbdbwdsfkdemukgipiiwqnmrwcwhbjlnjkmlkvmpqjetqjxnpyjvjgeshbbsmpjqeqangoyaslbrfqbbzgaagbcoxqvydojedhjwcakdwywycbosfsuxxmkhjltaqjmamjapsxiwvzaeuziktntkhpxpwcgztqxmbhethkgsgbligjqmhxshqyafdrcoaswmejxzqtbywqroxxnsswtmzmhswthrtvzwymsablamiwxgmusrbnhpihmgdeiflxlylwiuusqwxedcsulmtxluxcixkwwzsxqpexowactivmrepgfubytpuplzptnapypntszytuxmjgedqvlffwoeveuujxbwrgncztseubcqrypuaouudapbrkvwjiiqbdgymxrjdjowajprhzjckpuemhssbwgdetqvddgsmrekkmgohkmcbxwwctbswseeoxytgfkbyvtzutuvskxffzoyagdoiwoxefejyxrtxtulnprtvntqsetzhscilvrrueqiivqhbsttyeuoedexrboyfqlldrnxxzcnvogwnfgmahudqcosxpiduilucqkgynrgrkkkvdcqidoirluwknhcmbawhinpehhiaxpxeuycpovukmegivbheuypykvczsklymyouorzlzuubbgnnnmnkmrutoyattctxuozevvmexzfiexjzsfmgncqpxnhmevaxdssyakpdudeepepoigsqozwejijocncnbyfftpuhqolubxenkmwjokmbjgjnaiioqhizekkuymnawfurhanguybshpsisoqueermiommzjtkfrudgwcokxpxkgpjpqwaohzhmiliaqigicxxpmyclihqfhzgqwnlynzezpiolgaxckljkvliawbqfnwpnmjuvvlizwrezyochcculmdycwjcgvakhofkrdyjeeywcymzuuvdwyuqrfrmqlksjioyqzvrkeofdhivupbmviubzhlohjqpsdvrkgjskiljlgliniampqemmmzoxgyjysyhntcfxkvyfeztadpawjxfhcxxofwlijdpftyyipsnesynwbawezymecogwfuxirqjqoxmwbaqaamrqrjzmadveopogeccfotgwwvsfxrojljszkxircalgynfcvwjtatcedaqophfqwcjjkhbzndncuzsdqowjgtggsqxygfoljacwxhmcsynmxxpctinmeakoghapfvuaciczqzbnmrmdxfwtykjqtcdszqydklvrpzgodstlovjtpplpbvovgrqfcguvekvkzzbrcextpecamegyccianlblpvnxffyinspbrwbztjlwtfgnezcjbxqhklbctlcdkybobmymjitjzeboriavsncqyghhbzeaxsdmlmqeiwwnognmgdbyguijtpfgvdipzmoztmnknovpuvgzqpjdiznptvsdasvmtxndshbdiadetsjyezcipxgtyoamtttgpwyjtagydgrntfvpyekzpbukmvlsvjkyxzhowdfwuefdrvswmeivjbgmryfuustvfqqssqngzixnmyuogbgnaapdhxpcpvdgimbziagtjogaplyskxdktoseqghusvtqzwkqrecqjpwxokdyhutfghdwtgtgdwpmxvterzqezzzimcxddzmhzjgztslivggnzzanpslayexuhhbiifxxzgweioxtbopioskdzaflzeklvqwizpstyilwjmlystcuwtgtvdkkutnztcrgdfdnnzgsktkavapslrbmdwklojfffaupbzitwbavbjqgqhyzeinycgsojyhqczadrreikagcswtvgywkypkbdkwxbttkcterhhrxketeloiejzycotlhiulajmaxnpdxlyureewjbcrgihpsrdnrwwrimeydspbqhhcvoegopmqycxopvkxdnhdxouddysuhanvwvevepvcivdjhfrjlvjkdzhxpdckhuicrvggezizpcwgpamswbtphgeuyzwufcwzdztigrsglaqfluebizjjchxiygjjgrlhpgxjwunkkomksoxvqcviuxcxcmaykzqronpjrdhapdctttohnllesjiizmzsaafnqujzbidbpqdunsflxmjpwaabmvjlyoxpxdpbgrylpfeiphiakuzyefzdntpmicwihbfgyaogcwaphmyhjilkugbrszycoorpcdmaqyvzcdajuradzzmsprlagkhbpgfzzfgilhfghfjwwd");
-    ft_strlen_assertion("0");
-    ft_strlen_assertion("🔥💀");
+    for (int i = 0; STRING_SEEDS[i]; i++)
+    {
+        ft_strlen_assertion(STRING_SEEDS[i]);
+    }
 }
 
-void ft_strcpy_assertion(char *src, char *dest)
+void ft_strcpy_assertion(char *src)
 {
-    printf("\t- When source is '%s' (%lu chars) and dest is '%s' (%lu chars)\n", src, strlen(src), dest, strlen(dest));
+    size_t src_len = strlen(src);
 
-    printf("Before strcpy: %s\n", dest);
-    strcpy(dest, src);
-    printf("After strcpy: %s\n", dest);
+    char dest[src_len + 1];
+    bzero(dest, src_len + 1);
 
+    printf("  - When source is '%s%.50s%s' (%lu chars) and dest is '%s%.50s%s' (%lu chars)\n", BLUE, src, NC, strlen(src), BLUE, dest, NC, strlen(dest));
+
+    printf("    Dest (before strcpy): %s%.50s%s\n", YELLOW, dest, NC);
+    char *original_ret = strcpy(dest, src);
+    printf("    Dest (after strcpy): %s%.50s%s\n", YELLOW, dest, NC);
+    printf("    Return value is: %s%.50s%s\n", BLUE, original_ret, NC);
+
+    printf("      -\n");
     bzero(dest, strlen(dest));
 
-    printf("Before ft_strcpy: %s\n", dest);
-    ft_strcpy(dest, src);
-    printf("After ft_strcpy: %s\n", dest);
+    printf("    Dest (before ft_strcpy): %s%.50s%s\n", YELLOW, dest, NC);
+    char *own_ret = ft_strcpy(dest, src);
+    printf("    Dest (after ft_strcpy): %s%.50s%s\n", YELLOW, dest, NC);
+    printf("    Return value is: %s%.50s%s\n", BLUE, own_ret, NC);
+
+    printf("\n");
 }
 
 void ft_strcpy_tests()
 {
-    ft_print_test_title("ft_strcpy");
+    ft_print_test_title("FT_STRCPY");
 
-    char *src = "Hello World!";
-    size_t len = strlen(src);
-
-    char dest[len + 1];
-    bzero(dest, len + 1);
-    ft_strcpy_assertion(src, dest);
+    for (int i = 0; STRING_SEEDS[i]; i++)
+    {
+        ft_strcpy_assertion(STRING_SEEDS[i]);
+    }
 }
 
 int main()
 {
     printf("\n%sLIBASM TESTS%s\n\n", YELLOW, NC);
 
-    // ft_strlen_tests();
+    ft_strlen_tests();
     ft_strcpy_tests();
     return 0;
 }
