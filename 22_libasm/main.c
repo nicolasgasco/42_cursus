@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <sys/stat.h>
 #include "ft_libasm.h"
 #include "test_seeds.h"
 
@@ -83,17 +86,17 @@ void ft_strcmp_assertion(char *s1, char *s2)
 
 void ft_strcmp_tests()
 {
-    const char *cmp_seeds1[] = {
+    char *cmp_seeds1[] = {
         "Hello world!",
-        "a",
+        "",
         "String containing 👋🌍 emojis",
         "Not a very long string, but still long enough to be considered long",
         NULL};
 
-    const char *cmp_seeds2[] = {
+    char *cmp_seeds2[] = {
         "hello world!",
+        "hey",
         "",
-        "10",
         " \t",
         NULL};
 
@@ -110,6 +113,50 @@ void ft_strcmp_tests()
     }
 }
 
+void ft_write_assertion(int fd, char *str, size_t len)
+{
+    printf("  - When fd is %d, str is '%s%.50s%s' and len is %lu\n", fd, BLUE, str, NC, len);
+
+    int original_ret = write(fd, str, len);
+    int original_errno = errno;
+
+    int own_ret = ft_write(fd, str, len);
+    int own_errno = errno;
+    printf("    write: %s%d%s, ft_write: %s%d%s\n", YELLOW, original_ret, NC, YELLOW, own_ret, NC);
+
+    if (original_ret < 0 || own_ret < 0)
+        printf("    errno: %s%s%s (%d), ft_errno: %s%s%s (%d)\n", YELLOW, strerror(original_errno), NC, original_errno, YELLOW, strerror(own_errno), NC, own_errno);
+    printf("\n");
+}
+
+void ft_write_tests()
+{
+    ft_print_test_title("FT_WRITE");
+
+    for (int i = 0; STRING_SEEDS[i]; i++)
+    {
+        if (strlen(STRING_SEEDS[i]) < 50)
+            ft_write_assertion(1, STRING_SEEDS[i], strlen(STRING_SEEDS[i]));
+    }
+
+    ft_write_assertion(1, "Hello world!", 5);
+    ft_write_assertion(1, "Hello world!", 1);
+    ft_write_assertion(1, "Hello world!", 0);
+    ft_write_assertion(1, "Hello world!", 25);
+    ft_write_assertion(1, "Hello world!", -2);
+
+    ft_write_assertion(-1, "Hello world!", 5);
+    ft_write_assertion(0, "Hello world!", 5);
+    ft_write_assertion(1203, NULL, 10);
+    ft_write_assertion(2, "Hello world!", 5);
+
+    ft_write_assertion(1, NULL, 5);
+
+    int fd = open("test_write", O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
+    ft_write_assertion(fd, "Hello world!", 5);
+    close(fd);
+}
+
 int main()
 {
     printf("\n%sLIBASM TESTS%s\n\n", YELLOW, NC);
@@ -117,6 +164,7 @@ int main()
     ft_strlen_tests();
     ft_strcpy_tests();
     ft_strcmp_tests();
+    ft_write_tests();
 
     return 0;
 }
