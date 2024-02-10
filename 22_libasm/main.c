@@ -157,6 +157,69 @@ void ft_write_tests()
     close(fd);
 }
 
+void ft_read_assertion(int fd, size_t len, char *filename)
+{
+    char buf[len];
+
+    if (filename)
+    {
+        fd = open("test_read", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+        write(fd, "Hello world!", 12);
+        close(fd);
+
+        fd = open("test_read", O_RDWR);
+    }
+
+    printf("  - When fd is %d and buf len is %lu\n", fd, len);
+
+    int original_ret = read(fd, &buf, len);
+    int original_errno = errno;
+
+    if (filename)
+        close(fd);
+
+    if (filename)
+    {
+        char new_filename[1024];
+        strcpy(new_filename, filename);
+        strcat(new_filename, "_own");
+
+        fd = open(new_filename, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+        write(fd, "Hello world!", 12);
+        close(fd);
+
+        fd = open("test_read", O_RDWR);
+    }
+
+    int own_ret = ft_read(fd, &buf, len);
+    int own_errno = errno;
+
+    if (original_errno > 0 || own_errno > 0)
+        printf("    errno: %s%s%s (%d), ft_errno: %s%s%s (%d)\n", YELLOW, strerror(original_errno), NC, original_errno, YELLOW, strerror(own_errno), NC, own_errno);
+
+    printf("    write: %s%d%s, ft_write: %s%d%s\n", YELLOW, original_ret, NC, YELLOW, own_ret, NC);
+
+    if (filename)
+        close(fd);
+
+    printf("\n");
+}
+
+void ft_read_tests()
+{
+    ft_print_test_title("FT_READ");
+
+    ft_read_assertion(0, 10, NULL);
+    ft_read_assertion(0, 0, NULL);
+    ft_read_assertion(0, -1, NULL);
+
+    ft_read_assertion(-1, 10, NULL);
+    ft_read_assertion(2500, 10, NULL);
+    ft_read_assertion(0, -1, NULL);
+
+    ft_read_assertion(0, 7, "test_read");
+}
+
 int main()
 {
     printf("\n%sLIBASM TESTS%s\n\n", YELLOW, NC);
@@ -165,6 +228,7 @@ int main()
     ft_strcpy_tests();
     ft_strcmp_tests();
     ft_write_tests();
+    ft_read_tests();
 
     return 0;
 }

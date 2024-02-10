@@ -20,6 +20,7 @@ ifeq (${OS}, Darwin)
 	@ nasm -f macho64 ft_strcpy.s -o ft_strcpy.o
 	@ nasm -f macho64 ft_strcmp.s -o ft_strcmp.o
 	@ nasm -f macho64 ft_write.s -o ft_write.o
+	@ nasm -f macho64 ft_read.s -o ft_read.o
 else
 	@ echo "Other OS detected (Codespaces)"
 	@ sh scripts/remove_underscore.sh
@@ -28,6 +29,7 @@ else
 	@ nasm -f elf64 ft_strcpy.s -o ft_strcpy.o
 	@ nasm -f elf64 ft_strcmp.s -o ft_strcmp.o
 	@ nasm -f elf64 ft_write.s -o ft_write.o
+	@ nasm -f elf64 ft_read.s -o ft_read.o
 endif
 	@ ar rcs $(NAME) *.o
 	@ echo "Compiling test file"
