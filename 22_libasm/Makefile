@@ -10,18 +10,10 @@ OS = $(shell uname)
 
 all: $(NAME)
 
-up:
-	docker compose up --build -d
-
-exec:
-	docker exec -it linux bash
-
 $(NAME):
 	@ echo "Compiling ${NAME}..."
 ifeq (${OS}, Darwin)
 	@ echo "🍏 Intel Mac detected (42Urduliz campus)"
-	@ nasm -f macho64 ft_strlen.s -o ft_strlen.o
-	@ nasm -f macho64 ft_strcpy.s -o ft_strcpy.o
 else
 	@ echo "Other OS detected (Codespaces)"
 	@ nasm -f elf64 ft_strlen.s -o ft_strlen.o
@@ -32,6 +24,14 @@ endif
 	@ echo "Compiling test file"
 	@ gcc -arch x86_64 main.c ${NAME} -o test
 
+%.o: %.s
+ifeq (${OS}, Darwin)
+	@ echo "🍏 Intel Mac detected (42Urduliz campus)"
+	@ nasm -f macho64 $< -o $@
+else
+	@ echo "Other OS detected (Codespaces)"
+	@ nasm -f elf64 $< -o $@
+endif
 
 clean:
 	@ echo "Cleaning up object files"
