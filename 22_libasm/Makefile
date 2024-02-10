@@ -17,12 +17,14 @@ ifeq (${OS}, Darwin)
 	@ echo "🍏 Intel Mac detected (42Urduliz campus)"
 	@ nasm -f macho64 ft_strlen.s -o ft_strlen.o
 	@ nasm -f macho64 ft_strcpy.s -o ft_strcpy.o
+	@ nasm -f macho64 ft_strcmp.s -o ft_strcmp.o
 else
 	@ echo "Other OS detected (Codespaces)"
 	@ sh scripts/remove_underscore.sh
 	@ echo "Removing underscore from function names"
 	@ nasm -f elf64 ft_strlen.s -o ft_strlen.o
 	@ nasm -f elf64 ft_strcpy.s -o ft_strcpy.o
+	@ nasm -f elf64 ft_strcmp.s -o ft_strcmp.o
 endif
 	@ ar rcs $(NAME) *.o
 	@ echo "Compiling test file"
