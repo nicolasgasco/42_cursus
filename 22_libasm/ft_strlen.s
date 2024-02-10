@@ -1,8 +1,8 @@
 section .text
-global  ft_strlen
+global  _ft_strlen
 
-ft_strlen:
-    mov rbx, rax ; get the first argument
+_ft_strlen:
+    mov rbx, rdi ; get the first argument
     mov rax, 0d  ; initialize the counter
     jmp .loop    ; start the loop
 
