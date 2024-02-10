@@ -1,8 +1,8 @@
-global  ft_strcpy
+global  _ft_strcpy
     
 section .text
 
-ft_strcpy:
+_ft_strcpy:
     mov rbx, rax
     mov eax, 4
     mov ebx, 1
