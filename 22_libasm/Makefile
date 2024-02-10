@@ -1,6 +1,7 @@
 NAME = ft_libasm.a
 
-SRCS = ft_strlen.s
+SRCS = 	ft_strlen.s \
+		ft_strcpy.s
 
 OBJS = $(SRCS:.c=.o)
 
@@ -14,11 +15,12 @@ exec:
 
 $(NAME):
 	@ echo "Compiling ${NAME}..."
-	@ nasm -f elf64 ${SRCS}
+	@ nasm -f elf64 ft_strlen.s
+	@ nasm -f elf64 ft_strcpy.s
 	@ echo "Creating library file"
-	@ ar -rcs $(NAME) ft_strlen.o
+	@ ar -rcs $(NAME) ft_strlen.o ft_strcpy.o
 	@ echo "Compiling test file"
-	@ gcc -Wall -Wextra -Werror main.c ${NAME} -o test
+	@ gcc main.c ${NAME} -o test
 
 clean:
 	@ echo "Cleaning up object files"

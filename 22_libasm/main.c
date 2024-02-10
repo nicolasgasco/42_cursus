@@ -5,7 +5,8 @@
 #define BLUE "\033[0;34m"
 #define NC "\033[0m"
 
-size_t ft_strlen(char *);
+size_t ft_strlen(const char *s);
+char *ft_strcpy(char *restrict dst, const char *restrict src);
 
 void ft_strlen_assertion(char *str)
 {
@@ -17,9 +18,14 @@ void ft_strlen_assertion(char *str)
     printf("\n");
 }
 
+void ft_print_test_title(char *title)
+{
+    printf("%s%s%s\n", BLUE, title, NC);
+}
+
 void ft_strlen_tests()
 {
-    printf("%sft_strlen%s\n", BLUE, NC);
+    ft_print_test_title("ft_strlen");
 
     ft_strlen_assertion("Hello World!");
     ft_strlen_assertion("");
@@ -28,10 +34,32 @@ void ft_strlen_tests()
     ft_strlen_assertion("🔥💀");
 }
 
+void ft_strcpy_tests()
+{
+    // ft_print_test_title("ft_strcpy");
+    char *src = "Hello World!";
+
+    // printf("Source: %s\n", src);
+
+    size_t len = strlen(src);
+    char dest[len + 1];
+    bzero(dest, len + 1);
+
+    // printf("Before strcpy: %s\n", dest);
+    // strcpy(dest, src);
+    // printf("After strcpy: %s\n", dest);
+
+    // bzero(dest, len + 1);
+    // printf("Before ft_strcpy: %s\n", dest);
+    ft_strcpy("cia", "miao");
+    // printf("After ft_strcpy: %s\n", dest);
+}
+
 int main()
 {
     printf("\n%sLIBASM TESTS%s\n\n", YELLOW, NC);
 
-    ft_strlen_tests();
+    // ft_strlen_tests();
+    ft_strcpy_tests();
     return 0;
 }
