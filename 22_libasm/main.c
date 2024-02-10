@@ -8,6 +8,11 @@
 size_t ft_strlen(const char *s);
 char *ft_strcpy(char *restrict dst, const char *restrict src);
 
+void ft_print_test_title(char *title)
+{
+    printf("%s%s%s\n", BLUE, title, NC);
+}
+
 void ft_strlen_assertion(char *str)
 {
     size_t expected = strlen(str);
@@ -16,11 +21,6 @@ void ft_strlen_assertion(char *str)
     printf("  - When string is %.50s\n", str);
     printf("    strlen: %s%lu%s, ft_strlen: %s%lu%s\n", YELLOW, expected, NC, BLUE, actual, NC);
     printf("\n");
-}
-
-void ft_print_test_title(char *title)
-{
-    printf("%s%s%s\n", BLUE, title, NC);
 }
 
 void ft_strlen_tests()
@@ -34,25 +34,31 @@ void ft_strlen_tests()
     ft_strlen_assertion("🔥💀");
 }
 
+void ft_strcpy_assertion(char *src, char *dest)
+{
+    printf("\t- When source is '%s' (%lu chars) and dest is '%s' (%lu chars)\n", src, strlen(src), dest, strlen(dest));
+
+    printf("Before strcpy: %s\n", dest);
+    strcpy(dest, src);
+    printf("After strcpy: %s\n", dest);
+
+    bzero(dest, strlen(dest));
+
+    printf("Before ft_strcpy: %s\n", dest);
+    ft_strcpy(dest, src);
+    printf("After ft_strcpy: %s\n", dest);
+}
+
 void ft_strcpy_tests()
 {
-    // ft_print_test_title("ft_strcpy");
+    ft_print_test_title("ft_strcpy");
+
     char *src = "Hello World!";
-
-    // printf("Source: %s\n", src);
-
     size_t len = strlen(src);
+
     char dest[len + 1];
     bzero(dest, len + 1);
-
-    // printf("Before strcpy: %s\n", dest);
-    // strcpy(dest, src);
-    // printf("After strcpy: %s\n", dest);
-
-    // bzero(dest, len + 1);
-    // printf("Before ft_strcpy: %s\n", dest);
-    ft_strcpy("cia", "miao");
-    // printf("After ft_strcpy: %s\n", dest);
+    ft_strcpy_assertion(src, dest);
 }
 
 int main()
