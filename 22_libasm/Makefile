@@ -16,11 +16,12 @@ OS = $(shell uname)
 all: $(NAME)
 
 $(NAME):
-	@ echo "Compiling ${NAME}..."
-	@ echo "Creating library"
 	@ mkdir -p ${OBJS_DIR}
 ifeq (${OS}, Darwin)
 	@ echo "🍏 Intel Mac detected (42Urduliz campus)"
+	@ sh scripts/remove_plt.sh
+	@ echo "Removing PLT from source files"
+	@ rm -rf src/*.s-e
 	@ nasm -f macho64 ${SRC_DIR}/ft_strlen.s -o ${OBJS_DIR}/ft_strlen.o
 	@ nasm -f macho64 ${SRC_DIR}/ft_strcpy.s -o ${OBJS_DIR}/ft_strcpy.o
 	@ nasm -f macho64 ${SRC_DIR}/ft_strcmp.s -o ${OBJS_DIR}/ft_strcmp.o
@@ -38,6 +39,7 @@ else
 	@ nasm -f elf64 ${SRC_DIR}/ft_read.s -o ${OBJS_DIR}/ft_read.o
 	@ nasm -f elf64 ${SRC_DIR}/ft_strdup.s -o ${OBJS_DIR}/ft_strdup.o
 endif
+	@ echo "Compiling ${NAME} library"
 	@ ar rcs $(NAME) ${OBJS_DIR}/*.o
 	@ echo "Compiling test file"
 ifeq (${OS}, Darwin)
