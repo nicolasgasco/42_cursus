@@ -226,10 +226,10 @@ void ft_strdup_assertion(char *str)
 
     printf("    strdup: %s%.50s%s, ft_strdup: %s%.50s%s\n", YELLOW, original_ret, NC, YELLOW, own_ret, NC);
 
-    if (strlen(original_ret) > 0)
+    if (original_ret)
         free(original_ret);
 
-    if (strlen(own_ret) > 0)
+    if (own_ret)
         free(own_ret);
 
     printf("\n");
