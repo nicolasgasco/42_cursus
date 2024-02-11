@@ -34,22 +34,21 @@
 
 section .text
 
-extern  __errno_location
+extern  ___error
 global  _ft_write
 
-%define WRITE_SYSCALL 1
+%define WRITE_SYSCALL 0x2000004
 
 _ft_write:
     mov rax, WRITE_SYSCALL ; syscall number for write
     syscall
-    cmp rax, 0             ; check for error
-    jl  .error
+
+    jc  .error
     ret
 
 .error:
-    neg  rax                        ; negate the return value
     mov  rdi,   rax                 ; set errno
-    call __errno_location WRT ..plt ; call __errno_location 
+    call ___error  ; call ___error 
     mov  [rax], rdi                 ; set errno
     mov  rax,   -1                  ; return -1
     ret

@@ -18,9 +18,8 @@ _ft_strlen:
     jmp .loop    ; jump to the loop
 
 .loop:
-    cmp byte [rbx], 0d ; check if the current character is the null byte
+    cmp byte [rbx + rax], 0d ; check if the current character is the null byte
     je  .end           ; if it is, jump to the end
-    inc rbx            ; move to the next character
     inc rax            ; increment the counter and return value
     jmp .loop          ; jump back to the loop
 

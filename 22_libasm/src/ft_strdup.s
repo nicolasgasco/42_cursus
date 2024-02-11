@@ -23,7 +23,7 @@ global  _ft_strdup
 extern  _ft_strcpy
 extern  _ft_strlen
 extern  _malloc
-extern  __errno_location
+extern  ___error
 
 default rel
 
@@ -31,19 +31,16 @@ section .text
 
 _ft_strdup:
     call _ft_strlen ; get the length of the string
-
     inc rax ; add 1 to the length of the string for the null byte
 
     push rdi               ; save the pointer to the old string
     mov  rdi, rax          ; first argument is the length of the string + 1
-    call _malloc WRT ..plt ; allocate memory for the new string
+    call _malloc  ; allocate memory for the new string
     pop  rdi               ; restore the pointer to the old string
 
     cmp rax, 0 ; check if the allocation was successful
     je  .error ; jump to the error section if the allocation failed
-    jne .copy
 
-.copy:
     mov rsi, rdi ; second argument is the pointer to the old string
     mov rdi, rax ; first argument is the pointer to the new string
 
@@ -53,9 +50,8 @@ _ft_strdup:
     ret
 
 .error:
-    neg  rax                        ; negate the return value
     mov  rdi,   rax                 ; set errno
-    call __errno_location WRT ..plt ; call __errno_location 
+    call ___error  ; call ___error 
     mov  [rax], rdi                 ; set errno
     mov  rax,   0                   ; return NULL
     ret
