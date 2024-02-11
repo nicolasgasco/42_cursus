@@ -32,8 +32,8 @@ _ft_read:
     ret
 
 .error:
-    mov  rdi,   rax                 ; set errno
-    call ___error  ; call ___error 
-    mov  [rax], rdi                 ; set errno
-    mov  rax,   -1                  ; return -1
+    mov  rdi,   rax ; set errno
+    call ___error   ; call ___error 
+    mov  [rax], rdi ; set errno
+    mov  rax,   -1  ; return -1
     ret

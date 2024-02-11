@@ -19,9 +19,9 @@ _ft_strlen:
 
 .loop:
     cmp byte [rbx + rax], 0d ; check if the current character is the null byte
-    je  .end           ; if it is, jump to the end
-    inc rax            ; increment the counter and return value
-    jmp .loop          ; jump back to the loop
+    je  .end                 ; if it is, jump to the end
+    inc rax                  ; increment the counter and return value
+    jmp .loop                ; jump back to the loop
 
 .end:
     ret

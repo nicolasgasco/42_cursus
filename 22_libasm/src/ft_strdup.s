@@ -31,12 +31,12 @@ section .text
 
 _ft_strdup:
     call _ft_strlen ; get the length of the string
-    inc rax ; add 1 to the length of the string for the null byte
+    inc  rax        ; add 1 to the length of the string for the null byte
 
-    push rdi               ; save the pointer to the old string
-    mov  rdi, rax          ; first argument is the length of the string + 1
+    push rdi      ; save the pointer to the old string
+    mov  rdi, rax ; first argument is the length of the string + 1
     call _malloc  ; allocate memory for the new string
-    pop  rdi               ; restore the pointer to the old string
+    pop  rdi      ; restore the pointer to the old string
 
     cmp rax, 0 ; check if the allocation was successful
     je  .error ; jump to the error section if the allocation failed
@@ -50,8 +50,8 @@ _ft_strdup:
     ret
 
 .error:
-    mov  rdi,   rax                 ; set errno
-    call ___error  ; call ___error 
-    mov  [rax], rdi                 ; set errno
-    mov  rax,   0                   ; return NULL
+    mov  rdi,   rax ; set errno
+    call ___error   ; call ___error 
+    mov  [rax], rdi ; set errno
+    mov  rax,   0   ; return NULL
     ret
