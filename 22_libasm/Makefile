@@ -9,6 +9,7 @@ SRC_DIR = src
 OBJS_DIR = objs
 OBJS = $(SRCS:.c=.o)
 
+SANITIZE= -fsanitize=address -g3 -fno-omit-frame-pointer
 OS = $(shell uname)
 
 
@@ -40,9 +41,9 @@ endif
 	@ ar rcs $(NAME) ${OBJS_DIR}/*.o
 	@ echo "Compiling test file"
 ifeq (${OS}, Darwin)
-	@ gcc -arch x86_64 ${FLAGS} main.c ${NAME} -o ${EXECUTABLE}
+	@ gcc -arch x86_64 ${FLAGS} ${SANITIZE} main.c ${NAME} -o ${EXECUTABLE}
 else
-	@ gcc main.c ${FLAGS} ${NAME} -o test
+	@ gcc main.c ${FLAGS} ${SANITIZE} ${NAME} -o test
 	@ sh scripts/add_underscore.sh
 	@ echo "Re-adding underscore to function names"
 endif

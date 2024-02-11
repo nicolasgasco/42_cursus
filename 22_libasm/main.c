@@ -147,7 +147,7 @@ void ft_write_tests()
     ft_write_assertion(1, "Hello world!", 5);
     ft_write_assertion(1, "Hello world!", 1);
     ft_write_assertion(1, "Hello world!", 0);
-    ft_write_assertion(1, "Hello world!", 25);
+    ft_write_assertion(1, "Hello world! Hey hey hey", 25);
     ft_write_assertion(1, "Hello world!", -2);
 
     ft_write_assertion(-1, "Hello world!", 5);
