@@ -42,7 +42,7 @@ _ft_strdup:
     je  .error ; jump to the error section if the allocation failed
     jne .copy
 
-.copy
+.copy:
     mov rsi, rdi ; second argument is the pointer to the old string
     mov rdi, rax ; first argument is the pointer to the new string
 
@@ -51,6 +51,6 @@ _ft_strdup:
 
     ret
 
-.error
+.error:
     mov rax, 0 ; return NULL
     ret
