@@ -5,7 +5,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
-#include "ft_libasm.h"
+#include "src/ft_libasm.h"
 #include "test_seeds.h"
 
 #define YELLOW "\033[0;33m"
