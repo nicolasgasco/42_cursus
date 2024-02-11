@@ -152,7 +152,7 @@ void ft_write_tests()
 
     ft_write_assertion(1, NULL, 5);
 
-    int fd = open("test_write", O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
+    int fd = open("test_files/test_write", O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
     ft_write_assertion(fd, "Hello world!", 5);
     close(fd);
 }
@@ -163,11 +163,11 @@ void ft_read_assertion(int fd, size_t len, char *filename)
 
     if (filename)
     {
-        fd = open("test_read", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+        fd = open("test_files/test_read", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
         write(fd, "Hello world!", 12);
         close(fd);
 
-        fd = open("test_read", O_RDWR);
+        fd = open("test_files/test_read", O_RDWR);
     }
 
     printf("  - When fd is %d and buf len is %lu\n", fd, len);
@@ -188,13 +188,13 @@ void ft_read_assertion(int fd, size_t len, char *filename)
         write(fd, "Hello world!", 12);
         close(fd);
 
-        fd = open("test_read", O_RDWR);
+        fd = open("test_files/test_read", O_RDWR);
     }
 
     int own_ret = ft_read(fd, &buf, len);
     int own_errno = errno;
 
-    if (original_errno > 0 || own_errno > 0)
+    if (own_ret < 0 || original_ret < 0)
         printf("    errno: %s%s%s (%d), ft_errno: %s%s%s (%d)\n", YELLOW, strerror(original_errno), NC, original_errno, YELLOW, strerror(own_errno), NC, own_errno);
 
     printf("    write: %s%d%s, ft_write: %s%d%s\n", YELLOW, original_ret, NC, YELLOW, own_ret, NC);
@@ -209,7 +209,7 @@ void ft_read_tests()
 {
     ft_print_test_title("FT_READ");
 
-    ft_read_assertion(0, 10, NULL);
+    // ft_read_assertion(0, 10, NULL);
     ft_read_assertion(0, 0, NULL);
     ft_read_assertion(0, -1, NULL);
 

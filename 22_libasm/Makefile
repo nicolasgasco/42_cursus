@@ -53,6 +53,8 @@ endif
 clean:
 	@ echo "Cleaning up object files"
 	@ rm -rf *.o
+	@ echo "Cleaning up test files"
+	@ rm -rf test_files
 
 fclean: clean
 	@ echo "Cleaning up executable"
