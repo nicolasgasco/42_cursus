@@ -19,8 +19,6 @@ $(NAME):
 	@ mkdir -p ${OBJS_DIR}
 ifeq (${OS}, Darwin)
 	@ echo "🍏 Intel Mac detected (42Urduliz campus)"
-	@ sh scripts/remove_plt.sh
-	@ echo "Removing PLT from source files"
 	@ rm -rf src/*.s-e
 	@ nasm -f macho64 ${SRC_DIR}/ft_strlen.s -o ${OBJS_DIR}/ft_strlen.o
 	@ nasm -f macho64 ${SRC_DIR}/ft_strcpy.s -o ${OBJS_DIR}/ft_strcpy.o
@@ -29,9 +27,9 @@ ifeq (${OS}, Darwin)
 	@ nasm -f macho64 ${SRC_DIR}/ft_read.s -o ${OBJS_DIR}/ft_read.o
 	@ nasm -f macho64 ${SRC_DIR}/ft_strdup.s -o ${OBJS_DIR}/ft_strdup.o
 else
-	@ echo "Other OS detected (Codespaces)"
-	@ sh scripts/remove_underscore.sh
-	@ echo "Removing underscore from function names"
+	@ echo "🐧 Other OS detected (Codespaces)"
+	@ sh scripts/macos_to_linux.sh
+	@ echo "Adapting function names to Linux format"
 	@ nasm -f elf64 ${SRC_DIR}/ft_strlen.s -o ${OBJS_DIR}/ft_strlen.o
 	@ nasm -f elf64 ${SRC_DIR}/ft_strcpy.s -o ${OBJS_DIR}/ft_strcpy.o
 	@ nasm -f elf64 ${SRC_DIR}/ft_strcmp.s -o ${OBJS_DIR}/ft_strcmp.o
@@ -41,25 +39,17 @@ else
 endif
 	@ echo "Compiling ${NAME} library"
 	@ ar rcs $(NAME) ${OBJS_DIR}/*.o
-	@ echo "Compiling test file"
+
 ifeq (${OS}, Darwin)
 	gcc -arch x86_64 ${FLAGS} ${SANITIZE} main.c ${NAME} -o ${EXECUTABLE}
 else
 	gcc main.c ${FLAGS} ${SANITIZE} ${NAME} -o test
-	@ sh scripts/add_underscore.sh
-	@ echo "Re-adding underscore to function names"
+	@ sh scripts/linux_to_macos.sh
+	@ echo "Bringing back function names to MacOS format"
 endif
 	@ echo "Creating test_files directory"
 	@ mkdir -p test_files
 
-# %.o: %.s
-# ifeq (${OS}, Darwin)
-# 	@ echo "🍏 Intel Mac detected (42Urduliz campus)"
-# 	@ nasm -f macho64 $< -o $@
-# else
-# 	@ echo "Other OS detected (Codespaces)"
-# 	@ nasm -f elf64 $< -o $@
-# endif
 
 clean:
 	@ echo "Cleaning up object files"

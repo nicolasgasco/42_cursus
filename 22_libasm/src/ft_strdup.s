@@ -4,7 +4,7 @@
 ; DESCRIPTION
 ;        The strdup() function returns a pointer to a new string which is
 ;        a duplicate of the string s.  Memory for the new string is
-;        obtained with _malloc(3), and can be freed with free(3).
+;        obtained with malloc(3), and can be freed with free(3).
 
 ;        The strndup() function is similar, but copies at most n bytes.
 ;        If s is longer than n, only n bytes are copied, and a terminating
