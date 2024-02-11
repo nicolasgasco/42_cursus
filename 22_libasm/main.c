@@ -39,9 +39,7 @@ void ft_strlen_tests()
     ft_print_test_title("FT_STRLEN");
 
     for (int i = 0; STRING_SEEDS[i]; i++)
-    {
         ft_strlen_assertion(STRING_SEEDS[i]);
-    }
 }
 
 void ft_strcpy_assertion(char *src)
@@ -74,9 +72,7 @@ void ft_strcpy_tests()
     ft_print_test_title("FT_STRCPY");
 
     for (int i = 0; STRING_SEEDS[i]; i++)
-    {
         ft_strcpy_assertion(STRING_SEEDS[i]);
-    }
 }
 
 void ft_strcmp_assertion(char *s1, char *s2)
@@ -108,14 +104,10 @@ void ft_strcmp_tests()
     ft_print_test_title("FT_STRCMP");
 
     for (int i = 0; STRING_SEEDS[i]; i++)
-    {
         ft_strcmp_assertion(STRING_SEEDS[i], cmp_seeds1[i]);
-    }
 
     for (int i = 0; STRING_SEEDS[i]; i++)
-    {
         ft_strcmp_assertion(STRING_SEEDS[i], cmp_seeds2[i]);
-    }
 }
 
 void ft_write_assertion(int fd, char *str, size_t len)
@@ -248,9 +240,7 @@ void ft_strdup_tests()
     ft_print_test_title("FT_STRDUP");
 
     for (int i = 0; STRING_SEEDS[i]; i++)
-    {
         ft_strdup_assertion(STRING_SEEDS[i]);
-    }
 }
 
 int main()
