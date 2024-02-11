@@ -194,7 +194,7 @@ void ft_read_assertion(int fd, size_t len, char *filename)
     if (own_ret < 0 || original_ret < 0)
         printf("    errno: %s%s%s (%d), ft_errno: %s%s%s (%d)\n", YELLOW, strerror(original_errno), NC, original_errno, YELLOW, strerror(own_errno), NC, own_errno);
 
-    printf("    write: %s%d%s, ft_write: %s%d%s\n", YELLOW, original_ret, NC, YELLOW, own_ret, NC);
+    printf("    read: %s%d%s, ft_read: %s%d%s\n", YELLOW, original_ret, NC, YELLOW, own_ret, NC);
 
     if (filename)
         close(fd);
