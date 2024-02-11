@@ -3,6 +3,8 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <stdlib.h>
+
 #include "ft_libasm.h"
 #include "test_seeds.h"
 
@@ -217,7 +219,37 @@ void ft_read_tests()
     ft_read_assertion(2500, 10, NULL);
     ft_read_assertion(0, -1, NULL);
 
-    ft_read_assertion(0, 7, "test_read");
+    ft_read_assertion(0, 7, "test_files/test_read");
+}
+
+void ft_strdup_assertion(char *str)
+{
+    printf("  - When string is %s%.50s%s\n", BLUE, str, NC);
+
+    char *original_ret = strdup(str);
+    char *own_ret = "ciao";
+
+    printf("Result: %s\n", ft_strdup(str));
+
+    printf("    strdup: %s%.50s%s, ft_strdup: %s%.50s%s\n", YELLOW, original_ret, NC, YELLOW, own_ret, NC);
+
+    if (original_ret)
+        free(original_ret);
+
+    // if (own_ret)
+    //     free(own_ret);
+
+    printf("\n");
+}
+
+void ft_strdup_tests()
+{
+    ft_print_test_title("FT_STRDUP");
+
+    for (int i = 0; STRING_SEEDS[i]; i++)
+    {
+        ft_strdup_assertion(STRING_SEEDS[i]);
+    }
 }
 
 int main()
@@ -229,6 +261,7 @@ int main()
     ft_strcmp_tests();
     ft_write_tests();
     ft_read_tests();
+    ft_strdup_tests();
 
     return 0;
 }
