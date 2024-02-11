@@ -23,6 +23,7 @@ global  _ft_strdup
 extern  _ft_strcpy
 extern  _ft_strlen
 extern  _malloc
+extern  __errno_location
 
 default rel
 
@@ -52,5 +53,9 @@ _ft_strdup:
     ret
 
 .error:
-    mov rax, 0 ; return NULL
+    neg  rax                        ; negate the return value
+    mov  rdi,   rax                 ; set errno
+    call __errno_location WRT ..plt ; call __errno_location 
+    mov  [rax], rdi                 ; set errno
+    mov  rax,   0                   ; return NULL
     ret

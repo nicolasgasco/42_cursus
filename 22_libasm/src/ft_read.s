@@ -18,6 +18,9 @@
 ;        (if any) changes.
 
 section .text
+
+extern  __errno_location
+
 global  _ft_read
 
 %define READ_SYSCALL 0
@@ -25,10 +28,14 @@ global  _ft_read
 _ft_read:
     mov rax, READ_SYSCALL ; syscall number for write
     syscall
-    cmp rax, 0             ; check for error
+    cmp rax, 0            ; check for error
     jl  .error
     ret
 
 .error:
-    mov rax, -1 ; error. This is enough in Linux but in other OSs we should set errno
+    neg  rax                        ; negate the return value
+    mov  rdi,   rax                 ; set errno
+    call __errno_location WRT ..plt ; call __errno_location 
+    mov  [rax], rdi                 ; set errno
+    mov  rax,   -1                  ; return -1
     ret

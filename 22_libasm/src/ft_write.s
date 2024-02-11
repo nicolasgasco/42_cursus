@@ -33,6 +33,8 @@
 ;        the results are not specified.
 
 section .text
+
+extern  __errno_location
 global  _ft_write
 
 %define WRITE_SYSCALL 1
@@ -45,5 +47,9 @@ _ft_write:
     ret
 
 .error:
-    mov rax, -1 ; error. This is enough in Linux but in other OSs we should set errno
+    neg  rax                        ; negate the return value
+    mov  rdi,   rax                 ; set errno
+    call __errno_location WRT ..plt ; call __errno_location 
+    mov  [rax], rdi                 ; set errno
+    mov  rax,   -1                  ; return -1
     ret
