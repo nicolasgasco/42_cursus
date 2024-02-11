@@ -16,6 +16,7 @@ char *STRING_SEEDS[] = {NORMAL_STRING,
                         EMPTY_STRING,
                         EMOJI_STRING,
                         LONG_STRING,
+                        UNREACHABLE,
                         NULL};
 
 void ft_print_test_title(char *title)
@@ -93,6 +94,7 @@ void ft_strcmp_tests()
         "",
         "String containing 👋🌍 emojis",
         "Not a very long string, but still long enough to be considered long",
+        "Hi\0This string is unreachable",
         NULL};
 
     char *cmp_seeds2[] = {
@@ -100,6 +102,7 @@ void ft_strcmp_tests()
         "hey",
         "",
         " \t",
+        "\0",
         NULL};
 
     ft_print_test_title("FT_STRCMP");
@@ -227,17 +230,15 @@ void ft_strdup_assertion(char *str)
     printf("  - When string is %s%.50s%s\n", BLUE, str, NC);
 
     char *original_ret = strdup(str);
-    char *own_ret = "ciao";
-
-    printf("Result: %s\n", ft_strdup(str));
+    char *own_ret = ft_strdup(str);
 
     printf("    strdup: %s%.50s%s, ft_strdup: %s%.50s%s\n", YELLOW, original_ret, NC, YELLOW, own_ret, NC);
 
     if (original_ret)
         free(original_ret);
 
-    // if (own_ret)
-    //     free(own_ret);
+    if (own_ret)
+        free(own_ret);
 
     printf("\n");
 }

@@ -12,5 +12,6 @@ for file in "$folder"/*; do
     if [ -f "$file" ] && [ "${file##*.}" = "s" ]; then
         # Remove _
         sed -i "s/_ft/ft/g" "$file"
+        sed -i "s/_malloc/malloc/g" "$file"
     fi
 done

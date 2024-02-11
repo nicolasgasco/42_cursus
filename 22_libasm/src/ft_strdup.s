@@ -4,7 +4,7 @@
 ; DESCRIPTION
 ;        The strdup() function returns a pointer to a new string which is
 ;        a duplicate of the string s.  Memory for the new string is
-;        obtained with malloc(3), and can be freed with free(3).
+;        obtained with _malloc(3), and can be freed with free(3).
 
 ;        The strndup() function is similar, but copies at most n bytes.
 ;        If s is longer than n, only n bytes are copied, and a terminating
@@ -17,16 +17,40 @@
 ;        duplicated string.  It returns NULL if insufficient memory was
 ;        available, with errno set to indicate the error.
 
+
 global  _ft_strdup
+
+extern  _ft_strcpy
 extern  _ft_strlen
-    
-; first argument is in rdi
+extern  _malloc
+
+default rel
 
 section .text
 
 _ft_strdup:
-    mov r8, rdi ; save the pointer to the string
     call _ft_strlen ; get the length of the string
 
-    mov rdi, rax ; first argument is the length of the string
+    inc rax ; add 1 to the length of the string for the null byte
+
+    push rdi               ; save the pointer to the old string
+    mov  rdi, rax          ; first argument is the length of the string + 1
+    call _malloc WRT ..plt ; allocate memory for the new string
+    pop  rdi               ; restore the pointer to the old string
+
+    cmp rax, 0 ; check if the allocation was successful
+    je  .error ; jump to the error section if the allocation failed
+    jne .copy
+
+.copy
+    mov rsi, rdi ; second argument is the pointer to the old string
+    mov rdi, rax ; first argument is the pointer to the new string
+
+
+    call _ft_strcpy ; copy the old string to the new string
+
+    ret
+
+.error
+    mov rax, 0 ; return NULL
     ret
