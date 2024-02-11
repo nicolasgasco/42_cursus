@@ -43,12 +43,12 @@ _ft_write:
     mov rax, WRITE_SYSCALL ; syscall number for write
     syscall
 
-    jc  .error
+    jc .error
     ret
 
 .error:
-    mov  rdi,   rax                 ; set errno
-    call ___error  ; call ___error 
-    mov  [rax], rdi                 ; set errno
-    mov  rax,   -1                  ; return -1
+    mov  rdi,   rax ; set errno
+    call ___error   ; call ___error 
+    mov  [rax], rdi ; set errno
+    mov  rax,   -1  ; return -1
     ret
