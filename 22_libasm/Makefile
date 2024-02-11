@@ -46,6 +46,8 @@ else
 	@ sh scripts/add_underscore.sh
 	@ echo "Re-adding underscore to function names"
 endif
+	@ echo "Creating test_files directory"
+	@ mkdir -p test_files
 
 # %.o: %.s
 # ifeq (${OS}, Darwin)
@@ -63,6 +65,8 @@ clean:
 	@ rm -rf test_files
 	@ echo "Cleaning up library"
 	@ rm -rf ${NAME}
+	@ echo "Cleaning up test_files directory"
+	@ rm -rf test_files
 
 fclean: clean
 	@ echo "Cleaning up executable"
