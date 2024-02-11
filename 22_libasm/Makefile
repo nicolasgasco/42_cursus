@@ -41,9 +41,9 @@ endif
 	@ ar rcs $(NAME) ${OBJS_DIR}/*.o
 	@ echo "Compiling test file"
 ifeq (${OS}, Darwin)
-	@ gcc -arch x86_64 ${FLAGS} ${SANITIZE} main.c ${NAME} -o ${EXECUTABLE}
+	gcc -arch x86_64 ${FLAGS} ${SANITIZE} main.c ${NAME} -o ${EXECUTABLE}
 else
-	@ gcc main.c ${FLAGS} ${SANITIZE} ${NAME} -o test
+	gcc main.c ${FLAGS} ${SANITIZE} ${NAME} -o test
 	@ sh scripts/add_underscore.sh
 	@ echo "Re-adding underscore to function names"
 endif
