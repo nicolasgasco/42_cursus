@@ -31,4 +31,5 @@ _ft_strcpy:
     jmp .loop             ; repeat the loop
 
 .end:
+    mov rax, rdi          ; return the destination
     ret
