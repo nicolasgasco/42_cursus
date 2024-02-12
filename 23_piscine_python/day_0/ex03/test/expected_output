@@ -1,0 +1,7 @@
+Nothing: None <class 'NoneType'>$
+Cheese: nan <class 'float'>$
+Zero: 0 <class 'int'>$
+Empty: <class 'str'>$
+Fake: False <class 'bool'>$
+Type not Found$
+1$
