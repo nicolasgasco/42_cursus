@@ -1,4 +1,4 @@
-import sys
+import sys as sys
 from ft_filter import ft_filter
 
 
