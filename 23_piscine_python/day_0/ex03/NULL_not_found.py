@@ -1,6 +1,3 @@
-import math as math
-
-
 def NULL_not_found(object: any) -> int:
 
     obj_type = type(object)

@@ -13,13 +13,18 @@ NESTED_MORSE = {" ": "/ ", "A": ".- ", "B": "-... ", "C": "-.-. ",
 
 
 def main():
-    assert len(sys.argv) == 2, "provide exactly one argument"
+    try:
+        assert len(sys.argv) == 2, "provide exactly one argument"
+    except AssertionError as e:
+        print(f"AssertionError: {e}")
+        sys.exit(1)
 
     string_value = sys.argv[1].upper()
 
     for c in string_value:
         if c not in NESTED_MORSE.keys():
-            raise AssertionError("argument contains invalid characters")
+            print("AssertionError: argument contains invalid characters")
+            sys.exit(1)
 
     res = [NESTED_MORSE[x]
            for x in string_value if x in NESTED_MORSE.keys()]

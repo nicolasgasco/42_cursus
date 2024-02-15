@@ -3,15 +3,19 @@ import sys as sys
 
 def main():
     """
-    This function takes user input or command line argument and counts
-    the number of uppercase letters, lowercase letters,
-    punctuation marks, spaces, and digits in the given text.
-    It then prints the counts along with the total number of characters.
+    This function counts the number of uppercase letters, lowercase letters,
+    digits, punctuation marks, spaces, and total characters in a given text.
+    It takes the text as a command-line argument
+    or prompts the user to enter it.
     """
 
     argc = len(sys.argv)
 
-    assert (argc <= 2), "more than one argument is provided"
+    try:
+        assert (argc <= 2), "more than one argument is provided"
+    except AssertionError as e:
+        print(f"AssertionError: {e}")
+        sys.exit(1)
 
     arg_value = None
 
