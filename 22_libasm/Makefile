@@ -2,12 +2,8 @@ NAME = ft_libasm.a
 EXECUTABLE = test
 FLAGS = -Wall -Wextra -Werror
 
-SRCS = 	ft_strlen.s \
-		ft_strcpy.s
-
 SRC_DIR = src
 OBJS_DIR = objs
-OBJS = $(SRCS:.c=.o)
 
 SANITIZE= -fsanitize=address -g3 -fno-omit-frame-pointer
 OS = $(shell uname)
