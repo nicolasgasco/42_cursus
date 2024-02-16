@@ -1,0 +1,9 @@
+version: "3"
+services:
+  python:
+    image: python:3.10
+    command: tail -F anything
+    volumes:
+      - ./:/day_0
+    command: rm -rf docker-compose.yml
+
