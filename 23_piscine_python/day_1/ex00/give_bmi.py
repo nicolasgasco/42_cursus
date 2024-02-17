@@ -17,7 +17,8 @@ def _calc_bmi(weight: float | int, height: float | int):
     return weight / height_square
 
 
-def give_bmi(height: list[int | float], weight: list[int | float]) -> list[int | float]:
+def give_bmi(height: list[int | float], weight: list[int | float])\
+        -> list[int | float]:
     """
     Calculate the Body Mass Index (BMI) for each pair of height and weight.
 
@@ -63,14 +64,16 @@ def give_bmi(height: list[int | float], weight: list[int | float]) -> list[int |
 
 def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
     """
-    Apply a limit to each BMI value in the given list and return a list of booleans indicating whether each BMI value is greater than the limit.
+    Apply a limit to each BMI value in the given list and return a list
+    of booleans indicating whether each BMI value is greater than the limit.
 
     Args:
         bmi (list[int | float]): The list of BMI values.
         limit (int): The limit to apply to each BMI value.
 
     Returns:
-        list[bool]: A list of booleans indicating whether each BMI value is greater than the limit.
+        list[bool]: A list of booleans indicating
+        whether each BMI value is greater than the limit.
     """
     return [i > limit for i in bmi]
     pass
