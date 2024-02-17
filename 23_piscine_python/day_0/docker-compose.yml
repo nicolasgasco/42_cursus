@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  python:
-    container_name: python
+  day_0:
+    container_name: day_0
     working_dir: /day_0
     build: .
     volumes:
