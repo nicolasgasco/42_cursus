@@ -3,7 +3,8 @@ import time as time
 
 def format_time(seconds: float) -> str:
     """
-    Format the given number of seconds into a string representation of time in the format "MM:SS".
+    Format the given number of seconds
+    into a string representation of time in the format "MM:SS".
 
     Args:
         seconds (float): The number of seconds to format.
