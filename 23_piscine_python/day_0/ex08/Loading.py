@@ -37,40 +37,41 @@ def ft_tqdm(lst: range):
     start_time = time.time()
 
     count = 0
-
     for elem in lst:
+        str_result = ""
+
         percentage = int((count) * 100 / lst_len)
-        print(f"{percentage}%|[", end="")
+        str_result += f"{percentage}%|["
 
         # Print the progress bar
-        for i in range(percentage):
-            print("=", end="")
-        print(">", end="")
+        for i in range(int(percentage / 2)):
+            str_result += "="
+        str_result += ">"
 
         # Print the empty spaces
-        for i in range(100 - percentage - 1):
-            print(" ", end="")
+        for i in range(int((100 - percentage - 1) / 2)):
+            str_result += " "
 
-        print(f"]| {count + 1}/{lst_len}", end="")
+        str_result += f"]| {count + 1}/{lst_len}"
 
         if count > 0:
             elapsed_time = time.time() - start_time
 
             # Print elapsed time
-            print(f"[{format_time(elapsed_time)}", end="")
+            str_result += f" [{format_time(elapsed_time)}"
 
             iterations_per_second = count / elapsed_time
 
             estimated_time = float(lst_len - count) / iterations_per_second
 
             # Print estimated remaining time
-            print(f"<{format_time(estimated_time)}", end="")
+            str_result += f"<{format_time(estimated_time)}"
 
             # Print iterations per second
-            print(
-                f", {round(iterations_per_second, 2)}it/s]")
+            str_result += f", {round(iterations_per_second, 2)}it/s]"
         else:
-            print(" [00:00<--:--, -.-it/s]")
+            str_result += " [00:00<--:--, -.-it/s]"
 
+        print(str_result, end="\r", flush=True)
         count += 1
         yield elem
