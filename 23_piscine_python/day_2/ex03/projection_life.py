@@ -12,7 +12,8 @@ def _get_data_by_year(year: str, file_name: str) -> list[int] | None:
         file_name (str): The name of the file containing the life data.
 
     Returns:
-        list[int] | None: The life data for the specified year, or None if the data is not available.
+        list[int] | None: The life data for the specified year,
+        or None if the data is not available.
     """
 
     life_data = load(file_name)
@@ -27,7 +28,8 @@ def _get_data_by_year(year: str, file_name: str) -> list[int] | None:
 
 def projection_life() -> None:
     """
-    Generates a scatter plot of gross domestic product vs life expectancy for a given year.
+    Generates a scatter plot of gross domestic product
+    vs life expectancy for a given year.
     Saves the plot as 'projection_life.png'.
 
     Raises:
