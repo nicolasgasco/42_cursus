@@ -46,7 +46,8 @@ class Stark(Character):
 
         Args:
             first_name (str): The first name of the Stark character.
-            is_alive (bool, optional): Whether the Stark character is alive or not.
+            is_alive (bool, optional): Whether the Stark character
+            is alive or not.
                 Defaults to True.
         """
         super().__init__(first_name, is_alive)
