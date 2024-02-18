@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  day_2:
+    container_name: day_2
+    working_dir: /day_2
+    build: .
+    volumes:
+      - ./:/day_2
