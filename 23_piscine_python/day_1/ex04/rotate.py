@@ -1,20 +1,8 @@
 import numpy as numpy
 import matplotlib.pyplot as plt
-from matplotlib.image import imread
+from load_image import ft_load
 
 PATH = "animal.jpeg"
-
-
-def _load_image(path: str) -> numpy.ndarray | None:
-    try:
-        image = imread(PATH)
-    except FileNotFoundError:
-        print(f"File not found: {PATH}")
-        return None
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return None
-    return image
 
 
 def _crop_image(image) -> numpy.ndarray:
@@ -40,7 +28,7 @@ def _rotate_image(image: numpy.ndarray) -> numpy.ndarray:
 
 
 def main():
-    image = _load_image(PATH)
+    image = ft_load(PATH)
     image = _crop_image(image)
     image = _convert_to_grayscale(image)
 
@@ -53,7 +41,7 @@ def main():
 
     plt.imshow(new_image, cmap=plt.get_cmap("gray"))
     plt.savefig('new_image.jpeg')
-    
+
     _describe_image(new_image)
 
 
