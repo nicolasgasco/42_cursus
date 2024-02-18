@@ -107,7 +107,15 @@ def ft_grey(array) -> None:
 
     new_image = numpy.copy(array)
 
-    new_image = numpy.median(array, axis=2)
+    for y in range(len(array)):
+        for x in range(len(array[y])):
+            rgb_values = array[y][x]
+            red_value = rgb_values[0]
+            green_value = rgb_values[1]
+            blue_value = rgb_values[2]
+
+            new_value = red_value / 3.0 + green_value / 3.0 + blue_value / 3.0
+            new_image[y][x] = [new_value, new_value, new_value]
 
     _save_image(new_image, 'greyscale.jpg', True)
     _describe_image(new_image)
