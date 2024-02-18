@@ -1,4 +1,20 @@
 class calculator:
+    """
+    A class representing a calculator.
+
+    Attributes:
+        lst (list): The list of numbers to perform calculations on.
+    """
+
+    def __init__(self, lst) -> None:
+        """
+        Initializes a Calculator object.
+
+        Args:
+            lst (list): The list of numbers to perform calculations on.
+        """
+        self.lst = lst
+
     def __repr__(self) -> str:
         """
         Returns a string representation of the object.
@@ -8,16 +24,6 @@ class calculator:
         """
 
         return f"{self.lst}"
-
-    class Calculator:
-        def __init__(self, lst) -> None:
-            """
-            Initializes a Calculator object.
-
-            Args:
-                lst (list): The list of numbers to perform calculations on.
-            """
-            self.lst = lst
 
     def __add__(self, object) -> None:
         """
