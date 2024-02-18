@@ -1,11 +1,24 @@
 # 42 Cursus
 
-## Common Core
-The _Common Core_ projects I completed while being a student at 42Urduliz campus in Bilbao, Spain.
+## Outer Core
+The _Outer Core_ projects I completed after completing the _Common Core_ at 42Urduliz in Bilbao, Spain.
+
 
 |Name|Language|End date|Description|Estimated effort (h)|
 |----|--------|--------|-----------|----------|
+|**[piscine_python](https://github.com/nicolasgasco/42_cursus/tree/master/23_piscine_python)**|Python|March 2024| 5 days Python for Data Science piscine.|5 days|
 |**[ft_libasm](https://github.com/nicolasgasco/42_cursus/tree/master/22_libasm)**|x86_64 assembly/C|February 2024| Create a small library of x86_64 NASM functions.|70|
+
+## Common Core
+The _Common Core_ projects I completed while being a student at 42Urduliz campus in Bilbao, Spain.
+
+---
+⚠️ Don't copy from this repository. I'm not that good and it's against the spirit of 42. Ask your classmates for help. I only created this repository to keep track of my progress. ⚠️
+
+---
+
+|Name|Language|End date|Description|Estimated effort (h)|
+|----|--------|--------|-----------|----------|
 |**[ft_transcendence 🕹️🌐](https://github.com/iker-gonzalez/ft_transcendence)**|NestJs + TypeScript React|December 2023| Create an oline multiplayer Pong game with chat functionality.|275|
 |**[webserv 🌐](https://github.com/nicolasgasco/42_webserv)**|C++/Python/HTML+CSS|June 2023| Write your own HTTP server than can be tested with an actual browser|175|
 |**[~~ft_containers~~](https://github.com/nicolasgasco/42_cursus/tree/master/18_ft_containers)**|~~C++~~|Removed from Cursus|~~Reimplement `vector`, `map`, and `stack` containers from the STL.~~|~~210~~|
@@ -23,15 +36,3 @@ The _Common Core_ projects I completed while being a student at 42Urduliz campus
 |**[born2beroot](https://github.com/nicolasgasco/42_cursus/tree/master/02_born2beroot)**|Unix|August 2021|Create a virtual machine under specific instructions. Setting a minimal Debian server implementing strict rules, e.g. strong password policy, UFW firewall, SSH, etc. In the repo there's only a Bash script that had to be broadcasted to all users every 10 minutes using crontab and wall|40|
 |**[libft](https://github.com/nicolasgasco/42_cursus/tree/master/01_libft)**|C|July 2021|Re-code useful C functions like `split` or `join` using only `malloc`, `free`, and `write`|70|
 
----
-⚠️ Don't copy from this repository. I'm not that good and it's against the spirit of 42. Ask your classmates for help. I only created this repository to keep track of my progress. ⚠️
-
----
-
-## Outer Core
-The _Outer Core_ projects I completed after completing the _Common Core_ at 42Urduliz in Bilbao, Spain.
-
-
-|Name|Language|End date|Description|Estimated effort (h)|
-|----|--------|--------|-----------|----------|
-|ft_libasm|asm||The aim of this project is to get familiar with assembly language.||
