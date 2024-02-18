@@ -3,19 +3,19 @@ import pandas as pandas
 import matplotlib.pyplot as plt
 
 
-def _get_income(year: str) -> list[int] | None:
-    income_data = load(
-        "income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
+def _get_data_by_year(year: str, file_name: str) -> list[int] | None:
+    """
+    Retrieves life data for a specific year from a given file.
 
-    if income_data is None:
-        return None
+    Args:
+        year (str): The year for which to retrieve the life data.
+        file_name (str): The name of the file containing the life data.
 
-    income_list = income_data[year].tolist()
-    return income_list
+    Returns:
+        list[int] | None: The life data for the specified year, or None if the data is not available.
+    """
 
-
-def _get_life(year: str) -> list[int] | None:
-    life_data = load("life_expectancy_years.csv")
+    life_data = load(file_name)
 
     if life_data is None:
         return None
@@ -26,11 +26,20 @@ def _get_life(year: str) -> list[int] | None:
 
 
 def projection_life() -> None:
+    """
+    Generates a scatter plot of gross domestic product vs life expectancy for a given year.
+    Saves the plot as 'projection_life.png'.
+
+    Raises:
+        KeyError: If the year is not found in the dataset.
+    """
+
     YEAR = "1900"
 
     try:
-        income_list = _get_income(YEAR)
-        life_list = _get_life(YEAR)
+        income_list = _get_data_by_year(
+            YEAR, "income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
+        life_list = _get_data_by_year(YEAR, "life_expectancy_years.csv")
     except KeyError:
         print(f"Year {YEAR} not found in dataset")
         return
