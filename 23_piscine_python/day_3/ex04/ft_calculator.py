@@ -15,7 +15,7 @@ class calculator:
         Returns:
             None: Prints the dot product of the two vectors.
         """
-        dot_product = sum([V1[i] * V2[i] for i in range(len(V1))])
+        dot_product = float(sum([V1[i] * V2[i] for i in range(len(V1))]))
         print(f"Dot product is: {dot_product}")
 
     @staticmethod
@@ -30,7 +30,7 @@ class calculator:
         Returns:
             None
         """
-        add_vector = [V1[i] + V2[i] for i in range(len(V1))]
+        add_vector = [float(V1[i] + V2[i]) for i in range(len(V1))]
         print(f"Add vector is: {add_vector}")
 
     @staticmethod
@@ -45,5 +45,5 @@ class calculator:
         Returns:
             None
         """
-        sous_vector = [V1[i] - V2[i] for i in range(len(V1))]
+        sous_vector = [float(V1[i] - V2[i]) for i in range(len(V1))]
         print(f"Sous vector is: {sous_vector}")
