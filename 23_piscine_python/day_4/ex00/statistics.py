@@ -2,6 +2,15 @@ from typing import Any
 
 
 def _print_mean(values: list[int]) -> None:
+    """
+    Calculate and print the mean of a list of values.
+
+    Args:
+        values (list[int]): A list of integer values.
+
+    Returns:
+        None
+    """
     try:
         mean = sum(values) / len(values)
         print(f"mean : {mean}")
@@ -10,6 +19,15 @@ def _print_mean(values: list[int]) -> None:
 
 
 def _print_median(values: list[int]) -> None:
+    """
+    Prints the median value of a list of integers.
+
+    Args:
+        values (list[int]): The list of integers.
+
+    Returns:
+        None
+    """
     try:
         ordered_values = sorted(values)
 
@@ -28,6 +46,15 @@ def _print_median(values: list[int]) -> None:
 
 
 def _print_quartile(values: list[int]) -> None:
+    """
+    Prints the lower and upper quartiles of a given list of values.
+
+    Args:
+        values (list[int]): The list of values.
+
+    Returns:
+        None
+    """
     try:
         ordered_values = sorted(values)
 
@@ -41,6 +68,15 @@ def _print_quartile(values: list[int]) -> None:
 
 
 def _print_std(values: list[int]) -> None:
+    """
+    Calculate and print the standard deviation of a list of values.
+
+    Args:
+        values (list[int]): A list of integer values.
+
+    Returns:
+        None
+    """
     try:
         mean = sum(values) / len(values)
         variance = sum([((x - mean) ** 2) for x in values]) / len(values)
@@ -53,6 +89,15 @@ def _print_std(values: list[int]) -> None:
 
 
 def _print_var(values: list[int]) -> None:
+    """
+    Calculate and print the variance of a list of values.
+
+    Args:
+        values (list[int]): A list of integer values.
+
+    Returns:
+        None
+    """
     try:
         mean = sum(values) / len(values)
         variance = sum([((x - mean) ** 2) for x in values]) / len(values)
@@ -64,6 +109,16 @@ def _print_var(values: list[int]) -> None:
 
 
 def ft_statistics(*args: Any, **kwargs: Any) -> None:
+    """
+    Perform statistical operations on a list of values.
+
+    Args:
+        *args: Variable length argument list of values.
+        **kwargs: Keyword arguments specifying the operations to perform.
+
+    Returns:
+        None
+    """
     values = list(args)
 
     operations = [op for op in kwargs.values()]
