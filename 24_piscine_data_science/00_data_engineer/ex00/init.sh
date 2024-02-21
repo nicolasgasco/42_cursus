@@ -1,0 +1,1 @@
+psql -U ngasco -d piscineds -h localhost -W
