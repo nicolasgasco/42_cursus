@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  postgres:
+    image: "postgres:16"
+    container_name: "postgres"
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - ./00_data_engineer:/00_data_engineer
+      - ./01_data_warehouse:/01_data_warehouse
+    environment:
+      - POSTGRES_USER=ngasco
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=piscineds
+  pgadmin:
+    image: "dpage/pgadmin4"
+    container_name: "pgadmin"
+    restart: always
+    ports:
+      - 5050:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ngasco@student.42urduliz.com
+      PGADMIN_DEFAULT_PASSWORD: mysecretpassword
+      PGADMIN_CONFIG_SERVER_MODE: "False"
