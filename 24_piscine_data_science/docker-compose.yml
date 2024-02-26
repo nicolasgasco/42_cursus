@@ -10,6 +10,7 @@ services:
     volumes:
       - ./00_data_engineer:/00_data_engineer
       - ./01_data_warehouse:/01_data_warehouse
+      - ./bak:/bak
     environment:
       - POSTGRES_USER=ngasco
       - POSTGRES_PASSWORD=mysecretpassword
