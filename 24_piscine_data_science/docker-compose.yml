@@ -25,3 +25,9 @@ services:
       PGADMIN_DEFAULT_EMAIL: ngasco@student.42urduliz.com
       PGADMIN_DEFAULT_PASSWORD: mysecretpassword
       PGADMIN_CONFIG_SERVER_MODE: "False"
+  python:
+    container_name: "python"
+    working_dir: /02_data_analyst
+    build: .
+    volumes:
+      - ./02_data_analyst:/02_data_analyst
