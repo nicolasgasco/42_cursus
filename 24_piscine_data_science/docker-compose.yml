@@ -10,7 +10,9 @@ services:
     volumes:
       - ./00_data_engineer:/00_data_engineer
       - ./01_data_warehouse:/01_data_warehouse
+      - ./02_data_analyst:/02_data_analyst
       - ./bak:/bak
+      - pg_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=ngasco
       - POSTGRES_PASSWORD=mysecretpassword
@@ -31,3 +33,5 @@ services:
     build: .
     volumes:
       - ./02_data_analyst:/02_data_analyst
+volumes:
+  pg_data:
