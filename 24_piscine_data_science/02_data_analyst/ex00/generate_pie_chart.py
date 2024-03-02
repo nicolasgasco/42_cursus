@@ -8,4 +8,4 @@ print(event_counts)
 
 plt.pie(event_counts, labels=event_counts.index.tolist(), autopct='%1.1f%%')
 plt.show()
-plt.savefig('event_types.jpg', bbox_inches='tight', pad_inches=0, dpi=300)
+plt.savefig('event_types.jpg', bbox_inches='tight', pad_inches=0, dpi=600)
