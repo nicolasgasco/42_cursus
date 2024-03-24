@@ -33,5 +33,6 @@ services:
     build: .
     volumes:
       - ./02_data_analyst:/02_data_analyst
+      - ./03_data_scientist_01:/03_data_scientist_01
 volumes:
   pg_data:
