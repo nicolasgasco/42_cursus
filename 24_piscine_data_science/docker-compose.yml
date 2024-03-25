@@ -34,5 +34,6 @@ services:
     volumes:
       - ./02_data_analyst:/02_data_analyst
       - ./03_data_scientist_01:/03_data_scientist_01
+      - ./04_data_scientist_02:/04_data_scientist_02
 volumes:
   pg_data:
