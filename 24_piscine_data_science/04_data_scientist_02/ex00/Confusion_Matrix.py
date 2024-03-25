@@ -48,7 +48,7 @@ def main():
     sns.heatmap(own_conf_mat, annot=True, fmt='d', cmap='Blues',
                 xticklabels=["0", "1"], yticklabels=["1", "0"])
     plt.show()
-    plt.savefig("heat-map.jpg", bbox_inches='tight', pad_inches=0, dpi=500)
+    plt.savefig("confusion_matrix.jpg", bbox_inches='tight', pad_inches=0, dpi=500)
 
 
 if __name__ == "__main__":
