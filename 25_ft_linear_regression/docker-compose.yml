@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  python:
+    container_name: "python"
+    build: .
+    volumes:
+      - ./:/ft_linear_regression
