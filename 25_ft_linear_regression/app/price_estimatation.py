@@ -1,3 +1,6 @@
+from PriceEstimate import PriceEstimate
+
+
 def get_mileage_input():
     """
     Get the mileage input from the user.
@@ -20,7 +23,8 @@ def get_mileage_input():
 def main():
     mileage = get_mileage_input()
 
-    print(mileage)
+    price_estimate = PriceEstimate(mileage)
+    print(price_estimate)
 
 
 if __name__ == "__main__":
