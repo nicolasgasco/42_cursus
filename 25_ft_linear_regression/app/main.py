@@ -39,7 +39,7 @@ def main():
     plot.show(linear_regression=True)
 
     elapsed_time = time.time() - start
-    formatted_elapsed_time = time.strftime("%S", time.gmtime(elapsed_time))
+    formatted_elapsed_time = "{:.2f}".format(elapsed_time)
     print(f"\nOperation compled in {formatted_elapsed_time} seconds")
 
     print("\nPress Ctrl+C to exit the program.")
