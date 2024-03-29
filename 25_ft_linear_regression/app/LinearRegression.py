@@ -36,7 +36,7 @@ class LinearRegression:
 
         print("Training the model...")
 
-        ITERATIONS = 500_000
+        ITERATIONS = 300_000
         LEARNING_RATE = 0.0001
 
         mileage = self._dataset['km']
