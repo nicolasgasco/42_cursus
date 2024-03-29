@@ -34,8 +34,6 @@ class LinearRegression:
             tuple: A tuple containing the computed values of theta0 and theta1.
         """
 
-        print("Training the model...")
-
         ITERATIONS = 300_000
         LEARNING_RATE = 0.0001
 
@@ -56,7 +54,5 @@ class LinearRegression:
 
             self.theta0 -= temp_theta0
             self.theta1 -= temp_theta1
-
-        print("Theta0 and Theta1 were computed successfully.")
 
         return self.theta0, self.theta1

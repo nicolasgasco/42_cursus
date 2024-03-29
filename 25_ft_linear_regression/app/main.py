@@ -1,6 +1,7 @@
 from LinearRegression import LinearRegression
 from Plot import Plot
 from PriceEstimator import PriceEstimator
+import time as time
 
 
 def get_mileage_input():
@@ -12,7 +13,8 @@ def get_mileage_input():
     """
 
     while True:
-        user_input = input("Enter the mileage (integer value, no separator): ")
+        user_input = input(
+            "\nEnter the mileage (integer value, no separator): ")
 
         try:
             mileage = int(user_input)
@@ -23,23 +25,35 @@ def get_mileage_input():
     return mileage
 
 
-TEST_MILEAGES = [1_000, 5_000, 10_000, 50_000, 80_000,
-                 81_000, 120_000, 150_000, 200_000, 300_000, 400_000]
-
-
 def main():
+    start = time.time()
+
     linear_regression = LinearRegression()
 
+    print("Training linear regression model... (this might take longer)")
     theta0, theta1 = linear_regression.fit()
     price_estimator = PriceEstimator(theta0, theta1)
 
-    for mileage in TEST_MILEAGES:
-        estimate = price_estimator.estimate(mileage)
-
-        print(f"{mileage:,} km -> {estimate:.2f}")
-
+    print("\nPlotting the data and linear regression line...")
     plot = Plot(theta0, theta1)
     plot.show(linear_regression=True)
+
+    elapsed_time = time.time() - start
+    formatted_elapsed_time = time.strftime("%S", time.gmtime(elapsed_time))
+    print(f"\nOperation compled in {formatted_elapsed_time} seconds")
+
+    print("\nPress Ctrl+C to exit the program.")
+
+    try:
+        while True:
+            mileage = get_mileage_input()
+
+            estimate = price_estimator.estimate(mileage)
+
+            print(
+                f"\nThe estimated price for {mileage:,} km is {estimate:.2f}")
+    except KeyboardInterrupt:
+        print("\nGoodbye!")
 
 
 if __name__ == "__main__":

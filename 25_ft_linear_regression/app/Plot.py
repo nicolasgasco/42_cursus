@@ -31,8 +31,6 @@ class Plot:
         plt.plot(x_data, estimated_y_data, 'y-')
 
     def show(self, linear_regression=False):
-        print("Generating plot...")
-
         x_data = self._data['km']
         y_data = self._data['price']
 
