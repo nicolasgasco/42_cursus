@@ -1,32 +1,19 @@
-import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
 
 class Plot:
-    def __init__(self, theta0, theta1):
+    def __init__(self, data, theta0, theta1):
         self._theta0 = theta0
         self._theta1 = theta1
 
-        self._data = self._prepare_data()
+        self._data = data
 
         self._labels = {
             'x_label': 'Mileage',
             'y_label': 'Price',
             'title': 'Mileage vs Price'
         }
-
-    def _prepare_data(self):
-        """
-        Reads the data from a CSV file and sorts it by the 'km' column.
-
-        Returns:
-            pandas.DataFrame: The sorted data.
-        """
-        data = pd.read_csv("../data.csv")
-        data = data.sort_values(by='km')
-
-        return data
 
     def _plot_linear_regression(self, x_data):
         """

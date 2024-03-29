@@ -1,30 +1,11 @@
-import pandas as pd
-
-
 class LinearRegression:
-    def __init__(self):
+    def __init__(self, data):
         self._scale_factor = 1_000
 
-        self._dataset = self._prepare_data()
+        self._dataset = data / self._scale_factor
 
         self.theta0 = 0.0
         self.theta1 = 0.0
-
-    def _prepare_data(self):
-        """
-        Preprocesses the data by reading it from a CSV file, \
-        sorting it by 'km' column,
-        and scaling it by the specified scale factor.
-
-        Returns:
-            pd.DataFrame: The preprocessed data.
-        """
-
-        data = pd.read_csv("../data.csv")
-        data = data.sort_values(by='km')
-        data = data / self._scale_factor
-
-        return data
 
     def fit(self):
         """

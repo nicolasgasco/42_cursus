@@ -2,6 +2,7 @@ from LinearRegression import LinearRegression
 from Plot import Plot
 from PriceEstimator import PriceEstimator
 import time as time
+import pandas as pd
 
 
 def get_mileage_input():
@@ -25,33 +26,77 @@ def get_mileage_input():
     return mileage
 
 
+def import_data():
+    """
+    Import and preprocess the data from a CSV file.
+
+    Returns:
+        pandas.DataFrame: The preprocessed data.
+    """
+
+    data = pd.read_csv("../data.csv")
+    data = data.sort_values(by='km')
+
+    return data
+
+
+def show_elapsed_time(start):
+    """
+    Prints the elapsed time since the given start time.
+
+    Parameters:
+    start (float): The start time in seconds.
+
+    Returns:
+    None
+    """
+
+    elapsed_time = time.time() - start
+    formatted_elapsed_time = "{:.2f}".format(elapsed_time)
+    print(f"\nOperation completed in {formatted_elapsed_time} seconds")
+
+
+def estimate_user_input(price_estimator):
+    """
+    Estimates the price based on user input mileage.
+
+    Args:
+        price_estimator: An instance of the PriceEstimator class.
+
+    Returns:
+        None
+    """
+
+    mileage = get_mileage_input()
+
+    estimate = price_estimator.estimate(mileage)
+
+    print(f"\nThe estimated price for {mileage:,} km is {estimate:,.2f}")
+
+
 def main():
     start = time.time()
 
-    linear_regression = LinearRegression()
+    data = import_data()
 
-    print("Training linear regression model... (this might take longer)")
+    linear_regression = LinearRegression(data)
+
+    print("Training linear regression model... (this might take long)")
     theta0, theta1 = linear_regression.fit()
     price_estimator = PriceEstimator(theta0, theta1)
 
     print("\nPlotting the data and linear regression line...")
-    plot = Plot(theta0, theta1)
+    plot = Plot(data, theta0, theta1)
     plot.show(linear_regression=True)
 
-    elapsed_time = time.time() - start
-    formatted_elapsed_time = "{:.2f}".format(elapsed_time)
-    print(f"\nOperation compled in {formatted_elapsed_time} seconds")
+    show_elapsed_time(start)
 
     print("\nPress Ctrl+C to exit the program.")
 
     try:
         while True:
-            mileage = get_mileage_input()
+            estimate_user_input(price_estimator)
 
-            estimate = price_estimator.estimate(mileage)
-
-            print(
-                f"\nThe estimated price for {mileage:,} km is {estimate:.2f}")
     except KeyboardInterrupt:
         print("\nGoodbye!")
 
