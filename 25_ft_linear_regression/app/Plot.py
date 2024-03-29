@@ -17,12 +17,28 @@ class Plot:
         }
 
     def _prepare_data(self):
+        """
+        Reads the data from a CSV file and sorts it by the 'km' column.
+
+        Returns:
+            pandas.DataFrame: The sorted data.
+        """
         data = pd.read_csv("../data.csv")
         data = data.sort_values(by='km')
 
         return data
 
     def _plot_linear_regression(self, x_data):
+        """
+        Plot the linear regression line.
+
+        Args:
+            x_data (numpy.ndarray): The input x data.
+
+        Returns:
+            None
+        """
+
         scaled_x_data = x_data / 1_000
         scaled_estimated_y_data = self._theta0 + self._theta1 * scaled_x_data
 
@@ -31,6 +47,14 @@ class Plot:
         plt.plot(x_data, estimated_y_data, 'y-')
 
     def show(self, linear_regression=False):
+        """
+        Display the scatter plot of the data.
+
+        Args:
+            linear_regression (bool, optional): Whether to plot the linear \
+            regression line. Defaults to False.
+        """
+
         x_data = self._data['km']
         y_data = self._data['price']
 

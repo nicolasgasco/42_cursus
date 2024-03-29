@@ -8,6 +8,16 @@ class PriceEstimator:
         return f"[theta_0={self.__theta_0}] [theta_1={self.__theta_1}]"
 
     def estimate(self, mileage):
+        """
+        Estimates the price of a car based on its mileage.
+
+        Args:
+            mileage (float): The mileage of the car.
+
+        Returns:
+            float: The estimated price of the car.
+        """
+
         scaled_mileage = mileage / 1_000
 
         scaled_estimate = self.__theta_0 + self.__theta_1 * scaled_mileage
