@@ -21,7 +21,7 @@ def generate_plot(data, labels):
 
     plt.clf()  # Reset plot options
     plt.title(labels['title'])
-    plt.plot(data['x'], data['y'], 'o-')
+    plt.scatter(data['x'], data['y'])
     plt.xlabel(labels['x_label'])
     plt.ylabel(labels['y_label'])
 
