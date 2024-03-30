@@ -34,7 +34,7 @@ def import_data():
         pandas.DataFrame: The preprocessed data.
     """
 
-    data = pd.read_csv("../data.csv")
+    data = pd.read_csv("../data/data.csv")
     data = data.sort_values(by='km')
 
     return data
