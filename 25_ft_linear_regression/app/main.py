@@ -83,6 +83,8 @@ def main():
 
     print("Training linear regression model... (this might take long)")
     theta0, theta1 = linear_regression.fit()
+    linear_regression.accuracy()
+
     price_estimator = PriceEstimator(theta0, theta1)
 
     print("\nPlotting the data and linear regression line...")
