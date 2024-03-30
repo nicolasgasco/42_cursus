@@ -5,4 +5,5 @@ services:
     container_name: "python"
     build: .
     volumes:
-      - ./:/ft_linear_regression
+      - ./data:/ft_linear_regression/data
+      - ./app:/ft_linear_regression/app

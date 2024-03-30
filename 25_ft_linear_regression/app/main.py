@@ -1,6 +1,8 @@
 from LinearRegression import LinearRegression
 from Plot import Plot
 from PriceEstimator import PriceEstimator
+
+from colorama import Fore, Style
 import time as time
 import pandas as pd
 
@@ -71,7 +73,7 @@ def estimate_user_input(price_estimator):
 
     estimate = price_estimator.estimate(mileage)
 
-    print(f"\nThe estimated price for {mileage:,} km is {estimate:,.2f}")
+    print(f"\nThe estimated price for {mileage:,} km is {Fore.YELLOW}{estimate:,.2f}{Style.RESET_ALL}")
 
 
 def main():
