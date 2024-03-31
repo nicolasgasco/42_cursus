@@ -2,16 +2,12 @@ import pandas as pd
 
 
 class Describer:
-    def __init__(self):
-        self._data = pd.DataFrame()
-        self._stats = pd.DataFrame()
+    def __init__(self, data):
+        assert isinstance(
+            data, pd.DataFrame), "Data must be a non-empty DataFrame."
 
-    def load_data(self, file_name):
-        try:
-            self._data = pd.read_csv(file_name)
-        except FileNotFoundError:
-            print("The file was not found.")
-            exit(1)
+        self._data = data
+        self._stats = pd.DataFrame()
 
     def _get_columns(self, data):
         all_columns = data.columns

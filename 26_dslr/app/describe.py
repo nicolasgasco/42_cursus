@@ -1,5 +1,6 @@
 from Describer import Describer
 
+import pandas as pd
 import sys as sys
 
 
@@ -13,9 +14,14 @@ def main():
 
     file_name = argv[1]
 
-    describer = Describer()
+    data = pd.DataFrame()
+    try:
+        data = pd.read_csv(file_name)
+    except FileNotFoundError:
+        print("The file was not found.")
+        exit(1)
 
-    describer.load_data(file_name)
+    describer = Describer(data)
 
     describer.describe()
 
