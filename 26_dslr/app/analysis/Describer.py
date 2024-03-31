@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 
@@ -69,6 +70,10 @@ class Describer:
             values = data[column].values
             valid_values = self._get_valid_entries(values)
 
+            if len(valid_values) == 0:
+                means.append(np.nan)
+                continue
+
             mean = sum(valid_values) / len(valid_values)
             means.append(mean)
 
@@ -80,6 +85,10 @@ class Describer:
         for column in columns:
             values = data[column].values
             valid_values = self._get_valid_entries(values)
+
+            if len(valid_values) == 0:
+                stds.append(np.nan)
+                continue
 
             mean = sum(valid_values) / len(valid_values)
             squared_diffs = [(value - mean) ** 2 for value in valid_values]
@@ -97,6 +106,10 @@ class Describer:
             values = data[column].sort_values().values
             valid_values = self._get_valid_entries(values)
 
+            if len(valid_values) == 0:
+                quartiles.append(np.nan)
+                continue
+
             first_quartile_index = (len(valid_values) + 1) // 4
             first_quartile_value = valid_values[first_quartile_index - 1]
 
@@ -111,6 +124,10 @@ class Describer:
             values = data[column].sort_values().values
             valid_values = self._get_valid_entries(values)
 
+            if len(valid_values) == 0:
+                quartiles.append(np.nan)
+                continue
+
             second_quartile_index = (len(valid_values) + 1) // 2
             second_quartile_value = valid_values[second_quartile_index - 1]
 
@@ -124,6 +141,10 @@ class Describer:
         for column in columns:
             values = data[column].sort_values().values
             valid_values = self._get_valid_entries(values)
+
+            if len(valid_values) == 0:
+                quartiles.append(np.nan)
+                continue
 
             third_quartile_index = 3 * (len(valid_values) + 1) // 4
             third_quartile_value = valid_values[third_quartile_index - 1]
@@ -162,5 +183,6 @@ class Describer:
         max_values = self._get_maxes(self._data, columns)
         self._stats.loc[7] = ['max'] + max_values
 
-        print(self._stats)
+        print(self._stats.to_string(index=False))
+
         print(self._data.describe())
