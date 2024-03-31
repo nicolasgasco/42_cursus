@@ -90,6 +90,48 @@ class Describer:
 
         return stds
 
+    def _get_first_quartiles(self, data, columns):
+        quartiles = []
+
+        for column in columns:
+            values = data[column].sort_values().values
+            valid_values = self._get_valid_entries(values)
+
+            first_quartile_index = (len(valid_values) + 1) // 4
+            first_quartile_value = valid_values[first_quartile_index - 1]
+
+            quartiles.append(first_quartile_value)
+
+        return quartiles
+
+    def _get_second_quartiles(self, data, columns):
+        quartiles = []
+
+        for column in columns:
+            values = data[column].sort_values().values
+            valid_values = self._get_valid_entries(values)
+
+            second_quartile_index = (len(valid_values) + 1) // 2
+            second_quartile_value = valid_values[second_quartile_index - 1]
+
+            quartiles.append(second_quartile_value)
+
+        return quartiles
+
+    def _get_third_quartiles(self, data, columns):
+        quartiles = []
+
+        for column in columns:
+            values = data[column].sort_values().values
+            valid_values = self._get_valid_entries(values)
+
+            third_quartile_index = 3 * (len(valid_values) + 1) // 4
+            third_quartile_value = valid_values[third_quartile_index - 1]
+
+            quartiles.append(third_quartile_value)
+
+        return quartiles
+
     def describe(self):
         columns = self._get_columns(self._data)
 
@@ -108,8 +150,17 @@ class Describer:
         min_values = self._get_mins(self._data, columns)
         self._stats.loc[3] = ['min'] + min_values
 
+        first_quartiles = self._get_first_quartiles(self._data, columns)
+        self._stats.loc[4] = ['25%'] + first_quartiles
+
+        second_quartiles = self._get_second_quartiles(self._data, columns)
+        self._stats.loc[5] = ['50%'] + second_quartiles
+
+        third_quartiles = self._get_third_quartiles(self._data, columns)
+        self._stats.loc[6] = ['75%'] + third_quartiles
+
         max_values = self._get_maxes(self._data, columns)
-        self._stats.loc[4] = ['max'] + max_values
+        self._stats.loc[7] = ['max'] + max_values
 
         print(self._stats)
         print(self._data.describe())
