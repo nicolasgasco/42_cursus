@@ -3,18 +3,18 @@ import pandas as pd
 
 
 class Describer:
-    def __init__(self, data):
+    def __init__(self, data: pd.DataFrame):
         assert isinstance(
             data, pd.DataFrame), "Data must be a non-empty DataFrame."
 
-        self._data = data
-        self._stats = pd.DataFrame()
+        self._data: pd.DataFrame = data
+        self._stats: pd.DataFrame | None = None
 
-    def _get_columns(self, data):
-        all_columns = data.columns
-        columns = [column for column in all_columns
-                   if data[column].dtype == 'int64'
-                   or data[column].dtype == 'float64']
+    def _get_columns(self, data: pd.DataFrame):
+        all_columns: pd.Index[str] = data.columns
+        columns: list[str] = [column for column in all_columns
+                              if data[column].dtype == 'int64'
+                              or data[column].dtype == 'float64']
 
         columns = columns
 
@@ -24,165 +24,91 @@ class Describer:
         return [value for value in values
                 if pd.notnull(value) and pd.notna(value)]
 
-    def _get_counts(self, data, columns):
-        counts = []
-        for column in columns:
-            valid_entries = self._get_valid_entries(data[column].values)
+    def _calc_count(self, entries: list[float]):
+        return len(entries)
 
-            len_valid_entries = len(valid_entries)
+    def _calc_mean(self, valid_entries: list[float]):
+        if len(valid_entries) == 0:
+            return np.nan
 
-            counts.append(len_valid_entries)
+        return sum(valid_entries) / len(valid_entries)
 
-        return counts
+    def _calc_std(self, valid_entries: list[float]):
+        if len(valid_entries) == 0:
+            return np.nan
 
-    def _get_mins(self, data, columns):
-        min_values = []
-        for column in columns:
-            values = data[column].values
-            min_value = values[0]
+        mean: float = self._calc_mean(valid_entries)
+        squared_diffs: list[float] = [(x - mean) ** 2.0 for x in valid_entries]
+        variance: float = sum(squared_diffs) / (len(squared_diffs) - 1)
+        std: float = variance ** 0.5
 
-            for value in values:
-                if value < min_value:
-                    min_value = value
+        return std
 
-            min_values.append(min_value)
+    def _calc_min(self, valid_entries: list[float]):
+        if len(valid_entries) == 0:
+            return np.nan
 
-        return min_values
+        min_value: float = valid_entries[0]
 
-    def _get_maxes(self, data, columns):
-        max_values = []
-        for column in columns:
-            values = data[column].values
-            max_value = values[0]
+        for value in valid_entries:
+            if value < min_value:
+                min_value = value
 
-            for value in values:
-                if value > max_value:
-                    max_value = value
+        return min_value
 
-            max_values.append(max_value)
+    def _calc_quartile(self, valid_entries: list[float], quartile: float):
+        if len(valid_entries) == 0:
+            return np.nan
 
-        return max_values
+        index_float: float = (len(valid_entries) - 1) * quartile
+        lower_index: int = int(index_float)
+        upper_index: int = int(index_float + 1)
 
-    def _get_means(self, data, columns):
-        means = []
+        is_integer: bool = index_float == lower_index
+        if is_integer:
+            return valid_entries[lower_index]
+        else:
+            mean: float = (valid_entries[lower_index] +
+                           valid_entries[upper_index]) / 2.0
+            return mean
 
-        for column in columns:
-            values = data[column].values
-            valid_values = self._get_valid_entries(values)
+    def _calc_max(self, valid_entries):
+        if len(valid_entries) == 0:
+            return np.nan
 
-            if len(valid_values) == 0:
-                means.append(np.nan)
-                continue
+        max_value: float = valid_entries[0]
 
-            mean = sum(valid_values) / len(valid_values)
-            means.append(mean)
+        for value in valid_entries:
+            if value > max_value:
+                max_value: float = value
 
-        return means
-
-    def _get_stds(self, data, columns):
-        stds = []
-
-        for column in columns:
-            values = data[column].values
-            valid_values = self._get_valid_entries(values)
-
-            if len(valid_values) == 0:
-                stds.append(np.nan)
-                continue
-
-            mean = sum(valid_values) / len(valid_values)
-            squared_diffs = [(value - mean) ** 2 for value in valid_values]
-            variance = sum(squared_diffs) / len(squared_diffs)
-            std = variance ** 0.5
-
-            stds.append(std)
-
-        return stds
-
-    def _get_first_quartiles(self, data, columns):
-        quartiles = []
-
-        for column in columns:
-            values = data[column].sort_values().values
-            valid_values = self._get_valid_entries(values)
-
-            if len(valid_values) == 0:
-                quartiles.append(np.nan)
-                continue
-
-            first_quartile_index = (len(valid_values) + 1) // 4
-            first_quartile_value = valid_values[first_quartile_index - 1]
-
-            quartiles.append(first_quartile_value)
-
-        return quartiles
-
-    def _get_second_quartiles(self, data, columns):
-        quartiles = []
-
-        for column in columns:
-            values = data[column].sort_values().values
-            valid_values = self._get_valid_entries(values)
-
-            if len(valid_values) == 0:
-                quartiles.append(np.nan)
-                continue
-
-            second_quartile_index = (len(valid_values) + 1) // 2
-            second_quartile_value = valid_values[second_quartile_index - 1]
-
-            quartiles.append(second_quartile_value)
-
-        return quartiles
-
-    def _get_third_quartiles(self, data, columns):
-        quartiles = []
-
-        for column in columns:
-            values = data[column].sort_values().values
-            valid_values = self._get_valid_entries(values)
-
-            if len(valid_values) == 0:
-                quartiles.append(np.nan)
-                continue
-
-            third_quartile_index = 3 * (len(valid_values) + 1) // 4
-            third_quartile_value = valid_values[third_quartile_index - 1]
-
-            quartiles.append(third_quartile_value)
-
-        return quartiles
+        return max_value
 
     def describe(self):
         columns = self._get_columns(self._data)
 
-        table_columns = [''] + columns
-        self._stats = pd.DataFrame(columns=table_columns)
+        stats_values: dict[str, list[str | float]] = {
+            '': ['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],
+        }
 
-        counts = self._get_counts(self._data, columns)
-        self._stats.loc[0] = ['count'] + counts
+        for column in columns:
+            valid_entries: list[float] = self._get_valid_entries(
+                self._data[column].values)
+            sorted_entries: list[float] = sorted(valid_entries)
 
-        means = self._get_means(self._data, columns)
-        self._stats.loc[1] = ['mean'] + means
+            count: float = self._calc_count(sorted_entries)
+            mean: float = self._calc_mean(sorted_entries)
+            std: float = self._calc_std(sorted_entries)
+            min: float = self._calc_min(sorted_entries)
+            first_quartile: float = self._calc_quartile(sorted_entries, 0.25)
+            second_quartile: float = self._calc_quartile(sorted_entries, 0.50)
+            third_quartile: float = self._calc_quartile(sorted_entries, 0.75)
+            max: float = self._calc_max(sorted_entries)
 
-        stds = self._get_stds(self._data, columns)
-        self._stats.loc[2] = ['std'] + stds
+            stats_values[column] = [count, mean, std, min,
+                                    first_quartile, second_quartile,
+                                    third_quartile, max]
 
-        min_values = self._get_mins(self._data, columns)
-        self._stats.loc[3] = ['min'] + min_values
-
-        first_quartiles = self._get_first_quartiles(self._data, columns)
-        self._stats.loc[4] = ['25%'] + first_quartiles
-
-        second_quartiles = self._get_second_quartiles(self._data, columns)
-        self._stats.loc[5] = ['50%'] + second_quartiles
-
-        third_quartiles = self._get_third_quartiles(self._data, columns)
-        self._stats.loc[6] = ['75%'] + third_quartiles
-
-        max_values = self._get_maxes(self._data, columns)
-        self._stats.loc[7] = ['max'] + max_values
+        self._stats = pd.DataFrame(stats_values)
 
         print(self._stats.to_string(index=False))
-
-        print(self._data.describe())
