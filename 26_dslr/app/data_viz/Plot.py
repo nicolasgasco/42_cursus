@@ -34,7 +34,7 @@ class Plot:
         n_cols = len(self.houses)
 
         num_bins = 20
-        figure_height = 5 * n_rows
+        figure_height = 3 * n_rows
 
         _, axs = plt.subplots(
             n_rows, n_cols, figsize=(num_bins, figure_height))
