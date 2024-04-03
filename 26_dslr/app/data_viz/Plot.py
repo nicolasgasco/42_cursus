@@ -9,6 +9,7 @@ class Plot:
     def __init__(self, data: pd.DataFrame):
         self._validate_inputs(data)
 
+        self.columns = data.columns.values[6:]  # Remove unrelevant columns
         self.data: pd.DataFrame = data
         self.houses: list[str] = np.sort(data[HOUSE_COLUMN].unique()).tolist()
         self.house_colors = {
@@ -30,11 +31,14 @@ class Plot:
         return [value for value in values
                 if pd.notnull(value) and pd.notna(value)]
 
-    def plot_score_distribution(self):
-        columns = self.data.columns.values[6:]  # Remove unrelevant columns
+    def _save_plot(self, filename):
+        plt.tight_layout()
+        plt.savefig(f"plots/{filename}")
+        plt.close()
 
-        n_rows = len(columns)
-        n_cols = len(self.houses)
+    def plot_score_distribution(self):
+        n_rows: int = len(self.columns)
+        n_cols: int = len(self.houses)
 
         num_bins = 20
         figure_height = 3 * n_rows
@@ -42,12 +46,12 @@ class Plot:
         _, axs = plt.subplots(
             n_rows, n_cols, figsize=(num_bins, figure_height))
 
-        for y, subject in enumerate(columns):
+        for y, subject in enumerate(self.columns):
 
             sorted_data = self.data[subject].sort_values()
 
-            min_score = sorted_data.min()
-            max_score = sorted_data.max()
+            min_score: float = sorted_data.min()
+            max_score: float = sorted_data.max()
 
             for x, house in enumerate(self.houses):
                 is_current_house: bool = self.data[HOUSE_COLUMN] == house
@@ -62,19 +66,31 @@ class Plot:
 
                 axs[y][x].set_xlim(min_score, max_score)
 
-        plt.tight_layout()
-        plt.savefig("plots/subjects_score_distribution.png")
-        plt.close()
+        self._save_plot("score_distribution.png")
+
+    def _plot_histogram_grid(self, n_rows, n_cols, plot_data, axs):
+        for y in range(n_rows):
+            for x in range(n_cols):
+                no_data_to_plot: bool = len(plot_data) == 0
+                if (no_data_to_plot):
+                    axs[y][x].set_visible(False)
+                    continue
+
+                all_data = plot_data.pop(0)
+                for data in all_data:
+                    axs[y][x].scatter(data["subj_data"], data["other_subj_data"],
+                                      color=self.house_colors[data["house"]],
+                                      alpha=0.5)
+                    axs[y][x].set_title(
+                        f'{data["subj"]} vs {data["other_subj"]}')
 
     def plot_features_similarity(self):
-        columns = self.data.columns.values[6:]  # Remove unrelevant columns
-
         n_rows, n_cols = 8, 10
         _, axs = plt.subplots(n_rows, n_cols, figsize=(75, 40))
 
         plot_data = []
-        for subject in columns:
-            for other_subject in columns:
+        for subject in self.columns:
+            for other_subject in self.columns:
                 is_same_subject: bool = subject == other_subject
                 if is_same_subject:
                     break
@@ -93,31 +109,16 @@ class Plot:
                                              "house": house})
                 plot_data.append(single_plot_data)
 
-        for y in range(n_rows):
-            for x in range(n_cols):
-                if (len(plot_data) == 0):
-                    axs[y][x].set_visible(False)
-                    continue
-
-                all_data = plot_data.pop(0)
-                for data in all_data:
-                    axs[y][x].scatter(data["subj_data"], data["other_subj_data"],
-                                      color=self.house_colors[data["house"]],
-                                      alpha=0.5)
-                    axs[y][x].set_title(
-                        f'{data["subj"]} vs {data["other_subj"]}')
-        plt.tight_layout()
-        plt.savefig("plots/subjects_similarity.png")
-        plt.close()
+        self._plot_histogram_grid(n_rows, n_cols, plot_data, axs)
+        self._save_plot("subjects_similarity.png")
 
     def plot_pair_matrix(self):
-        columns = self.data.columns.values[6:]  # Remove unrelevant columns
-        n = len(columns)
+        n = len(self.columns)
 
         _, axs = plt.subplots(n, n, figsize=(75, 40))
 
-        for y, subject in enumerate(columns):
-            for x, other_subject in enumerate(columns):
+        for y, subject in enumerate(self.columns):
+            for x, other_subject in enumerate(self.columns):
                 is_same_subject: bool = subject == other_subject
 
                 for house in self.houses:
@@ -142,6 +143,4 @@ class Plot:
                 if y == n - 1:
                     axs[y][x].set_xlabel(other_subject, fontsize=font_size)
 
-        plt.tight_layout()
-        plt.savefig("plots/pair_plot_matrix.png")
-        plt.close()
+        self._save_plot("pair_plot_matrix.png")
