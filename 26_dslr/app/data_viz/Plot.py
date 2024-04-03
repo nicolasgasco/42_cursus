@@ -65,34 +65,44 @@ class Plot:
 
     def plot_features_similarity(self):
         columns = self.data.columns.values[6:]  # Remove unrelevant columns
-        n = len(columns)
 
-        _, axs = plt.subplots(n, n, figsize=(75, 40))
+        n_rows, n_cols = 8, 10
+        _, axs = plt.subplots(n_rows, n_cols, figsize=(75, 40))
 
-        for y, subject in enumerate(columns):
-            for x, other_subject in enumerate(columns):
+        plot_data = []
+        for subject in columns:
+            for other_subject in columns:
                 is_same_subject: bool = subject == other_subject
                 if is_same_subject:
-                    axs[y][x].set_visible(False)  # Hide the plot
-                    continue
+                    break
 
+                single_plot_data = []
                 for house in self.houses:
                     is_curr_house: bool = self.data[HOUSE_COLUMN] == house
 
                     subj_data = self.data[subject][is_curr_house]
                     other_subj_data = self.data[other_subject][is_curr_house]
 
-                    axs[y][x].scatter(subj_data, other_subj_data,
-                                      color=self.house_colors[house],
+                    single_plot_data.append({"subj_data": subj_data,
+                                             "subj": subject,
+                                             "other_subj_data": other_subj_data,
+                                             "other_subj": other_subject,
+                                             "house": house})
+                plot_data.append(single_plot_data)
+
+        for y in range(n_rows):
+            for x in range(n_cols):
+                if (len(plot_data) == 0):
+                    axs[y][x].set_visible(False)
+                    continue
+
+                all_data = plot_data.pop(0)
+                for data in all_data:
+                    axs[y][x].scatter(data["subj_data"], data["other_subj_data"],
+                                      color=self.house_colors[data["house"]],
                                       alpha=0.5)
-
-                font_size = 16
-                if x == 0:
-                    axs[y][x].set_ylabel(subject, fontsize=font_size)
-
-                if y == n - 1:
-                    axs[y][x].set_xlabel(other_subject, fontsize=font_size)
-
+                    axs[y][x].set_title(
+                        f'{data["subj"]} vs {data["other_subj"]}')
         plt.tight_layout()
         plt.savefig("plots/subjects_similarity.png")
         plt.close()
