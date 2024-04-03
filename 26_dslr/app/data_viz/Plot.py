@@ -26,7 +26,6 @@ class Plot:
         assert data[HOUSE_COLUMN].nunique(
         ) == 4, "Data must contain all four Hogwarts Houses."
 
-    # TODO refactor this to util function
     def _get_valid_entries(self, values):
         return [value for value in values
                 if pd.notnull(value) and pd.notna(value)]
