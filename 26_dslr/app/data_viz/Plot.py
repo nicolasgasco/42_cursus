@@ -96,3 +96,39 @@ class Plot:
         plt.tight_layout()
         plt.savefig("plots/subjects_similarity.png")
         plt.close()
+
+    def plot_pair_matrix(self):
+        columns = self.data.columns.values[6:]  # Remove unrelevant columns
+        n = len(columns)
+
+        _, axs = plt.subplots(n, n, figsize=(75, 40))
+
+        for y, subject in enumerate(columns):
+            for x, other_subject in enumerate(columns):
+                is_same_subject: bool = subject == other_subject
+
+                for house in self.houses:
+                    is_curr_house: bool = self.data[HOUSE_COLUMN] == house
+                    subj_data = self.data[subject][is_curr_house]
+
+                    if is_same_subject:
+                        axs[y][x].hist(
+                            subj_data, color=self.house_colors[house],
+                            alpha=0.4)
+                        continue
+
+                    other_subj_data = self.data[other_subject][is_curr_house]
+                    axs[y][x].scatter(subj_data, other_subj_data,
+                                      color=self.house_colors[house],
+                                      alpha=0.4)
+
+                font_size = 16
+                if x == 0:
+                    axs[y][x].set_ylabel(subject, fontsize=font_size)
+
+                if y == n - 1:
+                    axs[y][x].set_xlabel(other_subject, fontsize=font_size)
+
+        plt.tight_layout()
+        plt.savefig("plots/pair_plot_matrix.png")
+        plt.close()
