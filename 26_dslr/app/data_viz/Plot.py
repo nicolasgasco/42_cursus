@@ -7,20 +7,23 @@ HOUSE_COLUMN = "Hogwarts House"
 
 class Plot:
     def __init__(self, data: pd.DataFrame):
-        assert isinstance(
-            data, pd.DataFrame) and not data.empty, "Data must be a non-empty DataFrame."
-
-        assert data[HOUSE_COLUMN].nunique(
-        ) == 4, "Data must contain all four Hogwarts Houses."
+        self._validate_inputs(data)
 
         self.data: pd.DataFrame = data
-        self.houses = np.sort(data[HOUSE_COLUMN].unique())
+        self.houses: list[str] = np.sort(data[HOUSE_COLUMN].unique()).tolist()
         self.house_colors = {
             "Gryffindor": "#ae0001",
             "Hufflepuff": "#ecb939",
             "Ravenclaw": "#222f5b",
             "Slytherin": "#2a623d"
         }
+
+    def _validate_inputs(self, data: pd.DataFrame):
+        assert isinstance(
+            data, pd.DataFrame) and not data.empty, "Data must be a non-empty DataFrame."
+
+        assert data[HOUSE_COLUMN].nunique(
+        ) == 4, "Data must contain all four Hogwarts Houses."
 
     # TODO refactor this to util function
     def _get_valid_entries(self, values):
