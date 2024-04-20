@@ -36,8 +36,9 @@ class LinearRegression:
         """
         Save the theta values to a CSV file.
 
-        This method creates a DataFrame with the theta values and saves it to a CSV file.
-        The CSV file is saved in the '../data/thetas.csv' directory.
+        This method creates a DataFrame with the theta values
+        and saves it to a CSV file.
+        The CSV file is saved in the 'data/thetas.csv' directory.
 
         Parameters:
             None
@@ -47,12 +48,13 @@ class LinearRegression:
         """
         thetas_df = pd.DataFrame(
             {'theta0': [self.theta0_unnorm], 'theta1': [self.theta1_unnorm]})
-        thetas_df.to_csv('../data/thetas.csv', index=False)
+        thetas_df.to_csv('data/thetas.csv', index=False)
 
     def _estimate_price(self, theta0: float, theta1: float,
                         mileage: pd.Series) -> pd.Series:
         """
-        Estimates the price of a car based on the given theta0, theta1, and mileage.
+        Estimates the price of a car based
+        on the given theta0, theta1, and mileage.
 
         Parameters:
         theta0 (float): The intercept of the linear regression model.
