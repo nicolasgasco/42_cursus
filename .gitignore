@@ -6863,4 +6863,4 @@ micropaint_tester
 20_exam_06/grademe.sh
 __pycache__
 25_ft_linear_regression/data/thetas.csv
-25_ft_linear_regression/app/mileage_vs_price-linear_regression.png
+25_ft_linear_regression/app/plots/mileage_vs_price-linear_regression.png
