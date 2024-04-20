@@ -26,14 +26,11 @@ class Plot:
             None
         """
 
-        scaled_x_data = x_data / 1_000
-        scaled_estimated_y_data = self._theta0 + self._theta1 * scaled_x_data
-
-        estimated_y_data = scaled_estimated_y_data * 1_000
+        estimated_y_data = self._theta0 + self._theta1 * x_data
 
         plt.plot(x_data, estimated_y_data, 'y-')
 
-    def show(self, linear_regression=False):
+    def generate_plot(self, linear_regression=False):
         """
         Display the scatter plot of the data.
 
