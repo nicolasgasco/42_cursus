@@ -1,13 +1,85 @@
-class LinearRegression:
-    def __init__(self, data):
-        self._scale_factor = 1_000
+from colorama import Fore, Style
+import pandas as pd
 
-        self._dataset = data / self._scale_factor
+MAX_ITERATIONS = 25_000
+EXTRA_ITERATIONS = 1_000
+LEARNING_RATE = 0.1
+THRESHOLD = 0.001
+
+
+class LinearRegression:
+    def __init__(self, data: pd.DataFrame):
+        self._dataset: pd.DataFrame = self._normalize_data(data)
+        self._dataset_unnormal: pd.DataFrame = data
 
         self.theta0 = 0.0
         self.theta1 = 0.0
 
-    def fit(self):
+        self.theta0_unnorm = 0.0
+        self.theta1_unnorm = 0.0
+
+    def _normalize_data(self, data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Normalize the given data using min-max scaling.
+
+        Parameters:
+        data (pd.DataFrame): The input data to be normalized.
+
+        Returns:
+        pd.DataFrame: The normalized data.
+        """
+
+        normalized_data = (data - data.min()) / (data.max() - data.min())
+        return normalized_data
+
+    def _save_thetas_to_csv(self):
+        """
+        Save the theta values to a CSV file.
+
+        This method creates a DataFrame with the theta values and saves it to a CSV file.
+        The CSV file is saved in the '../data/thetas.csv' directory.
+
+        Parameters:
+            None
+
+        Returns:
+            None
+        """
+        thetas_df = pd.DataFrame(
+            {'theta0': [self.theta0_unnorm], 'theta1': [self.theta1_unnorm]})
+        thetas_df.to_csv('../data/thetas.csv', index=False)
+
+    def _estimate_price(self, theta0: float, theta1: float,
+                        mileage: pd.Series) -> pd.Series:
+        """
+        Estimates the price of a car based on the given theta0, theta1, and mileage.
+
+        Parameters:
+        theta0 (float): The intercept of the linear regression model.
+        theta1 (float): The slope of the linear regression model.
+        mileage (pd.Series): The mileage of the car.
+
+        Returns:
+        pd.Series: The estimated price of the car.
+        """
+
+        estimated_price = theta0 + theta1 * mileage
+
+        return estimated_price
+
+    def _calc_thetas(self, norm_factor: float, mileage: pd.Series,
+                     price: pd.Series) -> tuple[float, float]:
+        estimated_price = self._estimate_price(
+            self.theta0, self.theta1, mileage)
+        price_error = estimated_price - price
+
+        temp_theta0 = LEARNING_RATE * norm_factor * sum(price_error)
+        temp_theta1 = LEARNING_RATE * norm_factor * \
+            sum((price_error) * mileage)
+
+        return temp_theta0, temp_theta1
+
+    def fit(self) -> tuple[float, float]:
         """
         Trains the linear regression model using gradient descent.
 
@@ -15,33 +87,78 @@ class LinearRegression:
             tuple: A tuple containing the computed values of theta0 and theta1.
         """
 
-        ITERATIONS = 300_000
-        LEARNING_RATE = 0.0001
-
-        mileage = self._dataset['km']
-        price = self._dataset['price']
+        mileage: pd.Series = self._dataset['km']
+        price: pd.Series = self._dataset['price']
 
         m = len(mileage)
         norm_factor = 1 / m
 
-        for _ in range(ITERATIONS):
-            estimate_price = self.theta0 + self.theta1 * mileage
-            price_error = estimate_price - price
+        will_break = False
+        extra_iterations = EXTRA_ITERATIONS
 
-            temp_theta0 = LEARNING_RATE * norm_factor * sum(price_error)
+        prev_theta0, prev_theta1 = self.theta0, self.theta1
+        for i in range(MAX_ITERATIONS):
+            if extra_iterations <= 0:
+                break
 
-            temp_theta1 = LEARNING_RATE * norm_factor * \
-                sum((price_error) * mileage)
+            temp_theta0, temp_theta1 = self._calc_thetas(
+                norm_factor, mileage, price)
 
             self.theta0 -= temp_theta0
             self.theta1 -= temp_theta1
 
-        return self.theta0, self.theta1
+            theta0, theta1 = self._unnormalize_thetas()
+            print(
+                "\r"
+                f"theta0: {Fore.GREEN}{theta0:.2f}{Style.RESET_ALL}, "
+                f"theta1: {Fore.GREEN}{theta1:.2f}{Style.RESET_ALL}, "
+                f"iteration: {i + 1:,}/{MAX_ITERATIONS:,}",
+                end=""
+            )
 
-    def _compute_mean_absolute_error(self, price, estimated_price,
-                                     normalization_factor):
+            is_theta0_unchanged: bool = (theta0 - prev_theta0) < THRESHOLD
+            is_theta1_unchanged: bool = (theta1 - prev_theta1) < THRESHOLD
+            if is_theta0_unchanged and is_theta1_unchanged:
+                will_break = True
+
+            if will_break:
+                extra_iterations -= 1
+
+            prev_theta0, prev_theta1 = theta0, theta1
+
+        theta0, theta1 = self._unnormalize_thetas()
+        self.theta0_unnorm = theta0
+        self.theta1_unnorm = theta1
+
+        self._save_thetas_to_csv()
+
+        return theta0, theta1
+
+    def _unnormalize_thetas(self) -> tuple[float, float]:
         """
-        Compute the mean absolute error between the actual price and the estimated price.
+        Unnormalizes the theta values based on the original dataset.
+
+        Returns:
+            tuple: A tuple containing the unnormalized theta0 and theta1.
+        """
+
+        x: pd.Series = self._dataset_unnormal.iloc[:, 0]
+        y: pd.Series = self._dataset_unnormal.iloc[:, 1]
+
+        range_y: pd.Series = y.max() - y.min()
+
+        theta1_unnorm: float = self.theta1 * range_y / (x.max() - x.min())
+        theta0_unnorm: float = self.theta0 * range_y + y.min() \
+            - theta1_unnorm * x.min()
+
+        return theta0_unnorm, theta1_unnorm
+
+    def _mean_absolute_error(self, price: pd.Series,
+                             estimated_price: pd.Series,
+                             normalization_factor: float) -> float:
+        """
+        Compute the mean absolute error between the actual price
+        and the estimated price.
 
         Args:
             price (float): The actual price.
@@ -52,15 +169,17 @@ class LinearRegression:
             float: The scaled mean absolute error.
         """
 
-        scaled_mean_absolute_error = normalization_factor * \
+        mean_absolute_error: float = normalization_factor * \
             sum(abs(price - estimated_price))
 
-        return scaled_mean_absolute_error * self._scale_factor
+        return mean_absolute_error
 
-    def _compute_root_mean_squared_error(self, price, estimated_price,
-                                         normalization_factor):
+    def _root_mean_squared_error(self, price: pd.Series,
+                                 estimated_price: pd.Series,
+                                 normalization_factor: float) -> float:
         """
-        Compute the root mean squared error (RMSE) for the linear regression model.
+        Compute the root mean squared error (RMSE)
+        for the linear regression model.
 
         Args:
             price (float): The actual price.
@@ -72,15 +191,16 @@ class LinearRegression:
 
         """
 
-        scaled_root_mean_squared_error = normalization_factor * \
+        root_mean_squared_error: float = normalization_factor * \
             sum((price - estimated_price) ** 2) ** 0.5
 
-        return scaled_root_mean_squared_error * self._scale_factor
+        return root_mean_squared_error
 
-    def _compute_mean_squared_error(self, price, estimated_price,
-                                    normalization_factor):
+    def _mean_squared_error(self, price: pd.Series, estimated_price: pd.Series,
+                            normalization_factor: float) -> float:
         """
-        Computes the mean squared error between the actual price and the estimated price.
+        Computes the mean squared error between the actual price
+        and the estimated price.
 
         Args:
             price (float): The actual price.
@@ -91,37 +211,37 @@ class LinearRegression:
             float: The scaled mean squared error.
         """
 
-        scaled_mean_squared_error = normalization_factor * \
+        mean_squared_error: float = normalization_factor * \
             sum((price - estimated_price) ** 2)
 
-        return scaled_mean_squared_error * self._scale_factor
+        return mean_squared_error
 
-    def _compute_r_squared(self, estimated_price):
+    def _r_squared(self, price: pd.Series, estimated_price: pd.Series)\
+            -> float:
         """
-        Compute the coefficient of determination (R-squared) for the linear regression model.
+        Compute the coefficient of determination (R-squared)
+        for the linear regression model.
 
         Parameters:
-            estimated_price (numpy.ndarray): The estimated prices predicted by the linear regression model.
+            price (pd.Series): The actual prices.
+            estimated_price (pd.Series): The estimated prices.
 
         Returns:
-            float: The R-squared value, indicating the proportion of the variance in the dependent variable that is predictable from the independent variable.
-
+            float: The coefficient of determination (R-squared) value.
         """
+        mean_price: float = sum(price) / len(price)
 
-        price = self._dataset['price']
+        ssr: float = sum((price - estimated_price) ** 2)
+        sst: float = sum((price - mean_price) ** 2)
 
-        mean_price = sum(price) / len(price)
+        r_squared: float = 1 - (ssr / sst)
 
-        ssr = sum((price - estimated_price) ** 2)
-        sst = sum((price - mean_price) ** 2)
-
-        r_squared = 1 - (ssr / sst)
-
-        return r_squared * 100
+        return r_squared
 
     def accuracy(self):
         """
-        Calculate and print the accuracy metrics of the linear regression model.
+        Calculate and print the accuracy metrics
+        of the linear regression model.
 
         The accuracy metrics include:
         - Mean absolute error
@@ -129,29 +249,38 @@ class LinearRegression:
         - Mean squared error
         - R-squared
 
-        The accuracy metrics are calculated based on the predicted prices and the actual prices
+        The accuracy metrics are calculated based on the predicted prices
+        and the actual prices
         from the dataset.
 
         Returns:
             None
         """
 
-        mileage = self._dataset['km']
-        price = self._dataset['price']
+        mileage: pd.Series = self._dataset_unnormal['km']
+        price: pd.Series = self._dataset_unnormal['price']
 
-        estimated_price = self.theta0 + self.theta1 * mileage
+        estimated_price: pd.Series = self._estimate_price(
+            self.theta0_unnorm, self.theta1_unnorm, mileage)
         normalization_factor = 1 / len(mileage)
 
-        mean_absolute_error = self._compute_mean_absolute_error(
+        mean_absolute_error = self._mean_absolute_error(
             price, estimated_price, normalization_factor)
-        root_mean_squared_error = self._compute_root_mean_squared_error(
+        root_mean_squared_error = self._root_mean_squared_error(
             price, estimated_price, normalization_factor)
-        mean_squared_error = self._compute_mean_squared_error(
+        mean_squared_error = self._mean_squared_error(
             price, estimated_price, normalization_factor)
-        r_squared = self._compute_r_squared(estimated_price)
+        r_squared = self._r_squared(price, estimated_price)
 
         print("\nModel accuracy:")
-        print(f"\tMean absolute error: {mean_absolute_error:.2f}")
-        print(f"\tRoot mean squared error: {root_mean_squared_error:.2f}")
-        print(f"\tMean squared error: {mean_squared_error:.2f}")
-        print(f"\tR-squared: {r_squared:.2f}%")
+        print(
+            "\tMean absolute error: ",
+            f"{Fore.GREEN}{mean_absolute_error:.2f}{Style.RESET_ALL}")
+        print(
+            "\tRoot mean squared error: ",
+            f"{Fore.GREEN}{root_mean_squared_error:.2f}{Style.RESET_ALL}")
+        print(
+            "\tMean squared error: ",
+            f"{Fore.GREEN}{mean_squared_error:.2f}{Style.RESET_ALL}")
+        print("\tR-squared: ",
+              f"{Fore.GREEN}{r_squared:.2f}{Style.RESET_ALL}")
