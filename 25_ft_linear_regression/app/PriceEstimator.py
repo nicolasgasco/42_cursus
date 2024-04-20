@@ -18,8 +18,8 @@ class PriceEstimator:
             float: The estimated price of the car.
         """
 
-        scaled_mileage = mileage / 1_000
+        scaled_mileage = mileage
 
         scaled_estimate = self.__theta_0 + self.__theta_1 * scaled_mileage
 
-        return scaled_estimate * 1_000
+        return scaled_estimate
