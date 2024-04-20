@@ -42,7 +42,7 @@ def main():
 
     except FileNotFoundError:
         print(f"{Fore.RED}File thetas.csv not found.",
-              "Using default values for theta0 and theta1.{Style.RESET_ALL}")
+              f"Using default values for theta0 and theta1.{Style.RESET_ALL}")
 
     price_estimator = PriceEstimator(theta0, theta1)
 
