@@ -1,21 +1,22 @@
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
+import pandas as pd
 
 
 class Plot:
-    def __init__(self, data, theta0, theta1):
-        self._theta0 = theta0
-        self._theta1 = theta1
+    def __init__(self, data: pd.DataFrame, theta0: float, theta1: float):
+        self._theta0: float = theta0
+        self._theta1: float = theta1
 
-        self._data = data
+        self._data: pd.DataFrame = data
 
-        self._labels = {
+        self._labels: dict = {
             'x_label': 'Mileage',
             'y_label': 'Price',
             'title': 'Mileage vs Price'
         }
 
-    def _plot_linear_regression(self, x_data):
+    def _plot_linear_regression(self, x_data: pd.Series):
         """
         Plot the linear regression line.
 
@@ -26,7 +27,7 @@ class Plot:
             None
         """
 
-        estimated_y_data = self._theta0 + self._theta1 * x_data
+        estimated_y_data: pd.Series = self._theta0 + self._theta1 * x_data
 
         plt.plot(x_data, estimated_y_data, 'y-')
 
@@ -39,8 +40,8 @@ class Plot:
             regression line. Defaults to False.
         """
 
-        x_data = self._data['km']
-        y_data = self._data['price']
+        x_data: pd.Series = self._data['km']
+        y_data: pd.Series = self._data['price']
 
         plt.clf()  # Reset plot options
         plt.title(self._labels['title'])
@@ -58,8 +59,9 @@ class Plot:
         if (linear_regression):
             self._plot_linear_regression(x_data)
 
-        plot_name = self._labels['title'].lower().replace(' ', '_')
+        plot_name: str = self._labels['title'].lower().replace(' ', '_')
         plot_name += '-linear_regression' if linear_regression else ''
         plot_name += '.png'
 
-        plt.savefig(plot_name, bbox_inches='tight', pad_inches=0, dpi=500)
+        plt.savefig(f"app/plots/{plot_name}", bbox_inches='tight',
+                    pad_inches=0, dpi=500)
