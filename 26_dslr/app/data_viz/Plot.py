@@ -31,11 +31,39 @@ class Plot:
                 if pd.notnull(value) and pd.notna(value)]
 
     def _save_plot(self, filename):
+        PLOTS_PATH = "/dslr/app/data_viz/plots/"
+        file_path = PLOTS_PATH + filename
         plt.tight_layout()
-        plt.savefig(f"plots/{filename}")
+        plt.savefig(file_path)
         plt.close()
 
-    def plot_score_distribution(self):
+        print(f"Plot saved successfully: {file_path}")
+
+    def plot_score_distribution(self, subject: str):
+        sorted_data = self.data[subject].sort_values()
+
+        num_bins = 20
+
+        min_score: float = sorted_data.min()
+        max_score: float = sorted_data.max()
+
+        for x, house in enumerate(self.houses):
+            is_current_house = self.data[HOUSE_COLUMN] == house
+            house_data = self._get_valid_entries(
+                sorted_data[is_current_house])
+
+            plt.hist(house_data, bins=num_bins,
+                     color=self.house_colors[house], alpha=0.5)
+            plt.title(f'{subject} ({house})')
+            plt.xlabel("Score")
+            plt.ylabel("Frequency")
+
+            plt.xlim(min_score, max_score)
+
+        serialized_subject = subject.replace(" ", "_").lower()
+        self._save_plot(f"score_distribution_{serialized_subject}.png")
+
+    def plot_score_distributions(self):
         n_rows: int = len(self.columns)
         n_cols: int = len(self.houses)
 
