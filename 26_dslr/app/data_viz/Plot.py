@@ -106,6 +106,7 @@ class Plot:
             plt.xlabel("Score")
             plt.ylabel("Frequency")
             plt.xlim(min_score, max_score)
+            plt.legend(self.houses)
 
         serialized_subject = subject.replace(" ", "_").lower()
         self._save_plot(f"score_distribution_{serialized_subject}.png")
@@ -152,6 +153,7 @@ class Plot:
                 axs[y][x].set_xlabel("Score")
                 axs[y][x].set_ylabel("Frequency")
                 axs[y][x].set_xlim(min_score, max_score)
+                axs[y][x].legend(self.houses)
 
             x = (x + 1) % n_cols
             y = y + 1 if x == 0 else y
