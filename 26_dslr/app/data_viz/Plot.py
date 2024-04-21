@@ -192,7 +192,7 @@ class Plot:
                         f'{data["subj"]} vs {data["other_subj"]}')
                     axs[y][x].legend(self.houses)
 
-    def plot_features_similarity(self):
+    def plot_similarities(self):
         """
         Plots the similarity between different features.
 
@@ -238,7 +238,7 @@ class Plot:
         self._plot_scatter_grid(n_rows, n_cols, plot_data, axs)
         self._save_plot("subjects_similarity.png")
 
-    def plot_pair(self, subject: str, other_subject: str):
+    def plot_similarity(self, subject: str, other_subject: str):
         plt.figure(figsize=(10, 6))
 
         for house in self.houses:

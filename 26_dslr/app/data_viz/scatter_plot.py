@@ -32,12 +32,12 @@ def main():
             print(
                 "Plotting comparison between",
                 f"{first_chosen_subject} and {second_chosen_subject}...")
-            plot.plot_pair(first_chosen_subject, second_chosen_subject)
+            plot.plot_similarity(first_chosen_subject, second_chosen_subject)
 
             print("\n")
     except KeyboardInterrupt:
         print("\nPlotting comparison for all subject pairs...")
-        plot.plot_features_similarity()
+        plot.plot_similarities()
         print("Bye...")
 
 
