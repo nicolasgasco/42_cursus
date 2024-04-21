@@ -64,34 +64,38 @@ class Plot:
         self._save_plot(f"score_distribution_{serialized_subject}.png")
 
     def plot_score_distributions(self):
-        n_rows: int = len(self.columns)
-        n_cols: int = 1
+        n_cols: int = 3
+        n_rows: int = len(self.columns) // n_cols + 1
 
         num_bins = 20
         figure_height = 5 * n_rows
-
         _, axs = plt.subplots(
-            n_rows, n_cols, figsize=(num_bins/2, figure_height))
+            n_rows, n_cols, figsize=(num_bins, figure_height))
 
-        for y, subject in enumerate(self.columns):
+        x = 0
+        y = 0
+        for subject in self.columns:
 
             sorted_data = self.data[subject].sort_values()
 
             min_score: float = sorted_data.min()
             max_score: float = sorted_data.max()
 
-            for x, house in enumerate(self.houses):
+            for house in self.houses:
                 is_current_house = self.data[HOUSE_COLUMN] == house
                 house_data = self._get_valid_entries(
                     sorted_data[is_current_house])
 
-                axs[y].hist(house_data, bins=num_bins,
-                            color=self.house_colors[house], alpha=0.5)
-                axs[y].set_title(f'{subject} ({house})')
-                axs[y].set_xlabel("Score")
-                axs[y].set_ylabel("Frequency")
+                axs[y][x].hist(house_data, bins=num_bins,
+                               color=self.house_colors[house], alpha=0.5)
+                axs[y][x].set_title(f'{subject} ({house})')
+                axs[y][x].set_xlabel("Score")
+                axs[y][x].set_ylabel("Frequency")
 
-                axs[y].set_xlim(min_score, max_score)
+                axs[y][x].set_xlim(min_score, max_score)
+
+            x = (x + 1) % n_cols
+            y = y + 1 if x == 0 else y
 
         self._save_plot("score_distribution.png")
 
