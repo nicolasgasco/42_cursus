@@ -11,6 +11,7 @@ The _Outer Core_ projects I completed after completing the _Common Core_ at 42Ur
 
 |Name|Language|End date|Description|Estimated effort (h)|
 |----|--------|--------|-----------|----------|
+|**[dslr](https://github.com/nicolasgasco/42_cursus/tree/master/26_dslr)**|Python|-| Create an Harry Potter Sorting Hat algorithm implementing a linear a linear classification model.|98|
 |**[ft_linear_regression](https://github.com/nicolasgasco/42_cursus/tree/master/25_ft_linear_regression)**|Python|April 2024| Predict the price of a car by using a linear function train with a gradient descent algorithm.|70|
 |**[ft_libasm](https://github.com/nicolasgasco/42_cursus/tree/master/22_libasm)**|x86_64 assembly/C|February 2024| Create a small library of x86_64 NASM functions.|70|
 
