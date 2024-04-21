@@ -1,3 +1,4 @@
+from colorama import Fore, Style
 from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
@@ -74,7 +75,8 @@ class Plot:
         plt.savefig(file_path)
         plt.close()
 
-        print(f"Plot saved successfully: {file_path}")
+        print(f"{Fore.GREEN}Plot saved successfully: ",
+              f"{file_path}{Style.RESET_ALL}")
 
     def plot_score_distribution(self, subject: str):
         """
