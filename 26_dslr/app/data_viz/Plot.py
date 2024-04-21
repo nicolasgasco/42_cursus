@@ -65,13 +65,13 @@ class Plot:
 
     def plot_score_distributions(self):
         n_rows: int = len(self.columns)
-        n_cols: int = len(self.houses)
+        n_cols: int = 1
 
         num_bins = 20
-        figure_height = 3 * n_rows
+        figure_height = 5 * n_rows
 
         _, axs = plt.subplots(
-            n_rows, n_cols, figsize=(num_bins, figure_height))
+            n_rows, n_cols, figsize=(num_bins/2, figure_height))
 
         for y, subject in enumerate(self.columns):
 
@@ -81,17 +81,17 @@ class Plot:
             max_score: float = sorted_data.max()
 
             for x, house in enumerate(self.houses):
-                is_current_house: bool = self.data[HOUSE_COLUMN] == house
+                is_current_house = self.data[HOUSE_COLUMN] == house
                 house_data = self._get_valid_entries(
                     sorted_data[is_current_house])
 
-                axs[y][x].hist(house_data, bins=num_bins,
-                               color=self.house_colors[house])
-                axs[y][x].set_title(f'{subject} ({house})')
-                axs[y][x].set_xlabel("Score")
-                axs[y][x].set_ylabel("Frequency")
+                axs[y].hist(house_data, bins=num_bins,
+                            color=self.house_colors[house], alpha=0.5)
+                axs[y].set_title(f'{subject} ({house})')
+                axs[y].set_xlabel("Score")
+                axs[y].set_ylabel("Frequency")
 
-                axs[y][x].set_xlim(min_score, max_score)
+                axs[y].set_xlim(min_score, max_score)
 
         self._save_plot("score_distribution.png")
 
@@ -105,7 +105,8 @@ class Plot:
 
                 all_data = plot_data.pop(0)
                 for data in all_data:
-                    axs[y][x].scatter(data["subj_data"], data["other_subj_data"],
+                    axs[y][x].scatter(data["subj_data"],
+                                      data["other_subj_data"],
                                       color=self.house_colors[data["house"]],
                                       alpha=0.5)
                     axs[y][x].set_title(
@@ -124,7 +125,7 @@ class Plot:
 
                 single_plot_data = []
                 for house in self.houses:
-                    is_curr_house: bool = self.data[HOUSE_COLUMN] == house
+                    is_curr_house = self.data[HOUSE_COLUMN] == house
 
                     subj_data = self.data[subject][is_curr_house]
                     other_subj_data = self.data[other_subject][is_curr_house]
@@ -149,7 +150,7 @@ class Plot:
                 is_same_subject: bool = subject == other_subject
 
                 for house in self.houses:
-                    is_curr_house: bool = self.data[HOUSE_COLUMN] == house
+                    is_curr_house = self.data[HOUSE_COLUMN] == house
                     subj_data = self.data[subject][is_curr_house]
 
                     if is_same_subject:
