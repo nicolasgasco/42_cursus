@@ -160,16 +160,16 @@ class Plot:
 
         self._save_plot("score_distribution.png")
 
-    def _plot_histogram_grid(self, n_rows: int, n_cols: int,
-                             plot_data: list, axs):
+    def _plot_scatter_grid(self, n_rows: int, n_cols: int,
+                           plot_data: list, axs):
         """
-        Plot a grid of histograms.
+        Plot scatter grid with multiple subplots.
 
         Args:
-          n_rows (int): The number of rows in the grid.
-          n_cols (int): The number of columns in the grid.
-          plot_data (list): A list of data to plot.
-          axs (list): A 2D list of subplots.
+          n_rows (int): Number of rows in the grid.
+          n_cols (int): Number of columns in the grid.
+          plot_data (list): List of data to be plotted.
+          axs: Axes objects for the subplots.
 
         Returns:
           None
@@ -190,6 +190,7 @@ class Plot:
                                       alpha=0.5)
                     axs[y][x].set_title(
                         f'{data["subj"]} vs {data["other_subj"]}')
+                    axs[y][x].legend(self.houses)
 
     def plot_features_similarity(self):
         """
@@ -234,8 +235,30 @@ class Plot:
                                              "house": house})
                 plot_data.append(single_plot_data)
 
-        self._plot_histogram_grid(n_rows, n_cols, plot_data, axs)
+        self._plot_scatter_grid(n_rows, n_cols, plot_data, axs)
         self._save_plot("subjects_similarity.png")
+
+    def plot_pair(self, subject: str, other_subject: str):
+        plt.figure(figsize=(10, 6))
+
+        for house in self.houses:
+            is_curr_house = self.data[HOUSE_COLUMN] == house
+            subj_data = self.data[subject][is_curr_house]
+
+            other_subj_data = self.data[other_subject][is_curr_house]
+            plt.scatter(subj_data, other_subj_data,
+                        color=self.house_colors[house],
+                        alpha=0.4)
+
+            plt.ylabel(subject)
+            plt.xlabel(other_subject)
+            plt.legend(self.houses)
+
+        serialized_subject = subject.replace(" ", "_").lower()
+        serialized_other_subject = other_subject.replace(" ", "_").lower()
+        self._save_plot(
+            "pair_plot_matrix_" +
+            f"{serialized_subject}_{serialized_other_subject}.png")
 
     def plot_pair_matrix(self):
         """
