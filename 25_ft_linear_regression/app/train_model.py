@@ -13,7 +13,7 @@ def import_data() -> pd.DataFrame:
         pandas.DataFrame: The preprocessed data.
     """
 
-    data = pd.read_csv("data/data.csv")
+    data = pd.read_csv("/ft_linear_regression/data/data.csv")
     data = data.sort_values(by='km')
 
     return data

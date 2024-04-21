@@ -32,7 +32,7 @@ def main():
     theta0, theta1 = 0.0, 0.0
 
     try:
-        thetas_df = pd.read_csv('data/thetas.csv')
+        thetas_df = pd.read_csv('/ft_linear_regression/data/thetas.csv')
         theta0: float = thetas_df['theta0'].values[0]
         theta1: float = thetas_df['theta1'].values[0]
 

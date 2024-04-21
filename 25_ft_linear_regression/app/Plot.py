@@ -63,5 +63,5 @@ class Plot:
         plot_name += '-linear_regression' if linear_regression else ''
         plot_name += '.png'
 
-        plt.savefig(f"app/plots/{plot_name}", bbox_inches='tight',
-                    pad_inches=0, dpi=500)
+        plt.savefig(f"/ft_linear_regression/app/plots/{plot_name}",
+                    bbox_inches='tight', pad_inches=0, dpi=500)

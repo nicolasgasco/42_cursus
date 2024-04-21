@@ -48,7 +48,7 @@ class LinearRegression:
         """
         thetas_df = pd.DataFrame(
             {'theta0': [self.theta0_unnorm], 'theta1': [self.theta1_unnorm]})
-        thetas_df.to_csv('data/thetas.csv', index=False)
+        thetas_df.to_csv('/ft_linear_regression/data/thetas.csv', index=False)
 
     def _estimate_price(self, theta0: float, theta1: float,
                         mileage: pd.Series) -> pd.Series:
