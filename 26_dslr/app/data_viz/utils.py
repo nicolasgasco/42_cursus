@@ -1,3 +1,5 @@
+from colorama import Fore, Style
+
 ALPHABET: str = "abcdefghijklmnopqrstuvwxyz"
 
 
@@ -43,7 +45,9 @@ def get_user_input(subjects: list[str], subject_letters: str):
         """
 
         if len(choice) != 1 or choice not in subject_letters:
-            print("\nInvalid input. Please choose a valid option.")
+            print(
+                f"\n{Fore.RED}Invalid input.",
+                f"Please choose a valid option.{Style.RESET_ALL}\n")
             return False
         return True
 
