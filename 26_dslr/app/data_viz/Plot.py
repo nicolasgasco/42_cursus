@@ -9,8 +9,11 @@ class Plot:
     def __init__(self, data: pd.DataFrame):
         self._validate_inputs(data)
 
-        self.columns = data.columns.values[6:]  # Remove unrelevant columns
+        # Remove unrelevant columns
+        self.columns = data.columns.values[6:]
+
         self.data: pd.DataFrame = data
+
         self.houses: list[str] = np.sort(data[HOUSE_COLUMN].unique()).tolist()
         self.house_colors = {
             "Gryffindor": "#ae0001",
@@ -20,19 +23,53 @@ class Plot:
         }
 
     def _validate_inputs(self, data: pd.DataFrame):
-        assert isinstance(
-            data, pd.DataFrame) and not data.empty, "Data must be a non-empty DataFrame."
+        """
+        Validates the input data.
+
+        Args:
+          data (pd.DataFrame): The input data to be validated.
+
+        Raises:
+          AssertionError: If the data is not a non-empty DataFrame
+          or if it does not contain all four Hogwarts Houses.
+        """
+
+        assert isinstance(data, pd.DataFrame), "Data must be a DataFrame."
+        assert not data.empty, "Data must not be empty."
 
         assert data[HOUSE_COLUMN].nunique(
         ) == 4, "Data must contain all four Hogwarts Houses."
 
-    def _get_valid_entries(self, values):
-        return [value for value in values
-                if pd.notnull(value) and pd.notna(value)]
+    def _get_valid_entries(self, values: pd.Series) -> list:
+        """
+        Returns a list of valid entries from the given values.
 
-    def _save_plot(self, filename):
+        Parameters:
+        values (list): A list of values to filter.
+
+        Returns:
+        list: A list of valid entries, where valid entries
+        are non-null and non-NaN values.
+        """
+
+        valid_entries = [value for value in values
+                         if pd.notnull(value) and pd.notna(value)]
+
+        return valid_entries
+
+    def _save_plot(self, filename: str):
+        """
+        Save the current plot to a file.
+
+        Args:
+          filename (str): The name of the file to save the plot to.
+
+        Returns:
+          None
+        """
         PLOTS_PATH = "/dslr/app/data_viz/plots/"
         file_path = PLOTS_PATH + filename
+
         plt.tight_layout()
         plt.savefig(file_path)
         plt.close()
@@ -40,16 +77,27 @@ class Plot:
         print(f"Plot saved successfully: {file_path}")
 
     def plot_score_distribution(self, subject: str):
-        sorted_data = self.data[subject].sort_values()
+        """
+        Plots the score distribution for a given subject.
 
-        num_bins = 20
+        Args:
+          subject (str): The subject
+          for which the score distribution is plotted.
+
+        Returns:
+          None
+        """
+
+        sorted_data: pd.Series = self.data[subject].sort_values()
+
+        num_bins: int = 20
 
         min_score: float = sorted_data.min()
         max_score: float = sorted_data.max()
 
-        for x, house in enumerate(self.houses):
+        for house in self.houses:
             is_current_house = self.data[HOUSE_COLUMN] == house
-            house_data = self._get_valid_entries(
+            house_data: list[bool] = self._get_valid_entries(
                 sorted_data[is_current_house])
 
             plt.hist(house_data, bins=num_bins,
@@ -57,33 +105,45 @@ class Plot:
             plt.title(f'{subject} ({house})')
             plt.xlabel("Score")
             plt.ylabel("Frequency")
-
             plt.xlim(min_score, max_score)
 
         serialized_subject = subject.replace(" ", "_").lower()
         self._save_plot(f"score_distribution_{serialized_subject}.png")
 
     def plot_score_distributions(self):
+        """
+        Plots the score distributions for each subject and house.
+
+        This method generates a histogram
+        for each subject and house combination,
+        showing the distribution of scores.
+        The histograms are plotted in a grid
+        layout with the number of columns specified by `n_cols`.
+
+        Returns:
+          None
+        """
+
         n_cols: int = 3
         n_rows: int = len(self.columns) // n_cols + 1
 
-        num_bins = 20
-        figure_height = 5 * n_rows
+        num_bins: int = 20
+        figure_height: int = 5 * n_rows
         _, axs = plt.subplots(
             n_rows, n_cols, figsize=(num_bins, figure_height))
 
-        x = 0
-        y = 0
+        x: int = 0
+        y: int = 0
         for subject in self.columns:
 
-            sorted_data = self.data[subject].sort_values()
+            sorted_data: pd.Series = self.data[subject].sort_values()
 
             min_score: float = sorted_data.min()
             max_score: float = sorted_data.max()
 
             for house in self.houses:
                 is_current_house = self.data[HOUSE_COLUMN] == house
-                house_data = self._get_valid_entries(
+                house_data: list[bool] = self._get_valid_entries(
                     sorted_data[is_current_house])
 
                 axs[y][x].hist(house_data, bins=num_bins,
@@ -91,7 +151,6 @@ class Plot:
                 axs[y][x].set_title(f'{subject} ({house})')
                 axs[y][x].set_xlabel("Score")
                 axs[y][x].set_ylabel("Frequency")
-
                 axs[y][x].set_xlim(min_score, max_score)
 
             x = (x + 1) % n_cols
@@ -99,7 +158,21 @@ class Plot:
 
         self._save_plot("score_distribution.png")
 
-    def _plot_histogram_grid(self, n_rows, n_cols, plot_data, axs):
+    def _plot_histogram_grid(self, n_rows: int, n_cols: int,
+                             plot_data: list, axs):
+        """
+        Plot a grid of histograms.
+
+        Args:
+          n_rows (int): The number of rows in the grid.
+          n_cols (int): The number of columns in the grid.
+          plot_data (list): A list of data to plot.
+          axs (list): A 2D list of subplots.
+
+        Returns:
+          None
+        """
+
         for y in range(n_rows):
             for x in range(n_cols):
                 no_data_to_plot: bool = len(plot_data) == 0
@@ -107,7 +180,7 @@ class Plot:
                     axs[y][x].set_visible(False)
                     continue
 
-                all_data = plot_data.pop(0)
+                all_data: list = plot_data.pop(0)
                 for data in all_data:
                     axs[y][x].scatter(data["subj_data"],
                                       data["other_subj_data"],
@@ -117,21 +190,39 @@ class Plot:
                         f'{data["subj"]} vs {data["other_subj"]}')
 
     def plot_features_similarity(self):
+        """
+        Plots the similarity between different features.
+
+        This method generates a grid of histograms to visualize
+        the similarity between different features.
+        It iterates over each pair of features and each house,
+        and plots the histograms of the feature values
+        for each house. The resulting grid of histograms provides
+        a visual representation of the similarity
+        between different features.
+
+        Parameters:
+        None
+
+        Returns:
+        None
+        """
+
         n_rows, n_cols = 8, 10
         _, axs = plt.subplots(n_rows, n_cols, figsize=(75, 40))
 
-        plot_data = []
+        plot_data: list = []
         for subject in self.columns:
             for other_subject in self.columns:
                 is_same_subject: bool = subject == other_subject
                 if is_same_subject:
                     break
 
-                single_plot_data = []
+                single_plot_data: list = []
                 for house in self.houses:
                     is_curr_house = self.data[HOUSE_COLUMN] == house
 
-                    subj_data = self.data[subject][is_curr_house]
+                    subj_data: list[bool] = self.data[subject][is_curr_house]
                     other_subj_data = self.data[other_subject][is_curr_house]
 
                     single_plot_data.append({"subj_data": subj_data,
@@ -145,7 +236,23 @@ class Plot:
         self._save_plot("subjects_similarity.png")
 
     def plot_pair_matrix(self):
-        n = len(self.columns)
+        """
+        Plot a pair matrix of scatter plots and histograms.
+
+        This method generates a pair matrix of scatter plots and histograms
+        for each combination of columns in the dataset.
+        The scatter plots show the relationship between two different columns,
+        while the histograms show the distribution
+        of a single column.
+
+        Returns:
+          None
+
+        Raises:
+          None
+        """
+
+        n: int = len(self.columns)
 
         _, axs = plt.subplots(n, n, figsize=(75, 40))
 
@@ -155,7 +262,7 @@ class Plot:
 
                 for house in self.houses:
                     is_curr_house = self.data[HOUSE_COLUMN] == house
-                    subj_data = self.data[subject][is_curr_house]
+                    subj_data: list[bool] = self.data[subject][is_curr_house]
 
                     if is_same_subject:
                         axs[y][x].hist(
@@ -168,7 +275,7 @@ class Plot:
                                       color=self.house_colors[house],
                                       alpha=0.4)
 
-                font_size = 16
+                font_size: int = 16
                 if x == 0:
                     axs[y][x].set_ylabel(subject, fontsize=font_size)
 
