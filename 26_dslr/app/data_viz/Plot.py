@@ -102,7 +102,7 @@ class Plot:
 
             plt.hist(house_data, bins=num_bins,
                      color=self.house_colors[house], alpha=0.5)
-            plt.title(f'{subject} ({house})')
+            plt.title(f'{subject}')
             plt.xlabel("Score")
             plt.ylabel("Frequency")
             plt.xlim(min_score, max_score)
@@ -148,7 +148,7 @@ class Plot:
 
                 axs[y][x].hist(house_data, bins=num_bins,
                                color=self.house_colors[house], alpha=0.5)
-                axs[y][x].set_title(f'{subject} ({house})')
+                axs[y][x].set_title(f'{subject}')
                 axs[y][x].set_xlabel("Score")
                 axs[y][x].set_ylabel("Frequency")
                 axs[y][x].set_xlim(min_score, max_score)
