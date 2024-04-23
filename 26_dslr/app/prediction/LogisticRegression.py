@@ -133,6 +133,8 @@ class LogisticRegression:
                 'Bias': b
             })
 
+        print("\n")
+
         file_name: str = "prediction_params.csv"
         print(f"Saving prediction parameters to {file_name}...\n")
 
