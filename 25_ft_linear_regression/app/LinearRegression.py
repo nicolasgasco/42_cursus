@@ -2,9 +2,6 @@ from colorama import Fore, Style
 import pandas as pd
 import numpy as np
 
-MAX_ITERATIONS = 25_000
-LEARNING_RATE = 0.1
-
 
 class LinearRegression:
     def __init__(self, data: pd.DataFrame):
@@ -16,6 +13,9 @@ class LinearRegression:
 
         self.theta0_unnorm = 0.0
         self.theta1_unnorm = 0.0
+
+        self.max_iterations = 25_000
+        self.learning_rate = 0.1
 
     def _normalize_data(self, data: pd.DataFrame) -> pd.DataFrame:
         """
@@ -74,8 +74,8 @@ class LinearRegression:
             self.theta0, self.theta1, mileage)
         price_error = estimated_price - price
 
-        temp_theta0 = LEARNING_RATE * norm_factor * sum(price_error)
-        temp_theta1 = LEARNING_RATE * norm_factor * \
+        temp_theta0 = self.learning_rate * norm_factor * sum(price_error)
+        temp_theta1 = self.learning_rate * norm_factor * \
             sum((price_error) * mileage)
 
         return temp_theta0, temp_theta1
@@ -95,7 +95,7 @@ class LinearRegression:
         norm_factor = 1 / m
 
         prev_theta0, prev_theta1 = 0.0, 0.0
-        for i in range(MAX_ITERATIONS):
+        for i in range(self.max_iterations):
 
             temp_theta0, temp_theta1 = self._calc_thetas(
                 norm_factor, mileage, price)
@@ -108,7 +108,7 @@ class LinearRegression:
                 "\r"
                 f"theta0: {Fore.GREEN}{theta0:.2f}{Style.RESET_ALL}, "
                 f"theta1: {Fore.GREEN}{theta1:.2f}{Style.RESET_ALL}, "
-                f"iteration: {i + 1:,}/{MAX_ITERATIONS:,}",
+                f"iteration: {i + 1:,}/{self.max_iterations:,}",
                 end=""
             )
 
