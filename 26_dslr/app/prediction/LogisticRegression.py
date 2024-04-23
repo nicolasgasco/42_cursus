@@ -190,6 +190,6 @@ class LogisticRegression:
         file_name = "houses.csv"
         print(f"Saving formatted predictions to {file_name}...\n")
 
-        file_path = "./" + file_name
+        file_path = "/dslr/data/" + file_name
         formatted_predictions.to_csv(
             file_path, index=True, index_label='Index')
