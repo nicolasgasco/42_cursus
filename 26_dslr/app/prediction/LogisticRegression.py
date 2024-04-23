@@ -180,6 +180,8 @@ class LogisticRegression:
 
             binary_predictions[house] = prediction
 
+        print("\n")
+
         predicted_house = binary_predictions.idxmax(axis=1)
 
         formatted_predictions = pd.DataFrame(
