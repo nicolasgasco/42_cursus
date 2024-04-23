@@ -94,7 +94,7 @@ class LogisticRegression:
             None
         """
 
-        print("Training the model...\n")
+        print("Training the model...")
 
         prediction_params_list = []
 
