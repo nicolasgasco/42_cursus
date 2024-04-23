@@ -25,7 +25,7 @@ class LogisticRegression:
             data[[self.feature1, self.feature2]])
         self.data_y: pd.Series = data["Hogwarts House"]
 
-        self.learning_rate: float = 5
+        self.learning_rate: float = 0.1
         self.iterations: int = 40_000
 
     def _normalize_data(self, data: pd.DataFrame) -> pd.DataFrame:
@@ -110,6 +110,8 @@ class LogisticRegression:
 
             w = np.zeros(n)
             b = 0.0
+
+            prev_w, prev_b = w, b
             for i in range(self.iterations):
                 linear_prediction = np.dot(self.data_x, w) + b
                 prediction = self._sigmoid(linear_prediction)
@@ -119,6 +121,11 @@ class LogisticRegression:
 
                 w = w - self.learning_rate * dw
                 b = b - self.learning_rate * db
+
+                if np.allclose(w, prev_w) and np.isclose(b, prev_b):
+                    break
+
+                prev_w, prev_b = w, b
 
                 print(
                     "\r"
