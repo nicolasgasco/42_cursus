@@ -1,10 +1,9 @@
 from colorama import Fore, Style
 import pandas as pd
+import numpy as np
 
 MAX_ITERATIONS = 25_000
-EXTRA_ITERATIONS = 1_000
 LEARNING_RATE = 0.1
-THRESHOLD = 0.001
 
 
 class LinearRegression:
@@ -95,13 +94,8 @@ class LinearRegression:
         m = len(mileage)
         norm_factor = 1 / m
 
-        will_break = False
-        extra_iterations = EXTRA_ITERATIONS
-
-        prev_theta0, prev_theta1 = self.theta0, self.theta1
+        prev_theta0, prev_theta1 = 0.0, 0.0
         for i in range(MAX_ITERATIONS):
-            if extra_iterations <= 0:
-                break
 
             temp_theta0, temp_theta1 = self._calc_thetas(
                 norm_factor, mileage, price)
@@ -118,13 +112,9 @@ class LinearRegression:
                 end=""
             )
 
-            is_theta0_unchanged: bool = (theta0 - prev_theta0) < THRESHOLD
-            is_theta1_unchanged: bool = (theta1 - prev_theta1) < THRESHOLD
-            if is_theta0_unchanged and is_theta1_unchanged:
-                will_break = True
-
-            if will_break:
-                extra_iterations -= 1
+            if np.isclose(prev_theta0, theta0) \
+                    and np.isclose(prev_theta1, theta1):
+                break
 
             prev_theta0, prev_theta1 = theta0, theta1
 
