@@ -106,9 +106,9 @@ class LinearRegression:
             theta0, theta1 = self._unnormalize_thetas()
             print(
                 "\r"
-                f"theta0: {Fore.GREEN}{theta0:.2f}{Style.RESET_ALL}, "
-                f"theta1: {Fore.GREEN}{theta1:.2f}{Style.RESET_ALL}, "
-                f"iteration: {i + 1:,}/{self.max_iterations:,}",
+                f"Iteration: {i + 1:_}/{self.max_iterations:,}:",
+                f"theta0: {Fore.GREEN}{theta0:.2f}{Style.RESET_ALL},",
+                f"theta1: {Fore.GREEN}{theta1:.2f}{Style.RESET_ALL}",
                 end=""
             )
 
@@ -117,6 +117,8 @@ class LinearRegression:
                 break
 
             prev_theta0, prev_theta1 = theta0, theta1
+
+        print("\n")
 
         theta0, theta1 = self._unnormalize_thetas()
         self.theta0_unnorm = theta0
@@ -264,7 +266,7 @@ class LinearRegression:
             price, estimated_price, normalization_factor)
         r_squared = self._r_squared(price, estimated_price)
 
-        print("\nModel accuracy:")
+        print("Model accuracy:")
         print(
             "\tMean absolute error: ",
             f"{Fore.GREEN}{mean_absolute_error:.2f}{Style.RESET_ALL}")

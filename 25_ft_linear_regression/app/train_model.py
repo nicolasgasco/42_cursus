@@ -41,7 +41,8 @@ def main():
     start: float = time.time()
 
     linear_regression = LinearRegression(data)
-    print("\nTraining linear regression model... (this might take long)")
+    print("Training linear regression model... (this might take long)")
+    print("\n")
     theta0, theta1 = linear_regression.fit()
     linear_regression.accuracy()
 
