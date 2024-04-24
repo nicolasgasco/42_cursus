@@ -8,7 +8,7 @@ Given a data set with 25 data points, linear regression is computed:
 
 <img src="https://github.com/nicolasgasco/42_cursus/assets/73175085/355159d8-5fbf-45b0-86d5-793425463d15" width="500" />
 
-The use of library that do the heavy lifting in computing linear regression (e.g. python's `numpy.polyfit` is forbidden.
+The use of library that do the heavy lifting in computing linear regression (e.g. python's `numpy.polyfit`) is forbidden.
 
 ## Features
 - Computation of linear regression with a gradient descent algorithm
