@@ -1,4 +1,5 @@
 from colorama import Fore, Style
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
@@ -81,6 +82,54 @@ class LogisticRegression:
 
         return 1 / (1 + np.exp(-x))
 
+    def plot_regression(self, prediction_params_list: list[dict]):
+        """
+        Plot the regression line for each set of prediction parameters
+        in the given list.
+
+        Args:
+            prediction_params_list (list[dict]): A list of dictionaries
+            containing prediction parameters.
+                Each dictionary should have the following keys:
+                - 'House': The house name.
+                - 'Weight_1': The weight parameter 1.
+                - 'Weight_2': The weight parameter 2.
+                - 'Bias': The bias parameter.
+
+        Returns:
+            None
+        """
+
+        print("Plotting regression line for each house...\n")
+
+        for prediction_params in prediction_params_list:
+            house = prediction_params['House']
+
+            w = np.array([prediction_params['Weight_1'],
+                         prediction_params['Weight_2']])
+            b = prediction_params['Bias']
+
+            x_values = np.linspace(start=min(self.data_x[self.feature1]),
+                                   stop=max(self.data_x[self.feature1]),
+                                   num=100)
+            y_values = (-w[0]*x_values - b) / w[1]
+
+            plt.plot(x_values, y_values, color=HOUSE_COLOR[house].lower())
+
+        plt.scatter(
+            self.data_x[self.feature1], self.data_x[self.feature2],
+            color='grey', alpha=0.5, s=10)
+
+        plt.xlabel(self.feature1)
+        plt.ylabel(self.feature2)
+
+        plt.legend(self.houses)
+        plt.title(f"Regression: {self.feature1} vs {self.feature2}")
+
+        filename = f"regression-{self.feature1.lower()}_{self.feature2.lower()}.png"
+        plt.savefig(filename, dpi=300)
+        plt.close()
+
     def train(self):
         """
         Trains the model using logistic regression.
@@ -148,6 +197,8 @@ class LogisticRegression:
         file_path: str = "/dslr/data/" + file_name
         prediction_params = pd.DataFrame(prediction_params_list)
         prediction_params.to_csv(file_path, index=False)
+
+        self.plot_regression(prediction_params_list)
 
     def predict(self, prediction_params: pd.DataFrame):
         """
