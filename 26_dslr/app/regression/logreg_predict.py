@@ -18,7 +18,6 @@ def main():
         raise FileNotFoundError("Dataset file not found.")
 
     prediction_params_file_path = sys.argv[2]
-
     try:
         prediction_params = pd.read_csv(prediction_params_file_path)
     except FileNotFoundError:

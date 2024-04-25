@@ -1,3 +1,5 @@
+from ftplib import error_perm
+from os import error
 from colorama import Fore, Style
 import matplotlib.pyplot as plt
 import numpy as np
@@ -33,7 +35,7 @@ class LogisticRegression:
             data[[self.feature1, self.feature2]])
         self.data_y: pd.Series = data["Hogwarts House"]
 
-        self.learning_rate: float = 0.1
+        self.learning_rate: float = 1
         self.iterations: int = 40_000
 
     def _normalize_data(self, data: pd.DataFrame) -> pd.DataFrame:
@@ -195,7 +197,9 @@ class LogisticRegression:
                 'House': house,
                 'Weight_1': w[0],
                 'Weight_2': w[1],
-                'Bias': b
+                'Bias': b,
+                'Feature_1': self.feature1,
+                'Feature_2': self.feature2
             })
 
             print("\n")
@@ -221,6 +225,13 @@ class LogisticRegression:
         Returns:
             None
         """
+
+        feature_1 = prediction_params['Feature_1'].values[0]
+        feature_2 = prediction_params['Feature_2'].values[0]
+
+        error_message = Fore.RED + "Invalid features." + Style.RESET_ALL
+        assert feature_1 == self.feature1, error_message
+        assert feature_2 == self.feature2, error_message
 
         binary_predictions = pd.DataFrame(columns=self.houses)
 
