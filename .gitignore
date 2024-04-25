@@ -6868,4 +6868,4 @@ __pycache__
 26_dslr/app/data_viz/plots/pair_plot_*
 26_dslr/data/prediction_params.csv
 26_dslr/data/houses.csv
-26_dslr/app/regression/regression-herbology_astronomy.png
+26_dslr/app/regression/plots/
