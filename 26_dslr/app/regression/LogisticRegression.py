@@ -13,7 +13,9 @@ HOUSE_COLOR = {
 
 class LogisticRegression:
     def __init__(self, data: pd.DataFrame,
-                 feature1: str = "Herbology", feature2: str = "Astronomy"):
+                 feature1: str = "Herbology",
+                 feature2: str = "Astronomy",
+                 should_fill_na: bool = True):
         self._validate_inputs(data, feature1, feature2)
 
         self.houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
@@ -21,7 +23,12 @@ class LogisticRegression:
         self.feature1: str = feature1
         self.feature2: str = feature2
 
-        data = data.fillna({self.feature1: 0, self.feature2: 0})
+        # Fill NaN values allows to predict all values in test set
+        # For training set, it's better to drop NaN values completely
+        if should_fill_na:
+            data = data.fillna({self.feature1: 0, self.feature2: 0})
+        else:
+            data = data.dropna(subset=[self.feature1, self.feature2])
         self.data_x: pd.DataFrame = self._normalize_data(
             data[[self.feature1, self.feature2]])
         self.data_y: pd.Series = data["Hogwarts House"]
@@ -126,8 +133,9 @@ class LogisticRegression:
         plt.legend(self.houses)
         plt.title(f"Regression: {self.feature1} vs {self.feature2}")
 
-        filename = f"regression-{self.feature1.lower()}_{self.feature2.lower()}.png"
-        plt.savefig(filename, dpi=300)
+        filename = f"{self.feature1.lower()}_{self.feature2.lower()}.png"
+        file_path = "/dslr/app/regression/plots/" + filename
+        plt.savefig(file_path, dpi=300)
         plt.close()
 
     def train(self):
@@ -143,7 +151,7 @@ class LogisticRegression:
             None
         """
 
-        print("Training the model...")
+        print("Training the model...\n")
 
         prediction_params_list = []
 
@@ -151,9 +159,10 @@ class LogisticRegression:
 
         for house in self.houses:
             print(
-                f"{getattr(Fore, HOUSE_COLOR[house])}",
-                f"\n{house.upper()}",
-                f"{Style.RESET_ALL}")
+                getattr(Fore, HOUSE_COLOR[house]),
+                f"{house.upper()}",
+                Style.RESET_ALL,
+            )
 
             y = self.data_y.apply(lambda x: 1 if x == house else 0).values
 
@@ -177,10 +186,10 @@ class LogisticRegression:
                 prev_w, prev_b = w, b
 
                 print(
-                    "\r"
-                    f"\tIteration {(i + 1):,}/{self.iterations:_}:",
-                    f"weights: {w}, "
-                    f"bias: {b}", end="")
+                    "\r",
+                    f"Iteration {(i + 1):,}/{self.iterations:_}: ",
+                    f"weights: {w}, bias: {b}",
+                    end="")
 
             prediction_params_list.append({
                 'House': house,
@@ -189,7 +198,7 @@ class LogisticRegression:
                 'Bias': b
             })
 
-        print("\n")
+            print("\n")
 
         file_name: str = "prediction_params.csv"
         print(f"Saving prediction parameters to {file_name}...\n")
