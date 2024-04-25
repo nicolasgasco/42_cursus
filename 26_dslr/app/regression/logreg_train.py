@@ -11,9 +11,12 @@ def main():
         raise ValueError("Usage: python3 logreg_train.py <dataset>")
 
     dataset_file_path = sys.argv[1]
-    train_set = pd.read_csv(dataset_file_path)
+    try:
+        train_set = pd.read_csv(dataset_file_path)
+    except FileNotFoundError:
+        raise FileNotFoundError("Dataset file not found.")
 
-    regression = LogisticRegression(train_set)
+    regression = LogisticRegression(train_set, should_fill_na=False)
 
     regression.train()
 
