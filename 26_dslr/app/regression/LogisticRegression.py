@@ -1,6 +1,5 @@
-from ftplib import error_perm
-from os import error
 from colorama import Fore, Style
+import json as json
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -15,27 +14,26 @@ HOUSE_COLOR = {
 
 class LogisticRegression:
     def __init__(self, data: pd.DataFrame,
-                 feature1: str = "Herbology",
-                 feature2: str = "Astronomy",
+                 features: list[str] = ["Astronomy",
+                                        "Defense Against the Dark Arts",
+                                        "Herbology"],
                  should_fill_na: bool = True):
-        self._validate_inputs(data, feature1, feature2)
+        self._validate_inputs(data, features)
 
         self.houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
 
-        self.feature1: str = feature1
-        self.feature2: str = feature2
+        self.features = features
 
         # Fill NaN values allows to predict all values in test set
         # For training set, it's better to drop NaN values completely
         if should_fill_na:
-            data = data.fillna({self.feature1: 0, self.feature2: 0})
+            data = data.fillna(0)
         else:
-            data = data.dropna(subset=[self.feature1, self.feature2])
-        self.data_x: pd.DataFrame = self._normalize_data(
-            data[[self.feature1, self.feature2]])
+            data = data.dropna(subset=self.features)
+        self.data_x: pd.DataFrame = self._normalize_data(data[self.features])
         self.data_y: pd.Series = data["Hogwarts House"]
 
-        self.learning_rate: float = 1
+        self.learning_rate: float = 10
         self.iterations: int = 40_000
 
     def _normalize_data(self, data: pd.DataFrame) -> pd.DataFrame:
@@ -52,31 +50,27 @@ class LogisticRegression:
         normalized_data = (data - data.min()) / (data.max() - data.min())
         return normalized_data
 
-    def _validate_inputs(self, data: pd.DataFrame,
-                         feature1: str, feature2: str):
+    def _validate_inputs(self, data: pd.DataFrame, features: list[str]):
         """
-        Validates the inputs for the Trainer class.
+        Validates the inputs for the LogisticRegression model.
 
         Args:
             data (pd.DataFrame): The input data as a pandas DataFrame.
-            feature1 (str): The name of the first feature.
-            feature2 (str): The name of the second feature.
+            features (list[str]): The list of feature names.
 
         Raises:
-            AssertionError: If the data is not a pandas DataFrame
-            or if it is empty.
-            AssertionError: If 'feature1' is not found in the data.
-            AssertionError: If 'feature2' is not found in the data.
+            AssertionError: If the data is not a pandas DataFrame.
+            AssertionError: If the data is empty.
+            AssertionError: If any feature is not found in the data.
         """
 
         assert isinstance(
             data, pd.DataFrame), "The data must be a pandas DataFrame."
         assert not data.empty, "The data must not be empty."
 
-        assert (
-            feature1 in data.columns), f"'{feature1}' not found in the data."
-        assert (
-            feature2 in data.columns), f"'{feature2}' not found in the data."
+        for feature in features:
+            error_message = f"'{feature}' not found in the data."
+            assert feature in data.columns, error_message
 
     def _sigmoid(self, x):
         """
@@ -90,6 +84,20 @@ class LogisticRegression:
         """
 
         return 1 / (1 + np.exp(-x))
+
+    def _serialize_title(self, title: str) -> str:
+        """
+        Serialize the given title by replacing spaces with underscores
+        and converting it to lowercase.
+
+        Args:
+            title (str): The title to be serialized.
+
+        Returns:
+            str: The serialized title.
+        """
+
+        return title.lower().replace(" ", "_")
 
     def plot_regression(self, prediction_params_list: list[dict]):
         """
@@ -111,31 +119,40 @@ class LogisticRegression:
 
         print("Plotting regression line for each house...\n")
 
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+
+        x_range = np.linspace(self.data_x[self.features[0]].min(
+        ), self.data_x[self.features[0]].max(), num=10)
+        y_range = np.linspace(self.data_x[self.features[1]].min(
+        ), self.data_x[self.features[1]].max(), num=10)
+        x_values, y_values = np.meshgrid(x_range, y_range)
+
         for prediction_params in prediction_params_list:
             house = prediction_params['House']
 
-            w = np.array([prediction_params['Weight_1'],
-                         prediction_params['Weight_2']])
+            weights = json.loads(prediction_params['Weights'])
+            w = np.array(weights)
             b = prediction_params['Bias']
 
-            x_values = np.linspace(start=min(self.data_x[self.feature1]),
-                                   stop=max(self.data_x[self.feature1]),
-                                   num=100)
-            y_values = (-w[0]*x_values - b) / w[1]
+            z_values = (-w[0] * x_values - w[1] * y_values - b) / w[2]
 
-            plt.plot(x_values, y_values, color=HOUSE_COLOR[house].lower())
+            ax.plot_surface(x_values, y_values, z_values,
+                            color=HOUSE_COLOR[house].lower(),
+                            alpha=0.5)
 
-        plt.scatter(
-            self.data_x[self.feature1], self.data_x[self.feature2],
-            color='grey', alpha=0.5, s=10)
-
-        plt.xlabel(self.feature1)
-        plt.ylabel(self.feature2)
+        ax.set_xlabel(self.features[0])
+        ax.set_ylabel(self.features[1])
+        ax.set_zlabel(self.features[2])
 
         plt.legend(self.houses)
-        plt.title(f"Regression: {self.feature1} vs {self.feature2}")
 
-        filename = f"{self.feature1.lower()}_{self.feature2.lower()}.png"
+        plt.title(" vs ".join(self.features))
+
+        formatted_features = [
+            f"{self._serialize_title(feature)}" for feature in self.features]
+        features = "-".join(formatted_features)
+        filename = f"{features}.png"
         file_path = "/dslr/app/regression/plots/" + filename
         plt.savefig(file_path, dpi=300)
         plt.close()
@@ -153,7 +170,11 @@ class LogisticRegression:
             None
         """
 
-        print("Training the model...\n")
+        formatted_features = [
+            f"{Fore.GREEN}{feature}{Style.RESET_ALL}"
+            for feature in self.features]
+        joined_features = ", ".join(formatted_features)
+        print(f"Training the model with features: {joined_features}...\n")
 
         prediction_params_list = []
 
@@ -195,11 +216,9 @@ class LogisticRegression:
 
             prediction_params_list.append({
                 'House': house,
-                'Weight_1': w[0],
-                'Weight_2': w[1],
-                'Bias': b,
-                'Feature_1': self.feature1,
-                'Feature_2': self.feature2
+                'Weights': json.dumps(w.tolist()),
+                "Bias": b,
+                "Features": json.dumps(self.features)
             })
 
             print("\n")
@@ -211,7 +230,8 @@ class LogisticRegression:
         prediction_params = pd.DataFrame(prediction_params_list)
         prediction_params.to_csv(file_path, index=False)
 
-        self.plot_regression(prediction_params_list)
+        if (len(self.features) == 3):
+            self.plot_regression(prediction_params_list)
 
     def predict(self, prediction_params: pd.DataFrame):
         """
@@ -226,16 +246,21 @@ class LogisticRegression:
             None
         """
 
-        feature_1 = prediction_params['Feature_1'].values[0]
-        feature_2 = prediction_params['Feature_2'].values[0]
+        features = json.loads(prediction_params['Features'].values[0])
 
         error_message = Fore.RED + "Invalid features." + Style.RESET_ALL
-        assert feature_1 == self.feature1, error_message
-        assert feature_2 == self.feature2, error_message
+        assert features == self.features, error_message
+
+        formatted_features = [
+            f"{Fore.GREEN}{feature}{Style.RESET_ALL}"
+            for feature in self.features]
+        joined_features = ", ".join(formatted_features)
+        print(
+            "Predicting house for each student with features: ",
+            f"{joined_features}...\n")
 
         binary_predictions = pd.DataFrame(columns=self.houses)
 
-        print("Predicting the house for each student...\n")
         for house in self.houses:
             print(
                 f"{getattr(Fore, HOUSE_COLOR[house])}",
@@ -245,9 +270,8 @@ class LogisticRegression:
             prediction_params_row = prediction_params.loc[
                 prediction_params['House'] == house]
 
-            weight_1: float = prediction_params_row['Weight_1'].values[0]
-            weight_2: float = prediction_params_row['Weight_2'].values[0]
-            weights: list[float] = [weight_1, weight_2]
+            weights: list[float] = json.loads(
+                prediction_params_row['Weights'].values[0])
 
             bias: float = prediction_params_row['Bias'].values[0]
 
