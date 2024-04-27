@@ -14,9 +14,19 @@ HOUSE_COLOR = {
 
 class LogisticRegression:
     def __init__(self, data: pd.DataFrame,
-                 features: list[str] = ["Astronomy",
+                 features: list[str] = ["Ancient Runes",
+                                        "Arithmancy",
+                                        "Astronomy",
+                                        "Care of Magical Creatures",
+                                        "Charms",
                                         "Defense Against the Dark Arts",
-                                        "Herbology"],
+                                        "Divination",
+                                        "Flying",
+                                        "Herbology",
+                                        "History of Magic",
+                                        "Muggle Studies",
+                                        "Potions",
+                                        "Transfiguration"],
                  should_fill_na: bool = True):
         self._validate_inputs(data, features)
 
@@ -33,8 +43,8 @@ class LogisticRegression:
         self.data_x: pd.DataFrame = self._normalize_data(data[self.features])
         self.data_y: pd.Series = data["Hogwarts House"]
 
-        self.learning_rate: float = 10
-        self.iterations: int = 40_000
+        self.learning_rate: int = 10
+        self.iterations: int = 50_000
 
     def _normalize_data(self, data: pd.DataFrame) -> pd.DataFrame:
         """
@@ -171,7 +181,7 @@ class LogisticRegression:
         """
 
         formatted_features = [
-            f"{Fore.GREEN}{feature}{Style.RESET_ALL}"
+            f"{Fore.YELLOW}{feature}{Style.RESET_ALL}"
             for feature in self.features]
         joined_features = ", ".join(formatted_features)
         print(f"Training the model with features: {joined_features}...\n")
@@ -211,7 +221,9 @@ class LogisticRegression:
                 print(
                     "\r",
                     f"Iteration {(i + 1):,}/{self.iterations:_}: ",
-                    f"weights: {w}, bias: {b}",
+                    f"weights: {w[:3]} (omitted)," if len(
+                        w) > 3 else f"weights: {w}",
+                    f"bias: {b}",
                     end="")
 
             prediction_params_list.append({
