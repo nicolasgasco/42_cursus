@@ -32,7 +32,7 @@ class LogisticRegression:
 
         self.houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
 
-        self.features = features
+        self.features = sorted(features)
 
         # Fill NaN values allows to predict all values in test set
         # For training set, it's better to drop NaN values completely
@@ -278,7 +278,7 @@ class LogisticRegression:
                 prev_w, prev_b = w, b
 
                 print(
-                    "\r",
+                    "\r\t",
                     f"Iteration {(i + 1):,}/{self.iterations:_}: ",
                     f"weights: {w[:3]} (some weights omitted)," if len(
                         w) > 3 else f"weights: {w}",
@@ -349,14 +349,17 @@ class LogisticRegression:
 
             bias: float = prediction_params_row['Bias'].values[0]
 
-            print(f"\tweights: {weights}, bias: {bias}")
+            print("\t",
+                  f"weights: {weights[:3]} (some weights omitted)," if len(
+                      weights) > 3 else f"weights: {weights},",
+                  f"bias: {bias}", end="")
 
             linear_pred = np.dot(self.data_x, weights) + bias
             prediction = self._sigmoid(linear_pred)
 
             binary_predictions[house] = prediction
 
-        print("\n")
+            print("\n")
 
         predicted_house = binary_predictions.idxmax(axis=1)
 
