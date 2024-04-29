@@ -13,8 +13,8 @@ def main():
     dataset_file_path = sys.argv[1]
     try:
         train_set = pd.read_csv(dataset_file_path)
-    except FileNotFoundError:
-        raise FileNotFoundError("Dataset file not found.")
+    except FileNotFoundError as e:
+        raise FileNotFoundError(e)
 
     regression = LogisticRegression(train_set, should_fill_na=False)
 

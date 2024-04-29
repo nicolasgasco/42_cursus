@@ -44,7 +44,7 @@ class LogisticRegression:
         self.data_y: pd.Series = data["Hogwarts House"]
 
         self.learning_rate: int = 1 if len(self.features) == 2 else 10
-        self.iterations: int = 50_000
+        self.iterations: int = 100_000
 
     def _normalize_data(self, data: pd.DataFrame) -> pd.DataFrame:
         """

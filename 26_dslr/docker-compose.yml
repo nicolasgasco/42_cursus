@@ -6,3 +6,7 @@ services:
     build: .
     volumes:
       - ./:/dslr
+    environment:
+      - TRAIN=/dslr/data/dataset_train.csv
+      - TEST=/dslr/data/dataset_test.csv
+      - PARAMS=/dslr/data/prediction_params.csv
