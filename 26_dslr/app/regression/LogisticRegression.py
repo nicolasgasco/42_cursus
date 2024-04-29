@@ -221,7 +221,7 @@ class LogisticRegression:
                 print(
                     "\r",
                     f"Iteration {(i + 1):,}/{self.iterations:_}: ",
-                    f"weights: {w[:3]} (omitted)," if len(
+                    f"weights: {w[:3]} (some weights omitted)," if len(
                         w) > 3 else f"weights: {w}",
                     f"bias: {b}",
                     end="")
