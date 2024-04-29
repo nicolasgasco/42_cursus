@@ -43,7 +43,7 @@ class LogisticRegression:
         self.data_x: pd.DataFrame = self._normalize_data(data[self.features])
         self.data_y: pd.Series = data["Hogwarts House"]
 
-        self.learning_rate: int = 10
+        self.learning_rate: int = 1 if len(self.features) == 2 else 10
         self.iterations: int = 50_000
 
     def _normalize_data(self, data: pd.DataFrame) -> pd.DataFrame:
@@ -66,17 +66,26 @@ class LogisticRegression:
 
         Args:
             data (pd.DataFrame): The input data as a pandas DataFrame.
-            features (list[str]): The list of feature names.
+            features (list[str]): The list of features to be used for training.
 
         Raises:
-            AssertionError: If the data is not a pandas DataFrame.
-            AssertionError: If the data is empty.
-            AssertionError: If any feature is not found in the data.
+            AssertionError: If the data is not a pandas DataFrame
+            or if it is empty.
+            AssertionError: If the features list does not contain
+            at least 2 features.
+            AssertionError: If any feature in the features list
+            is not found in the data.
+
+        Returns:
+            None
         """
 
         assert isinstance(
             data, pd.DataFrame), "The data must be a pandas DataFrame."
         assert not data.empty, "The data must not be empty."
+
+        assert len(
+            features) > 1, "Features list must contain at least 2 features."
 
         for feature in features:
             error_message = f"'{feature}' not found in the data."
@@ -109,7 +118,58 @@ class LogisticRegression:
 
         return title.lower().replace(" ", "_")
 
-    def plot_regression(self, prediction_params_list: list[dict]):
+    def plot_regression_2d(self, prediction_params_list: list[dict]):
+        """
+        Plot the regression line for each set of prediction parameters
+        in the given list.
+        Args:
+            prediction_params_list (list[dict]): A list of dictionaries
+            containing prediction parameters.
+                Each dictionary should have the following keys:
+                - 'House': The house name.
+                - 'Weight_1': The weight parameter 1.
+                - 'Weight_2': The weight parameter 2.
+                - 'Bias': The bias parameter.
+        Returns:
+            None
+        """
+
+        print("Plotting regression line for each house...\n")
+
+        feature1 = self.features[0]
+        feature2 = self.features[1]
+
+        for prediction_params in prediction_params_list:
+            house = prediction_params['House']
+
+            weights = json.loads(prediction_params['Weights'])
+            w = np.array(weights)
+            b = prediction_params['Bias']
+
+            x_values = np.linspace(start=min(self.data_x[feature1]),
+                                   stop=max(self.data_x[feature1]),
+                                   num=100)
+            y_values = (-w[0]*x_values - b) / w[1]
+
+            plt.plot(x_values, y_values, color=HOUSE_COLOR[house].lower())
+
+        plt.scatter(
+            self.data_x[feature1], self.data_x[feature2],
+            color='grey', alpha=0.5, s=10)
+
+        plt.xlabel(feature1)
+        plt.ylabel(feature2)
+
+        plt.legend(self.houses)
+        plt.title(f"Regression: {feature1} vs {feature2}")
+
+        filename = "/dslr/app/regression/plots/logistic_regression_2d.png"
+        plt.savefig(filename, dpi=300)
+        plt.close()
+
+        print("2D plot saved to", filename, "\n")
+
+    def plot_regression_3d(self, prediction_params_list: list[dict]):
         """
         Plot the regression line for each set of prediction parameters
         in the given list.
@@ -127,7 +187,7 @@ class LogisticRegression:
             None
         """
 
-        print("Plotting regression line for each house...\n")
+        print("Plotting regression planes for each house...\n")
 
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
@@ -159,13 +219,12 @@ class LogisticRegression:
 
         plt.title(" vs ".join(self.features))
 
-        formatted_features = [
-            f"{self._serialize_title(feature)}" for feature in self.features]
-        features = "-".join(formatted_features)
-        filename = f"{features}.png"
-        file_path = "/dslr/app/regression/plots/" + filename
+        file_name = "logistic_regression_3d.png"
+        file_path = "/dslr/app/regression/plots/" + file_name
         plt.savefig(file_path, dpi=300)
         plt.close()
+
+        print("3D plot saved to", file_path, "\n")
 
     def train(self):
         """
@@ -242,8 +301,11 @@ class LogisticRegression:
         prediction_params = pd.DataFrame(prediction_params_list)
         prediction_params.to_csv(file_path, index=False)
 
-        if (len(self.features) == 3):
-            self.plot_regression(prediction_params_list)
+        features_num = len(self.features)
+        if features_num == 2:
+            self.plot_regression_2d(prediction_params_list)
+        elif features_num == 3:
+            self.plot_regression_3d(prediction_params_list)
 
     def predict(self, prediction_params: pd.DataFrame):
         """
@@ -259,6 +321,8 @@ class LogisticRegression:
         """
 
         features = json.loads(prediction_params['Features'].values[0])
+        print("Features: ", features, "\n")
+        print("self.features: ", self.features, "\n")
 
         error_message = Fore.RED + "Invalid features." + Style.RESET_ALL
         assert features == self.features, error_message
