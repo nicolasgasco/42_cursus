@@ -321,8 +321,6 @@ class LogisticRegression:
         """
 
         features = json.loads(prediction_params['Features'].values[0])
-        print("Features: ", features, "\n")
-        print("self.features: ", self.features, "\n")
 
         error_message = Fore.RED + "Invalid features." + Style.RESET_ALL
         assert features == self.features, error_message
