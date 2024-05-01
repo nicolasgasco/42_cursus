@@ -111,7 +111,8 @@ class Plot:
             plt.legend(self.houses)
 
         serialized_subject = subject.replace(" ", "_").lower()
-        self._save_plot(f"score_distribution_{serialized_subject}.png")
+        self._save_plot(
+            f"score_distribution/{serialized_subject}.png")
 
     def plot_score_distributions(self):
         """
@@ -258,9 +259,8 @@ class Plot:
 
         serialized_subject = subject.replace(" ", "_").lower()
         serialized_other_subject = other_subject.replace(" ", "_").lower()
-        self._save_plot(
-            "pair_plot_matrix_" +
-            f"{serialized_subject}_{serialized_other_subject}.png")
+        self._save_plot("subject_similarity/" +
+                        f"{serialized_subject}-{serialized_other_subject}.png")
 
     def plot_pair_matrix(self):
         """
