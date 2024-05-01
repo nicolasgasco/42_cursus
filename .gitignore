@@ -6866,6 +6866,8 @@ __pycache__
 25_ft_linear_regression/app/plots/mileage_vs_price-linear_regression.png
 26_dslr/app/data_viz/plots/score_distribution_*
 26_dslr/app/data_viz/plots/pair_plot_*
+26_dslr/app/data_viz/plots/score_distribution/
+26_dslr/app/data_viz/plots/subject_similarity/
 26_dslr/data/prediction_params.csv
 26_dslr/data/houses.csv
 26_dslr/app/regression/plots/
