@@ -20,20 +20,18 @@ def main():
 
     print("Choose a subject to see the score distribution:\n")
 
-    try:
-        while True:
-            choice: str = get_user_input(subjects, subject_letters)
+    choice: str = get_user_input(subjects, subject_letters)
 
-            chosen_subject: str = subjects[ALPHABET.index(choice)]
+    chosen_subject: str = subjects[ALPHABET.index(choice)]
 
-            print(f"Plotting score distribution for {chosen_subject}...")
-            plot.plot_score_distribution(chosen_subject)
+    print(f"Plotting score distribution for {chosen_subject}...")
+    plot.plot_score_distribution(chosen_subject)
 
-            print("\n")
-    except KeyboardInterrupt:
-        print("\nPlotting score distribution for all subjects...")
-        plot.plot_score_distributions()
-        print("Bye...")
+    print("\n")
+
+    print("Plotting score distribution for all subjects...")
+    plot.plot_score_distributions()
+    print("Bye...")
 
 
 if __name__ == "__main__":
