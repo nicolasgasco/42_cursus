@@ -56,11 +56,11 @@ class Describer:
 
         return min_value
 
-    def _calc_quartile(self, valid_entries: list[float], quartile: float):
+    def _calc_quantile(self, valid_entries: list[float], quantile: float):
         if len(valid_entries) == 0:
             return np.nan
 
-        index_float: float = (len(valid_entries) - 1) * quartile
+        index_float: float = (len(valid_entries) - 1) * quantile
         lower_index: int = int(index_float)
         upper_index: int = int(index_float + 1)
 
@@ -100,14 +100,14 @@ class Describer:
             mean: float = self._calc_mean(sorted_entries)
             std: float = self._calc_std(sorted_entries)
             min: float = self._calc_min(sorted_entries)
-            first_quartile: float = self._calc_quartile(sorted_entries, 0.25)
-            second_quartile: float = self._calc_quartile(sorted_entries, 0.50)
-            third_quartile: float = self._calc_quartile(sorted_entries, 0.75)
+            first_quantile: float = self._calc_quantile(sorted_entries, 0.25)
+            second_quantile: float = self._calc_quantile(sorted_entries, 0.50)
+            third_quantile: float = self._calc_quantile(sorted_entries, 0.75)
             max: float = self._calc_max(sorted_entries)
 
             stats_values[column] = [count, mean, std, min,
-                                    first_quartile, second_quartile,
-                                    third_quartile, max]
+                                    first_quantile, second_quantile,
+                                    third_quantile, max]
 
         self._stats = pd.DataFrame(stats_values)
 
