@@ -39,7 +39,7 @@ class LogisticRegression:
         # Fill NaN values allows to predict all values in test set
         # For training set, it's better to drop NaN values completely
         if should_fill_na:
-            data = data.fillna(0)
+            data = data.fillna(data[self.features].mean())
         else:
             data = data.dropna(subset=self.features)
         self.data_x: pd.DataFrame = self._normalize_data(data[self.features])
