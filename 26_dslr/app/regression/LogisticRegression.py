@@ -3,6 +3,7 @@ import json as json
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from prettytable import PrettyTable
 
 HOUSE_COLOR = {
     "Ravenclaw": "BLUE",
@@ -288,7 +289,7 @@ class LogisticRegression:
                 print(
                     "\r\t",
                     f"Iteration {(i + 1):,}/{self.iterations:_}: ",
-                    f"weights: {w[:3]} (some weights omitted)," if len(
+                    f"weights: {w[:3]} (...)," if len(
                         w) > 3 else f"weights: {w}",
                     f"bias: {b}",
                     end="")
@@ -319,6 +320,7 @@ class LogisticRegression:
 
         binary_predictions = pd.DataFrame(columns=self.houses)
 
+        table = PrettyTable(["House", "Weights", "Bias"])
         for house in self.houses:
             prediction_params_row = prediction_params.loc[
                 prediction_params['House'] == house]
@@ -328,18 +330,13 @@ class LogisticRegression:
 
             bias: float = prediction_params_row['Bias'].values[0]
 
-            if output is True:
-                print(
-                    f"{getattr(Fore, HOUSE_COLOR[house])}",
-                    f"{house.upper()}",
-                    Style.RESET_ALL)
+            formatted_house = getattr(
+                Fore, HOUSE_COLOR[house]) + house + Style.RESET_ALL
 
-                print("\t",
-                      f"weights: {weights[:3]} (some weights omitted)," if len(
-                          weights) > 3 else f"weights: {weights},",
-                      f"bias: {bias}", end="")
+            formatted_weights = f"{weights[:3]} (...)" if len(
+                weights) > 3 else f"{weights}"
 
-                print("\n")
+            table.add_row([formatted_house, formatted_weights, bias])
 
             linear_pred = np.dot(self.data_x, weights) + bias
             prediction = self._sigmoid(linear_pred)
@@ -350,6 +347,9 @@ class LogisticRegression:
 
         formatted_predictions = pd.DataFrame(
             predicted_house, columns=['Hogwarts House'])
+
+        if output is True:
+            print(table)
 
         return formatted_predictions
 
@@ -375,7 +375,7 @@ class LogisticRegression:
         assert features == self.features, error_message
 
         formatted_features = [
-            f"{Fore.GREEN}{feature}{Style.RESET_ALL}"
+            f"{Fore.YELLOW}{feature}{Style.RESET_ALL}"
             for feature in self.features]
         joined_features = ", ".join(formatted_features)
         print(
