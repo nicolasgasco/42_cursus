@@ -20,6 +20,8 @@ def main():
 
     regression.train()
 
+    regression.accuracy()
+
 
 if __name__ == "__main__":
     main()

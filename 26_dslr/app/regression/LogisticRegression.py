@@ -11,6 +11,8 @@ HOUSE_COLOR = {
     "Hufflepuff": "YELLOW"
 }
 
+PREDICTION_PARAMS_FILE_PATH = "/dslr/data/prediction_params.csv"
+
 
 class LogisticRegression:
     def __init__(self, data: pd.DataFrame,
@@ -45,6 +47,12 @@ class LogisticRegression:
 
         self.learning_rate: int = 1 if len(self.features) == 2 else 10
         self.iterations: int = 100_000
+
+        try:
+            self.prediction_params: pd.DataFrame | None = pd.read_csv(
+                PREDICTION_PARAMS_FILE_PATH)
+        except FileNotFoundError:
+            self.prediction_params: pd.DataFrame | None = None
 
     def _normalize_data(self, data: pd.DataFrame) -> pd.DataFrame:
         """
@@ -294,12 +302,11 @@ class LogisticRegression:
 
             print("\n")
 
-        file_name: str = "prediction_params.csv"
+        file_name: str = PREDICTION_PARAMS_FILE_PATH.split("/")[-1]
         print(f"Saving prediction parameters to {file_name}...\n")
 
-        file_path: str = "/dslr/data/" + file_name
-        prediction_params = pd.DataFrame(prediction_params_list)
-        prediction_params.to_csv(file_path, index=False)
+        self.prediction_params = pd.DataFrame(prediction_params_list)
+        self.prediction_params.to_csv(PREDICTION_PARAMS_FILE_PATH, index=False)
 
         features_num = len(self.features)
         if features_num == 2:
@@ -307,14 +314,56 @@ class LogisticRegression:
         elif features_num == 3:
             self.plot_regression_3d(prediction_params_list)
 
+    def _get_binary_predictions(self, prediction_params: pd.DataFrame,
+                                output: bool = True) -> pd.DataFrame:
+
+        binary_predictions = pd.DataFrame(columns=self.houses)
+
+        for house in self.houses:
+            prediction_params_row = prediction_params.loc[
+                prediction_params['House'] == house]
+
+            weights: list[float] = json.loads(
+                prediction_params_row['Weights'].values[0])
+
+            bias: float = prediction_params_row['Bias'].values[0]
+
+            if output is True:
+                print(
+                    f"{getattr(Fore, HOUSE_COLOR[house])}",
+                    f"{house.upper()}",
+                    Style.RESET_ALL)
+
+                print("\t",
+                      f"weights: {weights[:3]} (some weights omitted)," if len(
+                          weights) > 3 else f"weights: {weights},",
+                      f"bias: {bias}", end="")
+
+                print("\n")
+
+            linear_pred = np.dot(self.data_x, weights) + bias
+            prediction = self._sigmoid(linear_pred)
+
+            binary_predictions[house] = prediction
+
+        predicted_house = binary_predictions.idxmax(axis=1)
+
+        formatted_predictions = pd.DataFrame(
+            predicted_house, columns=['Hogwarts House'])
+
+        return formatted_predictions
+
     def predict(self, prediction_params: pd.DataFrame):
         """
-        Predicts the Hogwarts house for each student based
-        on the given prediction parameters.
+        Predicts the house for each student based on the given features.
 
         Args:
             prediction_params (pd.DataFrame): A DataFrame containing
-            the prediction parameters for each house.
+            the prediction parameters.
+
+        Raises:
+            AssertionError: If the features in the prediction_params
+            do not match the features used for training.
 
         Returns:
             None
@@ -333,38 +382,7 @@ class LogisticRegression:
             "Predicting house for each student with features: ",
             f"{joined_features}...\n")
 
-        binary_predictions = pd.DataFrame(columns=self.houses)
-
-        for house in self.houses:
-            print(
-                f"{getattr(Fore, HOUSE_COLOR[house])}",
-                f"{house.upper()}",
-                f"{Style.RESET_ALL}")
-
-            prediction_params_row = prediction_params.loc[
-                prediction_params['House'] == house]
-
-            weights: list[float] = json.loads(
-                prediction_params_row['Weights'].values[0])
-
-            bias: float = prediction_params_row['Bias'].values[0]
-
-            print("\t",
-                  f"weights: {weights[:3]} (some weights omitted)," if len(
-                      weights) > 3 else f"weights: {weights},",
-                  f"bias: {bias}", end="")
-
-            linear_pred = np.dot(self.data_x, weights) + bias
-            prediction = self._sigmoid(linear_pred)
-
-            binary_predictions[house] = prediction
-
-            print("\n")
-
-        predicted_house = binary_predictions.idxmax(axis=1)
-
-        formatted_predictions = pd.DataFrame(
-            predicted_house, columns=['Hogwarts House'])
+        formatted_predictions = self._get_binary_predictions(prediction_params)
 
         file_name = "houses.csv"
         print(f"Saving formatted predictions to {file_name}...\n")
@@ -372,3 +390,46 @@ class LogisticRegression:
         file_path = "/dslr/data/" + file_name
         formatted_predictions.to_csv(
             file_path, index=True, index_label='Index')
+
+    def accuracy(self) -> None:
+        """
+        Calculate the accuracy of the trained model.
+
+        This method calculates the accuracy of the trained model
+        by comparing the predicted Hogwarts House values
+        with the actual data labels.
+        It prints the accuracy percentage on the console.
+
+        Returns:
+            None
+        """
+
+        if (self.prediction_params is None):
+            print(Fore.RED,
+                  "Prediction parameters not found. Train the model first.",
+                  Style.RESET_ALL)
+            return
+
+        print("Calculating accuracy of trained model...\n")
+
+        predictions = self._get_binary_predictions(
+            self.prediction_params, output=False)
+        house_predictions = predictions["Hogwarts House"]
+
+        if (house_predictions.shape[0] != self.data_y.shape[0]):
+            print(Fore.RED,
+                  "Prediction and data sizes do not match.",
+                  Style.RESET_ALL)
+            return
+
+        n = house_predictions.shape[0]
+
+        correct_predictions = 0
+        for i in range(n):
+            if house_predictions.values[i] == self.data_y.values[i]:
+                correct_predictions += 1
+
+        accuracy = correct_predictions / n
+
+        print("Model trained with an accuracy of",
+              f"{Fore.YELLOW}{accuracy:.2%}{Style.RESET_ALL}.\n")
