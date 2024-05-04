@@ -8,11 +8,9 @@ class LinearRegression:
         self._dataset: pd.DataFrame = self._normalize_data(data)
         self._dataset_unnormal: pd.DataFrame = data
 
-        self.theta0 = 0.0
-        self.theta1 = 0.0
+        self.theta0, self.theta1 = 0.0, 0.0
 
-        self.theta0_unnorm = 0.0
-        self.theta1_unnorm = 0.0
+        self.theta0_unnorm, self.theta1_unnorm = 0.0, 0.0
 
         self.max_iterations = 25_000
         self.learning_rate = 0.1
@@ -29,6 +27,7 @@ class LinearRegression:
         """
 
         normalized_data = (data - data.min()) / (data.max() - data.min())
+
         return normalized_data
 
     def _save_thetas_to_csv(self):
@@ -47,7 +46,11 @@ class LinearRegression:
         """
         thetas_df = pd.DataFrame(
             {'theta0': [self.theta0_unnorm], 'theta1': [self.theta1_unnorm]})
+
+        file_path = '/ft_linear_regression/data/thetas.csv'
+
         thetas_df.to_csv('/ft_linear_regression/data/thetas.csv', index=False)
+        print(f"Thetas saved to {file_path}.\n")
 
     def _estimate_price(self, theta0: float, theta1: float,
                         mileage: pd.Series) -> pd.Series:
@@ -72,6 +75,7 @@ class LinearRegression:
                      price: pd.Series) -> tuple[float, float]:
         estimated_price = self._estimate_price(
             self.theta0, self.theta1, mileage)
+
         price_error = estimated_price - price
 
         temp_theta0 = self.learning_rate * norm_factor * sum(price_error)
@@ -121,8 +125,7 @@ class LinearRegression:
         print("\n")
 
         theta0, theta1 = self._unnormalize_thetas()
-        self.theta0_unnorm = theta0
-        self.theta1_unnorm = theta1
+        self.theta0_unnorm, self.theta1_unnorm = theta0, theta1
 
         self._save_thetas_to_csv()
 

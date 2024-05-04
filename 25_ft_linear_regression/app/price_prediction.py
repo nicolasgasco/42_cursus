@@ -23,7 +23,10 @@ def get_mileage_input() -> int:
                 raise ValueError()
             break
         except ValueError:
-            print(f"{Fore.RED}Please enter a valid value.{Style.RESET_ALL}")
+            print(
+                f"{Fore.RED}",
+                "Please enter a valid value. (integer, no seprators)",
+                f"{Style.RESET_ALL}")
 
     return mileage
 
@@ -41,12 +44,15 @@ def main():
               f"\nTheta1: {Fore.GREEN}{theta1:.6f}{Style.RESET_ALL}")
 
     except FileNotFoundError:
-        print(f"{Fore.RED}File thetas.csv not found.",
-              f"Using default values for theta0 and theta1.{Style.RESET_ALL}")
+        print(f"{Fore.RED}",
+              "File thetas.csv not found.",
+              "Defaulting theta0 and theta1 to 0.",
+              f"{Style.RESET_ALL}")
 
     price_estimator = PriceEstimator(theta0, theta1)
 
-    print("\nPress Ctrl+C to exit the program.")
+    print("\n",
+          "Press Ctrl+C to exit the program.")
     try:
         while True:
             mileage: int = get_mileage_input()
@@ -54,7 +60,9 @@ def main():
             estimate: float = price_estimator.estimate(mileage)
 
             print(
-                f"\nThe estimated price for {mileage:,} km is ",
+                "\n"
+                "\t",
+                f"The estimated price for {mileage:,} km is ",
                 f"{Fore.YELLOW}{estimate:,.2f}{Style.RESET_ALL}")
 
     except KeyboardInterrupt:

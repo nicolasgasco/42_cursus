@@ -5,8 +5,7 @@ import pandas as pd
 
 class Plot:
     def __init__(self, data: pd.DataFrame, theta0: float, theta1: float):
-        self._theta0: float = theta0
-        self._theta1: float = theta1
+        self._theta0, self._theta1 = theta0, theta1
 
         self._data: pd.DataFrame = data
 
