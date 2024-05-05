@@ -17,19 +17,11 @@ PREDICTION_PARAMS_FILE_PATH = "/dslr/data/prediction_params.csv"
 
 class LogisticRegression:
     def __init__(self, data: pd.DataFrame,
-                 features: list[str] = ["Ancient Runes",
-                                        "Arithmancy",
-                                        "Astronomy",
-                                        "Care of Magical Creatures",
-                                        "Charms",
-                                        "Defense Against the Dark Arts",
-                                        "Divination",
-                                        "Flying",
-                                        "Herbology",
-                                        "History of Magic",
-                                        "Muggle Studies",
-                                        "Potions",
-                                        "Transfiguration"],
+                 features: list[str] = [
+                     "Astronomy",
+                     "Ancient Runes",
+                     "Defense Against the Dark Arts",
+                     "Herbology",],
                  should_fill_na: bool = True):
         self._validate_inputs(data, features)
 
@@ -37,11 +29,11 @@ class LogisticRegression:
 
         self.features = sorted(features)
 
-        # Fill NaN values allows to predict all values in test set
-        # For training set, it's better to drop NaN values completely
         if should_fill_na:
+            # Fill NaN values allows to predict all values in test set
             data = data.fillna(data[self.features].mean())
         else:
+            # For training set, it's better to drop NaN values completely
             data = data.dropna(subset=self.features)
         self.data_x: pd.DataFrame = self._normalize_data(data[self.features])
         self.data_y: pd.Series = data["Hogwarts House"]
@@ -289,8 +281,8 @@ class LogisticRegression:
                 print(
                     "\r\t",
                     f"Iteration {(i + 1):,}/{self.iterations:_}: ",
-                    f"weights: {w[:3]} (...)," if len(
-                        w) > 3 else f"weights: {w}",
+                    f"weights: {w[:4]} (...)," if len(
+                        w) > 4 else f"weights: {w}",
                     f"bias: {b}",
                     end="")
 
@@ -303,8 +295,9 @@ class LogisticRegression:
 
             print("\n")
 
-        file_name: str = PREDICTION_PARAMS_FILE_PATH.split("/")[-1]
-        print(f"Saving prediction parameters to {file_name}...\n")
+        print(
+            "Saving prediction parameters to",
+            f"{PREDICTION_PARAMS_FILE_PATH}...\n")
 
         self.prediction_params = pd.DataFrame(prediction_params_list)
         self.prediction_params.to_csv(PREDICTION_PARAMS_FILE_PATH, index=False)
@@ -333,8 +326,8 @@ class LogisticRegression:
             formatted_house = getattr(
                 Fore, HOUSE_COLOR[house]) + house + Style.RESET_ALL
 
-            formatted_weights = f"{weights[:3]} (...)" if len(
-                weights) > 3 else f"{weights}"
+            formatted_weights = f"{weights[:4]} (...)" if len(
+                weights) > 4 else f"{weights}"
 
             table.add_row([formatted_house, formatted_weights, bias])
 
