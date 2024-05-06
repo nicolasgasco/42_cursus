@@ -21,10 +21,8 @@ def main():
         exit(1)
 
     describer = Describer(data)
-
     describer.describe()
 
-    # Uncomment for testing against the original implementation
     print(data.describe())
 
 

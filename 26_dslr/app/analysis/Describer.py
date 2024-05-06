@@ -10,99 +10,148 @@ class Describer:
         self._data: pd.DataFrame = data
         self._stats: pd.DataFrame | None = None
 
-    def _get_columns(self, data: pd.DataFrame):
-        all_columns: pd.Index[str] = data.columns
-        columns: list[str] = [column for column in all_columns
-                              if data[column].dtype == 'int64'
-                              or data[column].dtype == 'float64']
+    def _calc_mean(self, entries: list[float]) -> float:
+        """
+        Calculates the mean of a list of valid entries.
 
-        columns = columns
+        Args:
+            entries (list[float]): A list of valid entries.
 
-        return columns
+        Returns:
+            float: The mean of the valid entries. If the list is empty,
+            returns NaN.
+        """
 
-    def _get_valid_entries(self, values):
-        return [value for value in values
-                if pd.notnull(value) and pd.notna(value)]
-
-    def _calc_count(self, entries: list[float]):
-        return len(entries)
-
-    def _calc_mean(self, valid_entries: list[float]):
-        if len(valid_entries) == 0:
+        if len(entries) == 0:
             return np.nan
 
-        return sum(valid_entries) / len(valid_entries)
+        return sum(entries) / len(entries)
 
-    def _calc_std(self, valid_entries: list[float]):
-        if len(valid_entries) == 0:
+    def _calc_std(self, entries: list[float]) -> float:
+        """
+        Calculate the standard deviation of a list of valid entries.
+
+        Args:
+            entries (list[float]): A list of valid entries.
+
+        Returns:
+            float: The standard deviation of the valid entries.
+        """
+        if len(entries) == 0:
             return np.nan
 
-        mean: float = self._calc_mean(valid_entries)
-        squared_diffs: list[float] = [(x - mean) ** 2.0 for x in valid_entries]
+        mean: float = self._calc_mean(entries)
+
+        squared_diffs: list[float] = [(x - mean) ** 2.0 for x in entries]
+
         variance: float = sum(squared_diffs) / (len(squared_diffs) - 1)
-        std: float = variance ** 0.5
 
-        return std
+        return variance ** 0.5
 
-    def _calc_min(self, valid_entries: list[float]):
-        if len(valid_entries) == 0:
+    def _calc_min(self, entries: list[float]) -> float:
+        """
+        Calculates the minimum value from a list of entries.
+
+        Args:
+            entries (list[float]): A list of numerical entries.
+
+        Returns:
+            float: The minimum value from the list of entries.
+            If the list is empty, returns NaN.
+        """
+        if len(entries) == 0:
             return np.nan
 
-        min_value: float = valid_entries[0]
+        return sorted(entries)[0]
 
-        for value in valid_entries:
-            if value < min_value:
-                min_value = value
+    def _calc_quantile(self, entries: list[float], quantile: float) -> float:
+        """
+        Calculate the quantile value for a given list of entries and quantile.
 
-        return min_value
+        Args:
+            entries (list[float]): The list of entries.
+            quantile (float): The quantile value (between 0 and 1).
 
-    def _calc_quantile(self, valid_entries: list[float], quantile: float):
-        if len(valid_entries) == 0:
+        Returns:
+            float: The calculated quantile value.
+
+        Raises:
+            None
+
+        """
+        if len(entries) == 0:
             return np.nan
 
-        index_float: float = (len(valid_entries) - 1) * quantile
-        lower_index: int = int(index_float)
-        upper_index: int = int(index_float + 1)
+        index_fraction: float = (len(entries) - 1.0) * quantile
+        lower_index: int = int(index_fraction)
+        upper_index: int = int(index_fraction + 1)
 
-        is_integer: bool = index_float == lower_index
-        if is_integer:
-            return valid_entries[lower_index]
+        is_integer_index: bool = index_fraction == lower_index
+        if is_integer_index:
+            return entries[lower_index]
         else:
-            mean: float = (valid_entries[lower_index] +
-                           valid_entries[upper_index]) / 2.0
-            return mean
+            fraction: float = index_fraction - lower_index
+            interpolation = entries[lower_index] * \
+                (1 - fraction) + entries[upper_index] * fraction
 
-    def _calc_max(self, valid_entries):
-        if len(valid_entries) == 0:
+            return interpolation
+
+    def _calc_max(self, entries: list[float]) -> float:
+        """
+        Calculates the maximum value from a list of entries.
+
+        Args:
+            entries (list[float]): A list of floating-point numbers.
+
+        Returns:
+            float: The maximum value from the list.
+            If the list is empty, returns NaN.
+        """
+        if len(entries) == 0:
             return np.nan
 
-        max_value: float = valid_entries[0]
+        return sorted(entries)[-1]
 
-        for value in valid_entries:
-            if value > max_value:
-                max_value: float = value
+    def describe(self) -> None:
+        """
+        Generate descriptive statistics of the numeric columns in the dataset.
 
-        return max_value
+        This method calculates various statistical measures
+        such as count, mean, standard deviation,
+        minimum, first quartile, median, third quartile,
+        and maximum for each numeric column in the dataset.
+        The calculated statistics are stored in a pandas DataFrame
+        and printed to the console.
 
-    def describe(self):
-        columns = self._get_columns(self._data)
+        Returns:
+            None
+        """
+
+        columns: list[str] = [column for column in self._data.columns
+                              if self._data[column].dtype == 'int64'
+                              or self._data[column].dtype == 'float64']
 
         stats_values: dict[str, list[str | float]] = {
             '': ['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],
         }
 
         for column in columns:
-            valid_entries: list[float] = self._get_valid_entries(
-                self._data[column].values)
+            entries = self._data[column].values
+            valid_entries = [value for value in entries
+                             if pd.notnull(value) and pd.notna(value)]
             sorted_entries: list[float] = sorted(valid_entries)
 
-            count: float = self._calc_count(sorted_entries)
+            count: float = len(sorted_entries)
+
             mean: float = self._calc_mean(sorted_entries)
             std: float = self._calc_std(sorted_entries)
+
             min: float = self._calc_min(sorted_entries)
+
             first_quantile: float = self._calc_quantile(sorted_entries, 0.25)
             second_quantile: float = self._calc_quantile(sorted_entries, 0.50)
             third_quantile: float = self._calc_quantile(sorted_entries, 0.75)
+
             max: float = self._calc_max(sorted_entries)
 
             stats_values[column] = [count, mean, std, min,
