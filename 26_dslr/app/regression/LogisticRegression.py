@@ -35,11 +35,12 @@ class LogisticRegression:
         else:
             # For training set, it's better to drop NaN values completely
             data = data.dropna(subset=self.features)
+
         self.data_x: pd.DataFrame = self._normalize_data(data[self.features])
         self.data_y: pd.Series = data["Hogwarts House"]
 
-        self.learning_rate: int = 1 if len(self.features) == 2 else 10
-        self.iterations: int = 100_000
+        self.learning_rate: int = 1 if len(self.features) <= 4 else 10
+        self.max_iterations: int = 100_000
 
         try:
             self.prediction_params: pd.DataFrame | None = pd.read_csv(
@@ -58,10 +59,13 @@ class LogisticRegression:
         pd.DataFrame: The normalized data.
         """
 
-        normalized_data = (data - data.min()) / (data.max() - data.min())
+        normalized_data: pd.DataFrame = (
+            data - data.min()) / (data.max() - data.min())
+
         return normalized_data
 
-    def _validate_inputs(self, data: pd.DataFrame, features: list[str]):
+    def _validate_inputs(self, data: pd.DataFrame, features: list[str]) \
+            -> None:
         """
         Validates the inputs for the LogisticRegression model.
 
@@ -92,7 +96,7 @@ class LogisticRegression:
             error_message = f"'{feature}' not found in the data."
             assert feature in data.columns, error_message
 
-    def _sigmoid(self, x):
+    def _sigmoid(self, x) -> float:
         """
         Applies the sigmoid function to the input x.
 
@@ -119,7 +123,7 @@ class LogisticRegression:
 
         return title.lower().replace(" ", "_")
 
-    def plot_regression_2d(self, prediction_params_list: list[dict]):
+    def plot_regression_2d(self, prediction_params_list: list[dict]) -> None:
         """
         Plot the regression line for each set of prediction parameters
         in the given list.
@@ -137,15 +141,15 @@ class LogisticRegression:
 
         print("Plotting regression line for each house...\n")
 
-        feature1 = self.features[0]
-        feature2 = self.features[1]
+        feature1: str = self.features[0]
+        feature2: str = self.features[1]
 
         for prediction_params in prediction_params_list:
-            house = prediction_params['House']
+            house: str = prediction_params['House']
 
-            weights = json.loads(prediction_params['Weights'])
+            weights: list[float] = json.loads(prediction_params['Weights'])
             w = np.array(weights)
-            b = prediction_params['Bias']
+            b: float = prediction_params['Bias']
 
             x_values = np.linspace(start=min(self.data_x[feature1]),
                                    stop=max(self.data_x[feature1]),
@@ -170,7 +174,7 @@ class LogisticRegression:
 
         print("2D plot saved to", filename, "\n")
 
-    def plot_regression_3d(self, prediction_params_list: list[dict]):
+    def plot_regression_3d(self, prediction_params_list: list[dict]) -> None:
         """
         Plot the regression line for each set of prediction parameters
         in the given list.
@@ -227,7 +231,7 @@ class LogisticRegression:
 
         print("3D plot saved to", file_path, "\n")
 
-    def train(self):
+    def train(self) -> None:
         """
         Trains the model using logistic regression.
 
@@ -240,10 +244,10 @@ class LogisticRegression:
             None
         """
 
-        formatted_features = [
+        formatted_features: list[str] = [
             f"{Fore.YELLOW}{feature}{Style.RESET_ALL}"
             for feature in self.features]
-        joined_features = ", ".join(formatted_features)
+        joined_features: str = ", ".join(formatted_features)
         print(f"Training the model with features: {joined_features}...\n")
 
         prediction_params_list = []
@@ -263,7 +267,7 @@ class LogisticRegression:
             b = 0.0
 
             prev_w, prev_b = w, b
-            for i in range(self.iterations):
+            for i in range(self.max_iterations):
                 linear_prediction = np.dot(self.data_x, w) + b
                 prediction = self._sigmoid(linear_prediction)
 
@@ -280,7 +284,7 @@ class LogisticRegression:
 
                 print(
                     "\r\t",
-                    f"Iteration {(i + 1):,}/{self.iterations:_}: ",
+                    f"Iteration {(i + 1):,}/{self.max_iterations:_}: ",
                     f"weights: {w[:4]} (...)," if len(
                         w) > 4 else f"weights: {w}",
                     f"bias: {b}",
