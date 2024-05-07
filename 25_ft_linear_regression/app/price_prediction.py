@@ -25,7 +25,7 @@ def get_mileage_input() -> int:
         except ValueError:
             print(
                 f"{Fore.RED}",
-                "Please enter a valid value. (integer, no seprators)",
+                "Please enter a valid value (positive integer, no separators)",
                 f"{Style.RESET_ALL}")
 
     return mileage
@@ -62,8 +62,9 @@ def main():
             print(
                 "\n"
                 "\t",
-                f"The estimated price for {mileage:,} km is ",
-                f"{Fore.YELLOW}{estimate:,.2f}{Style.RESET_ALL}")
+                "Estimated price for",
+                f"{Fore.YELLOW}{mileage:,}{Style.RESET_ALL} km is",
+                f"{Fore.GREEN}{estimate:,.2f}{Style.RESET_ALL}")
 
     except KeyboardInterrupt:
         print("\n\nGoodbye!")

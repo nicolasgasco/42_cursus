@@ -1,3 +1,4 @@
+from colorama import Fore, Style
 import pandas as pd
 import time as time
 
@@ -13,7 +14,11 @@ def import_data() -> pd.DataFrame:
         pandas.DataFrame: The preprocessed data.
     """
 
-    data = pd.read_csv("/ft_linear_regression/data/data.csv")
+    file_path: str = "/ft_linear_regression/data/data.csv"
+    print("Importing data from",
+          f"{Fore.YELLOW}{file_path}{Style.RESET_ALL}...\n")
+
+    data = pd.read_csv(file_path)
     data = data.sort_values(by='km')
 
     return data
@@ -32,7 +37,8 @@ def show_elapsed_time(start):
 
     elapsed_time: float = time.time() - start
     formatted_elapsed_time: str = "{:.2f}".format(elapsed_time)
-    print(f"\nOperation completed in {formatted_elapsed_time} seconds")
+    print("\nOperation completed in",
+          f"{Fore.YELLOW}{formatted_elapsed_time}{Style.RESET_ALL} seconds")
 
 
 def main():

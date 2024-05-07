@@ -50,7 +50,8 @@ class LinearRegression:
         file_path = '/ft_linear_regression/data/thetas.csv'
 
         thetas_df.to_csv('/ft_linear_regression/data/thetas.csv', index=False)
-        print(f"Thetas saved to {file_path}.\n")
+        print("Thetas saved to",
+              f"{Fore.YELLOW}{file_path}{Style.RESET_ALL}.\n")
 
     def _estimate_price(self, theta0: float, theta1: float,
                         mileage: pd.Series) -> pd.Series:
