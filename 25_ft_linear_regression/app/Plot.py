@@ -15,21 +15,6 @@ class Plot:
             'title': 'Mileage vs Price'
         }
 
-    def _plot_linear_regression(self, x_data: pd.Series):
-        """
-        Plot the linear regression line.
-
-        Args:
-            x_data (numpy.ndarray): The input x data.
-
-        Returns:
-            None
-        """
-
-        estimated_y_data: pd.Series = self._theta0 + self._theta1 * x_data
-
-        plt.plot(x_data, estimated_y_data, 'y-')
-
     def generate_plot(self, linear_regression=False):
         """
         Display the scatter plot of the data.
@@ -38,6 +23,21 @@ class Plot:
             linear_regression (bool, optional): Whether to plot the linear \
             regression line. Defaults to False.
         """
+
+        def _plot_linear_regression(x_data: pd.Series):
+            """
+            Plot the linear regression line.
+
+            Args:
+                x_data (numpy.ndarray): The input x data.
+
+            Returns:
+                None
+            """
+
+            estimated_y_data: pd.Series = self._theta0 + self._theta1 * x_data
+
+            plt.plot(x_data, estimated_y_data, 'y-')
 
         x_data: pd.Series = self._data['km']
         y_data: pd.Series = self._data['price']
@@ -56,7 +56,7 @@ class Plot:
         plt.grid(True, which='both', linestyle='--', linewidth=0.5)
 
         if (linear_regression):
-            self._plot_linear_regression(x_data)
+            _plot_linear_regression(x_data)
 
         plot_name: str = self._labels['title'].lower().replace(' ', '_')
         plot_name += '-linear_regression' if linear_regression else ''

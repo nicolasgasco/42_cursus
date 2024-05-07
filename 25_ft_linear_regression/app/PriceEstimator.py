@@ -4,9 +4,6 @@ class PriceEstimator:
         self.__theta_0 = theta_0
         self.__theta_1 = theta_1
 
-    def __repr__(self):
-        return f"[theta_0={self.__theta_0}] [theta_1={self.__theta_1}]"
-
     def estimate(self, mileage):
         """
         Estimates the price of a car based on its mileage.
