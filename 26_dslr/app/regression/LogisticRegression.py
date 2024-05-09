@@ -280,11 +280,11 @@ class LogisticRegression:
 
             prev_w, prev_b = w, b
             for i in range(self.max_iterations):
-                linear_prediction = np.dot(self.data_x, w) + b
+                linear_prediction = self.data_x @ w + b
                 prediction = self._sigmoid(linear_prediction)
 
-                dw = (1 / m) * np.dot(self.data_x.T, (prediction - y))
-                db = (1 / m) * np.sum(prediction - y)
+                dw = (1 / m) * self.data_x.T @ (prediction - y)
+                db = (1 / m) * sum(prediction - y)
 
                 w = w - self.learning_rate * dw
                 b = b - self.learning_rate * db
