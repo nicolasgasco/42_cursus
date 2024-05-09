@@ -18,10 +18,20 @@ PREDICTION_PARAMS_FILE_PATH = "/dslr/data/prediction_params.csv"
 class LogisticRegression:
     def __init__(self, data: pd.DataFrame,
                  features: list[str] = [
-                     "Astronomy",
                      "Ancient Runes",
+                     "Arithmancy",
+                     "Astronomy",
+                     "Care of Magical Creatures",
+                     "Charms",
                      "Defense Against the Dark Arts",
-                     "Herbology",],
+                     "Divination",
+                     "Flying",
+                     "Herbology",
+                     "History of Magic",
+                     "Muggle Studies",
+                     "Potions",
+                     "Transfiguration",
+                 ],
                  should_fill_na: bool = True):
         self._validate_inputs(data, features)
 
@@ -31,7 +41,9 @@ class LogisticRegression:
 
         if should_fill_na:
             # Fill NaN values allows to predict all values in test set
-            data = data.fillna(data[self.features].mean())
+            for feature in self.features:
+                mean = data[feature].sum() / data[feature].count()
+                data[feature] = data[feature].fillna(mean)
         else:
             # For training set, it's better to drop NaN values completely
             data = data.dropna(subset=self.features)
