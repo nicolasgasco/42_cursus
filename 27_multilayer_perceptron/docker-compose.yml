@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  python:
+    container_name: "perceptron"
+    build: .
+    volumes:
+      - ./:/multilayer_perceptron
+    environment:
+      - DATA_PATH=/multilayer_perceptron/data/data.csv
