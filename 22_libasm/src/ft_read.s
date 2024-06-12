@@ -14,18 +14,18 @@
 ;        also NOTES.
 
 ;        On error, -1 is returned, and errno is set to indicate the error.
-;        In this case, it is le_ft unspecified whether the file position
+;        In this case, it is left unspecified whether the file position
 ;        (if any) changes.
 
 section .text
 
-extern  ___error
+extern  __errno_location
 
-global  _ft_read
+global  ft_read
 
-%define READ_SYSCALL 0x2000003
+%define READ_SYSCALL 0
 
-_ft_read:
+ft_read:
     mov rax, READ_SYSCALL ; syscall number for write
     syscall
     jc  .error
@@ -33,7 +33,7 @@ _ft_read:
 
 .error:
     mov  rdi,   rax ; set errno
-    call ___error   ; call ___error 
+    call __errno_location WRT ..plt   ; call __errno_location WRT ..plt 
     mov  [rax], rdi ; set errno
     mov  rax,   -1  ; return -1
     ret

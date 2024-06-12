@@ -13,11 +13,11 @@
 ;        strcpy()
 ;               These functions return dst.
 
-global  _ft_strcpy
+global  ft_strcpy
     
 section .text
 
-_ft_strcpy:
+ft_strcpy:
     cmp rsi, 0 ; if the current byte is 0, jump to the end
     je  .end   ; if the current byte is 0, jump to the end
 

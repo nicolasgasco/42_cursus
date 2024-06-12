@@ -18,24 +18,24 @@
 ;        available, with errno set to indicate the error.
 
 
-global  _ft_strdup
+global  ft_strdup
 
-extern  _ft_strcpy
-extern  _ft_strlen
-extern  _malloc
-extern  ___error
+extern  ft_strcpy
+extern  ft_strlen
+extern  malloc
+extern  __errno_location
 
 default rel
 
 section .text
 
-_ft_strdup:
-    call _ft_strlen ; get the length of the string
+ft_strdup:
+    call ft_strlen ; get the length of the string
     inc  rax        ; add 1 to the length of the string for the null byte
 
     push rdi      ; save the pointer to the old string
     mov  rdi, rax ; first argument is the length of the string + 1
-    call _malloc  ; allocate memory for the new string
+    call malloc WRT ..plt ; allocate memory for the new string
     pop  rdi      ; restore the pointer to the old string
 
     cmp rax, 0 ; check if the allocation was successful
@@ -45,13 +45,13 @@ _ft_strdup:
     mov rdi, rax ; first argument is the pointer to the new string
 
 
-    call _ft_strcpy ; copy the old string to the new string
+    call ft_strcpy ; copy the old string to the new string
 
     ret
 
 .error:
     mov  rdi,   rax ; set errno
-    call ___error   ; call ___error 
+    call __errno_location WRT ..plt   ; call __errno_location WRT ..plt 
     mov  [rax], rdi ; set errno
     mov  rax,   0   ; return NULL
     ret

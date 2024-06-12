@@ -10,9 +10,9 @@
 ;        pointed to by s.
 
 section .text
-global  _ft_strlen
+global  ft_strlen
 
-_ft_strlen:
+ft_strlen:
     mov rbx, rdi ; move argument to rbx
     mov rax, 0d  ; set counter and return value to 0
     jmp .loop    ; jump to the loop

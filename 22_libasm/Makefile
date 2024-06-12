@@ -15,6 +15,8 @@ $(NAME):
 	@ mkdir -p ${OBJS_DIR}
 ifeq (${OS}, Darwin)
 	@ echo "🍏 Intel Mac detected (42Urduliz campus)"
+	@ sh scripts/linux_to_macos.sh
+	@ echo "Adapting function names to MacOs format"
 	@ rm -rf src/*.s-e
 	@ nasm -f macho64 ${SRC_DIR}/ft_strlen.s -o ${OBJS_DIR}/ft_strlen.o
 	@ nasm -f macho64 ${SRC_DIR}/ft_strcpy.s -o ${OBJS_DIR}/ft_strcpy.o
@@ -23,9 +25,7 @@ ifeq (${OS}, Darwin)
 	@ nasm -f macho64 ${SRC_DIR}/ft_read.s -o ${OBJS_DIR}/ft_read.o
 	@ nasm -f macho64 ${SRC_DIR}/ft_strdup.s -o ${OBJS_DIR}/ft_strdup.o
 else
-	@ echo "🐧 Other OS detected (Codespaces)"
-	@ sh scripts/macos_to_linux.sh
-	@ echo "Adapting function names to Linux format"
+	@ echo "🐧 Other OS detected (42Urduliz campus after migration to Linux)"
 	@ nasm -f elf64 ${SRC_DIR}/ft_strlen.s -o ${OBJS_DIR}/ft_strlen.o
 	@ nasm -f elf64 ${SRC_DIR}/ft_strcpy.s -o ${OBJS_DIR}/ft_strcpy.o
 	@ nasm -f elf64 ${SRC_DIR}/ft_strcmp.s -o ${OBJS_DIR}/ft_strcmp.o
@@ -38,10 +38,10 @@ endif
 
 ifeq (${OS}, Darwin)
 	gcc -arch x86_64 ${FLAGS} ${SANITIZE} main.c ${NAME} -o ${EXECUTABLE}
+	@ sh scripts/macos_to_linux.sh
+	@ echo "Bringing back function names to Linux format"
 else
 	gcc main.c ${FLAGS} ${SANITIZE} ${NAME} -o test
-	@ sh scripts/linux_to_macos.sh
-	@ echo "Bringing back function names to MacOS format"
 endif
 	@ echo "Creating test_files directory"
 	@ mkdir -p test_files

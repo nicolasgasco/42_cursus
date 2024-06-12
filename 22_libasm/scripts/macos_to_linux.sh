@@ -4,7 +4,7 @@
 # For Intel MacOs, it's the opposite
 # This script removes the underscore from the function names in the assembly files
 
-folder="/workspaces/42_cursus/22_libasm/src"
+folder="/home/ngasco/Documents/42_cursus/22_libasm/src"
 
 # Loop through each file in the folder
 for file in "$folder"/*; do

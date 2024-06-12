@@ -14,11 +14,11 @@
 ; rdi is the first string
 ; rsi is the second string
 
-global  _ft_strcmp
+global  ft_strcmp
     
 section .text
 
-_ft_strcmp:
+ft_strcmp:
     mov rax, 0 ; initialize return value to 0
     jmp .loop  ; jump to the loop
 

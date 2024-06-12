@@ -8,7 +8,7 @@
 ;        example, there is insufficient space on the underlying physical
 ;        medium, or the RLIMIT_FSIZE resource limit is encountered (see
 ;        setrlimit(2)), or the call was interrupted by a signal handler
-;        a_fter having written less than count bytes.  (See also pipe(7).)
+;        after having written less than count bytes.  (See also pipe(7).)
 
 ; RETURN VALUE
 ;        On success, the number of bytes written is returned.  On error,
@@ -19,7 +19,7 @@
 ;        example, because there was insufficient space on the disk device
 ;        to write all of the requested bytes, or because a blocked write()
 ;        to a socket, pipe, or similar was interrupted by a signal handler
-;        a_fter it had transferred some, but before it had transferred all
+;        after it had transferred some, but before it had transferred all
 ;        of the requested bytes.  In the event of a partial write, the
 ;        caller can make another write() call to transfer the remaining
 ;        bytes.  The subsequent call will either transfer further bytes or
@@ -34,12 +34,12 @@
 
 section .text
 
-extern  ___error
-global  _ft_write
+extern  __errno_location
+global  ft_write
 
-%define WRITE_SYSCALL 0x2000004
+%define WRITE_SYSCALL 1
 
-_ft_write:
+ft_write:
     mov rax, WRITE_SYSCALL ; syscall number for write
     syscall
 
@@ -48,7 +48,7 @@ _ft_write:
 
 .error:
     mov  rdi,   rax ; set errno
-    call ___error   ; call ___error 
+    call __errno_location WRT ..plt   ; call __errno_location WRT ..plt 
     mov  [rax], rdi ; set errno
     mov  rax,   -1  ; return -1
     ret
