@@ -40,6 +40,16 @@ global  ft_write
 %define WRITE_SYSCALL 1
 
 ft_write:
+    cmp rdi, 0d ; check if fd is null
+    je  .end    ; if it is, jump to the end
+
+    cmp rsi, 0d ; check if the buffer is empty
+    je  .end    ; if it is, jump to the end
+
+    cmp rdx, 0d ; check if the count is 0
+    je  .end    ; if it is, jump to the end
+
+
     mov rax, WRITE_SYSCALL ; syscall number for write
     syscall
 
@@ -51,4 +61,8 @@ ft_write:
     call __errno_location WRT ..plt   ; call __errno_location WRT ..plt 
     mov  [rax], rdi ; set errno
     mov  rax,   -1  ; return -1
+    ret
+
+.end:
+    mov rax, 0 ; return 0
     ret

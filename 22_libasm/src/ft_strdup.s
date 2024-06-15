@@ -30,6 +30,9 @@ default rel
 section .text
 
 ft_strdup:
+    cmp rdi, 0 ; check if the string is empty
+    je  .end ; jump to the end if the string is empty
+
     call ft_strlen ; get the length of the string
     inc  rax        ; add 1 to the length of the string for the null byte
 
@@ -54,4 +57,8 @@ ft_strdup:
     call __errno_location WRT ..plt   ; call __errno_location WRT ..plt 
     mov  [rax], rdi ; set errno
     mov  rax,   0   ; return NULL
+    ret
+
+.end:
+    mov rax, 0 ; return 0
     ret

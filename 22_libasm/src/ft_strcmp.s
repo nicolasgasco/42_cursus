@@ -20,6 +20,13 @@ section .text
 
 ft_strcmp:
     mov rax, 0 ; initialize return value to 0
+
+    cmp rdi, 0d ; check if s1 is null
+    je  .end    ; if s1 is null, return
+
+    cmp rsi, 0d ; check if s2 is null
+    je  .end    ; if s2 is null, return
+
     jmp .loop  ; jump to the loop
 
 .loop:
