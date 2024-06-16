@@ -62,3 +62,31 @@ class DataPlotter:
         plot.savefig(filename)
 
         print(f"Pair plot saved to {filename}")
+
+    def correlation_matrix(self) -> None:
+        """
+        Create a correlation matrix plot of the data.
+
+        This method generates a correlation matrix plot using seaborn library
+        to visualize the relationships between pair of variables in the data.
+
+        Returns:
+        None
+        """
+
+        print("Creating correlation matrix plot...")
+
+        numeric_values = self._data.iloc[:, 2:]
+
+        correlation_matrix = numeric_values.corr()
+
+        plt.figure(figsize=(75, 75))
+
+        plot = sns.heatmap(correlation_matrix, annot=True,
+                           cmap='coolwarm', annot_kws={"size": 24})
+
+        print("Saving correlation matrix plot...")
+        filename = PLOTS_DIR + "/correlation_matrix.png"
+        plot.get_figure().savefig(filename)
+
+        print(f"Correlation matrix plot saved to {filename}")

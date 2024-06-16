@@ -9,8 +9,18 @@ def main():
     normalized_data = data_importer.normalize_data()
 
     plotter = DataPlotter(normalized_data)
-    plotter.pair_plot()
-    plotter.histograms()
+
+    print("Which plot do you want to create?\n")
+    print("a) Histograms\nb) Pair plot\nc) Correlation matrix\n")
+
+    user_choice = input("Enter your choice: ")
+
+    if user_choice == "a":
+        plotter.histograms()
+    elif user_choice == "b":
+        plotter.pair_plot()
+    elif user_choice == "c":
+        plotter.correlation_matrix()
 
 
 if __name__ == "__main__":
