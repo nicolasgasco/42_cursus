@@ -19,18 +19,8 @@ class LogisticRegression:
     def __init__(self, data: pd.DataFrame,
                  features: list[str] = [
                      "Ancient Runes",
-                     "Arithmancy",
-                     "Astronomy",
-                     "Care of Magical Creatures",
-                     "Charms",
                      "Defense Against the Dark Arts",
-                     "Divination",
-                     "Flying",
                      "Herbology",
-                     "History of Magic",
-                     "Muggle Studies",
-                     "Potions",
-                     "Transfiguration",
                  ],
                  should_fill_na: bool = True):
         self._validate_inputs(data, features)
