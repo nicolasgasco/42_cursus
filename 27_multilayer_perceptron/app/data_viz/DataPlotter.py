@@ -11,6 +11,8 @@ class DataPlotter:
         assert self._data is not None, "DataPlotter: data is None."
 
     def histograms(self) -> None:
+        print("Creating histograms...")
+
         numeric_data = self._data.iloc[:, 2:]
 
         fig, axs = plt.subplots(len(numeric_data.columns), figsize=(
@@ -30,30 +32,33 @@ class DataPlotter:
         plt.savefig(f'{PLOTS_DIR}/all_histograms.png')
         plt.close()
 
+        print(f"Histograms saved to {PLOTS_DIR}/all_histograms.png")
 
-def pair_plot(self) -> None:
-    """
-        Create a pair plot of the data.
-
-        This method generates a pair plot using seaborn library to visualize the relationships between pairs of variables in the data.
-
-        Returns:
-          None
+    def pair_plot(self) -> None:
         """
+            Create a pair plot of the data.
 
-    print("Creating pair plot...")
+            This method generates a pair plot using seaborn library
+            to visualize the relationships between pair
+            of variables in the data.
 
-    column_name = self._data.columns[1]
-    column_unique = self._data[column_name].unique()
-    plot = sns.pairplot(self._data, hue=column_name,
-                        palette={column_unique[0]: 'red',
-                                 column_unique[1]: 'blue'},
-                        plot_kws={'alpha': 0.5},
-                        diag_kind='hist',
-                        corner=True)
+            Returns:
+            None
+            """
 
-    print("Saving pair plot...")
-    filename = PLOTS_DIR + "/pair_plot.png"
-    plot.savefig(filename)
+        print("Creating pair plot...")
 
-    print(f"Pair plot saved to {filename}")
+        column_name = self._data.columns[1]
+        column_unique = self._data[column_name].unique()
+        plot = sns.pairplot(self._data, hue=column_name,
+                            palette={column_unique[0]: 'red',
+                                     column_unique[1]: 'blue'},
+                            plot_kws={'alpha': 0.5},
+                            diag_kind='hist',
+                            corner=True)
+
+        print("Saving pair plot...")
+        filename = PLOTS_DIR + "/pair_plot.png"
+        plot.savefig(filename)
+
+        print(f"Pair plot saved to {filename}")
