@@ -286,10 +286,7 @@ class LogisticRegression:
 
                 print(
                     "\r\t",
-                    f"Iteration {(i + 1):,}/{self.max_iterations:_}: ",
-                    f"weights: {w[:4]} (...)," if len(
-                        w) > 4 else f"weights: {w}",
-                    f"bias: {b}",
+                    f"Iteration {(i + 1):,}/{self.max_iterations:_}",
                     end="")
 
             prediction_params_list.append({
