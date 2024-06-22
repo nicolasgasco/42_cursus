@@ -1,6 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from colorama import Fore, Style
 
 PLOTS_DIR = "/multilayer_perceptron/app/data_viz/plots"
 
@@ -32,7 +33,8 @@ class DataPlotter:
         plt.savefig(f'{PLOTS_DIR}/all_histograms.png')
         plt.close()
 
-        print(f"Histograms saved to {PLOTS_DIR}/all_histograms.png")
+        print(
+            f"Histograms saved to {Fore.GREEN}{PLOTS_DIR}/all_histograms.png{Style.RESET_ALL}")
 
     def pair_plot(self) -> None:
         """
@@ -61,7 +63,7 @@ class DataPlotter:
         filename = PLOTS_DIR + "/pair_plot.png"
         plot.savefig(filename)
 
-        print(f"Pair plot saved to {filename}")
+        print(f"Pair plot saved to {Fore.GREEN}{filename}{Style.RESET_ALL}")
 
     def correlation_matrix(self) -> None:
         """
@@ -89,4 +91,5 @@ class DataPlotter:
         filename = PLOTS_DIR + "/correlation_matrix.png"
         plot.get_figure().savefig(filename)
 
-        print(f"Correlation matrix plot saved to {filename}")
+        print(
+            f"Correlation matrix plot saved to {Fore.GREEN}{filename}{Style.RESET_ALL}")

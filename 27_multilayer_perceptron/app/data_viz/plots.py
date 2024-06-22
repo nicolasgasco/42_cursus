@@ -15,6 +15,8 @@ def main():
 
     user_choice = input("Enter your choice: ")
 
+    print("\n")
+
     if user_choice == "a":
         plotter.histograms()
     elif user_choice == "b":
