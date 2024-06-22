@@ -1,6 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
 from colorama import Fore, Style
 
 PLOTS_DIR = "/multilayer_perceptron/app/data_viz/plots"
@@ -16,18 +17,28 @@ class DataPlotter:
 
         numeric_data = self._data.iloc[:, 2:]
 
-        fig, axs = plt.subplots(len(numeric_data.columns), figsize=(
-            10, 6*len(numeric_data.columns)))
+        num_plots = len(numeric_data.columns)
+        num_columns = 4
+        num_rows = np.ceil(num_plots / num_columns).astype(int)
 
-        for ax, column in zip(axs, numeric_data.columns):
+        fig, axs = plt.subplots(num_rows, num_columns, figsize=(
+            20, 6*num_rows))
+
+        axs = axs.flatten()
+
+        for i, column in enumerate(numeric_data.columns):
+            ax = axs[i]
             ax.hist(self._data[self._data.iloc[:, 1] == 'M']
                     [column], color='red', alpha=0.5, label='M')
             ax.hist(self._data[self._data.iloc[:, 1] == 'B']
                     [column], color='blue', alpha=0.5, label='B')
-            ax.set_title(f'Histogram of {column}')
+            ax.set_title(column)
             ax.set_xlabel(column)
             ax.set_ylabel('Frequency')
             ax.legend()
+
+        for i in range(num_plots, num_rows*num_columns):
+            axs[i].axis('off')
 
         plt.tight_layout()
         plt.savefig(f'{PLOTS_DIR}/all_histograms.png')
