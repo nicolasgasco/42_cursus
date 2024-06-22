@@ -6871,3 +6871,6 @@ __pycache__
 26_dslr/data/prediction_params.csv
 26_dslr/data/houses.csv
 26_dslr/app/regression/plots/
+26_dslr/app/regression/dataset_truth.csv
+26_dslr/app/regression/evaluate.py
+26_dslr/app/regression/run.sh
