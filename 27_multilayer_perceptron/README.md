@@ -1,17 +1,20 @@
-# dslr
+# Multilayer Perceptron
 
-In this project DataScience x Logistic Regression, you will continue your exploration of
-Machine Learning by discovering different tools.
+The goal of this project is to give you a first approach to artificial neural networks,
+and to have you implement the algorithms at the heart of the training process.
 
-You will implement a linear classification model, as a continuation of the subject linear regression : a logistic regression.
+In the language of your choice you are going to implement a multilayer
+perceptron, in order to predict whether a cancer is malignant or benign on a dataset of
+breast cancer diagnosis in the Wisconsin.
 
-Summarizing:
+> The multilayer perceptron is a feedforward network (meaning that the data
+> flows from the input layer to the output layer) defined by the presence of one or more
+> hidden layers as well as an interconnection of all the neurons of one layer to the next.
+> 
+> <img width="500" alt="Screenshot 2024-06-22 at 16 27 39" src="https://github.com/nicolasgasco/42_cursus/assets/73175085/682f245c-7359-4059-92a3-fffd3205d79d">
 
-- You will learn how to read a data set, to visualize it in different ways, to select and
-  clean unnecessary information from your data.
-- You will train a logistic regression that will solve classification problem.
-
-## Data visualization
-Visualize the provided data, e.g. by plotting the score distribution for each subject:
-![score_distribution](https://github.com/nicolasgasco/42_cursus/assets/73175085/70aeb396-bb72-49f4-b283-5db7672fb8c2)
+## Dataset
+The dataset is a csv file of 32 columns, the column diagnosis being the label you want to learn given all the other features of an example,
+it can be either the value M or B (for malignant or benign).
+The features of the dataset describe the characteristics of a cell nucleus of breast mass extracted with fine-needle aspiration.
 
