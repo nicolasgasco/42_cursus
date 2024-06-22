@@ -6874,3 +6874,4 @@ __pycache__
 26_dslr/app/regression/dataset_truth.csv
 26_dslr/app/regression/evaluate.py
 26_dslr/app/regression/run.sh
+27_multilayer_perceptron/app/plots

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from colorama import Fore, Style
 
-PLOTS_DIR = "/multilayer_perceptron/app/data_viz/plots"
+PLOTS_DIR = "/multilayer_perceptron/app/plots"
 
 
 class DataPlotter:
@@ -41,7 +41,7 @@ class DataPlotter:
             axs[i].axis('off')
 
         plt.tight_layout()
-        plt.savefig(f'{PLOTS_DIR}/all_histograms.png')
+        plt.savefig(f'{PLOTS_DIR}/histograms.png')
         plt.close()
 
         print(
