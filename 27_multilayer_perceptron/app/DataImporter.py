@@ -40,7 +40,7 @@ class DataImporter:
             pd.DataFrame: The normalized data as a pandas DataFrame.
         """
 
-        # Exclude the first column (M/B)
+        # Exclude the first non-numeric column
         data_to_normalize = self._data.iloc[:, 2:]
 
         # Apply min-max normalization manually
