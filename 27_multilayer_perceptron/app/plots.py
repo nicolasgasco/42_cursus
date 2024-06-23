@@ -1,5 +1,5 @@
-from DataImporter import DataImporter
-from DataPlotter import DataPlotter
+from src.DataImporter import DataImporter
+from src.DataPlotter import DataPlotter
 
 
 def main():
