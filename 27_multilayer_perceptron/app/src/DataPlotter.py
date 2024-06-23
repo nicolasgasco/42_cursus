@@ -18,11 +18,11 @@ class DataPlotter:
         numeric_data = self._data.iloc[:, 2:]
 
         num_plots = len(numeric_data.columns)
-        num_columns = 4
+        num_columns = 8
         num_rows = np.ceil(num_plots / num_columns).astype(int)
 
         fig, axs = plt.subplots(num_rows, num_columns, figsize=(
-            20, 6*num_rows))
+            24, 4*num_rows))
 
         axs = axs.flatten()
 
@@ -41,11 +41,12 @@ class DataPlotter:
             axs[i].axis('off')
 
         plt.tight_layout()
-        plt.savefig(f'{PLOTS_DIR}/histograms.png')
+        file_name = f'{PLOTS_DIR}/histograms.png'
+        plt.savefig(file_name)
         plt.close()
 
         print(
-            f"Histograms saved to {Fore.GREEN}{PLOTS_DIR}/all_histograms.png{Style.RESET_ALL}")
+            f"Histograms saved to {Fore.YELLOW}{file_name}{Style.RESET_ALL}")
 
     def pair_plot(self) -> None:
         """
