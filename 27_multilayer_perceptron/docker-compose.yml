@@ -7,4 +7,6 @@ services:
     volumes:
       - ./:/multilayer_perceptron
     environment:
+      - DATA_DIR_PATH=/multilayer_perceptron/data
       - DATA_PATH=/multilayer_perceptron/data/data.csv
+      - SETTINGS_DIR_PATH=/multilayer_perceptron/app/settings

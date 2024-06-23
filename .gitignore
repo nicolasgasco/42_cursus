@@ -6875,3 +6875,5 @@ __pycache__
 26_dslr/app/regression/evaluate.py
 26_dslr/app/regression/run.sh
 27_multilayer_perceptron/app/plots
+27_multilayer_perceptron/data/train_set.csv
+27_multilayer_perceptron/data/validation_set.csv
