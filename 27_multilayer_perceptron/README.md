@@ -18,3 +18,7 @@ The dataset is a csv file of 32 columns, the column diagnosis being the label yo
 it can be either the value M or B (for malignant or benign).
 The features of the dataset describe the characteristics of a cell nucleus of breast mass extracted with fine-needle aspiration.
 
+### Feature selection based on data visualization
+Features with the least overlap: 2, 4, 5, 8, 9, 22, 24, 25, 29.
+
+<img width="500" src="https://github.com/nicolasgasco/42_cursus/assets/73175085/e96f65ab-0b5a-4ec3-b872-4e6735fbb56f" alt=""/>
