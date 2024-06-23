@@ -19,6 +19,13 @@ it can be either the value M or B (for malignant or benign).
 The features of the dataset describe the characteristics of a cell nucleus of breast mass extracted with fine-needle aspiration.
 
 ### Feature selection based on data visualization
-<img width="900" src="https://github.com/nicolasgasco/42_cursus/assets/73175085/9c8b9d7d-1003-4d91-b761-57af9a267ea8" alt=""/>
+- Histograms
 
-Features with the least overlap: 2, 4, 5, 8, 9, 22, 24, 25, 29.
+  <img width="750" src="https://github.com/nicolasgasco/42_cursus/assets/73175085/9c8b9d7d-1003-4d91-b761-57af9a267ea8" alt=""/>
+
+  Features with the least overlap: 2, 4, 5, 8, 9, 22, 24, 25, 29.
+- Pair plot
+
+  <img width="750" src="https://github.com/nicolasgasco/42_cursus/assets/73175085/3ce826eb-b265-4a63-bb22-668e29e18f60" alt=""/>
+
+  Feature couples with too much correlation (pick one, not both): `4,2`, `5,2`, `5,4`, `24,22`, `25,22`, `25,24`  
