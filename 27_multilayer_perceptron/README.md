@@ -31,6 +31,6 @@ The features of the dataset describe the characteristics of a cell nucleus of br
   Feature couples with too much correlation (pick one, not both): `4,2`, `5,2`, `5,4`, `24,22`, `25,22`, `25,24`  
 - Correlation matrix
 
-  <img width="600" src="[https://github.com/nicolasgasco/42_cursus/assets/73175085/e97aa52c-30ef-4b50-b072-f4ab3215ce84](https://github.com/nicolasgasco/42_cursus/assets/73175085/54cebfd1-e7fa-4c9e-9640-69e513c49300)" alt=""/>
+  <img width="600" src="https://github.com/nicolasgasco/42_cursus/assets/73175085/54cebfd1-e7fa-4c9e-9640-69e513c49300" alt=""/>
 
   Feature couple with too much correlation (pick one, not both): `2,4`, `2,5`, `2,22`, `2,24`, `2,25`, `3,23`, `4,2`, `4,5`, `4,22`, `4,24`, `4,25`, `5,2`, `5,4`, `5,22`, `5,24`, `5,25`...
