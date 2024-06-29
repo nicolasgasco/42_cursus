@@ -98,6 +98,7 @@ class DataPlotter:
 
         plot = sns.heatmap(correlation_matrix, annot=True,
                            cmap='coolwarm', annot_kws={"size": 24})
+        plt.tight_layout()
 
         print("Saving correlation matrix plot...")
         filename = PLOTS_DIR + "/correlation_matrix.png"
