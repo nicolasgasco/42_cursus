@@ -51,9 +51,13 @@ def get_user_input(subjects: list[str], subject_letters: str):
             return False
         return True
 
-    while True:
-        _output_options(subjects)
-        choice: str = input()
+    try:
+        while True:
+            _output_options(subjects)
+            choice: str = input()
 
-        if _is_valid_input(choice, subject_letters):
-            return choice
+            if _is_valid_input(choice, subject_letters):
+                return choice
+    except KeyboardInterrupt:
+        print("\nBye!")
+        exit()
