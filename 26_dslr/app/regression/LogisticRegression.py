@@ -289,7 +289,11 @@ class LogisticRegression:
 
                 print(
                     "\r\t",
-                    f"Iteration {(i + 1):,}/{self.max_iterations:_}",
+                    f"Iteration {Fore.YELLOW}{(i + 1):,}{Style.RESET_ALL}",
+                    " - ",
+                    f"Weights: {[x for x in w]}",
+                    " - ",
+                    f"Bias: {b}",
                     end="")
 
             prediction_params_list.append({
@@ -303,7 +307,8 @@ class LogisticRegression:
 
         print(
             "Saving prediction parameters to",
-            f"{PREDICTION_PARAMS_FILE_PATH}...\n")
+            f"{Fore.GREEN}{PREDICTION_PARAMS_FILE_PATH}{Style.RESET_ALL}...",
+            "\n")
 
         self.prediction_params = pd.DataFrame(prediction_params_list)
         self.prediction_params.to_csv(PREDICTION_PARAMS_FILE_PATH, index=False)
@@ -431,4 +436,4 @@ class LogisticRegression:
         accuracy = correct_predictions / n
 
         print("Model trained with an accuracy of",
-              f"{Fore.YELLOW}{accuracy:.2%}{Style.RESET_ALL}.\n")
+              f"{Fore.GREEN}{accuracy:.2%}{Style.RESET_ALL}.\n")
