@@ -16,13 +16,27 @@ The use of library that do the heavy lifting in computing linear regression (e.g
 - Measurement of prediction accuracy
 
 ## Execution
+
+Start Docker container:
 ```shell
-docker compose up
-docker exec -it python bash
-
-# Inside container
-cd ft_linear_regression/
-python3 app/main.py
-
-# When prompted, insert a mileage value to get a price prediction
+docker compose up -d
 ```
+
+Access Docker container:
+```shell
+sh access_docker_container.sh
+```
+
+Inside container:
+```shell
+cd ft_linear_regression/app/
+```
+
+Train model:
+
+<img width="500" alt="Screenshot 2024-06-30 at 21 52 37" src="https://github.com/nicolasgasco/42_cursus/assets/73175085/912b42b9-db87-4618-ab9f-d212be471752">
+
+
+Launch prediction program:
+
+<img width="500" alt="Screenshot 2024-06-30 at 21 53 48" src="https://github.com/nicolasgasco/42_cursus/assets/73175085/db1d24db-ada2-4be7-9c42-5a24db94c337">
