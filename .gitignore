@@ -6870,10 +6870,10 @@ __pycache__
 26_dslr/app/data_viz/plots/subject_similarity/
 26_dslr/data/prediction_params.csv
 26_dslr/data/houses.csv
-26_dslr/app/regression/plots/
 26_dslr/app/regression/dataset_truth.csv
 26_dslr/app/regression/evaluate.py
 26_dslr/app/regression/run.sh
 27_multilayer_perceptron/app/plots
 27_multilayer_perceptron/data/train_set.csv
 27_multilayer_perceptron/data/validation_set.csv
+26_dslr/data/houses_binary.csv
