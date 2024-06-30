@@ -1,9 +1,11 @@
-from colorama import Fore, Style
 import json as json
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+
+from colorama import Fore, Style
 from prettytable import PrettyTable
+
 
 HOUSE_COLOR = {
     "Ravenclaw": "BLUE",
@@ -19,6 +21,7 @@ class LogisticRegression:
     def __init__(self, data: pd.DataFrame,
                  features: list[str] = [
                      "Ancient Runes",
+                     "Astronomy",
                      "Defense Against the Dark Arts",
                      "Herbology",
                  ],
@@ -42,7 +45,7 @@ class LogisticRegression:
         self.data_y: pd.Series = data["Hogwarts House"]
 
         self.learning_rate: int = 10
-        self.max_iterations: int = 100_000
+        self.max_iterations: int = 20_000
 
         try:
             self.prediction_params: pd.DataFrame | None = pd.read_csv(
