@@ -10,10 +10,12 @@ class Plot:
     def __init__(self, data: pd.DataFrame):
         self._validate_inputs(data)
 
-        # Remove unrelevant columns
-        self.columns = data.columns.values[6:]
+        first_num_col_index = 6
 
-        self.data: pd.DataFrame = data
+        self.columns = data.columns.values[first_num_col_index:]
+
+        self.data: pd.DataFrame = pd.concat(
+            [data.iloc[:, :6], self._normalize_data(data.iloc[:, first_num_col_index:])], axis=1)
 
         self.houses: list[str] = np.sort(data[HOUSE_COLUMN].unique()).tolist()
         self.house_colors = {
@@ -40,6 +42,22 @@ class Plot:
 
         assert data[HOUSE_COLUMN].nunique(
         ) == 4, "Data must contain all four Hogwarts Houses."
+
+    def _normalize_data(self, data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Normalize the given data using min-max scaling.
+
+        Parameters:
+        data (pd.DataFrame): The input data to be normalized.
+
+        Returns:
+        pd.DataFrame: The normalized data.
+        """
+
+        normalized_data: pd.DataFrame = (
+            data - data.min()) / (data.max() - data.min())
+
+        return normalized_data
 
     def _get_valid_entries(self, values: pd.Series) -> list:
         """
