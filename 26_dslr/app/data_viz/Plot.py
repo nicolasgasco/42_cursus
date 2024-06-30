@@ -161,6 +161,10 @@ class Plot:
             x = (x + 1) % n_cols
             y = y + 1 if x == 0 else y
 
+        # Hide remaining subplots
+        for i in range(x, n_cols):
+            axs[y][i].axis("off")
+
         self._save_plot("score_distribution.png")
 
     def _plot_scatter_grid(self, n_rows: int, n_cols: int,
