@@ -20,9 +20,13 @@ def main():
         print("The file was not found.")
         exit(1)
 
+    print("My describe function:")
     describer = Describer(data)
     describer.describe()
 
+    print("\n")
+
+    print("Pandas describe function:")
     print(data.describe())
 
 
