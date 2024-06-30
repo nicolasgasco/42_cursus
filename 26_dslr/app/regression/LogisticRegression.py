@@ -14,13 +14,13 @@ HOUSE_COLOR = {
     "Hufflepuff": "YELLOW"
 }
 
-PREDICTION_PARAMS_FILE_PATH = "/dslr/data/prediction_params.csv"
+DATA_FILE_PATH = "/dslr/data/"
+PREDICTION_PARAMS_FILE_PATH = DATA_FILE_PATH + "prediction_params.csv"
 
 
 class LogisticRegression:
     def __init__(self, data: pd.DataFrame,
                  features: list[str] = [
-                     "Ancient Runes",
                      "Astronomy",
                      "Defense Against the Dark Arts",
                      "Herbology",
@@ -349,6 +349,12 @@ class LogisticRegression:
 
         predicted_house = binary_predictions.idxmax(axis=1)
 
+        # Save the binary predictions to a CSV file
+        filepath = DATA_FILE_PATH + "houses_binary.csv"
+        print(
+            f"Saving binary predictions to {Fore.GREEN}{filepath}{Style.RESET_ALL}...\n")
+        binary_predictions.to_csv(filepath, index=False)
+
         formatted_predictions = pd.DataFrame(
             predicted_house, columns=['Hogwarts House'])
 
@@ -388,10 +394,11 @@ class LogisticRegression:
 
         formatted_predictions = self._get_binary_predictions(prediction_params)
 
-        file_name = "houses.csv"
-        print(f"Saving formatted predictions to {file_name}...\n")
+        file_path = DATA_FILE_PATH + "houses.csv"
 
-        file_path = "/dslr/data/" + file_name
+        print("\n")
+        print(
+            f"Saving formatted predictions to {Fore.GREEN}{file_path}{Style.RESET_ALL}...\n")
         formatted_predictions.to_csv(
             file_path, index=True, index_label='Index')
 
