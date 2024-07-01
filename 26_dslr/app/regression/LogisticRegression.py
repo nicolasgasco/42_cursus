@@ -132,7 +132,7 @@ class LogisticRegression:
             None
         """
 
-        print("Plotting regression line for each house...\n")
+        print("Plotting regression line for each house...")
 
         feature1: str = self.features[0]
         feature2: str = self.features[1]
@@ -183,7 +183,7 @@ class LogisticRegression:
             None
         """
 
-        print("Plotting regression planes for each house...\n")
+        print("Plotting regression planes for each house...")
 
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
@@ -336,17 +336,19 @@ class LogisticRegression:
 
         predicted_house = binary_predictions.idxmax(axis=1)
 
-        # Save the binary predictions to a CSV file
-        filepath = DATA_FILE_PATH + "houses_binary.csv"
-        print(
-            f"Saving binary predictions to {Fore.GREEN}{filepath}{Style.RESET_ALL}...\n")
-        binary_predictions.to_csv(filepath, index=False, float_format='%.16f')
+        if (output is True):
+            print(table)
+            print("\n")
+
+            # Save the binary predictions to a CSV file
+            filepath = DATA_FILE_PATH + "houses_binary.csv"
+            print(
+                f"Saving binary predictions to {Fore.GREEN}{filepath}{Style.RESET_ALL}...")
+            binary_predictions.to_csv(
+                filepath, index=False, float_format='%.16f')
 
         formatted_predictions = pd.DataFrame(
             predicted_house, columns=['Hogwarts House'])
-
-        if output is True:
-            print(table)
 
         return formatted_predictions
 
@@ -383,7 +385,6 @@ class LogisticRegression:
 
         file_path = DATA_FILE_PATH + "houses.csv"
 
-        print("\n")
         print(
             f"Saving formatted predictions to {Fore.GREEN}{file_path}{Style.RESET_ALL}...\n")
         formatted_predictions.to_csv(
@@ -407,8 +408,6 @@ class LogisticRegression:
                   "Prediction parameters not found. Train the model first.",
                   Style.RESET_ALL)
             return
-
-        print("Calculating accuracy of trained model...\n")
 
         predictions = self._get_binary_predictions(
             self.prediction_params, output=False)
