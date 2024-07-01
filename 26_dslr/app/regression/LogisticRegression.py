@@ -165,7 +165,7 @@ class LogisticRegression:
         plt.savefig(filename, dpi=300)
         plt.close()
 
-        print("2D plot saved to", filename, "\n")
+        print(f"2D plot saved to {Fore.GREEN}{filename}{Style.RESET_ALL}\n")
 
     def plot_regression_3d(self, prediction_params_list: list[dict]) -> None:
         """
@@ -220,7 +220,7 @@ class LogisticRegression:
         plt.savefig(file_path, dpi=300)
         plt.close()
 
-        print("3D plot saved to", file_path, "\n")
+        print(f"3D plot saved to {Fore.GREEN}{file_path}{Style.RESET_ALL}\n")
 
     def train(self) -> None:
         """
