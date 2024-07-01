@@ -22,7 +22,6 @@ class LogisticRegression:
     def __init__(self, data: pd.DataFrame,
                  features: list[str] = [
                      "Ancient Runes",
-                     "Astronomy",
                      "Defense Against the Dark Arts",
                      "Herbology",
                  ],
