@@ -3,7 +3,14 @@ from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
 
-HOUSE_COLUMN = "Hogwarts House"
+HOUSE_COLUMN_NAME = "Hogwarts House"
+
+HOUSES_COLORS = {
+    "Gryffindor": "#ae0001",
+    "Hufflepuff": "#ecb939",
+    "Ravenclaw": "#222f5b",
+    "Slytherin": "#2a623d"
+}
 
 
 class Plot:
@@ -14,16 +21,14 @@ class Plot:
 
         self.columns = data.columns.values[first_num_col_index:]
 
+        normalized_num_data = self._normalize_data(
+            data.iloc[:, first_num_col_index:])
         self.data: pd.DataFrame = pd.concat(
-            [data.iloc[:, :6], self._normalize_data(data.iloc[:, first_num_col_index:])], axis=1)
+            [data.iloc[:, :6], normalized_num_data], axis=1)
 
-        self.houses: list[str] = np.sort(data[HOUSE_COLUMN].unique()).tolist()
-        self.house_colors = {
-            "Gryffindor": "#ae0001",
-            "Hufflepuff": "#ecb939",
-            "Ravenclaw": "#222f5b",
-            "Slytherin": "#2a623d"
-        }
+        self.houses: list[str] = np.sort(
+            data[HOUSE_COLUMN_NAME].unique()).tolist()
+        self.houses_colors = HOUSES_COLORS
 
     def _validate_inputs(self, data: pd.DataFrame):
         """
@@ -40,7 +45,7 @@ class Plot:
         assert isinstance(data, pd.DataFrame), "Data must be a DataFrame."
         assert not data.empty, "Data must not be empty."
 
-        assert data[HOUSE_COLUMN].nunique(
+        assert data[HOUSE_COLUMN_NAME].nunique(
         ) == 4, "Data must contain all four Hogwarts Houses."
 
     def _normalize_data(self, data: pd.DataFrame) -> pd.DataFrame:
@@ -116,12 +121,12 @@ class Plot:
         max_score: float = sorted_data.max()
 
         for house in self.houses:
-            is_current_house = self.data[HOUSE_COLUMN] == house
+            is_current_house = self.data[HOUSE_COLUMN_NAME] == house
             house_data: list[bool] = self._get_valid_entries(
                 sorted_data[is_current_house])
 
             plt.hist(house_data, bins=num_bins,
-                     color=self.house_colors[house], alpha=0.5)
+                     color=self.houses_colors[house], alpha=0.5)
             plt.title(f'{subject}')
             plt.xlabel("Score")
             plt.ylabel("Frequency")
@@ -164,12 +169,12 @@ class Plot:
             max_score: float = sorted_data.max()
 
             for house in self.houses:
-                is_current_house = self.data[HOUSE_COLUMN] == house
+                is_current_house = self.data[HOUSE_COLUMN_NAME] == house
                 house_data: list[bool] = self._get_valid_entries(
                     sorted_data[is_current_house])
 
                 axs[y][x].hist(house_data, bins=num_bins,
-                               color=self.house_colors[house], alpha=0.5)
+                               color=self.houses_colors[house], alpha=0.5)
                 axs[y][x].set_title(f'{subject}')
                 axs[y][x].set_xlabel("Score")
                 axs[y][x].set_ylabel("Frequency")
@@ -211,7 +216,7 @@ class Plot:
                 for data in all_data:
                     axs[y][x].scatter(data["subj_data"],
                                       data["other_subj_data"],
-                                      color=self.house_colors[data["house"]],
+                                      color=self.houses_colors[data["house"]],
                                       alpha=0.5)
                     axs[y][x].set_title(
                         f'{data["subj"]} vs {data["other_subj"]}')
@@ -248,7 +253,7 @@ class Plot:
 
                 single_plot_data: list = []
                 for house in self.houses:
-                    is_curr_house = self.data[HOUSE_COLUMN] == house
+                    is_curr_house = self.data[HOUSE_COLUMN_NAME] == house
 
                     subj_data: list[bool] = self.data[subject][is_curr_house]
                     other_subj_data = self.data[other_subject][is_curr_house]
@@ -267,12 +272,12 @@ class Plot:
         plt.figure(figsize=(10, 6))
 
         for house in self.houses:
-            is_curr_house = self.data[HOUSE_COLUMN] == house
+            is_curr_house = self.data[HOUSE_COLUMN_NAME] == house
             subj_data = self.data[subject][is_curr_house]
 
             other_subj_data = self.data[other_subject][is_curr_house]
             plt.scatter(subj_data, other_subj_data,
-                        color=self.house_colors[house],
+                        color=self.houses_colors[house],
                         alpha=0.4)
 
             plt.ylabel(subject)
@@ -310,18 +315,18 @@ class Plot:
                 is_same_subject: bool = subject == other_subject
 
                 for house in self.houses:
-                    is_curr_house = self.data[HOUSE_COLUMN] == house
+                    is_curr_house = self.data[HOUSE_COLUMN_NAME] == house
                     subj_data: list[bool] = self.data[subject][is_curr_house]
 
                     if is_same_subject:
                         axs[y][x].hist(
-                            subj_data, color=self.house_colors[house],
+                            subj_data, color=self.houses_colors[house],
                             alpha=0.4)
                         continue
 
                     other_subj_data = self.data[other_subject][is_curr_house]
                     axs[y][x].scatter(subj_data, other_subj_data,
-                                      color=self.house_colors[house],
+                                      color=self.houses_colors[house],
                                       alpha=0.4)
 
                 font_size: int = 16
