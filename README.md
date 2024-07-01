@@ -16,7 +16,7 @@ The _Outer Core_ projects I completed after completing the _Common Core_ at 42Ur
 |**[ft_linear_regression](https://github.com/nicolasgasco/42_cursus/tree/master/25_ft_linear_regression)**|Python|June 2024| Predict the price of a car by using a linear function train with a gradient descent algorithm.|70|✅|
 |**[piscine_data_science](https://github.com/nicolasgasco/42_cursus/tree/master/24_piscine_data_science)**|Python|March 2024| Data Science fundamentals.|35|❌|
 |**[piscine_python_data_science](https://github.com/nicolasgasco/42_cursus/tree/master/23_piscine_python)**|Python|March 2024| Python fundamentals for Data Science.|35|❌|
-|**[ft_libasm](https://github.com/nicolasgasco/42_cursus/tree/master/22_libasm)**|x86_64 assembly/C|February 2024| Create a small library of x86_64 NASM functions.|70|❌|
+|**[ft_libasm](https://github.com/nicolasgasco/42_cursus/tree/master/22_libasm)**|x86_64 assembly|February 2024| Create a small library of x86_64 NASM functions.|70|❌|
 
 ## Common Core
 The _Common Core_ projects I completed while being a student at 42Urduliz campus in Bilbao, Spain.
