@@ -340,7 +340,7 @@ class LogisticRegression:
         filepath = DATA_FILE_PATH + "houses_binary.csv"
         print(
             f"Saving binary predictions to {Fore.GREEN}{filepath}{Style.RESET_ALL}...\n")
-        binary_predictions.to_csv(filepath, index=False)
+        binary_predictions.to_csv(filepath, index=False, float_format='%.16f')
 
         formatted_predictions = pd.DataFrame(
             predicted_house, columns=['Hogwarts House'])
