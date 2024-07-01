@@ -6,8 +6,8 @@ import pandas as pd
 from colorama import Fore, Style
 from prettytable import PrettyTable
 
-
-HOUSE_COLOR = {
+HOUSES = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
+HOUSES_COLORS = {
     "Ravenclaw": "BLUE",
     "Gryffindor": "RED",
     "Slytherin": "GREEN",
@@ -26,10 +26,10 @@ class LogisticRegression:
                      "Herbology",
                  ],
                  should_fill_na: bool = True):
+
         self._validate_inputs(data, features)
 
-        self.houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
-
+        self.houses = HOUSES
         self.features = sorted(features)
 
         if should_fill_na:
@@ -65,7 +65,7 @@ class LogisticRegression:
         """
 
         normalized_data: pd.DataFrame = (
-            data - data.min()) / (data.max() - data.min())
+            data - data.min()) / (data.max() - data.min() + 1e-6)  # Avoid division by zero
 
         return normalized_data
 
@@ -114,32 +114,20 @@ class LogisticRegression:
 
         return 1 / (1 + np.exp(-x))
 
-    def _serialize_title(self, title: str) -> str:
-        """
-        Serialize the given title by replacing spaces with underscores
-        and converting it to lowercase.
-
-        Args:
-            title (str): The title to be serialized.
-
-        Returns:
-            str: The serialized title.
-        """
-
-        return title.lower().replace(" ", "_")
-
     def plot_regression_2d(self, prediction_params_list: list[dict]) -> None:
         """
-        Plot the regression line for each set of prediction parameters
-        in the given list.
+        Plots the regression line for each house based
+        on the given prediction parameters.
+
         Args:
             prediction_params_list (list[dict]): A list of dictionaries
-            containing prediction parameters.
+            containing the prediction parameters for each house.
                 Each dictionary should have the following keys:
-                - 'House': The house name.
-                - 'Weight_1': The weight parameter 1.
-                - 'Weight_2': The weight parameter 2.
-                - 'Bias': The bias parameter.
+                    - 'House': The name of the house.
+                    - 'Weights': A string representation of the weights
+                    for the regression line.
+                    - 'Bias': The bias term for the regression line.
+
         Returns:
             None
         """
@@ -161,7 +149,7 @@ class LogisticRegression:
                                    num=100)
             y_values = (-w[0]*x_values - b) / w[1]
 
-            plt.plot(x_values, y_values, color=HOUSE_COLOR[house].lower())
+            plt.plot(x_values, y_values, color=HOUSES_COLORS[house].lower())
 
         plt.scatter(
             self.data_x[feature1], self.data_x[feature2],
@@ -181,17 +169,15 @@ class LogisticRegression:
 
     def plot_regression_3d(self, prediction_params_list: list[dict]) -> None:
         """
-        Plot the regression line for each set of prediction parameters
-        in the given list.
+        Plot regression planes for each house in a 3D plot.
 
         Args:
             prediction_params_list (list[dict]): A list of dictionaries
-            containing prediction parameters.
+            containing prediction parameters for each house.
                 Each dictionary should have the following keys:
-                - 'House': The house name.
-                - 'Weight_1': The weight parameter 1.
-                - 'Weight_2': The weight parameter 2.
-                - 'Bias': The bias parameter.
+                - 'House': The name of the house.
+                - 'Weights': A string representation of the weight vector.
+                - 'Bias': The bias term.
 
         Returns:
             None
@@ -218,7 +204,7 @@ class LogisticRegression:
             z_values = (-w[0] * x_values - w[1] * y_values - b) / w[2]
 
             ax.plot_surface(x_values, y_values, z_values,
-                            color=HOUSE_COLOR[house].lower(),
+                            color=HOUSES_COLORS[house].lower(),
                             alpha=0.5)
 
         ax.set_xlabel(self.features[0])
@@ -238,17 +224,18 @@ class LogisticRegression:
 
     def train(self) -> None:
         """
-        Trains the model using logistic regression.
+        Trains the logistic regression model.
 
-        This method performs logistic regression on the given data
-        to train the model.
+        This method performs the training of the logistic regression model
+        using the provided features and data.
         It iterates over each house, calculates the weights and bias,
-        and saves the prediction parameters to a CSV file.
+        and saves the prediction parameters to a file.
+        Additionally, it plots the regression in 2D or 3D based
+        on the number of features.
 
         Returns:
             None
         """
-
         formatted_features: list[str] = [
             f"{Fore.YELLOW}{feature}{Style.RESET_ALL}"
             for feature in self.features]
@@ -261,7 +248,7 @@ class LogisticRegression:
 
         for house in self.houses:
             print(
-                getattr(Fore, HOUSE_COLOR[house]),
+                getattr(Fore, HOUSES_COLORS[house]),
                 f"{house.upper()}",
                 Style.RESET_ALL,
             )
@@ -335,7 +322,7 @@ class LogisticRegression:
             bias: float = prediction_params_row['Bias'].values[0]
 
             formatted_house = getattr(
-                Fore, HOUSE_COLOR[house]) + house + Style.RESET_ALL
+                Fore, HOUSES_COLORS[house]) + house + Style.RESET_ALL
 
             formatted_weights = f"{weights[:4]} (...)" if len(
                 weights) > 4 else f"{weights}"
@@ -381,8 +368,8 @@ class LogisticRegression:
 
         features = json.loads(prediction_params['Features'].values[0])
 
-        error_message = Fore.RED + "Invalid features." + Style.RESET_ALL
-        assert features == self.features, error_message
+        assert features == self.features, Fore.RED + \
+            f"{Fore.RED}Invalid features.{Style.RESET_ALL}"
 
         formatted_features = [
             f"{Fore.YELLOW}{feature}{Style.RESET_ALL}"
