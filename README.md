@@ -6,7 +6,7 @@
 ---
 
 ## Outer Core
-The _Outer Core_ projects I completed after completing the _Common Core_ at 42Urduliz in Bilbao, Spain.
+The _Outer Core_ (elective module) projects I completed after completing the _Common Core_ at 42Urduliz in Bilbao, Spain.
 
 
 |Name|Language|End date|Description|Estimated effort (h)|Validated|
@@ -19,7 +19,7 @@ The _Outer Core_ projects I completed after completing the _Common Core_ at 42Ur
 |**[ft_libasm](https://github.com/nicolasgasco/42_cursus/tree/master/22_libasm)**|x86_64 assembly|February 2024| Create a small library of x86_64 NASM functions.|70|❌|
 
 ## Common Core
-The _Common Core_ projects I completed while being a student at 42Urduliz campus in Bilbao, Spain.
+The _Common Core_ (compulsory module) projects I completed while being a student at 42Urduliz campus in Bilbao, Spain.
 
 |Name|Language|End date|Description|Estimated effort (h)|
 |----|--------|--------|-----------|----------|
