@@ -21,6 +21,7 @@ PREDICTION_PARAMS_FILE_PATH = DATA_FILE_PATH + "prediction_params.csv"
 class LogisticRegression:
     def __init__(self, data: pd.DataFrame,
                  features: list[str] = [
+                     "Ancient Runes",
                      "Astronomy",
                      "Defense Against the Dark Arts",
                      "Herbology",
