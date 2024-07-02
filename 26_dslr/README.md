@@ -9,12 +9,12 @@
 > - You will train a logistic regression that will solve classification problem.
 
 
-The aim of the project is creating a predictive model that works like Harry Potter's Sorting Hat: it predicts the House for new Hogwarts students based on their scores.
+The aim of the project is creating a predictive model that works like Harry Potter's Sorting Hat: it predicts the House for new Hogwarts students based on their scores. (Which scores, if they're new students? Anyway...).
 
 <img width="300" src="https://github.com/nicolasgasco/42_cursus/assets/73175085/e053404f-5fe5-4c4e-8947-64a60cf63724" />
 
 ## Dataset
-The given data set includes 1600 data points with following shape:
+The given data set includes 1600 data points with the following shape:
 | Index | Hogwarts House | First Name | Last Name | Birthday   | Best Hand | Arithmancy | Astronomy          | Herbology         | Defense Against the Dark Arts | Divination | Muggle Studies     | Ancient Runes       | History of Magic | Transfiguration     | Potions           | Care of Magical Creatures | Charms     | Flying |
 |-------|----------------|------------|-----------|------------|-----------|------------|--------------------|-------------------|-------------------------------|------------|--------------------|---------------------|------------------|----------------------|-------------------|---------------------------|------------|--------|
 | 0     | Ravenclaw      | Tamara     | Hsu       | 2000-03-30 | Left      | 58384.0    | -487.88608595139016 | 5.727180298550763 | 4.8788608595139005            | 4.7219999999999995 | 272.0358314131986 | 532.4842261151226   | 5.231058287281048 | 1039.7882807428462 | 3.7903690663529614 | 0.7159391270136213         | -232.79405 | -26.89 |
