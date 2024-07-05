@@ -1,7 +1,7 @@
 import pandas as pd
 
 from src.DataImporter import DataImporter
-from src.DataPrepper import DataPrepper
+from src.DataSplitter import DataSplitter
 
 
 def main():
@@ -9,7 +9,7 @@ def main():
     data_importer = DataImporter()
     data: pd.DataFrame = data_importer.import_data()
 
-    data_prepper = DataPrepper(data)
+    data_prepper = DataSplitter(data)
     print(data_prepper)
 
     data_prepper.split()

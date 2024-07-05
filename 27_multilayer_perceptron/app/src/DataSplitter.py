@@ -10,7 +10,7 @@ class InvalidPercentageError(Exception):
     pass
 
 
-class DataPrepper:
+class DataSplitter:
     def __init__(self, data: pd.DataFrame):
         def _parse_percentage() -> int:
             """
@@ -29,7 +29,7 @@ class DataPrepper:
             try:
                 settings_dir_path: str | None = os.environ.get(
                     "SETTINGS_DIR_PATH")
-                assert settings_dir_path is not None, "DataPrepper: SETTINGS_DIR_PATH environment variable not set."
+                assert settings_dir_path is not None, "DataSplitter: SETTINGS_DIR_PATH environment variable not set."
 
                 settings_file_name = settings_dir_path + "/split.json"
                 print(
@@ -38,7 +38,7 @@ class DataPrepper:
                 with open(settings_file_name) as file:
                     data = json.load(file)
             except FileNotFoundError:
-                raise FileNotFoundError("DataPrepper: Settings file missing.")
+                raise FileNotFoundError("DataSplitter: Settings file missing.")
 
             validation_percentage_str: str = data['validation_percentage']
             try:
@@ -46,19 +46,19 @@ class DataPrepper:
                 if percentage < 0 or percentage > 90:
                     raise InvalidPercentageError(
 
-                        "DataPrepper: Invalid percentage value.")
+                        "DataSplitter: Invalid percentage value.")
                 return percentage
             except ValueError:
-                raise ValueError("DataPrepper: Invalid percentage value.")
+                raise ValueError("DataSplitter: Invalid percentage value.")
             except KeyError:
                 raise KeyError(
 
-                    "DataPrepper: validation_percentage key missing.")
+                    "DataSplitter: validation_percentage key missing.")
 
-        assert data is not None, "DataPrepper: data is None."
+        assert data is not None, "DataSplitter: data is None."
 
         data_dir_path = os.environ.get("DATA_DIR_PATH")
-        assert data_dir_path is not None, "DataPrepper: DATA_DIR_PATH environment variable not set."
+        assert data_dir_path is not None, "DataSplitter: DATA_DIR_PATH environment variable not set."
         self._data_dir_path: str = data_dir_path
 
         self._validation_percentage: int = _parse_percentage()
@@ -69,7 +69,7 @@ class DataPrepper:
         self._train_set: pd.DataFrame | None = None
 
     def __str__(self) -> str:
-        representation = "DataPrepper("
+        representation = "DataSplitter("
         representation += f"validation_percentage={self._validation_percentage}, "
         representation += f"data={self._data.shape[0]}, "
         representation += f"train_set={self._train_set.shape[0] if self._train_set is not None else None}, "
@@ -87,7 +87,7 @@ class DataPrepper:
             AssertionError: If the validation percentage is None.
 
         """
-        assert self._validation_percentage is not None, "DataPrepper: validation_percentage is None."
+        assert self._validation_percentage is not None, "DataSplitter: validation_percentage is None."
 
         print("Splitting data into training and validation sets...\n")
 
@@ -107,7 +107,7 @@ class DataPrepper:
 
         if self._train_set is None or self._validation_set is None:
             raise ValueError(
-                "DataPrepper: split method must be called before saving to CSV.")
+                "DataSplitter: split method must be called before saving to CSV.")
 
         print("Saving train and validation sets to CSV files...")
 
