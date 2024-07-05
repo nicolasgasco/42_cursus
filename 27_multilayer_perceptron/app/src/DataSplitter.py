@@ -1,9 +1,8 @@
-import json as json
-import re
 import pandas as pd
 import os as os
 
 from colorama import Fore, Style
+from src.SettingsImporter import SettingsImporter
 
 
 class InvalidPercentageError(Exception):
@@ -13,34 +12,10 @@ class InvalidPercentageError(Exception):
 class DataSplitter:
     def __init__(self, data: pd.DataFrame):
         def _parse_percentage() -> int:
-            """
-            Parses the validation percentage from the settings file.
+            settings_importer = SettingsImporter("split.json")
+            settings = settings_importer.import_settings()
 
-            Returns:
-                int: The validation percentage value.
-
-            Raises:
-                FileNotFoundError: If the settings file is missing.
-                InvalidPercentageError: If the percentage value is invalid.
-                ValueError: If the percentage value is not an integer.
-                KeyError: If the 'validation_percentage' key is missing in the settings file.
-            """
-
-            try:
-                settings_dir_path: str | None = os.environ.get(
-                    "SETTINGS_DIR_PATH")
-                assert settings_dir_path is not None, "DataSplitter: SETTINGS_DIR_PATH environment variable not set."
-
-                settings_file_name = settings_dir_path + "/split.json"
-                print(
-                    f"Importing settings from {Fore.YELLOW}{settings_dir_path}/split.json{Style.RESET_ALL}...\n")
-
-                with open(settings_file_name) as file:
-                    data = json.load(file)
-            except FileNotFoundError:
-                raise FileNotFoundError("DataSplitter: Settings file missing.")
-
-            validation_percentage_str: str = data['validation_percentage']
+            validation_percentage_str: str = settings['validation_percentage']
             try:
                 percentage = int(validation_percentage_str)
                 if percentage < 0 or percentage > 90:

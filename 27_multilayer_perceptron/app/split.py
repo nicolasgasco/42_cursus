@@ -5,7 +5,6 @@ from src.DataSplitter import DataSplitter
 
 
 def main():
-
     data_importer = DataImporter()
     data: pd.DataFrame = data_importer.import_data()
 
