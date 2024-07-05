@@ -1,3 +1,4 @@
+import os as os
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -13,6 +14,15 @@ class DataPlotter:
         assert self._data is not None, "DataPlotter: data is None."
 
     def histograms(self) -> None:
+        """
+        Create histograms for numeric data.
+
+        This method creates histograms for each numeric column in the dataset.
+        The histograms are saved as a PNG file.
+
+        Returns:
+            None
+        """
         print("Creating histograms...")
 
         numeric_data = self._data.iloc[:, 2:]
@@ -41,7 +51,7 @@ class DataPlotter:
             axs[i].axis('off')
 
         plt.tight_layout()
-        file_name = f'{PLOTS_DIR}/histograms.png'
+        file_name = os.path.join(PLOTS_DIR, 'histograms.png')
         plt.savefig(file_name)
         plt.close()
 
@@ -72,10 +82,10 @@ class DataPlotter:
                             corner=True)
 
         print("Saving pair plot...")
-        filename = PLOTS_DIR + "/pair_plot.png"
+        filename = os.path.join(PLOTS_DIR, "pair_plot.png")
         plot.savefig(filename)
 
-        print(f"Pair plot saved to {Fore.GREEN}{filename}{Style.RESET_ALL}")
+        print(f"Pair plot saved to {Fore.YELLOW}{filename}{Style.RESET_ALL}")
 
     def correlation_matrix(self) -> None:
         """
@@ -101,8 +111,8 @@ class DataPlotter:
         plt.tight_layout()
 
         print("Saving correlation matrix plot...")
-        filename = PLOTS_DIR + "/correlation_matrix.png"
+        filename = os.path.join(PLOTS_DIR, "correlation_matrix.png")
         plot.get_figure().savefig(filename)
 
         print(
-            f"Correlation matrix plot saved to {Fore.GREEN}{filename}{Style.RESET_ALL}")
+            f"Correlation matrix plot saved to {Fore.YELLOW}{filename}{Style.RESET_ALL}")

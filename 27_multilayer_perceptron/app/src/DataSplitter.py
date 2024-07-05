@@ -32,7 +32,7 @@ class DataSplitter:
 
         assert data is not None, "DataSplitter: data is None."
 
-        data_dir_path = os.environ.get("DATA_DIR_PATH")
+        data_dir_path: str | None = os.environ.get("DATA_DIR_PATH")
         assert data_dir_path is not None, "DataSplitter: DATA_DIR_PATH environment variable not set."
         self._data_dir_path: str = data_dir_path
 
@@ -86,12 +86,14 @@ class DataSplitter:
 
         print("Saving train and validation sets to CSV files...")
 
-        train_set_path = self._data_dir_path + "/train_set.csv"
+        train_set_path: str | None = os.environ.get("TRAIN_PATH")
+        assert train_set_path is not None, "DataSplitter: TRAIN_PATH environment variable not set."
         self._train_set.to_csv(train_set_path, index=False)
         print(
             f"Train set saved to {Fore.YELLOW}{train_set_path}{Style.RESET_ALL}.")
 
-        validation_set_path = self._data_dir_path + "/validation_set.csv"
+        validation_set_path: str | None = os.environ.get("TEST_PATH")
+        assert validation_set_path is not None, "DataSplitter: TEST_PATH environment variable not set."
         self._validation_set.to_csv(validation_set_path, index=False)
         print(
             f"Validation set saved to {Fore.YELLOW}{validation_set_path}{Style.RESET_ALL}.\n")

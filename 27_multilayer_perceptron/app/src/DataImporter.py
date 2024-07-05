@@ -4,7 +4,7 @@ import pandas as pd
 
 class DataImporter:
     def __init__(self):
-        data_path = os.environ.get("DATA_PATH")
+        data_path: str | None = os.environ.get("DATA_PATH")
         assert data_path is not None, "DataImporter: DATA_PATH environment variable not set."
 
         self._data_path: str = data_path
@@ -22,7 +22,7 @@ class DataImporter:
         """
 
         try:
-            text_field_types = {0: str, 1: str}
+            text_field_types: dict = {0: str, 1: str}
             data: pd.DataFrame = pd.read_csv(
                 self._data_path, header=None, dtype=text_field_types)
 
@@ -41,14 +41,43 @@ class DataImporter:
         """
 
         # Exclude the first non-numeric column
-        data_to_normalize = self._data.iloc[:, 2:]
+        data_to_normalize: pd.DataFrame = self._data.iloc[:, 2:]
 
-        # Apply min-max normalization manually
-        normalized_data = (data_to_normalize - data_to_normalize.min()) / \
+        # Min-max normalization
+        normalized_data: pd.DataFrame = (data_to_normalize - data_to_normalize.min()) / \
             (data_to_normalize.max() - data_to_normalize.min())
 
-        # # Concatenate the first column with the normalized data
-        result = pd.concat([self._data.iloc[:, :2], normalized_data], axis=1)
+        result: pd.DataFrame = pd.concat(
+            [self._data.iloc[:, :2], normalized_data], axis=1)
 
-        # return result
         return result
+
+    @staticmethod
+    def import_train_data() -> pd.DataFrame:
+        """
+        Imports the training data from the specified path.
+
+        Returns:
+            pd.DataFrame: The imported training data.
+        """
+        train_data_path: str | None = os.environ.get("TRAIN_PATH")
+        assert train_data_path is not None, "TRAIN_PATH environment variable not set."
+
+        train_data: pd.DataFrame = pd.read_csv(train_data_path)
+
+        return train_data
+
+    @staticmethod
+    def import_test_data() -> pd.DataFrame:
+        """
+        Imports the test data from the specified path.
+
+        Returns:
+            pd.DataFrame: The imported test data.
+        """
+        test_data_path: str | None = os.environ.get("TEST_PATH")
+        assert test_data_path is not None, "TEST_PATH environment variable not set."
+
+        test_data: pd.DataFrame = pd.read_csv(test_data_path)
+
+        return test_data

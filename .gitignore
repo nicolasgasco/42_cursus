@@ -6877,3 +6877,5 @@ __pycache__
 27_multilayer_perceptron/data/train_set.csv
 27_multilayer_perceptron/data/validation_set.csv
 26_dslr/data/houses_binary.csv
+27_multilayer_perceptron/data/data_test.csv
+27_multilayer_perceptron/data/data_train.csv
