@@ -8,6 +8,7 @@ def main():
     train_data: pd.DataFrame = DataImporter.import_train_data()
 
     multilayer_perceptron = MultilayerPerceptron(train_data)
+    print(multilayer_perceptron)
 
 
 if __name__ == "__main__":

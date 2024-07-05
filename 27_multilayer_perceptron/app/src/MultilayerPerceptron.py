@@ -40,3 +40,14 @@ class MultilayerPerceptron:
         self._outputs_columns: list[str] = settings["outputs_columns"]
         self._hidden_layers: int = settings["hidden_layers"]
         self._hidden_layer_neurons: int = settings["hidden_layer_neurons"]
+
+    def __str__(self) -> str:
+        representation = "MultilayerPerceptron("
+        representation += f"inputs_columns={self._inputs_columns}, "
+        representation += f"outputs={self._outputs}, "
+        representation += f"outputs_columns={self._outputs_columns}, "
+        representation += f"hidden_layers={self._hidden_layers}, "
+        representation += f"hidden_layer_neurons={self._hidden_layer_neurons})"
+        representation += "\n"
+
+        return representation
