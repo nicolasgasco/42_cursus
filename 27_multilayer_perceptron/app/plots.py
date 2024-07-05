@@ -10,11 +10,15 @@ def main():
 
     plotter = DataPlotter(normalized_data)
 
-    print("Which plot do you want to create?\n")
-    print("a) Histograms\nb) Pair plot\nc) Correlation matrix\n")
+    print("Which plot do you want to create")
+    print("\n")
+
+    print("a) Histograms")
+    print("b) Pair plot")
+    print("c) Correlation matrix")
+    print("\n")
 
     user_choice = input("Enter your choice: ")
-
     print("\n")
 
     if user_choice == "a":
