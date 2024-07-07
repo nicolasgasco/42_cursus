@@ -1,8 +1,8 @@
 {
-  "inputs_columns": ["24", "29"],
+  "inputs_columns": ["4", "8", "9"],
   "outputs": ["M", "B"],
   "outputs_columns": ["1"],
-  "hidden_layers": 1,
-  "hidden_layer_neurons": 2,
+  "hidden_layers": 2,
+  "hidden_layer_neurons": 5,
   "learning_rate": 0.1
 }
