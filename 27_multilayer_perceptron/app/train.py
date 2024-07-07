@@ -10,6 +10,9 @@ def main():
     multilayer_perceptron = MultilayerPerceptron(train_data)
     print(multilayer_perceptron)
 
+    # Full features ["24", "29", "4", "8", "9"],
+    multilayer_perceptron.train()
+
 
 if __name__ == "__main__":
     main()
