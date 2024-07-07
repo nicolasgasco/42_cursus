@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 
+from colorama import Fore, Style
 from src.SettingsImporter import SettingsImporter
 from src.Neuron import Neuron
 
@@ -62,50 +63,50 @@ class MultilayerPerceptron:
 
     def train(self) -> None:
         x = self._train_data[self._inputs_columns]
-        print("\n")
 
-        print(
-            f"My model has {self._hidden_layers_count} hidden layers with {self._hidden_layer_neurons} neurons")
-        print("\n")
+        print(f"{Fore.YELLOW}INPUT LAYER{Style.RESET_ALL}")
+        print(f"\n{x}\n")
 
-        # Initialize the hidden layers
+        weights_num = len(x.columns)
+
         hidden_layers = []
         for i in range(self._hidden_layers_count):
-            print(f"Initializing hidden layer {i}")
-            weights_num = len(x.columns)
-            hidden_layer = [Neuron([self._random_float() * weights_num],
+            hidden_layer = [Neuron([self._random_float()] * weights_num,
                                    self._random_float())
                             for _ in range(self._hidden_layer_neurons)]
             hidden_layers.append(hidden_layer)
-            print(hidden_layer)
-        print("\n")
+            weights_num = self._hidden_layer_neurons
 
-        # Initialize the output layer
-        print("Initializing output layer")
-        weights_num = self._hidden_layer_neurons
-        output_layer = [Neuron([self._random_float()] * weights_num,
-                               self._random_float())
-                        for _ in range(len(self._outputs))]
-        print(output_layer)
-        print("\n")
-
-        neurons_input = x
+        neurons_input: pd.DataFrame = x
+        hidden_layer_outputs = pd.DataFrame()
         for i, hidden_layer in enumerate(hidden_layers):
-            print(f"Hidden layer {i}")
-            print("\n")
+            print(f"{Fore.YELLOW}HIDDEN LAYER {i}{Style.RESET_ALL}")
+            print(neurons_input)
 
             neurons_outputs = []
             for i, neuron in enumerate(hidden_layer):
-                print(f"\tNeuron {i}: {neuron}")
-                print(
-                    f"\tInput is: {len(neurons_input)} data points with shape {neurons_input.shape}")
+                print(f"\t{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
                 neuron_output = neuron.generate_output(neurons_input)
                 print("\tOutput is: ", neuron_output)
                 neurons_outputs.append(neuron_output)
                 print("\n")
 
-            neurons_input = neuron_output
-            # print(f"Hidden layer outputs: {neurons_outputs[:3]}")
+            neurons_input = pd.DataFrame(neurons_outputs).T
+            hidden_layer_outputs = pd.DataFrame(neurons_outputs).T
+
+            print(hidden_layer_outputs)
+            print("\n")
+
+        output_layer = [Neuron([self._random_float()] * weights_num,
+                               self._random_float())
+                        for _ in range(len(self._outputs))]
+
+        print(f"{Fore.YELLOW}OUTPUT LAYER{Style.RESET_ALL}")
+        for i, neuron in enumerate(output_layer):
+            print(f"\t{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
+            neuron_output = neuron.generate_output(hidden_layer_outputs)
+            print("\tOutput is: ", neuron_output)
+            print("\n")
 
     # Use later, for now it's easier to see with 0.0
 
