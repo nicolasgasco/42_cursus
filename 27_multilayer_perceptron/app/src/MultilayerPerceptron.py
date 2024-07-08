@@ -4,6 +4,7 @@ import pandas as pd
 from colorama import Fore, Style
 from src.SettingsImporter import SettingsImporter
 from src.Neuron import Neuron
+from src.OutputNeuron import OutputNeuron
 
 
 class MultilayerPerceptron:
@@ -97,18 +98,22 @@ class MultilayerPerceptron:
             print(hidden_layer_outputs)
             print("\n")
 
-        output_layer = [Neuron([self._random_float()] * weights_num,
-                               self._random_float())
+        output_layer = [OutputNeuron([self._random_float()] * weights_num,
+                                     self._random_float())
                         for _ in range(len(self._outputs))]
 
         print(f"{Fore.YELLOW}OUTPUT LAYER{Style.RESET_ALL}")
+
+        output_layer_neurons_output = []
         for i, neuron in enumerate(output_layer):
             print(f"\t{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
             neuron_output = neuron.generate_output(hidden_layer_outputs)
-            print("\tOutput is: ", neuron_output)
+            output_layer_neurons_output.append(neuron_output)
+            print(f"\t{neuron_output}")
             print("\n")
 
-    # Use later, for now it's easier to see with 0.0
+        output_layer_outputs = pd.DataFrame(output_layer_neurons_output).T
+        print(OutputNeuron.softmax(output_layer_outputs))
 
     def _random_float(self) -> float:
         num: float = np.random.randn() * 0.01

@@ -39,11 +39,24 @@ class Neuron:
             pd.DataFrame: The output of the neuron as a pandas DataFrame.
         """
 
-        weighted_sum: pd.DataFrame = (inputs @ self.weights) + self.bias
+        weighted_sum: pd.DataFrame = self._weighted_sum(inputs)
 
         output = weighted_sum.apply(self._activation_sigmoid)
 
         return output
+
+    def _weighted_sum(self, inputs: pd.DataFrame):
+        """
+        Calculates the weighted sum of the inputs.
+
+        Args:
+            inputs (pd.DataFrame): The input data as a pandas DataFrame.
+
+        Returns:
+            pd.DataFrame: The weighted sum of the inputs.
+        """
+
+        return (inputs @ self.weights) + self.bias
 
     def _activation_sigmoid(self, x: float):
         """
