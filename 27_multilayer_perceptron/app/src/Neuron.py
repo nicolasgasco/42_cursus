@@ -1,11 +1,12 @@
 import math as math
 import pandas as pd
+import numpy as np
 
 
 class Neuron:
     def __init__(self, weights, bias):
-        self.bias = bias
-        self.weights = weights
+        self.bias: float = bias
+        self.weights: list[float] = weights
 
     def __repr__(self) -> str:
         """
@@ -28,24 +29,25 @@ class Neuron:
 
         return representation
 
-    def generate_output(self, inputs: pd.DataFrame):
+    def generate_output(self, inputs: pd.DataFrame) -> np.ndarray:
         """
-        Generates the output of the neuron based on the given inputs.
+        Generates the output of the neuron for the given inputs.
 
         Args:
             inputs (pd.DataFrame): The input data as a pandas DataFrame.
 
         Returns:
-            pd.DataFrame: The output of the neuron as a pandas DataFrame.
+            np.ndarray: The generated output as a numpy array.
         """
 
-        weighted_sum: pd.DataFrame = self._weighted_sum(inputs)
+        weighted_sum = self._weighted_sum(inputs)
 
-        output = weighted_sum.apply(self._activation_sigmoid)
+        weighted_sum = np.array([self._activation_sigmoid(x)
+                                for x in weighted_sum])
 
-        return output
+        return weighted_sum.reshape(-1, 1)
 
-    def _weighted_sum(self, inputs: pd.DataFrame):
+    def _weighted_sum(self, inputs: pd.DataFrame) -> np.ndarray:
         """
         Calculates the weighted sum of the inputs.
 
@@ -53,10 +55,21 @@ class Neuron:
             inputs (pd.DataFrame): The input data as a pandas DataFrame.
 
         Returns:
-            pd.DataFrame: The weighted sum of the inputs.
+            np.ndarray: The calculated weighted sum.
         """
 
-        return (inputs @ self.weights) + self.bias
+        result = np.array([])
+        for input in inputs:
+            if len(input) != len(self.weights):
+                raise ValueError(
+                    "The number of weights must match the number of inputs.")
+
+            dot_product = np.dot(self.weights, input)
+            weighted_sum = dot_product + self.bias
+
+            result = np.append(result, weighted_sum)
+
+        return result
 
     def _activation_sigmoid(self, x: float):
         """

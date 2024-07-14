@@ -32,7 +32,7 @@ class DataImporter:
         except FileNotFoundError:
             raise FileNotFoundError("DataImporter: Dataset file not found.")
 
-    def normalize_data(self) -> pd.DataFrame:
+    def normalize_data(data: pd.DataFrame) -> pd.DataFrame:
         """
         Normalizes the data.
 
@@ -41,14 +41,14 @@ class DataImporter:
         """
 
         # Exclude the first non-numeric column
-        data_to_normalize: pd.DataFrame = self._data.iloc[:, 2:]
+        data_to_normalize: pd.DataFrame = data.iloc[:, 2:]
 
         # Min-max normalization
         normalized_data: pd.DataFrame = (data_to_normalize - data_to_normalize.min()) / \
             (data_to_normalize.max() - data_to_normalize.min())
 
         result: pd.DataFrame = pd.concat(
-            [self._data.iloc[:, :2], normalized_data], axis=1)
+            [data.iloc[:, :2], normalized_data], axis=1)
 
         return result
 

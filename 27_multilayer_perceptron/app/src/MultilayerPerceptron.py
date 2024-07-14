@@ -63,7 +63,7 @@ class MultilayerPerceptron:
         return representation
 
     def train(self) -> None:
-        x = self._train_data[self._inputs_columns]
+        x: pd.DataFrame = self._train_data[self._inputs_columns]
 
         print(f"{Fore.YELLOW}INPUT LAYER{Style.RESET_ALL}")
         print(f"\n{x}\n")
@@ -78,25 +78,25 @@ class MultilayerPerceptron:
             hidden_layers.append(hidden_layer)
             weights_num = self._hidden_layer_neurons
 
-        neurons_input: pd.DataFrame = x
-        hidden_layer_outputs = pd.DataFrame()
+        neurons_input: np.ndarray = x.to_numpy(dtype=float)
+        hidden_layer_outputs = np.array([])
         for i, hidden_layer in enumerate(hidden_layers):
             print(f"{Fore.YELLOW}HIDDEN LAYER {i}{Style.RESET_ALL}")
-            print(neurons_input)
+            print(f"Hidden layer inputs: {neurons_input}\n")
 
-            neurons_outputs = []
+            neurons_outputs = np.array([])
             for i, neuron in enumerate(hidden_layer):
                 print(f"\t{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
                 neuron_output = neuron.generate_output(neurons_input)
                 print("\tOutput is: ", neuron_output)
-                neurons_outputs.append(neuron_output)
+                neurons_outputs = np.append(
+                    neurons_outputs, neuron_output).reshape(1, -1)
                 print("\n")
 
-            neurons_input = pd.DataFrame(neurons_outputs).T
-            hidden_layer_outputs = pd.DataFrame(neurons_outputs).T
+            neurons_input = neurons_outputs
+            hidden_layer_outputs = neurons_outputs
 
-            print(hidden_layer_outputs)
-            print("\n")
+            print(f"Hidden layer outputs: {hidden_layer_outputs}\n")
 
         output_layer = [OutputNeuron([self._random_float()] * weights_num,
                                      self._random_float())
@@ -104,15 +104,17 @@ class MultilayerPerceptron:
 
         print(f"{Fore.YELLOW}OUTPUT LAYER{Style.RESET_ALL}")
 
-        output_layer_neurons_output = []
+        output_layer_neurons_output = np.array([])
         for i, neuron in enumerate(output_layer):
             print(f"\t{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
             neuron_output = neuron.generate_output(hidden_layer_outputs)
-            output_layer_neurons_output.append(neuron_output)
-            print(f"\t{neuron_output}")
+            output_layer_neurons_output = np.append(
+                output_layer_neurons_output, neuron_output).reshape(1, -1)
+
+            print("\tOutput is: ", neuron_output)
             print("\n")
 
-        output_layer_outputs = pd.DataFrame(output_layer_neurons_output).T
+        output_layer_outputs = output_layer_neurons_output
         print(OutputNeuron.softmax(output_layer_outputs))
 
     def _random_float(self) -> float:
