@@ -9,7 +9,7 @@ def main():
     train_data = DataImporter.normalize_data(train_data)
 
     # pass down only first row of data set for now
-    multilayer_perceptron = MultilayerPerceptron(train_data.iloc[0:1])
+    multilayer_perceptron = MultilayerPerceptron(train_data)
     print(multilayer_perceptron)
 
     # Full features ["24", "29", "4", "8", "9"],

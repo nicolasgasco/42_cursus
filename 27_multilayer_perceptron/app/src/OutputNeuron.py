@@ -8,32 +8,31 @@ class OutputNeuron(Neuron):
     def __init__(self, weights, bias):
         super().__init__(weights, bias)
 
-    def generate_output(self, inputs: np.ndarray) -> np.ndarray:
+    def generate_output(self, inputs: pd.DataFrame) -> pd.DataFrame:
         """
         Generates the output of the output neuron based on the given inputs.
 
         Args:
-          inputs (np.ndarray): The input values for the neuron.
+          inputs (pd.DataFrame): The input data for the output neuron.
 
         Returns:
-          np.ndarray: The generated output of the neuron.
+          pd.DataFrame: The generated output of the output neuron.
         """
 
-        weighted_sum = self._weighted_sum(inputs)
+        weighted_sum: pd.DataFrame = self._weighted_sum(inputs)
 
-        return weighted_sum.reshape(-1, 1)
+        return weighted_sum
 
     @staticmethod
-    def softmax(x: np.ndarray):
+    def softmax(x: pd.DataFrame) -> pd.DataFrame:
         """
-        Applies the softmax function to the input array.
+        Applies the softmax function to the input DataFrame.
 
         Parameters:
-        x (np.ndarray): Input array.
+        x (pd.DataFrame): The input DataFrame.
 
         Returns:
-        np.ndarray: Array with softmax applied to each element.
+        pd.DataFrame: The DataFrame with softmax applied to each element.
         """
-
-        e_x = np.exp(x - np.max(x))
-        return e_x / e_x.sum(axis=1).reshape(-1, 1)
+        e_row = np.exp(x - np.max(x))
+        return e_row / e_row.sum()
