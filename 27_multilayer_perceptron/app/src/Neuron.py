@@ -4,8 +4,23 @@ import pandas as pd
 
 class Neuron:
     def __init__(self, weights, bias):
-        self.bias: float = bias
-        self.weights: list[float] = weights
+        self.__bias: float = bias
+        self.__weights: list[float] = weights
+
+        self.__output: pd.DataFrame = pd.DataFrame()
+
+    @property
+    def bias(self) -> float:
+        return self.__bias
+
+    @property
+    def weights(self) -> list[float]:
+        return self.__weights
+
+    @property
+    def output(self) -> pd.DataFrame:
+
+        return self.__output
 
     def __repr__(self) -> str:
         """
@@ -20,11 +35,11 @@ class Neuron:
         """
 
         representation = "Neuron("
-        if (len(self.weights) > 3):
-            representation += f"weights={self.weights[:3]}... , "
+        if (len(self.__weights) > 3):
+            representation += f"weights={self.__weights[:3]}... , "
         else:
-            representation += f"weights={self.weights}, "
-        representation += f"bias={self.bias})"
+            representation += f"weights={self.__weights}, "
+        representation += f"bias={self.__bias})"
 
         return representation
 
@@ -41,7 +56,9 @@ class Neuron:
 
         weighted_sum: pd.DataFrame = self._weighted_sum(inputs)
 
-        result = weighted_sum.apply(lambda x: self._activation_sigmoid(x))
+        result = weighted_sum.apply(lambda x: self.__activation_sigmoid(x))
+
+        self.__output = result
 
         return result
 
@@ -57,14 +74,14 @@ class Neuron:
         """
 
         err_message = "Number of weights should be equal to number of inputs."
-        assert len(inputs.columns) == len(self.weights), err_message
+        assert len(inputs.columns) == len(self.__weights), err_message
 
-        dot_product = inputs.dot(self.weights)
-        weighted_sum = dot_product + self.bias
+        dot_product = inputs.dot(self.__weights)
+        weighted_sum = dot_product + self.__bias
 
         return weighted_sum
 
-    def _activation_sigmoid(self, x: float):
+    def __activation_sigmoid(self, x: float):
         """
         Applies the sigmoid activation function to the input value.
 
@@ -77,7 +94,7 @@ class Neuron:
 
         return 1 / (1 + math.exp(-x))
 
-    def _activation_relu(self, x: float):
+    def __activation_relu(self, x: float):
         """
         Applies the Rectified Linear Unit (ReLU) activation function
         to the input.

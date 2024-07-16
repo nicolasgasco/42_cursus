@@ -10,8 +10,8 @@ PLOTS_DIR = "/multilayer_perceptron/app/plots"
 
 class DataPlotter:
     def __init__(self, data: pd.DataFrame):
-        self._data: pd.DataFrame = data
-        assert self._data is not None, "DataPlotter: data is None."
+        self.__data: pd.DataFrame = data
+        assert self.__data is not None, "DataPlotter: data is None."
 
     def histograms(self) -> None:
         """
@@ -25,22 +25,22 @@ class DataPlotter:
         """
         print("Creating histograms...")
 
-        numeric_data = self._data.iloc[:, 2:]
+        numeric_data = self.__data.iloc[:, 2:]
 
         num_plots = len(numeric_data.columns)
         num_columns = 8
         num_rows = np.ceil(num_plots / num_columns).astype(int)
 
-        fig, axs = plt.subplots(num_rows, num_columns, figsize=(
+        _, axs = plt.subplots(num_rows, num_columns, figsize=(
             24, 4*num_rows))
 
         axs = axs.flatten()
 
         for i, column in enumerate(numeric_data.columns):
             ax = axs[i]
-            ax.hist(self._data[self._data.iloc[:, 1] == 'M']
+            ax.hist(self.__data[self.__data.iloc[:, 1] == 'M']
                     [column], color='red', alpha=0.5, label='M')
-            ax.hist(self._data[self._data.iloc[:, 1] == 'B']
+            ax.hist(self.__data[self.__data.iloc[:, 1] == 'B']
                     [column], color='blue', alpha=0.5, label='B')
             ax.set_title(column)
             ax.set_xlabel(column)
@@ -72,9 +72,9 @@ class DataPlotter:
 
         print("Creating pair plot...")
 
-        column_name = self._data.columns[1]
-        column_unique = self._data[column_name].unique()
-        plot = sns.pairplot(self._data, hue=column_name,
+        column_name = self.__data.columns[1]
+        column_unique = self.__data[column_name].unique()
+        plot = sns.pairplot(self.__data, hue=column_name,
                             palette={column_unique[0]: 'red',
                                      column_unique[1]: 'blue'},
                             plot_kws={'alpha': 0.5},
@@ -100,7 +100,7 @@ class DataPlotter:
 
         print("Creating correlation matrix plot...")
 
-        numeric_values = self._data.iloc[:, 2:]
+        numeric_values = self.__data.iloc[:, 2:]
 
         correlation_matrix = numeric_values.corr()
 

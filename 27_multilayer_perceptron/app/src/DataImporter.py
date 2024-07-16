@@ -7,8 +7,8 @@ class DataImporter:
         data_path: str | None = os.environ.get("DATA_PATH")
         assert data_path is not None, "DataImporter: DATA_PATH environment variable not set."
 
-        self._data_path: str = data_path
-        self._data: pd.DataFrame = pd.DataFrame()
+        self.__data_path: str = data_path
+        self.__data: pd.DataFrame = pd.DataFrame()
 
     def import_data(self) -> pd.DataFrame:
         """
@@ -24,15 +24,15 @@ class DataImporter:
         try:
             text_field_types: dict = {0: str, 1: str}
             data: pd.DataFrame = pd.read_csv(
-                self._data_path, header=None, dtype=text_field_types)
+                self.__data_path, header=None, dtype=text_field_types)
 
-            self._data = data
+            self.__data = data
 
-            return self._data
+            return self.__data
         except FileNotFoundError:
             raise FileNotFoundError("DataImporter: Dataset file not found.")
 
-    def normalize_data(data: pd.DataFrame) -> pd.DataFrame:
+    def normalize_data(self) -> pd.DataFrame:
         """
         Normalizes the data.
 
@@ -41,14 +41,14 @@ class DataImporter:
         """
 
         # Exclude the first non-numeric column
-        data_to_normalize: pd.DataFrame = data.iloc[:, 2:]
+        data_to_normalize: pd.DataFrame = self.__data.iloc[:, 2:]
 
         # Min-max normalization
         normalized_data: pd.DataFrame = (data_to_normalize - data_to_normalize.min()) / \
             (data_to_normalize.max() - data_to_normalize.min())
 
         result: pd.DataFrame = pd.concat(
-            [data.iloc[:, :2], normalized_data], axis=1)
+            [self.__data.iloc[:, :2], normalized_data], axis=1)
 
         return result
 

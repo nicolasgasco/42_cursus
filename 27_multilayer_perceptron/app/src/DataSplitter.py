@@ -34,21 +34,21 @@ class DataSplitter:
 
         data_dir_path: str | None = os.environ.get("DATA_DIR_PATH")
         assert data_dir_path is not None, "DataSplitter: DATA_DIR_PATH environment variable not set."
-        self._data_dir_path: str = data_dir_path
+        self.___data_dir_path: str = data_dir_path
 
-        self._validation_percentage: int = _parse_percentage()
+        self.__validation_percentage: int = _parse_percentage()
 
-        self._data: pd.DataFrame = data
+        self.__data: pd.DataFrame = data
 
-        self._validation_set: pd.DataFrame | None = None
-        self._train_set: pd.DataFrame | None = None
+        self.__validation_set: pd.DataFrame | None = None
+        self.__train_set: pd.DataFrame | None = None
 
     def __str__(self) -> str:
         representation = "DataSplitter("
-        representation += f"validation_percentage={self._validation_percentage}, "
-        representation += f"data={self._data.shape[0]}, "
-        representation += f"train_set={self._train_set.shape[0] if self._train_set is not None else None}, "
-        representation += f"validation_set={self._validation_set.shape[0] if self._validation_set is not None else None})"
+        representation += f"validation_percentage={self.__validation_percentage}, "
+        representation += f"data={self.__data.shape[0]}, "
+        representation += f"train_set={self.__train_set.shape[0] if self.__train_set is not None else None}, "
+        representation += f"validation_set={self.__validation_set.shape[0] if self.__validation_set is not None else None})"
         representation += "\n"
 
         return representation
@@ -62,15 +62,15 @@ class DataSplitter:
             AssertionError: If the validation percentage is None.
 
         """
-        assert self._validation_percentage is not None, "DataSplitter: validation_percentage is None."
+        assert self.__validation_percentage is not None, "DataSplitter: validation_percentage is None."
 
         print("Splitting data into training and validation sets...\n")
 
-        total_rows = self._data.shape[0]
-        upper_bound = total_rows * self._validation_percentage // 100 - 1
+        total_rows = self.__data.shape[0]
+        upper_bound = total_rows * self.__validation_percentage // 100 - 1
 
-        self._validation_set = self._data.iloc[:upper_bound]
-        self._train_set = self._data.iloc[upper_bound:]
+        self.__validation_set = self.__data.iloc[:upper_bound]
+        self.__train_set = self.__data.iloc[upper_bound:]
 
     def save_to_csv(self) -> None:
         """
@@ -80,7 +80,7 @@ class DataSplitter:
             ValueError: If the train or validation set is not set.
         """
 
-        if self._train_set is None or self._validation_set is None:
+        if self.__train_set is None or self.__validation_set is None:
             raise ValueError(
                 "DataSplitter: split method must be called before saving to CSV.")
 
@@ -88,21 +88,12 @@ class DataSplitter:
 
         train_set_path: str | None = os.environ.get("TRAIN_PATH")
         assert train_set_path is not None, "DataSplitter: TRAIN_PATH environment variable not set."
-        self._train_set.to_csv(train_set_path, index=False)
+        self.__train_set.to_csv(train_set_path, index=False)
         print(
             f"Train set saved to {Fore.YELLOW}{train_set_path}{Style.RESET_ALL}.")
 
         validation_set_path: str | None = os.environ.get("TEST_PATH")
         assert validation_set_path is not None, "DataSplitter: TEST_PATH environment variable not set."
-        self._validation_set.to_csv(validation_set_path, index=False)
+        self.__validation_set.to_csv(validation_set_path, index=False)
         print(
             f"Validation set saved to {Fore.YELLOW}{validation_set_path}{Style.RESET_ALL}.\n")
-
-    def get_train_set(self) -> pd.DataFrame | None:
-        return self._train_set
-
-    def get_validation_percentage(self) -> int:
-        return self._validation_percentage
-
-    def get_validation_set(self) -> pd.DataFrame | None:
-        return self._validation_set
