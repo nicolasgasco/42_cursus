@@ -5,10 +5,16 @@ import pandas as pd
 class DataImporter:
     def __init__(self):
         data_path: str | None = os.environ.get("DATA_PATH")
-        assert data_path is not None, "DataImporter: DATA_PATH environment variable not set."
+
+        err_message = "DataImporter: DATA_PATH environment variable not set."
+        assert data_path is not None, err_message
 
         self.__data_path: str = data_path
         self.__data: pd.DataFrame = pd.DataFrame()
+
+    @property
+    def data(self) -> pd.DataFrame:
+        return self.__data
 
     def import_data(self) -> pd.DataFrame:
         """
@@ -32,7 +38,8 @@ class DataImporter:
         except FileNotFoundError:
             raise FileNotFoundError("DataImporter: Dataset file not found.")
 
-    def normalize_data(self) -> pd.DataFrame:
+    @staticmethod
+    def normalize_data(data: pd.DataFrame) -> pd.DataFrame:
         """
         Normalizes the data.
 
@@ -41,14 +48,15 @@ class DataImporter:
         """
 
         # Exclude the first non-numeric column
-        data_to_normalize: pd.DataFrame = self.__data.iloc[:, 2:]
+        data_to_normalize: pd.DataFrame = data.iloc[:, 2:]
 
         # Min-max normalization
-        normalized_data: pd.DataFrame = (data_to_normalize - data_to_normalize.min()) / \
+        normalized_data: pd.DataFrame = (data_to_normalize -
+                                         data_to_normalize.min()) / \
             (data_to_normalize.max() - data_to_normalize.min())
 
         result: pd.DataFrame = pd.concat(
-            [self.__data.iloc[:, :2], normalized_data], axis=1)
+            [data.iloc[:, :2], normalized_data], axis=1)
 
         return result
 
@@ -61,7 +69,9 @@ class DataImporter:
             pd.DataFrame: The imported training data.
         """
         train_data_path: str | None = os.environ.get("TRAIN_PATH")
-        assert train_data_path is not None, "TRAIN_PATH environment variable not set."
+
+        err_message = "TRAIN_PATH environment variable not set."
+        assert train_data_path is not None, err_message
 
         train_data: pd.DataFrame = pd.read_csv(train_data_path)
 
@@ -76,7 +86,9 @@ class DataImporter:
             pd.DataFrame: The imported test data.
         """
         test_data_path: str | None = os.environ.get("TEST_PATH")
-        assert test_data_path is not None, "TEST_PATH environment variable not set."
+
+        err_message = "TEST_PATH environment variable not set."
+        assert test_data_path is not None, err_message
 
         test_data: pd.DataFrame = pd.read_csv(test_data_path)
 

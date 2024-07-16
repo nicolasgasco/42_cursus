@@ -114,5 +114,5 @@ class DataPlotter:
         filename = os.path.join(PLOTS_DIR, "correlation_matrix.png")
         plot.get_figure().savefig(filename)
 
-        print(
-            f"Correlation matrix plot saved to {Fore.YELLOW}{filename}{Style.RESET_ALL}")
+        print("Correlation matrix plot saved to", end=" ")
+        print(f"{Fore.YELLOW}{filename}{Style.RESET_ALL}")

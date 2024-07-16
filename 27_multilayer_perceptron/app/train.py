@@ -5,7 +5,7 @@ from src.MultilayerPerceptron import MultilayerPerceptron
 
 
 def main():
-    train_data: pd.DataFrame = DataImporter.import_train_data()
+    train_data = DataImporter.import_train_data()
     train_data = DataImporter.normalize_data(train_data)
 
     # pass down only first row of data set for now

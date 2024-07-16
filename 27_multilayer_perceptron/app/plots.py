@@ -6,7 +6,7 @@ def main():
     data_importer = DataImporter()
     data_importer.import_data()
 
-    normalized_data = data_importer.normalize_data()
+    normalized_data = DataImporter.normalize_data(data_importer.data)
 
     plotter = DataPlotter(normalized_data)
 
