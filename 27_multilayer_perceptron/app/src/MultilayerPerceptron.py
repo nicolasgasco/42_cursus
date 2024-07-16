@@ -63,6 +63,11 @@ class MultilayerPerceptron:
         return representation
 
     def train(self) -> None:
+        predictions: pd.DataFrame = self._forward_propagation()
+
+        self._calc_loss(predictions)
+
+    def _forward_propagation(self) -> pd.DataFrame:
         x: pd.DataFrame = self._train_data[self._inputs_columns]
 
         print(f"{Fore.YELLOW}INPUT LAYER{Style.RESET_ALL}")
@@ -122,8 +127,73 @@ class MultilayerPerceptron:
             lambda x: OutputNeuron.softmax(x), axis=1)
         print(f"Probabilities:\n{output_layer_probabilities}\n")
 
-        # formatted_probabilities = output_layer_probabilities.idxmax(axis=1)
-        # print(f"Formatted probabilities:\n{formatted_probabilities}\n")
+        return output_layer_probabilities
+
+    def _calc_loss(self, y_pred: pd.DataFrame):
+        """
+        Calculate the loss for the predicted labels.
+
+        Args:
+            y_pred (pd.DataFrame): A DataFrame containing the predicted labels.
+
+        Returns:
+            float: The calculated loss.
+        """
+
+        def _create_y_true() -> pd.DataFrame:
+            """
+            Create a DataFrame containing the true labels
+            for the training data.
+
+            Returns:
+                pd.DataFrame: A DataFrame containing the true labels
+                for the training data.
+            """
+
+            y_true = pd.DataFrame(columns=self._outputs)
+
+            malignant_column = self._outputs[0]
+            y_true[malignant_column] = self._train_data[self._outputs_columns]
+            y_true[malignant_column] = y_true[malignant_column].apply(
+                lambda x: 1 if x == malignant_column else 0)
+
+            benign_column = self._outputs[1]
+            y_true[benign_column] = self._train_data[self._outputs_columns]
+            y_true[benign_column] = y_true[benign_column].apply(
+                lambda x: 1 if x == benign_column else 0)
+
+            return y_true
+
+        def _binary_cross_entropy_error(y_pred: pd.DataFrame,
+                                        y_true: pd.DataFrame) -> float:
+            """
+            Calculate the binary cross entropy error
+            between predicted and true values.
+
+            Parameters:
+            - y_pred (pd.DataFrame): The predicted values.
+            - y_true (pd.DataFrame): The true values.
+
+            Returns:
+            - float: The binary cross entropy error.
+            """
+            loss = -np.mean(
+                y_true * np.log(y_pred) + (1 - y_true) * np.log(1 - y_pred)
+            )
+
+            return loss
+
+        print(f"{Fore.YELLOW}LOSS CALCULATION{Style.RESET_ALL}")
+
+        y_pred_clipped = y_pred.clip(1e-7, 1 - 1e-7)  # to avoid log(0)
+        y_pred_clipped.columns = ['M', 'B']  # for compatibility with y_true
+        print("y_pred:\n", y_pred_clipped)
+
+        y_true = _create_y_true()
+        print(f"\ny_true:\n{y_true}")
+
+        loss = _binary_cross_entropy_error(y_pred_clipped, y_true)
+        print(f"\nLoss: {loss}\n")
 
     def _random_float(self) -> float:
         num: float = np.random.randn() * 0.01
