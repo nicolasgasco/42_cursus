@@ -111,7 +111,7 @@ class MultilayerPerceptron:
         representation += f"outputs={self.__outputs}, "
         representation += f"outputs_columns={self.__outputs_columns}, "
         representation += f"hidden_layers_count={self.__hidden_layers_count}, "
-        representation += f"hidden_layer_neurons={self.__hidden_layer_neurons})"
+        representation += f"hidden_layer_neurons={self.__hidden_layer_neurons}"
         representation += "\n"
 
         return representation
@@ -119,7 +119,11 @@ class MultilayerPerceptron:
     def train(self) -> None:
         predictions: pd.DataFrame = self.__forward_propagation()
 
-        self.__loss_function(predictions)
+        loss: float = self.__loss_function(predictions)
+        print(f"\nLoss: {loss}\n")
+
+        precision: int = self.__calc_precision(predictions)
+        print(f"\nPrecision: {precision.round(2)}%\n")
 
     def __forward_propagation(self) -> pd.DataFrame:
         x: pd.DataFrame = self.__train_data[self.__inputs_columns]
@@ -169,7 +173,7 @@ class MultilayerPerceptron:
 
         return output_layer_probabilities
 
-    def __loss_function(self, y_pred: pd.DataFrame):
+    def __loss_function(self, y_pred: pd.DataFrame) -> float:
         """
         Calculate the loss for the predicted labels.
 
@@ -193,7 +197,8 @@ class MultilayerPerceptron:
             y_true = pd.DataFrame(columns=self.__outputs)
 
             malignant_column = self.__outputs[0]
-            y_true[malignant_column] = self.__train_data[self.__outputs_columns]
+            y_true[malignant_column] = self.__train_data[
+                self.__outputs_columns]
             y_true[malignant_column] = y_true[malignant_column].apply(
                 lambda x: 1 if x == malignant_column else 0)
 
@@ -233,7 +238,28 @@ class MultilayerPerceptron:
         print(f"\ny_true:\n{y_true}")
 
         loss = __binary_cross_entropy_error(y_pred_clipped, y_true)
-        print(f"\nLoss: {loss}\n")
+
+        return loss
+
+    def __calc_precision(self, y_pred: pd.DataFrame) -> int:
+        """
+        Calculate the precision of the predictions made by the model.
+
+        Parameters:
+        - y_pred (pd.DataFrame): The predicted values.
+
+        Returns:
+        - int: The precision of the predictions as a percentage.
+        """
+
+        formatted_predictions = y_pred.idxmax(axis=1).apply(
+            lambda x: "M" if x == 0 else "B").values
+        x = self.__train_data[self.__outputs_columns].values.flatten()
+
+        correct_predictions = sum(formatted_predictions == x)
+        percentage_precision = correct_predictions / len(x) * 100
+
+        return percentage_precision
 
     def __random_float(self) -> float:
         num: float = np.random.randn() * 0.01
