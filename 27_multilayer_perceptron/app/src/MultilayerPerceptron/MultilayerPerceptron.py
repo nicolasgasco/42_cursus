@@ -5,6 +5,9 @@ from colorama import Fore, Style
 from src.SettingsImporter import SettingsImporter
 from src.Neuron import Neuron
 from src.OutputNeuron import OutputNeuron
+from src.MultilayerPerceptron.Layer import Layer
+
+import src.MultilayerPerceptron.loss_utils as loss_utils
 
 
 class MultilayerPerceptron:
@@ -66,7 +69,9 @@ class MultilayerPerceptron:
         self.__learning_rate: float = settings["learning_rate"]
 
         self.__hidden_layers = self.__generate_hidden_layers()
-        self.__output_layer = self.__generate_output_layer()
+
+        self.__output_layer = Layer(
+            self.__hidden_layer_neurons, len(self.__outputs))
 
     def __generate_hidden_layers(self) -> list[list[Neuron]]:
         """
@@ -78,36 +83,16 @@ class MultilayerPerceptron:
         """
 
         x = self.__train_data[self.__inputs_columns]
-        weights_num = len(x.columns)
 
-        hidden_layers = []
+        hidden_layers: list[Layer] = []
+
+        weights_num = len(x.columns)
         for _ in range(self.__hidden_layers_count):
-            hidden_layer = [Neuron([self.__random_float()] * weights_num,
-                                   self.__random_float())
-                            for _ in range(self.__hidden_layer_neurons)]
+            hidden_layer = Layer(weights_num, self.__hidden_layer_neurons)
             hidden_layers.append(hidden_layer)
             weights_num = self.__hidden_layer_neurons
 
         return hidden_layers
-
-    def __generate_output_layer(self) -> list[OutputNeuron]:
-        """
-        Generates the output layer of the multilayer perceptron.
-
-        Returns:
-            list[OutputNeuron]: The generated output layer.
-        """
-
-        weights_num = self.__hidden_layer_neurons
-        output_layer_neurons = [OutputNeuron([self.__random_float()]
-                                             * weights_num,
-                                             self.__random_float())
-                                for _ in range(len(self.__outputs))]
-
-        return {
-            "neurons": output_layer_neurons,
-            "input": pd.DataFrame()
-        }
 
     def ___str__(self) -> str:
         representation = "MultilayerPerceptron("
@@ -126,7 +111,8 @@ class MultilayerPerceptron:
         loss: float = self.__loss_function(predictions)
         print(f"\nLoss: {loss}\n")
 
-        precision: int = self.__calc_precision(predictions)
+        precision: int = loss_utils.calc_precision(
+            self.__train_data, self.__outputs_columns, predictions)
         print(f"\nPrecision: {precision.round(2)}%\n")
 
         self.__backpropagation(predictions)
@@ -145,8 +131,8 @@ class MultilayerPerceptron:
             print(f"Hidden layer inputs:\n{hidden_neurons_inputs}\n")
 
             hidden_neurons_outputs = pd.DataFrame(
-                columns=range(len(hidden_layer)))
-            for i, neuron in enumerate(hidden_layer):
+                columns=range(len(hidden_layer.neurons)))
+            for i, neuron in enumerate(hidden_layer.neurons):
                 print(f"{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
 
                 neuron_output = neuron.generate_output(hidden_neurons_inputs)
@@ -162,10 +148,10 @@ class MultilayerPerceptron:
         print(f"{Fore.YELLOW}OUTPUT LAYER{Style.RESET_ALL}")
         print(f"Output layer inputs:\n{hidden_layer_outputs}\n")
 
-        self.__output_layer["input"] = hidden_layer_outputs
+        self.__output_layer.input = hidden_layer_outputs
 
         output_layer_neurons_outputs = pd.DataFrame()
-        for i, neuron in enumerate(self.__output_layer["neurons"]):
+        for i, neuron in enumerate(self.__output_layer.neurons):
             print(f"{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
 
             neuron_output = neuron.generate_output(hidden_layer_outputs)
@@ -217,25 +203,6 @@ class MultilayerPerceptron:
             float: The calculated loss.
         """
 
-        def __binary_cross_entropy_error(y_pred: pd.DataFrame,
-                                         y_true: pd.DataFrame) -> float:
-            """
-            Calculate the binary cross entropy error
-            between predicted and true values.
-
-            Parameters:
-            - y_pred (pd.DataFrame): The predicted values.
-            - y_true (pd.DataFrame): The true values.
-
-            Returns:
-            - float: The binary cross entropy error.
-            """
-            loss = -np.mean(
-                y_true * np.log(y_pred) + (1 - y_true) * np.log(1 - y_pred)
-            )
-
-            return loss
-
         print(f"{Fore.YELLOW}LOSS CALCULATION{Style.RESET_ALL}")
 
         y_pred_clipped = y_pred.clip(1e-7, 1 - 1e-7)  # to avoid log(0)
@@ -245,29 +212,9 @@ class MultilayerPerceptron:
         y_true = self.__create_y_true()
         print(f"\ny_true:\n{y_true}")
 
-        loss = __binary_cross_entropy_error(y_pred_clipped, y_true)
+        loss = loss_utils.binary_cross_entropy_error(y_pred_clipped, y_true)
 
         return loss
-
-    def __calc_precision(self, y_pred: pd.DataFrame) -> int:
-        """
-        Calculate the precision of the predictions made by the model.
-
-        Parameters:
-        - y_pred (pd.DataFrame): The predicted values.
-
-        Returns:
-        - int: The precision of the predictions as a percentage.
-        """
-
-        formatted_predictions = y_pred.idxmax(axis=1).apply(
-            lambda x: "M" if x == 0 else "B").values
-        x = self.__train_data[self.__outputs_columns].values.flatten()
-
-        correct_predictions = sum(formatted_predictions == x)
-        percentage_precision = correct_predictions / len(x) * 100
-
-        return percentage_precision
 
     def __backpropagation(self, y_pred: pd.DataFrame) -> None:
         print(f"{Fore.YELLOW}BACKPROPAGATION{Style.RESET_ALL}")
@@ -282,7 +229,7 @@ class MultilayerPerceptron:
 
         print(f"\nGradient:\n{gradient}")
 
-        activation_output_layer = self.__output_layer["input"]
+        activation_output_layer = self.__output_layer.input
         print(f"\nActivation output layer:\n{activation_output_layer}")
 
         weights_gradient = pd.DataFrame(np.dot(
@@ -292,17 +239,13 @@ class MultilayerPerceptron:
         bias_gradient = np.sum(gradient, axis=0) / len(y_pred)
         print(f"\nBias gradient:\n{bias_gradient}")
 
-        for i, neuron in enumerate(self.__output_layer["neurons"]):
+        for i, neuron in enumerate(self.__output_layer.neurons):
             print(f"\n{Fore.GREEN}Neuron {i}{Style.RESET_ALL}")
 
-            print(neuron)
+            print("Before: ", neuron)
 
             neuron.weights -= (self.__learning_rate *
                                weights_gradient[i]).values
             neuron.bias -= self.__learning_rate * bias_gradient.values[i]
 
-            print(neuron)
-
-    def __random_float(self) -> float:
-        num: float = np.random.randn() * 0.01
-        return num
+            print("After: ", neuron)
