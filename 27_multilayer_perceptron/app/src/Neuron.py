@@ -42,10 +42,10 @@ class Neuron:
         """
 
         representation = "Neuron("
-        if (len(self.__weights) > 3):
-            representation += f"weights={self.__weights[:3]}... , "
-        else:
-            representation += f"weights={self.__weights}, "
+        weights = self.__weights if len(
+            self.__weights) <= 3 else self.__weights[:3]
+        representation += f"weights={weights}"
+        representation += f"{'...' if len(self.__weights) > 3 else ''}, "
         representation += f"bias={self.__bias})"
 
         return representation
