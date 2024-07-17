@@ -13,13 +13,20 @@ class Neuron:
     def bias(self) -> float:
         return self.__bias
 
+    @bias.setter
+    def bias(self, bias: float):
+        self.__bias = bias
+
     @property
     def weights(self) -> list[float]:
         return self.__weights
 
+    @weights.setter
+    def weights(self, weights: list[float]):
+        self.__weights = weights
+
     @property
     def output(self) -> pd.DataFrame:
-
         return self.__output
 
     def __repr__(self) -> str:
