@@ -1,7 +1,5 @@
-import pandas as pd
-
 from src.DataImporter import DataImporter
-from src.MultilayerPerceptron import MultilayerPerceptron
+from src.MultilayerPerceptron.MultilayerPerceptron import MultilayerPerceptron
 
 
 def main():
