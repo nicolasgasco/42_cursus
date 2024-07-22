@@ -1,4 +1,5 @@
 import math as math
+import numpy as np
 import pandas as pd
 
 
@@ -50,45 +51,16 @@ class Neuron:
 
         return representation
 
-    def generate_output(self, inputs: pd.DataFrame) -> pd.DataFrame:
-        """
-        Generates the output of the neuron based on the given inputs.
+    @staticmethod
+    def weighted_sum(inputs: pd.DataFrame,
+                     weights: pd.DataFrame,
+                     biases: list[float]) -> pd.DataFrame:
+        result = np.dot(inputs, np.array(weights).T) + biases
 
-        Args:
-            inputs (pd.DataFrame): The input data for the neuron.
+        return pd.DataFrame(result)
 
-        Returns:
-            pd.DataFrame: The generated output of the neuron.
-        """
-
-        weighted_sum: pd.DataFrame = self._weighted_sum(inputs)
-
-        result = weighted_sum.apply(lambda x: self.__activation_sigmoid(x))
-
-        self.__output = result
-
-        return result
-
-    def _weighted_sum(self, inputs: pd.DataFrame) -> pd.DataFrame:
-        """
-        Calculates the weighted sum of the inputs.
-
-        Args:
-            inputs (pd.DataFrame): The input data as a DataFrame.
-
-        Returns:
-            pd.DataFrame: The weighted sum of the inputs.
-        """
-
-        err_message = "Number of weights should be equal to number of inputs."
-        assert len(inputs.columns) == len(self.__weights), err_message
-
-        dot_product = inputs.dot(self.__weights)
-        weighted_sum = dot_product + self.__bias
-
-        return weighted_sum
-
-    def __activation_sigmoid(self, x: float):
+    @staticmethod
+    def activation_sigmoid(x: float):
         """
         Applies the sigmoid activation function to the input value.
 
@@ -101,7 +73,8 @@ class Neuron:
 
         return 1 / (1 + math.exp(-x))
 
-    def __activation_relu(self, x: float):
+    @staticmethod
+    def activation_relu(x: float):
         """
         Applies the Rectified Linear Unit (ReLU) activation function
         to the input.
@@ -115,3 +88,17 @@ class Neuron:
         """
 
         return max(0, x)
+
+    @staticmethod
+    def softmax(x: pd.DataFrame) -> pd.DataFrame:
+        """
+        Applies the softmax function to the input DataFrame.
+
+        Parameters:
+        x (pd.DataFrame): The input DataFrame.
+
+        Returns:
+        pd.DataFrame: The DataFrame with softmax applied to each element.
+        """
+        e_row = np.exp(x - np.max(x))
+        return e_row / e_row.sum()

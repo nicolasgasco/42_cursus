@@ -4,7 +4,6 @@ import pandas as pd
 from colorama import Fore, Style
 from src.SettingsImporter import SettingsImporter
 from src.Neuron import Neuron
-from src.OutputNeuron import OutputNeuron
 from src.MultilayerPerceptron.Layer import Layer
 
 import src.MultilayerPerceptron.loss_utils as loss_utils
@@ -68,10 +67,11 @@ class MultilayerPerceptron:
 
         self.__learning_rate: float = settings["learning_rate"]
 
-        self.__hidden_layers = self.__generate_hidden_layers()
+        self.__hidden_layers: list[Layer] = self.__generate_hidden_layers()
 
-        self.__output_layer = Layer(
-            self.__hidden_layer_neurons, len(self.__outputs))
+        self.__output_layer = Layer(True,
+                                    self.__hidden_layer_neurons,
+                                    len(self.__outputs))
 
     def __generate_hidden_layers(self) -> list[list[Neuron]]:
         """
@@ -88,7 +88,8 @@ class MultilayerPerceptron:
 
         weights_num = len(x.columns)
         for _ in range(self.__hidden_layers_count):
-            hidden_layer = Layer(weights_num, self.__hidden_layer_neurons)
+            hidden_layer = Layer(False, weights_num,
+                                 self.__hidden_layer_neurons)
             hidden_layers.append(hidden_layer)
             weights_num = self.__hidden_layer_neurons
 
@@ -108,14 +109,16 @@ class MultilayerPerceptron:
     def train(self) -> None:
         predictions: pd.DataFrame = self.__forward_propagation()
 
-        loss: float = self.__loss_function(predictions)
-        print(f"\nLoss: {loss}\n")
+        # loss: float = self.__loss_function(predictions)
+        # print(f"\nLoss: {loss}\n")
 
-        precision: int = loss_utils.calc_precision(
-            self.__train_data, self.__outputs_columns, predictions)
-        print(f"\nPrecision: {precision.round(2)}%\n")
+        # precision: int = loss_utils.calc_precision(
+        #     self.__train_data, self.__outputs_columns, predictions)
+        # print(f"\nPrecision: {precision.round(2)}%\n")
 
-        self.__backpropagation(predictions)
+        # output_layer_neurons = self.__backpropagation_output_layer(predictions)
+
+        # self.__backpropagation_hidden_layers(output_layer_neurons)
 
     def __forward_propagation(self) -> pd.DataFrame:
         x: pd.DataFrame = self.__train_data[self.__inputs_columns]
@@ -128,42 +131,58 @@ class MultilayerPerceptron:
 
         for i, hidden_layer in enumerate(self.__hidden_layers):
             print(f"{Fore.YELLOW}HIDDEN LAYER {i}{Style.RESET_ALL}")
-            print(f"Hidden layer inputs:\n{hidden_neurons_inputs}\n")
+            print(f"Hidden layer input:\n{hidden_neurons_inputs}\n")
 
-            hidden_neurons_outputs = pd.DataFrame(
-                columns=range(len(hidden_layer.neurons)))
-            for i, neuron in enumerate(hidden_layer.neurons):
+            hidden_layer_neurons = hidden_layer.neurons
+
+            print("Hidden layer neurons:")
+            for i, neuron in enumerate(hidden_layer_neurons):
                 print(f"{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
+            print("\n")
 
-                neuron_output = neuron.generate_output(hidden_neurons_inputs)
-                print(f"Output:\n{neuron_output}\n")
+            hidden_layer_weights = [
+                neuron.weights for neuron in hidden_layer_neurons]
+            hidden_layer_biases = [
+                neuron.bias for neuron in hidden_layer_neurons]
 
-                hidden_neurons_outputs[i] = neuron_output
+            weighted_sum = Neuron.weighted_sum(
+                hidden_neurons_inputs,
+                pd.DataFrame(hidden_layer_weights),
+                hidden_layer_biases)
 
-            hidden_neurons_inputs = hidden_neurons_outputs
-            hidden_layer_outputs = hidden_neurons_outputs
+            hidden_layer_outputs = weighted_sum.map(
+                lambda x: Neuron.activation_sigmoid(x))
 
-            print(f"Hidden layer outputs:\n{hidden_layer_outputs}\n")
+            hidden_neurons_inputs = hidden_layer_outputs
+
+            print(f"Hidden layer output:\n{hidden_layer_outputs}\n")
 
         print(f"{Fore.YELLOW}OUTPUT LAYER{Style.RESET_ALL}")
         print(f"Output layer inputs:\n{hidden_layer_outputs}\n")
 
-        self.__output_layer.input = hidden_layer_outputs
+        # self.__output_layer.input = hidden_layer_outputs
 
-        output_layer_neurons_outputs = pd.DataFrame()
         for i, neuron in enumerate(self.__output_layer.neurons):
+            print("Output layer neurons:")
             print(f"{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
+        print("\n")
 
-            neuron_output = neuron.generate_output(hidden_layer_outputs)
-            print(f"Output:\n{neuron_output}\n")
+        output_layer_weights = [
+            neuron.weights for neuron in self.__output_layer.neurons]
+        output_layer_biases = [
+            neuron.bias for neuron in self.__output_layer.neurons]
 
-            output_layer_neurons_outputs[i] = neuron_output
+        output_layer_weighted_sum = Neuron.weighted_sum(
+            hidden_layer_outputs,
+            pd.DataFrame(output_layer_weights),
+            output_layer_biases)
+        output_layer_neurons_outputs = output_layer_weighted_sum
 
         output_layer_outputs = output_layer_neurons_outputs
 
         output_layer_probabilities = output_layer_outputs.apply(
-            lambda x: OutputNeuron.softmax(x), axis=1)
-        print(f"Probabilities:\n{output_layer_probabilities}\n")
+            lambda x: Neuron.softmax(x), axis=1)
+        print(f"Softmax probabilities:\n{output_layer_probabilities}\n")
 
         return output_layer_probabilities
 
@@ -216,8 +235,8 @@ class MultilayerPerceptron:
 
         return loss
 
-    def __backpropagation(self, y_pred: pd.DataFrame) -> None:
-        print(f"{Fore.YELLOW}BACKPROPAGATION{Style.RESET_ALL}")
+    def __backpropagation_output_layer(self, y_pred: pd.DataFrame) -> None:
+        print(f"{Fore.YELLOW}BACKPROPAGATION OUTPUT LAYER{Style.RESET_ALL}")
 
         y_pred.columns = self.__outputs  # for compatibility with y_true
         print("y_pred:\n", y_pred)
@@ -249,3 +268,34 @@ class MultilayerPerceptron:
             neuron.bias -= self.__learning_rate * bias_gradient.values[i]
 
             print("After: ", neuron)
+
+        return self.__output_layer.neurons
+
+    # def __backpropagation_hidden_layers(self,
+    #                                     output_layer_neurons: list[Neuron])
+    #         -> None:
+        # print(f"\n{Fore.YELLOW}BACKPROPAGATION HIDDEN LAYERS{Style.RESET_ALL}")
+
+        # next_layer_neurons=output_layer_neurons
+        # print("Next layer neurons: ", next_layer_neurons)
+        # for i, hidden_layer in enumerate(reversed(self.__hidden_layers)):
+        #     original_i=len(self.__hidden_layers) - 1 - i
+        #     print(f"\n{Fore.YELLOW}HIDDEN LAYER {original_i}{Style.RESET_ALL}")
+
+        #     for i, neuron in enumerate(hidden_layer.neurons):
+        #         print(f"\n{Fore.GREEN}Neuron {i}{Style.RESET_ALL}")
+
+        #         derivative=neuron.output * (1 - neuron.output)
+        #         print("Derivative: ", derivative)
+
+        #         print("\nIterating through next layer neurons")
+        #         gradient_sum=0
+        #         for next_neuron in next_layer_neurons:
+        #             print("next_neuron: ", next_neuron)
+        #             # Find the connection weight from the current neuron to the 'next_neuron'
+        #             connection_weight=next_neuron.weights[i]
+        #             # error_contribution = connection_weight * next_neuron.delta
+        #             # weighted_error_gradient_sum += error_contribution
+        #             print("\n")
+
+        #     next_layer_neurons=hidden_layer.neurons
