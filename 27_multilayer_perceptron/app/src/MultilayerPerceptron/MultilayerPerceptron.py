@@ -94,7 +94,7 @@ class MultilayerPerceptron:
 
         return hidden_layers
 
-    def ___str__(self) -> str:
+    def __str__(self) -> str:
         representation = "MultilayerPerceptron("
         representation += f"inputs_columns={self.__inputs_columns}, "
         representation += f"outputs={self.__outputs}, "
