@@ -5,6 +5,7 @@ from colorama import Fore, Style
 from src.SettingsImporter import SettingsImporter
 from src.Neuron import Neuron
 from src.MultilayerPerceptron.Layer import Layer
+from src.MultilayerPerceptron.forward_utils import calc_layer_output
 
 import src.MultilayerPerceptron.loss_utils as loss_utils
 
@@ -107,7 +108,7 @@ class MultilayerPerceptron:
         return representation
 
     def train(self) -> None:
-        predictions: pd.DataFrame = self.__forward_propagation()
+        predictions: pd.DataFrame = self.__forward()
 
         # loss: float = self.__loss_function(predictions)
         # print(f"\nLoss: {loss}\n")
@@ -120,13 +121,13 @@ class MultilayerPerceptron:
 
         # self.__backpropagation_hidden_layers(output_layer_neurons)
 
-    def __forward_propagation(self) -> pd.DataFrame:
-        x: pd.DataFrame = self.__train_data[self.__inputs_columns]
+    def __forward(self) -> pd.DataFrame:
+        X: pd.DataFrame = self.__train_data[self.__inputs_columns]
 
         print(f"{Fore.YELLOW}INPUT LAYER{Style.RESET_ALL}")
-        print(f"\n{x}\n")
+        print(f"\n{X}\n")
 
-        hidden_neurons_inputs: pd.DataFrame = x
+        hidden_neurons_inputs: pd.DataFrame = X
         hidden_layer_outputs: pd.DataFrame = pd.DataFrame()
 
         for i, hidden_layer in enumerate(self.__hidden_layers):
@@ -140,22 +141,11 @@ class MultilayerPerceptron:
                 print(f"{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
             print("\n")
 
-            hidden_layer_weights = [
-                neuron.weights for neuron in hidden_layer_neurons]
-            hidden_layer_biases = [
-                neuron.bias for neuron in hidden_layer_neurons]
-
-            weighted_sum = Neuron.weighted_sum(
-                hidden_neurons_inputs,
-                pd.DataFrame(hidden_layer_weights),
-                hidden_layer_biases)
-
-            hidden_layer_outputs = weighted_sum.map(
-                lambda x: Neuron.activation_sigmoid(x))
+            hidden_layer_outputs = calc_layer_output(hidden_layer_neurons,
+                                                     hidden_neurons_inputs)
+            print(f"Hidden layer output:\n{hidden_layer_outputs}\n")
 
             hidden_neurons_inputs = hidden_layer_outputs
-
-            print(f"Hidden layer output:\n{hidden_layer_outputs}\n")
 
         print(f"{Fore.YELLOW}OUTPUT LAYER{Style.RESET_ALL}")
         print(f"Output layer inputs:\n{hidden_layer_outputs}\n")
@@ -167,16 +157,8 @@ class MultilayerPerceptron:
             print(f"{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
         print("\n")
 
-        output_layer_weights = [
-            neuron.weights for neuron in self.__output_layer.neurons]
-        output_layer_biases = [
-            neuron.bias for neuron in self.__output_layer.neurons]
-
-        output_layer_weighted_sum = Neuron.weighted_sum(
-            hidden_layer_outputs,
-            pd.DataFrame(output_layer_weights),
-            output_layer_biases)
-        output_layer_neurons_outputs = output_layer_weighted_sum
+        output_layer_neurons_outputs = calc_layer_output(
+            self.__output_layer.neurons, hidden_layer_outputs)
 
         output_layer_outputs = output_layer_neurons_outputs
 
