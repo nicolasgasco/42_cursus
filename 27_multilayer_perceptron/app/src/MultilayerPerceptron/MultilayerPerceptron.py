@@ -107,7 +107,7 @@ class MultilayerPerceptron:
         return representation
 
     def train(self) -> None:
-        print("Training model...")
+        print("Training model...\n")
 
         predictions: pd.DataFrame = self.__forward()
 
