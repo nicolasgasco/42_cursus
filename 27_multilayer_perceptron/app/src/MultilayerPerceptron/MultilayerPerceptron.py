@@ -160,7 +160,7 @@ class MultilayerPerceptron:
             f"Output layer outputs:\n{output_layer_outputs}\n")
 
         output_layer_probabilities = output_layer_outputs.apply(
-            lambda x: Layer.softmax(x), axis=1)
+            lambda x: Layer.activation_softmax(x), axis=1)
         self.__output_layer.output = output_layer_probabilities
         print_output(f"Softmax outputs:\n{output_layer_probabilities}\n")
 

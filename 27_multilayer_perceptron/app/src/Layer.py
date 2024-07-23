@@ -123,7 +123,7 @@ class Layer:
         return 1 if x > 0 else 0
 
     @staticmethod
-    def softmax(x: pd.DataFrame) -> pd.DataFrame:
+    def activation_softmax(x: pd.DataFrame) -> pd.DataFrame:
         """
         Applies the softmax function to the input DataFrame.
 
