@@ -154,8 +154,8 @@ class MultilayerPerceptron:
 
         # self.__output_layer.input = hidden_layer_outputs
 
+        print_output("Output layer neurons:")
         for i, neuron in enumerate(self.__output_layer.neurons):
-            print_output("Output layer neurons:")
             print_output(f"{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
         print_output("\n")
 
