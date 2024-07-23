@@ -90,6 +90,20 @@ class Neuron:
         return max(0, x)
 
     @staticmethod
+    def activation_step_function(x: float):
+        """
+        Applies the step function to the input value.
+
+        Args:
+            x (float): The input value.
+
+        Returns:
+            float: The output value after applying the step function.
+        """
+
+        return 1 if x > 0 else 0
+
+    @staticmethod
     def softmax(x: pd.DataFrame) -> pd.DataFrame:
         """
         Applies the softmax function to the input DataFrame.
