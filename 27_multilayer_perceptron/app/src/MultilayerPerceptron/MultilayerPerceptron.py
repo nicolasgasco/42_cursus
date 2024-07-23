@@ -96,12 +96,13 @@ class MultilayerPerceptron:
 
     def __str__(self) -> str:
         representation = "MultilayerPerceptron(\n"
-        representation += f"  inputs_columns={self.__inputs_columns},\n"
-        representation += f"  outputs={self.__outputs},\n"
-        representation += f"  outputs_columns={self.__outputs_columns},\n"
-        representation += f"  hidden_layers_count={self.__hidden_layers_count}\n"
-        representation += f"  hidden_layer_neurons={self.__hidden_layer_neurons}\n"
-        representation += f"  learning_rate={self.__learning_rate}\n"
+        representation += f"  inputs_columns: {self.__inputs_columns},\n"
+        representation += f"  outputs: {self.__outputs},\n"
+        representation += f"  outputs_columns: {self.__outputs_columns},\n"
+        representation += f"  hidden_layers_count: {self.__hidden_layers_count}\n"
+        representation += "  hidden_layer_neurons: "
+        representation += f"{self.__hidden_layer_neurons}\n"
+        representation += f"  learning_rate: {self.__learning_rate}\n"
         representation += ")\n"
 
         return representation

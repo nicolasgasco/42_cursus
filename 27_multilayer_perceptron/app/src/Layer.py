@@ -53,9 +53,9 @@ class Layer:
         representation = "Layer(\n"
 
         for i in self.__weights.columns:
-            representation += f"{Fore.BLUE}Neuron {i}{Style.RESET_ALL}: "
-            representation += f"weights={self.__weights[i].to_list()}, "
-            representation += f"bias={self.__biases[i]}\n"
+            representation += f"  {Fore.BLUE}Neuron {i}{Style.RESET_ALL}: "
+            representation += f"weights: {self.__weights[i].to_list()}, "
+            representation += f"bias: {self.__biases[i]}\n"
 
         representation += ")"
 
