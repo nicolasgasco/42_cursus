@@ -10,10 +10,10 @@ class Layer:
     def __init__(self, n_inputs: int, n_neurons: int):
         # By initializing the weights with this shape,
         # we don't need to transpose weights when calculating dot product
-        self.__weights: pd.DataFrame = pd.DataFrame(
+        self.__weights = pd.DataFrame(
             np.full((n_inputs, n_neurons), rand_small_float()))
-        self.__biases: list[float] = [rand_small_float()
-                                      for _ in range(n_neurons)]
+
+        self.__biases = [rand_small_float() for _ in range(n_neurons)]
 
         self.__input: pd.DataFrame = pd.DataFrame()
         self.__output: pd.DataFrame = pd.DataFrame()

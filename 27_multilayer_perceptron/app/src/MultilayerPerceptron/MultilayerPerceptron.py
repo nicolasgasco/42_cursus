@@ -4,7 +4,6 @@ from colorama import Fore, Style
 
 from src.SettingsImporter import SettingsImporter
 from src.Layer import Layer
-from src.MultilayerPerceptron.utils_forward import layer_output
 import src.MultilayerPerceptron.utils_loss as utils_loss
 from src.utils import print_output
 
