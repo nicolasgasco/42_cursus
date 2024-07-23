@@ -25,12 +25,12 @@ class MultilayerPerceptron:
             err_message = "MultilayerPerceptron: outputs is empty."
             assert len(settings["outputs"]) > 0, err_message
 
-            err_message = "MultilayerPerceptron: outputs_columns key missing."
-            assert "outputs_columns" in settings, err_message
-            err_message = "MultilayerPerceptron: outputs is None."
-            assert settings["outputs_columns"] is not None, err_message
-            err_message = "MultilayerPerceptron: outputs is empty."
-            assert len(settings["outputs_columns"]) > 0, err_message
+            err_message = "MultilayerPerceptron: outputs_column key missing."
+            assert "outputs_column" in settings, err_message
+            err_message = "MultilayerPerceptron: outputs_column is None."
+            assert settings["outputs_column"] is not None, err_message
+            err_message = "MultilayerPerceptron: outputs_column is empty."
+            assert len(settings["outputs_column"]) > 0, err_message
 
             err_message = "MultilayerPerceptron: hidden_layers key missing."
             assert "hidden_layers" in settings, err_message
@@ -60,7 +60,7 @@ class MultilayerPerceptron:
         self.__train_data: pd.DataFrame = train_data
         self.__inputs_columns: list[str] = settings["inputs_columns"]
         self.__outputs: list[str] = settings["outputs"]
-        self.__outputs_columns: list[str] = settings["outputs_columns"]
+        self.__outputs_column: list[str] = settings["outputs_column"]
         self.__hidden_layers_count: int = settings["hidden_layers"]
         self.__hidden_layer_neurons: int = settings["hidden_layer_neurons"]
 
@@ -97,7 +97,7 @@ class MultilayerPerceptron:
         representation = "MultilayerPerceptron(\n"
         representation += f"  inputs_columns: {self.__inputs_columns},\n"
         representation += f"  outputs: {self.__outputs},\n"
-        representation += f"  outputs_columns: {self.__outputs_columns},\n"
+        representation += f"  outputs_column: {self.__outputs_column},\n"
         representation += f"  hidden_layers_count: {self.__hidden_layers_count}\n"
         representation += "  hidden_layer_neurons: "
         representation += f"{self.__hidden_layer_neurons}\n"
@@ -115,7 +115,10 @@ class MultilayerPerceptron:
         # print(f"\nLoss: {loss}\n")
 
         precision: int = utils_loss.calc_precision(
-            self.__train_data, self.__outputs_columns, predictions)
+            self.__train_data,
+            self.__outputs_column,
+            self.__outputs,
+            predictions)
         print(f"\nPrecision: {precision.round(2)}%\n")
 
         # output_layer_neurons = self.__backpropagation_output_layer(predictions)
@@ -181,12 +184,12 @@ class MultilayerPerceptron:
 
         malignant_column = self.__outputs[0]
         y_true[malignant_column] = self.__train_data[
-            self.__outputs_columns]
+            self.__outputs_column]
         y_true[malignant_column] = y_true[malignant_column].apply(
             lambda x: 1 if x == malignant_column else 0)
 
         benign_column = self.__outputs[1]
-        y_true[benign_column] = self.__train_data[self.__outputs_columns]
+        y_true[benign_column] = self.__train_data[self.__outputs_column]
         y_true[benign_column] = y_true[benign_column].apply(
             lambda x: 1 if x == benign_column else 0)
 

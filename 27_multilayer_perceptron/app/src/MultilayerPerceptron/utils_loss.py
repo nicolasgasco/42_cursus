@@ -25,7 +25,8 @@ def binary_cross_entropy_error(y_pred: pd.DataFrame,
 
 
 def calc_precision(train_data: pd.DataFrame,
-                   outputs_columns: list[str],
+                   outputs_column: str,
+                   outputs: list[str],
                    y_pred: pd.DataFrame) -> int:
     """
     Calculates the precision of the predictions made
@@ -41,8 +42,8 @@ def calc_precision(train_data: pd.DataFrame,
     """
 
     formatted_predictions = y_pred.idxmax(axis=1).apply(
-        lambda x: "M" if x == 0 else "B").values
-    X = train_data[outputs_columns].values.flatten()
+        lambda x: outputs[int(x)]).values
+    X = train_data[outputs_column].values.flatten()
 
     print_output("Actual values: ", X)
     print_output(f"Predictions: {formatted_predictions}")
