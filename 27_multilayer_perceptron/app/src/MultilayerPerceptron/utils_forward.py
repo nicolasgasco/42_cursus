@@ -27,6 +27,6 @@ def layer_output(neurons: list[Neuron],
         input, pd.DataFrame(weights), biases)
 
     output = weighted_sum.map(
-        lambda x: Neuron.activation_sigmoid(x))
+        lambda x: Neuron.activation_relu(x))
 
     return output
