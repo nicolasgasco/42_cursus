@@ -114,12 +114,8 @@ class MultilayerPerceptron:
         # loss: float = self.__loss_function(predictions)
         # print(f"\nLoss: {loss}\n")
 
-        precision: int = utils_loss.calc_precision(
-            self.__train_data,
-            self.__outputs_column,
-            self.__outputs,
-            predictions)
-        print(f"\nPrecision: {precision.round(2)}%\n")
+        accuracy: int = self.__accuracy(predictions)
+        print(f"\nPrecision: {accuracy.round(2)}%\n")
 
         # output_layer_neurons = self.__backpropagation_output_layer(predictions)
 
@@ -169,6 +165,30 @@ class MultilayerPerceptron:
         print_output(f"Softmax outputs:\n{output_layer_probabilities}\n")
 
         return output_layer_probabilities
+
+    def __accuracy(self, y: pd.DataFrame) -> float:
+        """
+        Calculates the accuracy of the predictions made
+        by the multilayer perceptron model.
+
+        Parameters:
+        - y (pd.DataFrame): The predicted values.
+
+        Returns:
+        - float: The accuracy of the predictions as a percentage.
+        """
+
+        formatted_predictions = y.idxmax(axis=1).apply(
+            lambda x: self.__outputs[int(x)]).values
+        X = self.__train_data[self.__outputs_column].values.flatten()
+
+        print_output("Actual values: ", X)
+        print_output(f"Predictions: {formatted_predictions}")
+
+        correct_predictions = sum(formatted_predictions == X)
+        percentage_precision = correct_predictions / len(X) * 100
+
+        return percentage_precision
 
     def __create_y_true(self) -> pd.DataFrame:
         """
