@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 
+from src.utils import print_output
+
 
 def binary_cross_entropy_error(y_pred: pd.DataFrame,
                                y_true: pd.DataFrame) -> float:
@@ -40,9 +42,12 @@ def calc_precision(train_data: pd.DataFrame,
 
     formatted_predictions = y_pred.idxmax(axis=1).apply(
         lambda x: "M" if x == 0 else "B").values
-    x = train_data[outputs_columns].values.flatten()
+    X = train_data[outputs_columns].values.flatten()
 
-    correct_predictions = sum(formatted_predictions == x)
-    percentage_precision = correct_predictions / len(x) * 100
+    print_output("Actual values: ", X)
+    print_output(f"Predictions: {formatted_predictions}")
+
+    correct_predictions = sum(formatted_predictions == X)
+    percentage_precision = correct_predictions / len(X) * 100
 
     return percentage_precision

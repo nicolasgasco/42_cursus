@@ -115,9 +115,9 @@ class MultilayerPerceptron:
         # loss: float = self.__loss_function(predictions)
         # print(f"\nLoss: {loss}\n")
 
-        # precision: int = loss_utils.calc_precision(
-        #     self.__train_data, self.__outputs_columns, predictions)
-        # print(f"\nPrecision: {precision.round(2)}%\n")
+        precision: int = loss_utils.calc_precision(
+            self.__train_data, self.__outputs_columns, predictions)
+        print(f"\nPrecision: {precision.round(2)}%\n")
 
         # output_layer_neurons = self.__backpropagation_output_layer(predictions)
 
