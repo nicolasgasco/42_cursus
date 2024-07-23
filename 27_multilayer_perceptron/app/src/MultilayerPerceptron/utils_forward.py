@@ -1,10 +1,9 @@
-from src.Neuron import Neuron
 from src.Layer import Layer
 
 import pandas as pd
 
 
-def layer_output(neurons: list[Neuron],
+def layer_output(layer: Layer,
                  input: pd.DataFrame) -> pd.DataFrame:
     """
     Calculates the output of the hidden layer in a multilayer perceptron.
@@ -19,13 +18,10 @@ def layer_output(neurons: list[Neuron],
 
     """
 
-    weights = [
-        neuron.weights for neuron in neurons]
-    biases = [
-        neuron.bias for neuron in neurons]
+    weights = layer.weights
+    biases = layer.biases
 
-    weighted_sum = Layer.weighted_sum(
-        input, pd.DataFrame(weights), biases)
+    weighted_sum = Layer.weighted_sum(input, weights, biases)
 
     output = weighted_sum.map(
         lambda x: Layer.activation_relu(x))

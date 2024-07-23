@@ -1,9 +1,8 @@
 import numpy as np
 import pandas as pd
-
 from colorama import Fore, Style
+
 from src.SettingsImporter import SettingsImporter
-from src.Neuron import Neuron
 from src.Layer import Layer
 from src.MultilayerPerceptron.utils_forward import layer_output
 import src.MultilayerPerceptron.utils_loss as utils_loss
@@ -73,7 +72,7 @@ class MultilayerPerceptron:
         self.__output_layer = Layer(
             self.__hidden_layer_neurons, len(self.__outputs))
 
-    def __generate_hidden_layers(self) -> list[list[Neuron]]:
+    def __generate_hidden_layers(self) -> list[Layer]:
         """
         Generates the hidden layers for the multilayer perceptron.
 
@@ -96,13 +95,14 @@ class MultilayerPerceptron:
         return hidden_layers
 
     def __str__(self) -> str:
-        representation = "MultilayerPerceptron("
-        representation += f"inputs_columns={self.__inputs_columns}, "
-        representation += f"outputs={self.__outputs}, "
-        representation += f"outputs_columns={self.__outputs_columns}, "
-        representation += f"hidden_layers_count={self.__hidden_layers_count}, "
-        representation += f"hidden_layer_neurons={self.__hidden_layer_neurons}"
-        representation += "\n"
+        representation = "MultilayerPerceptron(\n"
+        representation += f"  inputs_columns={self.__inputs_columns},\n"
+        representation += f"  outputs={self.__outputs},\n"
+        representation += f"  outputs_columns={self.__outputs_columns},\n"
+        representation += f"  hidden_layers_count={self.__hidden_layers_count}\n"
+        representation += f"  hidden_layer_neurons={self.__hidden_layer_neurons}\n"
+        representation += f"  learning_rate={self.__learning_rate}\n"
+        representation += ")\n"
 
         return representation
 
@@ -135,16 +135,9 @@ class MultilayerPerceptron:
             print_output(f"{Fore.YELLOW}HIDDEN LAYER {i}{Style.RESET_ALL}")
             print_output(f"Hidden layer input:\n{hidden_neurons_inputs}\n")
 
-            hidden_layer_neurons = hidden_layer.neurons
-
-            print_output("Hidden layer neurons:")
-            for i, neuron in enumerate(hidden_layer_neurons):
-                print_output(
-                    f"{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
-            print_output("\n")
-
+            print_output(hidden_layer, "\n")
             hidden_layer.input = hidden_neurons_inputs
-            hidden_layer_outputs = layer_output(hidden_layer_neurons,
+            hidden_layer_outputs = layer_output(hidden_layer,
                                                 hidden_neurons_inputs)
             hidden_layer.output = hidden_layer_outputs
             print_output(f"Hidden layer output:\n{hidden_layer_outputs}\n")
@@ -154,21 +147,18 @@ class MultilayerPerceptron:
         print_output(f"{Fore.YELLOW}OUTPUT LAYER{Style.RESET_ALL}")
         print_output(f"Output layer inputs:\n{hidden_layer_outputs}\n")
 
-        # self.__output_layer.input = hidden_layer_outputs
-
-        print_output("Output layer neurons:")
-        for i, neuron in enumerate(self.__output_layer.neurons):
-            print_output(f"{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
-        print_output("\n")
-
+        print_output(self.__output_layer, "\n")
         output_layer_neurons_outputs = layer_output(
-            self.__output_layer.neurons, hidden_layer_outputs)
+            self.__output_layer, hidden_layer_outputs)
+
+        print_output(
+            f"Output layer outputs:\n{output_layer_neurons_outputs}\n")
 
         output_layer_outputs = output_layer_neurons_outputs
 
         output_layer_probabilities = output_layer_outputs.apply(
             lambda x: Layer.softmax(x), axis=1)
-        print_output(f"Softmax probabilities:\n{output_layer_probabilities}\n")
+        print_output(f"Softmax outputs:\n{output_layer_probabilities}\n")
 
         return output_layer_probabilities
 

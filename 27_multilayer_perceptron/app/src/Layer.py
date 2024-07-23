@@ -1,23 +1,28 @@
 import pandas as pd
 import numpy as np
 import math as math
+from colorama import Fore, Style
 
-from src.Neuron import Neuron
 from src.utils import rand_small_float
 
 
 class Layer:
     def __init__(self, n_inputs: int, n_neurons: int):
-        self.__neurons: list[Neuron] = [
-            Neuron([rand_small_float()] * n_inputs, rand_small_float())
-            for _ in range(n_neurons)]
+        self.__weights: pd.DataFrame = pd.DataFrame(
+            np.full((n_inputs, n_neurons), rand_small_float()))
+        self.__biases: list[float] = [rand_small_float()
+                                      for _ in range(n_neurons)]
 
         self.__input: pd.DataFrame = pd.DataFrame()
         self.__output: pd.DataFrame = pd.DataFrame()
 
     @property
-    def neurons(self) -> list[Neuron | Neuron]:
-        return self.__neurons
+    def weights(self) -> pd.DataFrame:
+        return self.__weights
+
+    @property
+    def biases(self) -> list[float]:
+        return self.__biases
 
     @property
     def input(self) -> pd.DataFrame:
@@ -35,11 +40,32 @@ class Layer:
     def output(self, output: pd.DataFrame):
         self.__output = output
 
+    def __repr__(self) -> str:
+        """
+        Returns a string representation of the Layer object.
+
+        The string representation includes the weights and biases of the layer.
+
+        Returns:
+            str: A string representation of the Layer object.
+        """
+
+        representation = "Layer(\n"
+
+        for i in self.__weights.columns:
+            representation += f"{Fore.BLUE}Neuron {i}{Style.RESET_ALL}: "
+            representation += f"weights={self.__weights[i].to_list()}, "
+            representation += f"bias={self.__biases[i]}\n"
+
+        representation += ")"
+
+        return representation
+
     @staticmethod
     def weighted_sum(inputs: pd.DataFrame,
                      weights: pd.DataFrame,
                      biases: list[float]) -> pd.DataFrame:
-        result = np.dot(inputs, np.array(weights).T) + biases
+        result = np.dot(inputs, np.array(weights)) + biases
 
         return pd.DataFrame(result)
 
