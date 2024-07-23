@@ -9,6 +9,7 @@ services:
     environment:
       - DATA_DIR_PATH=/multilayer_perceptron/data
       - DATA_PATH=/multilayer_perceptron/data/data.csv
-      - TRAIN_PATH=/multilayer_perceptron/data/data_train.csv
-      - TEST_PATH=/multilayer_perceptron/data/data_test.csv
+      - PRINT_OUTPUT=0
       - SETTINGS_DIR_PATH=/multilayer_perceptron/app/settings
+      - TEST_PATH=/multilayer_perceptron/data/data_test.csv
+      - TRAIN_PATH=/multilayer_perceptron/data/data_train.csv

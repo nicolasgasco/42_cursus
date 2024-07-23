@@ -1,5 +1,6 @@
 from src.DataImporter import DataImporter
 from src.MultilayerPerceptron.MultilayerPerceptron import MultilayerPerceptron
+from src.utils import print_output
 
 
 def main():
@@ -8,7 +9,7 @@ def main():
 
     # pass down only first row of data set for now
     multilayer_perceptron = MultilayerPerceptron(train_data.iloc[0:6])
-    print(multilayer_perceptron)
+    print_output(multilayer_perceptron)
 
     # Full features ["24", "29", "4", "8", "9"],
     multilayer_perceptron.train()
