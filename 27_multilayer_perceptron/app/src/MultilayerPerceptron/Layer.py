@@ -5,17 +5,11 @@ from src.utils import rand_small_float
 
 
 class Layer:
-    def __init__(self, is_output_layer: bool,
-                 weights_num: int, inputs_num: int):
+    def __init__(self, n_inputs: int, n_neurons: int):
 
-        if (is_output_layer):
-            self.__neurons: list[Neuron] = [
-                Neuron([rand_small_float()] * weights_num, rand_small_float())
-                for _ in range(inputs_num)]
-        else:
-            self.__neurons: list[Neuron] = [
-                Neuron([rand_small_float()] * weights_num, rand_small_float())
-                for _ in range(inputs_num)]
+        self.__neurons: list[Neuron] = [
+            Neuron([rand_small_float()] * n_inputs, rand_small_float())
+            for _ in range(n_neurons)]
 
         self.__input: pd.DataFrame = pd.DataFrame()
 

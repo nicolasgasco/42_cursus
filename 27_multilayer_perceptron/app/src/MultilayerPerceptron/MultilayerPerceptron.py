@@ -70,9 +70,8 @@ class MultilayerPerceptron:
 
         self.__hidden_layers: list[Layer] = self.__generate_hidden_layers()
 
-        self.__output_layer = Layer(True,
-                                    self.__hidden_layer_neurons,
-                                    len(self.__outputs))
+        self.__output_layer = Layer(
+            self.__hidden_layer_neurons, len(self.__outputs))
 
     def __generate_hidden_layers(self) -> list[list[Neuron]]:
         """
@@ -89,8 +88,7 @@ class MultilayerPerceptron:
 
         weights_num = len(x.columns)
         for _ in range(self.__hidden_layers_count):
-            hidden_layer = Layer(False, weights_num,
-                                 self.__hidden_layer_neurons)
+            hidden_layer = Layer(weights_num, self.__hidden_layer_neurons)
             hidden_layers.append(hidden_layer)
             weights_num = self.__hidden_layer_neurons
 
