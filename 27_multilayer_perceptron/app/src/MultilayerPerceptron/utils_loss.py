@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
 
-from src.utils import print_output
-
 
 def binary_cross_entropy_error(y_pred: pd.DataFrame,
                                y_true: pd.DataFrame) -> float:
