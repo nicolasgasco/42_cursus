@@ -3,7 +3,7 @@ from src.Neuron import Neuron
 import pandas as pd
 
 
-def calc_layer_output(neurons: list[Neuron],
+def layer_output(neurons: list[Neuron],
                       input: pd.DataFrame) -> pd.DataFrame:
     """
     Calculates the output of the hidden layer in a multilayer perceptron.

@@ -5,7 +5,7 @@ from colorama import Fore, Style
 from src.SettingsImporter import SettingsImporter
 from src.Neuron import Neuron
 from src.MultilayerPerceptron.Layer import Layer
-from src.MultilayerPerceptron.forward_utils import calc_layer_output
+from src.MultilayerPerceptron.forward_utils import layer_output
 
 import src.MultilayerPerceptron.loss_utils as loss_utils
 
@@ -141,8 +141,8 @@ class MultilayerPerceptron:
                 print(f"{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
             print("\n")
 
-            hidden_layer_outputs = calc_layer_output(hidden_layer_neurons,
-                                                     hidden_neurons_inputs)
+            hidden_layer_outputs = layer_output(hidden_layer_neurons,
+                                                hidden_neurons_inputs)
             print(f"Hidden layer output:\n{hidden_layer_outputs}\n")
 
             hidden_neurons_inputs = hidden_layer_outputs
@@ -157,7 +157,7 @@ class MultilayerPerceptron:
             print(f"{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
         print("\n")
 
-        output_layer_neurons_outputs = calc_layer_output(
+        output_layer_neurons_outputs = layer_output(
             self.__output_layer.neurons, hidden_layer_outputs)
 
         output_layer_outputs = output_layer_neurons_outputs
