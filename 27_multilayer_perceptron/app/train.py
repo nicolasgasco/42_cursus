@@ -1,9 +1,13 @@
+import numpy as np
+
 from src.DataImporter import DataImporter
 from src.MultilayerPerceptron.MultilayerPerceptron import MultilayerPerceptron
 from src.utils import print_output
 
 
 def main():
+    np.random.seed(0)  # TODO remove before deployment
+
     train_data = DataImporter.import_train_data()
     train_data = DataImporter.normalize_data(train_data)
 
