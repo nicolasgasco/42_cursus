@@ -143,8 +143,10 @@ class MultilayerPerceptron:
                     f"{Fore.GREEN}Neuron {i}{Style.RESET_ALL}: {neuron}")
             print_output("\n")
 
+            hidden_layer.input = hidden_neurons_inputs
             hidden_layer_outputs = layer_output(hidden_layer_neurons,
                                                 hidden_neurons_inputs)
+            hidden_layer.output = hidden_layer_outputs
             print_output(f"Hidden layer output:\n{hidden_layer_outputs}\n")
 
             hidden_neurons_inputs = hidden_layer_outputs
@@ -165,7 +167,7 @@ class MultilayerPerceptron:
         output_layer_outputs = output_layer_neurons_outputs
 
         output_layer_probabilities = output_layer_outputs.apply(
-            lambda x: Neuron.softmax(x), axis=1)
+            lambda x: Layer.softmax(x), axis=1)
         print_output(f"Softmax probabilities:\n{output_layer_probabilities}\n")
 
         return output_layer_probabilities
