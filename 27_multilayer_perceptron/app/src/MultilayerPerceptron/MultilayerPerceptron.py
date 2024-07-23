@@ -82,15 +82,16 @@ class MultilayerPerceptron:
             and contains instances of the Neuron class.
         """
 
-        x = self.__train_data[self.__inputs_columns]
+        X = self.__train_data[self.__inputs_columns]
 
         hidden_layers: list[Layer] = []
 
-        weights_num = len(x.columns)
+        n_inputs = len(X.columns)
+        n_neurons = self.__hidden_layer_neurons
         for _ in range(self.__hidden_layers_count):
-            hidden_layer = Layer(weights_num, self.__hidden_layer_neurons)
+            hidden_layer = Layer(n_inputs, n_neurons)
             hidden_layers.append(hidden_layer)
-            weights_num = self.__hidden_layer_neurons
+            n_inputs = n_neurons
 
         return hidden_layers
 

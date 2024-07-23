@@ -6,7 +6,6 @@ from src.utils import rand_small_float
 
 class Layer:
     def __init__(self, n_inputs: int, n_neurons: int):
-
         self.__neurons: list[Neuron] = [
             Neuron([rand_small_float()] * n_inputs, rand_small_float())
             for _ in range(n_neurons)]
