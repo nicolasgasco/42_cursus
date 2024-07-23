@@ -28,6 +28,6 @@ def rand_small_float() -> float:
       float: A random small float number.
     """
 
-    num: float = np.random.randn() * 0.01
+    num: float = np.random.randn() * 0.1
 
     return num
