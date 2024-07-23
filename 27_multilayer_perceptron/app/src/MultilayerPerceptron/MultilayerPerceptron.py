@@ -4,9 +4,9 @@ import pandas as pd
 from colorama import Fore, Style
 from src.SettingsImporter import SettingsImporter
 from src.Neuron import Neuron
-from src.MultilayerPerceptron.Layer import Layer
-from src.MultilayerPerceptron.forward_utils import layer_output
-import src.MultilayerPerceptron.loss_utils as loss_utils
+from src.Layer import Layer
+from src.MultilayerPerceptron.utils_forward import layer_output
+import src.MultilayerPerceptron.utils_loss as utils_loss
 from src.utils import print_output
 
 
@@ -114,7 +114,7 @@ class MultilayerPerceptron:
         # loss: float = self.__loss_function(predictions)
         # print(f"\nLoss: {loss}\n")
 
-        precision: int = loss_utils.calc_precision(
+        precision: int = utils_loss.calc_precision(
             self.__train_data, self.__outputs_columns, predictions)
         print(f"\nPrecision: {precision.round(2)}%\n")
 
@@ -215,7 +215,7 @@ class MultilayerPerceptron:
         y_true = self.__create_y_true()
         print(f"\ny_true:\n{y_true}")
 
-        loss = loss_utils.binary_cross_entropy_error(y_pred_clipped, y_true)
+        loss = utils_loss.binary_cross_entropy_error(y_pred_clipped, y_true)
 
         return loss
 
