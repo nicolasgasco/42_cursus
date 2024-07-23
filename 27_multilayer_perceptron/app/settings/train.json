@@ -1,8 +1,9 @@
 {
   "inputs_columns": ["4", "8", "9"],
   "outputs": ["M", "B"],
-  "outputs_columns": ["1"],
+  "outputs_column": "1",
   "hidden_layers": 2,
   "hidden_layer_neurons": 2,
-  "learning_rate": 0.1
+  "learning_rate": 0.1,
+  "activation_function": "sigmoid"
 }

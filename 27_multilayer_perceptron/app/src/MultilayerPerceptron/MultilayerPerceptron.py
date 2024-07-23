@@ -53,6 +53,14 @@ class MultilayerPerceptron:
             error_message = "MultilayerPerceptron: learning_rate is < 1."
             assert settings["learning_rate"] > 0, error_message
 
+            error_message = "MultilayerPerceptron: activation_function missing."
+            assert "activation_function" in settings, error_message
+            error_message = "MultilayerPerceptron: activation_function is None."
+            assert settings["activation_function"] is not None, error_message
+            supported_activations = ["relu", "sigmoid"]
+            error_message = "MultilayerPerceptron: activation_function not supported."
+            assert settings["activation_function"] in supported_activations, error_message
+
         settings_importer = SettingsImporter("train.json")
         settings = settings_importer.import_settings()
         __validate_settings(settings)
@@ -63,6 +71,7 @@ class MultilayerPerceptron:
         self.__outputs_column: list[str] = settings["outputs_column"]
         self.__hidden_layers_count: int = settings["hidden_layers"]
         self.__hidden_layer_neurons: int = settings["hidden_layer_neurons"]
+        self.__activation_function: str = settings["activation_function"]
 
         self.__learning_rate: float = settings["learning_rate"]
 
@@ -139,8 +148,12 @@ class MultilayerPerceptron:
             hidden_layer.input = hidden_neurons_inputs
             hidden_layer_weighted_sum = hidden_layer.weighted_sum(
                 hidden_neurons_inputs)
-            hidden_layer_outputs = hidden_layer_weighted_sum.map(
-                lambda x: Layer.activation_relu(x))
+            if (self.__activation_function == "sigmoid"):
+                hidden_layer_outputs = hidden_layer_weighted_sum.map(
+                    lambda x: Layer.activation_sigmoid(x))
+            else:
+                hidden_layer_outputs = hidden_layer_weighted_sum.map(
+                    lambda x: Layer.activation_relu(x))
             hidden_layer.output = hidden_layer_outputs
 
             print_output(f"Hidden layer output:\n{hidden_layer_outputs}\n")
