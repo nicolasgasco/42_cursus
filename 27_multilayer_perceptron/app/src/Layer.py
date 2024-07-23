@@ -134,5 +134,5 @@ class Layer:
         pd.DataFrame: The DataFrame with softmax applied to each element.
         """
 
-        exp_values = np.exp(x)
+        exp_values = np.exp(x - np.max(x))
         return exp_values / np.sum(exp_values)
