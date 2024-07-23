@@ -1,4 +1,5 @@
 import os as os
+import numpy as np
 
 
 def print_output(args):
@@ -6,3 +7,8 @@ def print_output(args):
 
     if (should_print):
         print(args)
+
+
+def rand_small_float() -> float:
+    num: float = np.random.randn() * 0.1
+    return num
