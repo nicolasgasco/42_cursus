@@ -137,10 +137,14 @@ class MultilayerPerceptron:
             print_output(f"Hidden layer input:\n{hidden_neurons_inputs}\n")
 
             print_output(hidden_layer, "\n")
+
             hidden_layer.input = hidden_neurons_inputs
-            hidden_layer_outputs = layer_output(hidden_layer,
-                                                hidden_neurons_inputs)
+            hidden_layer_weighted_sum = hidden_layer.weighted_sum(
+                hidden_neurons_inputs)
+            hidden_layer_outputs = hidden_layer_weighted_sum.map(
+                lambda x: Layer.activation_relu(x))
             hidden_layer.output = hidden_layer_outputs
+
             print_output(f"Hidden layer output:\n{hidden_layer_outputs}\n")
 
             hidden_neurons_inputs = hidden_layer_outputs
@@ -149,16 +153,17 @@ class MultilayerPerceptron:
         print_output(f"Output layer inputs:\n{hidden_layer_outputs}\n")
 
         print_output(self.__output_layer, "\n")
-        output_layer_neurons_outputs = layer_output(
-            self.__output_layer, hidden_layer_outputs)
+        output_layer_inputs = hidden_layer_outputs
+        self.__output_layer.input = output_layer_inputs
+        output_layer_outputs = self.__output_layer.weighted_sum(
+            output_layer_inputs)
 
         print_output(
-            f"Output layer outputs:\n{output_layer_neurons_outputs}\n")
-
-        output_layer_outputs = output_layer_neurons_outputs
+            f"Output layer outputs:\n{output_layer_outputs}\n")
 
         output_layer_probabilities = output_layer_outputs.apply(
             lambda x: Layer.softmax(x), axis=1)
+        self.__output_layer.output = output_layer_probabilities
         print_output(f"Softmax outputs:\n{output_layer_probabilities}\n")
 
         return output_layer_probabilities

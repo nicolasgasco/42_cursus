@@ -63,11 +63,18 @@ class Layer:
 
         return representation
 
-    @staticmethod
-    def weighted_sum(inputs: pd.DataFrame,
-                     weights: pd.DataFrame,
-                     biases: list[float]) -> pd.DataFrame:
-        result = np.dot(inputs, np.array(weights)) + biases
+    def weighted_sum(self, inputs: pd.DataFrame) -> pd.DataFrame:
+        """
+        Calculates the weighted sum of the inputs.
+
+        Args:
+            inputs (pd.DataFrame): The input data.
+
+        Returns:
+            pd.DataFrame: The result of the weighted sum.
+        """
+
+        result = np.dot(inputs, np.array(self.__weights)) + self.__biases
 
         return pd.DataFrame(result)
 
