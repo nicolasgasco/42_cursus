@@ -240,7 +240,7 @@ class MultilayerPerceptron:
             float: The calculated loss.
         """
 
-        y_pred = y_pred.clip(1e-7, 1 - 1e-7)  # to avoid log(0)
+        y_pred = y_pred.clip(1e-7, 1-1e-7)  # to avoid log(0)
         y_pred.columns = self.__outputs  # for compatibility with y_true
 
         y_true: pd.DataFrame = self.__create_y_true()
