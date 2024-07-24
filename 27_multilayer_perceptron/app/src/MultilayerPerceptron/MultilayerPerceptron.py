@@ -120,11 +120,11 @@ class MultilayerPerceptron:
 
         predictions: pd.DataFrame = self.__forward()
 
-        # loss: float = self.__loss_function(predictions)
-        # print(f"\nLoss: {loss}\n")
-
         accuracy: int = self.__accuracy(predictions)
-        print(f"\nPrecision: {accuracy.round(2)}%\n")
+        print_output(f"\nAccuracy: {accuracy.round(2)}%\n")
+
+        loss = self.__loss_function(predictions)
+        print_output(f"Loss: {loss}\n")
 
         # output_layer_neurons = self.__backpropagation_output_layer(predictions)
 
@@ -233,22 +233,24 @@ class MultilayerPerceptron:
         Calculate the loss for the predicted labels.
 
         Args:
-            y_pred (pd.DataFrame): A DataFrame containing the predicted labels.
+            predictions (pd.DataFrame): A DataFrame containing
+            the predicted labels.
 
         Returns:
             float: The calculated loss.
         """
 
-        print(f"{Fore.YELLOW}LOSS CALCULATION{Style.RESET_ALL}")
+        y_pred = y_pred.clip(1e-7, 1 - 1e-7)  # to avoid log(0)
+        y_pred.columns = self.__outputs  # for compatibility with y_true
 
-        y_pred_clipped = y_pred.clip(1e-7, 1 - 1e-7)  # to avoid log(0)
-        y_pred_clipped.columns = self.__outputs  # for compatibility with y_true
-        print("y_pred:\n", y_pred_clipped)
+        y_true: pd.DataFrame = self.__create_y_true()
 
-        y_true = self.__create_y_true()
-        print(f"\ny_true:\n{y_true}")
-
-        loss = utils_loss.binary_cross_entropy_error(y_pred_clipped, y_true)
+        if (len(self.__outputs) > 2):
+            loss = utils_loss.categorical_cross_entropy_error(y_pred, y_true)
+            print_output("Computing categorical cross-entropy loss...")
+        else:
+            loss = utils_loss.binary_cross_entropy_error(y_pred, y_true)
+            print_output("Computing binary cross-entropy loss...")
 
         return loss
 
