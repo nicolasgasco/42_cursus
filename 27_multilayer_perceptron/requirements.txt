@@ -1,5 +1,9 @@
 colorama==0.4.6
 matplotlib==3.9.0
+mypy==1.11.0
 networkx==3.3.0
 pandas==2.2.2
+pandas-stubs==2.2.2.240603
 seaborn==0.13.2
+types-colorama==0.4.15.20240311
+types-seaborn==0.13.2.20240618

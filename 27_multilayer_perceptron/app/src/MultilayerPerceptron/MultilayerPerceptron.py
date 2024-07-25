@@ -120,7 +120,7 @@ class MultilayerPerceptron:
 
         predictions: pd.DataFrame = self.__forward()
 
-        accuracy: int = self.__accuracy(predictions)
+        accuracy: float = self.__accuracy(predictions)
         print_output(f"\nAccuracy: {accuracy.round(2)}%\n")
 
         loss = self.__loss_function(predictions)
@@ -173,7 +173,7 @@ class MultilayerPerceptron:
             f"Output layer outputs:\n{output_layer_outputs}\n")
 
         output_layer_probabilities = output_layer_outputs.apply(
-            lambda x: Layer.activation_softmax(x), axis=1)
+            lambda x: Layer.activation_softmax(x), axis=1)  # type: ignore[call-overload]
         self.__output_layer.output = output_layer_probabilities
         print_output(f"Softmax outputs:\n{output_layer_probabilities}\n")
 
@@ -198,7 +198,7 @@ class MultilayerPerceptron:
         print_output("Actual values: ", X)
         print_output(f"Predictions: {formatted_predictions}")
 
-        correct_predictions = sum(formatted_predictions == X)
+        correct_predictions = sum((formatted_predictions == X))
         percentage_precision = correct_predictions / len(X) * 100
 
         return percentage_precision
@@ -241,7 +241,9 @@ class MultilayerPerceptron:
         """
 
         y_pred = y_pred.clip(1e-7, 1-1e-7)  # to avoid log(0)
-        y_pred.columns = self.__outputs  # for compatibility with y_true
+
+        # for compatibility with y_true
+        y_pred.columns = self.__outputs  # type: ignore[assignment]
 
         y_true: pd.DataFrame = self.__create_y_true()
 
@@ -254,41 +256,39 @@ class MultilayerPerceptron:
 
         return loss
 
-    def __backpropagation_output_layer(self, y_pred: pd.DataFrame) -> None:
-        print(f"{Fore.YELLOW}BACKPROPAGATION OUTPUT LAYER{Style.RESET_ALL}")
+    # def __backpropagation_output_layer(self, y_pred: pd.DataFrame) -> None:
+    #     print(f"{Fore.YELLOW}BACKPROPAGATION OUTPUT LAYER{Style.RESET_ALL}")
 
-        y_pred.columns = self.__outputs  # for compatibility with y_true
-        print("y_pred:\n", y_pred)
+    #     y_pred.columns = self.__outputs  # for compatibility with y_true
+    #     print("y_pred:\n", y_pred)
 
-        y_true = self.__create_y_true()
-        print(f"\ny_true:\n{y_true}")
+    #     y_true = self.__create_y_true()
+    #     print(f"\ny_true:\n{y_true}")
 
-        gradient = y_pred - y_true
+    #     gradient = y_pred - y_true
 
-        print(f"\nGradient:\n{gradient}")
+    #     print(f"\nGradient:\n{gradient}")
 
-        activation_output_layer = self.__output_layer.input
-        print(f"\nActivation output layer:\n{activation_output_layer}")
+    #     activation_output_layer = self.__output_layer.input
+    #     print(f"\nActivation output layer:\n{activation_output_layer}")
 
-        weights_gradient = pd.DataFrame(np.dot(
-            activation_output_layer.T, gradient) / len(y_pred))
-        print(f"\nWeights gradient:\n{weights_gradient}")
+    #     weights_gradient = pd.DataFrame(np.dot(
+    #         activation_output_layer.T, gradient) / len(y_pred))
+    #     print(f"\nWeights gradient:\n{weights_gradient}")
 
-        bias_gradient = np.sum(gradient, axis=0) / len(y_pred)
-        print(f"\nBias gradient:\n{bias_gradient}")
+    #     bias_gradient = np.sum(gradient, axis=0) / len(y_pred)
+    #     print(f"\nBias gradient:\n{bias_gradient}")
 
-        for i, neuron in enumerate(self.__output_layer.neurons):
-            print(f"\n{Fore.GREEN}Neuron {i}{Style.RESET_ALL}")
+    #     for i, neuron in enumerate(self.__output_layer.neurons):
+    #         print(f"\n{Fore.GREEN}Neuron {i}{Style.RESET_ALL}")
 
-            print("Before: ", neuron)
+    #         print("Before: ", neuron)
 
-            neuron.weights -= (self.__learning_rate *
-                               weights_gradient[i]).values
-            neuron.bias -= self.__learning_rate * bias_gradient.values[i]
+    #         neuron.weights -= (self.__learning_rate *
+    #                            weights_gradient[i]).values
+    #         neuron.bias -= self.__learning_rate * bias_gradient.values[i]
 
-            print("After: ", neuron)
-
-        return self.__output_layer.neurons
+    #         print("After: ", neuron)
 
     # def __backpropagation_hidden_layers(self,
     #                                     output_layer_neurons: list[Neuron])
