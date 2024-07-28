@@ -22,9 +22,17 @@ class Layer:
     def weights(self) -> pd.DataFrame:
         return self.__weights
 
+    @weights.setter
+    def weights(self, weights: pd.DataFrame):
+        self.__weights = weights
+
     @property
     def biases(self) -> list[float]:
         return self.__biases
+
+    @biases.setter
+    def biases(self, biases: list[float]):
+        self.__biases = biases
 
     @property
     def input(self) -> pd.DataFrame:
