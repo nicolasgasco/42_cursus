@@ -16,9 +16,14 @@ def binary_cross_entropy_error(y_pred: pd.DataFrame,
     """
 
     N = y_true.shape[0]
+    y_true = np.array(y_true)
 
-    loss = np.mean(-(1/N) * np.sum(y_true * np.log(y_pred) +
+    log_loss_component = y_true * np.log(y_pred)
+
+    loss = np.mean(-(1/N) * np.sum(log_loss_component +
                    (1 - y_true) * np.log(1 - y_pred), axis=0))
+
+    assert loss >= 0, "Loss should be greater than or equal to 0."
 
     return loss
 
@@ -36,6 +41,8 @@ def categorical_cross_entropy_error(y_pred: pd.DataFrame,
     Returns:
         float: The categorical cross-entropy error.
     """
+
+    y_true = np.array(y_true)
 
     total_loss = np.sum(y_true * np.log(y_pred), axis=1)
     loss = -np.mean(total_loss)
