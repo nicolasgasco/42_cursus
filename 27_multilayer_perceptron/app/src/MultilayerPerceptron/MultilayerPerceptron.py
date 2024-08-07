@@ -66,17 +66,22 @@ class MultilayerPerceptron:
         __validate_settings(settings)
 
         self.__train_data: pd.DataFrame = train_data
+        self.__batch_data = pd.DataFrame()
+
         self.__inputs_columns: list[str] = settings["inputs_columns"]
+
         self.__outputs: list[str] = settings["outputs"]
         self.__outputs_column: list[str] = settings["outputs_column"]
+
         self.__hidden_layers_count: int = settings["hidden_layers"]
         self.__hidden_layer_neurons: int = settings["hidden_layer_neurons"]
+
         self.__activation_function: str = settings["activation_function"]
 
         self.__learning_rate: float = settings["learning_rate"]
+        self.__epochs: int = 400
 
         self.__hidden_layers: list[Layer] = self.__generate_hidden_layers()
-
         self.__output_layer = Layer(
             self.__hidden_layer_neurons, len(self.__outputs))
 
@@ -89,11 +94,9 @@ class MultilayerPerceptron:
             and contains instances of the Neuron class.
         """
 
-        X = self.__train_data[self.__inputs_columns]
-
         hidden_layers: list[Layer] = []
 
-        n_inputs = len(X.columns)
+        n_inputs = len(self.__inputs_columns)
         n_neurons = self.__hidden_layer_neurons
         for _ in range(self.__hidden_layers_count):
             hidden_layer = Layer(n_inputs, n_neurons)
@@ -116,66 +119,68 @@ class MultilayerPerceptron:
         return representation
 
     def train(self) -> None:
-        print("Training model...\n")
+        self.__batch_data = self.__train_data
 
-        predictions: pd.DataFrame = self.__forward()
+        print("Starting training...\n")
 
-        accuracy: float = self.__accuracy(predictions)
-        print_output(f"\nAccuracy: {accuracy.round(2)}%\n")
+        loss = None
+        accuracy = None
 
-        loss = self.__loss_function(predictions)
-        print_output(f"Loss: {loss}\n")
+        for epoch in range(self.__epochs):
 
-        # output_layer_neurons = self.__backpropagation_output_layer(predictions)
+            predictions = self.__forward()
+            loss = self.__loss_function(predictions)
 
-        # self.__backpropagation_hidden_layers(output_layer_neurons)
+            predictions = pd.DataFrame(predictions)
+            pd.columns = self.__outputs
 
-    def __forward(self) -> pd.DataFrame:
-        X: pd.DataFrame = self.__train_data[self.__inputs_columns]
+            accuracy = self.__accuracy(predictions)
+
+            delta = self.__backpropagation_output_layer(predictions)
+            self.__backpropagation_hidden_layers(delta)
+
+            print(
+                f"\rEpoch {epoch + 1}/{self.__epochs} - Loss: {loss.round(10)}", end="")
+
+        print("\n")
+        print("Loss: ", loss.round(10))
+        print("Accuracy: ", accuracy.round(2))
+        print("\n")
+
+    def __forward(self) -> np.ndarray:
+        X = np.array(self.__batch_data[self.__inputs_columns])
 
         print_output(f"{Fore.YELLOW}INPUT LAYER{Style.RESET_ALL}")
-        print_output(f"\n{X}\n")
+        print_output(X, "\n")
 
-        hidden_neurons_inputs: pd.DataFrame = X
-        hidden_layer_outputs: pd.DataFrame = pd.DataFrame()
+        hidden_layer_inputs: np.ndarray = X
+
+        hidden_layer_outputs = None
 
         for i, hidden_layer in enumerate(self.__hidden_layers):
             print_output(f"{Fore.YELLOW}HIDDEN LAYER {i}{Style.RESET_ALL}")
-            print_output(f"Hidden layer input:\n{hidden_neurons_inputs}\n")
+            print_output("Hidden layer input:", hidden_layer_inputs, "\n")
 
             print_output(hidden_layer, "\n")
 
-            hidden_layer.input = hidden_neurons_inputs
-            hidden_layer_weighted_sum = hidden_layer.weighted_sum(
-                hidden_neurons_inputs)
-            if (self.__activation_function == "sigmoid"):
-                hidden_layer_outputs = hidden_layer_weighted_sum.map(
-                    lambda x: Layer.activation_sigmoid(x))
-            else:
-                hidden_layer_outputs = hidden_layer_weighted_sum.map(
-                    lambda x: Layer.activation_relu(x))
-            hidden_layer.output = hidden_layer_outputs
+            hidden_layer.forward(hidden_layer_inputs,
+                                 self.__activation_function)
 
-            print_output(f"Hidden layer output:\n{hidden_layer_outputs}\n")
+            hidden_layer_outputs = hidden_layer.output
+            print_output("Hidden layer output:", hidden_layer_outputs, "\n")
 
-            hidden_neurons_inputs = hidden_layer_outputs
+            hidden_layer_inputs = hidden_layer_outputs
 
         print_output(f"{Fore.YELLOW}OUTPUT LAYER{Style.RESET_ALL}")
-        print_output(f"Output layer inputs:\n{hidden_layer_outputs}\n")
+        print_output("Output layer inputs:", hidden_layer_outputs, "\n")
 
         print_output(self.__output_layer, "\n")
         output_layer_inputs = hidden_layer_outputs
-        self.__output_layer.input = output_layer_inputs
-        output_layer_outputs = self.__output_layer.weighted_sum(
-            output_layer_inputs)
+        self.__output_layer.forward(output_layer_inputs, "softmax")
 
-        print_output(
-            f"Output layer outputs:\n{output_layer_outputs}\n")
+        output_layer_probabilities = self.__output_layer.output
 
-        output_layer_probabilities = output_layer_outputs.apply(
-            lambda x: Layer.activation_softmax(x), axis=1)  # type: ignore[call-overload]
-        self.__output_layer.output = output_layer_probabilities
-        print_output(f"Softmax outputs:\n{output_layer_probabilities}\n")
+        print_output("Softmax outputs:", output_layer_probabilities, "\n")
 
         return output_layer_probabilities
 
@@ -193,26 +198,14 @@ class MultilayerPerceptron:
 
         formatted_predictions = y.idxmax(axis=1).apply(
             lambda x: self.__outputs[int(x)]).values
-        X = self.__train_data[self.__outputs_column].values.flatten()
-
-        print_output("Actual values: ", X)
-        print_output(f"Predictions: {formatted_predictions}")
+        X = self.__batch_data[self.__outputs_column].values.flatten()
 
         correct_predictions = sum((formatted_predictions == X))
         percentage_precision = correct_predictions / len(X) * 100
 
         return percentage_precision
 
-    def __create_y_true(self) -> pd.DataFrame:
-        """
-        Create a DataFrame containing the true labels
-        for the training data.
-
-        Returns:
-            pd.DataFrame: A DataFrame containing the true labels
-            for the training data.
-        """
-
+    def __create_y_true(self) -> np.ndarray:
         y_true = pd.DataFrame(columns=self.__outputs)
 
         malignant_column = self.__outputs[0]
@@ -228,93 +221,82 @@ class MultilayerPerceptron:
 
         return y_true
 
-    def __loss_function(self, y_pred: pd.DataFrame) -> float:
-        """
-        Calculate the loss for the predicted labels.
+    def __loss_function(self, y_pred: np.ndarray) -> float:
 
-        Args:
-            predictions (pd.DataFrame): A DataFrame containing
-            the predicted labels.
+        print_output(f"{Fore.YELLOW}LOSS FUNCTION{Style.RESET_ALL}")
 
-        Returns:
-            float: The calculated loss.
-        """
-
+        y_pred = pd.DataFrame(y_pred)
         y_pred = y_pred.clip(1e-7, 1-1e-7)  # to avoid log(0)
 
         # for compatibility with y_true
         y_pred.columns = self.__outputs  # type: ignore[assignment]
 
-        y_true: pd.DataFrame = self.__create_y_true()
+        y_true = self.__create_y_true()
 
-        if (len(self.__outputs) > 2):
+        # TODO add setting for function
+        # TODO activate this later
+        if (len(self.__outputs) > 20):
             loss = utils_loss.categorical_cross_entropy_error(y_pred, y_true)
-            print_output("Computing categorical cross-entropy loss...")
+            print_output("Computing categorical cross-entropy loss...\n")
         else:
             loss = utils_loss.binary_cross_entropy_error(y_pred, y_true)
-            print_output("Computing binary cross-entropy loss...")
+            print_output("Computing binary cross-entropy loss...\n")
 
         return loss
 
-    # def __backpropagation_output_layer(self, y_pred: pd.DataFrame) -> None:
-    #     print(f"{Fore.YELLOW}BACKPROPAGATION OUTPUT LAYER{Style.RESET_ALL}")
+    def __backpropagation_output_layer(self,
+                                       y_pred: pd.DataFrame) -> np.ndarray:
+        print_output(
+            f"{Fore.YELLOW}BACKPROPAGATION OUTPUT LAYER{Style.RESET_ALL}")
 
-    #     y_pred.columns = self.__outputs  # for compatibility with y_true
-    #     print("y_pred:\n", y_pred)
+        print_output(f"{self.__output_layer}\n")
 
-    #     y_true = self.__create_y_true()
-    #     print(f"\ny_true:\n{y_true}")
+        y_true = self.__create_y_true()
+        y_true = np.array(y_true)
 
-    #     gradient = y_pred - y_true
+        output_gradient = y_pred - y_true
 
-    #     print(f"\nGradient:\n{gradient}")
+        m = len(self.__batch_data)
 
-    #     activation_output_layer = self.__output_layer.input
-    #     print(f"\nActivation output layer:\n{activation_output_layer}")
+        weights_gradient = 1 / m * \
+            np.dot(output_gradient.T, self.__output_layer.input)
+        bias_gradient = 1 / m * np.sum(output_gradient, axis=0)
 
-    #     weights_gradient = pd.DataFrame(np.dot(
-    #         activation_output_layer.T, gradient) / len(y_pred))
-    #     print(f"\nWeights gradient:\n{weights_gradient}")
+        self.__output_layer.weights -= self.__learning_rate * weights_gradient
+        self.__output_layer.biases -= self.__learning_rate * bias_gradient[0]
 
-    #     bias_gradient = np.sum(gradient, axis=0) / len(y_pred)
-    #     print(f"\nBias gradient:\n{bias_gradient}")
+        print_output(f"{self.__output_layer}\n")
 
-    #     for i, neuron in enumerate(self.__output_layer.neurons):
-    #         print(f"\n{Fore.GREEN}Neuron {i}{Style.RESET_ALL}")
+        return output_gradient
 
-    #         print("Before: ", neuron)
+    def __backpropagation_hidden_layers(self, delta_L: np.ndarray) -> None:
+        print_output(
+            f"\n{Fore.YELLOW}BACKPROPAGATION HIDDEN LAYERS{Style.RESET_ALL}")
 
-    #         neuron.weights -= (self.__learning_rate *
-    #                            weights_gradient[i]).values
-    #         neuron.bias -= self.__learning_rate * bias_gradient.values[i]
+        delta_prev = delta_L
+        for i, hidden_layer in enumerate(reversed(self.__hidden_layers)):
+            original_i = len(self.__hidden_layers) - 1 - i
+            print_output(
+                f"\n{Fore.YELLOW}HIDDEN LAYER {original_i}{Style.RESET_ALL}")
 
-    #         print("After: ", neuron)
+            print_output(f"{hidden_layer}, i is {original_i}\n")
 
-    # def __backpropagation_hidden_layers(self,
-    #                                     output_layer_neurons: list[Neuron])
-    #         -> None:
-        # print(f"\n{Fore.YELLOW}BACKPROPAGATION HIDDEN LAYERS{Style.RESET_ALL}")
+            weights = self.__output_layer.weights if i == 0 else \
+                self.__hidden_layers[original_i + 1].weights
 
-        # next_layer_neurons=output_layer_neurons
-        # print("Next layer neurons: ", next_layer_neurons)
-        # for i, hidden_layer in enumerate(reversed(self.__hidden_layers)):
-        #     original_i=len(self.__hidden_layers) - 1 - i
-        #     print(f"\n{Fore.YELLOW}HIDDEN LAYER {original_i}{Style.RESET_ALL}")
+            m = len(self.__batch_data)
 
-        #     for i, neuron in enumerate(hidden_layer.neurons):
-        #         print(f"\n{Fore.GREEN}Neuron {i}{Style.RESET_ALL}")
+            output_gradient = np.dot(delta_prev, weights) * \
+                Layer.activation_relu_derivative(
+                hidden_layer.raw_output)
 
-        #         derivative=neuron.output * (1 - neuron.output)
-        #         print("Derivative: ", derivative)
+            weights_gradient = 1 / m * \
+                np.dot(output_gradient.T, hidden_layer.input)
+            bias_gradient = 1 / m * np.sum(output_gradient, axis=0)
 
-        #         print("\nIterating through next layer neurons")
-        #         gradient_sum=0
-        #         for next_neuron in next_layer_neurons:
-        #             print("next_neuron: ", next_neuron)
-        #             # Find the connection weight from the current neuron to the 'next_neuron'
-        #             connection_weight=next_neuron.weights[i]
-        #             # error_contribution = connection_weight * next_neuron.delta
-        #             # weighted_error_gradient_sum += error_contribution
-        #             print("\n")
+            hidden_layer.weights -= self.__learning_rate * weights_gradient
+            hidden_layer.biases -= self.__learning_rate * bias_gradient
 
-        #     next_layer_neurons=hidden_layer.neurons
+            delta_prev = output_gradient
+
+            print_output(f"{hidden_layer}\n")

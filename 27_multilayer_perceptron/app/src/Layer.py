@@ -1,29 +1,23 @@
-import pandas as pd
 import numpy as np
-import math as math
 from colorama import Fore, Style
-
-from src.utils import rand_small_float
 
 
 class Layer:
     def __init__(self, n_inputs: int, n_neurons: int):
-        # By initializing the weights with this shape,
-        # we don't need to transpose weights when calculating dot product
-        self.__weights = pd.DataFrame(
-            np.full((n_inputs, n_neurons), rand_small_float()))
+        self.__weights = np.random.rand(n_neurons, n_inputs) - 0.5
 
-        self.__biases = [rand_small_float() for _ in range(n_neurons)]
+        self.__biases = [0.0 for _ in range(n_neurons)]
 
-        self.__input: pd.DataFrame = pd.DataFrame()
-        self.__output: pd.DataFrame = pd.DataFrame()
+        self.__input = np.array([])
+        self.__output = np.array([])
+        self.__raw_output = np.array([])
 
     @property
-    def weights(self) -> pd.DataFrame:
+    def weights(self) -> np.ndarray:
         return self.__weights
 
     @weights.setter
-    def weights(self, weights: pd.DataFrame):
+    def weights(self, weights: np.ndarray):
         self.__weights = weights
 
     @property
@@ -35,112 +29,159 @@ class Layer:
         self.__biases = biases
 
     @property
-    def input(self) -> pd.DataFrame:
+    def input(self) -> np.ndarray:
         return self.__input
 
     @input.setter
-    def input(self, input: pd.DataFrame):
+    def input(self, input: np.ndarray):
         self.__input = input
 
     @property
-    def output(self) -> pd.DataFrame:
+    def output(self) -> np.ndarray:
         return self.__output
 
     @output.setter
-    def output(self, output: pd.DataFrame):
+    def output(self, output: np.ndarray):
         self.__output = output
+
+    @property
+    def raw_output(self) -> np.ndarray:
+        return self.__raw_output
+
+    @raw_output.setter
+    def raw_output(self, raw_output: np.ndarray):
+        self.__raw_output = raw_output
 
     def __repr__(self) -> str:
         """
-        Returns a string representation of the Layer object.
+        Returns a string representation of
+         Layer object.
 
-        The string representation includes the weights and biases of the layer.
+        The string representation includes
+         weights and biases of layer.
 
         Returns:
-            str: A string representation of the Layer object.
+            str: A string representation of
+             Layer object.
         """
 
         representation = "Layer(\n"
 
-        for i in self.__weights.columns:
+        for i in range(len(self.__weights)):
             representation += f"  {Fore.BLUE}Neuron {i}{Style.RESET_ALL}: "
-            representation += f"weights: {self.__weights[i].values}, "
+            representation += f"weights: {self.__weights[i]}, "
             representation += f"bias: {self.__biases[i]}\n"
 
         representation += ")"
 
         return representation
 
-    def weighted_sum(self, inputs: pd.DataFrame) -> pd.DataFrame:
+    def forward(self, inputs: np.ndarray, activation_function: str):
+        """
+        Perform the forward pass of the layer.
+        Args:
+            inputs (np.ndarray): The input data for the layer.
+            activation_function (str): The activation function to be applied.
+        Returns:
+            np.ndarray: The output of the layer after applying
+            the activation function.
+        """
+
+        self.__input = inputs
+
+        weighted_sum = self.weighted_sum(inputs)
+        self.__raw_output = weighted_sum
+
+        if (activation_function == "sigmoid"):
+            outputs = Layer.activation_sigmoid(weighted_sum)
+        elif (activation_function == "relu"):
+            outputs = Layer.activation_relu(weighted_sum)
+        elif (activation_function == "softmax"):
+            outputs = Layer.activation_softmax(weighted_sum)
+
+        self.__output = outputs
+
+    def weighted_sum(self, inputs: np.ndarray) -> np.ndarray:
         """
         Calculates the weighted sum of the inputs.
 
-        Args:
-            inputs (pd.DataFrame): The input data.
+        Parameters:
+            inputs (np.ndarray): The input values.
 
         Returns:
-            pd.DataFrame: The result of the weighted sum.
+            np.ndarray: The weighted sum of the inputs.
         """
 
-        result = np.dot(inputs, np.array(self.__weights)) + self.__biases
+        result = np.dot(inputs, self.__weights.T) + self.__biases
 
-        return pd.DataFrame(result)
+        return result
 
     @staticmethod
-    def activation_sigmoid(x: float):
+    def activation_sigmoid(x: np.ndarray) -> np.ndarray:
         """
-        Applies the sigmoid activation function to the input value.
+        Applies the sigmoid activation function to the input.
 
-        Args:
-            x (float): The input value.
+        Parameters:
+        x (np.ndarray): The input array.
 
         Returns:
-            float: The output value after applying the sigmoid function.
+        np.ndarray: The output array after applying the sigmoid function.
         """
 
-        return 1 / (1 + math.exp(-x))
+        return 1 / (1 + np.exp(-x))
 
     @staticmethod
-    def activation_relu(x: float):
+    def activation_relu(x: np.ndarray) -> np.ndarray:
         """
-        Applies the Rectified Linear Unit (ReLU) activation function
-        to the input.
+        Applies 
+         Rectified Linear Unit (ReLU) activation function
+        to 
+         input.
 
-        Args:
-            x (float): The input value.
+        Parameters:
+        x (np.ndarray): The input array.
 
         Returns:
-            float: The output value after applying
-            the ReLU activation function.
+        np.ndarray: The output array after applying
+        the ReLU activation function.
+        """
+        return np.maximum(0, x)
+
+    def activation_relu_derivative(x: np.ndarray) -> np.ndarray:
+        """
+        Calculates the derivative of the ReLU activation function.
+
+        Parameters:
+        x (np.ndarray): Input array.
+
+        Returns:
+        np.ndarray: Derivative of the ReLU activation function.
         """
 
-        return max(0, x)
+        return np.where(x > 0, 1, 0)
 
     @staticmethod
     def activation_step_function(x: float):
         """
-        Applies the step function to the input value.
-
-        Args:
-            x (float): The input value.
-
+        Applies the step function activation to the input.
+        Parameters:
+        x (float): The input value.
         Returns:
-            float: The output value after applying the step function.
+        int: The output value after applying the step function.
         """
 
         return 1 if x > 0 else 0
 
     @staticmethod
-    def activation_softmax(x: pd.DataFrame) -> pd.DataFrame:
+    def activation_softmax(x: np.ndarray) -> np.ndarray:
         """
-        Applies the softmax function to the input DataFrame.
-
+        Applies the softmax activation function to the input array.
         Parameters:
-        x (pd.DataFrame): The input DataFrame.
-
+        - x (np.ndarray): Input array.
         Returns:
-        pd.DataFrame: The DataFrame with softmax applied to each element.
+        - np.ndarray: Output array after applying
+        the softmax activation function.
         """
 
-        exp_values = np.exp(x - np.max(x))
-        return exp_values / np.sum(exp_values)
+        exp = np.exp(x)
+        return exp / np.sum(exp, axis=1, keepdims=True)

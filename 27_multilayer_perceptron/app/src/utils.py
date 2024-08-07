@@ -27,6 +27,7 @@ def print_output(*args, **kwargs) -> None:
                 print(arg)
 
 
+# TODO remove this if really unused
 def rand_small_float() -> float:
     """
     Generate a random small float number between -0.1 and 0.1.
