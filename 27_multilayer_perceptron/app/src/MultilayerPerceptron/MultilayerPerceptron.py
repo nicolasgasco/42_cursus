@@ -80,8 +80,8 @@ class MultilayerPerceptron:
         self.__activation_function: str = settings["activation_function"]
 
         self.__learning_rate: float = settings["learning_rate"]
-        self.__epochs: int = 50  # TODO add to settings
-        self.__batch_size: int = 6  # TODO add to settings
+        self.__epochs: int = 100  # TODO add to settings
+        self.__batch_size: int = 20  # TODO add to settings
 
         self.__hidden_layers: list[Layer] = self.__generate_hidden_layers()
         self.__output_layer = Layer(
@@ -129,6 +129,7 @@ class MultilayerPerceptron:
         loss = None
         accuracy = None
 
+        n_batches = len(self.__train_data) // batch_size + 1
         for b, i in enumerate(range(0, len(self.__train_data), batch_size)):
             self.__batch_data = self.__train_data[i:i + batch_size]
 
@@ -144,24 +145,27 @@ class MultilayerPerceptron:
                 delta = self.__backpropagation_output_layer(predictions)
                 self.__backpropagation_hidden_layers(delta)
 
-                print(
-                    f"\rBatch {b + 1}/{len(self.__train_data) // batch_size + 1} - Epoch {epoch + 1}/{self.__epochs} - Loss: {loss.round(10)}", end="")
+                output = f"\rBatch {Fore.YELLOW}{b + 1}{Style.RESET_ALL}/"
+                output += f"{n_batches}"
+                output += f" - Epoch {Fore.YELLOW}{epoch + 1}{Style.RESET_ALL}"
+                output += f"/{self.__epochs}"
+                output += " - Loss: "
+                output += f"{Fore.YELLOW}{loss.round(5)}{Style.RESET_ALL}"
+                print(output, end="")
 
         print("\n")
-        print("Loss: ", loss.round(10))
-        print("Accuracy: ", accuracy.round(2))
-        print("\n")
 
-        print("Training complete.\n")
+        output = f"\nFinal loss: {Fore.GREEN}{loss.round(5)}{Style.RESET_ALL}"
+        output += " - Accuracy: "
+        output += f"{Fore.GREEN}{accuracy.round(2)}{Style.RESET_ALL}\n"
+        print(output)
 
         print("Starting testing...\n")
-
         predictions = self.__forward(self.__test_data[self.__inputs_columns])
-
         accuracy = self.__accuracy(
             predictions, self.__test_data[self.__outputs_column])
-
-        print("Accuracy: ", accuracy.round(2))
+        print(
+            f"Test accuracy: {Fore.GREEN}{accuracy.round(2)}{Style.RESET_ALL}")
 
     def __forward(self, data: pd.DataFrame) -> np.ndarray:
         X = np.array(data)
