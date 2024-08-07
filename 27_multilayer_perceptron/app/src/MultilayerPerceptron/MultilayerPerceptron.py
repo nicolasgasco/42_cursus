@@ -79,7 +79,7 @@ class MultilayerPerceptron:
         self.__activation_function: str = settings["activation_function"]
 
         self.__learning_rate: float = settings["learning_rate"]
-        self.__epochs: int = 400
+        self.__epochs: int = 300
 
         self.__hidden_layers: list[Layer] = self.__generate_hidden_layers()
         self.__output_layer = Layer(
