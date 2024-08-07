@@ -9,7 +9,7 @@ from src.utils import print_output
 
 
 class MultilayerPerceptron:
-    def __init__(self, train_data: pd.DataFrame):
+    def __init__(self, train_data: pd.DataFrame, test_data: pd.DataFrame):
         def __validate_settings(settings: dict):
             err_message = "MultilayerPerceptron: settings validation failed."
             assert "inputs_columns" in settings, err_message
@@ -67,6 +67,7 @@ class MultilayerPerceptron:
 
         self.__train_data: pd.DataFrame = train_data
         self.__batch_data = pd.DataFrame()
+        self.__test_data: pd.DataFrame = test_data  # TODO add validation
 
         self.__inputs_columns: list[str] = settings["inputs_columns"]
 
@@ -79,8 +80,8 @@ class MultilayerPerceptron:
         self.__activation_function: str = settings["activation_function"]
 
         self.__learning_rate: float = settings["learning_rate"]
-        self.__epochs: int = 100  # TODO add to settings
-        self.__batch_size: int = 64  # TODO add to settings
+        self.__epochs: int = 50  # TODO add to settings
+        self.__batch_size: int = 6  # TODO add to settings
 
         self.__hidden_layers: list[Layer] = self.__generate_hidden_layers()
         self.__output_layer = Layer(
@@ -133,13 +134,12 @@ class MultilayerPerceptron:
 
             for epoch in range(self.__epochs):
 
-                predictions = self.__forward()
+                predictions = self.__forward(
+                    self.__batch_data[self.__inputs_columns])
                 loss = self.__loss_function(predictions)
 
-                predictions = pd.DataFrame(predictions)
-                pd.columns = self.__outputs
-
-                accuracy = self.__accuracy(predictions)
+                accuracy = self.__accuracy(
+                    predictions, self.__batch_data[self.__outputs_column])
 
                 delta = self.__backpropagation_output_layer(predictions)
                 self.__backpropagation_hidden_layers(delta)
@@ -152,8 +152,19 @@ class MultilayerPerceptron:
         print("Accuracy: ", accuracy.round(2))
         print("\n")
 
-    def __forward(self) -> np.ndarray:
-        X = np.array(self.__batch_data[self.__inputs_columns])
+        print("Training complete.\n")
+
+        print("Starting testing...\n")
+
+        predictions = self.__forward(self.__test_data[self.__inputs_columns])
+
+        accuracy = self.__accuracy(
+            predictions, self.__test_data[self.__outputs_column])
+
+        print("Accuracy: ", accuracy.round(2))
+
+    def __forward(self, data: pd.DataFrame) -> np.ndarray:
+        X = np.array(data)
 
         print_output(f"{Fore.YELLOW}INPUT LAYER{Style.RESET_ALL}")
         print_output(X, "\n")
@@ -189,7 +200,7 @@ class MultilayerPerceptron:
 
         return output_layer_probabilities
 
-    def __accuracy(self, y: pd.DataFrame) -> float:
+    def __accuracy(self, y: np.ndarray, x: pd.DataFrame) -> float:
         """
         Calculates the accuracy of the predictions made
         by the multilayer perceptron model.
@@ -201,9 +212,11 @@ class MultilayerPerceptron:
         - float: The accuracy of the predictions as a percentage.
         """
 
+        y = pd.DataFrame(y)
+
         formatted_predictions = y.idxmax(axis=1).apply(
             lambda x: self.__outputs[int(x)]).values
-        X = self.__batch_data[self.__outputs_column].values.flatten()
+        X = x.values.flatten()
 
         correct_predictions = sum((formatted_predictions == X))
         percentage_precision = correct_predictions / len(X) * 100
@@ -291,9 +304,15 @@ class MultilayerPerceptron:
 
             m = len(self.__batch_data)
 
-            output_gradient = np.dot(delta_prev, weights) * \
-                Layer.activation_relu_derivative(
-                hidden_layer.raw_output)
+            output_gradient = None
+            if self.__activation_function == "relu":
+                output_gradient = np.dot(delta_prev, weights) * \
+                    Layer.activation_relu_derivative(
+                    hidden_layer.raw_output)
+            elif self.__activation_function == "sigmoid":
+                output_gradient = np.dot(delta_prev, weights) * \
+                    Layer.activation_sigmoid_derivative(
+                    hidden_layer.raw_output)
 
             weights_gradient = 1 / m * \
                 np.dot(output_gradient.T, hidden_layer.input)

@@ -131,6 +131,20 @@ class Layer:
         return 1 / (1 + np.exp(-x))
 
     @staticmethod
+    def activation_sigmoid_derivative(x: np.ndarray) -> np.ndarray:
+        """
+        Calculates the derivative of the sigmoid activation function.
+
+        Parameters:
+        x (np.ndarray): Input array.
+
+        Returns:
+        np.ndarray: Derivative of the sigmoid activation function.
+        """
+
+        return x * (1 - x)
+
+    @staticmethod
     def activation_relu(x: np.ndarray) -> np.ndarray:
         """
         Applies 
