@@ -48,3 +48,21 @@ def categorical_cross_entropy_error(y_pred: pd.DataFrame,
     loss = -np.mean(total_loss)
 
     return loss
+
+
+def mean_squared_error(y_pred: pd.DataFrame,
+                       y_true: pd.DataFrame) -> float:
+    """
+    Calculates the mean squared error between predicted and true labels.
+
+    Args:
+        y_pred (pd.DataFrame): The predicted labels.
+        y_true (pd.DataFrame): The true labels.
+
+    Returns:
+        float: The mean squared error.
+    """
+
+    loss = np.mean((y_pred - y_true) ** 2)
+
+    return loss
