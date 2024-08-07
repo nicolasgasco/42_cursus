@@ -1,9 +1,9 @@
 {
-  "inputs_columns": ["4", "8", "24", "29"],
+  "inputs_columns": ["4", "8", "9", "24", "29"],
   "outputs": ["M", "B"],
   "outputs_column": "1",
-  "hidden_layers": 8,
-  "hidden_layer_neurons": 32,
+  "hidden_layers": 4,
+  "hidden_layer_neurons": 24,
   "learning_rate": 0.01,
   "activation_function": "relu"
 }

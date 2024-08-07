@@ -79,7 +79,8 @@ class MultilayerPerceptron:
         self.__activation_function: str = settings["activation_function"]
 
         self.__learning_rate: float = settings["learning_rate"]
-        self.__epochs: int = 300
+        self.__epochs: int = 100  # TODO add to settings
+        self.__batch_size: int = 64  # TODO add to settings
 
         self.__hidden_layers: list[Layer] = self.__generate_hidden_layers()
         self.__output_layer = Layer(
@@ -119,28 +120,32 @@ class MultilayerPerceptron:
         return representation
 
     def train(self) -> None:
-        self.__batch_data = self.__train_data
 
         print("Starting training...\n")
+
+        batch_size = self.__batch_size
 
         loss = None
         accuracy = None
 
-        for epoch in range(self.__epochs):
+        for b, i in enumerate(range(0, len(self.__train_data), batch_size)):
+            self.__batch_data = self.__train_data[i:i + batch_size]
 
-            predictions = self.__forward()
-            loss = self.__loss_function(predictions)
+            for epoch in range(self.__epochs):
 
-            predictions = pd.DataFrame(predictions)
-            pd.columns = self.__outputs
+                predictions = self.__forward()
+                loss = self.__loss_function(predictions)
 
-            accuracy = self.__accuracy(predictions)
+                predictions = pd.DataFrame(predictions)
+                pd.columns = self.__outputs
 
-            delta = self.__backpropagation_output_layer(predictions)
-            self.__backpropagation_hidden_layers(delta)
+                accuracy = self.__accuracy(predictions)
 
-            print(
-                f"\rEpoch {epoch + 1}/{self.__epochs} - Loss: {loss.round(10)}", end="")
+                delta = self.__backpropagation_output_layer(predictions)
+                self.__backpropagation_hidden_layers(delta)
+
+                print(
+                    f"\rBatch {b + 1}/{len(self.__train_data) // batch_size + 1} - Epoch {epoch + 1}/{self.__epochs} - Loss: {loss.round(10)}", end="")
 
         print("\n")
         print("Loss: ", loss.round(10))
@@ -209,13 +214,13 @@ class MultilayerPerceptron:
         y_true = pd.DataFrame(columns=self.__outputs)
 
         malignant_column = self.__outputs[0]
-        y_true[malignant_column] = self.__train_data[
+        y_true[malignant_column] = self.__batch_data[
             self.__outputs_column]
         y_true[malignant_column] = y_true[malignant_column].apply(
             lambda x: 1 if x == malignant_column else 0)
 
         benign_column = self.__outputs[1]
-        y_true[benign_column] = self.__train_data[self.__outputs_column]
+        y_true[benign_column] = self.__batch_data[self.__outputs_column]
         y_true[benign_column] = y_true[benign_column].apply(
             lambda x: 1 if x == benign_column else 0)
 
