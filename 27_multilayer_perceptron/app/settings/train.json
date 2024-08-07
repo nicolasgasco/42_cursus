@@ -1,5 +1,5 @@
 {
-  "inputs_columns": ["4", "8", "9", "24", "29"],
+  "inputs_columns": ["24", "29", "4", "8", "9"],
   "outputs": ["M", "B"],
   "outputs_column": "1",
   "hidden_layers": 4,

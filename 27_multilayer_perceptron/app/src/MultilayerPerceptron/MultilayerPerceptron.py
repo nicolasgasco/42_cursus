@@ -1,3 +1,4 @@
+import json as json
 import numpy as np
 import pandas as pd
 from colorama import Fore, Style
@@ -121,7 +122,6 @@ class MultilayerPerceptron:
         return representation
 
     def train(self) -> None:
-
         print("Starting training...\n")
 
         batch_size = self.__batch_size
@@ -155,12 +155,29 @@ class MultilayerPerceptron:
 
         print("\n")
 
-        output = f"\nFinal loss: {Fore.GREEN}{loss.round(5)}{Style.RESET_ALL}"
+        output = f"Final loss: {Fore.GREEN}{loss.round(5)}{Style.RESET_ALL}"
         output += " - Accuracy: "
         output += f"{Fore.GREEN}{accuracy.round(2)}{Style.RESET_ALL}\n"
         print(output)
 
+        # TODO move to separate method
+        weights_biases = {}
+        for i, hidden_layer in enumerate(self.__hidden_layers):
+            weights_biases[f"hidden_layer_{i}"] = {
+                "weights": hidden_layer.weights.tolist(),
+                "biases": hidden_layer.biases.tolist()
+            }
+        weights_biases["output_layer"] = {
+            "weights": self.__output_layer.weights.tolist(),
+            "biases": self.__output_layer.biases.tolist()
+        }
+
+        with open('weights_biases.json', 'w') as json_file:
+            json.dump(weights_biases, json_file, indent=4)
+
+    def test(self) -> None:
         print("Starting testing...\n")
+
         predictions = self.__forward(self.__test_data[self.__inputs_columns])
         accuracy = self.__accuracy(
             predictions, self.__test_data[self.__outputs_column])

@@ -21,6 +21,8 @@ def main():
     # Full features ["24", "29", "4", "8", "9"],
     multilayer_perceptron.train()
 
+    multilayer_perceptron.test()
+
 
 if __name__ == "__main__":
     main()
