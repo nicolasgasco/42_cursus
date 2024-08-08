@@ -1,12 +1,8 @@
-import numpy as np
-
 from src.DataImporter import DataImporter
 from src.MultilayerPerceptron.MultilayerPerceptron import MultilayerPerceptron
 
 
 def main():
-    np.random.seed(0)  # TODO remove before deployment
-
     train_data = DataImporter.import_train_data()
     train_data = DataImporter.normalize_data(train_data)
 
@@ -16,7 +12,10 @@ def main():
     multilayer_perceptron = MultilayerPerceptron(train_data)
     print(multilayer_perceptron)
 
-    multilayer_perceptron.train()
+    parameters = DataImporter.import_parameters()
+    multilayer_perceptron.import_parameters(parameters)
+
+    multilayer_perceptron.test(test_data)
 
 
 if __name__ == "__main__":

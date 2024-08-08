@@ -1,4 +1,5 @@
-import os
+import json as json
+import os as os
 import pandas as pd
 
 
@@ -93,3 +94,18 @@ class DataImporter:
         test_data: pd.DataFrame = pd.read_csv(test_data_path)
 
         return test_data
+
+    @staticmethod
+    def import_parameters() -> dict:
+        parameters_path: str | None = os.environ.get("PARAMETERS_PATH")
+
+        err_message = "PARAMETERS_PATH environment variable not set."
+        assert parameters_path is not None, err_message
+
+        try:
+            with open(parameters_path, "r") as file:
+                parameters = json.load(file)
+
+                return parameters
+        except FileNotFoundError:
+            raise FileNotFoundError("DataImporter: Parameters file not found.")

@@ -13,3 +13,4 @@ services:
       - SETTINGS_DIR_PATH=/multilayer_perceptron/app/settings
       - TEST_PATH=/multilayer_perceptron/data/data_test.csv
       - TRAIN_PATH=/multilayer_perceptron/data/data_train.csv
+      - PARAMETERS_PATH=/multilayer_perceptron/data/parameters.json

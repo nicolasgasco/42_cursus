@@ -1,7 +1,8 @@
+from colorama import Fore, Style
 import json as json
 import numpy as np
+import os as os
 import pandas as pd
-from colorama import Fore, Style
 
 from src.SettingsImporter import SettingsImporter
 from src.Layer import Layer
@@ -10,7 +11,7 @@ from src.utils import print_output
 
 
 class MultilayerPerceptron:
-    def __init__(self, train_data: pd.DataFrame, test_data: pd.DataFrame):
+    def __init__(self, train_data: pd.DataFrame):
         def __validate_settings(settings: dict):
             err_message = "MultilayerPerceptron: settings validation failed."
             assert "inputs_columns" in settings, err_message
@@ -68,7 +69,6 @@ class MultilayerPerceptron:
 
         self.__train_data: pd.DataFrame = train_data
         self.__batch_data = pd.DataFrame()
-        self.__test_data: pd.DataFrame = test_data  # TODO add validation
 
         self.__inputs_columns: list[str] = settings["inputs_columns"]
 
@@ -109,7 +109,8 @@ class MultilayerPerceptron:
         return hidden_layers
 
     def __str__(self) -> str:
-        representation = "MultilayerPerceptron(\n"
+        representation = f"{Fore.GREEN}MultilayerPerceptron{Style.RESET_ALL}"
+        representation += "(\n"
         representation += f"  inputs_columns: {self.__inputs_columns},\n"
         representation += f"  outputs: {self.__outputs},\n"
         representation += f"  outputs_column: {self.__outputs_column},\n"
@@ -120,6 +121,43 @@ class MultilayerPerceptron:
         representation += ")\n"
 
         return representation
+
+    def import_parameters(self, parameters: dict) -> None:
+        def __validate_parameter(param: np.array, original: np.array,
+                                 name: str) -> None:
+            err_message = f"MultilayerPerceptron: {name} are None."
+            assert param is not None, err_message
+            err_message = "MultilayerPerceptron: {name} malformed."
+            assert len(param) == len(original), err_message
+
+        print("Importing parameters from JSON file...\n")
+
+        output_layer = parameters["output_layer"]
+
+        output_layer_weights = np.array(output_layer["weights"])
+        __validate_parameter(output_layer_weights, self.__output_layer.weights,
+                             "output layer weights")
+        self.__output_layer.weights = output_layer_weights
+
+        output_layer_biases = np.array(output_layer["biases"])
+        __validate_parameter(output_layer_biases, self.__output_layer.biases,
+                             "output layer biases")
+        self.__output_layer.biases = output_layer_biases
+
+        hidden_layers = parameters["hidden_layers"]
+
+        for i, hidden_layer in enumerate(self.__hidden_layers):
+            hidden_layer_parameters = hidden_layers[i]
+
+            hidden_layer_weights = np.array(hidden_layer_parameters["weights"])
+            __validate_parameter(hidden_layer_weights, hidden_layer.weights,
+                                 "hidden layer weights")
+            hidden_layer.weights = hidden_layer_weights
+
+            hidden_layer_biases = np.array(hidden_layer_parameters["biases"])
+            __validate_parameter(hidden_layer_biases, hidden_layer.biases,
+                                 "hidden layer biases")
+            hidden_layer.biases = hidden_layer_biases
 
     def train(self) -> None:
         print("Starting training...\n")
@@ -161,26 +199,30 @@ class MultilayerPerceptron:
         print(output)
 
         # TODO move to separate method
-        weights_biases = {}
-        for i, hidden_layer in enumerate(self.__hidden_layers):
-            weights_biases[f"hidden_layer_{i}"] = {
+        parameters = {}
+
+        hidden_layers = []
+        for hidden_layer in self.__hidden_layers:
+            hidden_layers.append({
                 "weights": hidden_layer.weights.tolist(),
                 "biases": hidden_layer.biases.tolist()
-            }
-        weights_biases["output_layer"] = {
+            })
+
+        parameters["hidden_layers"] = hidden_layers
+        parameters["output_layer"] = {
             "weights": self.__output_layer.weights.tolist(),
             "biases": self.__output_layer.biases.tolist()
         }
 
-        with open('weights_biases.json', 'w') as json_file:
-            json.dump(weights_biases, json_file, indent=4)
+        with open(os.environ.get("PARAMETERS_PATH"), 'w') as json_file:
+            json.dump(parameters, json_file, indent=4)
 
-    def test(self) -> None:
+    def test(self, test_data: pd.DataFrame) -> None:
         print("Starting testing...\n")
 
-        predictions = self.__forward(self.__test_data[self.__inputs_columns])
+        predictions = self.__forward(test_data[self.__inputs_columns])
         accuracy = self.__accuracy(
-            predictions, self.__test_data[self.__outputs_column])
+            predictions, test_data[self.__outputs_column])
         print(
             f"Test accuracy: {Fore.GREEN}{accuracy.round(2)}{Style.RESET_ALL}")
 
