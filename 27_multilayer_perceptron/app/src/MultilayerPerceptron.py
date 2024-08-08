@@ -9,6 +9,7 @@ from src.SettingsImporter import SettingsImporter
 from src.TaskTimer import TaskTimer
 from src.utils import print_output
 import src.utils_loss as utils_loss
+from src.utils_json import save_params_to_json
 
 
 class MultilayerPerceptron:
@@ -143,6 +144,8 @@ class MultilayerPerceptron:
                 output += f"/{self.__epochs}"
                 output += " - Loss: "
                 output += f"{Fore.YELLOW}{loss.round(5)}{Style.RESET_ALL}"
+                output += " - Accuracy: "
+                output += f"{Fore.YELLOW}{accuracy.round(2)}{Style.RESET_ALL}"
                 print(output, end="")
 
         print("\n")
@@ -154,24 +157,7 @@ class MultilayerPerceptron:
 
         timer.stop()
 
-        # TODO move to separate method
-        parameters = {}
-
-        hidden_layers = []
-        for hidden_layer in self.__hidden_layers:
-            hidden_layers.append({
-                "weights": hidden_layer.weights.tolist(),
-                "biases": hidden_layer.biases.tolist()
-            })
-
-        parameters["hidden_layers"] = hidden_layers
-        parameters["output_layer"] = {
-            "weights": self.__output_layer.weights.tolist(),
-            "biases": self.__output_layer.biases.tolist()
-        }
-
-        with open(os.environ.get("PARAMETERS_PATH"), 'w') as json_file:
-            json.dump(parameters, json_file, indent=4)
+        save_params_to_json(self.__hidden_layers, self.__output_layer)
 
     def test(self, test_data: pd.DataFrame) -> None:
         print("Starting testing...\n")
