@@ -3,13 +3,10 @@ from src.MultilayerPerceptron.MultilayerPerceptron import MultilayerPerceptron
 
 
 def main():
-    train_data = DataImporter.import_train_data()
-    train_data = DataImporter.normalize_data(train_data)
-
     test_data = DataImporter.import_test_data()
     test_data = DataImporter.normalize_data(test_data)
 
-    multilayer_perceptron = MultilayerPerceptron(train_data)
+    multilayer_perceptron = MultilayerPerceptron()
     print(multilayer_perceptron)
 
     parameters = DataImporter.import_parameters()

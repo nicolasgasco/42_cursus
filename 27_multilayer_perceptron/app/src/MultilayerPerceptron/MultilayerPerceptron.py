@@ -11,7 +11,7 @@ from src.utils import print_output
 
 
 class MultilayerPerceptron:
-    def __init__(self, train_data: pd.DataFrame):
+    def __init__(self, train_data: pd.DataFrame | None = None):
         def __validate_settings(settings: dict):
             err_message = "MultilayerPerceptron: settings validation failed."
             assert "inputs_columns" in settings, err_message
@@ -67,7 +67,8 @@ class MultilayerPerceptron:
         settings = settings_importer.import_settings()
         __validate_settings(settings)
 
-        self.__train_data: pd.DataFrame = train_data
+        self.__train_data: pd.DataFrame | None = train_data \
+            if train_data is not None else None
         self.__batch_data = pd.DataFrame()
 
         self.__inputs_columns: list[str] = settings["inputs_columns"]
