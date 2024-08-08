@@ -6,7 +6,7 @@ import pandas as pd
 
 from src.SettingsImporter import SettingsImporter
 from src.Layer import Layer
-import src.MultilayerPerceptron.utils_loss as utils_loss
+import src.utils_loss as utils_loss
 from src.utils import print_output
 
 

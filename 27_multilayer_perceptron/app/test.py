@@ -1,5 +1,5 @@
 from src.Data.DataImporter import DataImporter
-from src.MultilayerPerceptron.MultilayerPerceptron import MultilayerPerceptron
+from src.MultilayerPerceptron import MultilayerPerceptron
 
 
 def main():
