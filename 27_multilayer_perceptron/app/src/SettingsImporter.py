@@ -98,7 +98,7 @@ class SettingsImporter:
         error_message = "MultilayerPerceptron: epochs is not an integer."
         assert isinstance(settings["epochs"], int), error_message
         error_message = "MultilayerPerceptron: epochs is too large."
-        assert settings["epochs"] < 2_000, error_message
+        assert settings["epochs"] <= 5_000, error_message
 
         error_message = "MultilayerPerceptron: batch_size key missing."
         assert "batch_size" in settings, error_message
@@ -109,4 +109,4 @@ class SettingsImporter:
         error_message = "MultilayerPerceptron: batch_size is not an integer."
         assert isinstance(settings["batch_size"], int), error_message
         error_message = "MultilayerPerceptron: batch_size is too large."
-        assert settings["batch_size"] < 1_000, error_message
+        assert settings["batch_size"] <= 1_000, error_message

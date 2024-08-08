@@ -9,9 +9,17 @@ PLOTS_DIR = "/multilayer_perceptron/app/plots"
 
 
 class DataPlotter:
-    def __init__(self, data: pd.DataFrame):
-        self.__data: pd.DataFrame = data
-        assert self.__data is not None, "DataPlotter: data is None."
+    def __init__(self, data: pd.DataFrame = None):
+        self.__data: pd.DataFrame = data if data is not None else None
+
+        self.__ax = None
+        self.__fig = None
+        self.__line = None
+
+        self.__epochs = []
+        self.__values = []
+
+        self.__is_loss = True
 
     def histograms(self) -> None:
         """
@@ -120,3 +128,77 @@ class DataPlotter:
 
         print("Correlation matrix plot saved to", end=" ")
         print(f"{Fore.YELLOW}{filename}{Style.RESET_ALL}")
+
+    def train_plot_init(self, is_loss: bool):
+        """
+        Initializes a plot for displaying loss or accuracy over epochs.
+
+        Parameters:
+        - is_loss (bool): Indicates whether the plot is for loss or accuracy.
+
+        Returns:
+        None
+        """
+
+        self.__is_loss = is_loss
+
+        fig, ax = plt.subplots()
+        ax.set_xlabel('Epoch')
+        y_label = 'Loss' if is_loss else 'Accuracy'
+        ax.set_ylabel(y_label)
+        line, = ax.plot([], [], 'bo-', linewidth=0.5, markersize=0)
+        legend = ['Loss'] if is_loss else ['Accuracy']
+        ax.legend(legend)
+        title = 'Loss vs Epoch' if is_loss else 'Accuracy vs Epoch'
+        ax.set_title(title)
+        ax.grid(linestyle='--', linewidth=0.5, color='lightgray')
+
+        self.__ax = ax
+        self.__line = line
+        self.__fig = fig
+
+    def train_plot_update(self, epoch: int, value: float):
+        """
+        Update the loss plot with a new epoch and corresponding loss value.
+        Args:
+            epoch (int): The epoch number.
+            value (float): The loss value.
+        Raises:
+            AssertionError: If the loss plot is not initialized.
+        """
+
+        error_message = "Loss plot not initialized"
+        assert self.__ax is not None, error_message
+        assert self.__line is not None, error_message
+
+        self.__epochs.append(epoch)
+        self.__values.append(value)
+
+        self.__line.set_xdata(self.__epochs)
+        self.__line.set_ydata(self.__values)
+
+        self.__ax.relim()
+        self.__ax.autoscale_view()
+        self.__fig.canvas.draw()
+        self.__fig.canvas.flush_events()
+
+    def train_plot_save(self):
+        """
+        Saves the plot as an image file.
+        The plot can be either a loss plot or an accuracy plot,
+        depending on the value of `self.__is_loss`.
+        The image file is saved in the directory specified by `PLOTS_DIR`
+        with the filename "loss.png" if `self.__is_loss` is True,
+        or "accuracy.png" if `self.__is_loss` is False.
+        Returns:
+            None
+        Raises:
+            None
+        """
+
+        filename = "loss.png" if self.__is_loss else "accuracy.png"
+        file_path = os.path.join(PLOTS_DIR, filename)
+        self.__fig.savefig(file_path)
+        self.__fig.canvas.flush_events()
+
+        print(f"Plot saved to {Fore.YELLOW}{file_path}{Style.RESET_ALL}")

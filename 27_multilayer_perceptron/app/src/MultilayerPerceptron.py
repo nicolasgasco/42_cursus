@@ -4,6 +4,7 @@ import numpy as np
 import os as os
 import pandas as pd
 
+from src.Data.DataPlotter import DataPlotter
 from src.Layer import Layer
 from src.SettingsImporter import SettingsImporter
 from src.TaskTimer import TaskTimer
@@ -122,6 +123,12 @@ class MultilayerPerceptron:
         loss = None
         accuracy = None
 
+        loss_plotter = DataPlotter()
+        loss_plotter.train_plot_init(True)
+
+        accuracy_plotter = DataPlotter()
+        accuracy_plotter.train_plot_init(False)
+
         n_batches = len(self.__train_data) // batch_size + 1
         for b, i in enumerate(range(0, len(self.__train_data), batch_size)):
             self.__batch_data = self.__train_data[i:i + batch_size]
@@ -138,9 +145,11 @@ class MultilayerPerceptron:
                 delta = self.__backpropagation_output_layer(predictions)
                 self.__backpropagation_hidden_layers(delta)
 
-                output = f"\rBatch {Fore.YELLOW}{b + 1}{Style.RESET_ALL}/"
-                output += f"{n_batches}"
-                output += f" - Epoch {Fore.YELLOW}{epoch + 1}{Style.RESET_ALL}"
+                output = "\r"
+                if n_batches != 1:
+                    output += f"Batch {Fore.YELLOW}{b + 1}{Style.RESET_ALL}/"
+                    output += f"{n_batches} - "
+                output += f"Epoch {Fore.YELLOW}{epoch + 1}{Style.RESET_ALL}"
                 output += f"/{self.__epochs}"
                 output += " - Loss: "
                 output += f"{Fore.YELLOW}{loss.round(5)}{Style.RESET_ALL}"
@@ -148,6 +157,14 @@ class MultilayerPerceptron:
                 output += f"{Fore.YELLOW}{accuracy.round(2)}{Style.RESET_ALL}"
                 print(output, end="")
 
+                total_epoch = b * self.__epochs + epoch
+                if (total_epoch) % 10 == 0:
+                    loss_plotter.train_plot_update(total_epoch, loss)
+                    accuracy_plotter.train_plot_update(total_epoch, accuracy)
+
+        print("\n")
+        loss_plotter.train_plot_save()
+        accuracy_plotter.train_plot_save()
         print("\n")
 
         output = f"Final loss: {Fore.GREEN}{loss.round(5)}{Style.RESET_ALL}"
