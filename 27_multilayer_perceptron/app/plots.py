@@ -1,5 +1,6 @@
 from src.Data.DataImporter import DataImporter
 from src.Data.DataPlotter import DataPlotter
+from src.TaskTimer import TaskTimer
 
 
 def main():
@@ -21,12 +22,17 @@ def main():
     user_choice = input("Enter your choice: ")
     print("\n")
 
+    timer = TaskTimer("Plotting")
+
     if user_choice == "a":
         plotter.histograms()
     elif user_choice == "b":
         plotter.pair_plot()
     elif user_choice == "c":
         plotter.correlation_matrix()
+
+    print("\n")
+    timer.stop()
 
 
 if __name__ == "__main__":

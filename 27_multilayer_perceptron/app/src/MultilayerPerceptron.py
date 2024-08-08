@@ -6,6 +6,7 @@ import pandas as pd
 
 from src.Layer import Layer
 from src.SettingsImporter import SettingsImporter
+from src.TaskTimer import TaskTimer
 from src.utils import print_output
 import src.utils_loss as utils_loss
 
@@ -111,6 +112,8 @@ class MultilayerPerceptron:
             hidden_layer.biases = hidden_layer_biases
 
     def train(self) -> None:
+        timer = TaskTimer("Training")
+
         print("Starting training...\n")
 
         batch_size = self.__batch_size
@@ -148,6 +151,8 @@ class MultilayerPerceptron:
         output += " - Accuracy: "
         output += f"{Fore.GREEN}{accuracy.round(2)}{Style.RESET_ALL}\n"
         print(output)
+
+        timer.stop()
 
         # TODO move to separate method
         parameters = {}

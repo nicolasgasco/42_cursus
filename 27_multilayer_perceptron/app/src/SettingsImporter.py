@@ -21,8 +21,8 @@ class SettingsImporter:
         self.__settings: dict = {}
 
     def import_settings(self) -> dict:
-        print("Importing settings from ")
-        print(f"{Fore.YELLOW}{self.__settings_file_path}{Style.RESET_ALL}")
+        print("Importing settings from ", end="")
+        print(f"{Fore.YELLOW}{self.__settings_file_path}{Style.RESET_ALL}", end="")
         print("...\n")
 
         try:
