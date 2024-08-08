@@ -4,68 +4,18 @@ import numpy as np
 import os as os
 import pandas as pd
 
-from src.SettingsImporter import SettingsImporter
 from src.Layer import Layer
-import src.utils_loss as utils_loss
+from src.SettingsImporter import SettingsImporter
 from src.utils import print_output
+import src.utils_loss as utils_loss
 
 
 class MultilayerPerceptron:
     def __init__(self, train_data: pd.DataFrame | None = None):
-        def __validate_settings(settings: dict):
-            err_message = "MultilayerPerceptron: settings validation failed."
-            assert "inputs_columns" in settings, err_message
-            err_message = "MultilayerPerceptron: inputs is None."
-            assert settings["inputs_columns"] is not None, err_message
-            err_message = "MultilayerPerceptron: inputs is empty."
-            assert len(settings["inputs_columns"]) > 0, err_message
-
-            err_message = "MultilayerPerceptron: outputs key missing."
-            assert "outputs" in settings, err_message
-            err_message = "MultilayerPerceptron: outputs is None."
-            assert settings["outputs"] is not None, err_message
-            err_message = "MultilayerPerceptron: outputs is empty."
-            assert len(settings["outputs"]) > 0, err_message
-
-            err_message = "MultilayerPerceptron: outputs_column key missing."
-            assert "outputs_column" in settings, err_message
-            err_message = "MultilayerPerceptron: outputs_column is None."
-            assert settings["outputs_column"] is not None, err_message
-            err_message = "MultilayerPerceptron: outputs_column is empty."
-            assert len(settings["outputs_column"]) > 0, err_message
-
-            err_message = "MultilayerPerceptron: hidden_layers key missing."
-            assert "hidden_layers" in settings, err_message
-            err_message = "MultilayerPerceptron: hidden_layers is None."
-            assert settings["hidden_layers"] is not None, err_message
-            err_message = "MultilayerPerceptron: hidden_layers less than 1."
-            assert settings["hidden_layers"] > 0, err_message
-
-            err_message = "MultilayerPerceptron: hidden_layer_neurons missing."
-            assert "hidden_layer_neurons" in settings, err_message
-            err_message = "MultilayerPerceptron: hidden_layer_neurons is None."
-            assert settings["hidden_layer_neurons"] is not None, err_message
-            err_message = "MultilayerPerceptron: hidden_layer_neurons < 1."
-            assert settings["hidden_layer_neurons"] > 0, err_message
-
-            error_message = "MultilayerPerceptron: learning_rate key missing."
-            assert "learning_rate" in settings, error_message
-            error_message = "MultilayerPerceptron: learning_rate is None."
-            assert settings["learning_rate"] is not None, error_message
-            error_message = "MultilayerPerceptron: learning_rate is < 1."
-            assert settings["learning_rate"] > 0, error_message
-
-            error_message = "MultilayerPerceptron: activation_function missing."
-            assert "activation_function" in settings, error_message
-            error_message = "MultilayerPerceptron: activation_function is None."
-            assert settings["activation_function"] is not None, error_message
-            supported_activations = ["relu", "sigmoid"]
-            error_message = "MultilayerPerceptron: activation_function not supported."
-            assert settings["activation_function"] in supported_activations, error_message
 
         settings_importer = SettingsImporter("train.json")
         settings = settings_importer.import_settings()
-        __validate_settings(settings)
+        settings_importer.validate_settings()
 
         self.__train_data: pd.DataFrame | None = train_data \
             if train_data is not None else None
