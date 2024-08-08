@@ -88,3 +88,25 @@ class SettingsImporter:
         supported_activations = ["relu", "sigmoid"]
         error_message = "MultilayerPerceptron: activation_function not supported."
         assert settings["activation_function"] in supported_activations, error_message
+
+        error_message = "MultilayerPerceptron: epochs key missing."
+        assert "epochs" in settings, error_message
+        error_message = "MultilayerPerceptron: epochs is None."
+        assert settings["epochs"] is not None, error_message
+        error_message = "MultilayerPerceptron: epochs is < 1."
+        assert settings["epochs"] > 0, error_message
+        error_message = "MultilayerPerceptron: epochs is not an integer."
+        assert isinstance(settings["epochs"], int), error_message
+        error_message = "MultilayerPerceptron: epochs is too large."
+        assert settings["epochs"] < 2_000, error_message
+
+        error_message = "MultilayerPerceptron: batch_size key missing."
+        assert "batch_size" in settings, error_message
+        error_message = "MultilayerPerceptron: batch_size is None."
+        assert settings["batch_size"] is not None, error_message
+        error_message = "MultilayerPerceptron: batch_size is < 1."
+        assert settings["batch_size"] > 0, error_message
+        error_message = "MultilayerPerceptron: batch_size is not an integer."
+        assert isinstance(settings["batch_size"], int), error_message
+        error_message = "MultilayerPerceptron: batch_size is too large."
+        assert settings["batch_size"] < 1_000, error_message

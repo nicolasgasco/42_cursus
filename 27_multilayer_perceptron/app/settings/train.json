@@ -1,7 +1,9 @@
 {
   "activation_function": "relu",
-  "hidden_layer_neurons": 24,
-  "hidden_layers": 4,
+  "batch_size": 10,
+  "epochs": 100,
+  "hidden_layer_neurons": 50,
+  "hidden_layers": 2,
   "inputs_columns": ["24", "29", "4", "8", "9"],
   "learning_rate": 0.01,
   "outputs": ["M", "B"],
