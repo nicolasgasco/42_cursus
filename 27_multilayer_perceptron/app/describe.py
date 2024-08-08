@@ -1,4 +1,4 @@
-from src.DataImporter import DataImporter
+from src.Data.DataImporter import DataImporter
 
 
 def main():

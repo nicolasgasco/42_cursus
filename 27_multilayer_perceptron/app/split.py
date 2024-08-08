@@ -1,7 +1,7 @@
 import pandas as pd
 
-from src.DataImporter import DataImporter
-from src.DataSplitter import DataSplitter
+from src.Data.DataImporter import DataImporter
+from src.Data.DataSplitter import DataSplitter
 
 
 def main():

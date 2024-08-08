@@ -1,6 +1,6 @@
 import numpy as np
 
-from src.DataImporter import DataImporter
+from src.Data.DataImporter import DataImporter
 from src.MultilayerPerceptron.MultilayerPerceptron import MultilayerPerceptron
 
 
