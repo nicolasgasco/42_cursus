@@ -41,12 +41,63 @@ class SettingsImporter:
     def __validate_settings(self):
         settings = self.__settings
 
-        err_message = "MultilayerPerceptron: settings validation failed"
+        err_message = "MultilayerPerceptron: activation_function missing"
+        assert "activation_function" in settings, err_message
+        err_message = "MultilayerPerceptron: activation_function is None"
+        assert settings["activation_function"] is not None, err_message
+        activations = ["relu", "sigmoid"]
+        err_message = "MultilayerPerceptron: activation_function not supported"
+        assert settings["activation_function"] in activations, err_message
+
+        err_message = "MultilayerPerceptron: batch_size key missing"
+        assert "batch_size" in settings, err_message
+        err_message = "MultilayerPerceptron: batch_size is None"
+        assert settings["batch_size"] is not None, err_message
+        err_message = "MultilayerPerceptron: batch_size is < 1"
+        assert settings["batch_size"] > 0, err_message
+        err_message = "MultilayerPerceptron: batch_size is not an integer"
+        assert isinstance(settings["batch_size"], int), err_message
+        err_message = "MultilayerPerceptron: batch_size is too large"
+        assert settings["batch_size"] <= 1_000, err_message
+
+        err_message = "MultilayerPerceptron: epochs key missing"
+        assert "epochs" in settings, err_message
+        err_message = "MultilayerPerceptron: epochs is None"
+        assert settings["epochs"] is not None, err_message
+        err_message = "MultilayerPerceptron: epochs is < 1"
+        assert settings["epochs"] > 0, err_message
+        err_message = "MultilayerPerceptron: epochs is not an integer"
+        assert isinstance(settings["epochs"], int), err_message
+        err_message = "MultilayerPerceptron: epochs is too large"
+        assert settings["epochs"] <= 5_000, err_message
+
+        err_message = "MultilayerPerceptron: hidden_layer_neurons missing"
+        assert "hidden_layer_neurons" in settings, err_message
+        err_message = "MultilayerPerceptron: hidden_layer_neurons is None"
+        assert settings["hidden_layer_neurons"] is not None, err_message
+        err_message = "MultilayerPerceptron: hidden_layer_neurons < 1"
+        assert settings["hidden_layer_neurons"] > 0, err_message
+
+        err_message = "MultilayerPerceptron: hidden_layers key missing"
+        assert "hidden_layers" in settings, err_message
+        err_message = "MultilayerPerceptron: hidden_layers is None"
+        assert settings["hidden_layers"] is not None, err_message
+        err_message = "MultilayerPerceptron: hidden_layers less than 1"
+        assert settings["hidden_layers"] > 0, err_message
+
+        err_message = "MultilayerPerceptron: inputs_columns key missing"
         assert "inputs_columns" in settings, err_message
         err_message = "MultilayerPerceptron: inputs is None"
         assert settings["inputs_columns"] is not None, err_message
         err_message = "MultilayerPerceptron: inputs is empty"
         assert len(settings["inputs_columns"]) > 0, err_message
+
+        err_message = "MultilayerPerceptron: learning_rate key missing"
+        assert "learning_rate" in settings, err_message
+        err_message = "MultilayerPerceptron: learning_rate is None"
+        assert settings["learning_rate"] is not None, err_message
+        err_message = "MultilayerPerceptron: learning_rate is < 1"
+        assert settings["learning_rate"] > 0, err_message
 
         err_message = "MultilayerPerceptron: outputs key missing"
         assert "outputs" in settings, err_message
@@ -61,57 +112,6 @@ class SettingsImporter:
         assert settings["outputs_column"] is not None, err_message
         err_message = "MultilayerPerceptron: outputs_column is empty"
         assert len(settings["outputs_column"]) > 0, err_message
-
-        err_message = "MultilayerPerceptron: hidden_layers key missing"
-        assert "hidden_layers" in settings, err_message
-        err_message = "MultilayerPerceptron: hidden_layers is None"
-        assert settings["hidden_layers"] is not None, err_message
-        err_message = "MultilayerPerceptron: hidden_layers less than 1"
-        assert settings["hidden_layers"] > 0, err_message
-
-        err_message = "MultilayerPerceptron: hidden_layer_neurons missing"
-        assert "hidden_layer_neurons" in settings, err_message
-        err_message = "MultilayerPerceptron: hidden_layer_neurons is None"
-        assert settings["hidden_layer_neurons"] is not None, err_message
-        err_message = "MultilayerPerceptron: hidden_layer_neurons < 1"
-        assert settings["hidden_layer_neurons"] > 0, err_message
-
-        err_message = "MultilayerPerceptron: learning_rate key missing"
-        assert "learning_rate" in settings, err_message
-        err_message = "MultilayerPerceptron: learning_rate is None"
-        assert settings["learning_rate"] is not None, err_message
-        err_message = "MultilayerPerceptron: learning_rate is < 1"
-        assert settings["learning_rate"] > 0, err_message
-
-        err_message = "MultilayerPerceptron: activation_function missing"
-        assert "activation_function" in settings, err_message
-        err_message = "MultilayerPerceptron: activation_function is None"
-        assert settings["activation_function"] is not None, err_message
-        activations = ["relu", "sigmoid"]
-        err_message = "MultilayerPerceptron: activation_function not supported"
-        assert settings["activation_function"] in activations, err_message
-
-        err_message = "MultilayerPerceptron: epochs key missing"
-        assert "epochs" in settings, err_message
-        err_message = "MultilayerPerceptron: epochs is None"
-        assert settings["epochs"] is not None, err_message
-        err_message = "MultilayerPerceptron: epochs is < 1"
-        assert settings["epochs"] > 0, err_message
-        err_message = "MultilayerPerceptron: epochs is not an integer"
-        assert isinstance(settings["epochs"], int), err_message
-        err_message = "MultilayerPerceptron: epochs is too large"
-        assert settings["epochs"] <= 5_000, err_message
-
-        err_message = "MultilayerPerceptron: batch_size key missing"
-        assert "batch_size" in settings, err_message
-        err_message = "MultilayerPerceptron: batch_size is None"
-        assert settings["batch_size"] is not None, err_message
-        err_message = "MultilayerPerceptron: batch_size is < 1"
-        assert settings["batch_size"] > 0, err_message
-        err_message = "MultilayerPerceptron: batch_size is not an integer"
-        assert isinstance(settings["batch_size"], int), err_message
-        err_message = "MultilayerPerceptron: batch_size is too large"
-        assert settings["batch_size"] <= 1_000, err_message
 
         err_message = "MultilayerPerceptron: plot_loss key missing"
         assert "plot_loss" in settings, err_message
