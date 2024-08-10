@@ -1,7 +1,5 @@
 from colorama import Fore, Style
-import json as json
 import numpy as np
-import os as os
 import pandas as pd
 import sys as sys
 
@@ -70,18 +68,18 @@ class MultilayerPerceptron:
         return hidden_layers
 
     def __str__(self) -> str:
-        representation = f"{Fore.GREEN}MultilayerPerceptron{Style.RESET_ALL}"
-        representation += "(\n"
-        representation += f"  inputs_columns: {self.__inputs_columns},\n"
-        representation += f"  outputs: {self.__outputs},\n"
-        representation += f"  outputs_column: {self.__outputs_column},\n"
-        representation += f"  hidden_layers_count: {self.__hidden_layers_count}\n"
-        representation += "  hidden_layer_neurons: "
-        representation += f"{self.__hidden_layer_neurons}\n"
-        representation += f"  learning_rate: {self.__learning_rate}\n"
-        representation += ")\n"
+        repr = f"{Fore.GREEN}MultilayerPerceptron{Style.RESET_ALL}"
+        repr += "(\n"
+        repr += f"  inputs_columns: {self.__inputs_columns},\n"
+        repr += f"  outputs: {self.__outputs},\n"
+        repr += f"  outputs_column: {self.__outputs_column},\n"
+        repr += f"  hidden_layers_count: {self.__hidden_layers_count}\n"
+        repr += "  hidden_layer_neurons: "
+        repr += f"{self.__hidden_layer_neurons}\n"
+        repr += f"  learning_rate: {self.__learning_rate}\n"
+        repr += ")\n"
 
-        return representation
+        return repr
 
     def import_parameters(self, parameters: dict) -> None:
         def __validate_parameter(param: np.array, original: np.array,
@@ -301,7 +299,7 @@ class MultilayerPerceptron:
         y_pred = y_pred.clip(1e-7, 1-1e-7)  # to avoid log(0)
 
         # for compatibility with y_true
-        y_pred.columns = self.__outputs  # type: ignore[assignment]
+        y_pred.columns = self.__outputs
 
         y_true = self.__create_y_true(data)
 
