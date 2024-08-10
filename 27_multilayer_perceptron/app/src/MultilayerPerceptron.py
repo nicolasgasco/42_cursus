@@ -3,6 +3,7 @@ import json as json
 import numpy as np
 import os as os
 import pandas as pd
+import sys as sys
 
 from src.Data.DataPlotter import DataPlotter
 from src.Layer import Layer
@@ -262,9 +263,13 @@ class MultilayerPerceptron:
         """
 
         y = pd.DataFrame(y)
+        try:
+            formatted_predictions = y.idxmax(axis=1).apply(
+                lambda x: self.__outputs[int(x)]).values
+        except ValueError:
+            print("Overflow error. Use smaller values")
+            sys.exit(1)
 
-        formatted_predictions = y.idxmax(axis=1).apply(
-            lambda x: self.__outputs[int(x)]).values
         X = x.values.flatten()
 
         correct_predictions = sum((formatted_predictions == X))
