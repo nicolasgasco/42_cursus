@@ -175,18 +175,6 @@ class Layer:
         return np.where(x > 0, 1, 0)
 
     @staticmethod
-    def activation_step_function(x: float):
-        """
-        Applies the step function activation to the input.
-        Parameters:
-        x (float): The input value.
-        Returns:
-        int: The output value after applying the step function.
-        """
-
-        return 1 if x > 0 else 0
-
-    @staticmethod
     def activation_softmax(x: np.ndarray) -> np.ndarray:
         """
         Applies the softmax activation function to the input array.
