@@ -7,9 +7,11 @@ from src.Data.DataPlotter import DataPlotter
 from src.Layer import Layer
 from src.SettingsImporter import SettingsImporter
 from src.TaskTimer import TaskTimer
-from src.utils import print_output
-import src.utils_loss as utils_loss
-from src.utils_json import save_params_to_json
+from src.utils.binary_cross_entropy_error import binary_cross_entropy_error
+from src.utils.categorical_cross_entropy_error \
+    import categorical_cross_entropy_error
+from src.utils.save_params_to_json import save_params_to_json
+from src.utils.print_output import print_output
 
 
 class MultilayerPerceptron:
@@ -304,10 +306,10 @@ class MultilayerPerceptron:
         y_true = self.__create_y_true(data)
 
         if (len(self.__outputs) > 2):
-            loss = utils_loss.categorical_cross_entropy_error(y_pred, y_true)
+            loss = categorical_cross_entropy_error(y_pred, y_true)
             print_output("Computing categorical cross-entropy loss...\n")
         else:
-            loss = utils_loss.binary_cross_entropy_error(y_pred, y_true)
+            loss = binary_cross_entropy_error(y_pred, y_true)
             print_output("Computing binary cross-entropy loss...\n")
 
         return loss
