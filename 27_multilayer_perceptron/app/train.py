@@ -5,7 +5,7 @@ from src.MultilayerPerceptron import MultilayerPerceptron
 
 
 def main():
-    np.random.seed(0)  # TODO remove before deployment
+    np.random.seed(0)
 
     train_data = DataImporter.import_train_data()
     train_data = DataImporter.normalize_data(train_data)
