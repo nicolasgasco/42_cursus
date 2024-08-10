@@ -13,7 +13,7 @@ class DataSplitter:
     def __init__(self, data: pd.DataFrame):
         def _parse_percentage() -> int:
             settings_importer = SettingsImporter("split.json")
-            settings = settings_importer.import_settings()
+            settings = settings_importer.import_settings(with_validation=False)
 
             validation_percentage_str: str = settings['validation_percentage']
             try:
@@ -32,10 +32,6 @@ class DataSplitter:
 
         assert data is not None, "DataSplitter: data is None."
 
-        data_dir_path: str | None = os.environ.get("DATA_DIR_PATH")
-        assert data_dir_path is not None, "DataSplitter: DATA_DIR_PATH environment variable not set."
-        self.___data_dir_path: str = data_dir_path
-
         self.__validation_percentage: int = _parse_percentage()
 
         self.__data: pd.DataFrame = data
@@ -44,11 +40,15 @@ class DataSplitter:
         self.__train_set: pd.DataFrame | None = None
 
     def __str__(self) -> str:
-        representation = "DataSplitter("
-        representation += f"validation_percentage={self.__validation_percentage}, "
+        representation = "DataSplitter(validation_percentage="
+        representation += f"{self.__validation_percentage}, "
         representation += f"data={self.__data.shape[0]}, "
-        representation += f"train_set={self.__train_set.shape[0] if self.__train_set is not None else None}, "
-        representation += f"validation_set={self.__validation_set.shape[0] if self.__validation_set is not None else None})"
+        train_size = self.__train_set.shape[0] if self.__train_set is not None\
+            else None
+        representation += f"train_set={train_size}, "
+        validation_size = self.__validation_set.shape[0] if \
+            self.__validation_set is not None else None
+        representation += f"validation_set={validation_size})"
         representation += "\n"
 
         return representation
@@ -62,7 +62,8 @@ class DataSplitter:
             AssertionError: If the validation percentage is None.
 
         """
-        assert self.__validation_percentage is not None, "DataSplitter: validation_percentage is None."
+        err_message = "DataSplitter: validation_percentage is None."
+        assert self.__validation_percentage is not None, err_message
 
         print("Splitting data into training and validation sets...\n")
 
@@ -81,19 +82,26 @@ class DataSplitter:
         """
 
         if self.__train_set is None or self.__validation_set is None:
-            raise ValueError(
-                "DataSplitter: split method must be called before saving to CSV.")
+            err_message = "DataSplitter: train or validation set is None."
+            raise ValueError(err_message)
 
         print("Saving train and validation sets to CSV files...")
 
         train_set_path: str | None = os.environ.get("TRAIN_PATH")
-        assert train_set_path is not None, "DataSplitter: TRAIN_PATH environment variable not set."
+        err_message = "DataSplitter: TRAIN_PATH environment variable not set."
+        assert train_set_path is not None, err_message
         self.__train_set.to_csv(train_set_path, index=False)
-        print(
-            f"Train set saved to {Fore.YELLOW}{train_set_path}{Style.RESET_ALL}.")
+
+        output = "Train set saved to "
+        output += f"{Fore.YELLOW}{train_set_path}{Style.RESET_ALL}.\n"
+        print(output)
 
         validation_set_path: str | None = os.environ.get("TEST_PATH")
-        assert validation_set_path is not None, "DataSplitter: TEST_PATH environment variable not set."
+        err_message = "DataSplitter: TEST_PATH environment variable not set."
+        assert validation_set_path is not None, err_message
         self.__validation_set.to_csv(validation_set_path, index=False)
-        print(
-            f"Validation set saved to {Fore.YELLOW}{validation_set_path}{Style.RESET_ALL}.\n")
+
+        output = "Validation set saved to "
+        output += f"{Fore.YELLOW}{validation_set_path}{Style.RESET_ALL}.\n"
+
+        print(output)
