@@ -119,30 +119,34 @@ class Layer:
     @staticmethod
     def activation_sigmoid(x: np.ndarray) -> np.ndarray:
         """
-        Applies the sigmoid activation function to the input.
+        Applies the sigmoid activation function to the input array.
+
+        Parameters:
+        - x (np.ndarray): Input array.
+
+        Returns:
+        - np.ndarray: Output array after applying
+        the sigmoid function element-wise.
+        """
+
+        # 0.1 is max value to avoid overflow
+        return 0.1 / (1 + np.exp(-x))
+
+    @staticmethod
+    def activation_sigmoid_derivative(x: np.ndarray) -> np.ndarray:
+        """
+        Calculate the derivative of the sigmoid activation function.
 
         Parameters:
         x (np.ndarray): The input array.
 
         Returns:
-        np.ndarray: The output array after applying the sigmoid function.
+        np.ndarray: The derivative of the sigmoid activation function.
+
         """
 
-        return 1 / (1 + np.exp(-x))
-
-    @staticmethod
-    def activation_sigmoid_derivative(x: np.ndarray) -> np.ndarray:
-        """
-        Calculates the derivative of the sigmoid activation function.
-
-        Parameters:
-        x (np.ndarray): Input array.
-
-        Returns:
-        np.ndarray: Derivative of the sigmoid activation function.
-        """
-
-        return x * (1 - x)
+        sig = Layer.activation_sigmoid(x)
+        return sig * (0.1 - sig) / 0.1
 
     @staticmethod
     def activation_relu(x: np.ndarray) -> np.ndarray:

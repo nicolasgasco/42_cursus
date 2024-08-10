@@ -182,21 +182,21 @@ class DataPlotter:
         self.__fig.canvas.draw()
         self.__fig.canvas.flush_events()
 
-    def train_plot_save(self):
+    def train_plot_save(self, loss: str):
         """
-        Saves the plot as an image file.
-        The plot can be either a loss plot or an accuracy plot,
-        depending on the value of `self.__is_loss`.
-        The image file is saved in the directory specified by `PLOTS_DIR`
-        with the filename "loss.png" if `self.__is_loss` is True,
-        or "accuracy.png" if `self.__is_loss` is False.
+        Saves the current plot to a file.
+
+        Args:
+            loss (str): The loss value used in the filename.
+
         Returns:
             None
+
         Raises:
             None
         """
 
-        filename = "loss.png" if self.__is_loss else "accuracy.png"
+        filename = f"{'loss' if self.__is_loss else 'accuracy'}_{loss}.png"
         file_path = os.path.join(PLOTS_DIR, filename)
         self.__fig.savefig(file_path)
         self.__fig.canvas.flush_events()

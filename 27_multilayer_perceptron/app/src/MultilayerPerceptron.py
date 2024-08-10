@@ -168,8 +168,8 @@ class MultilayerPerceptron:
         print("\n")
 
         if self.__plot_loss:
-            loss_plotter.train_plot_save()
-            accuracy_plotter.train_plot_save()
+            loss_plotter.train_plot_save(self.__activation_function)
+            accuracy_plotter.train_plot_save(self.__activation_function)
             print("\n")
 
         output = f"Final loss: {Fore.GREEN}{loss.round(5)}{Style.RESET_ALL}"
