@@ -305,9 +305,7 @@ class MultilayerPerceptron:
 
         y_true = self.__create_y_true(data)
 
-        # TODO add setting for function
-        # TODO activate this later
-        if (len(self.__outputs) > 20):
+        if (len(self.__outputs) > 2):
             loss = utils_loss.categorical_cross_entropy_error(y_pred, y_true)
             print_output("Computing categorical cross-entropy loss...\n")
         else:
