@@ -14,13 +14,16 @@ from src.utils_json import save_params_to_json
 
 
 class MultilayerPerceptron:
-    def __init__(self, train_data: pd.DataFrame | None = None):
+    def __init__(self, train_data: pd.DataFrame | None = None,
+                 test_data: pd.DataFrame | None = None):
 
         settings_importer = SettingsImporter("train.json")
         settings = settings_importer.import_settings()
 
         self.__train_data: pd.DataFrame | None = train_data \
             if train_data is not None else None
+        self.__test_data: pd.DataFrame | None = test_data \
+            if test_data is not None else None
         self.__batch_data = pd.DataFrame()
 
         self.__inputs_columns: list[str] = [
@@ -140,7 +143,7 @@ class MultilayerPerceptron:
 
                 predictions = self.__forward(
                     self.__batch_data[self.__inputs_columns])
-                loss = self.__loss_function(predictions)
+                loss = self.__loss_function(predictions, self.__batch_data)
 
                 accuracy = self.__accuracy(
                     predictions, self.__batch_data[self.__outputs_column])
@@ -148,22 +151,31 @@ class MultilayerPerceptron:
                 delta = self.__backpropagation_output_layer(predictions)
                 self.__backpropagation_hidden_layers(delta)
 
+                [test_accuracy, test_loss] = self.test(self.__test_data, False)
+
                 output = "\r"
                 if n_batches != 1:
                     output += f"Batch {Fore.YELLOW}{b + 1}{Style.RESET_ALL}/"
                     output += f"{n_batches} - "
                 output += f"Epoch {Fore.YELLOW}{epoch + 1}{Style.RESET_ALL}"
                 output += f"/{self.__epochs}"
-                output += " - Loss: "
+                output += " - Train: loss: "
                 output += f"{Fore.YELLOW}{loss.round(5)}{Style.RESET_ALL}"
-                output += " - Accuracy: "
+                output += ", accuracy: "
                 output += f"{Fore.YELLOW}{accuracy.round(2)}{Style.RESET_ALL}"
+                output += " - Test: loss: "
+                output += f"{Fore.YELLOW}{test_loss.round(5)}{Style.RESET_ALL}"
+                output += ", accuracy: "
+                output += f"{Fore.YELLOW}{test_accuracy.round(2)}{Style.RESET_ALL}"
+
                 print(output, end="")
 
                 total_epoch = b * self.__epochs + epoch
                 if self.__plot_loss and (total_epoch) % 10 == 0:
-                    loss_plotter.train_plot_update(total_epoch, loss)
-                    accuracy_plotter.train_plot_update(total_epoch, accuracy)
+                    loss_plotter.train_plot_update(
+                        total_epoch, loss, test_loss)
+                    accuracy_plotter.train_plot_update(
+                        total_epoch, accuracy, test_accuracy)
 
         print("\n")
 
@@ -181,14 +193,24 @@ class MultilayerPerceptron:
 
         save_params_to_json(self.__hidden_layers, self.__output_layer)
 
-    def test(self, test_data: pd.DataFrame) -> None:
-        print("Starting testing...\n")
+    def test(self, test_data: pd.DataFrame, print_output: bool = True) -> None:
+        if (print_output):
+            print("Starting testing...\n")
 
         predictions = self.__forward(test_data[self.__inputs_columns])
         accuracy = self.__accuracy(
             predictions, test_data[self.__outputs_column])
-        print(
-            f"Test accuracy: {Fore.GREEN}{accuracy.round(2)}{Style.RESET_ALL}")
+        loss = self.__loss_function(predictions, test_data)
+
+        output = "Loss: "
+        output += f"{Fore.GREEN}{loss.round(5)}{Style.RESET_ALL}"
+        output += " - Test accuracy: "
+        output += f"{Fore.GREEN}{accuracy.round(2)}{Style.RESET_ALL}\n"
+
+        if (print_output):
+            print(output)
+
+        return [accuracy, loss]
 
     def __forward(self, data: pd.DataFrame) -> np.ndarray:
         X = np.array(data)
@@ -250,23 +272,22 @@ class MultilayerPerceptron:
 
         return percentage_precision
 
-    def __create_y_true(self) -> np.ndarray:
+    def __create_y_true(self, data: pd.DataFrame) -> np.ndarray:
         y_true = pd.DataFrame(columns=self.__outputs)
 
         malignant_column = self.__outputs[0]
-        y_true[malignant_column] = self.__batch_data[
-            self.__outputs_column]
+        y_true[malignant_column] = data[self.__outputs_column]
         y_true[malignant_column] = y_true[malignant_column].apply(
             lambda x: 1 if x == malignant_column else 0)
 
         benign_column = self.__outputs[1]
-        y_true[benign_column] = self.__batch_data[self.__outputs_column]
+        y_true[benign_column] = data[self.__outputs_column]
         y_true[benign_column] = y_true[benign_column].apply(
             lambda x: 1 if x == benign_column else 0)
 
         return y_true
 
-    def __loss_function(self, y_pred: np.ndarray) -> float:
+    def __loss_function(self, y_pred: np.ndarray, data: pd.DataFrame) -> float:
 
         print_output(f"{Fore.YELLOW}LOSS FUNCTION{Style.RESET_ALL}")
 
@@ -276,7 +297,7 @@ class MultilayerPerceptron:
         # for compatibility with y_true
         y_pred.columns = self.__outputs  # type: ignore[assignment]
 
-        y_true = self.__create_y_true()
+        y_true = self.__create_y_true(data)
 
         # TODO add setting for function
         # TODO activate this later
@@ -296,7 +317,7 @@ class MultilayerPerceptron:
 
         print_output(f"{self.__output_layer}\n")
 
-        y_true = self.__create_y_true()
+        y_true = self.__create_y_true(self.__batch_data)
         y_true = np.array(y_true)
 
         output_gradient = y_pred - y_true

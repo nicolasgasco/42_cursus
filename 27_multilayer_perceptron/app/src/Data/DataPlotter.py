@@ -14,10 +14,12 @@ class DataPlotter:
 
         self.__ax = None
         self.__fig = None
-        self.__line = None
+        self.__train_line = None
+        self.__test_line = None
 
         self.__epochs = []
         self.__values = []
+        self.__test_values = []
 
         self.__is_loss = True
 
@@ -146,18 +148,23 @@ class DataPlotter:
         ax.set_xlabel('Epoch')
         y_label = 'Loss' if is_loss else 'Accuracy'
         ax.set_ylabel(y_label)
-        line, = ax.plot([], [], 'bo-', linewidth=0.5, markersize=0)
-        legend = ['Loss'] if is_loss else ['Accuracy']
-        ax.legend(legend)
+        train_line, = ax.plot([], [], 'bo-', linewidth=0.5,
+                              markersize=0, label='Train')
+        test_line, = ax.plot([], [], 'ro-', linewidth=0.5,
+                             markersize=0, label='Test')
+        ax.legend()
+
         title = 'Loss vs Epoch' if is_loss else 'Accuracy vs Epoch'
         ax.set_title(title)
         ax.grid(linestyle='--', linewidth=0.5, color='lightgray')
 
         self.__ax = ax
-        self.__line = line
+        self.__train_line = train_line
+        self.__test_line = test_line
         self.__fig = fig
 
-    def train_plot_update(self, epoch: int, value: float):
+    def train_plot_update(self, epoch: int,
+                          value: float, value_test: float = None) -> None:
         """
         Update the loss plot with a new epoch and corresponding loss value.
         Args:
@@ -169,13 +176,17 @@ class DataPlotter:
 
         error_message = "Loss plot not initialized"
         assert self.__ax is not None, error_message
-        assert self.__line is not None, error_message
+        assert self.__train_line is not None, error_message
 
         self.__epochs.append(epoch)
         self.__values.append(value)
+        self.__test_values.append(value_test)
 
-        self.__line.set_xdata(self.__epochs)
-        self.__line.set_ydata(self.__values)
+        self.__train_line.set_xdata(self.__epochs)
+        self.__train_line.set_ydata(self.__values)
+
+        self.__test_line.set_xdata(self.__epochs)
+        self.__test_line.set_ydata(self.__test_values)
 
         self.__ax.relim()
         self.__ax.autoscale_view()
