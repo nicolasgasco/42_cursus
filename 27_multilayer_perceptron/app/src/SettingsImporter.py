@@ -20,7 +20,7 @@ class SettingsImporter:
 
         self.__settings: dict = {}
 
-    def import_settings(self) -> dict:
+    def import_settings(self, with_validation=True) -> dict:
         print("Importing settings from ", end="")
         print(f"{Fore.YELLOW}{self.__settings_file_path}{Style.RESET_ALL}",
               end="")
@@ -31,7 +31,8 @@ class SettingsImporter:
                 settings_data = json.load(file)
 
                 self.__settings = settings_data
-                self.__validate_settings()
+                if (with_validation):
+                    self.__validate_settings()
 
                 return settings_data
         except FileNotFoundError:
