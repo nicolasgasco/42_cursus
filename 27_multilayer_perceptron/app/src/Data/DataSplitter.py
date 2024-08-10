@@ -13,7 +13,8 @@ class DataSplitter:
     def __init__(self, data: pd.DataFrame):
         def _parse_percentage() -> int:
             settings_importer = SettingsImporter("split.json")
-            settings = settings_importer.import_settings(with_validation=False)
+            settings = settings_importer.import_settings()
+            settings_importer.validate_split_settings()
 
             validation_percentage_str: str = settings['validation_percentage']
             try:

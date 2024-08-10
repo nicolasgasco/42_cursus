@@ -20,7 +20,7 @@ class SettingsImporter:
 
         self.__settings: dict = {}
 
-    def import_settings(self, with_validation=True) -> dict:
+    def import_settings(self) -> dict:
         print("Importing settings from ", end="")
         print(f"{Fore.YELLOW}{self.__settings_file_path}{Style.RESET_ALL}",
               end="")
@@ -31,15 +31,25 @@ class SettingsImporter:
                 settings_data = json.load(file)
 
                 self.__settings = settings_data
-                if (with_validation):
-                    self.__validate_settings()
 
                 return settings_data
         except FileNotFoundError:
             raise FileNotFoundError(
                 "SettingsImporter: Settings file not found")
 
-    def __validate_settings(self):
+    def validate_split_settings(self):
+        settings = self.__settings
+
+        err_message = "DataSplitter: validation_percentage key missing"
+        assert "validation_percentage" in settings, err_message
+        err_message = "DataSplitter: validation_percentage is None"
+        assert settings["validation_percentage"] is not None, err_message
+        err_message = "DataSplitter: validation_percentage is < 1"
+        assert settings["validation_percentage"] > 0, err_message
+        err_message = "DataSplitter: validation_percentage is > 100"
+        assert settings["validation_percentage"] <= 100, err_message
+
+    def validate_perceptron_settings(self):
         settings = self.__settings
 
         err_message = "MultilayerPerceptron: activation_function missing"

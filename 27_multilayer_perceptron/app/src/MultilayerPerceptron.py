@@ -20,6 +20,7 @@ class MultilayerPerceptron:
 
         settings_importer = SettingsImporter("train.json")
         settings = settings_importer.import_settings()
+        settings_importer.validate_perceptron_settings()
 
         self.__train_data: pd.DataFrame | None = train_data \
             if train_data is not None else None
