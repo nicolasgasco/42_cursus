@@ -18,7 +18,6 @@ class MultilayerPerceptron:
 
         settings_importer = SettingsImporter("train.json")
         settings = settings_importer.import_settings()
-        settings_importer.validate_settings()
 
         self.__train_data: pd.DataFrame | None = train_data \
             if train_data is not None else None
@@ -41,6 +40,8 @@ class MultilayerPerceptron:
         self.__hidden_layers: list[Layer] = self.__generate_hidden_layers()
         self.__output_layer = Layer(
             self.__hidden_layer_neurons, len(self.__outputs))
+
+        self.__plot_loss: bool = settings["plot_loss"]
 
     def __generate_hidden_layers(self) -> list[Layer]:
         """
@@ -123,8 +124,9 @@ class MultilayerPerceptron:
         loss = None
         accuracy = None
 
-        loss_plotter = DataPlotter()
-        loss_plotter.train_plot_init(True)
+        if self.__plot_loss:
+            loss_plotter = DataPlotter()
+            loss_plotter.train_plot_init(True)
 
         accuracy_plotter = DataPlotter()
         accuracy_plotter.train_plot_init(False)
@@ -158,14 +160,16 @@ class MultilayerPerceptron:
                 print(output, end="")
 
                 total_epoch = b * self.__epochs + epoch
-                if (total_epoch) % 10 == 0:
+                if self.__plot_loss and (total_epoch) % 10 == 0:
                     loss_plotter.train_plot_update(total_epoch, loss)
                     accuracy_plotter.train_plot_update(total_epoch, accuracy)
 
         print("\n")
-        loss_plotter.train_plot_save()
-        accuracy_plotter.train_plot_save()
-        print("\n")
+
+        if self.__plot_loss:
+            loss_plotter.train_plot_save()
+            accuracy_plotter.train_plot_save()
+            print("\n")
 
         output = f"Final loss: {Fore.GREEN}{loss.round(5)}{Style.RESET_ALL}"
         output += " - Accuracy: "

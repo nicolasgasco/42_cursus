@@ -7,5 +7,6 @@
   "inputs_columns": ["24", "29", "4", "8", "9"],
   "learning_rate": 0.01,
   "outputs": ["M", "B"],
-  "outputs_column": "1"
+  "outputs_column": "1",
+  "plot_loss": true
 }
