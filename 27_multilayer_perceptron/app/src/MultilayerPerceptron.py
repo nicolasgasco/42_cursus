@@ -23,7 +23,8 @@ class MultilayerPerceptron:
             if train_data is not None else None
         self.__batch_data = pd.DataFrame()
 
-        self.__inputs_columns: list[str] = settings["inputs_columns"]
+        self.__inputs_columns: list[str] = [
+            str(column) for column in settings["inputs_columns"]]
 
         self.__outputs: list[str] = settings["outputs"]
         self.__outputs_column: list[str] = settings["outputs_column"]
