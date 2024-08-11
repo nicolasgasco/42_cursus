@@ -3,7 +3,9 @@ version: "3"
 services:
   python:
     container_name: "perceptron"
-    build: .
+    build:
+      context: ./
+      dockerfile: ./app/Dockerfile
     volumes:
       - ./:/multilayer_perceptron
     environment:
@@ -15,3 +17,12 @@ services:
       - SETTINGS_DIR_PATH=/multilayer_perceptron/app/settings
       - TEST_PATH=/multilayer_perceptron/data/data_test.csv
       - TRAIN_PATH=/multilayer_perceptron/data/data_train.csv
+  frontend:
+    container_name: "frontend"
+    build:
+      context: ./
+      dockerfile: ./front/Dockerfile
+    volumes:
+      - ./:/multilayer_perceptron
+    ports:
+      - 3000:3000
