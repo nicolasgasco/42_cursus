@@ -41,16 +41,17 @@ class DataSplitter:
         self.__train_set: pd.DataFrame | None = None
 
     def __str__(self) -> str:
-        representation = "DataSplitter(validation_percentage="
-        representation += f"{self.__validation_percentage}, "
-        representation += f"data={self.__data.shape[0]}, "
+        representation = f"{Fore.GREEN}DataSplitter{Style.RESET_ALL}(\n"
+        representation += "  validation_percentage="
+        representation += f"{self.__validation_percentage}\n"
+        representation += f"  data={self.__data.shape[0]}\n"
         train_size = self.__train_set.shape[0] if self.__train_set is not None\
             else None
-        representation += f"train_set={train_size}, "
+        representation += f"  train_set={train_size}\n"
         validation_size = self.__validation_set.shape[0] if \
             self.__validation_set is not None else None
-        representation += f"validation_set={validation_size})"
-        representation += "\n"
+        representation += f"  validation_set={validation_size}\n"
+        representation += ")\n"
 
         return representation
 
@@ -86,23 +87,17 @@ class DataSplitter:
             err_message = "DataSplitter: train or validation set is None."
             raise ValueError(err_message)
 
-        print("Saving train and validation sets to CSV files...")
-
         train_set_path: str | None = os.environ.get("TRAIN_PATH")
         err_message = "DataSplitter: TRAIN_PATH environment variable not set."
         assert train_set_path is not None, err_message
         self.__train_set.to_csv(train_set_path, index=False)
-
-        output = "Train set saved to "
-        output += f"{Fore.YELLOW}{train_set_path}{Style.RESET_ALL}.\n"
-        print(output)
 
         validation_set_path: str | None = os.environ.get("TEST_PATH")
         err_message = "DataSplitter: TEST_PATH environment variable not set."
         assert validation_set_path is not None, err_message
         self.__validation_set.to_csv(validation_set_path, index=False)
 
-        output = "Validation set saved to "
+        output = "Train and validation set saved to "
         output += f"{Fore.YELLOW}{validation_set_path}{Style.RESET_ALL}.\n"
 
         print(output)
