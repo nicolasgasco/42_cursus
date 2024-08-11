@@ -6880,3 +6880,4 @@ __pycache__
 27_multilayer_perceptron/data/data_test.csv
 27_multilayer_perceptron/data/data_train.csv
 27_multilayer_perceptron/data/parameters.json
+27_multilayer_perceptron/front/data/data.json
