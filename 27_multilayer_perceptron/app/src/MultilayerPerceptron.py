@@ -123,7 +123,7 @@ class MultilayerPerceptron:
     def train(self) -> None:
         timer = TaskTimer("Training")
 
-        print("Starting training...\n")
+        print(f"{Fore.YELLOW}TRAINING{Style.RESET_ALL}")
 
         batch_size = self.__batch_size
 
@@ -153,7 +153,7 @@ class MultilayerPerceptron:
                 delta = self.__backpropagation_output_layer(predictions)
                 self.__backpropagation_hidden_layers(delta)
 
-                [test_accuracy, test_loss] = self.test(self.__test_data, False)
+                [test_acc, test_loss] = self.test(self.__test_data, False)
 
                 output = "\r"
                 if n_batches != 1:
@@ -168,7 +168,7 @@ class MultilayerPerceptron:
                 output += " - Test: loss: "
                 output += f"{Fore.YELLOW}{test_loss.round(5)}{Style.RESET_ALL}"
                 output += ", accuracy: "
-                output += f"{Fore.YELLOW}{test_accuracy.round(2)}{Style.RESET_ALL}"
+                output += f"{Fore.YELLOW}{test_acc.round(2)}{Style.RESET_ALL}"
 
                 print(output, end="")
 
@@ -177,7 +177,7 @@ class MultilayerPerceptron:
                     loss_plotter.train_plot_update(
                         total_epoch, loss, test_loss)
                     accuracy_plotter.train_plot_update(
-                        total_epoch, accuracy, test_accuracy)
+                        total_epoch, accuracy, test_acc)
 
         print("\n")
 
@@ -197,19 +197,18 @@ class MultilayerPerceptron:
 
     def test(self, test_data: pd.DataFrame, print_output: bool = True) -> None:
         if (print_output):
-            print("Starting testing...\n")
+            print(f"{Fore.YELLOW}TESTING{Style.RESET_ALL}")
 
         predictions = self.__forward(test_data[self.__inputs_columns])
         accuracy = self.__accuracy(
             predictions, test_data[self.__outputs_column])
         loss = self.__loss_function(predictions, test_data)
 
-        output = "Loss: "
-        output += f"{Fore.GREEN}{loss.round(5)}{Style.RESET_ALL}"
-        output += " - Test accuracy: "
-        output += f"{Fore.GREEN}{accuracy.round(2)}{Style.RESET_ALL}\n"
-
         if (print_output):
+            output = "Loss: "
+            output += f"{Fore.GREEN}{loss.round(5)}{Style.RESET_ALL}"
+            output += " - Test accuracy: "
+            output += f"{Fore.GREEN}{accuracy.round(2)}{Style.RESET_ALL}\n"
             print(output)
 
         return [accuracy, loss]
