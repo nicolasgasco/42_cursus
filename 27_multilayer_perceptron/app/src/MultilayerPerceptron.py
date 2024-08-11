@@ -190,11 +190,23 @@ class MultilayerPerceptron:
                     frontend_data.append({
                         "accuracy": accuracy,
                         "batch": b,
+                        "batch_data": self.__batch_data[self.__inputs_columns][0:10].T.to_dict(),
+                        "batch_size": batch_size,
+                        "data_points": len(self.__train_data),
                         "epoch": epoch,
+                        "hidden_layers": [{
+                            "biases": hidden_layer.biases.tolist(),
+                            "weights": hidden_layer.weights.tolist()
+                        } for hidden_layer in self.__hidden_layers],
                         "loss": loss,
+                        "output_layer": {
+                            "biases": self.__output_layer.biases.tolist(),
+                            "weights": self.__output_layer.weights.tolist()
+                        },
+                        "predictions": predictions[0:10].tolist(),
                         "test_accuracy": test_acc,
-                        "total_batches": n_batches,
                         "test_loss": test_loss,
+                        "total_batches": n_batches,
                         "total_epoch": total_epoch,
                         "total_epochs": self.__epochs * n_batches
                     })

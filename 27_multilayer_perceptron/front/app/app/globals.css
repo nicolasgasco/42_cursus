@@ -48,3 +48,7 @@ body {
 .title-4 {
   @apply text-xl font-bold my-2;
 }
+
+.title-5 {
+  @apply text-lg font-bold my-2;
+}

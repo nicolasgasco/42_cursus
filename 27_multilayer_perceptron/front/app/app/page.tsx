@@ -1,4 +1,4 @@
-import { NeuralNetworkVisualizer } from "./components/NeuralNetworkVisualizer";
+import { HomePage } from "./components/HomePage";
 import { NeuralNetworkData } from "./interfaces/NeuralNetworkData.interface";
 import NEURAL_NETWORK_DATA from "../../data/data.json"
 
@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center h-screen my-24">
       <h1 className="title-1">Multilayer perceptron visualizer</h1>
-      <NeuralNetworkVisualizer data={neuralNetworkData} />
+      <HomePage data={neuralNetworkData} />
     </main>
   );
 }
