@@ -1,5 +1,7 @@
 from colorama import Fore, Style
+import json as json
 import numpy as np
+import os as os
 import pandas as pd
 import sys as sys
 
@@ -48,6 +50,8 @@ class MultilayerPerceptron:
             self.__hidden_layer_neurons, len(self.__outputs))
 
         self.__plot_loss: bool = settings["plot_loss"]
+
+        self.__frontend_data: bool = settings["frontend_data"]
 
     def __generate_hidden_layers(self) -> list[Layer]:
         """
@@ -137,6 +141,9 @@ class MultilayerPerceptron:
         accuracy_plotter = DataPlotter()
         accuracy_plotter.train_plot_init(False)
 
+        if self.__frontend_data:
+            frontend_data = []
+
         n_batches = len(self.__train_data) // batch_size + 1
         for b, i in enumerate(range(0, len(self.__train_data), batch_size)):
             self.__batch_data = self.__train_data[i:i + batch_size]
@@ -179,6 +186,19 @@ class MultilayerPerceptron:
                     accuracy_plotter.train_plot_update(
                         total_epoch, accuracy, test_acc)
 
+                if self.__frontend_data:
+                    frontend_data.append({
+                        "accuracy": accuracy,
+                        "batch": b,
+                        "epoch": epoch,
+                        "loss": loss,
+                        "test_accuracy": test_acc,
+                        "total_batches": n_batches,
+                        "test_loss": test_loss,
+                        "total_epoch": total_epoch,
+                        "total_epochs": self.__epochs * n_batches
+                    })
+
         print("\n")
 
         if self.__plot_loss:
@@ -194,6 +214,12 @@ class MultilayerPerceptron:
         timer.stop()
 
         save_params_to_json(self.__hidden_layers, self.__output_layer)
+
+        if self.__frontend_data:
+            frontend_data_path = os.environ.get("FRONTEND_DATA_PATH")
+            frontend_data_file = frontend_data_path + "/data.json"
+            with open(frontend_data_file, 'w') as file:
+                json.dump(frontend_data, file)
 
     def test(self, test_data: pd.DataFrame, print_output: bool = True) -> None:
         if (print_output):

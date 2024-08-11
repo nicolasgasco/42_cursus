@@ -130,3 +130,10 @@ class SettingsImporter:
         assert settings["plot_loss"] is not None, err_message
         err_message = "MultilayerPerceptron: plot_loss is not a boolean"
         assert isinstance(settings["plot_loss"], bool), err_message
+
+        err_message = "MultilayerPerceptron: frontend_data key missing"
+        assert "frontend_data" in settings, err_message
+        err_message = "MultilayerPerceptron: frontend_data is None"
+        assert settings["frontend_data"] is not None, err_message
+        err_message = "MultilayerPerceptron: frontend_data is not a boolean"
+        assert isinstance(settings["frontend_data"], bool), err_message
