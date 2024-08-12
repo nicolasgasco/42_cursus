@@ -2,6 +2,7 @@ import { TooltipIcon, TooltipIconProps } from "../TooltipIcon";
 
 interface LayerTileProps {
   children: React.ReactNode;
+  style?: React.CSSProperties;
   title: string;
   tooltipProps?: TooltipIconProps;
 }
@@ -10,6 +11,7 @@ export const LayerTile = ({
   children,
   title,
   tooltipProps,
+  style,
   ...restProps
 }: LayerTileProps): JSX.Element => {
   return (
