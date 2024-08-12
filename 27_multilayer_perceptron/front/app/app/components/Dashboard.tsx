@@ -9,7 +9,7 @@ interface DashboardProps {
 export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
   return (
     <div className="w-fit flex justify-between gap-4 mx-auto mb-12">
-      <Tile title={"Batch"}>
+      <Tile title="Model">
         <div className="mb-4">
           <ListEntry
             title="Training data points"
@@ -20,6 +20,13 @@ export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
             description={data["test_data_points"].toString()}
           />
         </div>
+        <ListEntry
+          title="Activation function"
+          description={data["activation_function"].toString()}
+        />
+      </Tile>
+
+      <Tile title={"Batch"}>
         <ListEntry
           title="Batch size"
           description={data["batch_size"].toString()}
