@@ -14,7 +14,7 @@ interface NeuralNetworkProps {
 export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
   console.table(data["predictions"]);
   return (
-    <div className="flex gap-4 px-12 py-6 w-full overflow-x-auto">
+    <div className="flex justify-center gap-4 px-12 py-6 w-full overflow-x-auto">
       <LayerTile title={"Input layer"} style={{ width: 410 }}>
         <InputTable data={data["batch_data"]} />
       </LayerTile>
