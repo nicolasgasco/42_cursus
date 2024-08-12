@@ -205,6 +205,7 @@ class MultilayerPerceptron:
                         },
                         "predictions": predictions[0:10].tolist(),
                         "test_accuracy": test_acc,
+                        "test_data_points": len(self.__test_data),
                         "test_loss": test_loss,
                         "total_batches": n_batches,
                         "total_epoch": total_epoch,
