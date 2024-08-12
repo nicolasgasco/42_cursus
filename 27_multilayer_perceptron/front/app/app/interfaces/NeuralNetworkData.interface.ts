@@ -10,6 +10,7 @@ export interface NeuralNetworkData {
   output_layer: { weights: number[][]; biases: number[] };
   predictions: { key_1: number; key_2: number }[];
   test_accuracy: number;
+  test_data_points: number;
   test_loss: number;
   total_batches: number;
   total_epoch: number;

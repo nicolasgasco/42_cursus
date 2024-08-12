@@ -10,10 +10,16 @@ export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
   return (
     <div className="w-fit flex justify-between gap-4 mx-auto mb-12">
       <Tile title={"Batch"}>
-        <ListEntry
-          title="Num of data points"
-          description={data["data_points"].toString()}
-        />
+        <div className="mb-4">
+          <ListEntry
+            title="Training data points"
+            description={data["data_points"].toString()}
+          />
+          <ListEntry
+            title="Validation data points"
+            description={data["test_data_points"].toString()}
+          />
+        </div>
         <ListEntry
           title="Batch size"
           description={data["batch_size"].toString()}
