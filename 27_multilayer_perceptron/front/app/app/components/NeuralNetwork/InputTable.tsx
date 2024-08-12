@@ -13,7 +13,11 @@ export const InputTable = ({ data }: InputTableProps): JSX.Element => {
         <tr>
           {headers.map((columnName, index) => {
             return (
-              <th key={index} className="px-6 pb-2 border-b-2">
+              <th
+                key={index}
+                className="px-6 pb-2 border-b-2"
+                style={{ width: 92 }}
+              >
                 {columnName}
               </th>
             );
@@ -29,7 +33,6 @@ export const InputTable = ({ data }: InputTableProps): JSX.Element => {
                   <td
                     key={valueIndex}
                     className={`px-3 pb-1 ${index === 0 ? "pt-4" : ""}`}
-                    style={{ width: 92 }}
                   >
                     {value.toFixed(6)}
                   </td>
