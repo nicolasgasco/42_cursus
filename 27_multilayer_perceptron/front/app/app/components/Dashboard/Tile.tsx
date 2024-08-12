@@ -1,14 +1,24 @@
+import { TooltipIcon, TooltipIconProps } from "../TooltipIcon";
+
 interface TileProps {
   children: React.ReactNode;
   title: string;
+  tooltipProps?: TooltipIconProps;
 }
-export const Tile = ({ children, title }: TileProps): JSX.Element => {
+export const Tile = ({
+  children,
+  title,
+  tooltipProps,
+}: TileProps): JSX.Element => {
   return (
     <div
       className="flex-auto	bg-slate-700 rounded-md p-6"
       style={{ width: 300 }}
     >
-      <h3 className="font-bold title-4 mb-4">{title}</h3>
+      <div className="flex items-center justify-between	gap-2 mb-4">
+        <h3 className="font-bold title-4">{title}</h3>
+        {tooltipProps && <TooltipIcon {...tooltipProps} />}
+      </div>
       {children}
     </div>
   );

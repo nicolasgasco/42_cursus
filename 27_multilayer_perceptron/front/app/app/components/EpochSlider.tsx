@@ -1,4 +1,5 @@
 import { NeuralNetworkData } from "../interfaces/NeuralNetworkData.interface";
+import { TooltipIcon } from "./TooltipIcon";
 
 interface EpochSliderProps {
   epoch: NeuralNetworkData;
@@ -46,8 +47,17 @@ export const EpochSlider = ({
           </span>
         </div>
 
-        <label htmlFor="range" className="title-3 text-center">
-          Epoch {epoch["total_epoch"] + 1} of {totalEpochs}
+        <label
+          htmlFor="range"
+          className="text-center flex gap-2 items-baseline mx-auto"
+        >
+          <span className="title-3">
+            Epoch {epoch["total_epoch"] + 1} of {totalEpochs}
+          </span>
+          <TooltipIcon
+            id="epoch-tooltip"
+            description="An epoch is complete training round. The neural network computes its predictions and compares them with the actual values. It then adjusts weights and biases to minimize the error."
+          />
         </label>
       </div>
     </div>
