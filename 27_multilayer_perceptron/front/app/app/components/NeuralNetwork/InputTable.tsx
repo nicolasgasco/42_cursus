@@ -6,7 +6,7 @@ interface InputTableProps {
 
 export const InputTable = ({ data }: InputTableProps): JSX.Element => {
   return (
-    <table className="table-auto m-4">
+    <table className="table-auto m-2 text-sm">
       <thead>
         <tr>
           {/* {Object.keys(data[0]).map((columnName, index) => {
@@ -24,21 +24,25 @@ export const InputTable = ({ data }: InputTableProps): JSX.Element => {
             <tr key={index}>
               {Object.values(value).map((value, valueIndex) => {
                 return (
-                  <td key={valueIndex} className={`px-6 pb-1 ${index === 0 ? 'pt-4' : ''}`}>
+                  <td
+                    key={valueIndex}
+                    className={`px-3 pb-1 ${index === 0 ? "pt-4" : ""}`}
+                  >
                     {value.toFixed(6)}
                   </td>
-                )
+                );
               })}
             </tr>
-          )
+          );
         })}
         {[0, 1, 3].map((_, index) => {
           return (
             <tr key={index}>
-              <td className="px-6 pb-1">...</td>
-            </tr>)
+              <td className="px-3 pb-1">...</td>
+            </tr>
+          );
         })}
       </tbody>
     </table>
-  )
+  );
 };
