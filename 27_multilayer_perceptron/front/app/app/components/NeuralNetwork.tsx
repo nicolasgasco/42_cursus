@@ -52,11 +52,11 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
                       </tr>
                     </thead>
                     <tbody>
-                      {weight.map((weight, weightIndex) => {
+                      {weight.map((weight, innerWeightIndex) => {
                         return (
-                          <tr key={weightIndex}>
+                          <tr key={innerWeightIndex}>
                             <TableRow>{weight.toFixed(6)}</TableRow>
-                            {weightIndex === 0 && (
+                            {innerWeightIndex === 0 && (
                               <TableRow>
                                 {layer.biases[weightIndex].toFixed(6)}
                               </TableRow>
@@ -92,11 +92,11 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
                   </tr>
                 </thead>
                 <tbody>
-                  {weight.map((weight, weightIndex) => {
+                  {weight.map((weight, innerWeightIndex) => {
                     return (
-                      <tr key={weightIndex}>
+                      <tr key={innerWeightIndex}>
                         <TableRow>{weight.toFixed(6)}</TableRow>
-                        {weightIndex === 0 && (
+                        {innerWeightIndex === 0 && (
                           <TableRow>
                             {data["output_layer"].biases[weightIndex].toFixed(
                               6
