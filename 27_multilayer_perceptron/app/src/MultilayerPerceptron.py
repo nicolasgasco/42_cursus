@@ -189,6 +189,7 @@ class MultilayerPerceptron:
                 if self.__frontend_data:
                     frontend_data.append({
                         "accuracy": accuracy,
+                        "activation_function": self.__activation_function,
                         "batch": b,
                         "batch_data": self.__batch_data[self.__inputs_columns][0:10].T.to_dict(),
                         "batch_size": batch_size,
