@@ -1,5 +1,6 @@
 export interface NeuralNetworkData {
   accuracy: number;
+  activation_function: string;
   batch: number;
   batch_data: { key_1: number; key_2: number }[];
   batch_size: number;
