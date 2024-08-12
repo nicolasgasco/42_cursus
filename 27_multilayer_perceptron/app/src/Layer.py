@@ -129,7 +129,7 @@ class Layer:
         """
 
         # 0.1 is max value to avoid overflow
-        return 0.1 / (1 + np.exp(-x))
+        return 1 / (1 + np.exp(-x))
 
     @staticmethod
     def activation_sigmoid_derivative(x: np.ndarray) -> np.ndarray:
@@ -145,7 +145,7 @@ class Layer:
         """
 
         sig = Layer.activation_sigmoid(x)
-        return sig * (0.1 - sig) / 0.1
+        return sig * (1 - sig) / 1
 
     @staticmethod
     def activation_relu(x: np.ndarray) -> np.ndarray:
