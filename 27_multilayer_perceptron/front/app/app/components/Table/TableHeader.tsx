@@ -1,11 +1,13 @@
 interface TableHeaderProps {
   children: React.ReactNode;
   key?: number;
+  style?: React.CSSProperties;
 }
 
 export const TableHeader = ({
   key,
   children,
+  style,
   ...restProps
 }: TableHeaderProps): JSX.Element => {
   return (
