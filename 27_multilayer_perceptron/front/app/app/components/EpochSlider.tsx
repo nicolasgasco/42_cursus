@@ -21,7 +21,7 @@ export const EpochSlider = ({
           <input
             id="range"
             type="range"
-            min="1"
+            min="0"
             max={totalEpochs - 1}
             step="1"
             value={epoch["total_epoch"]}
@@ -47,7 +47,7 @@ export const EpochSlider = ({
         </div>
 
         <label htmlFor="range" className="title-3">
-          Epoch {epoch["total_epoch"]} of {totalEpochs}
+          Epoch {epoch["total_epoch"] + 1} of {totalEpochs}
         </label>
       </div>
     </div>
