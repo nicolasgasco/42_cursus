@@ -1,4 +1,6 @@
 import { NeuralNetworkData } from "@/app/interfaces/NeuralNetworkData.interface";
+import { TableLayout } from "../Table/TableLayout";
+import { TableHeader } from "../Table/TableHeader";
 
 interface OutputTableProps {
   data: NeuralNetworkData;
@@ -6,15 +8,11 @@ interface OutputTableProps {
 
 export const OutputTable = ({ data }: OutputTableProps) => {
   return (
-    <table className="table-auto m-4">
+    <TableLayout>
       <thead>
         <tr>
-          <th className="px-6 pb-2 border-b-2" style={{ width: 125 }}>
-            Malignant
-          </th>
-          <th className="px-6 pb-2 border-b-2" style={{ width: 125 }}>
-            Benign
-          </th>
+          <TableHeader style={{ width: 125 }}>Malignant</TableHeader>
+          <TableHeader style={{ width: 125 }}>Benign</TableHeader>
         </tr>
       </thead>
       <tbody>
@@ -46,6 +44,6 @@ export const OutputTable = ({ data }: OutputTableProps) => {
           );
         })}
       </tbody>
-    </table>
+    </TableLayout>
   );
 };

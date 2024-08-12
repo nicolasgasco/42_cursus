@@ -1,4 +1,6 @@
 import { NeuralNetworkData } from "@/app/interfaces/NeuralNetworkData.interface";
+import { TableLayout } from "../Table/TableLayout";
+import { TableHeader } from "../Table/TableHeader";
 
 interface InputTableProps {
   data: NeuralNetworkData["batch_data"];
@@ -8,18 +10,14 @@ export const InputTable = ({ data }: InputTableProps): JSX.Element => {
   const headers = Object.keys(data[parseInt(Object.keys(data)[0])]);
 
   return (
-    <table className="table-auto m-2 text-sm">
+    <TableLayout>
       <thead>
         <tr>
           {headers.map((columnName, index) => {
             return (
-              <th
-                key={index}
-                className="px-6 pb-2 border-b-2"
-                style={{ width: 92 }}
-              >
+              <TableHeader key={index} style={{ width: 92 }}>
                 {columnName}
-              </th>
+              </TableHeader>
             );
           })}
         </tr>
@@ -49,6 +47,6 @@ export const InputTable = ({ data }: InputTableProps): JSX.Element => {
           );
         })}
       </tbody>
-    </table>
+    </TableLayout>
   );
 };
