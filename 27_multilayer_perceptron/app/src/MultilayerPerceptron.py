@@ -372,7 +372,7 @@ class MultilayerPerceptron:
         bias_gradient = 1 / m * np.sum(output_gradient, axis=0)
 
         self.__output_layer.weights -= self.__learning_rate * weights_gradient
-        self.__output_layer.biases -= self.__learning_rate * bias_gradient[0]
+        self.__output_layer.biases -= self.__learning_rate * bias_gradient
 
         print_output(f"{self.__output_layer}\n")
 

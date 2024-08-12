@@ -6,8 +6,7 @@ class Layer:
     def __init__(self, n_inputs: int, n_neurons: int):
         self.__weights = np.random.rand(n_neurons, n_inputs) - 0.5
 
-        self.__biases = [0.0 for _ in range(n_neurons)]
-
+        self.__biases = np.array([0.0] * n_neurons)
         self.__input = np.array([])
         self.__output = np.array([])
         self.__raw_output = np.array([])
