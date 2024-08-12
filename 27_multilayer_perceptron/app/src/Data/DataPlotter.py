@@ -207,6 +207,9 @@ class DataPlotter:
             None
         """
 
+        if not os.path.exists(PLOTS_DIR):
+            os.makedirs(PLOTS_DIR)
+
         filename = f"{'loss' if self.__is_loss else 'accuracy'}_{loss}.png"
         file_path = os.path.join(PLOTS_DIR, filename)
         self.__fig.savefig(file_path)
