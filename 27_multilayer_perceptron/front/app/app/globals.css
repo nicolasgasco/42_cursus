@@ -32,6 +32,18 @@ body {
   }
 }
 
+input[type="range"] {
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: rgb(253 224 71); /* yellow-300 */
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
+
 /* Typography */
 .title-1 {
   @apply text-4xl font-bold;

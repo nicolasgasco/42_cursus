@@ -1,9 +1,13 @@
 interface LayerTileProps {
-  children: React.ReactNode
-  title: string
+  children: React.ReactNode;
+  title: string;
 }
 
-export const LayerTile = ({ children, title, ...restProps }: LayerTileProps): JSX.Element => {
+export const LayerTile = ({
+  children,
+  title,
+  ...restProps
+}: LayerTileProps): JSX.Element => {
   return (
     <div {...restProps}>
       <h3 className="title-4">{title}</h3>
@@ -11,5 +15,5 @@ export const LayerTile = ({ children, title, ...restProps }: LayerTileProps): JS
         {children}
       </div>
     </div>
-  )
-}
+  );
+};

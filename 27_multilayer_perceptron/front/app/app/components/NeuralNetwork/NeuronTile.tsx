@@ -10,7 +10,7 @@ export const NeuronTile = ({
 }: NeuronTileProps): JSX.Element => {
   return (
     <div
-      className="flex-auto bg-slate-700 rounded-md p-6"
+      className="flex-auto bg-slate-800 rounded-md p-6"
       style={{ minWidth: 275 }}
       {...restProps}
     >
