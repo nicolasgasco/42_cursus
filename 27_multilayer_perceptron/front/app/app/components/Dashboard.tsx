@@ -8,7 +8,7 @@ interface DashboardProps {
 
 export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
   return (
-    <div className="flex justify-between gap-4 mb-12">
+    <div className="w-fit flex justify-between gap-4 mx-auto mb-12">
       <Tile title={"Batch"}>
         <ListEntry
           title="Num of data points"
@@ -26,28 +26,28 @@ export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
 
       <Tile title={"Loss"}>
         <dl>
-          <ListEntry
-            title={"Train"}
-            description={data["loss"].toFixed(6)} />
+          <ListEntry title={"Train"} description={data["loss"].toFixed(6)} />
           <ListEntry
             title={"Validation"}
-            description={data["test_loss"].toFixed(6)} />
+            description={data["test_loss"].toFixed(6)}
+          />
         </dl>
       </Tile>
-
 
       <Tile title={"Accuracy"}>
         <dl>
           <ListEntry
             title={"Train"}
             description={`${Math.round(data["accuracy"]).toString()}%`}
-            statusValue={data["accuracy"]} />
+            statusValue={data["accuracy"]}
+          />
           <ListEntry
             title={"Validation"}
             description={`${Math.round(data["test_accuracy"]).toString()}%`}
-            statusValue={data["test_accuracy"]} />
+            statusValue={data["test_accuracy"]}
+          />
         </dl>
       </Tile>
     </div>
-  )
+  );
 };

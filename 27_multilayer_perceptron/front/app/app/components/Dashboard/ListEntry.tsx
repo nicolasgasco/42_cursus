@@ -6,11 +6,20 @@ interface ListEntryProps {
   statusValue?: number;
 }
 
-export const ListEntry = ({ description, title, statusValue }: ListEntryProps): JSX.Element => {
+export const ListEntry = ({
+  description,
+  title,
+  statusValue,
+}: ListEntryProps): JSX.Element => {
   return (
-    <div className="flex">
+    <div className="flex gap-10">
       <dt>{title}:</dt>
-      <dd className="ml-auto">{description} {statusValue && <StatusIndicator className="ml-2" percentage={statusValue} />}</dd>
+      <dd className="ml-auto">
+        {description}{" "}
+        {statusValue && (
+          <StatusIndicator className="ml-2" percentage={statusValue} />
+        )}
+      </dd>
     </div>
-  )
+  );
 };

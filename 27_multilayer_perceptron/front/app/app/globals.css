@@ -34,21 +34,21 @@ body {
 
 /* Typography */
 .title-1 {
-  @apply text-4xl font-bold my-4;
+  @apply text-4xl font-bold;
 }
 
 .title-2 {
-  @apply text-3xl font-bold my-3;
+  @apply text-3xl font-bold;
 }
 
 .title-3 {
-  @apply text-2xl font-bold my-2;
+  @apply text-2xl font-bold;
 }
 
 .title-4 {
-  @apply text-xl font-bold my-2;
+  @apply text-xl font-bold;
 }
 
 .title-5 {
-  @apply text-lg font-bold my-2;
+  @apply text-lg font-bold;
 }
