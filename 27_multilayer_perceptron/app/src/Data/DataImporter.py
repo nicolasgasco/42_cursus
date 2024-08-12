@@ -74,7 +74,10 @@ class DataImporter:
         err_message = "TRAIN_PATH environment variable not set."
         assert train_data_path is not None, err_message
 
-        train_data: pd.DataFrame = pd.read_csv(train_data_path)
+        try:
+            train_data: pd.DataFrame = pd.read_csv(train_data_path)
+        except FileNotFoundError:
+            raise FileNotFoundError("DataImporter: Training data file not found.")
 
         return train_data
 
