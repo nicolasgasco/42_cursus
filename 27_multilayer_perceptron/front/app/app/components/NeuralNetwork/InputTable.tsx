@@ -5,17 +5,19 @@ interface InputTableProps {
 }
 
 export const InputTable = ({ data }: InputTableProps): JSX.Element => {
+  const headers = Object.keys(data[parseInt(Object.keys(data)[0])]);
+
   return (
     <table className="table-auto m-2 text-sm">
       <thead>
         <tr>
-          {/* {Object.keys(data[0]).map((columnName, index) => {
+          {headers.map((columnName, index) => {
             return (
               <th key={index} className="px-6 pb-2 border-b-2">
                 {columnName}
               </th>
-            )
-          })} */}
+            );
+          })}
         </tr>
       </thead>
       <tbody>
@@ -27,6 +29,7 @@ export const InputTable = ({ data }: InputTableProps): JSX.Element => {
                   <td
                     key={valueIndex}
                     className={`px-3 pb-1 ${index === 0 ? "pt-4" : ""}`}
+                    style={{ width: 92 }}
                   >
                     {value.toFixed(6)}
                   </td>
