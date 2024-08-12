@@ -15,7 +15,7 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
   console.table(data["predictions"]);
   return (
     <div className="flex gap-4">
-      <LayerTile title={"Input layer"}>
+      <LayerTile title={"Input layer"} style={{ width: 410 }}>
         <InputTable data={data["batch_data"]} />
       </LayerTile>
 
@@ -90,7 +90,7 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
         })}
       </LayerTile>
 
-      <LayerTile title={"Predictions"}>
+      <LayerTile title={"Predictions"} style={{ width: 240 }}>
         <OutputTable data={data} />
       </LayerTile>
     </div>

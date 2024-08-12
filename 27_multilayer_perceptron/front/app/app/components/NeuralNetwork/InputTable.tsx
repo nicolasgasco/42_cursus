@@ -16,11 +16,7 @@ export const InputTable = ({ data }: InputTableProps): JSX.Element => {
       <thead>
         <tr>
           {headers.map((columnName, index) => {
-            return (
-              <TableHeader key={index} style={{ width: 92 }}>
-                {columnName}
-              </TableHeader>
-            );
+            return <TableHeader key={index}>{columnName}</TableHeader>;
           })}
         </tr>
       </thead>
