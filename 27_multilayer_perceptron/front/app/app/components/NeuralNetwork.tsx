@@ -3,6 +3,9 @@ import { InputTable } from "./NeuralNetwork/InputTable";
 import { LayerTile } from "./NeuralNetwork/LayerTile";
 import { NeuronTile } from "./NeuralNetwork/NeuronTile";
 import { OutputTable } from "./NeuralNetwork/OutputTable";
+import { TableHeader } from "./Table/TableHeader";
+import { TableLayout } from "./Table/TableLayout";
+import { TableRow } from "./Table/TableRow";
 
 interface NeuralNetworkProps {
   data: NeuralNetworkData;
@@ -25,26 +28,28 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
                   key={weightIndex}
                   title={`Neuron ${weightIndex + 1}`}
                 >
-                  <table>
+                  <TableLayout>
                     <thead>
                       <tr>
-                        <th>Weights</th>
-                        <th>Bias</th>
+                        <TableHeader>Weights</TableHeader>
+                        <TableHeader>Bias</TableHeader>
                       </tr>
                     </thead>
                     <tbody>
                       {weight.map((weight, weightIndex) => {
                         return (
                           <tr key={weightIndex}>
-                            <td>{weight.toFixed(6)}</td>
+                            <TableRow>{weight.toFixed(6)}</TableRow>
                             {weightIndex === 0 && (
-                              <td>{layer.biases[weightIndex].toFixed(6)}</td>
+                              <TableRow>
+                                {layer.biases[weightIndex].toFixed(6)}
+                              </TableRow>
                             )}
                           </tr>
                         );
                       })}
                     </tbody>
-                  </table>
+                  </TableLayout>
                 </NeuronTile>
               );
             })}
@@ -56,30 +61,30 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
         {data["output_layer"].weights.map((weight, weightIndex) => {
           return (
             <NeuronTile key={weightIndex} title={`Neuron ${weightIndex + 1}`}>
-              <table>
+              <TableLayout>
                 <thead>
                   <tr>
-                    <th>Weights</th>
-                    <th>Bias</th>
+                    <TableHeader>Weights</TableHeader>
+                    <TableHeader>Bias</TableHeader>
                   </tr>
                 </thead>
                 <tbody>
                   {weight.map((weight, weightIndex) => {
                     return (
                       <tr key={weightIndex}>
-                        <td>{weight.toFixed(6)}</td>
+                        <TableRow>{weight.toFixed(6)}</TableRow>
                         {weightIndex === 0 && (
-                          <td>
+                          <TableRow>
                             {data["output_layer"].biases[weightIndex].toFixed(
                               6
                             )}
-                          </td>
+                          </TableRow>
                         )}
                       </tr>
                     );
                   })}
                 </tbody>
-              </table>
+              </TableLayout>
             </NeuronTile>
           );
         })}

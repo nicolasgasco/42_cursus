@@ -1,6 +1,8 @@
 import { NeuralNetworkData } from "@/app/interfaces/NeuralNetworkData.interface";
 import { TableLayout } from "../Table/TableLayout";
 import { TableHeader } from "../Table/TableHeader";
+import { EllipsisRows } from "../Table/EllipsisRows";
+import { TableRow } from "../Table/TableRow";
 
 interface OutputTableProps {
   data: NeuralNetworkData;
@@ -11,8 +13,8 @@ export const OutputTable = ({ data }: OutputTableProps) => {
     <TableLayout>
       <thead>
         <tr>
-          <TableHeader style={{ width: 125 }}>Malignant</TableHeader>
-          <TableHeader style={{ width: 125 }}>Benign</TableHeader>
+          <TableHeader style={{ width: 92 }}>M</TableHeader>
+          <TableHeader style={{ width: 92 }}>B</TableHeader>
         </tr>
       </thead>
       <tbody>
@@ -21,28 +23,19 @@ export const OutputTable = ({ data }: OutputTableProps) => {
             <tr key={index}>
               {Object.values(value).map((value, valueIndex) => {
                 return (
-                  <td
-                    key={valueIndex}
-                    className={`px-6 pb-1 ${index === 0 ? "pt-4" : ""}`}
-                  >
+                  <TableRow index={valueIndex} key={valueIndex}>
                     <span
                       className={value > 0.5 ? "text-yellow-300" : "font-light"}
                     >
                       {value.toFixed(6)}
                     </span>
-                  </td>
+                  </TableRow>
                 );
               })}
             </tr>
           );
         })}
-        {[0, 1, 3].map((_, index) => {
-          return (
-            <tr key={index}>
-              <td className="px-6 pb-1">...</td>
-            </tr>
-          );
-        })}
+        <EllipsisRows />
       </tbody>
     </TableLayout>
   );

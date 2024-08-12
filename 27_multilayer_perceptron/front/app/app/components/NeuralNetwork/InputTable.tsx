@@ -1,6 +1,8 @@
 import { NeuralNetworkData } from "@/app/interfaces/NeuralNetworkData.interface";
 import { TableLayout } from "../Table/TableLayout";
 import { TableHeader } from "../Table/TableHeader";
+import { EllipsisRows } from "../Table/EllipsisRows";
+import { TableRow } from "../Table/TableRow";
 
 interface InputTableProps {
   data: NeuralNetworkData["batch_data"];
@@ -28,24 +30,15 @@ export const InputTable = ({ data }: InputTableProps): JSX.Element => {
             <tr key={index}>
               {Object.values(value).map((value, valueIndex) => {
                 return (
-                  <td
-                    key={valueIndex}
-                    className={`px-3 pb-1 ${index === 0 ? "pt-4" : ""}`}
-                  >
+                  <TableRow index={valueIndex} key={valueIndex}>
                     {value.toFixed(6)}
-                  </td>
+                  </TableRow>
                 );
               })}
             </tr>
           );
         })}
-        {[0, 1, 3].map((_, index) => {
-          return (
-            <tr key={index}>
-              <td className="px-3 pb-1">...</td>
-            </tr>
-          );
-        })}
+        <EllipsisRows />
       </tbody>
     </TableLayout>
   );
