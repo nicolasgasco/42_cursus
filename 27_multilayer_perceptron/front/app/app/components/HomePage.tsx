@@ -1,27 +1,22 @@
 "use client";
 
-import data from "../../public/data.json";
 import React from "react";
 import { NeuralNetworkData } from "../interfaces/NeuralNetworkData.interface";
 import { EpochSlider } from "./EpochSlider";
 import { Dashboard } from "./Dashboard";
 import { NeuralNetwork } from "./NeuralNetwork";
+import NEURAL_NETWORK_DATA from "../../public/data.json";
 
-interface HomePageProps {
-  data: NeuralNetworkData[];
-}
+const neuralNetworkData: NeuralNetworkData[] = NEURAL_NETWORK_DATA;
 
-const totalEpochs = data[0]["total_epochs"];
+const totalEpochs = neuralNetworkData[0]["total_epochs"];
 
-export const HomePage = ({ data }: HomePageProps): JSX.Element => {
-  const [currentEpochData, setCurrentEpochData] = React.useState(data[0]);
-
-  const [modalIsOpen, setIsOpen] = React.useState(true);
-
+export const HomePage = (): JSX.Element => {
+  const [currentEpochData, setCurrentEpochData] = React.useState(neuralNetworkData[0]);
 
   const handleEpochChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const epochIndex = parseInt(event.target.value);
-    setCurrentEpochData(data[epochIndex]);
+    setCurrentEpochData(neuralNetworkData[epochIndex]);
   };
 
   return (
