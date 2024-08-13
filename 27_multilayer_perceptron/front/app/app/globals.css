@@ -46,21 +46,21 @@ input[type="range"] {
 
 /* Typography */
 .title-1 {
-  @apply text-4xl font-bold;
+  @apply text-4xl font-semibold;
 }
 
 .title-2 {
-  @apply text-3xl font-bold;
+  @apply text-3xl font-semibold;
 }
 
 .title-3 {
-  @apply text-2xl font-bold;
+  @apply text-2xl font-semibold;
 }
 
 .title-4 {
-  @apply text-xl font-bold;
+  @apply text-xl font-semibold;
 }
 
 .title-5 {
-  @apply text-lg font-bold;
+  @apply text-base font-medium;
 }

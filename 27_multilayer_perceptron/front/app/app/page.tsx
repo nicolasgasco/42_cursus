@@ -7,7 +7,7 @@ const neuralNetworkData: NeuralNetworkData[] = NEURAL_NETWORK_DATA;
 export default function Home() {
   return (
     <main className="max-w-full flex flex-col items-center min-h-screen h-full my-12">
-      <h1 className="title-1 mb-12">Multilayer perceptron visualizer</h1>
+      <h1 className="title-1 mb-6">Multilayer perceptron visualizer</h1>
       <HomePage data={neuralNetworkData} />
     </main>
   );

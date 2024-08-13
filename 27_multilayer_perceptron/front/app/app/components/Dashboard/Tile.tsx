@@ -12,14 +12,14 @@ export const Tile = ({
 }: TileProps): JSX.Element => {
   return (
     <div
-      className="flex-auto	bg-slate-700 rounded-md p-6"
-      style={{ width: 300 }}
+      className="flex-auto	bg-slate-700 rounded-md p-4"
+      style={{ width: 275 }}
     >
       <div className="flex items-center justify-between	gap-2 mb-4">
-        <h3 className="font-bold title-4">{title}</h3>
+        <h3 className="font-bold title-5">{title}</h3>
         {tooltipProps && <TooltipIcon {...tooltipProps} />}
       </div>
-      {children}
+      <div className="text-sm">{children}</div>
     </div>
   );
 };

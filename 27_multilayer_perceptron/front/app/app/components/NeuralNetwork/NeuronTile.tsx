@@ -10,11 +10,11 @@ export const NeuronTile = ({
 }: NeuronTileProps): JSX.Element => {
   return (
     <div
-      className="flex-auto bg-slate-800 rounded-md p-4"
-      style={{ minWidth: 275 }}
+      className="flex-auto flex flex-col items-center bg-slate-800 rounded-md p-2"
+      style={{ minWidth: 240 }}
       {...restProps}
     >
-      <h3 className="title-5 mb-4">{title}</h3>
+      <h3 className="title-5 mb-2 self-start">{title}</h3>
       {children}
     </div>
   );

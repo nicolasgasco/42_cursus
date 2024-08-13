@@ -14,7 +14,7 @@ interface NeuralNetworkProps {
 export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
   console.table(data["predictions"]);
   return (
-    <div className="flex justify-center gap-4 px-12 py-6 w-full overflow-x-auto">
+    <div className="flex justify-center gap-3 px-12 py-6 w-full overflow-x-auto">
       <LayerTile
         title={"Input layer"}
         tooltipProps={{
@@ -22,7 +22,6 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
           description:
             "The input layer contains the data that is fed into the neural network. Each row represents a data point and each column represents a feature.",
         }}
-        style={{ width: 410 }}
       >
         <InputTable data={data["batch_data"]} />
       </LayerTile>

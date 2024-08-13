@@ -4,6 +4,6 @@ interface TableLayoutProps {
 
 export const TableLayout = ({ children }: TableLayoutProps) => {
   return (
-    <table className="table-auto m-2 text-sm text-center">{children}</table>
+    <table className="table-auto m-2 text-xs text-center">{children}</table>
   );
 };

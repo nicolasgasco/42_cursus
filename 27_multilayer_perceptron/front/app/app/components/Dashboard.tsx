@@ -9,9 +9,9 @@ interface DashboardProps {
 
 export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
   return (
-    <div className="w-fit flex justify-between gap-4 mx-auto mb-12">
+    <div className="w-fit flex justify-between gap-4 mx-auto mb-3">
       <Tile
-        title="Model"
+        title="Data points"
         tooltipProps={{
           id: "model-tooltip",
           description:
@@ -19,11 +19,11 @@ export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
         }}
       >
         <ListEntry
-          title="Training data points"
+          title="Training set"
           description={data["data_points"].toString()}
         />
         <ListEntry
-          title="Validation data points"
+          title="Validation set"
           description={data["test_data_points"].toString()}
         />
       </Tile>
