@@ -1,7 +1,6 @@
 import { NeuralNetworkData } from "../interfaces/NeuralNetworkData.interface";
-import { Tile } from "./Dashboard/Tile";
+import { DashboardTile } from "./Dashboard/DashboardTile";
 import { ListEntry } from "./Dashboard/ListEntry";
-import { TooltipIcon } from "./TooltipIcon";
 
 interface DashboardProps {
   data: NeuralNetworkData;
@@ -10,7 +9,7 @@ interface DashboardProps {
 export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
   return (
     <div className="w-fit flex justify-between gap-4 mx-auto mb-3">
-      <Tile
+      <DashboardTile
         title="Data points"
         tooltipProps={{
           id: "model-tooltip",
@@ -26,9 +25,9 @@ export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
           title="Validation set"
           description={data["test_data_points"].toString()}
         />
-      </Tile>
+      </DashboardTile>
 
-      <Tile
+      <DashboardTile
         title={"Batch"}
         tooltipProps={{
           id: "batch-tooltip",
@@ -44,9 +43,9 @@ export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
           title="Current batch"
           description={`${data["batch"] + 1}/${data["total_batches"]}`}
         />
-      </Tile>
+      </DashboardTile>
 
-      <Tile
+      <DashboardTile
         title={"Loss"}
         tooltipProps={{
           id: "loss-tooltip",
@@ -64,9 +63,9 @@ export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
             description={data["test_loss"].toFixed(6)}
           />
         </dl>
-      </Tile>
+      </DashboardTile>
 
-      <Tile
+      <DashboardTile
         title={"Accuracy"}
         tooltipProps={{
           id: "accuracy-tooltip",
@@ -86,7 +85,7 @@ export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
             statusValue={data["test_accuracy"]}
           />
         </dl>
-      </Tile>
+      </DashboardTile>
     </div>
   );
 };

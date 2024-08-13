@@ -1,15 +1,15 @@
 import { TooltipIcon, TooltipIconProps } from "../TooltipIcon";
 
-interface TileProps {
+interface DashboardTileProps {
   children: React.ReactNode;
   title: string;
   tooltipProps?: TooltipIconProps;
 }
-export const Tile = ({
+export const DashboardTile = ({
   children,
   title,
   tooltipProps,
-}: TileProps): JSX.Element => {
+}: DashboardTileProps): JSX.Element => {
   return (
     <div
       className="flex-auto	bg-slate-700 rounded-md p-4"
