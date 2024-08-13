@@ -16,7 +16,7 @@ export const InputTable = ({ data }: InputTableProps): JSX.Element => {
       <thead>
         <tr>
           {headers.map((columnName, index) => {
-            return <TableHeader key={index}>{columnName}</TableHeader>;
+            return <TableHeader index={index}>{columnName}</TableHeader>;
           })}
         </tr>
       </thead>
