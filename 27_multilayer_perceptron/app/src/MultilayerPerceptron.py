@@ -187,31 +187,19 @@ class MultilayerPerceptron:
                         total_epoch, accuracy, test_acc)
 
                 if self.__frontend_data:
-                    frontend_data.append({
-                        "accuracy": accuracy,
-                        "activation_function": self.__activation_function,
-                        "batch": b,
-                        "batch_data": self.__batch_data[self.__inputs_columns][0:10].T.to_dict(),
-                        "batch_size": batch_size,
-                        "data_points": len(self.__train_data),
-                        "epoch": epoch,
-                        "hidden_layers": [{
-                            "biases": hidden_layer.biases.tolist(),
-                            "weights": hidden_layer.weights.tolist()
-                        } for hidden_layer in self.__hidden_layers],
-                        "loss": loss,
-                        "output_layer": {
-                            "biases": self.__output_layer.biases.tolist(),
-                            "weights": self.__output_layer.weights.tolist()
-                        },
-                        "predictions": predictions[0:10].tolist(),
-                        "test_accuracy": test_acc,
-                        "test_data_points": len(self.__test_data),
-                        "test_loss": test_loss,
-                        "total_batches": n_batches,
-                        "total_epoch": total_epoch,
-                        "total_epochs": self.__epochs * n_batches
+                    data = self.__encode_frontend_data({
+                        'accuracy': accuracy,
+                        'batch_size': batch_size,
+                        'b': b,
+                        'epoch': epoch,
+                        'loss': loss,
+                        'n_batches': n_batches,
+                        'predictions': predictions,
+                        'test_acc': test_acc,
+                        'test_loss': test_loss,
+                        'total_epoch': total_epoch
                     })
+                    frontend_data.append(data)
 
         print("\n")
 
@@ -230,10 +218,7 @@ class MultilayerPerceptron:
         save_params_to_json(self.__hidden_layers, self.__output_layer)
 
         if self.__frontend_data:
-            frontend_data_path = os.environ.get("FRONTEND_DATA_PATH")
-            frontend_data_file = frontend_data_path + "/data.json"
-            with open(frontend_data_file, 'w') as file:
-                json.dump(frontend_data, file)
+            self.__save_frontend_data(frontend_data)
 
     def test(self, test_data: pd.DataFrame, print_output: bool = True) -> None:
         if (print_output):
@@ -415,3 +400,44 @@ class MultilayerPerceptron:
             delta_prev = output_gradient
 
             print_output(f"{hidden_layer}\n")
+
+    def __encode_frontend_data(self, data) -> dict:
+
+        batch_data = self.__batch_data[self.__inputs_columns][0:10].T.to_dict()
+        return {
+            "accuracy": data['accuracy'],
+            "activation_function": self.__activation_function,
+            "batch": data['b'],
+            "batch_data": batch_data,
+            "batch_size": data['batch_size'],
+            "data_points": len(self.__train_data),
+            "epoch": data['epoch'],
+            "hidden_layers": [{
+                "biases": hidden_layer.biases.tolist(),
+                "weights": hidden_layer.weights.tolist()
+            } for hidden_layer in self.__hidden_layers],
+            "loss": data['loss'],
+            "output_layer": {
+                "biases": self.__output_layer.biases.tolist(),
+                "weights": self.__output_layer.weights.tolist()
+            },
+            "predictions": data['predictions'][0:10].tolist(),
+            "test_accuracy": data['test_acc'],
+            "test_data_points": len(self.__test_data),
+            "test_loss": data['test_loss'],
+            "total_batches": data['n_batches'],
+            "total_epoch": data['total_epoch'],
+            "total_epochs": self.__epochs * data['n_batches']
+        }
+
+    def __save_frontend_data(self, data: dict) -> None:
+        frontend_data_path = os.environ.get("FRONTEND_DATA_PATH")
+        frontend_data_file = os.path.join(frontend_data_path, "data.json")
+
+        output = "Saving frontend data to "
+        output += f"{Fore.YELLOW}{frontend_data_file}{Style.RESET_ALL}"
+        output += "...\n"
+        print(output)
+
+        with open(frontend_data_file, 'w') as file:
+            json.dump(data, file)
