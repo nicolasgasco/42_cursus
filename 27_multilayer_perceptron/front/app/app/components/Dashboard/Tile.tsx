@@ -13,7 +13,7 @@ export const Tile = ({
   return (
     <div
       className="flex-auto	bg-slate-700 rounded-md p-4"
-      style={{ width: 275 }}
+      style={{ minWidth: 215 }}
     >
       <div className="flex items-center justify-between	gap-2 mb-4">
         <h3 className="font-bold title-5">{title}</h3>

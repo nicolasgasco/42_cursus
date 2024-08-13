@@ -12,7 +12,7 @@ export const ListEntry = ({
   statusValue,
 }: ListEntryProps): JSX.Element => {
   return (
-    <div className="flex gap-10">
+    <div className="flex gap-2">
       <dt>{title}:</dt>
       <dd className="ml-auto">
         {description}{" "}
