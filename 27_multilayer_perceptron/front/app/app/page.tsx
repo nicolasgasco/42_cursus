@@ -1,6 +1,6 @@
 import { HomePage } from "./components/HomePage";
 import { NeuralNetworkData } from "./interfaces/NeuralNetworkData.interface";
-import NEURAL_NETWORK_DATA from "../../data/data.json";
+import NEURAL_NETWORK_DATA from "../public/data.json";
 
 const neuralNetworkData: NeuralNetworkData[] = NEURAL_NETWORK_DATA;
 

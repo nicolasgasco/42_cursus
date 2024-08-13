@@ -1,6 +1,6 @@
 "use client";
 
-import data from "../../../data/data.json";
+import data from "../../public/data.json";
 import React from "react";
 import { NeuralNetworkData } from "../interfaces/NeuralNetworkData.interface";
 import { EpochSlider } from "./EpochSlider";
