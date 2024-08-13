@@ -16,6 +16,9 @@ const totalEpochs = data[0]["total_epochs"];
 export const HomePage = ({ data }: HomePageProps): JSX.Element => {
   const [currentEpochData, setCurrentEpochData] = React.useState(data[0]);
 
+  const [modalIsOpen, setIsOpen] = React.useState(true);
+
+
   const handleEpochChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const epochIndex = parseInt(event.target.value);
     setCurrentEpochData(data[epochIndex]);
@@ -31,6 +34,6 @@ export const HomePage = ({ data }: HomePageProps): JSX.Element => {
       <Dashboard data={currentEpochData} />
 
       <NeuralNetwork data={currentEpochData} />
-    </div>
+    </div >
   );
 };

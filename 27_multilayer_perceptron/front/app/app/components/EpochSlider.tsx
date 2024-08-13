@@ -14,10 +14,23 @@ export const EpochSlider = ({
 
   return (
     <div className="w-1/5 min-w-fit mx-auto relative">
-      <h2 className="mb-4 text-center">
+      <h2 className="mb-8 text-center">
         Use the slider below to see how the neural network performs over time
       </h2>
-      <div className="mb-4 flex flex-col sticky">
+      <div className="flex flex-col sticky">
+        <label
+          htmlFor="range"
+          className="text-center flex gap-2 items-baseline mx-auto mb-2"
+        >
+          <span className="title-4">
+            Epoch {epoch["total_epoch"] + 1} of {totalEpochs}
+          </span>
+          <TooltipIcon
+            id="epoch-tooltip"
+            description="An epoch is a complete training round. The neural network computes its predictions and compares them with the actual values. It then adjusts weights and biases to minimize the error."
+          />
+        </label>
+
         <div className="relative mb-12">
           <input
             id="range"
@@ -46,19 +59,6 @@ export const EpochSlider = ({
             {totalEpochs}
           </span>
         </div>
-
-        <label
-          htmlFor="range"
-          className="text-center flex gap-2 items-baseline mx-auto"
-        >
-          <span className="title-4">
-            Epoch {epoch["total_epoch"] + 1} of {totalEpochs}
-          </span>
-          <TooltipIcon
-            id="epoch-tooltip"
-            description="An epoch is a complete training round. The neural network computes its predictions and compares them with the actual values. It then adjusts weights and biases to minimize the error."
-          />
-        </label>
       </div>
     </div>
   );

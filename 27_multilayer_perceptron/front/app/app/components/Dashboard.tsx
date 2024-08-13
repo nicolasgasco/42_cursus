@@ -8,13 +8,13 @@ interface DashboardProps {
 
 export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
   return (
-    <div className="w-fit flex justify-between gap-4 mx-auto mb-3">
+    <div className="w-fit flex justify-between flex-wrap gap-4 mx-auto mb-3">
       <DashboardTile
         title="Data points"
         tooltipProps={{
           id: "model-tooltip",
           description:
-            "The data set is divided into two sets: a main set that is used for training and a smaller one for validation. Once the model has been trained, the validation set is used to check the model's performance on unknown data.",
+            "The main set is used for training the model while the validation set is used to check the model's performance on unknown data.",
         }}
       >
         <ListEntry

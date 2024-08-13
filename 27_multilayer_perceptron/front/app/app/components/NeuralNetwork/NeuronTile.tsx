@@ -11,7 +11,7 @@ export const NeuronTile = ({
   return (
     <div
       className="flex-auto flex flex-col items-center bg-slate-800 rounded-md p-2"
-      style={{ minWidth: 240 }}
+      style={{ minWidth: 220 }}
       {...restProps}
     >
       <h3 className="title-5 mb-2 self-start">{title}</h3>
