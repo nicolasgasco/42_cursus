@@ -56,7 +56,7 @@ export const EpochSlider = ({
           </span>
           <TooltipIcon
             id="epoch-tooltip"
-            description="An epoch is complete training round. The neural network computes its predictions and compares them with the actual values. It then adjusts weights and biases to minimize the error."
+            description="An epoch is a complete training round. The neural network computes its predictions and compares them with the actual values. It then adjusts weights and biases to minimize the error."
           />
         </label>
       </div>
