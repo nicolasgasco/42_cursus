@@ -51,7 +51,7 @@ export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
         tooltipProps={{
           id: "loss-tooltip",
           description:
-            "Loss is a measure of how well the neural network is performing. It is calculated by comparing the predicted values with the actual values. The goal is to minimize the loss function.",
+            "Loss is a measure of how well the neural network is performing. The lower the loss, the better the model is at making predictions.",
         }}
       >
         <dl>
