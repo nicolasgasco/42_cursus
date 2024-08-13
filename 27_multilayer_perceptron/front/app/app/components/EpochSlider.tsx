@@ -13,7 +13,7 @@ export const EpochSlider = ({
   const totalEpochs = epoch["total_epochs"];
 
   return (
-    <div className="w-2/5 min-w-fit mx-auto relative">
+    <div className="w-1/5 min-w-fit mx-auto relative">
       <h2 className="mb-4 text-center">
         Use the slider below to see how the neural network performs over time
       </h2>
