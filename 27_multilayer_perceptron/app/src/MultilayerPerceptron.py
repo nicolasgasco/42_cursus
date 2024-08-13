@@ -162,22 +162,15 @@ class MultilayerPerceptron:
 
                 [test_acc, test_loss] = self.test(self.__test_data, False)
 
-                output = "\r"
-                if n_batches != 1:
-                    output += f"Batch {Fore.YELLOW}{b + 1}{Style.RESET_ALL}/"
-                    output += f"{n_batches} - "
-                output += f"Epoch {Fore.YELLOW}{epoch + 1}{Style.RESET_ALL}"
-                output += f"/{self.__epochs}"
-                output += " - Train: loss: "
-                output += f"{Fore.YELLOW}{loss.round(5)}{Style.RESET_ALL}"
-                output += ", accuracy: "
-                output += f"{Fore.YELLOW}{accuracy.round(2)}{Style.RESET_ALL}"
-                output += " - Test: loss: "
-                output += f"{Fore.YELLOW}{test_loss.round(5)}{Style.RESET_ALL}"
-                output += ", accuracy: "
-                output += f"{Fore.YELLOW}{test_acc.round(2)}{Style.RESET_ALL}"
-
-                print(output, end="")
+                self.__print_epoch_output({
+                    'accuracy': accuracy,
+                    'b': b,
+                    'epoch': epoch,
+                    'loss': loss,
+                    'n_batches': n_batches,
+                    'test_acc': test_acc,
+                    'test_loss': test_loss
+                })
 
                 total_epoch = b * self.__epochs + epoch
                 if self.__plot_loss and (total_epoch) % 10 == 0:
@@ -400,6 +393,25 @@ class MultilayerPerceptron:
             delta_prev = output_gradient
 
             print_output(f"{hidden_layer}\n")
+
+    def __print_epoch_output(self, data: dict) -> str:
+        output = "\r"
+        if data['n_batches'] != 1:
+            output += f"Batch {Fore.YELLOW}{data['b'] + 1}{Style.RESET_ALL}/"
+            output += f"{data['n_batches']} - "
+        output += f"Epoch {Fore.YELLOW}{data['epoch'] + 1}{Style.RESET_ALL}"
+        output += f"/{self.__epochs}"
+        output += " - Train: loss: "
+        output += f"{Fore.YELLOW}{data['loss'].round(5)}{Style.RESET_ALL}"
+        output += ", accuracy: "
+        output += f"{Fore.YELLOW}{data['accuracy'].round(2)}{Style.RESET_ALL}"
+        output += " - Test: loss: "
+        output += f"{Fore.YELLOW}{data['test_loss'].round(5)}{Style.RESET_ALL}"
+        output += ", accuracy: "
+        output += f"{Fore.YELLOW}{data['test_acc'].round(2)}{Style.RESET_ALL}"
+        output += "             "  # to clear previous output
+
+        print(output, end="")
 
     def __encode_frontend_data(self, data) -> dict:
 
