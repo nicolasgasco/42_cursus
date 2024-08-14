@@ -5,11 +5,11 @@ import { EllipsisRows } from "../Table/EllipsisRows";
 import { TableRow } from "../Table/TableRow";
 
 interface InputTableProps {
-  data: NeuralNetworkData["batch_data"];
+  epochData: NeuralNetworkData["batch_data"];
 }
 
-export const InputTable = ({ data }: InputTableProps): JSX.Element => {
-  const headers = Object.keys(data[parseInt(Object.keys(data)[0])]);
+export const InputTable = ({ epochData }: InputTableProps): JSX.Element => {
+  const headers = Object.keys(epochData[parseInt(Object.keys(epochData)[0])]);
 
   return (
     <TableLayout>
@@ -21,7 +21,7 @@ export const InputTable = ({ data }: InputTableProps): JSX.Element => {
         </tr>
       </thead>
       <tbody>
-        {Object.entries(data).map(([_, value], index) => {
+        {Object.entries(epochData).map(([_, value], index) => {
           return (
             <tr key={index}>
               {Object.values(value).map((value, valueIndex) => {

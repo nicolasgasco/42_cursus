@@ -1,19 +1,21 @@
-import { NeuralNetworkData } from "../interfaces/NeuralNetworkData.interface";
+import { NeuralNetworkData, NeuralNetworkEpochData, NeuralNetworkModelData } from "../interfaces/NeuralNetworkData.interface";
 import { TooltipIcon } from "./TooltipIcon";
 
 interface EpochSliderProps {
-  epoch: NeuralNetworkData;
+  epoch: NeuralNetworkEpochData;
+  modelData: NeuralNetworkModelData
   handleEpochChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const EpochSlider = ({
   epoch,
+  modelData,
   handleEpochChange,
 }: EpochSliderProps): JSX.Element => {
-  const totalEpochs = epoch["total_epochs"];
+  const totalEpochs = modelData["total_epochs"];
 
   return (
-    <div className="w-1/5 min-w-fit mx-auto relative">
+    <div className="w-1/5 min-w-fit mx-auto relative mx-6">
       <h2 className="mb-8 text-center">
         Use the slider below to see how the neural network performs over time
       </h2>

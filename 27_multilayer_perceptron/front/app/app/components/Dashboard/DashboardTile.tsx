@@ -12,7 +12,7 @@ export const DashboardTile = ({
 }: DashboardTileProps): JSX.Element => {
   return (
     <div
-      className="flex-auto	bg-slate-700 rounded-md p-4"
+      className="flex-auto flex flex-col justify-between bg-slate-700 rounded-md p-4"
       style={{ minWidth: 215 }}
     >
       <div className="flex items-center justify-between	gap-2 mb-4">

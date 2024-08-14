@@ -1,25 +1,26 @@
-import { NeuralNetworkData } from "@/app/interfaces/NeuralNetworkData.interface";
+import { NeuralNetworkData, NeuralNetworkModelData } from "@/app/interfaces/NeuralNetworkData.interface";
 import { TableLayout } from "../Table/TableLayout";
 import { TableHeader } from "../Table/TableHeader";
 import { EllipsisRows } from "../Table/EllipsisRows";
 import { TableRow } from "../Table/TableRow";
 
 interface OutputTableProps {
-  data: NeuralNetworkData;
+  epochData: NeuralNetworkData;
+  modelData: NeuralNetworkModelData
 }
 
-export const OutputTable = ({ data }: OutputTableProps) => {
+export const OutputTable = ({ epochData, modelData }: OutputTableProps) => {
   return (
     <TableLayout>
       <thead>
         <tr>
-          {data["outputs"].map((output, index) => {
+          {modelData["outputs"].map((output, index) => {
             return <TableHeader key={index}>{output}</TableHeader>;
           })}
         </tr>
       </thead>
       <tbody>
-        {Object.entries(data["predictions"]).map(([_, value], index) => {
+        {Object.entries(epochData["predictions"]).map(([_, value], index) => {
           return (
             <tr key={index}>
               {Object.values(value).map((innerValue, innerValueIndex) => {

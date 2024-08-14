@@ -142,7 +142,10 @@ class MultilayerPerceptron:
         accuracy_plotter.train_plot_init(False)
 
         if self.__frontend_data:
-            frontend_data = []
+            frontend_data = {
+                "data": {},
+                "epochs_data": []
+            }
 
         n_batches = len(self.__train_data) // batch_size + 1
         for b, i in enumerate(range(0, len(self.__train_data), batch_size)):
@@ -183,17 +186,15 @@ class MultilayerPerceptron:
                 if self.__frontend_data:
                     data = self.__encode_frontend_data({
                         'accuracy': accuracy,
-                        'batch_size': batch_size,
                         'b': b,
                         'epoch': epoch,
                         'loss': loss,
-                        'n_batches': n_batches,
                         'predictions': predictions,
                         'test_acc': test_acc,
                         'test_loss': test_loss,
                         'total_epoch': total_epoch
                     })
-                    frontend_data.append(data)
+                    frontend_data["epochs_data"].append(data)
 
         print("\n")
 
@@ -212,6 +213,15 @@ class MultilayerPerceptron:
         save_params_to_json(self.__hidden_layers, self.__output_layer)
 
         if self.__frontend_data:
+            frontend_data["data"] = {
+                'batch_size': batch_size,
+                "activation_function": self.__activation_function,
+                "data_points": len(self.__train_data),
+                "outputs": self.__outputs,
+                "test_data_points": len(self.__test_data),
+                "total_batches": n_batches,
+                "total_epochs": self.__epochs * n_batches
+            }
             self.__save_frontend_data(frontend_data)
 
     def test(self, test_data: pd.DataFrame, print_output: bool = True) -> None:
@@ -419,11 +429,8 @@ class MultilayerPerceptron:
         batch_data = relevant_batch_data[0:data_limit].T.to_dict()
         return {
             "accuracy": data['accuracy'],
-            "activation_function": self.__activation_function,
             "batch": data['b'],
             "batch_data": batch_data,
-            "batch_size": data['batch_size'],
-            "data_points": len(self.__train_data),
             "epoch": data['epoch'],
             "hidden_layers": [{
                 "biases": hidden_layer.biases.tolist(),
@@ -434,14 +441,10 @@ class MultilayerPerceptron:
                 "biases": self.__output_layer.biases.tolist(),
                 "weights": self.__output_layer.weights.tolist()
             },
-            "outputs": self.__outputs,
             "predictions": data['predictions'][0:data_limit].tolist(),
             "test_accuracy": data['test_acc'],
-            "test_data_points": len(self.__test_data),
             "test_loss": data['test_loss'],
-            "total_batches": data['n_batches'],
             "total_epoch": data['total_epoch'],
-            "total_epochs": self.__epochs * data['n_batches'],
             "true_values": self.__batch_data.iloc[
                 :, self.__outputs_column][0:data_limit].tolist()
         }

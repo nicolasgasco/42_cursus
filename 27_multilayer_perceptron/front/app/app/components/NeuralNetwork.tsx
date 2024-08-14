@@ -1,4 +1,5 @@
-import { NeuralNetworkData } from "../interfaces/NeuralNetworkData.interface";
+import { NeuralNetworkModelData } from "../interfaces/NeuralNetworkData.interface";
+import { NeuralNetworkepochData } from "../interfaces/NeuralNetworkepochData.interface";
 import { InputTable } from "./NeuralNetwork/InputTable";
 import { LayerTile } from "./NeuralNetwork/LayerTile";
 import { NeuronTile } from "./NeuralNetwork/NeuronTile";
@@ -8,10 +9,11 @@ import { TableLayout } from "./Table/TableLayout";
 import { TableRow } from "./Table/TableRow";
 
 interface NeuralNetworkProps {
-  data: NeuralNetworkData;
+  epochData: NeuralNetworkepochData;
+  modelData: NeuralNetworkModelData
 }
 
-export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
+export const NeuralNetwork = ({ epochData, modelData }: NeuralNetworkProps): JSX.Element => {
   return (
     <div className="overflow-x-auto py-6" style={{ maxWidth: "95%" }}>
       <div className="flex justify-center gap-3 min-w-fit">
@@ -23,10 +25,10 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
               "The input layer contains the data that is fed into the neural network. Each row represents a data point and each column a feature. In this data set, the features describe characteristics of cells in breast cancer biopsies.",
           }}
         >
-          <InputTable data={data["batch_data"]} />
+          <InputTable epochData={epochData["batch_data"]} />
         </LayerTile>
 
-        {data["hidden_layers"].map((layer, layerIndex) => {
+        {epochData["hidden_layers"].map((layer, layerIndex) => {
           return (
             <LayerTile
               title={`Hidden layer ${layerIndex + 1}`}
@@ -80,7 +82,7 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
               "The output layer computes the final predictions of the neural network. The number of neurons in the output layer matches the number of classes in the data set.",
           }}
         >
-          {data["output_layer"].weights.map((weight, weightIndex) => {
+          {epochData["output_layer"].weights.map((weight, weightIndex) => {
             return (
               <NeuronTile key={weightIndex} title={`Neuron ${weightIndex + 1}`}>
                 <TableLayout>
@@ -97,7 +99,7 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
                           <TableRow>{weight.toFixed(6)}</TableRow>
                           {innerWeightIndex === 0 && (
                             <TableRow>
-                              {data["output_layer"].biases[weightIndex].toFixed(
+                              {epochData["output_layer"].biases[weightIndex].toFixed(
                                 6
                               )}
                             </TableRow>
@@ -120,7 +122,7 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
               "Each column represents a feature, i.e. 'M' for malignant and 'B' for benign. The values represent the probability of the data point belonging to each class.",
           }}
         >
-          <OutputTable data={data} />
+          <OutputTable epochData={epochData} modelData={modelData} />
         </LayerTile>
 
         <LayerTile
@@ -139,10 +141,10 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
               </tr>
             </thead>
             <tbody>
-              {data["true_values"].map((value, index) => {
-                const predictions = data["predictions"][index];
+              {epochData["true_values"].map((value, index) => {
+                const predictions = epochData["predictions"][index];
                 const strongestPredictionIndex = Object.keys(predictions).reduce((a, b) => predictions[a] > predictions[b] ? a : b);
-                const predictedHouseName = data["outputs"][parseInt(strongestPredictionIndex)];
+                const predictedHouseName = modelData["outputs"][parseInt(strongestPredictionIndex)];
                 return (
                   <tr key={index}>
                     <TableRow>{value}</TableRow>
