@@ -1,0 +1,13 @@
+{
+  "activation_function": "sigmoid",
+  "batch_size": 124,
+  "epochs": 200,
+  "frontend_data": false,
+  "hidden_layer_neurons": 32,
+  "hidden_layers": 2,
+  "inputs_columns": [8, 9, 12],
+  "learning_rate": 0.1,
+  "outputs": ["Slytherin", "Gryffindor", "Ravenclaw", "Hufflepuff"],
+  "outputs_column": 1,
+  "plot_loss": true
+}

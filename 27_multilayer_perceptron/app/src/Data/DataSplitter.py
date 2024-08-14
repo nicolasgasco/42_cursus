@@ -73,7 +73,7 @@ class DataSplitter:
         upper_bound = total_rows * self.__validation_percentage // 100 - 1
 
         self.__validation_set = self.__data.iloc[:upper_bound]
-        self.__train_set = self.__data.iloc[upper_bound:]
+        self.__train_set = self.__data.iloc[upper_bound + 1:]
 
     def save_to_csv(self) -> None:
         """

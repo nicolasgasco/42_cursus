@@ -29,9 +29,7 @@ class DataImporter:
         """
 
         try:
-            text_field_types: dict = {0: str, 1: str}
-            data: pd.DataFrame = pd.read_csv(
-                self.__data_path, header=None, dtype=text_field_types)
+            data: pd.DataFrame = pd.read_csv(self.__data_path)
 
             self.__data = data
 
@@ -47,9 +45,11 @@ class DataImporter:
         Returns:
             pd.DataFrame: The normalized data as a pandas DataFrame.
         """
-
-        # Exclude the first non-numeric column
-        data_to_normalize: pd.DataFrame = data.iloc[:, 2:]
+        # Support for datasets with mixed data types
+        first_numeric_col = data[data.columns[1:]].select_dtypes(
+            include="number").columns[0]
+        col_index = data.columns.get_loc(first_numeric_col)
+        data_to_normalize: pd.DataFrame = data.iloc[:, col_index:]
 
         # Min-max normalization
         normalized_data: pd.DataFrame = (data_to_normalize -
@@ -57,7 +57,7 @@ class DataImporter:
             (data_to_normalize.max() - data_to_normalize.min())
 
         result: pd.DataFrame = pd.concat(
-            [data.iloc[:, :2], normalized_data], axis=1)
+            [data.iloc[:, :col_index], normalized_data], axis=1)
 
         return result
 
@@ -77,7 +77,8 @@ class DataImporter:
         try:
             train_data: pd.DataFrame = pd.read_csv(train_data_path)
         except FileNotFoundError:
-            raise FileNotFoundError("DataImporter: Training data file not found.")
+            raise FileNotFoundError(
+                "DataImporter: Training data file not found.")
 
         return train_data
 
