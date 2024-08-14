@@ -6878,6 +6878,6 @@ __pycache__
 27_multilayer_perceptron/data/validation_set.csv
 26_dslr/data/houses_binary.csv
 27_multilayer_perceptron/data/data_test.csv
-27_multilayer_perceptron/data/data_train.csv
+27_multilayer_perceptron/data/data_training.csv
 27_multilayer_perceptron/data/parameters.json
 27_multilayer_perceptron/front/data/data.json
