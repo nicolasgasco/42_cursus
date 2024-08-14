@@ -121,8 +121,8 @@ class SettingsImporter:
         assert "outputs_column" in settings, err_message
         err_message = "MultilayerPerceptron: outputs_column is None"
         assert settings["outputs_column"] is not None, err_message
-        err_message = "MultilayerPerceptron: outputs_column is empty"
-        assert len(settings["outputs_column"]) > 0, err_message
+        err_message = "MultilayerPerceptron: outputs_column is not string/int"
+        assert isinstance(settings["outputs_column"], (str, int)), err_message
 
         err_message = "MultilayerPerceptron: plot_loss key missing"
         assert "plot_loss" in settings, err_message

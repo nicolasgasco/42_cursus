@@ -151,11 +151,12 @@ class MultilayerPerceptron:
             for epoch in range(self.__epochs):
 
                 predictions = self.__forward(
-                    self.__batch_data[self.__inputs_columns])
+                    self.__batch_data.iloc[:, self.__inputs_columns])
                 loss = self.__loss_function(predictions, self.__batch_data)
 
                 accuracy = self.__accuracy(
-                    predictions, self.__batch_data[self.__outputs_column])
+                    predictions,
+                    self.__batch_data.iloc[:, self.__outputs_column])
 
                 delta = self.__backpropagation_output_layer(predictions)
                 self.__backpropagation_hidden_layers(delta)
@@ -217,9 +218,9 @@ class MultilayerPerceptron:
         if (print_output):
             print(f"{Fore.YELLOW}TESTING{Style.RESET_ALL}")
 
-        predictions = self.__forward(test_data[self.__inputs_columns])
+        predictions = self.__forward(test_data.iloc[:, self.__inputs_columns])
         accuracy = self.__accuracy(
-            predictions, test_data[self.__outputs_column])
+            predictions, test_data.iloc[:, self.__outputs_column])
         loss = self.__loss_function(predictions, test_data)
 
         if (print_output):
@@ -299,12 +300,12 @@ class MultilayerPerceptron:
         y_true = pd.DataFrame(columns=self.__outputs)
 
         malignant_column = self.__outputs[0]
-        y_true[malignant_column] = data[self.__outputs_column]
+        y_true[malignant_column] = data.iloc[:, self.__outputs_column]
         y_true[malignant_column] = y_true[malignant_column].apply(
             lambda x: 1 if x == malignant_column else 0)
 
         benign_column = self.__outputs[1]
-        y_true[benign_column] = data[self.__outputs_column]
+        y_true[benign_column] = data.iloc[:, self.__outputs_column]
         y_true[benign_column] = y_true[benign_column].apply(
             lambda x: 1 if x == benign_column else 0)
 
@@ -415,7 +416,8 @@ class MultilayerPerceptron:
 
     def __encode_frontend_data(self, data) -> dict:
 
-        batch_data = self.__batch_data[self.__inputs_columns][0:10].T.to_dict()
+        batch_data = self.__batch_data.iloc[:,
+                                            self.__inputs_columns][0:10].T.to_dict()
         return {
             "accuracy": data['accuracy'],
             "activation_function": self.__activation_function,
