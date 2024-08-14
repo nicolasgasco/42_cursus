@@ -13,21 +13,22 @@ export const OutputTable = ({ data }: OutputTableProps) => {
     <TableLayout>
       <thead>
         <tr>
-          <TableHeader style={{ width: 92 }}>M</TableHeader>
-          <TableHeader style={{ width: 92 }}>B</TableHeader>
+          {data["outputs"].map((output, index) => {
+            return <TableHeader key={index}>{output}</TableHeader>;
+          })}
         </tr>
       </thead>
       <tbody>
         {Object.entries(data["predictions"]).map(([_, value], index) => {
           return (
             <tr key={index}>
-              {Object.values(value).map((value, valueIndex) => {
+              {Object.values(value).map((innerValue, innerValueIndex) => {
                 return (
-                  <TableRow index={valueIndex} key={valueIndex}>
+                  <TableRow index={innerValueIndex} key={innerValueIndex}>
                     <span
-                      className={value > 0.5 ? "text-yellow-300" : "font-light"}
+                      className={innerValue === Math.max(...Object.values(value)) ? "text-yellow-300" : "font-light"}
                     >
-                      {value.toFixed(6)}
+                      {innerValue.toFixed(6)}
                     </span>
                   </TableRow>
                 );

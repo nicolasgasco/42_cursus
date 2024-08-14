@@ -24,9 +24,9 @@ class MultilayerPerceptron:
         settings = settings_importer.import_settings()
         settings_importer.validate_perceptron_settings()
 
-        self.__train_data: pd.DataFrame | None = train_data \
+        self.__train_data: pd.DataFrame | None = train_data.dropna() \
             if train_data is not None else None
-        self.__test_data: pd.DataFrame | None = test_data \
+        self.__test_data: pd.DataFrame | None = test_data.dropna() \
             if test_data is not None else None
         self.__batch_data = pd.DataFrame()
 
@@ -146,7 +146,7 @@ class MultilayerPerceptron:
 
         n_batches = len(self.__train_data) // batch_size + 1
         for b, i in enumerate(range(0, len(self.__train_data), batch_size)):
-            self.__batch_data = self.__train_data[i:i + batch_size].dropna()
+            self.__batch_data = self.__train_data[i:i + batch_size]
 
             for epoch in range(self.__epochs):
 
@@ -218,7 +218,7 @@ class MultilayerPerceptron:
         if (print_output):
             print(f"{Fore.YELLOW}TESTING{Style.RESET_ALL}")
 
-        clean_test_data = test_data.dropna()
+        clean_test_data = test_data
         predictions = self.__forward(
             clean_test_data.iloc[:, self.__inputs_columns])
         accuracy = self.__accuracy(
@@ -413,9 +413,10 @@ class MultilayerPerceptron:
         print(output, end="")
 
     def __encode_frontend_data(self, data) -> dict:
+        data_limit = 20
 
         relevant_batch_data = self.__batch_data.iloc[:, self.__inputs_columns]
-        batch_data = relevant_batch_data[0:10].T.to_dict()
+        batch_data = relevant_batch_data[0:data_limit].T.to_dict()
         return {
             "accuracy": data['accuracy'],
             "activation_function": self.__activation_function,
@@ -433,7 +434,8 @@ class MultilayerPerceptron:
                 "biases": self.__output_layer.biases.tolist(),
                 "weights": self.__output_layer.weights.tolist()
             },
-            "predictions": data['predictions'][0:10].tolist(),
+            "outputs": self.__outputs,
+            "predictions": data['predictions'][0:data_limit].tolist(),
             "test_accuracy": data['test_acc'],
             "test_data_points": len(self.__test_data),
             "test_loss": data['test_loss'],

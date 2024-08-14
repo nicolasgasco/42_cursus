@@ -119,7 +119,6 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
             description:
               "Each column represents a feature, i.e. 'M' for malignant and 'B' for benign. The values represent the probability of the data point belonging to each class.",
           }}
-          style={{ width: 240 }}
         >
           <OutputTable data={data} />
         </LayerTile>
