@@ -31,10 +31,10 @@ class MultilayerPerceptron:
         self.__batch_data = pd.DataFrame()
 
         self.__inputs_columns: list[str] = [
-            str(column) for column in settings["inputs_columns"]]
+            int(column) for column in settings["inputs_columns"]]
 
         self.__outputs: list[str] = settings["outputs"]
-        self.__outputs_column: list[str] = settings["outputs_column"]
+        self.__outputs_column = int(settings["outputs_column"])
 
         self.__hidden_layers_count: int = settings["hidden_layers"]
         self.__hidden_layer_neurons: int = settings["hidden_layer_neurons"]
