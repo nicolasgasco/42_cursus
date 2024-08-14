@@ -76,12 +76,12 @@ export const Dashboard = ({ data }: DashboardProps): JSX.Element => {
         <dl>
           <ListEntry
             title={"Train"}
-            description={`${Math.round(data["accuracy"]).toString()}%`}
+            description={`${parseFloat(data["accuracy"].toFixed(2)).toString()}%`}
             statusValue={data["accuracy"]}
           />
           <ListEntry
             title={"Validation"}
-            description={`${Math.round(data["test_accuracy"]).toString()}%`}
+            description={`${parseFloat(data["test_accuracy"].toFixed(2)).toString()}%`}
             statusValue={data["test_accuracy"]}
           />
         </dl>
