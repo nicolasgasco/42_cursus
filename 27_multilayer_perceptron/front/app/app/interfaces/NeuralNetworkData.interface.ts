@@ -17,4 +17,5 @@ export interface NeuralNetworkData {
   total_batches: number;
   total_epoch: number;
   total_epochs: number;
+  true_values: string[];
 }

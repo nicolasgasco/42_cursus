@@ -16,7 +16,7 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
     <div className="overflow-x-auto py-6" style={{ maxWidth: "95%" }}>
       <div className="flex justify-center gap-3 min-w-fit">
         <LayerTile
-          title={"Input layer"}
+          title="Input layer"
           tooltipProps={{
             id: "input-tooltip",
             description:
@@ -113,7 +113,7 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
         </LayerTile>
 
         <LayerTile
-          title={"Predictions"}
+          title="Predictions"
           tooltipProps={{
             id: "predictions-tooltip",
             description:
@@ -121,6 +121,37 @@ export const NeuralNetwork = ({ data }: NeuralNetworkProps): JSX.Element => {
           }}
         >
           <OutputTable data={data} />
+        </LayerTile>
+
+        <LayerTile
+          title="Truth"
+          tooltipProps={{
+            id: "true-values-tooltip",
+            description:
+              "The actual values that the neural network is trying to predict. These values are used to calculate the accuracy of the model.",
+          }}
+        >
+          <TableLayout>
+            <thead>
+              <tr>
+                <TableHeader>Value</TableHeader>
+                <TableHeader>Correct</TableHeader>
+              </tr>
+            </thead>
+            <tbody>
+              {data["true_values"].map((value, index) => {
+                const predictions = data["predictions"][index];
+                const strongestPredictionIndex = Object.keys(predictions).reduce((a, b) => predictions[a] > predictions[b] ? a : b);
+                const predictedHouseName = data["outputs"][parseInt(strongestPredictionIndex)];
+                return (
+                  <tr key={index}>
+                    <TableRow>{value}</TableRow>
+                    <TableRow>{value.toLocaleLowerCase() === predictedHouseName.toLowerCase() ? "✅" : "❌"}</TableRow>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </TableLayout>
         </LayerTile>
       </div>
     </div>

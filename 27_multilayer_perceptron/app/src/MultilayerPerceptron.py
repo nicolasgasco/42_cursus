@@ -441,7 +441,9 @@ class MultilayerPerceptron:
             "test_loss": data['test_loss'],
             "total_batches": data['n_batches'],
             "total_epoch": data['total_epoch'],
-            "total_epochs": self.__epochs * data['n_batches']
+            "total_epochs": self.__epochs * data['n_batches'],
+            "true_values": self.__batch_data.iloc[
+                :, self.__outputs_column][0:data_limit].tolist()
         }
 
     def __save_frontend_data(self, data: dict) -> None:
