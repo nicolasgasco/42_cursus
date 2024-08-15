@@ -92,6 +92,18 @@ class MultilayerPerceptron:
         return repr
 
     def import_parameters(self, parameters: dict) -> None:
+        """
+        Imports the parameters for the MultilayerPerceptron from a dictionary.
+        Args:
+            parameters (dict): A dictionary containing the parameters
+            for the MultilayerPerceptron.
+        Raises:
+            AssertionError: If any of the parameters are None
+            or have a different length than the original parameters.
+        Returns:
+            None
+        """
+
         def __validate_parameter(param: np.array, original: np.array,
                                  name: str) -> None:
             err_message = f"MultilayerPerceptron: {name} are None."
@@ -129,6 +141,12 @@ class MultilayerPerceptron:
             hidden_layer.biases = hidden_layer_biases
 
     def train(self) -> None:
+        """
+        Trains the multilayer perceptron model.
+        Returns:
+            None
+        """
+
         timer = TaskTimer("Training")
 
         print(f"{Fore.YELLOW}TRAINING{Style.RESET_ALL}")
@@ -231,6 +249,16 @@ class MultilayerPerceptron:
             self.__save_frontend_data(frontend_data)
 
     def test(self, test_data: pd.DataFrame, print_output: bool = True) -> None:
+        """
+        Test the multilayer perceptron model on the given test data.
+        Parameters:
+            test_data (pd.DataFrame): The test data to evaluate the model on.
+            print_output (bool, optional): Whether to print the output.
+            Defaults to True.
+        Returns:
+            list: A list containing the accuracy and loss of the model.
+        """
+
         if (print_output):
             print(f"{Fore.YELLOW}TESTING{Style.RESET_ALL}")
 
@@ -251,6 +279,14 @@ class MultilayerPerceptron:
         return [accuracy, loss]
 
     def __forward(self, data: pd.DataFrame) -> np.ndarray:
+        """
+        Performs forward propagation through the multilayer perceptron.
+        Args:
+            data (pd.DataFrame): The input data for the forward pass.
+        Returns:
+            np.ndarray: The output layer probabilities after the forward pass.
+        """
+
         X = np.array(data)
 
         print_output(f"{Fore.YELLOW}INPUT LAYER{Style.RESET_ALL}")
@@ -289,14 +325,15 @@ class MultilayerPerceptron:
 
     def __accuracy(self, y: np.ndarray, x: pd.DataFrame) -> float:
         """
-        Calculates the accuracy of the predictions made
+        Calculate the accuracy of the predictions made
         by the multilayer perceptron model.
 
         Parameters:
-        - y (pd.DataFrame): The predicted values.
+            y (np.ndarray): The predicted values.
+            x (pd.DataFrame): The input data.
 
         Returns:
-        - float: The accuracy of the predictions as a percentage.
+            float: The percentage precision of the predictions.
         """
 
         y = pd.DataFrame(y)
@@ -315,6 +352,14 @@ class MultilayerPerceptron:
         return percentage_precision
 
     def __create_y_true(self, data: pd.DataFrame) -> np.ndarray:
+        """
+        Create a binary encoded target array based on the given data.
+        Parameters:
+            data (pd.DataFrame): The input data.
+        Returns:
+            np.ndarray: The binary encoded target array.
+        """
+
         y_true = pd.DataFrame(columns=self.__outputs)
 
         for index, _ in enumerate(self.__outputs):
@@ -326,6 +371,14 @@ class MultilayerPerceptron:
         return y_true
 
     def __loss_function(self, y_pred: np.ndarray, data: pd.DataFrame) -> float:
+        """
+        Compute the loss function for the multilayer perceptron model.
+        Parameters:
+        - y_pred (np.ndarray): The predicted output values.
+        - data (pd.DataFrame): The input data.
+        Returns:
+        - float: The computed loss value.
+        """
 
         print_output(f"{Fore.YELLOW}LOSS FUNCTION{Style.RESET_ALL}")
 
@@ -348,6 +401,15 @@ class MultilayerPerceptron:
 
     def __backpropagation_output_layer(self,
                                        y_pred: pd.DataFrame) -> np.ndarray:
+        """
+        Performs backpropagation on the output layer
+        of the multilayer perceptron.
+        Args:
+            y_pred (pd.DataFrame): The predicted output values.
+        Returns:
+            np.ndarray: The gradient of the output layer.
+        """
+
         print_output(
             f"{Fore.YELLOW}BACKPROPAGATION OUTPUT LAYER{Style.RESET_ALL}")
 
@@ -372,6 +434,15 @@ class MultilayerPerceptron:
         return output_gradient
 
     def __backpropagation_hidden_layers(self, delta_L: np.ndarray) -> None:
+        """
+        Perform backpropagation on the hidden layers
+        of the multilayer perceptron.
+        Args:
+            delta_L (np.ndarray): The delta values of the output layer.
+        Returns:
+            None
+        """
+
         print_output(
             f"\n{Fore.YELLOW}BACKPROPAGATION HIDDEN LAYERS{Style.RESET_ALL}")
 
@@ -410,6 +481,7 @@ class MultilayerPerceptron:
             print_output(f"{hidden_layer}\n")
 
     def __print_epoch_output(self, data: dict) -> str:
+
         output = "\r"
         if data['n_batches'] != 1:
             output += f"Batch {Fore.YELLOW}{data['b'] + 1}{Style.RESET_ALL}/"
