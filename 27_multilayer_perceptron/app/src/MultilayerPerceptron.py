@@ -76,13 +76,17 @@ class MultilayerPerceptron:
     def __str__(self) -> str:
         repr = f"{Fore.GREEN}MultilayerPerceptron{Style.RESET_ALL}"
         repr += "(\n"
+        repr += f"  activation_function: {self.__activation_function},\n"
+        repr += f"  batch_size: {self.__batch_size},\n"
+        repr += f"  epochs: {self.__epochs},\n"
+        repr += f"  frontend_data: {self.__frontend_data},\n"
+        repr += f"  hidden_layer_neurons: {self.__hidden_layer_neurons},\n"
+        repr += f"  hidden_layers: {self.__hidden_layers_count},\n"
         repr += f"  inputs_columns: {self.__inputs_columns},\n"
+        repr += f"  learning_rate: {self.__learning_rate},\n"
         repr += f"  outputs: {self.__outputs},\n"
         repr += f"  outputs_column: {self.__outputs_column},\n"
-        repr += f"  hidden_layers_count: {self.__hidden_layers_count}\n"
-        repr += "  hidden_layer_neurons: "
-        repr += f"{self.__hidden_layer_neurons}\n"
-        repr += f"  learning_rate: {self.__learning_rate}\n"
+        repr += f"  plot_loss: {self.__plot_loss}\n"
         repr += ")\n"
 
         return repr
