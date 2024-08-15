@@ -416,14 +416,14 @@ class MultilayerPerceptron:
             output += f"{data['n_batches']} - "
         output += f"Epoch {Fore.YELLOW}{data['epoch'] + 1}{Style.RESET_ALL}"
         output += f"/{self.__epochs}"
-        output += " - Train: loss: "
+        output += " - Train(loss: "
         output += f"{Fore.YELLOW}{data['loss'].round(5)}{Style.RESET_ALL}"
         output += ", accuracy: "
-        output += f"{Fore.YELLOW}{data['accuracy'].round(2)}{Style.RESET_ALL}"
-        output += " - Test: loss: "
+        output += f"{Fore.YELLOW}{data['accuracy'].round(2)}{Style.RESET_ALL})"
+        output += " - Test(loss: "
         output += f"{Fore.YELLOW}{data['test_loss'].round(5)}{Style.RESET_ALL}"
         output += ", accuracy: "
-        output += f"{Fore.YELLOW}{data['test_acc'].round(2)}{Style.RESET_ALL}"
+        output += f"{Fore.YELLOW}{data['test_acc'].round(2)}{Style.RESET_ALL})"
         output += "             "  # to clear previous output
 
         print(output, end="")
