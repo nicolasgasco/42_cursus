@@ -184,7 +184,7 @@ class MultilayerPerceptron:
                         total_epoch, accuracy, test_acc)
 
                 if self.__frontend_data:
-                    data = self.__encode_frontend_data({
+                    data = self.__encode_frontend_epochs_data({
                         'accuracy': accuracy,
                         'b': b,
                         'epoch': epoch,
@@ -222,6 +222,8 @@ class MultilayerPerceptron:
                 "total_batches": n_batches,
                 "total_epochs": self.__epochs * n_batches
             }
+            frontend_data["data"] = self.__encode_frontend_model_data(
+                {"batch_size": batch_size, "n_batches": n_batches})
             self.__save_frontend_data(frontend_data)
 
     def test(self, test_data: pd.DataFrame, print_output: bool = True) -> None:
@@ -422,7 +424,7 @@ class MultilayerPerceptron:
 
         print(output, end="")
 
-    def __encode_frontend_data(self, data) -> dict:
+    def __encode_frontend_epochs_data(self, data) -> dict:
         data_limit = 20
 
         relevant_batch_data = self.__batch_data.iloc[:, self.__inputs_columns]
@@ -447,6 +449,17 @@ class MultilayerPerceptron:
             "total_epoch": data['total_epoch'],
             "true_values": self.__batch_data.iloc[
                 :, self.__outputs_column][0:data_limit].tolist()
+        }
+
+    def __encode_frontend_model_data(self, data) -> dict:
+        return {
+            'batch_size': data["batch_size"],
+            "activation_function": self.__activation_function,
+            "data_points": len(self.__train_data),
+            "outputs": self.__outputs,
+            "test_data_points": len(self.__test_data),
+            "total_batches": data["n_batches"],
+            "total_epochs": self.__epochs * data["n_batches"]
         }
 
     def __save_frontend_data(self, data: dict) -> None:
