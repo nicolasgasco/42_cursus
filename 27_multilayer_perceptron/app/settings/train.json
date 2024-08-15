@@ -2,7 +2,7 @@
   "activation_function": "relu",
   "batch_size": 64,
   "epochs": 200,
-  "frontend_data": false,
+  "frontend_data": true,
   "hidden_layer_neurons": 32,
   "hidden_layers": 3,
   "inputs_columns": [
@@ -12,5 +12,5 @@
   "learning_rate": 0.01,
   "outputs": ["M", "B"],
   "outputs_column": "1",
-  "plot_loss": false
+  "plot_loss": true
 }
