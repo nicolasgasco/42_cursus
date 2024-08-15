@@ -198,6 +198,8 @@ class MultilayerPerceptron:
 
         print("\n")
 
+        timer.stop()
+
         if self.__plot_loss:
             loss_plotter.train_plot_save(self.__activation_function)
             accuracy_plotter.train_plot_save(self.__activation_function)
@@ -207,8 +209,6 @@ class MultilayerPerceptron:
         output += " - Accuracy: "
         output += f"{Fore.GREEN}{accuracy.round(2)}{Style.RESET_ALL}\n"
         print(output)
-
-        timer.stop()
 
         save_params_to_json(self.__hidden_layers, self.__output_layer)
 
