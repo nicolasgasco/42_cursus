@@ -24,6 +24,10 @@ export const NeuralNetwork = ({ epochData, modelData }: NeuralNetworkProps): JSX
             description:
               "The input layer contains the data that is fed into the neural network. Each row represents a data point and each column a feature. In this data set, the features describe characteristics of cells in breast cancer biopsies.",
           }}
+          style={{
+            maxWidth: 370,
+            overflowX: "auto",
+          }}
         >
           <InputTable epochData={epochData["batch_data"]} />
         </LayerTile>
