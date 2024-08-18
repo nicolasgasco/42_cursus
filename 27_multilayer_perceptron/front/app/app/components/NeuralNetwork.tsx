@@ -22,7 +22,7 @@ export const NeuralNetwork = ({ epochData, modelData }: NeuralNetworkProps): JSX
           tooltipProps={{
             id: "input-tooltip",
             description:
-              "The input layer contains the data that is fed into the neural network. Each row represents a data point and each column a feature. In this data set, the features describe characteristics of cells in breast cancer biopsies.",
+              "The input layer contains the data that is fed into the neural network. Each row represents a data point and each column a feature.",
           }}
           style={{
             maxWidth: 370,
