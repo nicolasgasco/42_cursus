@@ -137,3 +137,10 @@ class SettingsImporter:
         assert settings["frontend_data"] is not None, err_message
         err_message = "MultilayerPerceptron: frontend_data is not a boolean"
         assert isinstance(settings["frontend_data"], bool), err_message
+        
+        err_message = "MultilayerPerceptron: early_stopping key missing"
+        assert "early_stopping" in settings, err_message
+        err_message = "MultilayerPerceptron: early_stopping is None"
+        assert settings["early_stopping"] is not None, err_message
+        err_message = "MultilayerPerceptron: early_stopping is not a boolean"
+        assert isinstance(settings["early_stopping"], bool), err_message
