@@ -52,8 +52,11 @@ class MultilayerPerceptron:
         self.__plot_loss: bool = settings["plot_loss"]
 
         self.__frontend_data: bool = settings["frontend_data"]
-        
+
         self.__early_stopping: bool = settings["early_stopping"]
+        self.__best_test_loss: float = np.inf
+        self.__epochs_without_improvement = 0
+        self.__patience = 10
 
     def __generate_hidden_layers(self) -> list[Layer]:
         """
@@ -171,12 +174,11 @@ class MultilayerPerceptron:
                 "epochs_data": []
             }
 
-        if self.__early_stopping:
-            prev_test_loss = np.inf
-
         n_batches = len(self.__train_data) // batch_size + 1
         for b, i in enumerate(range(0, len(self.__train_data), batch_size)):
             self.__batch_data = self.__train_data[i:i + batch_size]
+
+            self.__epochs_without_improvement = 0
 
             for epoch in range(self.__epochs):
 
@@ -202,10 +204,16 @@ class MultilayerPerceptron:
                     'test_acc': test_acc,
                     'test_loss': test_loss
                 })
-                
+
                 if (self.__early_stopping):
-                    if (test_loss > prev_test_loss):
-                        print(f"\n{Fore.YELLOW}Early stopping{Style.RESET_ALL}")
+                    if test_loss < self.__best_test_loss:
+                        self.__best_test_loss = test_loss
+                        self.__epochs_without_improvement = 0
+                    else:
+                        self.__epochs_without_improvement += 1
+
+                    if self.__epochs_without_improvement >= self.__patience:
+                        print(f"\n{Fore.YELLOW}Early stop{Style.RESET_ALL}")
                         break
 
                 total_epoch = b * self.__epochs + epoch
