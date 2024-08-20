@@ -1,6 +1,7 @@
 {
   "activation_function": "relu",
   "batch_size": 64,
+  "early_stopping": true,
   "epochs": 200,
   "frontend_data": false,
   "hidden_layer_neurons": 32,
