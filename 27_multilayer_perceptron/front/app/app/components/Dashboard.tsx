@@ -9,7 +9,7 @@ interface DashboardProps {
 
 export const Dashboard = ({ epochData, modelData }: DashboardProps): JSX.Element => {
   return (
-    <div className="w-fit flex justify-between flex-wrap gap-4 mx-auto mb-3">
+    <div className="w-fit flex justify-center flex-wrap gap-4 mx-auto mb-3">
       <DashboardTile
         title="Data points"
         tooltipProps={{

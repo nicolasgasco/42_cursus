@@ -15,7 +15,7 @@ interface NeuralNetworkProps {
 
 export const NeuralNetwork = ({ epochData, modelData }: NeuralNetworkProps): JSX.Element => {
   return (
-    <div className="overflow-x-auto py-6" style={{ maxWidth: "95%" }}>
+    <div className="py-6" style={{ maxWidth: "95%" }}>
       <div className="flex justify-center gap-3 min-w-fit">
         <LayerTile
           title="Input layer"
@@ -24,12 +24,15 @@ export const NeuralNetwork = ({ epochData, modelData }: NeuralNetworkProps): JSX
             description:
               "The input layer contains the data that is fed into the neural network. Each row represents a data point and each column a feature.",
           }}
-          style={{
-            maxWidth: 370,
-            overflowX: "auto",
-          }}
         >
-          <InputTable epochData={epochData["batch_data"]} />
+          <div
+            style={{
+              maxWidth: 370,
+              overflowX: "auto",
+            }}
+          >
+            <InputTable epochData={epochData["batch_data"]} />
+          </div>
         </LayerTile>
 
         {epochData["hidden_layers"].map((layer, layerIndex) => {
