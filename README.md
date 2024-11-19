@@ -11,6 +11,7 @@ The _Outer Core_ (elective module) projects I completed after completing the _Co
 
 |Name|Language|End date|Description|Estimated effort (h)|Validated|
 |----|--------|--------|-----------|----------|---------|
+|**[matcha](https://github.com/tentaclepurple/42_matcha)**|Python/Javascript|-| Build a dating app using Full-Stack development technologies.|98|❌|
 |**[multilayer_perceptron](https://github.com/nicolasgasco/42_cursus/tree/master/27_multilayer_perceptron)**|Python|-| Use a neuronal network to predict whether a cancer is malignant or benign.|98|❌|
 |**[dslr](https://github.com/nicolasgasco/42_cursus/tree/master/26_dslr)**|Python|July 2024| Create an Harry Potter Sorting Hat algorithm implementing a linear classification model.|98|✅|
 |**[ft_linear_regression](https://github.com/nicolasgasco/42_cursus/tree/master/25_ft_linear_regression)**|Python|June 2024| Predict the price of a car by using a linear function train with a gradient descent algorithm.|70|✅|
