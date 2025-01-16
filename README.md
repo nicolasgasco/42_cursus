@@ -11,6 +11,7 @@ The _Outer Core_ (elective module) projects I completed after completing the _Co
 
 |Name|Language|End date|Description|Estimated effort (h)|Validated|
 |----|--------|--------|-----------|----------|---------|
+|**[Learn2Slither]()**|Python|-|Create an AI-powered Snake game with Reinforcement Learning.|98|❌|
 |**[matcha](https://github.com/tentaclepurple/42_matcha)**|Python/Javascript|January 2025|Web dating app written in Flask + Svelte(Kit).|98|✅|
 |**[multilayer_perceptron](https://github.com/nicolasgasco/42_cursus/tree/master/27_multilayer_perceptron)**|Python|September 2024| Use a neuronal network to predict whether a cancer is malignant or benign.|98|✅|
 |**[dslr](https://github.com/nicolasgasco/42_cursus/tree/master/26_dslr)**|Python|July 2024| Create an Harry Potter Sorting Hat algorithm implementing a linear classification model.|98|✅|
