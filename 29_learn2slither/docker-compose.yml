@@ -1,0 +1,8 @@
+services:
+  python:
+    container_name: "learn2slither"
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./:/learn2slither
