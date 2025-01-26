@@ -6,3 +6,5 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - ./:/learn2slither
+    environment:
+      - SETTINGS_DIR_PATH=/learn2slither/settings/
