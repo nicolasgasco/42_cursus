@@ -7,4 +7,6 @@ services:
     volumes:
       - ./:/learn2slither
     environment:
+      - CONSTANTS_DIR_PATH=/learn2slither/constants/
+      - MAPS_DIR_PATH=/learn2slither/maps/
       - SETTINGS_DIR_PATH=/learn2slither/settings/
