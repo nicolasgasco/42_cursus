@@ -7,8 +7,14 @@ BOARD_LEGEND = {
     "EMPTY": "⬛",
     "GREEN_APPLE": "🍏",
     "RED_APPLE": "🍎",
+    "HEAD": "🐸",
+    "BODY": "🟩",
     "WALL": "⬜",
 }
+
+NUM_RED_APPLES = 1
+NUM_GREEN_APPLES = 2
+SNAKE_LENGTH = 3
 
 
 class MapGenerator:
@@ -107,9 +113,73 @@ class MapGenerator:
 
             return filled_map
 
-        self.__map = fill_walls(self.__map)
-        self.__map = fill_apple(self.__map, BOARD_LEGEND["RED_APPLE"], 1)
-        self.__map = fill_apple(self.__map, BOARD_LEGEND["GREEN_APPLE"], 2)
+        def fill_snake(map: list, head: str, body: str, length: str) -> list:
+            """
+            Fills the map with a snake of specified length, head,
+            and body characters.
+            Args:
+                map (list): The game board represented as a 2D list.
+                head (str): The character representing the snake's head.
+                body (str): The character representing the snake's body.
+                length (int): The length of the snake.
+            Returns:
+                list: The updated game board with the snake placed on it.
+            """
+
+            filled_map = map
+
+            placed_head = False
+
+            while not placed_head:
+                head_x = np.random.randint(1, self.__width - 1 - SNAKE_LENGTH)
+                head_y = np.random.randint(1, self.__height - 1)
+
+                is_head_empty = (
+                    filled_map[head_y, head_x] == BOARD_LEGEND["EMPTY"]
+                )
+
+                is_head_left_empty = (
+                    filled_map[head_y, head_x - 1] == BOARD_LEGEND["EMPTY"]
+                )
+                is_head_right_empty = (
+                    filled_map[head_y, head_x + 1] == BOARD_LEGEND["EMPTY"]
+                )
+                is_head_right_right_empty = (
+                    filled_map[head_y, head_x + 2] == BOARD_LEGEND["EMPTY"]
+                )
+                if (
+                    not is_head_empty
+                    or not is_head_left_empty
+                    or not is_head_right_empty
+                    or not is_head_right_right_empty
+                ):
+                    continue
+
+                filled_map[head_y, head_x] = head
+                placed_head = True
+
+            for i in range(1, length):
+                new_x = head_x + i
+                new_y = head_y
+
+                filled_map[new_y, new_x] = body
+
+            return filled_map
+
+        filled_map = fill_walls(self.__map)
+        filled_map = fill_apple(
+            filled_map, BOARD_LEGEND["RED_APPLE"], NUM_RED_APPLES
+        )
+        filled_map = fill_apple(
+            filled_map, BOARD_LEGEND["GREEN_APPLE"], NUM_GREEN_APPLES
+        )
+        filled_map = fill_snake(
+            filled_map,
+            BOARD_LEGEND["HEAD"],
+            BOARD_LEGEND["BODY"],
+            SNAKE_LENGTH,
+        )
+        self.__map = filled_map
 
     def save_map_to_file(self) -> str:
         """
