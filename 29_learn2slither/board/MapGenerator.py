@@ -192,7 +192,7 @@ class MapGenerator:
             str: The full path of the saved map file.
         """
 
-        timestamp = time.strftime("%Y-%m-%d_%H-%M-%S")
+        timestamp = time.strftime("%Y-%m-%d")
         file_name = timestamp
         file_name += f"_W{self.__width}_H{self.__height}"
         file_name += "_map"
