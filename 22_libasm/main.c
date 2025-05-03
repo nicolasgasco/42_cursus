@@ -14,6 +14,7 @@
 
 char *STRING_SEEDS[] = {NORMAL_STRING,
                         EMPTY_STRING,
+                        EMPTY_TERMINATED_STRING,
                         EMOJI_STRING,
                         LONG_STRING,
                         UNREACHABLE,
@@ -54,20 +55,20 @@ void ft_strcpy_assertion(char *src)
     char dest[src_len + 1];
     bzero(dest, src_len + 1);
 
-    printf("  - When source is '%s%.50s%s' (%lu chars) and dest is '%s%.50s%s' (%lu chars)\n", BLUE, src, NC, strlen(src), BLUE, dest, NC, strlen(dest));
+    printf("  - When source is .%s%.50s%s. (%lu chars)\n", BLUE, src, NC, strlen(src));
 
-    printf("    Dest (before strcpy): %s%.50s%s\n", YELLOW, dest, NC);
+    printf("    Dest (before strcpy): .%s%.50s%s.\n", YELLOW, dest, NC);
     char *original_ret = strcpy(dest, src);
-    printf("    Dest (after strcpy): %s%.50s%s\n", YELLOW, dest, NC);
-    printf("    Return value is: %s%.50s%s\n", BLUE, original_ret, NC);
+    printf("    Dest (after strcpy): .%s%.50s%s.\n", YELLOW, dest, NC);
+    printf("    Return value is: .%s%.50s%s.\n", BLUE, original_ret, NC);
 
     printf("      -\n");
     bzero(dest, strlen(dest));
 
-    printf("    Dest (before ft_strcpy): %s%.50s%s\n", YELLOW, dest, NC);
+    printf("    Dest (before ft_strcpy): .%s%.50s%s.\n", YELLOW, dest, NC);
     char *own_ret = ft_strcpy(dest, src);
-    printf("    Dest (after ft_strcpy): %s%.50s%s\n", YELLOW, dest, NC);
-    printf("    Return value is: %s%.50s%s\n", BLUE, own_ret, NC);
+    printf("    Dest (after ft_strcpy): .%s%.50s%s.\n", YELLOW, dest, NC);
+    printf("    Return value is: .%s%.50s%s.\n", BLUE, own_ret, NC);
 
     printf("\n");
 }
