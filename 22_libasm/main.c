@@ -29,7 +29,12 @@ void ft_strlen_assertion(char *str)
     size_t expected = strlen(str);
     size_t actual = ft_strlen(str);
 
-    printf("  - When string is %s%.50s%s\n", BLUE, str, NC);
+    printf("  - ");
+    if (expected == actual)
+        printf("✅");
+    else
+        printf("❌");
+    printf(" When string is |%s%.50s%s|\n", BLUE, str, NC);
     printf("    strlen: %s%lu%s, ft_strlen: %s%lu%s\n", YELLOW, expected, NC, YELLOW, actual, NC);
     printf("\n");
 }
