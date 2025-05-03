@@ -36,9 +36,7 @@ ft_strcmp:
     je  .end          ; if s2[i] is null, return
 
 .compare:
-    mov   r8, 0          ; reset r8
     movzx r8, byte [rdi] ; r8 = s1[i]
-    mov   r9, 0          ; reset r9
     movzx r9, byte [rsi] ; r9 = s2[i]
     cmp   r8, r9         ; if (s1[i] == s2[i])
     jne   .difference    ; jump to the difference if the characters are different
