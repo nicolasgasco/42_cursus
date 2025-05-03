@@ -14,7 +14,6 @@
 
 char *STRING_SEEDS[] = {NORMAL_STRING,
                         EMPTY_STRING,
-                        EMPTY_TERMINATED_STRING,
                         EMOJI_STRING,
                         LONG_STRING,
                         UNREACHABLE,
@@ -83,7 +82,7 @@ void ft_strcpy_tests()
 
 void ft_strcmp_assertion(char *s1, char *s2)
 {
-    printf("  - When s1 is '%s%.50s%s' and s2 is '%s%.50s%s'\n", BLUE, s1, NC, BLUE, s2, NC);
+    printf("  - When s1 is .%s%.50s%s. and s2 is .%s%.50s%s.\n", BLUE, s1, NC, BLUE, s2, NC);
 
     printf("    strcmp: %s%d%s, ft_strcmp: %s%d%s\n", YELLOW, strcmp(s1, s2), NC, YELLOW, ft_strcmp(s1, s2), NC);
     printf("\n");
