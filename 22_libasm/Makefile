@@ -41,7 +41,7 @@ ifeq (${OS}, Darwin)
 	@ sh scripts/macos_to_linux.sh
 	@ echo "Bringing back function names to Linux format"
 else
-	gcc main.c ${FLAGS} ${SANITIZE} ${NAME} -o test
+	gcc main.c ${FLAGS} ${SANITIZE} ${NAME} -o ${EXECUTABLE}
 endif
 	@ echo "Creating test_files directory"
 	@ mkdir -p test_files
