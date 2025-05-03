@@ -1,28 +1,31 @@
+from dotenv import load_dotenv
 import json as json
 import numpy as np
 import os as os
 import time as time
 
 BOARD_LEGEND = {
+    "BODY": "🟩",
     "EMPTY": "⬛",
     "GREEN_APPLE": "🍏",
-    "RED_APPLE": "🍎",
     "HEAD": "🐸",
-    "BODY": "🟩",
+    "RED_APPLE": "🍎",
     "WALL": "⬜",
 }
 
-NUM_RED_APPLES = 1
-NUM_GREEN_APPLES = 2
-SNAKE_LENGTH = 3
-
-
 class MapGenerator:
     def __init__(self) -> None:
+        load_dotenv()
+
         settings = self.__parse_settings()
 
-        self.__width = settings["width"]
+        self.__green_apples = settings["green_apples"]
         self.__height = settings["height"]
+        self.__red_apples = settings["red_apples"]
+        self.__snake_length = settings["snake_length"]
+        self.__width = settings["width"]
+        
+        # TODO add validation of settings
 
         map_size = (self.__height, self.__width)
         self.__map = np.full(map_size, BOARD_LEGEND["EMPTY"])
@@ -30,16 +33,15 @@ class MapGenerator:
     def __parse_settings(self) -> dict:
         """
         Parses the map settings from a JSON file.
-        This method retrieves the directory path for settings
-        from the environment variable
-        "SETTINGS_DIR_PATH", constructs the full path to the "map.json" file,
-        and reads the settings from this file.
         Returns:
             dict: A dictionary containing the map settings.
         """
 
         settings_dir_path = os.environ.get("SETTINGS_DIR_PATH")
-        map_settings_path = os.path.join(settings_dir_path, "map.json")
+        
+        file_name = "map.json"
+        map_settings_path = os.path.join("..", settings_dir_path, file_name)
+
         with open(map_settings_path, "r") as file:
             settings = json.load(file)
 
@@ -60,9 +62,6 @@ class MapGenerator:
         def fill_walls(map: list) -> list:
             """
             Fills the borders of the given map with walls.
-            This function takes a 2D list representing a map and fills
-            the top, bottom, left, and right borders with wall elements
-            as defined in BOARD_LEGEND.
             Args:
                 map (list): A 2D list representing the map
                 to be filled with walls.
@@ -131,7 +130,7 @@ class MapGenerator:
             placed_head = False
 
             while not placed_head:
-                head_x = np.random.randint(1, self.__width - 1 - SNAKE_LENGTH)
+                head_x = np.random.randint(1, self.__width - 1 - self.__snake_length)
                 head_y = np.random.randint(1, self.__height - 1)
 
                 is_head_empty = (
@@ -141,9 +140,11 @@ class MapGenerator:
                 is_head_left_empty = (
                     filled_map[head_y, head_x - 1] == BOARD_LEGEND["EMPTY"]
                 )
+
                 is_head_right_empty = (
                     filled_map[head_y, head_x + 1] == BOARD_LEGEND["EMPTY"]
                 )
+
                 is_head_right_right_empty = (
                     filled_map[head_y, head_x + 2] == BOARD_LEGEND["EMPTY"]
                 )
@@ -168,26 +169,22 @@ class MapGenerator:
 
         filled_map = fill_walls(self.__map)
         filled_map = fill_apple(
-            filled_map, BOARD_LEGEND["RED_APPLE"], NUM_RED_APPLES
+            filled_map, BOARD_LEGEND["RED_APPLE"], self.__red_apples
         )
         filled_map = fill_apple(
-            filled_map, BOARD_LEGEND["GREEN_APPLE"], NUM_GREEN_APPLES
+            filled_map, BOARD_LEGEND["GREEN_APPLE"], self.__green_apples
         )
         filled_map = fill_snake(
             filled_map,
             BOARD_LEGEND["HEAD"],
             BOARD_LEGEND["BODY"],
-            SNAKE_LENGTH,
+            self.__snake_length,
         )
         self.__map = filled_map
 
     def save_map_to_file(self) -> str:
         """
         Saves the current map to a file with a timestamped filename.
-        The filename is generated using the current timestamp,
-        map width, and height.
-        The directory to save the file is retrieved
-        from the environment variable "MAPS_DIR_PATH".
         Returns:
             str: The full path of the saved map file.
         """
@@ -198,10 +195,13 @@ class MapGenerator:
         file_name += "_map"
 
         maps_dir_path = os.environ.get("MAPS_DIR_PATH")
-        file_name = os.path.join(maps_dir_path, file_name)
+        file_name = os.path.join("..", maps_dir_path, file_name)
 
-        with open(file_name, "w") as file:
-            for row in self.__map:
-                file.write("".join(row) + "\n")
+        try:
+            with open(file_name, "w") as file:
+                for row in self.__map:
+                    file.write("".join(row) + "\n")
+        except Exception as e:
+            raise e
 
         return file_name

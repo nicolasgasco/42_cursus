@@ -1,4 +1,7 @@
 {
-  "width": 10,
-  "height": 10
+  "green_apples": 3,
+  "height": 10,
+  "red_apples": 1,
+  "snake_length": 3,
+  "width": 10
 }
