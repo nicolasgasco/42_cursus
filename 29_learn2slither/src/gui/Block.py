@@ -3,7 +3,7 @@ from constants import BoardBlock
 
 SQUARE_SIZE = 80
 
-class MapBlock(tk.Canvas):
+class Block(tk.Canvas):
   def __init__(self, args):
     self.__block = args["block"] if "block" in args else BoardBlock.EMPTY.name
 
