@@ -40,5 +40,5 @@ max-line-length = 79
 extend-ignore = "E203"
 
 [tool.rye.scripts]
-lint = "flake8 src/"
-format = "black src/"
+lint = "flake8"
+format = "black ./"
