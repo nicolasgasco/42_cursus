@@ -2,12 +2,12 @@ from constants import SETTINGS_DIR_PATH
 import json as json
 import os as os
 
-class SettingsParser():
+
+class SettingsParser:
     def __init__(self):
-        
         self.settings = self.__parse_settings()
 
-    def __parse_settings(self):        
+    def __parse_settings(self):
         file_name = "map.json"
         # TODO improve this
         map_settings_path = os.path.join("..", "..", SETTINGS_DIR_PATH, file_name)

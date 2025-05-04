@@ -7,6 +7,7 @@ import time as time
 from constants.board import BoardBlock
 from settings_parser import SettingsParser
 
+
 class MapGenerator:
     def __init__(self) -> None:
         load_dotenv()
@@ -18,7 +19,7 @@ class MapGenerator:
         self.__red_apples = settings["red_apples"]
         self.__snake_length = settings["snake_length"]
         self.__width = settings["width"]
-        
+
         # TODO add validation of settings
 
         map_size = (self.__height, self.__width)
@@ -120,9 +121,7 @@ class MapGenerator:
                 head_x = np.random.randint(1, self.__width - 1 - self.__snake_length)
                 head_y = np.random.randint(1, self.__height - 1)
 
-                is_head_empty = (
-                    filled_map[head_y, head_x] == BoardBlock.EMPTY.value
-                )
+                is_head_empty = filled_map[head_y, head_x] == BoardBlock.EMPTY.value
 
                 is_head_left_empty = (
                     filled_map[head_y, head_x - 1] == BoardBlock.EMPTY.value
