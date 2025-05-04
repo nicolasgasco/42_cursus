@@ -4,14 +4,7 @@ import numpy as np
 import os as os
 import time as time
 
-BOARD_LEGEND = {
-    "BODY": "🟩",
-    "EMPTY": "⬛",
-    "GREEN_APPLE": "🍏",
-    "HEAD": "🐸",
-    "RED_APPLE": "🍎",
-    "WALL": "⬜",
-}
+from constants.board import BoardBlock
 
 class MapGenerator:
     def __init__(self) -> None:
@@ -28,7 +21,7 @@ class MapGenerator:
         # TODO add validation of settings
 
         map_size = (self.__height, self.__width)
-        self.__map = np.full(map_size, BOARD_LEGEND["EMPTY"])
+        self.__map = np.full(map_size, BoardBlock.EMPTY.value)
 
     def __parse_settings(self) -> dict:
         """
@@ -40,7 +33,8 @@ class MapGenerator:
         settings_dir_path = os.environ.get("SETTINGS_DIR_PATH")
         
         file_name = "map.json"
-        map_settings_path = os.path.join("..", settings_dir_path, file_name)
+        # TODO improve this
+        map_settings_path = os.path.join("..", "..", settings_dir_path, file_name)
 
         with open(map_settings_path, "r") as file:
             settings = json.load(file)
@@ -59,6 +53,7 @@ class MapGenerator:
         return self.__map
 
     def generate_map(self) -> None:
+        # TODO move this to separate file
         def fill_walls(map: list) -> list:
             """
             Fills the borders of the given map with walls.
@@ -72,13 +67,13 @@ class MapGenerator:
             filled_map = map
 
             # Top wall
-            filled_map[0, :] = BOARD_LEGEND["WALL"]
+            filled_map[0, :] = BoardBlock.WALL.value
             # Bottom wall
-            filled_map[-1, :] = BOARD_LEGEND["WALL"]
+            filled_map[-1, :] = BoardBlock.WALL.value
             # Left wall
-            filled_map[:, 0] = BOARD_LEGEND["WALL"]
+            filled_map[:, 0] = BoardBlock.WALL.value
             # Right wall
-            filled_map[:, -1] = BOARD_LEGEND["WALL"]
+            filled_map[:, -1] = BoardBlock.WALL.value
 
             return filled_map
 
@@ -98,13 +93,18 @@ class MapGenerator:
             filled_map = map
 
             for _ in range(counter):
+                patience = 100
                 placed_apple = False
 
                 while not placed_apple:
+                    if patience <= 0:
+                        raise Exception("Unable to place apple on the map.")
+
                     rand_x = np.random.randint(1, self.__width - 1)
                     rand_y = np.random.randint(1, self.__height - 1)
 
-                    if filled_map[rand_y, rand_x] != BOARD_LEGEND["EMPTY"]:
+                    if filled_map[rand_y, rand_x] != BoardBlock.EMPTY.value:
+                        patience -= 1
                         continue
 
                     filled_map[rand_y, rand_x] = apple
@@ -127,26 +127,30 @@ class MapGenerator:
 
             filled_map = map
 
+            patience = 100
             placed_head = False
 
             while not placed_head:
+                if patience <= 0:
+                    raise Exception("Unable to place snake on the map.")
+
                 head_x = np.random.randint(1, self.__width - 1 - self.__snake_length)
                 head_y = np.random.randint(1, self.__height - 1)
 
                 is_head_empty = (
-                    filled_map[head_y, head_x] == BOARD_LEGEND["EMPTY"]
+                    filled_map[head_y, head_x] == BoardBlock.EMPTY.value
                 )
 
                 is_head_left_empty = (
-                    filled_map[head_y, head_x - 1] == BOARD_LEGEND["EMPTY"]
+                    filled_map[head_y, head_x - 1] == BoardBlock.EMPTY.value
                 )
 
                 is_head_right_empty = (
-                    filled_map[head_y, head_x + 1] == BOARD_LEGEND["EMPTY"]
+                    filled_map[head_y, head_x + 1] == BoardBlock.EMPTY.value
                 )
 
                 is_head_right_right_empty = (
-                    filled_map[head_y, head_x + 2] == BOARD_LEGEND["EMPTY"]
+                    filled_map[head_y, head_x + 2] == BoardBlock.EMPTY.value
                 )
                 if (
                     not is_head_empty
@@ -154,6 +158,7 @@ class MapGenerator:
                     or not is_head_right_empty
                     or not is_head_right_right_empty
                 ):
+                    patience -= 1
                     continue
 
                 filled_map[head_y, head_x] = head
@@ -169,15 +174,15 @@ class MapGenerator:
 
         filled_map = fill_walls(self.__map)
         filled_map = fill_apple(
-            filled_map, BOARD_LEGEND["RED_APPLE"], self.__red_apples
+            filled_map, BoardBlock.RED_APPLE.value, self.__red_apples
         )
         filled_map = fill_apple(
-            filled_map, BOARD_LEGEND["GREEN_APPLE"], self.__green_apples
+            filled_map, BoardBlock.GREEN_APPLE.value, self.__green_apples
         )
         filled_map = fill_snake(
             filled_map,
-            BOARD_LEGEND["HEAD"],
-            BOARD_LEGEND["BODY"],
+            BoardBlock.HEAD.value,
+            BoardBlock.BODY.value,
             self.__snake_length,
         )
         self.__map = filled_map
@@ -195,7 +200,7 @@ class MapGenerator:
         file_name += "_map"
 
         maps_dir_path = os.environ.get("MAPS_DIR_PATH")
-        file_name = os.path.join("..", maps_dir_path, file_name)
+        file_name = os.path.join("..", "..", maps_dir_path, file_name)
 
         try:
             with open(file_name, "w") as file:
