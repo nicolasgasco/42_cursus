@@ -6,7 +6,9 @@ SQUARE_SIZE = 80
 
 class Block(tk.Canvas):
     def __init__(self, args):
-        self.__block = args["block"] if "block" in args else BoardBlock.EMPTY.name
+        self.__block = (
+            args["block"] if "block" in args else BoardBlock.EMPTY.name
+        )
 
         super().__init__(
             bg=self.__get_bg_color(self.__block),

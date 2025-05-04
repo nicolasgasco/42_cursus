@@ -1,10 +1,9 @@
 from dotenv import load_dotenv
-import json as json
 import numpy as np
 import os as os
 import time as time
 
-from constants.board import BoardBlock
+from constants import BoardBlock
 from settings_parser import SettingsParser
 
 
@@ -118,10 +117,14 @@ class MapGenerator:
                 if patience <= 0:
                     raise Exception("Unable to place snake on the map.")
 
-                head_x = np.random.randint(1, self.__width - 1 - self.__snake_length)
+                head_x = np.random.randint(
+                    1, self.__width - 1 - self.__snake_length
+                )
                 head_y = np.random.randint(1, self.__height - 1)
 
-                is_head_empty = filled_map[head_y, head_x] == BoardBlock.EMPTY.value
+                is_head_empty = (
+                    filled_map[head_y, head_x] == BoardBlock.EMPTY.value
+                )
 
                 is_head_left_empty = (
                     filled_map[head_y, head_x - 1] == BoardBlock.EMPTY.value
