@@ -5,11 +5,14 @@ class Game:
     def __init__(self, raw_map: list):
         self.__raw_map = raw_map
 
-    def move_snake(self, direction: str):
+    def move_snake(self, direction: str) -> bool:
         has_moved = self.__move_head(direction)
 
         if has_moved:
             self.__move_tail()
+            return True
+
+        return False
 
     def __move_head(self, direction: str) -> None:
         head_y, head_x = self.__find_head()

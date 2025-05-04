@@ -14,14 +14,14 @@ def main():
     board.render()
 
     raw_map = board.raw_map
-    game_hanlder = Game(raw_map)
+    game_handler = Game(raw_map)
 
+    intended_direction = SnakeDirection.LEFT.value
     prev_direction = SnakeDirection.LEFT.value
 
     def on_key_press(_, direction):
-        nonlocal prev_direction
-        # TODO add logic to check if the snake actually moved
-        prev_direction = direction
+        nonlocal intended_direction
+        intended_direction = direction
 
     root.bind_all(
         "<w>", lambda event: on_key_press(event, SnakeDirection.UP.value)
@@ -51,8 +51,16 @@ def main():
 
     def tick():
         print("Tick")
-        game_hanlder.move_snake(prev_direction)
+
+        nonlocal prev_direction
+        has_moved = game_handler.move_snake(intended_direction)
+        if has_moved:
+            prev_direction = intended_direction
+        else:
+            game_handler.move_snake(prev_direction)
+
         board.render()
+
         root.after(SPEED, tick)
 
     tick()
