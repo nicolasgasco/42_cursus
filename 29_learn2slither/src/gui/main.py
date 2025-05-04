@@ -50,8 +50,6 @@ def main():
     )
 
     def tick():
-        print("Tick")
-
         nonlocal prev_direction
         has_moved = game_handler.move_snake(intended_direction)
         if has_moved:
