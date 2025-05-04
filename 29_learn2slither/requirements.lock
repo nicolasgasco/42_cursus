@@ -10,14 +10,26 @@
 #   universal: false
 
 -e file:.
+black==25.1.0
+    # via learn2slither
+click==8.1.8
+    # via black
 dotenv==0.9.9
     # via learn2slither
 flake8==7.2.0
     # via learn2slither
 mccabe==0.7.0
     # via flake8
+mypy-extensions==1.1.0
+    # via black
 numpy==2.2.5
     # via learn2slither
+packaging==25.0
+    # via black
+pathspec==0.12.1
+    # via black
+platformdirs==4.3.7
+    # via black
 pycodestyle==2.13.0
     # via flake8
 pyflakes==3.3.2
