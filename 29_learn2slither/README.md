@@ -6,9 +6,16 @@
 
 ## Run
 
-- Activate Python virtual environment
+- Python version
 
-```bash
-$ source env/bin/activate
-$ (env) pip install -r requirements.txt
-```
+  ```
+  3.13.3
+  ```
+
+- Create and activate Python virtual environment and install dependencies
+
+  ```shell
+  $ python3 -m venv env
+  $ source env/bin/activate
+  $ (env) pip install -r requirements.txt
+  ```
