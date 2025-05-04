@@ -68,8 +68,6 @@ class Game:
         found_tail = False
         prev_direction = None
         while not found_tail:
-            print("Prev direction: ", prev_direction)
-            print(f"tail_pos: {tail_pos}")
             if (
                 self.__raw_map[tail_pos[0] - 1][tail_pos[1]]
                 == BoardBlock.BODY.value
@@ -77,28 +75,24 @@ class Game:
             ):
                 tail_pos = (tail_pos[0] - 1, tail_pos[1])
                 prev_direction = SnakeDirection.UP.value
-                print("UP")
             elif (
                 self.__raw_map[tail_pos[0] + 1][tail_pos[1]]
                 == BoardBlock.BODY.value
             ) and prev_direction != SnakeDirection.UP.value:
                 tail_pos = (tail_pos[0] + 1, tail_pos[1])
                 prev_direction = SnakeDirection.DOWN.value
-                print("DOWN")
             elif (
                 self.__raw_map[tail_pos[0]][tail_pos[1] - 1]
                 == BoardBlock.BODY.value
             ) and prev_direction != SnakeDirection.RIGHT.value:
                 tail_pos = (tail_pos[0], tail_pos[1] - 1)
                 prev_direction = SnakeDirection.LEFT.value
-                print("LEFT")
             elif (
                 self.__raw_map[tail_pos[0]][tail_pos[1] + 1]
                 == BoardBlock.BODY.value
             ) and prev_direction != SnakeDirection.LEFT.value:
                 tail_pos = (tail_pos[0], tail_pos[1] + 1)
                 prev_direction = SnakeDirection.RIGHT.value
-                print("RIGHT")
             else:
                 found_tail = True
                 break
