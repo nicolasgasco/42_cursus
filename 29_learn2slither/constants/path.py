@@ -1,0 +1,3 @@
+CONSTANTS_DIR_PATH="constants"
+MAPS_DIR_PATH="maps"
+SETTINGS_DIR_PATH="settings"

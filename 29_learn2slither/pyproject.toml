@@ -25,7 +25,7 @@ dev-dependencies = []
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/", "constants/", "settings/", "maps/"] 
+packages = ["src", "src/gui", "src/settings_parser", "src/board", "constants/", "settings/", "maps/"] 
 
 [tool.black]
 line-length = 79

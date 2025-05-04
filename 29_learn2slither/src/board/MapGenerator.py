@@ -5,12 +5,13 @@ import os as os
 import time as time
 
 from constants.board import BoardBlock
+from settings_parser import SettingsParser
 
 class MapGenerator:
     def __init__(self) -> None:
         load_dotenv()
 
-        settings = self.__parse_settings()
+        settings = SettingsParser().settings
 
         self.__green_apples = settings["green_apples"]
         self.__height = settings["height"]
@@ -22,24 +23,6 @@ class MapGenerator:
 
         map_size = (self.__height, self.__width)
         self.__map = np.full(map_size, BoardBlock.EMPTY.value)
-
-    def __parse_settings(self) -> dict:
-        """
-        Parses the map settings from a JSON file.
-        Returns:
-            dict: A dictionary containing the map settings.
-        """
-
-        settings_dir_path = os.environ.get("SETTINGS_DIR_PATH")
-        
-        file_name = "map.json"
-        # TODO improve this
-        map_settings_path = os.path.join("..", "..", settings_dir_path, file_name)
-
-        with open(map_settings_path, "r") as file:
-            settings = json.load(file)
-
-        return settings
 
     def __str__(self) -> str:
         output = "MapGenerator("
