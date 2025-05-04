@@ -12,10 +12,9 @@
   3.13.3
   ```
 
-- Create and activate Python virtual environment and install dependencies
+- The project is using rye to handle dependencies
 
   ```shell
-  $ python3 -m venv env
-  $ source env/bin/activate
-  $ (env) pip install -r requirements.txt
+  $ . .venv/bin/activate
+  $ (env) rye sync
   ```
