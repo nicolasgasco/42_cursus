@@ -20,9 +20,33 @@ class MapBlock(tk.Canvas):
       self.create_text(
         SQUARE_SIZE // 2,
         SQUARE_SIZE // 2,
-        text=self.__block,
-        font=("Arial", SQUARE_SIZE - 20),
+        text=self.__get_text(self.__block),
+        font=("Arial", SQUARE_SIZE - 30),
       )
+      
+  def __get_text(self, block_value: str) -> str:
+    """
+    Returns the text for the given color.
+    Args:
+        color (str): The color to get the text for.
+    Returns:
+        str: The text for the given color.
+    """
+    if block_value == BoardBlock.EMPTY.value:
+      return None
+    elif block_value == BoardBlock.BODY.value:
+      return BoardBlock.BODY.value
+    elif block_value == BoardBlock.HEAD.value:
+      return BoardBlock.HEAD.value
+    elif block_value == BoardBlock.GREEN_APPLE.value:
+      return BoardBlock.GREEN_APPLE.value
+    elif block_value == BoardBlock.RED_APPLE.value:
+      return BoardBlock.RED_APPLE.value
+    elif block_value == BoardBlock.WALL.value:
+      return None
+    else:
+      raise ValueError(f"Unknown block value: {block_value}")
+
             
   def __get_bg_color(self, block_value: str) -> str:
     """
@@ -32,18 +56,21 @@ class MapBlock(tk.Canvas):
     Returns:
         str: The background color for the given color.
     """
+    black = "#161616"
+    grey = "#83878D"
+
     if block_value == BoardBlock.EMPTY.value:
-      return "black"
+      return black
     elif block_value == BoardBlock.BODY.value:
-      return "green"
+      return black
     elif block_value == BoardBlock.HEAD.value:
-      return "green"
+      return black
     elif block_value == BoardBlock.GREEN_APPLE.value:
-      return "green"
+      return black
     elif block_value == BoardBlock.RED_APPLE.value:
-      return "red"
+      return black
     elif block_value == BoardBlock.WALL.value:
-      return "white"
+      return grey
     else:
       raise ValueError(f"Unknown block value: {block_value}")
       
