@@ -22,7 +22,7 @@ class TkGui(tk.Tk):
 
     def tick(self, on_tick: callable) -> None:
         on_tick()
-        self.__board.render()
+        self.__board.fill()
         self.after(SPEED, lambda: self.tick(on_tick))
 
     def bind_movement_keys(self, on_key_press: callable) -> None:

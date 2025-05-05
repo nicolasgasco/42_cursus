@@ -1,4 +1,4 @@
-from Block import Block
+from GuiBlock import BlockCanvas
 from constants import MAPS_DIR_PATH
 from settings_parser import SettingsParser
 from os import path
@@ -6,11 +6,11 @@ from os import path
 
 class Board:
     def __init__(self):
-        self.__rows = self.__parse_board_from_file()
+        self.__map = self.__parse_board_from_file()
 
     @property
     def raw_map(self):
-        return self.__rows
+        return self.__map
 
     def __parse_board_from_file(self) -> list:
         settings = SettingsParser().settings
@@ -24,8 +24,8 @@ class Board:
 
         return map_rows
 
-    def render(self):
-        for y, row in enumerate(self.__rows):
+    def fill(self):
+        for y, row in enumerate(self.__map):
             for x, block in enumerate(row):
-                gui_block = Block({"block": block})
+                gui_block = BlockCanvas({"block": block})
                 gui_block.grid(row=y, column=x)

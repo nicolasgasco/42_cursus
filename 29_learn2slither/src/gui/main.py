@@ -8,7 +8,7 @@ def main():
     gui = TkGui()
 
     gui.board = Board()
-    gui.board.render()
+    gui.board.fill()
 
     raw_map = gui.board.raw_map
     game_handler = Game(raw_map)
