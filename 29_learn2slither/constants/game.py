@@ -6,3 +6,6 @@ class SnakeDirection(Enum):
     DOWN = "DOWN"
     LEFT = "LEFT"
     RIGHT = "RIGHT"
+
+
+DEFAULT_SNAKE_DIRECTION = SnakeDirection.LEFT.value

@@ -1,5 +1,5 @@
 from Board import Board
-from constants import SnakeDirection
+from constants import DEFAULT_SNAKE_DIRECTION
 from game_logic import Game
 from Gui import TkGui
 
@@ -13,8 +13,8 @@ def main():
     raw_map = gui.board.raw_map
     game_handler = Game(raw_map)
 
-    intended_direction = SnakeDirection.LEFT.value
-    prev_direction = SnakeDirection.LEFT.value
+    intended_direction = DEFAULT_SNAKE_DIRECTION
+    prev_direction = DEFAULT_SNAKE_DIRECTION
 
     def on_key_press(_, direction):
         nonlocal intended_direction

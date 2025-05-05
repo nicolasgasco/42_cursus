@@ -1,16 +1,22 @@
-from constants import SnakeDirection, BoardBlock
+from constants import SnakeDirection, BoardBlock, DEFAULT_SNAKE_DIRECTION
 
 
 class Game:
     def __init__(self, raw_map: list):
+        self.__raw_map = raw_map
+
+        self.__direction = DEFAULT_SNAKE_DIRECTION
+        self.__head_pos: tuple | None = None
+
         self.__forbidden_blocks = [
             BoardBlock.WALL.value,
             BoardBlock.BODY.value,
         ]
+
+        self.__ate_green_apple = False
+        self.__ate_red_apple = False
         self.__game_over = False
         self.__has_moved = False
-        self.__head_pos: tuple | None = None
-        self.__raw_map = raw_map
 
     @property
     def has_moved(self) -> bool:
@@ -21,10 +27,39 @@ class Game:
         return self.__game_over
 
     def move_snake(self, direction: str) -> None:
+        self.__ate_green_apple = False
+        self.__ate_red_apple = False
+        self.__game_over = False
+        self.__has_moved = False
+
         self.__move_head(direction)
 
         if self.__has_moved:
             self.__move_tail()
+
+        self.__direction = direction
+
+    def __is_opposite_direction(
+        self, direction: str, prev_direction: str
+    ) -> bool:
+        return (
+            (
+                direction == SnakeDirection.UP.value
+                and prev_direction == SnakeDirection.DOWN.value
+            )
+            or (
+                direction == SnakeDirection.DOWN.value
+                and prev_direction == SnakeDirection.UP.value
+            )
+            or (
+                direction == SnakeDirection.LEFT.value
+                and prev_direction == SnakeDirection.RIGHT.value
+            )
+            or (
+                direction == SnakeDirection.RIGHT.value
+                and prev_direction == SnakeDirection.LEFT.value
+            )
+        )
 
     def __move_head(self, direction: str) -> None:
         head_y, head_x = (
@@ -38,28 +73,33 @@ class Game:
             head_y, head_x, direction
         )
 
-        is_forbidden_block = (
-            self.__raw_map[new_head_y][new_head_x] in self.__forbidden_blocks
-        )
+        new_block = self.__raw_map[new_head_y][new_head_x]
 
-        if is_forbidden_block:
-            self.__game_over = True
-            self.__has_moved = False
-        elif not is_forbidden_block:
-            self.__raw_map[new_head_y][new_head_x] = BoardBlock.HEAD.value
-            self.__has_moved = True
-            self.__game_over = False
+        if new_block in self.__forbidden_blocks:
+            if not self.__is_opposite_direction(direction, self.__direction):
+                self.__game_over = True
+            return
 
-        if self.__has_moved:
-            self.__raw_map[head_y][head_x] = BoardBlock.BODY.value
+        self.__has_moved = True
+        if new_block == BoardBlock.GREEN_APPLE.value:
+            self.__ate_green_apple = True
+        elif new_block == BoardBlock.RED_APPLE.value:
+            self.__ate_red_apple = True
+
+        self.__raw_map[new_head_y][new_head_x] = BoardBlock.HEAD.value
+        self.__raw_map[head_y][head_x] = BoardBlock.BODY.value
 
     def __move_tail(self) -> None:
-        tail_y, tail_x = self.__find_tail()
+        n_repeat = 2 if self.__ate_red_apple else 1
 
-        if tail_x is None or tail_y is None:
-            raise ValueError("Snake tail not found in the map.")
+        for _ in range(n_repeat):
+            tail_y, tail_x = self.__find_tail()
 
-        self.__raw_map[tail_y][tail_x] = BoardBlock.EMPTY.value
+            if tail_x is None or tail_y is None:
+                raise ValueError("Snake tail not found in the map.")
+
+            if not self.__ate_green_apple:
+                self.__raw_map[tail_y][tail_x] = BoardBlock.EMPTY.value
 
     def __find_head_pos(self) -> tuple:
         for y, row in enumerate(self.__raw_map):
