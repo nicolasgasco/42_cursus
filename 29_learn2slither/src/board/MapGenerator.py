@@ -36,149 +36,116 @@ class MapGenerator:
         return self.__map
 
     def generate_map(self) -> None:
-        # TODO move this to separate file
-        def fill_walls(map: list) -> list:
-            """
-            Fills the borders of the given map with walls.
-            Args:
-                map (list): A 2D list representing the map
-                to be filled with walls.
-            Returns:
-                list: The modified map with walls on its borders.
-            """
+        filled_map = self.__fill_walls(self.__map)
 
-            filled_map = map
+        filled_map = self.__fill_snake(filled_map)
 
-            # Top wall
-            filled_map[0, :] = BoardBlock.WALL.value
-            # Bottom wall
-            filled_map[-1, :] = BoardBlock.WALL.value
-            # Left wall
-            filled_map[:, 0] = BoardBlock.WALL.value
-            # Right wall
-            filled_map[:, -1] = BoardBlock.WALL.value
-
-            return filled_map
-
-        def fill_apple(map: list, apple: str, counter: int = 1) -> list:
-            """
-            Fills the map with a specified number of apples
-            at random empty positions.
-            Args:
-                map (list): The game board represented as a 2D list.
-                apple (str): The character or symbol representing an apple.
-                counter (int, optional): The number of apples to place
-                on the map. Defaults to 1.
-            Returns:
-                list: The updated game board with apples placed.
-            """
-
-            filled_map = map
-
-            for _ in range(counter):
-                patience = 100
-                placed_apple = False
-
-                while not placed_apple:
-                    if patience <= 0:
-                        raise Exception("Unable to place apple on the map.")
-
-                    rand_x = np.random.randint(1, self.__width - 1)
-                    rand_y = np.random.randint(1, self.__height - 1)
-
-                    if filled_map[rand_y, rand_x] != BoardBlock.EMPTY.value:
-                        patience -= 1
-                        continue
-
-                    filled_map[rand_y, rand_x] = apple
-                    placed_apple = True
-
-            return filled_map
-
-        def fill_snake(map: list, head: str, body: str, length: str) -> list:
-            """
-            Fills the map with a snake of specified length, head,
-            and body characters.
-            Args:
-                map (list): The game board represented as a 2D list.
-                head (str): The character representing the snake's head.
-                body (str): The character representing the snake's body.
-                length (int): The length of the snake.
-            Returns:
-                list: The updated game board with the snake placed on it.
-            """
-
-            filled_map = map
-
-            patience = 100
-            placed_head = False
-
-            while not placed_head:
-                if patience <= 0:
-                    raise Exception("Unable to place snake on the map.")
-
-                head_x = np.random.randint(
-                    1, self.__width - 1 - self.__snake_length
-                )
-                head_y = np.random.randint(1, self.__height - 1)
-
-                is_head_empty = (
-                    filled_map[head_y, head_x] == BoardBlock.EMPTY.value
-                )
-
-                is_head_left_empty = (
-                    filled_map[head_y, head_x - 1] == BoardBlock.EMPTY.value
-                )
-
-                is_head_right_empty = (
-                    filled_map[head_y, head_x + 1] == BoardBlock.EMPTY.value
-                )
-
-                is_head_right_right_empty = (
-                    filled_map[head_y, head_x + 2] == BoardBlock.EMPTY.value
-                )
-                if (
-                    not is_head_empty
-                    or not is_head_left_empty
-                    or not is_head_right_empty
-                    or not is_head_right_right_empty
-                ):
-                    patience -= 1
-                    continue
-
-                filled_map[head_y, head_x] = head
-                placed_head = True
-
-            for i in range(1, length):
-                new_x = head_x + i
-                new_y = head_y
-
-                filled_map[new_y, new_x] = body
-
-            return filled_map
-
-        filled_map = fill_walls(self.__map)
-        filled_map = fill_apple(
+        filled_map = self.__fill_apple(
             filled_map, BoardBlock.RED_APPLE.value, self.__red_apples
         )
-        filled_map = fill_apple(
+
+        filled_map = self.__fill_apple(
             filled_map, BoardBlock.GREEN_APPLE.value, self.__green_apples
         )
-        filled_map = fill_snake(
-            filled_map,
-            BoardBlock.HEAD.value,
-            BoardBlock.BODY.value,
-            self.__snake_length,
-        )
+
         self.__map = filled_map
 
-    def save_map_to_file(self) -> str:
-        """
-        Saves the current map to a file with a timestamped filename.
-        Returns:
-            str: The full path of the saved map file.
-        """
+    def __fill_walls(self, map: list) -> list:
+        filled_map = map
 
+        filled_map[0, :] = BoardBlock.WALL.value  # Top wall
+        filled_map[-1, :] = BoardBlock.WALL.value  # Bottom wall
+        filled_map[:, 0] = BoardBlock.WALL.value  # Left wall
+        filled_map[:, -1] = BoardBlock.WALL.value  # Right wall
+
+        return filled_map
+
+    def __fill_apple(self, map: list, apple: str, num_apples: int) -> list:
+        filled_map = map
+
+        apple_to_place = num_apples
+        patience = 100
+        while apple_to_place > 0:
+            if patience <= 0:
+                raise Exception("Unable to place apple on the map.")
+
+            rand_x = np.random.randint(1, self.__width - 1)
+            rand_y = np.random.randint(1, self.__height - 1)
+
+            if filled_map[rand_y, rand_x] != BoardBlock.EMPTY.value:
+                patience -= 1
+                continue
+
+            filled_map[rand_y, rand_x] = apple
+            apple_to_place -= 1
+
+        return filled_map
+
+    def __fill_snake(self, map: list) -> list:
+        filled_map = map
+
+        placed_whole = False
+        patience_whole = 100
+        while not placed_whole:
+            if patience_whole <= 0:
+                raise Exception("Unable to place whole snake on the map.")
+
+            head_x = np.random.randint(
+                2, self.__width - 1 - 2
+            )  # - 2 to leave enough space for the body
+            head_y = np.random.randint(
+                2, self.__height - 1 - 2
+            )  # - 2 to avoid collision with walls
+
+            if filled_map[head_y, head_x] != BoardBlock.EMPTY.value:
+                continue
+
+            prev_x, prev_y = head_x, head_y
+            new_x, new_y = head_x, head_y
+            for _ in range(1, self.__snake_length):
+                # Right
+                if (
+                    prev_x + 1 <= self.__width
+                    and filled_map[prev_y, prev_x + 1]
+                    == BoardBlock.EMPTY.value
+                ):
+                    new_x = prev_x + 1
+                # Down
+                elif (
+                    prev_y + 1 <= self.__height
+                    and filled_map[prev_y + 1, prev_x]
+                    == BoardBlock.EMPTY.value
+                ):
+                    new_y = prev_y + 1
+                # Left
+                elif (
+                    prev_x - 1 >= 1
+                    and filled_map[prev_y, prev_x - 1]
+                    == BoardBlock.EMPTY.value
+                ):
+                    new_x = prev_x - 1
+                # Up
+                elif (
+                    prev_y - 1 >= 1
+                    and filled_map[prev_y - 1, prev_x]
+                    == BoardBlock.EMPTY.value
+                ):
+                    new_y = prev_y - 1
+                else:
+                    patience_whole -= 1
+                    continue
+
+                filled_map[new_y, new_x] = BoardBlock.BODY.value
+
+                prev_x = new_x
+                prev_y = new_y
+
+            filled_map[head_y, head_x] = BoardBlock.HEAD.value
+            break
+
+        return filled_map
+
+    def save_map_to_file(self) -> str:
         timestamp = time.strftime("%Y-%m-%d")
         file_name = timestamp
         file_name += f"_W{self.__width}_H{self.__height}"
