@@ -12,6 +12,7 @@ class MapGenerator:
 
         self.__green_apples = settings["green_apples"]
         self.__height = settings["height"]
+        self.__randomized = settings["randomized"]
         self.__red_apples = settings["red_apples"]
         self.__snake_length = settings["snake_length"]
         self.__width = settings["width"]
@@ -20,6 +21,9 @@ class MapGenerator:
 
         map_size = (self.__height, self.__width)
         self.__map = np.full(map_size, BoardBlock.EMPTY.value)
+
+        if not self.__randomized:
+            np.random.seed(0)
 
     def __str__(self) -> str:
         output = "MapGenerator("
