@@ -1,7 +1,6 @@
-from Board import Board
+from gui import Board, TkGui
 from constants import DEFAULT_SNAKE_DIRECTION
 from game_logic import Game
-from Gui import TkGui
 
 
 def main():

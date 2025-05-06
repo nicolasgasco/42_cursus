@@ -1,4 +1,4 @@
-from GuiBlock import BlockCanvas
+from .GuiBlock import BlockCanvas
 from constants import MAPS_DIR_PATH
 from settings_parser import SettingsParser
 from os import path
@@ -17,7 +17,7 @@ class Board:
         map_file_name = settings["file_name"]
         assert map_file_name, "Map file name not found in settings."
 
-        map_file_path = path.join("..", "..", MAPS_DIR_PATH, map_file_name)
+        map_file_path = path.join("..", MAPS_DIR_PATH, map_file_name)
         with open(map_file_path, "r") as file:
             map_rows = file.readlines()
             map_rows = [list(map_row.strip()) for map_row in map_rows]
