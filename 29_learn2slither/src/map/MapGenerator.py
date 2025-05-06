@@ -1,16 +1,13 @@
-from dotenv import load_dotenv
 import numpy as np
 import os as os
 import time as time
 
-from constants import BoardBlock
+from constants import BoardBlock, MAPS_DIR_PATH
 from settings_parser import SettingsParser
 
 
 class MapGenerator:
     def __init__(self) -> None:
-        load_dotenv()
-
         settings = SettingsParser().settings
 
         self.__green_apples = settings["green_apples"]
@@ -151,8 +148,7 @@ class MapGenerator:
         file_name += f"_W{self.__width}_H{self.__height}"
         file_name += "_map"
 
-        maps_dir_path = os.environ.get("MAPS_DIR_PATH")
-        file_name = os.path.join("..", "..", maps_dir_path, file_name)
+        file_name = os.path.join("..", MAPS_DIR_PATH, file_name)
 
         try:
             with open(file_name, "w") as file:

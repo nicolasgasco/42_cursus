@@ -1,4 +1,4 @@
-from MapGenerator import MapGenerator
+from map import MapGenerator
 
 
 def main():

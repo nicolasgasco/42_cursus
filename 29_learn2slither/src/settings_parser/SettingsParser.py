@@ -10,9 +10,7 @@ class SettingsParser:
     def __parse_settings(self):
         file_name = "map.json"
         # TODO improve this
-        map_settings_path = os.path.join(
-            "..", "..", SETTINGS_DIR_PATH, file_name
-        )
+        map_settings_path = os.path.join("..", SETTINGS_DIR_PATH, file_name)
 
         with open(map_settings_path, "r") as file:
             settings = json.load(file)
