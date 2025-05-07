@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class BoardBlock(Enum):
+class BoardBlockSymbol(Enum):
     BODY = "🟢"
     EMPTY = "⬛"
     GREEN_APPLE = "🍏"

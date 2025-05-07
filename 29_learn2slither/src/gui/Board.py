@@ -1,12 +1,24 @@
-from .GuiBlock import BlockCanvas
-from constants import MAPS_DIR_PATH
+from .BoardBlock import BoardBlock
+from constants import DEFAULT_PADDING, MAPS_DIR_PATH, BLACK
 from settings_parser import SettingsParser
 from os import path
+import tkinter as tk
 
 
-class Board:
-    def __init__(self):
+class Board(tk.Frame):
+    def __init__(self, parent: tk.Tk):
+        super().__init__(
+            parent,
+            bg=BLACK,
+            padx=DEFAULT_PADDING,
+            pady=DEFAULT_PADDING,
+            borderwidth=5,
+            relief=tk.RAISED,
+        )
+        self.grid(row=1, column=0, sticky="nsew")
+
         self.__map = self.__parse_board_from_file()
+        self.fill()
 
     @property
     def raw_map(self):
@@ -27,5 +39,5 @@ class Board:
     def fill(self):
         for y, row in enumerate(self.__map):
             for x, block in enumerate(row):
-                gui_block = BlockCanvas({"block": block})
+                gui_block = BoardBlock({"block": block, "parent": self})
                 gui_block.grid(row=y, column=x)

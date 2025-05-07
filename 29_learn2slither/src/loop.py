@@ -1,16 +1,16 @@
-from gui import Board, TkGui
+from gui import Board, Root, Controls
 from constants import DEFAULT_SNAKE_DIRECTION
 from game_logic import Game
 
 
 def main():
-    gui = TkGui()
+    root = Root()
 
-    gui.board = Board()
-    gui.board.fill()
+    root.controls = Controls(root)
 
-    raw_map = gui.board.raw_map
-    game_handler = Game(raw_map)
+    root.board = Board(root)
+
+    game_handler = Game(root.board.raw_map)
 
     intended_direction = DEFAULT_SNAKE_DIRECTION
     prev_direction = DEFAULT_SNAKE_DIRECTION
@@ -19,24 +19,24 @@ def main():
         nonlocal intended_direction
         intended_direction = direction
 
-    gui.bind_movement_keys(on_key_press)
+    root.bind_movement_keys(on_key_press)
 
     def on_tick():
-        nonlocal prev_direction
-        game_handler.move_snake(intended_direction)
-
         if game_handler.game_over:
             print("Game Over")
-            gui.after(2000, gui.quit)
+            root.after(2000, root.quit)
             return
-        elif game_handler.has_moved:
+
+        game_handler.move_snake(intended_direction)
+
+        if game_handler.has_moved:
+            nonlocal prev_direction
             prev_direction = intended_direction
         else:
             game_handler.move_snake(prev_direction)
 
-    gui.tick(on_tick)
-
-    gui.mainloop()
+    root.tick(on_tick)
+    root.mainloop()
 
 
 if __name__ == "__main__":

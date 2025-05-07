@@ -1,16 +1,17 @@
 import tkinter as tk
 from constants import SnakeDirection
 
-SPEED = 1_000  # TODO change with configurable settings
+DEFAULT_SPEED_MS = 1_000
 
 
-class TkGui(tk.Tk):
+class Root(tk.Tk):
     def __init__(self):
         super().__init__()
 
         self.title("Learn2Slither")
 
         self.__board = None
+        self.__controls = None
 
     @property
     def board(self):
@@ -20,10 +21,20 @@ class TkGui(tk.Tk):
     def board(self, board):
         self.__board = board
 
+    @property
+    def controls(self):
+        return self.__controls
+
+    @controls.setter
+    def controls(self, controls):
+        self.__controls = controls
+
     def tick(self, on_tick: callable) -> None:
         on_tick()
         self.__board.fill()
-        self.after(SPEED, lambda: self.tick(on_tick))
+
+        speed = int(DEFAULT_SPEED_MS / float(self.controls.speed.get()))
+        self.after(speed, lambda: self.tick(on_tick))
 
     def bind_movement_keys(self, on_key_press: callable) -> None:
         self.bind_all(

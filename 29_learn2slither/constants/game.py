@@ -9,3 +9,5 @@ class SnakeDirection(Enum):
 
 
 DEFAULT_SNAKE_DIRECTION = SnakeDirection.LEFT.value
+
+DEFAULT_SPEED = "1"

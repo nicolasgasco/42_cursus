@@ -1,0 +1,4 @@
+BLACK = "#161616"
+GREY = "#83878D"
+LIGHT_GREY = "#cccaca"
+PRIMARY = "#3d4856"

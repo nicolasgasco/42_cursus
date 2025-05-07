@@ -1,4 +1,4 @@
-from constants import SnakeDirection, BoardBlock, DEFAULT_SNAKE_DIRECTION
+from constants import BoardBlockSymbol, DEFAULT_SNAKE_DIRECTION, SnakeDirection
 
 
 class Game:
@@ -9,8 +9,8 @@ class Game:
         self.__head_pos: tuple | None = None
 
         self.__forbidden_blocks = [
-            BoardBlock.WALL.value,
-            BoardBlock.BODY.value,
+            BoardBlockSymbol.WALL.value,
+            BoardBlockSymbol.BODY.value,
         ]
 
         self.__ate_green_apple = False
@@ -81,13 +81,13 @@ class Game:
             return
 
         self.__has_moved = True
-        if new_block == BoardBlock.GREEN_APPLE.value:
+        if new_block == BoardBlockSymbol.GREEN_APPLE.value:
             self.__ate_green_apple = True
-        elif new_block == BoardBlock.RED_APPLE.value:
+        elif new_block == BoardBlockSymbol.RED_APPLE.value:
             self.__ate_red_apple = True
 
-        self.__raw_map[new_head_y][new_head_x] = BoardBlock.HEAD.value
-        self.__raw_map[head_y][head_x] = BoardBlock.BODY.value
+        self.__raw_map[new_head_y][new_head_x] = BoardBlockSymbol.HEAD.value
+        self.__raw_map[head_y][head_x] = BoardBlockSymbol.BODY.value
 
     def __move_tail(self) -> None:
         n_repeat = 2 if self.__ate_red_apple else 1
@@ -99,12 +99,12 @@ class Game:
                 raise ValueError("Snake tail not found in the map.")
 
             if not self.__ate_green_apple:
-                self.__raw_map[tail_y][tail_x] = BoardBlock.EMPTY.value
+                self.__raw_map[tail_y][tail_x] = BoardBlockSymbol.EMPTY.value
 
     def __find_head_pos(self) -> tuple:
         for y, row in enumerate(self.__raw_map):
             for x, block in enumerate(row):
-                if block == BoardBlock.HEAD.value:
+                if block == BoardBlockSymbol.HEAD.value:
                     return (y, x)
         return (None, None)
 
@@ -135,26 +135,26 @@ class Game:
         while not found_tail:
             if (
                 self.__raw_map[tail_pos[0] - 1][tail_pos[1]]
-                == BoardBlock.BODY.value
+                == BoardBlockSymbol.BODY.value
                 and prev_direction != SnakeDirection.DOWN.value
             ):
                 tail_pos = (tail_pos[0] - 1, tail_pos[1])
                 prev_direction = SnakeDirection.UP.value
             elif (
                 self.__raw_map[tail_pos[0] + 1][tail_pos[1]]
-                == BoardBlock.BODY.value
+                == BoardBlockSymbol.BODY.value
             ) and prev_direction != SnakeDirection.UP.value:
                 tail_pos = (tail_pos[0] + 1, tail_pos[1])
                 prev_direction = SnakeDirection.DOWN.value
             elif (
                 self.__raw_map[tail_pos[0]][tail_pos[1] - 1]
-                == BoardBlock.BODY.value
+                == BoardBlockSymbol.BODY.value
             ) and prev_direction != SnakeDirection.RIGHT.value:
                 tail_pos = (tail_pos[0], tail_pos[1] - 1)
                 prev_direction = SnakeDirection.LEFT.value
             elif (
                 self.__raw_map[tail_pos[0]][tail_pos[1] + 1]
-                == BoardBlock.BODY.value
+                == BoardBlockSymbol.BODY.value
             ) and prev_direction != SnakeDirection.LEFT.value:
                 tail_pos = (tail_pos[0], tail_pos[1] + 1)
                 prev_direction = SnakeDirection.RIGHT.value

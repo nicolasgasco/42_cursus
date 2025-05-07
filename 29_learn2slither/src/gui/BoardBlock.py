@@ -1,16 +1,17 @@
 import tkinter as tk
-from constants import BoardBlock
+from constants import BoardBlockSymbol, BLACK, GREY
 
 SQUARE_SIZE = 80
 
 
-class BlockCanvas(tk.Canvas):
+class BoardBlock(tk.Canvas):
     def __init__(self, args):
         self.__block = (
-            args["block"] if "block" in args else BoardBlock.EMPTY.name
+            args["block"] if "block" in args else BoardBlockSymbol.EMPTY.name
         )
 
         super().__init__(
+            args["parent"],
             bg=self.__get_bg_color(self.__block),
             height=SQUARE_SIZE,
             highlightthickness=0.5,
@@ -35,17 +36,17 @@ class BlockCanvas(tk.Canvas):
         Returns:
             str: The text for the given color.
         """
-        if block_value == BoardBlock.EMPTY.value:
+        if block_value == BoardBlockSymbol.EMPTY.value:
             return None
-        elif block_value == BoardBlock.BODY.value:
-            return BoardBlock.BODY.value
-        elif block_value == BoardBlock.HEAD.value:
-            return BoardBlock.HEAD.value
-        elif block_value == BoardBlock.GREEN_APPLE.value:
-            return BoardBlock.GREEN_APPLE.value
-        elif block_value == BoardBlock.RED_APPLE.value:
-            return BoardBlock.RED_APPLE.value
-        elif block_value == BoardBlock.WALL.value:
+        elif block_value == BoardBlockSymbol.BODY.value:
+            return BoardBlockSymbol.BODY.value
+        elif block_value == BoardBlockSymbol.HEAD.value:
+            return BoardBlockSymbol.HEAD.value
+        elif block_value == BoardBlockSymbol.GREEN_APPLE.value:
+            return BoardBlockSymbol.GREEN_APPLE.value
+        elif block_value == BoardBlockSymbol.RED_APPLE.value:
+            return BoardBlockSymbol.RED_APPLE.value
+        elif block_value == BoardBlockSymbol.WALL.value:
             return None
         else:
             raise ValueError(f"Unknown block value: {block_value}")
@@ -58,20 +59,18 @@ class BlockCanvas(tk.Canvas):
         Returns:
             str: The background color for the given color.
         """
-        black = "#161616"
-        grey = "#83878D"
 
-        if block_value == BoardBlock.EMPTY.value:
-            return black
-        elif block_value == BoardBlock.BODY.value:
-            return black
-        elif block_value == BoardBlock.HEAD.value:
-            return black
-        elif block_value == BoardBlock.GREEN_APPLE.value:
-            return black
-        elif block_value == BoardBlock.RED_APPLE.value:
-            return black
-        elif block_value == BoardBlock.WALL.value:
-            return grey
+        if block_value == BoardBlockSymbol.EMPTY.value:
+            return BLACK
+        elif block_value == BoardBlockSymbol.BODY.value:
+            return BLACK
+        elif block_value == BoardBlockSymbol.HEAD.value:
+            return BLACK
+        elif block_value == BoardBlockSymbol.GREEN_APPLE.value:
+            return BLACK
+        elif block_value == BoardBlockSymbol.RED_APPLE.value:
+            return BLACK
+        elif block_value == BoardBlockSymbol.WALL.value:
+            return GREY
         else:
             raise ValueError(f"Unknown block value: {block_value}")

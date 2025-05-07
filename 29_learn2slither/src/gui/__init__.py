@@ -1,5 +1,6 @@
 from .Board import Board
-from .TkGui import TkGui
-from .GuiBlock import BlockCanvas
+from .BoardBlock import BoardBlock
+from .Controls import Controls
+from .Root import Root
 
-__all__ = ["TkGui", "Board", "BlockCanvas"]
+__all__ = ["Board", "BoardBlock", "Controls", "Root"]
