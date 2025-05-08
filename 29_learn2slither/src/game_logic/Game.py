@@ -1,8 +1,10 @@
-from constants import BoardBlockSymbol, DEFAULT_SNAKE_DIRECTION, SnakeDirection
-from settings_parser import SettingsParser
 from collections import deque
 import os as os
 import pickle as pkl
+
+from .utils import is_opposite_direction
+from constants import BoardBlockSymbol, DEFAULT_SNAKE_DIRECTION, SnakeDirection
+from settings_parser import SettingsParser
 
 
 class Game:
@@ -69,7 +71,7 @@ class Game:
         self.__game_over = False
         self.__has_moved = False
 
-        if self.__is_opposite_direction(direction, self.__direction):
+        if is_opposite_direction(direction, self.__direction):
             return
 
         self.__move_head(direction)
@@ -79,28 +81,6 @@ class Game:
             self.__moves += 1
 
         self.__direction = direction
-
-    def __is_opposite_direction(
-        self, direction: str, prev_direction: str
-    ) -> bool:
-        return (
-            (
-                direction == SnakeDirection.UP.value
-                and prev_direction == SnakeDirection.DOWN.value
-            )
-            or (
-                direction == SnakeDirection.DOWN.value
-                and prev_direction == SnakeDirection.UP.value
-            )
-            or (
-                direction == SnakeDirection.LEFT.value
-                and prev_direction == SnakeDirection.RIGHT.value
-            )
-            or (
-                direction == SnakeDirection.RIGHT.value
-                and prev_direction == SnakeDirection.LEFT.value
-            )
-        )
 
     def __move_head(self, direction: str) -> None:
         head_y, head_x = self.__head_pos
