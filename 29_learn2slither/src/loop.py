@@ -1,6 +1,6 @@
-from gui import Board, Root, Controls, Data
 from constants import DEFAULT_SNAKE_DIRECTION
 from game_logic import Game
+from gui import Board, Controls, Data, Root
 
 
 def main():

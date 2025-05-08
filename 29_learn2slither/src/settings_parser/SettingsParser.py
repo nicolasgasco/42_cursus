@@ -1,6 +1,7 @@
-from constants import SETTINGS_DIR_PATH
 import json as json
 import os as os
+
+from constants import SETTINGS_DIR_PATH
 
 
 class SettingsParser:

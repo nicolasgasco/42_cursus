@@ -1,14 +1,15 @@
-import numpy as np
 import os as os
-import time as time
 import pickle as pkl
+import time as time
 from collections import deque
 
+import numpy as np
+
 from constants import (
-    BoardBlockSymbol,
     DATA_DIR_PATH,
     DATA_SNAKE_FILE_NAME,
     MAPS_DIR_PATH,
+    BoardBlockSymbol,
 )
 from settings_parser import SettingsParser
 

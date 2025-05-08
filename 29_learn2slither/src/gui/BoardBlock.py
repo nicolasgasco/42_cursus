@@ -1,5 +1,6 @@
 import tkinter as tk
-from constants import BoardBlockSymbol, BLACK, GREY
+
+from constants import BLACK, GREY, BoardBlockSymbol
 
 SQUARE_SIZE = 80
 

@@ -1,10 +1,11 @@
-from collections import deque
 import os as os
 import pickle as pkl
+from collections import deque
+
+from constants import DEFAULT_SNAKE_DIRECTION, BoardBlockSymbol, SnakeDirection
+from settings_parser import SettingsParser
 
 from .utils import is_opposite_direction
-from constants import BoardBlockSymbol, DEFAULT_SNAKE_DIRECTION, SnakeDirection
-from settings_parser import SettingsParser
 
 
 class Game:

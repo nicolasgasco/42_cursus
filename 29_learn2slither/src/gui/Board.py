@@ -1,8 +1,10 @@
-from .BoardBlock import BoardBlock
-from constants import DEFAULT_PADDING, MAPS_DIR_PATH, BLACK
-from settings_parser import SettingsParser
-from os import path
 import tkinter as tk
+from os import path
+
+from constants import BLACK, DEFAULT_PADDING, MAPS_DIR_PATH
+from settings_parser import SettingsParser
+
+from .BoardBlock import BoardBlock
 
 
 class Board(tk.Frame):

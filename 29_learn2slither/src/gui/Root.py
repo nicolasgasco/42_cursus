@@ -1,4 +1,5 @@
 import tkinter as tk
+
 from constants import SnakeDirection
 
 DEFAULT_SPEED_MS = 1_000
