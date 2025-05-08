@@ -1,5 +1,8 @@
 from constants import BoardBlockSymbol, DEFAULT_SNAKE_DIRECTION, SnakeDirection
 from settings_parser import SettingsParser
+from collections import deque
+import os as os
+import pickle as pkl
 
 
 class Game:
@@ -7,7 +10,10 @@ class Game:
         self.__raw_map = raw_map
 
         self.__direction = DEFAULT_SNAKE_DIRECTION
-        self.__head_pos: tuple | None = None
+
+        self.__head_pos: tuple = (None, None)
+        self.__body_pos: deque | None = None
+        self.__load_snake_pos()
 
         self.__forbidden_blocks = [
             BoardBlockSymbol.WALL.value,
@@ -49,11 +55,22 @@ class Game:
     def apples_red(self) -> int:
         return self.__apples_red
 
+    def __load_snake_pos(self) -> tuple:
+        path = os.path.join("data", "snake_pos.pkl")
+        with open(path, "rb") as f:
+            snake_pos = pkl.load(f)
+
+        self.__head_pos = snake_pos["head_pos"]
+        self.__body_pos = deque(snake_pos["body_pos"])
+
     def move_snake(self, direction: str) -> None:
         self.__ate_green_apple = False
         self.__ate_red_apple = False
         self.__game_over = False
         self.__has_moved = False
+
+        if self.__is_opposite_direction(direction, self.__direction):
+            return
 
         self.__move_head(direction)
 
@@ -86,12 +103,7 @@ class Game:
         )
 
     def __move_head(self, direction: str) -> None:
-        head_y, head_x = (
-            self.__head_pos if self.__head_pos else self.__find_head_pos()
-        )
-        assert (
-            head_x is not None and head_y is not None
-        ), "Head position not found."
+        head_y, head_x = self.__head_pos
 
         new_head_y, new_head_x = self.__get_new_head_pos(
             head_y, head_x, direction
@@ -100,11 +112,16 @@ class Game:
         new_block = self.__raw_map[new_head_y][new_head_x]
 
         if new_block in self.__forbidden_blocks:
-            if not self.__is_opposite_direction(direction, self.__direction):
-                self.__game_over = True
+            self.__game_over = True
             return
 
         self.__has_moved = True
+        self.__raw_map[new_head_y][new_head_x] = BoardBlockSymbol.HEAD.value
+        self.__head_pos = (new_head_y, new_head_x)
+
+        self.__raw_map[head_y][head_x] = BoardBlockSymbol.BODY.value
+        self.__body_pos.appendleft((head_y, head_x))
+
         if new_block == BoardBlockSymbol.GREEN_APPLE.value:
             self.__length += 1
             self.__ate_green_apple = True
@@ -113,28 +130,6 @@ class Game:
             self.__length -= 1
             self.__ate_red_apple = True
             self.__apples_red += 1
-
-        self.__raw_map[new_head_y][new_head_x] = BoardBlockSymbol.HEAD.value
-        self.__raw_map[head_y][head_x] = BoardBlockSymbol.BODY.value
-
-    def __move_tail(self) -> None:
-        n_repeat = 2 if self.__ate_red_apple else 1
-
-        for _ in range(n_repeat):
-            tail_y, tail_x = self.__find_tail()
-
-            if tail_x is None or tail_y is None:
-                raise ValueError("Snake tail not found in the map.")
-
-            if not self.__ate_green_apple:
-                self.__raw_map[tail_y][tail_x] = BoardBlockSymbol.EMPTY.value
-
-    def __find_head_pos(self) -> tuple:
-        for y, row in enumerate(self.__raw_map):
-            for x, block in enumerate(row):
-                if block == BoardBlockSymbol.HEAD.value:
-                    return (y, x)
-        return (None, None)
 
     def __get_new_head_pos(
         self, head_y: int, head_x: int, direction: str
@@ -150,44 +145,12 @@ class Game:
         else:
             raise ValueError(f"Invalid direction: {direction}")
 
-    def __find_tail(self) -> tuple:
-        head_pos = (
-            self.__head_pos if self.__head_pos else self.__find_head_pos()
-        )
-        assert head_pos is not None, "Head position not found."
+    def __move_tail(self) -> None:
+        blocks_to_remove = 2 if self.__ate_red_apple else 1
 
-        tail_pos = head_pos
+        for _ in range(blocks_to_remove):
+            tail_y, tail_x = self.__body_pos[-1]
 
-        found_tail = False
-        prev_direction = None
-        while not found_tail:
-            if (
-                self.__raw_map[tail_pos[0] - 1][tail_pos[1]]
-                == BoardBlockSymbol.BODY.value
-                and prev_direction != SnakeDirection.DOWN.value
-            ):
-                tail_pos = (tail_pos[0] - 1, tail_pos[1])
-                prev_direction = SnakeDirection.UP.value
-            elif (
-                self.__raw_map[tail_pos[0] + 1][tail_pos[1]]
-                == BoardBlockSymbol.BODY.value
-            ) and prev_direction != SnakeDirection.UP.value:
-                tail_pos = (tail_pos[0] + 1, tail_pos[1])
-                prev_direction = SnakeDirection.DOWN.value
-            elif (
-                self.__raw_map[tail_pos[0]][tail_pos[1] - 1]
-                == BoardBlockSymbol.BODY.value
-            ) and prev_direction != SnakeDirection.RIGHT.value:
-                tail_pos = (tail_pos[0], tail_pos[1] - 1)
-                prev_direction = SnakeDirection.LEFT.value
-            elif (
-                self.__raw_map[tail_pos[0]][tail_pos[1] + 1]
-                == BoardBlockSymbol.BODY.value
-            ) and prev_direction != SnakeDirection.LEFT.value:
-                tail_pos = (tail_pos[0], tail_pos[1] + 1)
-                prev_direction = SnakeDirection.RIGHT.value
-            else:
-                found_tail = True
-                break
-
-        return tail_pos if found_tail else (None, None)
+            if not self.__ate_green_apple:
+                self.__raw_map[tail_y][tail_x] = BoardBlockSymbol.EMPTY.value
+                self.__body_pos.pop()

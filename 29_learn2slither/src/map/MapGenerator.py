@@ -1,8 +1,15 @@
 import numpy as np
 import os as os
 import time as time
+import pickle as pkl
+from collections import deque
 
-from constants import BoardBlockSymbol, MAPS_DIR_PATH
+from constants import (
+    BoardBlockSymbol,
+    DATA_DIR_PATH,
+    DATA_SNAKE_FILE_NAME,
+    MAPS_DIR_PATH,
+)
 from settings_parser import SettingsParser
 
 
@@ -21,6 +28,9 @@ class MapGenerator:
 
         map_size = (self.__height, self.__width)
         self.__map = np.full(map_size, BoardBlockSymbol.EMPTY.value)
+
+        self.__body_pos = deque()
+        self.__head_pos = (None, None)
 
         if not self.__randomized:
             np.random.seed(0)
@@ -50,6 +60,8 @@ class MapGenerator:
         )
 
         self.__map = filled_map
+
+        self.__dump_snake_data()
 
     def __fill_walls(self, map: list) -> list:
         filled_map = map
@@ -101,6 +113,8 @@ class MapGenerator:
             if filled_map[head_y, head_x] != BoardBlockSymbol.EMPTY.value:
                 continue
 
+            self.__head_pos = (head_y, head_x)
+
             prev_x, prev_y = head_x, head_y
             new_x, new_y = head_x, head_y
             for _ in range(1, self.__snake_length):
@@ -137,6 +151,7 @@ class MapGenerator:
                     continue
 
                 filled_map[new_y, new_x] = BoardBlockSymbol.BODY.value
+                self.__body_pos.append((new_y, new_x))
 
                 prev_x = new_x
                 prev_y = new_y
@@ -162,3 +177,18 @@ class MapGenerator:
             raise e
 
         return file_name
+
+    def __dump_snake_data(self) -> str:
+        path = os.path.join(DATA_DIR_PATH, DATA_SNAKE_FILE_NAME)
+
+        if not os.path.exists(os.path.dirname(path)):
+            os.makedirs(os.path.dirname(path))
+
+        with open(path, "wb") as file:
+            pkl.dump(
+                {
+                    "head_pos": self.__head_pos,
+                    "body_pos": self.__body_pos,
+                },
+                file,
+            )

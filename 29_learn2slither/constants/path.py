@@ -1,3 +1,5 @@
 CONSTANTS_DIR_PATH = "constants"
+DATA_DIR_PATH = "data"
+DATA_SNAKE_FILE_NAME = "snake_pos.pkl"
 MAPS_DIR_PATH = "maps"
 SETTINGS_DIR_PATH = "settings"
