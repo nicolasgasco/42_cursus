@@ -66,7 +66,7 @@ class DataFrame(tk.Frame):
             text=self.__label + " " * padding,
             bg=LIGHT_GREY,
             fg=BLACK,
-            font=("Arial", 14),
+            font=("Arial", 18),
             anchor="w",
         )
         label.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5)
@@ -76,7 +76,7 @@ class DataFrame(tk.Frame):
             text=value,
             bg=LIGHT_GREY,
             fg=PRIMARY,
-            font=("Arial", 14),
+            font=("Arial", 18),
             anchor="e",
         )
         self.__value_label.pack(side=tk.RIGHT, fill=tk.X, expand=True, padx=5)
