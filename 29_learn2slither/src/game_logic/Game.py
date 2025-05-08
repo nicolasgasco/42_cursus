@@ -1,4 +1,5 @@
 from constants import BoardBlockSymbol, DEFAULT_SNAKE_DIRECTION, SnakeDirection
+from settings_parser import SettingsParser
 
 
 class Game:
@@ -13,10 +14,16 @@ class Game:
             BoardBlockSymbol.BODY.value,
         ]
 
+        settings = SettingsParser().settings
+
+        self.__apples_red = 0
+        self.__apples_green = 0
         self.__ate_green_apple = False
         self.__ate_red_apple = False
         self.__game_over = False
         self.__has_moved = False
+        self.__length = settings["snake_length"]
+        self.__moves = 0
 
     @property
     def has_moved(self) -> bool:
@@ -25,6 +32,22 @@ class Game:
     @property
     def game_over(self) -> bool:
         return self.__game_over
+
+    @property
+    def moves(self) -> int:
+        return self.__moves
+
+    @property
+    def length(self) -> int:
+        return self.__length
+
+    @property
+    def apples_green(self) -> int:
+        return self.__apples_green
+
+    @property
+    def apples_red(self) -> int:
+        return self.__apples_red
 
     def move_snake(self, direction: str) -> None:
         self.__ate_green_apple = False
@@ -36,6 +59,7 @@ class Game:
 
         if self.__has_moved:
             self.__move_tail()
+            self.__moves += 1
 
         self.__direction = direction
 
@@ -82,9 +106,13 @@ class Game:
 
         self.__has_moved = True
         if new_block == BoardBlockSymbol.GREEN_APPLE.value:
+            self.__length += 1
             self.__ate_green_apple = True
+            self.__apples_green += 1
         elif new_block == BoardBlockSymbol.RED_APPLE.value:
+            self.__length -= 1
             self.__ate_red_apple = True
+            self.__apples_red += 1
 
         self.__raw_map[new_head_y][new_head_x] = BoardBlockSymbol.HEAD.value
         self.__raw_map[head_y][head_x] = BoardBlockSymbol.BODY.value

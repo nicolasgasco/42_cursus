@@ -1,4 +1,4 @@
-from gui import Board, Root, Controls
+from gui import Board, Root, Controls, Data
 from constants import DEFAULT_SNAKE_DIRECTION
 from game_logic import Game
 
@@ -6,11 +6,19 @@ from game_logic import Game
 def main():
     root = Root()
 
-    root.controls = Controls(root)
-
     root.board = Board(root)
-
     game_handler = Game(root.board.raw_map)
+
+    root.controls = Controls(root)
+    root.data = Data(
+        root,
+        {
+            "moves": game_handler.moves,
+            "length": game_handler.length,
+            "red_apples": game_handler.apples_red,
+            "green_apples": game_handler.apples_green,
+        },
+    )
 
     intended_direction = DEFAULT_SNAKE_DIRECTION
     prev_direction = DEFAULT_SNAKE_DIRECTION
@@ -34,6 +42,15 @@ def main():
             prev_direction = intended_direction
         else:
             game_handler.move_snake(prev_direction)
+
+        root.data.update_data(
+            {
+                "moves": game_handler.moves,
+                "length": game_handler.length,
+                "red_apples": game_handler.apples_red,
+                "green_apples": game_handler.apples_green,
+            }
+        )
 
     root.tick(on_tick)
     root.mainloop()
