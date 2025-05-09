@@ -1,12 +1,12 @@
 from constants import DEFAULT_SNAKE_DIRECTION
 from game_logic import Game
-from gui import Board, Controls, Data, Root
+from gui import Board, Controls, GameData, Root, TrainData
 
 
 def init_interface(root: Root):
     root.board = Board(root)
     game_handler = Game(root.board.raw_map)
-    root.data = Data(
+    root.game_data = GameData(
         root,
         {
             "moves": game_handler.moves,
@@ -20,8 +20,11 @@ def init_interface(root: Root):
 
 
 def main():
+    games_played = 0  # TODO move to training object
+
     root = Root()
     root.controls = Controls(root)
+    root.train_data = TrainData(root, {"games_played": games_played})
 
     intended_direction = DEFAULT_SNAKE_DIRECTION
     prev_direction = DEFAULT_SNAKE_DIRECTION
@@ -38,6 +41,7 @@ def main():
         nonlocal prev_direction
         nonlocal intended_direction
         nonlocal game_handler
+        nonlocal games_played
 
         game_handler.move_snake(intended_direction)
 
@@ -46,7 +50,7 @@ def main():
         else:
             game_handler.move_snake(prev_direction)
 
-        root.data.update_data(
+        root.game_data.update_data(
             {
                 "moves": game_handler.moves,
                 "length": game_handler.length,
@@ -62,6 +66,9 @@ def main():
             prev_direction = DEFAULT_SNAKE_DIRECTION
 
             game_handler = init_interface(root)
+
+            games_played += 1
+            root.train_data.update_data({"games_played": games_played})
 
             return
 
