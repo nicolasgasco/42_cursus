@@ -48,7 +48,15 @@ class Controls(tk.LabelFrame):
         self.speed = tk.StringVar()
         self.speed.set(DEFAULT_SPEED)
 
-        speeds = [DEFAULT_SPEED, "5", "50", "75", "100", "150", "500", "1000"]
+        speeds = [
+            DEFAULT_SPEED,
+            "50",
+            "100",
+            "200",
+            "500",
+            "750",
+            "1000",
+        ]
 
         for speed in speeds:
             radio = tk.Radiobutton(
