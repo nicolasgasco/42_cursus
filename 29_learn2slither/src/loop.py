@@ -32,7 +32,7 @@ def main():
     def on_tick():
         if game_handler.game_over:
             print("Game Over")
-            root.after(2000, root.quit)
+            root.quit()
             return
 
         game_handler.move_snake(intended_direction)
