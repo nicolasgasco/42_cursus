@@ -3,13 +3,9 @@ from game_logic import Game
 from gui import Board, Controls, Data, Root
 
 
-def main():
-    root = Root()
-
+def init_interface(root: Root):
     root.board = Board(root)
     game_handler = Game(root.board.raw_map)
-
-    root.controls = Controls(root)
     root.data = Data(
         root,
         {
@@ -20,8 +16,17 @@ def main():
         },
     )
 
+    return game_handler
+
+
+def main():
+    root = Root()
+    root.controls = Controls(root)
+
     intended_direction = DEFAULT_SNAKE_DIRECTION
     prev_direction = DEFAULT_SNAKE_DIRECTION
+
+    game_handler = init_interface(root)
 
     def on_key_press(_, direction):
         nonlocal intended_direction
@@ -30,15 +35,13 @@ def main():
     root.bind_movement_keys(on_key_press)
 
     def on_tick():
-        if game_handler.game_over:
-            print("Game Over")
-            root.quit()
-            return
+        nonlocal prev_direction
+        nonlocal intended_direction
+        nonlocal game_handler
 
         game_handler.move_snake(intended_direction)
 
         if game_handler.has_moved:
-            nonlocal prev_direction
             prev_direction = intended_direction
         else:
             game_handler.move_snake(prev_direction)
@@ -51,6 +54,16 @@ def main():
                 "green_apples": game_handler.apples_green,
             }
         )
+
+        if game_handler.game_over:
+            print("Game Over -- Starting a new game...")
+
+            intended_direction = DEFAULT_SNAKE_DIRECTION
+            prev_direction = DEFAULT_SNAKE_DIRECTION
+
+            game_handler = init_interface(root)
+
+            return
 
     root.tick(on_tick)
     root.mainloop()
