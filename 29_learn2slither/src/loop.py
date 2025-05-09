@@ -1,3 +1,4 @@
+from agent import Agent, TrainStats
 from constants import DEFAULT_SNAKE_DIRECTION
 from game_logic import Game
 from gui import Board, Controls, GameData, Root, TrainData
@@ -20,17 +21,18 @@ def init_interface(root: Root):
 
 
 def main():
-    games_lost = 0  # TODO move to training object
-    games_won = 0  # TODO move to training object
+    agent = Agent()
+    agent.training_stats = TrainStats()
 
     root = Root()
     root.controls = Controls(root)
     root.train_data = TrainData(
         root,
         {
-            "games_played": games_lost + games_won,
-            "games_won": games_won,
-            "games_lost": games_lost,
+            "games_played": agent.training_stats.games_lost
+            + agent.training_stats.games_won,
+            "games_won": agent.training_stats.games_won,
+            "games_lost": agent.training_stats.games_lost,
         },
     )
 
@@ -49,8 +51,6 @@ def main():
         nonlocal prev_direction
         nonlocal intended_direction
         nonlocal game_handler
-        nonlocal games_lost
-        nonlocal games_won
 
         game_handler.move_snake(intended_direction)
 
@@ -71,16 +71,17 @@ def main():
         if game_handler.game_over or game_handler.has_won:
             if game_handler.has_won:
                 print("Game won!")
-                games_won += 1
+                agent.training_stats.games_won += 1
             else:
                 print("Game Over :(")
-                games_lost += 1
+                agent.training_stats.games_lost += 1
 
             root.train_data.update_data(
                 {
-                    "games_played": games_lost + games_won,
-                    "games_won": games_won,
-                    "games_lost": games_lost,
+                    "games_played": agent.training_stats.games_lost
+                    + agent.training_stats.games_won,
+                    "games_won": agent.training_stats.games_won,
+                    "games_lost": agent.training_stats.games_lost,
                 }
             )
 
