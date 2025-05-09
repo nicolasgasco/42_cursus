@@ -1,9 +1,11 @@
 import tkinter as tk
+
 from constants import (
     BLACK,
     DEFAULT_PADDING,
     LIGHT_GREY,
 )
+
 from .DataFrame import DataFrame
 
 

@@ -1,6 +1,7 @@
 import os as os
 import pickle as pkl
 from collections import deque
+
 import numpy as np
 
 from constants import DEFAULT_SNAKE_DIRECTION, BoardBlockSymbol, SnakeDirection
