@@ -101,7 +101,11 @@ class Game:
         self.__raw_map[new_head_y][new_head_x] = BoardBlockSymbol.HEAD.value
         self.__head_pos = (new_head_y, new_head_x)
 
-        self.__raw_map[head_y][head_x] = BoardBlockSymbol.BODY.value
+        self.__raw_map[head_y][head_x] = (
+            BoardBlockSymbol.BODY.value
+            if self.__length > 1
+            else BoardBlockSymbol.EMPTY.value
+        )
         self.__body_pos.appendleft((head_y, head_x))
 
         if new_block == BoardBlockSymbol.GREEN_APPLE.value:
@@ -114,6 +118,9 @@ class Game:
             self.__ate_red_apple = True
             self.__apples_red += 1
             self.__place_apple(BoardBlockSymbol.RED_APPLE.value)
+
+            if self.__length <= 0:
+                self.__game_over = True
 
     def __get_new_head_pos(
         self, head_y: int, head_x: int, direction: str
@@ -130,6 +137,9 @@ class Game:
             raise ValueError(f"Invalid direction: {direction}")
 
     def __move_tail(self) -> None:
+        if self.__length <= 0:
+            return
+
         blocks_to_remove = 2 if self.__ate_red_apple else 1
 
         for _ in range(blocks_to_remove):
