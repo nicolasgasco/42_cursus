@@ -50,7 +50,6 @@ class Root(tk.Tk):
 
     def tick(self, on_tick: callable) -> None:
         on_tick()
-        self.__board.fill()
 
         speed = int(DEFAULT_SPEED_MS / float(self.controls.speed.get()))
         self.after(speed, lambda: self.tick(on_tick))

@@ -56,6 +56,7 @@ class Controls(tk.LabelFrame):
             "500",
             "750",
             "1000",
+            "1500",
         ]
 
         for speed in speeds:

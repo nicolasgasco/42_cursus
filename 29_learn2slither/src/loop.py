@@ -72,6 +72,8 @@ def main():
 
             return
 
+        root.board.fill()
+
     root.tick(on_tick)
     root.mainloop()
 
