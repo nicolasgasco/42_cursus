@@ -1,6 +1,7 @@
 import os as os
 import pickle as pkl
 from collections import deque
+import numpy as np
 
 from constants import DEFAULT_SNAKE_DIRECTION, BoardBlockSymbol, SnakeDirection
 from settings_parser import SettingsParser
@@ -107,10 +108,12 @@ class Game:
             self.__length += 1
             self.__ate_green_apple = True
             self.__apples_green += 1
+            self.__place_apple(BoardBlockSymbol.GREEN_APPLE.value)
         elif new_block == BoardBlockSymbol.RED_APPLE.value:
             self.__length -= 1
             self.__ate_red_apple = True
             self.__apples_red += 1
+            self.__place_apple(BoardBlockSymbol.RED_APPLE.value)
 
     def __get_new_head_pos(
         self, head_y: int, head_x: int, direction: str
@@ -135,3 +138,21 @@ class Game:
             if not self.__ate_green_apple:
                 self.__raw_map[tail_y][tail_x] = BoardBlockSymbol.EMPTY.value
                 self.__body_pos.pop()
+
+    def __place_apple(self, apple: str) -> None:
+        apples_to_place = 1
+        patience = 100
+
+        while apples_to_place > 0:
+            if patience <= 0:
+                raise Exception("Unable to place apple on the map.")
+
+            rand_x = np.random.randint(1, len(self.__raw_map[0]) - 1)
+            rand_y = np.random.randint(1, len(self.__raw_map) - 1)
+
+            if self.__raw_map[rand_y][rand_x] != BoardBlockSymbol.EMPTY.value:
+                patience -= 1
+                continue
+
+            self.__raw_map[rand_y][rand_x] = apple
+            apples_to_place -= 1
