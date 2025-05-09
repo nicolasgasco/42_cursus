@@ -20,7 +20,7 @@ class Board(tk.Frame):
         self.grid(row=1, column=0, sticky="nsew")
 
         self.__map = self.__parse_board_from_file()
-        self.fill()
+        self.first_fill()
 
     @property
     def raw_map(self):
@@ -38,8 +38,16 @@ class Board(tk.Frame):
 
         return map_rows
 
-    def fill(self):
+    def first_fill(self) -> None:
         for y, row in enumerate(self.__map):
             for x, block in enumerate(row):
                 gui_block = BoardBlock({"block": block, "parent": self})
                 gui_block.grid(row=y, column=x)
+
+    def fill(self, blocks_to_update: list) -> None:
+        for block_info in blocks_to_update:
+            y, x = block_info["pos"]
+            block = block_info["block"]
+
+            gui_block = BoardBlock({"block": block, "parent": self})
+            gui_block.grid(row=y, column=x)

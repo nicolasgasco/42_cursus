@@ -24,6 +24,14 @@ class TrainData(tk.LabelFrame):
         self.__games_played = DataFrame(
             self, {"label": "Games played", "value": str(args["games_played"])}
         )
+        self.__games_won = DataFrame(
+            self, {"label": "Wins", "value": str(args["games_won"])}
+        )
+        self.__games_lost = DataFrame(
+            self, {"label": "Losses", "value": str(args["games_lost"])}
+        )
 
     def update_data(self, args: dict) -> None:
         self.__games_played.update(str(args["games_played"]))
+        self.__games_won.update(str(args["games_won"]))
+        self.__games_lost.update(str(args["games_lost"]))

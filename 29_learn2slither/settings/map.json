@@ -5,5 +5,6 @@
   "randomized": false,
   "red_apples": 1,
   "snake_length": 3,
-  "width": 10
+  "width": 10,
+  "victory_length": 10
 }
