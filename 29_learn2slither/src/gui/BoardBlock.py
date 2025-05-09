@@ -2,7 +2,7 @@ import tkinter as tk
 
 from constants import BLACK, GREY, BoardBlockSymbol
 
-SQUARE_SIZE = 80
+SQUARE_SIZE = 60
 
 
 class BoardBlock(tk.Canvas):
