@@ -50,8 +50,8 @@ class Controls(tk.LabelFrame):
 
         speeds = [
             DEFAULT_SPEED,
-            "5",
-            "50",
+            "10",
+            "25",
             "100",
             "200",
             "500",
