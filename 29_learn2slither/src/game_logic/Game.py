@@ -74,6 +74,10 @@ class Game:
     def blocks_to_update(self) -> list:
         return self.__blocks_to_update
 
+    @property
+    def head_pos(self) -> tuple:
+        return self.__head_pos
+
     def __load_snake_pos(self) -> tuple:
         path = os.path.join("data", "snake_pos.pkl")
         with open(path, "rb") as f:

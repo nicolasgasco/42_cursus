@@ -15,6 +15,7 @@ class Root(tk.Tk):
         self.__controls = None
         self.__game_data = None
         self.__train_data = None
+        self.__context_data = None
 
     @property
     def board(self):
@@ -47,6 +48,14 @@ class Root(tk.Tk):
     @train_data.setter
     def train_data(self, data):
         self.__train_data = data
+
+    @property
+    def context_data(self):
+        return self.__context_data
+
+    @context_data.setter
+    def context_data(self, data):
+        self.__context_data = data
 
     def tick(self, on_tick: callable) -> None:
         on_tick()

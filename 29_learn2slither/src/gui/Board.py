@@ -17,7 +17,7 @@ class Board(tk.Frame):
             borderwidth=5,
             relief=tk.RAISED,
         )
-        self.grid(row=1, column=0, sticky="nsew")
+        self.grid(row=1, column=0, rowspan=2, sticky="nsew")
 
         self.__map = self.__parse_board_from_file()
         self.first_fill()

@@ -18,24 +18,25 @@ class DataFrame(tk.Frame):
             pady=0,
         )
 
-        self.__label = args["label"]
+        self.__label = args.get("label", None)
         self.__value_label: tk.Label | None = None
 
         self.render(str(args["value"]))
 
     def render(self, value: str) -> None:
-        LINE_LENGTH = 40
-        padding = LINE_LENGTH - len(self.__label) - len(value)
+        if self.__label:
+            LINE_LENGTH = 40
+            padding = LINE_LENGTH - len(self.__label) - len(value)
 
-        label = tk.Label(
-            self,
-            text=self.__label + " " * padding,
-            bg=LIGHT_GREY,
-            fg=BLACK,
-            font=("Arial", 18),
-            anchor="w",
-        )
-        label.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5)
+            label = tk.Label(
+                self,
+                text=self.__label + " " * padding,
+                bg=LIGHT_GREY,
+                fg=BLACK,
+                font=("Arial", 18),
+                anchor="w",
+            )
+            label.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5)
 
         self.__value_label = tk.Label(
             self,
@@ -45,7 +46,12 @@ class DataFrame(tk.Frame):
             font=("Arial", 18),
             anchor="e",
         )
-        self.__value_label.pack(side=tk.RIGHT, fill=tk.X, expand=True, padx=5)
+        self.__value_label.pack(
+            side=(tk.RIGHT if self.__label else tk.LEFT),
+            fill=tk.Y,
+            expand=True if self.__label else False,
+            padx=5,
+        )
 
     def update(self, value: str) -> None:
         self.__value_label.config(text=value)

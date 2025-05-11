@@ -1,12 +1,18 @@
 from agent import Agent, TrainStats
 from constants import DEFAULT_SNAKE_DIRECTION
 from game_logic import Game
-from gui import Board, Controls, GameData, Root, TrainData
+from gui import Board, Controls, GameData, Root, TrainData, ContextData
 
 
-def init_interface(root: Root):
+def init_interface(root: Root, agent: Agent):
+    if root.board:
+        root.board.destroy()
     root.board = Board(root)
+
     game_handler = Game(root.board.raw_map)
+
+    if root.game_data:
+        root.game_data.destroy()
     root.game_data = GameData(
         root,
         {
@@ -14,6 +20,16 @@ def init_interface(root: Root):
             "length": game_handler.length,
             "red_apples": game_handler.apples_red,
             "green_apples": game_handler.apples_green,
+        },
+    )
+
+    if root.context_data:
+        root.context_data.destroy()
+    root.context_data = ContextData(
+        root,
+        {
+            "context": agent.context,
+            "head_pos": game_handler.head_pos,
         },
     )
 
@@ -39,7 +55,7 @@ def main():
     intended_direction = DEFAULT_SNAKE_DIRECTION
     prev_direction = DEFAULT_SNAKE_DIRECTION
 
-    game_handler = init_interface(root)
+    game_handler = init_interface(root, agent)
 
     def on_key_press(_, direction):
         nonlocal intended_direction
@@ -51,6 +67,7 @@ def main():
         nonlocal prev_direction
         nonlocal intended_direction
         nonlocal game_handler
+        nonlocal agent
 
         game_handler.move_snake(intended_direction)
 
@@ -65,6 +82,19 @@ def main():
                 "length": game_handler.length,
                 "red_apples": game_handler.apples_red,
                 "green_apples": game_handler.apples_green,
+            }
+        )
+
+        agent.update_context(
+            {
+                "map": root.board.raw_map,
+                "head_pos": game_handler.head_pos,
+            }
+        )
+        root.context_data.update_data(
+            {
+                "context": agent.context,
+                "head_pos": game_handler.head_pos,
             }
         )
 
@@ -88,7 +118,7 @@ def main():
             intended_direction = DEFAULT_SNAKE_DIRECTION
             prev_direction = DEFAULT_SNAKE_DIRECTION
 
-            game_handler = init_interface(root)
+            game_handler = init_interface(root, agent)
 
             return
 
