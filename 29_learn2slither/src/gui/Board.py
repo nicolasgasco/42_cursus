@@ -8,7 +8,7 @@ from .BoardBlock import BoardBlock
 
 
 class Board(tk.Frame):
-    def __init__(self, parent: tk.Tk):
+    def __init__(self, parent: tk.Tk, args: dict):
         super().__init__(
             parent,
             bg=BLACK,
@@ -19,7 +19,7 @@ class Board(tk.Frame):
         )
         self.grid(row=1, column=0, rowspan=2, sticky="nsew")
 
-        self.__map = self.__parse_board_from_file()
+        self.__map = args.get("map", self.__parse_board_from_file())
         self.first_fill()
 
     @property

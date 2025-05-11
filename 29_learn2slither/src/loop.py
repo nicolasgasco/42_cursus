@@ -2,12 +2,17 @@ from agent import Agent, TrainStats
 from constants import DEFAULT_SNAKE_DIRECTION
 from game_logic import Game
 from gui import Board, ContextData, Controls, GameData, Root, TrainData
+from map import MapGenerator
 
 
 def init_interface(root: Root, agent: Agent):
     if root.board:
         root.board.destroy()
-    root.board = Board(root)
+
+    map_generator = MapGenerator()
+    map_generator.generate_map()
+
+    root.board = Board(root, {"map": map_generator.map})
 
     game_handler = Game(root.board.raw_map)
 
