@@ -17,6 +17,11 @@ class Root(tk.Tk):
         self.__train_data = None
         self.__context_data = None
 
+        self.__is_paused = False
+
+        self.bind("<Escape>", lambda _: self.quit())
+        self.bind("<p>", lambda _: self.pause())
+
     @property
     def board(self):
         return self.__board
@@ -57,8 +62,12 @@ class Root(tk.Tk):
     def context_data(self, data):
         self.__context_data = data
 
+    def pause(self):
+        self.__is_paused = not self.__is_paused
+
     def tick(self, on_tick: callable) -> None:
-        on_tick()
+        if not self.__is_paused:
+            on_tick()
 
         speed = int(DEFAULT_SPEED_MS / float(self.controls.speed.get()))
         self.after(speed, lambda: self.tick(on_tick))
