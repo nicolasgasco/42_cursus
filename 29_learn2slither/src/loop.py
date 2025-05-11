@@ -1,7 +1,7 @@
 from agent import Agent, TrainStats
 from constants import DEFAULT_SNAKE_DIRECTION
 from game_logic import Game
-from gui import Board, Controls, GameData, Root, TrainData, ContextData
+from gui import Board, ContextData, Controls, GameData, Root, TrainData
 
 
 def init_interface(root: Root, agent: Agent):
@@ -67,7 +67,6 @@ def main():
         nonlocal prev_direction
         nonlocal intended_direction
         nonlocal game_handler
-        nonlocal agent
 
         game_handler.move_snake(intended_direction)
 

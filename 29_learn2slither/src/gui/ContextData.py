@@ -2,6 +2,7 @@ import tkinter as tk
 
 from constants import BLACK, DEFAULT_PADDING, LIGHT_GREY, BoardBlockSymbol
 from settings_parser import SettingsParser
+
 from .DataFrame import DataFrame
 
 

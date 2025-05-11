@@ -1,6 +1,3 @@
-from constants import SnakeDirection
-
-
 class Agent:
     def __init__(self):
         self.__training_stats = None
