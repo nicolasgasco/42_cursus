@@ -3,12 +3,10 @@ from constants import DEFAULT_SNAKE_DIRECTION
 from game_logic import Game
 from gui import Board, ContextData, Controls, GameData, Root, TrainData
 from map import MapGenerator
+import time as t
 
 
 def init_interface(root: Root, agent: Agent):
-    if root.board:
-        root.board.destroy()
-
     map_generator = MapGenerator()
     map_generator.generate_map()
 
@@ -16,8 +14,6 @@ def init_interface(root: Root, agent: Agent):
 
     game_handler = Game(root.board.raw_map)
 
-    if root.game_data:
-        root.game_data.destroy()
     root.game_data = GameData(
         root,
         {
@@ -28,8 +24,6 @@ def init_interface(root: Root, agent: Agent):
         },
     )
 
-    if root.context_data:
-        root.context_data.destroy()
     root.context_data = ContextData(
         root,
         {
@@ -41,12 +35,24 @@ def init_interface(root: Root, agent: Agent):
     return game_handler
 
 
+def destroy_interface(root: Root):
+    if root.board:
+        root.board.destroy()
+    if root.game_data:
+        root.game_data.destroy()
+    if root.context_data:
+        root.context_data.destroy()
+
+
 def main():
+    start = t.time()
+
     agent = Agent()
     agent.training_stats = TrainStats()
 
     root = Root()
     root.controls = Controls(root)
+
     root.train_data = TrainData(
         root,
         {
@@ -54,6 +60,7 @@ def main():
             + agent.training_stats.games_won,
             "games_won": agent.training_stats.games_won,
             "games_lost": agent.training_stats.games_lost,
+            "elapsed_time": (t.time() - start).__round__(1),
         },
     )
 
@@ -116,12 +123,14 @@ def main():
                     + agent.training_stats.games_won,
                     "games_won": agent.training_stats.games_won,
                     "games_lost": agent.training_stats.games_lost,
+                    "elapsed_time": (t.time() - start).__round__(1),
                 }
             )
 
             intended_direction = DEFAULT_SNAKE_DIRECTION
             prev_direction = DEFAULT_SNAKE_DIRECTION
 
+            destroy_interface(root)
             game_handler = init_interface(root, agent)
 
             return
