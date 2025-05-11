@@ -20,14 +20,15 @@ class ContextData(tk.LabelFrame):
 
         self.grid(row=2, column=1, sticky="nsew")
 
-        self.__map = self.__blank_map()
+        self.__blank_map = self.__generate_blank_map()
+        self.__map = self.__blank_map
 
         self.__context = DataFrame(
             self,
             {"value": self.__map},
         )
 
-    def __blank_map(self) -> str:
+    def __generate_blank_map(self) -> str:
         settings = SettingsParser().settings
         map_width = settings["width"]
         map_height = settings["height"]
@@ -39,7 +40,7 @@ class ContextData(tk.LabelFrame):
     def update_data(self, args: dict) -> None:
         contexts = [context for context in args["context"].values()]
 
-        map = [list(row) for row in self.__blank_map().split("\n")]
+        map = [list(row) for row in self.__blank_map.split("\n")]
 
         for context in contexts:
             for block_info in context:
