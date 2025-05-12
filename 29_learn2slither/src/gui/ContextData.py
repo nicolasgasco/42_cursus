@@ -29,7 +29,7 @@ class ContextData(tk.LabelFrame):
         )
 
     def __generate_blank_map(self) -> str:
-        settings = SettingsParser().settings
+        settings = SettingsParser("map").settings
         map_width = settings["width"]
         map_height = settings["height"]
 

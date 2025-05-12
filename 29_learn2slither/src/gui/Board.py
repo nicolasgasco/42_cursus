@@ -27,7 +27,7 @@ class Board(tk.Frame):
         return self.__map
 
     def __parse_board_from_file(self) -> list:
-        settings = SettingsParser().settings
+        settings = SettingsParser("map").settings
         map_file_name = settings["file_name"]
         assert map_file_name, "Map file name not found in settings."
 

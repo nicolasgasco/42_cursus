@@ -25,7 +25,7 @@ class Game:
             BoardBlockSymbol.BODY.value,
         ]
 
-        settings = SettingsParser().settings
+        settings = SettingsParser("map").settings
 
         self.__apples_red = 0
         self.__apples_green = 0

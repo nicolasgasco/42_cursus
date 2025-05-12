@@ -16,7 +16,7 @@ from settings_parser import SettingsParser
 
 class MapGenerator:
     def __init__(self) -> None:
-        settings = SettingsParser().settings
+        settings = SettingsParser("map").settings
 
         self.__green_apples = settings["green_apples"]
         self.__height = settings["height"]

@@ -5,11 +5,16 @@ from constants import SETTINGS_DIR_PATH
 
 
 class SettingsParser:
-    def __init__(self):
-        self.settings = self.__parse_settings()
+    def __init__(self, type: str):
+        self.__type = type
+        self.__settings = self.__parse_settings()
+
+    @property
+    def settings(self) -> dict:
+        return self.__settings
 
     def __parse_settings(self):
-        file_name = "map.json"
+        file_name = self.__get_file_name()
         # TODO improve this
         map_settings_path = os.path.join("..", SETTINGS_DIR_PATH, file_name)
 
@@ -17,3 +22,11 @@ class SettingsParser:
             settings = json.load(file)
 
         return settings
+
+    def __get_file_name(self) -> str:
+        if self.__type == "map":
+            return "map.json"
+        elif self.__type == "train":
+            return "train.json"
+        else:
+            raise ValueError("Invalid settings type. Use 'map' or 'train'.")
