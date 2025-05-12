@@ -23,8 +23,8 @@ class TrainData(tk.LabelFrame):
 
         self.grid(row=0, column=1, sticky="nsew")
 
-        self.__games_played = DataFrame(
-            self, {"label": "Games played", "value": str(args["games_played"])}
+        self.__episodes = DataFrame(
+            self, {"label": "Episodes", "value": str(args["games_played"])}
         )
         self.__games_won = DataFrame(
             self, {"label": "Wins", "value": str(args["games_won"])}
@@ -37,7 +37,7 @@ class TrainData(tk.LabelFrame):
         )
 
     def update_data(self, args: dict) -> None:
-        self.__games_played.update(str(args["games_played"]))
+        self.__episodes.update(str(args["games_played"]))
         self.__games_won.update(str(args["games_won"]))
         self.__games_lost.update(str(args["games_lost"]))
         self.__elapsed_time.update(args["elapsed_time"])
