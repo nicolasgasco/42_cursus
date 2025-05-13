@@ -1,20 +1,23 @@
 import json as json
 import os as os
 
-from constants import SETTINGS_DIR_PATH
+from constants import (
+    SETTINGS_DIR_PATH,
+    MAP_SETTINGS_FILE_NAME,
+    TRAIN_SETTINGS_FILE_NAME,
+)
 
 
 class SettingsParser:
     def __init__(self, type: str):
-        self.__type = type
-        self.__settings = self.__parse_settings()
+        self.__settings = self.__parse_settings(type)
 
     @property
     def settings(self) -> dict:
         return self.__settings
 
-    def __parse_settings(self):
-        file_name = self.__get_file_name()
+    def __parse_settings(self, type: str) -> dict:
+        file_name = self.__get_file_name(type)
         # TODO improve this
         map_settings_path = os.path.join("..", SETTINGS_DIR_PATH, file_name)
 
@@ -23,10 +26,10 @@ class SettingsParser:
 
         return settings
 
-    def __get_file_name(self) -> str:
-        if self.__type == "map":
-            return "map.json"
-        elif self.__type == "train":
-            return "train.json"
+    def __get_file_name(self, type: str) -> str:
+        if type == "map":
+            return MAP_SETTINGS_FILE_NAME
+        elif type == "train":
+            return TRAIN_SETTINGS_FILE_NAME
         else:
             raise ValueError("Invalid settings type. Use 'map' or 'train'.")

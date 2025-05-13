@@ -1,0 +1,2 @@
+MAP_SETTINGS_FILE_NAME = "map.json"
+TRAIN_SETTINGS_FILE_NAME = "train.json"
