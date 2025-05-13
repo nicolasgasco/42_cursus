@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from constants import SnakeDirection
+from constants import INTERACTIVE_ACTION, SnakeDirection
 
 DEFAULT_SPEED_MS = 1_000
 
@@ -100,3 +100,17 @@ class Root(tk.Tk):
                         event, direction
                     ),
                 )
+
+    def bind_training_keys(self, on_key_press: callable) -> None:
+        self.bind_all(
+            "<Left>",
+            lambda event, direction=INTERACTIVE_ACTION.BACKWARD: on_key_press(
+                event, direction
+            ),
+        )
+        self.bind_all(
+            "<Right>",
+            lambda event, direction=INTERACTIVE_ACTION.FORWARD: on_key_press(
+                event, direction
+            ),
+        )

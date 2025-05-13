@@ -9,6 +9,7 @@ from .path import (
     SETTINGS_DIR_PATH,
 )
 from .ui import DEFAULT_PADDING
+from .train import INTERACTIVE_ACTION
 
 __all__ = [
     "BLACK",
@@ -20,6 +21,7 @@ __all__ = [
     "DEFAULT_SPEED",
     "DEFAULT_SNAKE_DIRECTION",
     "GREY",
+    "INTERACTIVE_ACTION",
     "LIGHT_GREY",
     "MAPS_DIR_PATH",
     "PRIMARY",
