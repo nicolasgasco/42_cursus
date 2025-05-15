@@ -19,6 +19,7 @@ dotenv==0.9.9
 flake8==7.2.0
     # via learn2slither
 isort==6.0.1
+    # via learn2slither
 mccabe==0.7.0
     # via flake8
 mypy-extensions==1.1.0
