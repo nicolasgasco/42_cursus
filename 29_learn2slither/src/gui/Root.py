@@ -1,8 +1,6 @@
 import tkinter as tk
 
-from constants import INTERACTIVE_ACTION, SnakeDirection
-
-DEFAULT_SPEED_MS = 1_000
+from constants import INTERACTIVE_ACTION
 
 
 class Root(tk.Tk):
@@ -11,9 +9,13 @@ class Root(tk.Tk):
 
         self.title("Learn2Slither")
 
-        self.__board = None
+        self.__frames = {
+            "landing": None,
+            "game": None,
+            "train": None,
+        }
+
         self.__controls = None
-        self.__game_data = None
         self.__train_data = None
         self.__context_data = None
 
@@ -23,12 +25,8 @@ class Root(tk.Tk):
         self.bind("<p>", lambda _: self.pause())
 
     @property
-    def board(self):
-        return self.__board
-
-    @board.setter
-    def board(self, board):
-        self.__board = board
+    def frames(self):
+        return self.__frames
 
     @property
     def controls(self):
@@ -37,14 +35,6 @@ class Root(tk.Tk):
     @controls.setter
     def controls(self, controls):
         self.__controls = controls
-
-    @property
-    def game_data(self):
-        return self.__game_data
-
-    @game_data.setter
-    def game_data(self, data):
-        self.__game_data = data
 
     @property
     def train_data(self):
@@ -62,44 +52,18 @@ class Root(tk.Tk):
     def context_data(self, data):
         self.__context_data = data
 
+    def destroy_frame(self, frame_name: str = None):
+        if frame_name is None:
+            return
+
+        if self.__frames[frame_name]:
+            for widget in self.__frames[frame_name].winfo_children():
+                widget.destroy()
+            self.__frames[frame_name].destroy()
+            self.__frames[frame_name] = None
+
     def pause(self):
         self.__is_paused = not self.__is_paused
-
-    def tick(self, on_tick: callable) -> None:
-        if not self.__is_paused:
-            on_tick()
-
-        speed = int(DEFAULT_SPEED_MS / float(self.controls.speed.get()))
-        self.after(speed, lambda: self.tick(on_tick))
-
-    def bind_movement_keys(self, on_key_press: callable) -> None:
-        events = [
-            {
-                "keys": ["<w>", "<Up>"],
-                "direction": SnakeDirection.UP.value,
-            },
-            {
-                "keys": ["<a>", "<Left>"],
-                "direction": SnakeDirection.LEFT.value,
-            },
-            {
-                "keys": ["<s>", "<Down>"],
-                "direction": SnakeDirection.DOWN.value,
-            },
-            {
-                "keys": ["<d>", "<Right>"],
-                "direction": SnakeDirection.RIGHT.value,
-            },
-        ]
-
-        for event in events:
-            for key in event["keys"]:
-                self.bind_all(
-                    key,
-                    lambda event, direction=event["direction"]: on_key_press(
-                        event, direction
-                    ),
-                )
 
     def bind_training_keys(self, on_key_press: callable) -> None:
         self.bind_all(
