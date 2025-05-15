@@ -2,8 +2,8 @@ import json as json
 import os as os
 
 from constants import (
-    SETTINGS_DIR_PATH,
     MAP_SETTINGS_FILE_NAME,
+    SETTINGS_DIR_PATH,
     TRAIN_SETTINGS_FILE_NAME,
 )
 
