@@ -7,6 +7,7 @@ from .LandingPage import LandingPage
 from .PlayPage import PlayPage
 from .Root import Root
 from .TrainData import TrainData
+from .TrainPage import TrainPage
 
 __all__ = [
     "Board",
@@ -18,4 +19,5 @@ __all__ = [
     "PlayPage",
     "Root",
     "TrainData",
+    "TrainPage",
 ]
