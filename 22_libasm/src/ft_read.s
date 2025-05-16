@@ -26,27 +26,21 @@ global  ft_read
 %define READ_SYSCALL 0
 
 ft_read:
-    cmp rdi, 0d ; check if fd is null
-    je  .end    ; if it is, jump to the end
-
-    cmp rsi, 0d ; check if the buffer is empty
-    je  .end    ; if it is, jump to the end
-
-    cmp rdx, 0d ; check if the count is 0
-    je  .end    ; if it is, jump to the end
-
     mov rax, READ_SYSCALL ; syscall number for write
     syscall
-    jc  .error
+
+    test rax, rax         ; check if the syscall was successful
+    js  .error            ; if it was not, jump to the error section
+
     ret
 
 .error:
+    neg  rax              ; negate rax to get the error code
     mov  rdi,   rax ; set errno
     call __errno_location WRT ..plt   ; call __errno_location WRT ..plt 
     mov  [rax], rdi ; set errno
-    mov  rax,   -1  ; return -1
-    ret
+
 
 .end:
-    mov rax, 0 ; return 0
+    mov  rax,   -1  ; return -1
     ret

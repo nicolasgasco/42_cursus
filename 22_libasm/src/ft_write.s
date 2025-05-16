@@ -53,7 +53,6 @@ ft_write:
     mov  r10, rax                   ; save the error code in r10
     call __errno_location WRT ..plt ; call __errno_location WRT ..plt
     mov  [rax], r10                 ; set errno
-    jmp .end                        ; jump to the end
    
 .end:
     mov rax,   -1  ; return -1
