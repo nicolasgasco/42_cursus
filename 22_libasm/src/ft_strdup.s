@@ -56,8 +56,8 @@ ft_strdup:
     mov  rdi,   rax ; set errno
     call __errno_location WRT ..plt   ; call __errno_location WRT ..plt 
     mov  [rax], rdi ; set errno
-    mov  rax,   0   ; return NULL
-    ret
+    
+    jmp .end ; jump to the end
 
 .end:
     mov rax, 0 ; return 0
