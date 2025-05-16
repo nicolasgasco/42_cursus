@@ -1,12 +1,12 @@
-from .Board import Board
-from .BoardBlock import BoardBlock
-from .ContextData import ContextData
-from .Controls import Controls
-from .GameData import GameData
+from .components.Board import Board
+from .components.BoardBlock import BoardBlock
+from .components.ContextData import ContextData
+from .components.Controls import Controls
+from .components.GameData import GameData
 from .LandingPage import LandingPage
 from .PlayPage import PlayPage
 from .Root import Root
-from .TrainData import TrainData
+from .components.TrainData import TrainData
 from .TrainPage import TrainPage
 
 __all__ = [

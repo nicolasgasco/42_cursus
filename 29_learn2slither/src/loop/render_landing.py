@@ -10,7 +10,7 @@ def render_landing(
     root.frames["landing"].play_button.config(
         command=lambda: [
             root.destroy_frame("landing"),
-            render_game_mode(root, render_landing),
+            render_game_mode(root, render_landing, render_train_mode),
         ]
     )
 

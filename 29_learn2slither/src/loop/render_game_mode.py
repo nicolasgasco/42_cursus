@@ -11,7 +11,9 @@ from gui import (
 from map import MapGenerator
 
 
-def render_game_mode(root: Root, render_landing: callable):
+def render_game_mode(
+    root: Root, render_landing: callable, render_train_mode: callable
+):
     root.frames["game"] = PlayPage(root)
     root.frames["game"].pack(fill="both", expand=True)
 
@@ -73,7 +75,7 @@ def render_game_mode(root: Root, render_landing: callable):
             root.frames["game"].stop_tick()
             root.frames["game"].toggle_pause()
             root.destroy_frame("game")
-            render_landing(root, render_game_mode)
+            render_landing(root, render_game_mode, render_train_mode)
             return
 
     root.frames["game"].tick(on_tick)
