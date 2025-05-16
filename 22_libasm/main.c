@@ -62,7 +62,7 @@ void ft_strcpy_assertion(char *src)
     printf("    Return value is: .%s%.50s%s.\n", BLUE, original_ret, NC);
 
     printf("      -\n");
-    bzero(dest, strlen(dest));
+    bzero(dest, src_len + 1);
 
     printf("    Dest (before ft_strcpy): .%s%.50s%s.\n", YELLOW, dest, NC);
     char *own_ret = ft_strcpy(dest, src);
@@ -121,6 +121,8 @@ void ft_write_assertion(int fd, char *str, size_t len)
 
     int original_ret = write(fd, str, len);
     int original_errno = errno;
+
+    errno = 0;
 
     int own_ret = ft_write(fd, str, len);
     int own_errno = errno;
