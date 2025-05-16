@@ -40,16 +40,6 @@ global  ft_write
 %define WRITE_SYSCALL 1
 
 ft_write:
-    cmp rdi, 0d ; check if fd is null
-    je  .end    ; if it is, jump to the end
-
-    cmp rsi, 0d ; check if the buffer is empty
-    je  .end    ; if it is, jump to the end
-
-    cmp rdx, 0d ; check if the count is 0
-    je  .end    ; if it is, jump to the end
-
-
     mov rax, WRITE_SYSCALL ; syscall number for write
     syscall
 
