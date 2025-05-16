@@ -40,19 +40,21 @@ global  ft_write
 %define WRITE_SYSCALL 1
 
 ft_write:
-    mov rax, WRITE_SYSCALL ; syscall number for write
+    mov rax, WRITE_SYSCALL  ; syscall number for write
     syscall
 
-    jc .error
+    test rax, rax           ; check if the syscall was successful
+    js .error               ; if it was not, jump to the error section
+
     ret
 
 .error:
-    mov  rdi,   rax ; set errno
-    call __errno_location WRT ..plt   ; call __errno_location WRT ..plt 
-    mov  [rax], rdi ; set errno
-    mov  rax,   -1  ; return -1
-    ret
-
+    neg  rax 
+    mov  r10, rax                   ; save the error code in r10
+    call __errno_location WRT ..plt ; call __errno_location WRT ..plt
+    mov  [rax], r10                 ; set errno
+    jmp .end                        ; jump to the end
+   
 .end:
-    mov rax, 0 ; return 0
+    mov rax,   -1  ; return -1
     ret
