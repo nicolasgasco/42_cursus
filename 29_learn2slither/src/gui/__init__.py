@@ -3,10 +3,11 @@ from .components.BoardBlock import BoardBlock
 from .components.ContextData import ContextData
 from .components.Controls import Controls
 from .components.GameData import GameData
+from .components.TrainData import TrainData
 from .LandingPage import LandingPage
 from .PlayPage import PlayPage
 from .Root import Root
-from .components.TrainData import TrainData
+from .SettingsPage import SettingsPage
 from .TrainPage import TrainPage
 
 __all__ = [
@@ -20,4 +21,5 @@ __all__ = [
     "Root",
     "TrainData",
     "TrainPage",
+    "SettingsPage",
 ]

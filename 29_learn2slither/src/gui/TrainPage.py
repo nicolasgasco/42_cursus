@@ -1,4 +1,5 @@
 import tkinter as tk
+from constants import INTERACTIVE_ACTION
 
 DEFAULT_SPEED_MS = 1_000
 
@@ -72,3 +73,17 @@ class TrainPage(tk.Frame):
         if self.__tick_id:
             self.after_cancel(self.__tick_id)
             self.__tick_id = None
+
+    def bind_training_keys(self, on_key_press: callable) -> None:
+        self.bind_all(
+            "<Left>",
+            lambda event, direction=INTERACTIVE_ACTION.BACKWARD: on_key_press(
+                event, direction
+            ),
+        )
+        self.bind_all(
+            "<Right>",
+            lambda event, direction=INTERACTIVE_ACTION.FORWARD: on_key_press(
+                event, direction
+            ),
+        )
