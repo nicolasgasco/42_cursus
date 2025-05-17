@@ -109,10 +109,16 @@ void ft_strcmp_tests()
     ft_print_test_title("FT_STRCMP");
 
     for (int i = 0; STRING_SEEDS[i]; i++)
+    {
         ft_strcmp_assertion(STRING_SEEDS[i], cmp_seeds1[i]);
+        ft_strcmp_assertion(cmp_seeds1[i], STRING_SEEDS[i]);
+    }
 
     for (int i = 0; STRING_SEEDS[i]; i++)
+    {
         ft_strcmp_assertion(STRING_SEEDS[i], cmp_seeds2[i]);
+        ft_strcmp_assertion(cmp_seeds2[i], STRING_SEEDS[i]);
+    }
 }
 
 void ft_write_assertion(int fd, char *str, size_t len)
@@ -213,7 +219,7 @@ void ft_read_tests()
 {
     ft_print_test_title("FT_READ");
 
-    // ft_read_assertion(0, 10, NULL);
+    // ft_read_assertion(0, 10, NULL); User input required, uncomment to test
     ft_read_assertion(0, 0, NULL);
     ft_read_assertion(0, -1, NULL);
 
@@ -226,12 +232,12 @@ void ft_read_tests()
 
 void ft_strdup_assertion(char *str)
 {
-    printf("  - When string is %s%.50s%s\n", BLUE, str, NC);
+    printf("  - When string is |%s%.50s%s|\n", BLUE, str, NC);
 
     char *original_ret = strdup(str);
     char *own_ret = ft_strdup(str);
 
-    printf("    strdup: %s%.50s%s, ft_strdup: %s%.50s%s\n", YELLOW, original_ret, NC, YELLOW, own_ret, NC);
+    printf("    strdup: |%s%.50s%s|, ft_strdup: |%s%.50s%s|\n", YELLOW, original_ret, NC, YELLOW, own_ret, NC);
 
     if (original_ret)
         free(original_ret);
@@ -250,16 +256,73 @@ void ft_strdup_tests()
         ft_strdup_assertion(STRING_SEEDS[i]);
 }
 
-int main()
+void ft_subject_tests()
 {
-    printf("\n%sLIBASM TESTS%s\n\n", YELLOW, NC);
+    char *empty_str = "";
+    char *normal_str = "Hello world!";
+    char *very_long_str = "cmvgmblxmhwdenvyyltnhfcuqlyvkldxjcfczezekdyhxfp...zchdahfbghgzxzhxbswalnyeasxpbbcrdwtwkqqqspzstpswgkcjyrgjezbyxncnpacknscagjwbvkryoladtdrvcttpjethsrxmmyycuqoykfuyodgnqnlvzdevfdpziniljvrtvxgtpkuxoodlrtgnyviifkyjpybphtjwjzgofacckcslsagpbsbuhlkmcxazefvbzmtkgciloeopqnzljjbmuntstjdtdqkcefwrbnjiqxkclfqmbxigykeagquooapkeeftawzctydistntkeioaweswvbflwfzazcramnmjrncecspudzuisksukmbgqoxionyvhctipplavajbtgbtlhrhrkyehdvnrplwpycvxaejframiboceruuopjcugajtynrgblkyycpxqapcvmrnsvuwbjsabfpsdfchfksrbpwyguetazxdgwipfafpoytadixikcttnujsggrkucneilksodtnptlzsjzsdbbhisainzdwnilgxchvpfygqtzcflpjxtmxhyrnmxdqfabxvzgkkmbrmjfjtgybmxrwodynglnddowjzhxdcvktuvowdsyqdtztpwdrjcsbakcwwgsmzhesycpyxhpplagsffnukxsxgvsvndgvifniicmpafdvicbyrlhumyygetnvwxtitpwptwzkyxrsdrhpyethmlsziwcxmfxsvfbldzrygeyxrrmtcxpmrdxuhqxjskzxdcctotmblybhxxysvqfxcmonqqcziwhymmqavsjvkacruexxwegtcdxmjcdksoiiiployyugglnrfyzkavrywaxjfvkbhltaobflvxrvyzqcaytfdxitoggtynpaeqrwquorzaxfjbcletikacwvjwviipfoxsknbkbppumxqkcymmnssomenayg";
 
+    // ft_strlen
+    ft_print_test_title("FT_STRLEN");
+    ft_strlen_assertion(empty_str);
+    ft_strlen_assertion(very_long_str);
+
+    // ft_strcpy
+    ft_print_test_title("FT_STRCPY");
+    char dest[100];
+    bzero(dest, 100);
+    ft_strcpy_assertion(empty_str);
+    ft_strcpy_assertion(very_long_str);
+
+    // ft_strcmp
+    ft_print_test_title("FT_STRCMP");
+    ft_strcmp_assertion(empty_str, empty_str);
+    ft_strcmp_assertion(empty_str, normal_str);
+    ft_strcmp_assertion(normal_str, empty_str);
+
+    // ft_write
+    ft_print_test_title("FT_WRITE");
+    ft_write_assertion(1, normal_str, strlen(normal_str));
+
+    int fd = open("test_files/test_write", O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
+    ft_write_assertion(fd, normal_str, strlen(normal_str));
+
+    ft_write_assertion(-1, normal_str, strlen(normal_str));
+
+    // ft_read
+    ft_print_test_title("FT_READ");
+    // ft_read_assertion(0, 50, NULL); User input required, uncomment to test
+
+    int fd2 = open("test_files/test_read", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+    write(fd2, normal_str, strlen(normal_str));
+    ft_read_assertion(fd2, strlen(normal_str), "test_files/test_read");
+
+    ft_read_assertion(-1, 50, NULL);
+
+    // ft_strdup
+    ft_print_test_title("FT_STRDUP");
+    ft_strdup_assertion(empty_str);
+    ft_strdup_assertion(very_long_str);
+
+}
+
+void ft_exhaustive_tests()
+{
     ft_strlen_tests();
     ft_strcpy_tests();
     ft_strcmp_tests();
     ft_write_tests();
     ft_read_tests();
     ft_strdup_tests();
+}
+
+int main()
+{
+    printf("\n%sLIBASM TESTS%s\n\n", YELLOW, NC);
+
+    ft_exhaustive_tests();
+
+    ft_subject_tests();
 
     return 0;
 }
