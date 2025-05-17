@@ -1,7 +1,5 @@
 import tkinter as tk
 
-from constants import INTERACTIVE_ACTION
-
 
 class Root(tk.Tk):
     def __init__(self):
