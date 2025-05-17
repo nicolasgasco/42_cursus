@@ -96,6 +96,7 @@ class MapGenerator:
         return filled_map
 
     def __fill_snake(self, map: list) -> list:
+
         filled_map = map
 
         placed_whole = False
@@ -104,12 +105,13 @@ class MapGenerator:
             if patience_whole <= 0:
                 raise Exception("Unable to place whole snake on the map.")
 
+            min_dist_to_wall = 3
             head_x = np.random.randint(
-                2, self.__width - 1 - 2
-            )  # - 2 to leave enough space for the body
+                min_dist_to_wall, self.__width - 1 - min_dist_to_wall
+            )
             head_y = np.random.randint(
-                2, self.__height - 1 - 2
-            )  # - 2 to avoid collision with walls
+                min_dist_to_wall, self.__height - 1 - min_dist_to_wall
+            )
 
             if filled_map[head_y, head_x] != BoardBlockSymbol.EMPTY.value:
                 continue
