@@ -25,7 +25,7 @@ def render_game_mode(
     map_generator.generate_map()
 
     root.frames["game"].board = Board(
-        root.frames["game"], {"map": map_generator.map}
+        root.frames["game"], map=map_generator.map
     )
     game_handler = Game(root.frames["game"].board.raw_map)
 

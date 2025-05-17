@@ -20,7 +20,7 @@ def init_interface(root: Root, agent: Agent):
     map_generator = MapGenerator()
     map_generator.generate_map()
 
-    root.frames["train"].board = Board(root, {"map": map_generator.map})
+    root.frames["train"].board = Board(root, map=map_generator.map)
 
     game_handler = Game(root.frames["train"].board.raw_map)
 
