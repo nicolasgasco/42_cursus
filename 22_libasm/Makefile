@@ -6,7 +6,6 @@ SRC_DIR = src
 OBJS_DIR = objs
 
 SANITIZE= -fsanitize=address -g3 -fno-omit-frame-pointer
-OS = $(shell uname)
 
 
 all: $(NAME)
