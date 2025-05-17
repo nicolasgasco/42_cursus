@@ -49,8 +49,8 @@ class Controls(tk.LabelFrame):
         self.speed.set(DEFAULT_SPEED)
 
         speeds = [
+            "1",
             DEFAULT_SPEED,
-            "10",
             "20",
             "1000",
             "5000",

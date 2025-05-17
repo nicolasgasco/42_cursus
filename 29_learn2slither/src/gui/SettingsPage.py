@@ -4,15 +4,14 @@ from gui.components.TrainSettings import TrainSettings
 
 
 class SettingsPage(tk.Frame):
-    def __init__(self, parent, args: dict):
+    def __init__(self, parent, *, handle_go_back, handle_start_training):
         super().__init__(parent, padx=30, pady=15)
 
         self.__render_header()
         self.__render_train_settings()
         self.__render_buttons(
-            {
-                "handle_go_back": args["handle_go_back"],
-            }
+            handle_go_back=handle_go_back,
+            handle_start_training=handle_start_training,
         )
 
         self.__train_settings = None
@@ -36,7 +35,7 @@ class SettingsPage(tk.Frame):
         train_settings = TrainSettings(self)
         train_settings.pack(fill="both", expand=True)
 
-    def __render_buttons(self, args: dict):
+    def __render_buttons(self, *, handle_go_back, handle_start_training):
         frame = tk.Frame(self)
         frame.pack(pady=10)
 
@@ -48,7 +47,7 @@ class SettingsPage(tk.Frame):
             relief="solid",
             text="Back",
             font=("Arial", 20, "bold"),
-            command=args["handle_go_back"],
+            command=handle_go_back,
         )
         back_button.pack(pady=10)
 
@@ -56,6 +55,6 @@ class SettingsPage(tk.Frame):
             frame,
             text="Start training",
             font=("Arial", 20, "bold"),
-            command=lambda: print("Train button clicked"),
+            command=handle_start_training,
         )
         train_button.pack(pady=10)

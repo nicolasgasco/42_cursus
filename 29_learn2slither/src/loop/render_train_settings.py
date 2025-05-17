@@ -10,16 +10,20 @@ def render_train_settings(
 ):
     root.frames["settings"] = SettingsPage(
         root,
-        {
-            "handle_go_back": lambda: [
-                root.destroy_frame("settings"),
-                render_landing(
-                    root,
-                    render_game_mode=render_game_mode,
-                    render_train_settings=render_train_settings,
-                    render_train_mode=render_train_mode,
-                ),
-            ],
-        },
+        handle_go_back=lambda: [
+            root.destroy_frame("settings"),
+            render_landing(
+                root,
+                render_game_mode=render_game_mode,
+                render_train_settings=render_train_settings,
+                render_train_mode=render_train_mode,
+            ),
+        ],
+        handle_start_training=lambda: [
+            root.destroy_frame("settings"),
+            render_train_mode(
+                root,
+            ),
+        ],
     )
     root.frames["settings"].pack(fill="both", expand=True)
