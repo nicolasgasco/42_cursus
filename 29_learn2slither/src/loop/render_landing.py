@@ -3,6 +3,7 @@ from gui import LandingPage
 
 def render_landing(
     root,
+    *,
     render_game_mode: callable,
     render_train_settings: callable,
     render_train_mode: callable,
@@ -14,7 +15,10 @@ def render_landing(
         command=lambda: [
             root.destroy_frame("landing"),
             render_game_mode(
-                root, render_landing, render_train_mode, render_train_settings
+                root,
+                render_landing=render_landing,
+                render_train_mode=render_train_mode,
+                render_train_settings=render_train_settings,
             ),
         ]
     )
@@ -24,10 +28,9 @@ def render_landing(
             root.destroy_frame("landing"),
             render_train_settings(
                 root,
-                render_landing,
-                render_game_mode,
-                render_train_mode,
-                render_train_settings,
+                render_landing=render_landing,
+                render_game_mode=render_game_mode,
+                render_train_mode=render_train_mode,
             ),
         ]
     )

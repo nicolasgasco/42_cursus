@@ -13,6 +13,7 @@ from map import MapGenerator
 
 def render_game_mode(
     root: Root,
+    *,
     render_landing: callable,
     render_train_mode: callable,
     render_train_settings: callable,
@@ -80,9 +81,9 @@ def render_game_mode(
             root.destroy_frame("game")
             render_landing(
                 root,
-                render_game_mode,
-                render_train_mode,
-                render_train_settings,
+                render_game_mode=render_game_mode,
+                render_train_mode=render_train_mode,
+                render_train_settings=render_train_settings,
             )
             return
 

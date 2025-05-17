@@ -3,10 +3,10 @@ from gui import Root, SettingsPage
 
 def render_train_settings(
     root: Root,
+    *,
     render_landing: callable,
     render_game_mode: callable,
     render_train_mode: callable,
-    render_train_settings: callable,
 ):
     root.frames["settings"] = SettingsPage(
         root,
@@ -15,9 +15,9 @@ def render_train_settings(
                 root.destroy_frame("settings"),
                 render_landing(
                     root,
-                    render_game_mode,
-                    render_train_settings,
-                    render_train_mode,
+                    render_game_mode=render_game_mode,
+                    render_train_settings=render_train_settings,
+                    render_train_mode=render_train_mode,
                 ),
             ],
         },
