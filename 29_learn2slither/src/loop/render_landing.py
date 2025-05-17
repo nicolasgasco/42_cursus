@@ -22,6 +22,12 @@ def render_landing(
     root.frames["landing"].train_button.config(
         command=lambda: [
             root.destroy_frame("landing"),
-            render_train_settings(root),
+            render_train_settings(
+                root,
+                render_landing,
+                render_game_mode,
+                render_train_mode,
+                render_train_settings,
+            ),
         ]
     )

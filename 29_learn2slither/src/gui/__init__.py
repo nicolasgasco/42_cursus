@@ -4,6 +4,7 @@ from .components.ContextData import ContextData
 from .components.Controls import Controls
 from .components.GameData import GameData
 from .components.TrainData import TrainData
+from .components.TrainSettings import TrainSettings
 from .LandingPage import LandingPage
 from .PlayPage import PlayPage
 from .Root import Root
@@ -22,4 +23,5 @@ __all__ = [
     "TrainData",
     "TrainPage",
     "SettingsPage",
+    "TrainSettings",
 ]
