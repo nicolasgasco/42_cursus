@@ -1,4 +1,8 @@
+import json as json
 import tkinter as tk
+from os import path
+
+from constants import DEFAULT_MAX_EPISODES, SETTINGS_DIR_PATH
 
 
 class TrainSettings(tk.LabelFrame):
@@ -27,6 +31,7 @@ class TrainSettings(tk.LabelFrame):
         self.__max_episodes = tk.StringVar()
 
         options = [
+            {"label": "5,000", "value": 5_000},
             {"label": "10,000", "value": 10_000},
             {"label": "50,000", "value": 50_000},
             {"label": "100,000", "value": 100_000},
@@ -37,14 +42,31 @@ class TrainSettings(tk.LabelFrame):
             {"label": "5,000,000", "value": 5_000_000},
         ]
 
-        self.__max_episodes.set(options[3]["label"])
+        self.__max_episodes.set(DEFAULT_MAX_EPISODES)
+        self.__store_max_episodes(DEFAULT_MAX_EPISODES)
 
         dropdown = tk.OptionMenu(
             frame,
             self.__max_episodes,
-            *[option["label"] for option in options],
+            *[option["value"] for option in options],
+            command=self.__store_max_episodes,
         )
         dropdown.pack(side=tk.LEFT, padx=5)
+
+    def __store_max_episodes(self, value: int) -> None:
+        file_name = path.join(
+            "..",
+            SETTINGS_DIR_PATH,
+            "train.json",
+        )
+        with open(file_name, "r") as file:
+            settings = file.read()
+            settings = json.loads(settings)
+
+        settings["max_episodes"] = value
+
+        with open(file_name, "w") as file:
+            json.dump(settings, file, indent=4)
 
     def __render_interactive_mode_toggle(self):
         frame = tk.Frame(self)

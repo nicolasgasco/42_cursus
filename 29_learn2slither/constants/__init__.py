@@ -7,9 +7,10 @@ from .path import (
     DATA_SNAKE_FILE_NAME,
     MAPS_DIR_PATH,
     SETTINGS_DIR_PATH,
+    SETTINGS_TRAIN_FILE,
 )
 from .ui import DEFAULT_PADDING
-from .train import INTERACTIVE_ACTION
+from .train import INTERACTIVE_ACTION, DEFAULT_MAX_EPISODES
 from .settings import (
     MAP_SETTINGS_FILE_NAME,
     TRAIN_SETTINGS_FILE_NAME,
@@ -34,4 +35,6 @@ __all__ = [
     "SETTINGS_DIR_PATH",
     "SnakeDirection",
     "TRAIN_SETTINGS_FILE_NAME",
+    "SETTINGS_TRAIN_FILE",
+    "DEFAULT_MAX_EPISODES",
 ]

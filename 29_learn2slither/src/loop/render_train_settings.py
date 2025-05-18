@@ -21,9 +21,7 @@ def render_train_settings(
         ],
         handle_start_training=lambda: [
             root.destroy_frame("settings"),
-            render_train_mode(
-                root,
-            ),
+            render_train_mode(root),
         ],
     )
     root.frames["settings"].pack(fill="both", expand=True)
