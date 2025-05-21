@@ -23,8 +23,11 @@ class Controls(tk.LabelFrame):
             height=200,
         )
 
+        self.__parent = parent
+
         self.grid(row=0, column=0, sticky="nsew")
 
+        self.__create_buttons()
         self.__create_speed_radio()
 
     def __create_speed_radio(self) -> None:
@@ -34,7 +37,6 @@ class Controls(tk.LabelFrame):
             bg=self["bg"],
             fg=self["fg"],
             font=("Arial", 12),
-            padx=DEFAULT_PADDING,
             pady=DEFAULT_PADDING,
         )
         frame.pack(
@@ -70,3 +72,42 @@ class Controls(tk.LabelFrame):
                 selectcolor=PRIMARY,
             )
             radio.pack(side=tk.LEFT, padx=DEFAULT_PADDING)
+
+    def __create_buttons(self) -> None:
+        frame = tk.Frame(
+            self,
+            bg=self["bg"],
+            padx=DEFAULT_PADDING,
+            pady=DEFAULT_PADDING,
+        )
+        frame.pack(
+            side=tk.TOP,
+            anchor=tk.W,
+            fill=tk.X,
+            padx=DEFAULT_PADDING,
+            pady=DEFAULT_PADDING,
+        )
+
+        pause_button = tk.Button(
+            frame,
+            text="⏸︎ Pause",
+            bg=self["bg"],
+            command=lambda: self.__parent.frames["train"].toggle_pause(),
+            font=("Arial", 20),
+            borderwidth=0,
+            padx=10,
+            pady=5,
+        )
+        pause_button.pack(side=tk.LEFT, padx=DEFAULT_PADDING)
+
+        stop_button = tk.Button(
+            frame,
+            text="⏹︎ Stop",
+            bg=self["bg"],
+            command=lambda: print("Stop button clicked!"),
+            font=("Arial", 20),
+            borderwidth=0,
+            padx=10,
+            pady=5,
+        )
+        stop_button.pack(side=tk.LEFT, padx=DEFAULT_PADDING)
