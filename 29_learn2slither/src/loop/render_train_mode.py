@@ -1,7 +1,7 @@
 import time as t
 
 from agent import Agent, TrainStats
-from constants import DEFAULT_SNAKE_DIRECTION
+from constants import DEFAULT_SNAKE_DIRECTION, INTERACTIVE_ACTION
 from game_logic import Game
 from gui import (
     Board,
@@ -84,23 +84,17 @@ def render_train_mode(root: Root):
 
     game_handler = init_interface(root, agent)
 
-    #     if is_render_game_mode:
+    is_interactive_mode = False
+    if is_interactive_mode:
 
-    #         def on_key_press(_, direction):
-    #             nonlocal intended_direction
-    #             intended_direction = direction
+        def on_key_press(_, direction):
+            if direction == INTERACTIVE_ACTION.FORWARD:
+                on_tick()
+            elif direction == INTERACTIVE_ACTION.BACKWARD:
+                game_handler.move_snake(prev_direction)
 
-    #         root.bind_movement_keys(on_key_press)
-
-    #     elif is_interactive_mode:
-
-    #         def on_key_press(_, direction):
-    #             if direction == INTERACTIVE_ACTION.FORWARD:
-    #                 on_tick()
-    #             elif direction == INTERACTIVE_ACTION.BACKWARD:
-    #                 game_handler.move_snake(prev_direction)
-
-    #         root.bind_training_keys(on_key_press)
+        root.frames["train"].bind_training_keys(on_key_press)
+    root.frames["train"].bind_pause_key()
 
     def on_tick():
         pass

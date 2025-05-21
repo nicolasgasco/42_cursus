@@ -59,6 +59,10 @@ class TrainPage(tk.Frame):
     def context_data(self, data):
         self.__context_data = data
 
+    @property
+    def is_paused(self) -> bool:
+        return self.__is_paused
+
     def toggle_pause(self) -> None:
         self.__is_paused = not self.__is_paused
 
@@ -88,3 +92,6 @@ class TrainPage(tk.Frame):
                 event, direction
             ),
         )
+
+    def bind_pause_key(self) -> None:
+        self.bind_all("<space>", lambda _: self.toggle_pause())
