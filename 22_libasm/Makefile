@@ -1,4 +1,4 @@
-NAME = ft_libasm.a
+NAME = libasm.a
 EXECUTABLE = test
 FLAGS = -Wall -Wextra -Werror
 
