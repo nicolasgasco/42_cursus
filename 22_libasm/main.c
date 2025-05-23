@@ -291,7 +291,7 @@ void ft_subject_tests()
 
     // ft_read
     ft_print_test_title("FT_READ");
-    // ft_read_assertion(0, 50, NULL); User input required, uncomment to test
+    // ft_read_assertion(0, 50, NULL); // User input required, uncomment to test
 
     int fd2 = open("test_files/test_read", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
     write(fd2, normal_str, strlen(normal_str));
