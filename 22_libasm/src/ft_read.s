@@ -35,12 +35,14 @@ ft_read:
     ret
 
 .error:
-    neg  rax              ; negate rax to get the error code
-    mov  rdi,   rax ; set errno
-    call __errno_location WRT ..plt   ; call __errno_location WRT ..plt 
-    mov  [rax], rdi ; set errno
+    neg  rax                         ; negate rax to get the error code
+
+    push rbx                         ; preserve rbx
+    mov  rbx, rax                    ; save the error code in rbx
+    call __errno_location WRT ..plt  ; call __errno_location WRT ..plt
+    mov  [rax], rbx                  ; set errno
+    pop rbx                          ; restore the error code
 
 
-.end:
     mov  rax,   -1  ; return -1
     ret
