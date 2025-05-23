@@ -49,11 +49,13 @@ ft_write:
     ret
 
 .error:
-    neg  rax 
-    mov  r10, rax                   ; save the error code in r10
+    neg  rax
+
+    push rbx                        ; preserve rbx
+    mov rbx, rax                    ; save the error code in rbx
     call __errno_location WRT ..plt ; call __errno_location WRT ..plt
-    mov  [rax], r10                 ; set errno
-   
-.end:
-    mov rax,   -1  ; return -1
+    mov  [rax], rbx                 ; set errno
+    pop rbx                         ; restore the error code
+
+    mov rax,   -1                   ; return -1
     ret
