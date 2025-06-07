@@ -34,6 +34,13 @@ def init_interface(root: Root, agent: Agent):
         },
     )
 
+    agent.update_context(
+        {
+            "map": root.frames["train"].board.raw_map,
+            "head_pos": game_handler.head_pos,
+        }
+    )
+
     root.frames["train"].context_data = ContextData(
         root,
         {
@@ -113,6 +120,7 @@ def render_train_mode(root: Root):
             root.quit()
             return
 
+        intended_direction = agent.pick_next_move()
         game_handler.move_snake(intended_direction)
 
         if game_handler.has_moved:
