@@ -16,8 +16,8 @@ class TrainSettings(tk.LabelFrame):
             width=300,
         )
 
-        self.__max_episodes = DEFAULT_MAX_EPISODES
-        self.__interactive_mode = tk.BooleanVar(value=False)
+        self.__interactive_mode = tk.BooleanVar(value=True)
+        self.__max_episodes = tk.StringVar(value=DEFAULT_MAX_EPISODES)
 
         self.__render_max_episodes_widget()
         self.__render_interactive_mode_toggle()
@@ -28,8 +28,6 @@ class TrainSettings(tk.LabelFrame):
 
         label = tk.Label(frame, text="Max episodes")
         label.pack(side=tk.LEFT, padx=5)
-
-        self.__max_episodes = tk.StringVar()
 
         options = [
             {"label": "5,000", "value": 5_000},
