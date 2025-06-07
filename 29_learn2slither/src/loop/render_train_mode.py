@@ -61,6 +61,7 @@ def render_train_mode(root: Root):
     start = t.time()
 
     train_settings = SettingsParser("train").settings
+    interactive_mode = train_settings["interactive_mode"]
     max_episodes = train_settings["max_episodes"]
 
     agent = Agent()
@@ -84,8 +85,7 @@ def render_train_mode(root: Root):
 
     game_handler = init_interface(root, agent)
 
-    is_interactive_mode = False
-    if is_interactive_mode:
+    if interactive_mode:
 
         def on_key_press(_, direction):
             if direction == INTERACTIVE_ACTION.FORWARD:
@@ -94,6 +94,7 @@ def render_train_mode(root: Root):
                 game_handler.move_snake(prev_direction)
 
         root.frames["train"].bind_training_keys(on_key_press)
+
     root.frames["train"].bind_pause_key()
 
     def on_tick():
@@ -170,4 +171,5 @@ def render_train_mode(root: Root):
 
         root.frames["train"].board.fill(game_handler.blocks_to_update)
 
-    root.frames["train"].tick(on_tick)
+    if not interactive_mode:
+        root.frames["train"].tick(on_tick)
