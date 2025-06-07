@@ -1,3 +1,4 @@
 {
-    "max_episodes": 200000
+  "interactive_mode": false,
+  "max_episodes": 200000
 }

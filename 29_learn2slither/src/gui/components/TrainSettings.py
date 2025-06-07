@@ -1,6 +1,7 @@
 import json as json
 import tkinter as tk
 from os import path
+from constants.settings import TRAIN_SETTINGS_FILE_NAME
 
 from constants import DEFAULT_MAX_EPISODES, SETTINGS_DIR_PATH
 
@@ -15,7 +16,7 @@ class TrainSettings(tk.LabelFrame):
             width=300,
         )
 
-        self.__max_episodes = None
+        self.__max_episodes = DEFAULT_MAX_EPISODES
         self.__interactive_mode = tk.BooleanVar(value=False)
 
         self.__render_max_episodes_widget()
@@ -42,28 +43,29 @@ class TrainSettings(tk.LabelFrame):
             {"label": "5,000,000", "value": 5_000_000},
         ]
 
-        self.__max_episodes.set(DEFAULT_MAX_EPISODES)
-        self.__store_max_episodes(DEFAULT_MAX_EPISODES)
+        self.__store_setting_in_file("max_episodes", DEFAULT_MAX_EPISODES)
 
         dropdown = tk.OptionMenu(
             frame,
             self.__max_episodes,
             *[option["value"] for option in options],
-            command=self.__store_max_episodes,
+            command=lambda value: self.__store_setting_in_file(
+                "max_episodes", int(value)
+            ),
         )
         dropdown.pack(side=tk.LEFT, padx=5)
 
-    def __store_max_episodes(self, value: int) -> None:
+    def __store_setting_in_file(self, key: str, value: int | bool) -> None:
         file_name = path.join(
             "..",
             SETTINGS_DIR_PATH,
-            "train.json",
+            TRAIN_SETTINGS_FILE_NAME,
         )
         with open(file_name, "r") as file:
             settings = file.read()
             settings = json.loads(settings)
 
-        settings["max_episodes"] = value
+        settings[key] = value
 
         with open(file_name, "w") as file:
             json.dump(settings, file, indent=4)
@@ -75,9 +77,15 @@ class TrainSettings(tk.LabelFrame):
         label = tk.Label(frame, text="Interactive mode")
         label.pack(side=tk.LEFT, padx=5)
 
+        self.__store_setting_in_file(
+            "interactive_mode", bool(self.__interactive_mode.get())
+        )
         checkbox = tk.Checkbutton(
             frame,
             variable=self.__interactive_mode,
+            command=lambda value: self.__store_setting_in_file(
+                "interactive_mode", bool(value.get())
+            ),
         )
         checkbox.pack(side=tk.LEFT, padx=5)
 
