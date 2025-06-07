@@ -83,9 +83,11 @@ class TrainSettings(tk.LabelFrame):
         checkbox = tk.Checkbutton(
             frame,
             variable=self.__interactive_mode,
-            command=lambda value: self.__store_setting_in_file(
-                "interactive_mode", bool(value.get())
+            command=lambda: self.__store_setting_in_file(
+                "interactive_mode", bool(self.__interactive_mode.get())
             ),
+            onvalue=True,
+            offvalue=False,
         )
         checkbox.pack(side=tk.LEFT, padx=5)
 
