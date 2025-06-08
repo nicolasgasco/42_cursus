@@ -1,8 +1,6 @@
 from constants import SnakeDirection
 from random import random
-
-EXPLORATION_RATE_DECAY = 0.001
-EXPLORATION_RATE_MIN = 0.1
+from constants.train import EXPLORATION_RATE_DECAY, EXPLORATION_RATE_MIN
 
 
 class Training:
@@ -37,7 +35,7 @@ class Training:
         is_random_action = random() < self.__exploration_rate
 
         self.__exploration_rate = max(
-            0.1,
+            EXPLORATION_RATE_MIN,
             self.__exploration_rate - EXPLORATION_RATE_DECAY,
         )
 
