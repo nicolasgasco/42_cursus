@@ -1,5 +1,6 @@
-from constants import SnakeDirection
 from random import random
+
+from constants import SnakeDirection
 from constants.train import EXPLORATION_RATE_DECAY, EXPLORATION_RATE_MIN
 
 

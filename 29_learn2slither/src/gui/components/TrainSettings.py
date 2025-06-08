@@ -1,9 +1,9 @@
 import json as json
 import tkinter as tk
 from os import path
-from constants.settings import TRAIN_SETTINGS_FILE_NAME
 
 from constants import DEFAULT_MAX_EPISODES, SETTINGS_DIR_PATH
+from constants.settings import TRAIN_SETTINGS_FILE_NAME
 
 
 class TrainSettings(tk.LabelFrame):
