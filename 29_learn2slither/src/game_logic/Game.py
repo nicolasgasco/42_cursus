@@ -40,6 +40,7 @@ class Game:
         self.__moves = 0
         self.__win_length = settings["victory_length"]
 
+        self.__replaced_block = None
         self.__blocks_to_update = []
 
     @property
@@ -78,6 +79,10 @@ class Game:
     def head_pos(self) -> tuple:
         return self.__head_pos
 
+    @property
+    def replaced_block(self) -> str:
+        return self.__replaced_block
+
     def __load_snake_pos(self) -> tuple:
         path = os.path.join("data", "snake_pos.pkl")
         with open(path, "rb") as f:
@@ -92,6 +97,7 @@ class Game:
         self.__game_over = False
         self.__has_moved = False
         self.__blocks_to_update = []
+        self.__replaced_block = None
 
         if is_opposite_direction(direction, self.__direction):
             return
@@ -112,6 +118,7 @@ class Game:
         )
 
         new_block = self.__raw_map[new_head_y][new_head_x]
+        self.__replaced_block = new_block
 
         if new_block in self.__forbidden_blocks:
             self.__game_over = True

@@ -1,7 +1,7 @@
 from random import random
 
 from constants import SnakeDirection
-from constants.train import EXPLORATION_RATE_DECAY, EXPLORATION_RATE_MIN
+from constants import EXPLORATION_RATE_DECAY, EXPLORATION_RATE_MIN
 
 
 class Training:
@@ -62,3 +62,6 @@ class Training:
             direction: 0 for direction in self.__directions
         }
         return self.__directions[random_index]
+
+    def train(self, new_block: str, context: dict) -> None:
+        print("new_block:", new_block)

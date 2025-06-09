@@ -123,6 +123,8 @@ def render_train_mode(root: Root):
         intended_direction = agent.pick_next_move()
         game_handler.move_snake(intended_direction)
 
+        agent.train(game_handler.replaced_block)
+
         if game_handler.has_moved:
             prev_direction = intended_direction
         else:

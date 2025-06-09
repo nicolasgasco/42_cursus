@@ -50,3 +50,6 @@ class Agent:
         pick_next_move = self.__training.pick_next_move(self.__context)
 
         return pick_next_move
+
+    def train(self, new_block: str) -> None:
+        self.__training.train(new_block, self.__context)
