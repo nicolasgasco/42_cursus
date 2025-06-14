@@ -79,10 +79,6 @@ class Game:
     def head_pos(self) -> tuple:
         return self.__head_pos
 
-    @property
-    def replaced_block(self) -> str:
-        return self.__replaced_block
-
     def __load_snake_pos(self) -> tuple:
         path = os.path.join("data", "snake_pos.pkl")
         with open(path, "rb") as f:
@@ -91,7 +87,7 @@ class Game:
         self.__head_pos = snake_pos["head_pos"]
         self.__body_pos = deque(snake_pos["body_pos"])
 
-    def move_snake(self, direction: str) -> None:
+    def move_snake(self, direction: str) -> str | None:
         self.__ate_green_apple = False
         self.__ate_red_apple = False
         self.__game_over = False
@@ -100,7 +96,11 @@ class Game:
         self.__replaced_block = None
 
         if is_opposite_direction(direction, self.__direction):
-            return
+            head_y, head_x = self.__head_pos
+            new_head_y, new_head_x = self.__get_new_head_pos(
+                head_y, head_x, self.__direction
+            )
+            return self.__raw_map[new_head_y][new_head_x]
 
         self.__move_head(direction)
 
@@ -109,6 +109,8 @@ class Game:
             self.__moves += 1
 
         self.__direction = direction
+
+        return self.__replaced_block
 
     def __move_head(self, direction: str) -> None:
         head_y, head_x = self.__head_pos
