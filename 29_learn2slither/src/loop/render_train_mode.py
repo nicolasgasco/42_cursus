@@ -41,8 +41,8 @@ def init_interface(root: Root, agent: Agent):
         }
     )
 
-    root.frames["train"].context_data = ContextData(
-        root,
+    root.frames["train"].context_data = ContextData(root)
+    root.frames["train"].context_data.update_data(
         {
             "context": agent.context,
             "head_pos": game_handler.head_pos,
@@ -105,8 +105,6 @@ def render_train_mode(root: Root):
     root.frames["train"].bind_pause_key()
 
     def on_tick():
-        pass
-
         nonlocal prev_direction
         nonlocal intended_direction
         nonlocal game_handler

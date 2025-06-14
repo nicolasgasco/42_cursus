@@ -8,3 +8,6 @@ class BoardBlockSymbol(Enum):
     HEAD = "🐸"
     RED_APPLE = "🍎"
     WALL = "⬜"
+
+
+BLANK_CHARACTER = "❔"

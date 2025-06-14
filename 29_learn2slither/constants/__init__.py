@@ -1,4 +1,4 @@
-from .board import BoardBlockSymbol
+from .board import BoardBlockSymbol, BLANK_CHARACTER
 from .game import DEFAULT_SPEED, DEFAULT_SNAKE_DIRECTION, SnakeDirection
 from .palette import BLACK, GREY, LIGHT_GREY, PRIMARY
 from .path import (
@@ -24,6 +24,7 @@ from .settings import (
 __all__ = [
     "BLACK",
     "BoardBlockSymbol",
+    "BLANK_CHARACTER",
     "CONSTANTS_DIR_PATH",
     "DATA_DIR_PATH",
     "DATA_SNAKE_FILE_NAME",

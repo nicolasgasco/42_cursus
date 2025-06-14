@@ -52,4 +52,7 @@ class Agent:
         return pick_next_move
 
     def train(self, new_block: str) -> None:
+        if new_block is None:
+            return
+
         self.__training.train(new_block, self.__context)

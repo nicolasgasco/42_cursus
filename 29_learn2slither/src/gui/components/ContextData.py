@@ -1,13 +1,19 @@
 import tkinter as tk
 
-from constants import BLACK, DEFAULT_PADDING, LIGHT_GREY, BoardBlockSymbol
+from constants import (
+    BLACK,
+    DEFAULT_PADDING,
+    LIGHT_GREY,
+    BoardBlockSymbol,
+    BLANK_CHARACTER,
+)
 from settings_parser import SettingsParser
 
 from .DataFrame import DataFrame
 
 
 class ContextData(tk.LabelFrame):
-    def __init__(self, parent: tk.Tk, args: dict):
+    def __init__(self, parent: tk.Tk):
         super().__init__(
             parent,
             bg=LIGHT_GREY,
@@ -33,7 +39,7 @@ class ContextData(tk.LabelFrame):
         map_width = settings["width"]
         map_height = settings["height"]
 
-        map = ["❔" * map_width for _ in range(map_height)]
+        map = [BLANK_CHARACTER * map_width for _ in range(map_height)]
 
         return "\n".join(map)
 

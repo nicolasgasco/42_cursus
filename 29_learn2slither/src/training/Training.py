@@ -64,4 +64,4 @@ class Training:
         return self.__directions[random_index]
 
     def train(self, new_block: str, context: dict) -> None:
-        print("new_block:", new_block)
+        pass
