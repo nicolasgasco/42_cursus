@@ -13,19 +13,19 @@ from constants import (
 
 # TODO move to constants file
 REWARDS = {
-    BoardBlockSymbol.EMPTY.value: -1,
-    BoardBlockSymbol.BODY.value: -200,
-    BoardBlockSymbol.GREEN_APPLE.value: 50,
-    BoardBlockSymbol.RED_APPLE.value: -10,
-    BoardBlockSymbol.WALL.value: -200,
+    BoardBlockSymbol.EMPTY.value: -10,
+    BoardBlockSymbol.BODY.value: -1000,
+    BoardBlockSymbol.GREEN_APPLE.value: 500,
+    BoardBlockSymbol.RED_APPLE.value: -250,
+    BoardBlockSymbol.WALL.value: -1000,
 }
 
 
 class Training:
     def __init__(self):
         self.__q_table = self.__init_q_table()
-        self.__learning_rate = 0.1
-        self.__discount_factor = 0.99
+        self.__learning_rate = 0.05
+        self.__discount_factor = 0.98
         self.__exploration_rate = (
             EXPLORATION_RATE_MAX
             if len(self.__q_table) == 0
