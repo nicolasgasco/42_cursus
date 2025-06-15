@@ -95,15 +95,10 @@ class Training:
         random_index = int(random() * len(self.__directions))
 
         if is_random_action:
-            print("Picking a random action (exploration)...")
             return self.__directions[random_index]
 
-        print("Picking the best action (exploitation)...")
         if simplified_context in self.__q_table:
-            print("Context found in Q-table.")
             return self.__pick_highest_q_value_action(simplified_context)
-
-        print("Context not found in Q-table")
 
         self.__next_move = self.__directions[random_index]
         return self.__next_move

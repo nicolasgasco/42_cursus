@@ -154,10 +154,10 @@ def render_train_mode(root: Root):
 
         if game_handler.game_over or game_handler.has_won:
             if game_handler.has_won:
-                print("Game won!")
+                print("✅ Game won")
                 agent.training_stats.games_won += 1
             else:
-                print("Game Over :(")
+                print("❌ Game Over")
                 agent.training_stats.games_lost += 1
 
             root.frames["train"].train_data.update_data(
