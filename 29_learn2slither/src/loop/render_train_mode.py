@@ -123,7 +123,7 @@ def render_train_mode(root: Root):
 
         if game_handler.has_moved:
             prev_direction = intended_direction
-        else:
+        elif not game_handler.game_over:
             game_handler.move_snake(prev_direction)
 
         prev_context = agent.context.copy()

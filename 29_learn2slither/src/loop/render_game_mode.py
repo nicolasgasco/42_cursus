@@ -56,7 +56,7 @@ def render_game_mode(
 
         if game_handler.has_moved:
             prev_direction = intended_direction
-        else:
+        elif not game_handler.game_over:
             game_handler.move_snake(prev_direction)
 
         root.frames["game"].board.fill(game_handler.blocks_to_update)
