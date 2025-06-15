@@ -38,3 +38,5 @@ pyflakes==3.3.2
     # via flake8
 python-dotenv==1.1.0
     # via dotenv
+schedule==1.2.2
+    # via learn2slither
