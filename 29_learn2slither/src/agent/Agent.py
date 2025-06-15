@@ -31,7 +31,7 @@ class Agent:
 
         self.__context["north"] = [
             {"pos": (y, head_x), "block": map[y][head_x]}
-            for y in range(0, head_y)
+            for y in range(0, head_y)[::-1]  # so that wall is last
         ]
         self.__context["east"] = [
             {"pos": (head_y, x), "block": map[head_y][x]}
@@ -43,7 +43,7 @@ class Agent:
         ]
         self.__context["west"] = [
             {"pos": (head_y, x), "block": map[head_y][x]}
-            for x in range(0, head_x)
+            for x in range(0, head_x)[::-1]  # so that wall is last
         ]
 
     def pick_next_move(self) -> str:
@@ -51,8 +51,8 @@ class Agent:
 
         return pick_next_move
 
-    def train(self, new_block: str) -> None:
+    def train(self, new_block: str, prev_context: dict, move: str) -> None:
         if new_block is None:
             return
 
-        self.__training.train(new_block, self.__context)
+        self.__training.train(new_block, prev_context, self.__context, move)

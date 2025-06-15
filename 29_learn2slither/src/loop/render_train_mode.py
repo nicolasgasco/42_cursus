@@ -120,12 +120,21 @@ def render_train_mode(root: Root):
 
         intended_direction = agent.pick_next_move()
         replaced_block = game_handler.move_snake(intended_direction)
-        agent.train(replaced_block)
 
         if game_handler.has_moved:
             prev_direction = intended_direction
         else:
             game_handler.move_snake(prev_direction)
+
+        prev_context = agent.context.copy()
+        agent.update_context(
+            {
+                "map": root.frames["train"].board.raw_map,
+                "head_pos": game_handler.head_pos,
+            }
+        )
+
+        agent.train(replaced_block, prev_context, intended_direction)
 
         root.frames["train"].game_data.update_data(
             {
@@ -133,13 +142,6 @@ def render_train_mode(root: Root):
                 "length": game_handler.length,
                 "red_apples": game_handler.apples_red,
                 "green_apples": game_handler.apples_green,
-            }
-        )
-
-        agent.update_context(
-            {
-                "map": root.frames["train"].board.raw_map,
-                "head_pos": game_handler.head_pos,
             }
         )
 
