@@ -51,8 +51,16 @@ class Agent:
 
         return pick_next_move
 
-    def train(self, new_block: str, prev_context: dict, move: str) -> None:
+    def train(
+        self,
+        new_block: str,
+        prev_context: dict,
+        move: str,
+        current_episode: int,
+    ) -> None:
         if new_block is None:
             return
 
-        self.__training.train(new_block, prev_context, self.__context, move)
+        self.__training.train(
+            new_block, prev_context, self.__context, move, current_episode
+        )

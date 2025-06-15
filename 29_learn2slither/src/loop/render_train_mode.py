@@ -134,7 +134,9 @@ def render_train_mode(root: Root):
             }
         )
 
-        agent.train(replaced_block, prev_context, intended_direction)
+        agent.train(
+            replaced_block, prev_context, intended_direction, current_episode
+        )
 
         root.frames["train"].game_data.update_data(
             {

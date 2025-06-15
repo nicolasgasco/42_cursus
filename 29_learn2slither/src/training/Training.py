@@ -1,10 +1,12 @@
 from random import random
 import json
+import schedule as schedule
 
 from constants import (
     SnakeDirection,
     EXPLORATION_RATE_DECAY,
     EXPLORATION_RATE_MIN,
+    EXPLORATION_RATE_MAX,
     BoardBlockSymbol,
 )
 
@@ -20,10 +22,14 @@ REWARDS = {
 
 class Training:
     def __init__(self):
-        self.__q_table = {}
+        self.__q_table = self.__init_q_table()
         self.__learning_rate = 0.1
         self.__discount_factor = 0.99
-        self.__exploration_rate = 1.0
+        self.__exploration_rate = (
+            EXPLORATION_RATE_MAX
+            if len(self.__q_table) == 0
+            else EXPLORATION_RATE_MIN
+        )
 
         self.__directions = [
             SnakeDirection.UP.value,
@@ -31,6 +37,28 @@ class Training:
             SnakeDirection.DOWN.value,
             SnakeDirection.LEFT.value,
         ]
+
+        schedule.every(30).seconds.do(self.__save_q_table_to_file)
+
+    def __init_q_table(self) -> None:
+        q_table = {}
+        try:
+            with open("q_table.json", "r", encoding="utf-8") as file:
+                entries = json.load(file)
+
+            for entry in entries:
+                state = entry["state"]
+                actions = entry["actions"]
+                q_table[state] = {
+                    SnakeDirection.UP.value: actions[0],
+                    SnakeDirection.RIGHT.value: actions[1],
+                    SnakeDirection.DOWN.value: actions[2],
+                    SnakeDirection.LEFT.value: actions[3],
+                }
+
+            return q_table
+        except FileNotFoundError:
+            return q_table
 
     def simplify_context(self, context: dict) -> dict:
         context_props = context.keys()
@@ -105,6 +133,8 @@ class Training:
 
     # TODO improve this
     def __save_q_table_to_file(self) -> None:
+        print("Saving Q-table to file...")
+
         entries = []
         for state, actions in self.__q_table.items():
             entries.append(
@@ -118,7 +148,12 @@ class Training:
             json.dump(entries, file, indent=2, ensure_ascii=False)
 
     def train(
-        self, new_block: str, prev_context: dict, context: dict, move: str
+        self,
+        new_block: str,
+        prev_context: dict,
+        context: dict,
+        move: str,
+        current_episode: int,
     ) -> None:
         prev_context = self.simplify_context(prev_context)
 
@@ -142,4 +177,4 @@ class Training:
 
         self.__q_table[prev_context][move] = new_q_value
 
-        self.__save_q_table_to_file()
+        schedule.run_pending()
