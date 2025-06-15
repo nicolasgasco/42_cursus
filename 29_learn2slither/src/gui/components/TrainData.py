@@ -32,6 +32,19 @@ class TrainData(tk.LabelFrame):
         self.__games_lost = DataFrame(
             self, {"label": "Losses", "value": str(args["games_lost"])}
         )
+
+        win_loss_ration = (
+            args["games_won"] * 100 / args["games_played"]
+            if args["games_played"] > 0
+            else 0
+        )
+        self.__win_loss_ratio = DataFrame(
+            self,
+            {
+                "label": "Win/Loss ratio",
+                "value": f"{win_loss_ration:.2f}%",
+            },
+        )
         self.__elapsed_time = DataFrame(
             self, {"label": "Elapsed time", "value": args["elapsed_time"]}
         )
@@ -40,4 +53,7 @@ class TrainData(tk.LabelFrame):
         self.__episodes.update(str(args["games_played"]))
         self.__games_won.update(str(args["games_won"]))
         self.__games_lost.update(str(args["games_lost"]))
+        self.__win_loss_ratio.update(
+            f"{args['games_won'] * 100 / args['games_played']:.2f}%"
+        )
         self.__elapsed_time.update(args["elapsed_time"])
