@@ -71,12 +71,15 @@ class Training:
                 if str(block["block"]) == BoardBlockSymbol.EMPTY.value:
                     continue
 
-                is_wall = str(block["block"]) == BoardBlockSymbol.WALL.value
+                is_fatal_block = (
+                    str(block["block"]) == BoardBlockSymbol.WALL.value
+                    or str(block["block"]) == BoardBlockSymbol.BODY.value
+                )
                 is_preceded_by_empty = (
                     str(context[prop][i - 1]["block"])
                     == BoardBlockSymbol.EMPTY.value
                 )
-                if i > 0 and is_wall and is_preceded_by_empty:
+                if i > 0 and is_fatal_block and is_preceded_by_empty:
                     blocks.append(BoardBlockSymbol.EMPTY.value)
 
                 blocks.append(str(block["block"]))
