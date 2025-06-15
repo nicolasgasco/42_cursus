@@ -1,13 +1,14 @@
-from random import random
 import json
+from random import random
+
 import schedule as schedule
 
 from constants import (
-    SnakeDirection,
     EXPLORATION_RATE_DECAY,
-    EXPLORATION_RATE_MIN,
     EXPLORATION_RATE_MAX,
+    EXPLORATION_RATE_MIN,
     BoardBlockSymbol,
+    SnakeDirection,
 )
 
 # TODO move to constants file

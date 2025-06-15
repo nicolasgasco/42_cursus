@@ -2,10 +2,10 @@ import tkinter as tk
 
 from constants import (
     BLACK,
+    BLANK_CHARACTER,
     DEFAULT_PADDING,
     LIGHT_GREY,
     BoardBlockSymbol,
-    BLANK_CHARACTER,
 )
 from settings_parser import SettingsParser
 
