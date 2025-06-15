@@ -10,11 +10,11 @@ from constants import (
 
 # TODO move to constants file
 REWARDS = {
-    BoardBlockSymbol.EMPTY.value: -0.1,
-    BoardBlockSymbol.BODY.value: -20,
-    BoardBlockSymbol.GREEN_APPLE.value: 10,
-    BoardBlockSymbol.RED_APPLE.value: -5,
-    BoardBlockSymbol.WALL.value: -20,
+    BoardBlockSymbol.EMPTY.value: -1,
+    BoardBlockSymbol.BODY.value: -200,
+    BoardBlockSymbol.GREEN_APPLE.value: 50,
+    BoardBlockSymbol.RED_APPLE.value: -10,
+    BoardBlockSymbol.WALL.value: -200,
 }
 
 
@@ -22,7 +22,7 @@ class Training:
     def __init__(self):
         self.__q_table = {}
         self.__learning_rate = 0.1
-        self.__discount_factor = 0.9
+        self.__discount_factor = 0.99
         self.__exploration_rate = 1.0
 
         self.__directions = [
@@ -37,12 +37,22 @@ class Training:
 
         direction_props = []
         for prop in context_props:
-            blocks = [
-                str(block["block"])
-                for block in context[prop]
-                if str(block["block"]) != BoardBlockSymbol.EMPTY.value
-            ]
-            direction_props.append(tuple(blocks))
+            blocks = []
+            for i, block in enumerate(context[prop]):
+                if str(block["block"]) == BoardBlockSymbol.EMPTY.value:
+                    continue
+
+                is_wall = str(block["block"]) == BoardBlockSymbol.WALL.value
+                is_preceded_by_empty = (
+                    str(context[prop][i - 1]["block"])
+                    == BoardBlockSymbol.EMPTY.value
+                )
+                if i > 0 and is_wall and is_preceded_by_empty:
+                    blocks.append(BoardBlockSymbol.EMPTY.value)
+
+                blocks.append(str(block["block"]))
+
+            direction_props.append(tuple(dict.fromkeys(blocks)))
 
         return tuple(direction_props)
 
