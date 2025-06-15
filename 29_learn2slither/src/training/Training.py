@@ -143,7 +143,6 @@ class Training:
             + self.__discount_factor * q_value_best_action
             - prev_q_value
         )
-        # TODO review this
         new_q_value = prev_q_value + self.__learning_rate * temp_diff_error
 
         self.__q_table[prev_context][move] = new_q_value
