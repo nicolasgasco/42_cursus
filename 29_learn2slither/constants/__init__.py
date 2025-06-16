@@ -1,5 +1,5 @@
-from .board import BoardBlockSymbol, BLANK_CHARACTER
-from .game import DEFAULT_SPEED, DEFAULT_SNAKE_DIRECTION, SnakeDirection
+from .board import BLANK_CHARACTER, BoardBlockSymbol
+from .game import DEFAULT_SNAKE_DIRECTION, DEFAULT_SPEED, SnakeDirection
 from .palette import BLACK, GREY, LIGHT_GREY, PRIMARY
 from .path import (
     CONSTANTS_DIR_PATH,
@@ -8,19 +8,18 @@ from .path import (
     MAPS_DIR_PATH,
     SETTINGS_DIR_PATH,
 )
-from .ui import DEFAULT_PADDING
-from .train import (
-    INTERACTIVE_ACTION,
-    DEFAULT_MAX_EPISODES,
-    EXPLORATION_RATE_DECAY,
-    EXPLORATION_RATE_MIN,
-    EXPLORATION_RATE_MAX,
-)
 from .settings import (
     MAP_SETTINGS_FILE_NAME,
     TRAIN_SETTINGS_FILE_NAME,
 )
-
+from .train import (
+    DEFAULT_MAX_EPISODES,
+    EXPLORATION_RATE_DECAY,
+    EXPLORATION_RATE_MAX,
+    EXPLORATION_RATE_MIN,
+    INTERACTIVE_ACTION,
+)
+from .ui import DEFAULT_PADDING
 
 __all__ = [
     "BLACK",
