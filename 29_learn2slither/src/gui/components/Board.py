@@ -48,7 +48,7 @@ class Board(tk.Frame):
     def first_fill(self) -> None:
         for y, row in enumerate(self.__map):
             for x, block in enumerate(row):
-                gui_block = BoardBlock({"block": block, "parent": self})
+                gui_block = BoardBlock(self, block=block)
                 gui_block.grid(row=y, column=x)
 
     def __populate_victory_blocks(self) -> None:
@@ -57,10 +57,8 @@ class Board(tk.Frame):
                 if block == BoardBlockSymbol.GREEN_APPLE.value:
 
                     gui_block = BoardBlock(
-                        {
-                            "block": BoardBlockSymbol.VICTORY.value,
-                            "parent": self,
-                        }
+                        self,
+                        block=BoardBlockSymbol.VICTORY.value,
                     )
                     gui_block.grid(row=y, column=x)
 
@@ -69,7 +67,7 @@ class Board(tk.Frame):
             y, x = block_info["pos"]
             block = block_info["block"]
 
-            gui_block = BoardBlock({"block": block, "parent": self})
+            gui_block = BoardBlock(self, block=block)
             gui_block.grid(row=y, column=x)
 
         has_almost_won = (

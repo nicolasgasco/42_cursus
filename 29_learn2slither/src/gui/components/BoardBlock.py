@@ -6,11 +6,11 @@ SQUARE_SIZE = 60
 
 
 class BoardBlock(tk.Canvas):
-    def __init__(self, args):
-        self.__block = args.get("block", BoardBlockSymbol.EMPTY.value)
+    def __init__(self, parent: tk.Tk, block: str) -> None:
+        self.__block = block if block else BoardBlockSymbol.EMPTY.value
 
         super().__init__(
-            args["parent"],
+            parent,
             bg=self.__get_bg_color(self.__block),
             height=SQUARE_SIZE,
             highlightthickness=0.5,
