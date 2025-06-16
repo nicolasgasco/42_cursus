@@ -49,6 +49,8 @@ class BoardBlock(tk.Canvas):
             return BoardBlockSymbol.RED_APPLE.value
         elif block_value == BoardBlockSymbol.WALL.value:
             return None
+        elif block_value == BoardBlockSymbol.VICTORY.value:
+            return BoardBlockSymbol.VICTORY.value
         else:
             raise ValueError(f"Unknown block value: {block_value}")
 
@@ -73,5 +75,7 @@ class BoardBlock(tk.Canvas):
             return BLACK
         elif block_value == BoardBlockSymbol.WALL.value:
             return GREY
+        elif block_value == BoardBlockSymbol.VICTORY.value:
+            return BLACK
         else:
             raise ValueError(f"Unknown block value: {block_value}")

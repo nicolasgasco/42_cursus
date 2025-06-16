@@ -1,7 +1,12 @@
 import tkinter as tk
 from os import path
 
-from constants import BLACK, DEFAULT_PADDING, MAPS_DIR_PATH
+from constants import (
+    BLACK,
+    DEFAULT_PADDING,
+    MAPS_DIR_PATH,
+    BoardBlockSymbol,
+)
 from settings_parser import SettingsParser
 
 from .BoardBlock import BoardBlock
@@ -22,16 +27,18 @@ class Board(tk.Frame):
         self.__map = map if map.all() else self.__parse_board_from_file()
         self.first_fill()
 
+        settings = SettingsParser("map").settings
+        self.__victory_length = settings["victory_length"]
+        self.__file_name = settings["file_name"]
+
     @property
     def raw_map(self):
         return self.__map
 
     def __parse_board_from_file(self) -> list:
-        settings = SettingsParser("map").settings
-        map_file_name = settings["file_name"]
-        assert map_file_name, "Map file name not found in settings."
+        assert self.__file_name, "Map file name not found in settings."
 
-        map_file_path = path.join("..", MAPS_DIR_PATH, map_file_name)
+        map_file_path = path.join("..", MAPS_DIR_PATH, self.__file_name)
         with open(map_file_path, "r") as file:
             map_rows = file.readlines()
             map_rows = [list(map_row.strip()) for map_row in map_rows]
@@ -44,10 +51,30 @@ class Board(tk.Frame):
                 gui_block = BoardBlock({"block": block, "parent": self})
                 gui_block.grid(row=y, column=x)
 
-    def fill(self, blocks_to_update: list) -> None:
+    def fill(self, blocks_to_update: list, snake_length: int = None) -> None:
         for block_info in blocks_to_update:
             y, x = block_info["pos"]
             block = block_info["block"]
 
             gui_block = BoardBlock({"block": block, "parent": self})
             gui_block.grid(row=y, column=x)
+
+        # Replace green apples with victory block
+        # if the snake is one block away from winning
+        has_almost_won = (
+            snake_length == self.__victory_length - 1
+            if snake_length
+            else False
+        )
+        if has_almost_won:
+            for y, row in enumerate(self.__map):
+                for x, block in enumerate(row):
+                    if block == BoardBlockSymbol.GREEN_APPLE.value:
+
+                        gui_block = BoardBlock(
+                            {
+                                "block": BoardBlockSymbol.VICTORY.value,
+                                "parent": self,
+                            }
+                        )
+                        gui_block.grid(row=y, column=x)

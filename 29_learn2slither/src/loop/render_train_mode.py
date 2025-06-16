@@ -179,7 +179,9 @@ def render_train_mode(root: Root):
 
             return
 
-        root.frames["train"].board.fill(game_handler.blocks_to_update)
+        root.frames["train"].board.fill(
+            game_handler.blocks_to_update, game_handler.length
+        )
 
     if not interactive_mode:
         root.frames["train"].tick(on_tick)
