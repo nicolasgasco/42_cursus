@@ -76,13 +76,11 @@ def render_train_mode(root: Root):
 
     root.frames["train"].train_data = TrainData(
         root,
-        {
-            "games_played": agent.training_stats.games_lost
-            + agent.training_stats.games_won,
-            "games_won": agent.training_stats.games_won,
-            "games_lost": agent.training_stats.games_lost,
-            "elapsed_time": (t.time() - start).__round__(1),
-        },
+        games_played=agent.training_stats.games_lost
+        + agent.training_stats.games_won,
+        games_won=agent.training_stats.games_won,
+        games_lost=agent.training_stats.games_lost,
+        elapsed_time=f"{int(t.time() - start)} s",
     )
 
     intended_direction = DEFAULT_SNAKE_DIRECTION
@@ -165,7 +163,7 @@ def render_train_mode(root: Root):
                     + agent.training_stats.games_won,
                     "games_won": agent.training_stats.games_won,
                     "games_lost": agent.training_stats.games_lost,
-                    "elapsed_time": (t.time() - start).__round__(1),
+                    "elapsed_time": f"{int(t.time() - start)} s",
                 }
             )
 
