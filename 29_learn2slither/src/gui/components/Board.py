@@ -51,6 +51,19 @@ class Board(tk.Frame):
                 gui_block = BoardBlock({"block": block, "parent": self})
                 gui_block.grid(row=y, column=x)
 
+    def __populate_victory_blocks(self) -> None:
+        for y, row in enumerate(self.__map):
+            for x, block in enumerate(row):
+                if block == BoardBlockSymbol.GREEN_APPLE.value:
+
+                    gui_block = BoardBlock(
+                        {
+                            "block": BoardBlockSymbol.VICTORY.value,
+                            "parent": self,
+                        }
+                    )
+                    gui_block.grid(row=y, column=x)
+
     def fill(self, blocks_to_update: list, snake_length: int = None) -> None:
         for block_info in blocks_to_update:
             y, x = block_info["pos"]
@@ -59,22 +72,10 @@ class Board(tk.Frame):
             gui_block = BoardBlock({"block": block, "parent": self})
             gui_block.grid(row=y, column=x)
 
-        # Replace green apples with victory block
-        # if the snake is one block away from winning
         has_almost_won = (
             snake_length == self.__victory_length - 1
             if snake_length
             else False
         )
         if has_almost_won:
-            for y, row in enumerate(self.__map):
-                for x, block in enumerate(row):
-                    if block == BoardBlockSymbol.GREEN_APPLE.value:
-
-                        gui_block = BoardBlock(
-                            {
-                                "block": BoardBlockSymbol.VICTORY.value,
-                                "parent": self,
-                            }
-                        )
-                        gui_block.grid(row=y, column=x)
+            self.__populate_victory_blocks()
