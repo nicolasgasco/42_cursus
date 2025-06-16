@@ -18,6 +18,7 @@ from .train import (
     EXPLORATION_RATE_MAX,
     EXPLORATION_RATE_MIN,
     INTERACTIVE_ACTION,
+    REWARDS,
 )
 from .ui import DEFAULT_PADDING
 
@@ -44,4 +45,5 @@ __all__ = [
     "EXPLORATION_RATE_DECAY",
     "EXPLORATION_RATE_MIN",
     "EXPLORATION_RATE_MAX",
+    "REWARDS",
 ]

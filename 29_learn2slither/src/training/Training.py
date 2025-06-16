@@ -7,18 +7,10 @@ from constants import (
     EXPLORATION_RATE_DECAY,
     EXPLORATION_RATE_MAX,
     EXPLORATION_RATE_MIN,
+    REWARDS,
     BoardBlockSymbol,
     SnakeDirection,
 )
-
-# TODO move to constants file
-REWARDS = {
-    BoardBlockSymbol.EMPTY.value: -10,
-    BoardBlockSymbol.BODY.value: -1000,
-    BoardBlockSymbol.GREEN_APPLE.value: 500,
-    BoardBlockSymbol.RED_APPLE.value: -250,
-    BoardBlockSymbol.WALL.value: -1000,
-}
 
 
 class Training:
