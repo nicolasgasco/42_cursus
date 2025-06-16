@@ -114,6 +114,7 @@ def render_train_mode(root: Root):
         )
 
         if current_episode >= max_episodes:
+            # agent.save_q_table_to_file()
             print("Training completed.")
             root.quit()
             return
@@ -134,9 +135,7 @@ def render_train_mode(root: Root):
             }
         )
 
-        agent.train(
-            replaced_block, prev_context, intended_direction, current_episode
-        )
+        agent.train(replaced_block, prev_context, intended_direction)
 
         root.frames["train"].game_data.update_data(
             {

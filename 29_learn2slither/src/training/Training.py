@@ -39,7 +39,7 @@ class Training:
             SnakeDirection.LEFT.value,
         ]
 
-        schedule.every(30).seconds.do(self.__save_q_table_to_file)
+        schedule.every(30).seconds.do(self.save_q_table_to_file)
 
     def __init_q_table(self) -> None:
         q_table = {}
@@ -136,7 +136,7 @@ class Training:
         return self.__next_move
 
     # TODO improve this
-    def __save_q_table_to_file(self) -> None:
+    def save_q_table_to_file(self) -> None:
         print("Saving Q-table to file...")
 
         entries = []
@@ -157,7 +157,6 @@ class Training:
         prev_context: dict,
         context: dict,
         move: str,
-        current_episode: int,
     ) -> None:
         prev_context = self.simplify_context(prev_context)
 

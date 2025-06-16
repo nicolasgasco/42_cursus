@@ -30,15 +30,16 @@ class TrainSettings(tk.LabelFrame):
         label.pack(side=tk.LEFT, padx=5)
 
         options = [
+            {"label": "1", "value": 1},
+            {"label": "10", "value": 10},
+            {"label": "100", "value": 100},
+            {"label": "1,000", "value": DEFAULT_MAX_EPISODES},
+            {"label": "2,000", "value": 2_000},
             {"label": "5,000", "value": 5_000},
             {"label": "10,000", "value": 10_000},
+            {"label": "20,000", "value": 20_000},
             {"label": "50,000", "value": 50_000},
             {"label": "100,000", "value": 100_000},
-            {"label": "200,000", "value": 200_000},
-            {"label": "500,000", "value": 500_000},
-            {"label": "1,000,000", "value": 1_000_000},
-            {"label": "2,000,000", "value": 2_000_000},
-            {"label": "5,000,000", "value": 5_000_000},
         ]
 
         self.__store_setting_in_file("max_episodes", DEFAULT_MAX_EPISODES)
