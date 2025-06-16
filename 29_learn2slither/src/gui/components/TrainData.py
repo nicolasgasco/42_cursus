@@ -24,13 +24,13 @@ class TrainData(tk.LabelFrame):
         self.grid(row=0, column=1, sticky="nsew")
 
         self.__episodes = DataFrame(
-            self, {"label": "Episodes", "value": str(args["games_played"])}
+            self, label="Episodes", value=str(args["games_played"])
         )
         self.__games_won = DataFrame(
-            self, {"label": "Wins", "value": str(args["games_won"])}
+            self, label="Wins", value=str(args["games_won"])
         )
         self.__games_lost = DataFrame(
-            self, {"label": "Losses", "value": str(args["games_lost"])}
+            self, label="Losses", value=str(args["games_lost"])
         )
 
         win_loss_ratio = (
@@ -40,13 +40,11 @@ class TrainData(tk.LabelFrame):
         )
         self.__win_loss_ratio = DataFrame(
             self,
-            {
-                "label": "Win/Loss ratio",
-                "value": f"{win_loss_ratio:.2f}%",
-            },
+            label="Win/Loss ratio",
+            value=f"{win_loss_ratio:.2f}%",
         )
         self.__elapsed_time = DataFrame(
-            self, {"label": "Elapsed time", "value": args["elapsed_time"]}
+            self, label="Elapsed time", value=args["elapsed_time"]
         )
 
     def update_data(self, args: dict) -> None:

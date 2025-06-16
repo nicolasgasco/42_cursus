@@ -31,7 +31,7 @@ class ContextData(tk.LabelFrame):
 
         self.__context = DataFrame(
             self,
-            {"value": self.__map},
+            value=self.__map,
         )
 
     def __generate_blank_map(self) -> str:

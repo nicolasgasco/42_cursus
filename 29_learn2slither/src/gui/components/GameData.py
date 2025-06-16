@@ -23,17 +23,15 @@ class GameData(tk.LabelFrame):
 
         self.grid(row=1, column=1, sticky="nsew")
 
-        self.__moves = DataFrame(
-            self, {"label": "Moves", "value": str(args["moves"])}
-        )
+        self.__moves = DataFrame(self, label="Moves", value=str(args["moves"]))
         self.__length = DataFrame(
-            self, {"label": "Length", "value": str(args["length"])}
+            self, label="Length", value=str(args["length"])
         )
         self.__red_apples = DataFrame(
-            self, {"label": "Red apples", "value": str(args["red_apples"])}
+            self, label="Red apples", value=str(args["red_apples"])
         )
         self.__green_apples = DataFrame(
-            self, {"label": "Green apples", "value": str(args["green_apples"])}
+            self, label="Green apples", value=str(args["green_apples"])
         )
 
     def update_data(self, args: dict) -> None:

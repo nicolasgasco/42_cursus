@@ -8,7 +8,7 @@ from constants import (
 
 
 class DataFrame(tk.Frame):
-    def __init__(self, parent: tk.Tk, args: dict):
+    def __init__(self, parent: tk.Tk, value: str | int, label: str = None):
         super().__init__(parent, bg=parent["bg"], padx=0, pady=0)
         self.pack(
             side=tk.TOP,
@@ -18,10 +18,10 @@ class DataFrame(tk.Frame):
             pady=0,
         )
 
-        self.__label = args.get("label", None)
+        self.__label = label
         self.__value_label: tk.Label | None = None
 
-        self.render(str(args["value"]))
+        self.render(str(value))
 
     def render(self, value: str) -> None:
         if self.__label:
