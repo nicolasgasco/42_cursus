@@ -25,9 +25,10 @@ class Agent:
     def context(self) -> dict:
         return self.__context
 
-    def update_context(self, args: dict) -> None:
-        map = args["map"]
-        head_y, head_x = args["head_pos"]
+    def update_context(
+        self, map: list[list[str]], head_pos: tuple[int, int]
+    ) -> None:
+        head_y, head_x = head_pos
 
         self.__context["north"] = [
             {"pos": (y, head_x), "block": map[y][head_x]}

@@ -33,10 +33,8 @@ def init_interface(root: Root, agent: Agent):
     )
 
     agent.update_context(
-        {
-            "map": root.frames["train"].board.raw_map,
-            "head_pos": game_handler.head_pos,
-        }
+        map=root.frames["train"].board.raw_map,
+        head_pos=game_handler.head_pos,
     )
 
     root.frames["train"].context_data = ContextData(root)
@@ -123,10 +121,8 @@ def render_train_mode(root: Root):
 
         prev_context = agent.context.copy()
         agent.update_context(
-            {
-                "map": root.frames["train"].board.raw_map,
-                "head_pos": game_handler.head_pos,
-            }
+            map=root.frames["train"].board.raw_map,
+            head_pos=game_handler.head_pos,
         )
 
         agent.train(replaced_block, prev_context, intended_direction)
