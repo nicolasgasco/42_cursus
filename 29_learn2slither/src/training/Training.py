@@ -39,7 +39,7 @@ class Training:
             SnakeDirection.LEFT.value,
         ]
 
-        schedule.every(30).seconds.do(self.save_q_table_to_file)
+        schedule.every(15).seconds.do(self.save_q_table_to_file)
 
     def __init_q_table(self) -> None:
         q_table = {}
@@ -151,6 +151,27 @@ class Training:
         with open("q_table.json", "w", encoding="utf-8") as file:
             json.dump(entries, file, indent=2, ensure_ascii=False)
 
+    def __calc_reward(
+        self, new_block: str, prev_context: dict, move: str
+    ) -> int:
+        DIRECTION_INDEX = {
+            SnakeDirection.UP.value: 0,
+            SnakeDirection.RIGHT.value: 1,
+            SnakeDirection.DOWN.value: 2,
+            SnakeDirection.LEFT.value: 3,
+        }
+
+        if new_block == BoardBlockSymbol.EMPTY.value:
+            index = DIRECTION_INDEX[move]
+            direction_context = prev_context[index]
+
+            if BoardBlockSymbol.RED_APPLE.value in direction_context:
+                return -100
+            if BoardBlockSymbol.GREEN_APPLE.value in direction_context:
+                return 50
+
+        return REWARDS.get(new_block, 0)
+
     def train(
         self,
         new_block: str,
@@ -166,7 +187,7 @@ class Training:
                 direction: 0 for direction in self.__directions
             }
 
-        reward = REWARDS.get(new_block, 0)
+        reward = self.__calc_reward(new_block, prev_context, move)
         prev_q_value = self.__q_table[prev_context][move]
         best_action = self.__pick_highest_q_value_action(context)
         q_value_best_action = self.__q_table[context][best_action]
