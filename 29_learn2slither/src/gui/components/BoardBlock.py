@@ -7,9 +7,7 @@ SQUARE_SIZE = 60
 
 class BoardBlock(tk.Canvas):
     def __init__(self, args):
-        self.__block = (
-            args["block"] if "block" in args else BoardBlockSymbol.EMPTY.name
-        )
+        self.__block = args.get("block", BoardBlockSymbol.EMPTY.value)
 
         super().__init__(
             args["parent"],
@@ -30,52 +28,40 @@ class BoardBlock(tk.Canvas):
         )
 
     def __get_text(self, block_value: str) -> str:
-        """
-        Returns the text for the given color.
-        Args:
-            color (str): The color to get the text for.
-        Returns:
-            str: The text for the given color.
-        """
-        if block_value == BoardBlockSymbol.EMPTY.value:
+        blocks_with_text = [
+            BoardBlockSymbol.BODY.value,
+            BoardBlockSymbol.HEAD.value,
+            BoardBlockSymbol.GREEN_APPLE.value,
+            BoardBlockSymbol.RED_APPLE.value,
+            BoardBlockSymbol.VICTORY.value,
+        ]
+        if block_value in blocks_with_text:
+            return block_value
+
+        blocks_without_text = [
+            BoardBlockSymbol.EMPTY.value,
+            BoardBlockSymbol.WALL.value,
+        ]
+        if block_value in blocks_without_text:
             return None
-        elif block_value == BoardBlockSymbol.BODY.value:
-            return BoardBlockSymbol.BODY.value
-        elif block_value == BoardBlockSymbol.HEAD.value:
-            return BoardBlockSymbol.HEAD.value
-        elif block_value == BoardBlockSymbol.GREEN_APPLE.value:
-            return BoardBlockSymbol.GREEN_APPLE.value
-        elif block_value == BoardBlockSymbol.RED_APPLE.value:
-            return BoardBlockSymbol.RED_APPLE.value
-        elif block_value == BoardBlockSymbol.WALL.value:
-            return None
-        elif block_value == BoardBlockSymbol.VICTORY.value:
-            return BoardBlockSymbol.VICTORY.value
-        else:
-            raise ValueError(f"Unknown block value: {block_value}")
+
+        raise ValueError(f"Unknown block value: {block_value}")
 
     def __get_bg_color(self, block_value: str) -> str:
-        """
-        Returns the background color for the given color.
-        Args:
-            color (str): The color to get the background color for.
-        Returns:
-            str: The background color for the given color.
-        """
 
-        if block_value == BoardBlockSymbol.EMPTY.value:
+        blocks_with_black_bg = [
+            BoardBlockSymbol.EMPTY.value,
+            BoardBlockSymbol.BODY.value,
+            BoardBlockSymbol.HEAD.value,
+            BoardBlockSymbol.GREEN_APPLE.value,
+            BoardBlockSymbol.RED_APPLE.value,
+            BoardBlockSymbol.VICTORY.value,
+        ]
+        if block_value in blocks_with_black_bg:
             return BLACK
-        elif block_value == BoardBlockSymbol.BODY.value:
-            return BLACK
-        elif block_value == BoardBlockSymbol.HEAD.value:
-            return BLACK
-        elif block_value == BoardBlockSymbol.GREEN_APPLE.value:
-            return BLACK
-        elif block_value == BoardBlockSymbol.RED_APPLE.value:
-            return BLACK
-        elif block_value == BoardBlockSymbol.WALL.value:
+
+        blocks_with_grey_bg = [BoardBlockSymbol.WALL.value]
+        if block_value in blocks_with_grey_bg:
             return GREY
-        elif block_value == BoardBlockSymbol.VICTORY.value:
-            return BLACK
-        else:
-            raise ValueError(f"Unknown block value: {block_value}")
+
+        raise ValueError(f"Unknown block value: {block_value}")
