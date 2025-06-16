@@ -43,8 +43,12 @@ class ContextData(tk.LabelFrame):
 
         return "\n".join(map)
 
-    def update_data(self, args: dict) -> None:
-        contexts = [context for context in args["context"].values()]
+    def update_data(
+        self,
+        context: dict,
+        head_pos: tuple[int, int],
+    ) -> None:
+        contexts = [context for context in context.values()]
 
         map = [list(row) for row in self.__blank_map.split("\n")]
 
@@ -53,7 +57,7 @@ class ContextData(tk.LabelFrame):
                 y, x = block_info["pos"]
                 map[y][x] = block_info["block"]
 
-        head_y, head_x = args["head_pos"]
+        head_y, head_x = head_pos
         map[head_y][head_x] = BoardBlockSymbol.HEAD.value
 
         self.__map = "\n".join("".join(row) for row in map)

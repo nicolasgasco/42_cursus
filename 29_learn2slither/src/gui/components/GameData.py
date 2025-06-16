@@ -39,8 +39,14 @@ class GameData(tk.LabelFrame):
             self, label="Green apples", value=str(green_apples)
         )
 
-    def update_data(self, args: dict) -> None:
-        self.__moves.update(str(args["moves"]))
-        self.__length.update(str(args["length"]))
-        self.__red_apples.update(str(args["red_apples"]))
-        self.__green_apples.update(str(args["green_apples"]))
+    def update_data(
+        self,
+        moves: int,
+        length: int,
+        red_apples: int,
+        green_apples: int,
+    ) -> None:
+        self.__moves.update(str(moves))
+        self.__length.update(str(length))
+        self.__red_apples.update(str(red_apples))
+        self.__green_apples.update(str(green_apples))

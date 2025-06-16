@@ -61,12 +61,10 @@ def render_game_mode(
             game_handler.blocks_to_update, game_handler.length
         )
         root.frames["game"].game_data.update_data(
-            {
-                "moves": game_handler.moves,
-                "length": game_handler.length,
-                "red_apples": game_handler.apples_red,
-                "green_apples": game_handler.apples_green,
-            }
+            moves=game_handler.moves,
+            length=game_handler.length,
+            red_apples=game_handler.apples_red,
+            green_apples=game_handler.apples_green,
         )
 
         if game_handler.game_over or game_handler.has_won:

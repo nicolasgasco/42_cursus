@@ -47,15 +47,21 @@ class TrainData(tk.LabelFrame):
             value=f"{win_loss_ratio:.2f}%",
         )
         self.__elapsed_time = DataFrame(
-            self, label="Elapsed seconds", value=elapsed_time
+            self, label="Elapsed seconds", value=f"{int(elapsed_time)} s"
         )
 
-    def update_data(self, args: dict) -> None:
-        self.__episodes.update(str(args["games_played"]))
-        self.__games_won.update(str(args["games_won"]))
-        self.__games_lost.update(str(args["games_lost"]))
+    def update_data(
+        self,
+        games_played: int,
+        games_won: int,
+        games_lost: int,
+        elapsed_time: float,
+    ) -> None:
+        self.__episodes.update(str(games_played))
+        self.__games_won.update(str(games_won))
+        self.__games_lost.update(str(games_lost))
 
-        win_loss_ratio = args["games_won"] * 100 / args["games_played"]
+        win_loss_ratio = games_won * 100 / games_played
         self.__win_loss_ratio.update(f"{win_loss_ratio:.2f}%")
 
-        self.__elapsed_time.update(args["elapsed_time"])
+        self.__elapsed_time.update(f"{int(elapsed_time)} s")

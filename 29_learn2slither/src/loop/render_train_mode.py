@@ -41,10 +41,8 @@ def init_interface(root: Root, agent: Agent):
 
     root.frames["train"].context_data = ContextData(root)
     root.frames["train"].context_data.update_data(
-        {
-            "context": agent.context,
-            "head_pos": game_handler.head_pos,
-        },
+        context=agent.context,
+        head_pos=game_handler.head_pos,
     )
 
     return game_handler
@@ -80,7 +78,7 @@ def render_train_mode(root: Root):
         + agent.training_stats.games_won,
         games_won=agent.training_stats.games_won,
         games_lost=agent.training_stats.games_lost,
-        elapsed_time=f"{int(t.time() - start)} s",
+        elapsed_time=(t.time() - start),
     )
 
     intended_direction = DEFAULT_SNAKE_DIRECTION
@@ -134,19 +132,15 @@ def render_train_mode(root: Root):
         agent.train(replaced_block, prev_context, intended_direction)
 
         root.frames["train"].game_data.update_data(
-            {
-                "moves": game_handler.moves,
-                "length": game_handler.length,
-                "red_apples": game_handler.apples_red,
-                "green_apples": game_handler.apples_green,
-            }
+            moves=game_handler.moves,
+            length=game_handler.length,
+            red_apples=game_handler.apples_red,
+            green_apples=game_handler.apples_green,
         )
 
         root.frames["train"].context_data.update_data(
-            {
-                "context": agent.context,
-                "head_pos": game_handler.head_pos,
-            }
+            context=agent.context,
+            head_pos=game_handler.head_pos,
         )
 
         if game_handler.game_over or game_handler.has_won:
@@ -158,13 +152,11 @@ def render_train_mode(root: Root):
                 agent.training_stats.games_lost += 1
 
             root.frames["train"].train_data.update_data(
-                {
-                    "games_played": agent.training_stats.games_lost
-                    + agent.training_stats.games_won,
-                    "games_won": agent.training_stats.games_won,
-                    "games_lost": agent.training_stats.games_lost,
-                    "elapsed_time": f"{int(t.time() - start)} s",
-                }
+                games_played=agent.training_stats.games_lost
+                + agent.training_stats.games_won,
+                games_won=agent.training_stats.games_won,
+                games_lost=agent.training_stats.games_lost,
+                elapsed_time=(t.time() - start),
             )
 
             intended_direction = DEFAULT_SNAKE_DIRECTION
