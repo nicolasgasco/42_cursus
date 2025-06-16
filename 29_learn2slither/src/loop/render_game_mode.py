@@ -50,23 +50,6 @@ def render_game_mode(
     def on_tick():
         nonlocal prev_direction
 
-        game_handler.move_snake(intended_direction)
-
-        if game_handler.has_moved:
-            prev_direction = intended_direction
-        elif not game_handler.game_over:
-            game_handler.move_snake(prev_direction)
-
-        root.frames["game"].board.fill(
-            game_handler.blocks_to_update, game_handler.length
-        )
-        root.frames["game"].game_data.update_data(
-            moves=game_handler.moves,
-            length=game_handler.length,
-            red_apples=game_handler.apples_red,
-            green_apples=game_handler.apples_green,
-        )
-
         if game_handler.game_over or game_handler.has_won:
             messagebox.showinfo(
                 title="Game Over",
@@ -84,5 +67,22 @@ def render_game_mode(
                 render_train_settings=render_train_settings,
             )
             return
+
+        game_handler.move_snake(intended_direction)
+
+        if game_handler.has_moved:
+            prev_direction = intended_direction
+        elif not game_handler.game_over:
+            game_handler.move_snake(prev_direction)
+
+        root.frames["game"].board.fill(
+            game_handler.blocks_to_update, game_handler.length
+        )
+        root.frames["game"].game_data.update_data(
+            moves=game_handler.moves,
+            length=game_handler.length,
+            red_apples=game_handler.apples_red,
+            green_apples=game_handler.apples_green,
+        )
 
     root.frames["game"].tick(on_tick)
