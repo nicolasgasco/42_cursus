@@ -101,6 +101,30 @@ def render_train_mode(root: Root):
         nonlocal intended_direction
         nonlocal game_handler
 
+        if game_handler.game_over or game_handler.has_won:
+            if game_handler.has_won:
+                print("✅ Game won")
+                agent.training_stats.games_won += 1
+            else:
+                print("❌ Game Over")
+                agent.training_stats.games_lost += 1
+
+            root.frames["train"].train_data.update_data(
+                games_played=agent.training_stats.games_lost
+                + agent.training_stats.games_won,
+                games_won=agent.training_stats.games_won,
+                games_lost=agent.training_stats.games_lost,
+                elapsed_time=(t.time() - start),
+            )
+
+            intended_direction = DEFAULT_SNAKE_DIRECTION
+            prev_direction = DEFAULT_SNAKE_DIRECTION
+
+            destroy_interface(root)
+            game_handler = init_interface(root, agent)
+
+            return
+
         current_episode = (
             agent.training_stats.games_lost + agent.training_stats.games_won
         )
@@ -138,30 +162,6 @@ def render_train_mode(root: Root):
             context=agent.context,
             head_pos=game_handler.head_pos,
         )
-
-        if game_handler.game_over or game_handler.has_won:
-            if game_handler.has_won:
-                print("✅ Game won")
-                agent.training_stats.games_won += 1
-            else:
-                print("❌ Game Over")
-                agent.training_stats.games_lost += 1
-
-            root.frames["train"].train_data.update_data(
-                games_played=agent.training_stats.games_lost
-                + agent.training_stats.games_won,
-                games_won=agent.training_stats.games_won,
-                games_lost=agent.training_stats.games_lost,
-                elapsed_time=(t.time() - start),
-            )
-
-            intended_direction = DEFAULT_SNAKE_DIRECTION
-            prev_direction = DEFAULT_SNAKE_DIRECTION
-
-            destroy_interface(root)
-            game_handler = init_interface(root, agent)
-
-            return
 
         root.frames["train"].board.fill(
             game_handler.blocks_to_update, game_handler.length
