@@ -31,12 +31,10 @@ def render_game_mode(
 
     root.frames["game"].game_data = GameData(
         root.frames["game"],
-        {
-            "moves": game_handler.moves,
-            "length": game_handler.length,
-            "red_apples": game_handler.apples_red,
-            "green_apples": game_handler.apples_green,
-        },
+        moves=game_handler.moves,
+        length=game_handler.length,
+        red_apples=game_handler.apples_red,
+        green_apples=game_handler.apples_green,
     )
 
     intended_direction = DEFAULT_SNAKE_DIRECTION

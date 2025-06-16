@@ -10,7 +10,14 @@ from .DataFrame import DataFrame
 
 
 class GameData(tk.LabelFrame):
-    def __init__(self, parent: tk.Tk, args: dict):
+    def __init__(
+        self,
+        parent: tk.Tk,
+        length: int,
+        red_apples: int,
+        green_apples: int,
+        moves: int,
+    ):
         super().__init__(
             parent,
             bg=LIGHT_GREY,
@@ -23,15 +30,13 @@ class GameData(tk.LabelFrame):
 
         self.grid(row=1, column=1, sticky="nsew")
 
-        self.__moves = DataFrame(self, label="Moves", value=str(args["moves"]))
-        self.__length = DataFrame(
-            self, label="Length", value=str(args["length"])
-        )
+        self.__moves = DataFrame(self, label="Moves", value=str(moves))
+        self.__length = DataFrame(self, label="Length", value=str(length))
         self.__red_apples = DataFrame(
-            self, label="Red apples", value=str(args["red_apples"])
+            self, label="Red apples", value=str(red_apples)
         )
         self.__green_apples = DataFrame(
-            self, label="Green apples", value=str(args["green_apples"])
+            self, label="Green apples", value=str(green_apples)
         )
 
     def update_data(self, args: dict) -> None:

@@ -26,12 +26,10 @@ def init_interface(root: Root, agent: Agent):
 
     root.frames["train"].game_data = GameData(
         root,
-        {
-            "moves": game_handler.moves,
-            "length": game_handler.length,
-            "red_apples": game_handler.apples_red,
-            "green_apples": game_handler.apples_green,
-        },
+        moves=game_handler.moves,
+        length=game_handler.length,
+        red_apples=game_handler.apples_red,
+        green_apples=game_handler.apples_green,
     )
 
     agent.update_context(
