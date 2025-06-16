@@ -2,7 +2,7 @@ import tkinter as tk
 
 from constants import SnakeDirection
 
-DEFAULT_SPEED_MS = 1_000
+DEFAULT_SPEED_MS = 750  # the smaller the faster
 
 
 class PlayPage(tk.Frame):
