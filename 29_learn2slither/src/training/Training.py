@@ -36,7 +36,9 @@ class Training:
     def __import_training_data(self) -> None:
         training_data = {}
         try:
-            with open("q_table.json", "r", encoding="utf-8") as file:
+            filename = "training_data.json"
+            path = "../models/" + filename
+            with open(path, "r", encoding="utf-8") as file:
                 body = json.load(file)
 
             training_data["learning_rate"] = body.get("learning_rate", None)
@@ -155,7 +157,10 @@ class Training:
             "exploration_rate": self.__exploration_rate,
             "entries": entries,
         }
-        with open("q_table.json", "w", encoding="utf-8") as file:
+
+        filename = "training_data.json"
+        path = "../models/" + filename
+        with open(path, "w", encoding="utf-8") as file:
             json.dump(body, file, indent=2, ensure_ascii=False)
 
     def __calc_reward(
