@@ -63,5 +63,5 @@ class Agent:
 
         self.__training.train(new_block, prev_context, self.__context, move)
 
-    def save_q_table_to_file(self) -> None:
-        self.__training.save_q_table_to_file()
+    def save_training_data_to_file(self) -> None:
+        self.__training.save_training_data_to_file()

@@ -1,10 +1,10 @@
 {
   "file_name": "2025-05-09_W10_H10_map",
-  "green_apples": 2,
-  "height": 12,
-  "randomized": true,
+  "green_apples": 5,
+  "height": 20,
+  "randomized": false,
   "red_apples": 1,
   "snake_length": 3,
-  "width": 12,
-  "victory_length": 10
+  "width": 20,
+  "victory_length": 20
 }

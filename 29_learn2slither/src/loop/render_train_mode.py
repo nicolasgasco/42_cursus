@@ -130,7 +130,7 @@ def render_train_mode(root: Root):
         )
 
         if current_episode >= max_episodes:
-            agent.save_q_table_to_file()
+            agent.save_training_data_to_file()
             print("Training completed.")
             root.quit()
             return

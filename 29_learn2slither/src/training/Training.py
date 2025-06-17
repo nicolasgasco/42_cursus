@@ -15,13 +15,13 @@ from constants import (
 
 class Training:
     def __init__(self):
-        self.__q_table = self.__init_q_table()
-        self.__learning_rate = 0.05
-        self.__discount_factor = 0.98
-        self.__exploration_rate = (
-            EXPLORATION_RATE_MAX
-            if len(self.__q_table) == 0
-            else EXPLORATION_RATE_MIN
+        training_data = self.__import_training_data()
+
+        self.__q_table = training_data.get("q_table", {})
+        self.__learning_rate = training_data.get("learning_rate", 0.05)
+        self.__discount_factor = training_data.get("discount_factor", 0.98)
+        self.__exploration_rate = training_data.get(
+            "exploration_rate", EXPLORATION_RATE_MAX
         )
 
         self.__directions = [
@@ -31,27 +31,36 @@ class Training:
             SnakeDirection.LEFT.value,
         ]
 
-        schedule.every(15).seconds.do(self.save_q_table_to_file)
+        schedule.every(15).seconds.do(self.save_training_data_to_file)
 
-    def __init_q_table(self) -> None:
-        q_table = {}
+    def __import_training_data(self) -> None:
+        training_data = {}
         try:
             with open("q_table.json", "r", encoding="utf-8") as file:
-                entries = json.load(file)
+                body = json.load(file)
 
-            for entry in entries:
+            training_data["learning_rate"] = body.get("learning_rate", None)
+            training_data["discount_factor"] = body.get(
+                "discount_factor", None
+            )
+            training_data["exploration_rate"] = body.get(
+                "exploration_rate", None
+            )
+            training_data["q_table"] = {}
+            for entry in body["entries"]:
                 state = entry["state"]
                 actions = entry["actions"]
-                q_table[state] = {
+
+                training_data["q_table"][state] = {
                     SnakeDirection.UP.value: actions[0],
                     SnakeDirection.RIGHT.value: actions[1],
                     SnakeDirection.DOWN.value: actions[2],
                     SnakeDirection.LEFT.value: actions[3],
                 }
 
-            return q_table
+            return training_data
         except FileNotFoundError:
-            return q_table
+            return training_data
 
     def simplify_context(self, context: dict) -> dict:
         context_props = context.keys()
@@ -128,7 +137,7 @@ class Training:
         return self.__next_move
 
     # TODO improve this
-    def save_q_table_to_file(self) -> None:
+    def save_training_data_to_file(self) -> None:
         print("Saving Q-table to file...")
 
         entries = []
@@ -140,8 +149,14 @@ class Training:
                 }
             )
 
+        body = {
+            "learning_rate": self.__learning_rate,
+            "discount_factor": self.__discount_factor,
+            "exploration_rate": self.__exploration_rate,
+            "entries": entries,
+        }
         with open("q_table.json", "w", encoding="utf-8") as file:
-            json.dump(entries, file, indent=2, ensure_ascii=False)
+            json.dump(body, file, indent=2, ensure_ascii=False)
 
     def __calc_reward(
         self, new_block: str, prev_context: dict, move: str
