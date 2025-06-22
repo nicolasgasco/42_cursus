@@ -7,6 +7,7 @@ from constants import (
     LIGHT_GREY,
     PRIMARY,
 )
+from settings_parser import SettingsParser
 
 
 class Controls(tk.LabelFrame):
@@ -27,8 +28,13 @@ class Controls(tk.LabelFrame):
 
         self.grid(row=0, column=0, sticky="nsew")
 
+        is_interactive_mode = SettingsParser("train").settings.get(
+            "interactive_mode", False
+        )
+
         self.__create_buttons()
-        self.__create_speed_radio()
+        if not is_interactive_mode:
+            self.__create_speed_radio()
 
     def __create_speed_radio(self) -> None:
         frame = tk.LabelFrame(
