@@ -13,6 +13,7 @@ from .settings import (
     TRAIN_SETTINGS_FILE_NAME,
 )
 from .train import (
+    DEFAULT_EXISTING_MODEL,
     DEFAULT_MAX_EPISODES,
     EXPLORATION_RATE_DECAY,
     EXPLORATION_RATE_MAX,
@@ -46,4 +47,5 @@ __all__ = [
     "EXPLORATION_RATE_MIN",
     "EXPLORATION_RATE_MAX",
     "REWARDS",
+    "DEFAULT_EXISTING_MODEL",
 ]

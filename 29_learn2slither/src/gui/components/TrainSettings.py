@@ -1,9 +1,13 @@
 import json as json
 import tkinter as tk
-from os import path
+from os import path, listdir
 
-from constants import DEFAULT_MAX_EPISODES, SETTINGS_DIR_PATH
-from constants.settings import TRAIN_SETTINGS_FILE_NAME
+from constants import (
+    DEFAULT_MAX_EPISODES,
+    SETTINGS_DIR_PATH,
+    DEFAULT_EXISTING_MODEL,
+    TRAIN_SETTINGS_FILE_NAME,
+)
 
 
 class TrainSettings(tk.LabelFrame):
@@ -16,13 +20,15 @@ class TrainSettings(tk.LabelFrame):
             width=300,
         )
 
-        self.__interactive_mode = tk.BooleanVar(value=True)
         self.__max_episodes = tk.StringVar(value=DEFAULT_MAX_EPISODES)
+        self.__existing_model = tk.StringVar(value=DEFAULT_EXISTING_MODEL)
+        self.__interactive_mode = tk.BooleanVar(value=True)
 
-        self.__render_max_episodes_widget()
+        self.__render_max_episodes_dropdown()
+        self.__render_import_model_dropdown()
         self.__render_interactive_mode_toggle()
 
-    def __render_max_episodes_widget(self) -> None:
+    def __render_max_episodes_dropdown(self) -> None:
         frame = tk.Frame(self)
         frame.pack(fill=tk.X, padx=10, pady=10)
 
@@ -30,16 +36,16 @@ class TrainSettings(tk.LabelFrame):
         label.pack(side=tk.LEFT, padx=5)
 
         options = [
-            {"label": "1", "value": 1},
-            {"label": "10", "value": 10},
-            {"label": "100", "value": 100},
-            {"label": "1,000", "value": DEFAULT_MAX_EPISODES},
-            {"label": "2,000", "value": 2_000},
-            {"label": "5,000", "value": 5_000},
-            {"label": "10,000", "value": 10_000},
-            {"label": "20,000", "value": 20_000},
-            {"label": "50,000", "value": 50_000},
-            {"label": "100,000", "value": 100_000},
+            1,
+            10,
+            100,
+            DEFAULT_MAX_EPISODES,
+            2_000,
+            5_000,
+            10_000,
+            20_000,
+            50_000,
+            100_000,
         ]
 
         self.__store_setting_in_file("max_episodes", DEFAULT_MAX_EPISODES)
@@ -47,7 +53,7 @@ class TrainSettings(tk.LabelFrame):
         dropdown = tk.OptionMenu(
             frame,
             self.__max_episodes,
-            *[option["value"] for option in options],
+            *[option for option in options],
             command=lambda value: self.__store_setting_in_file(
                 "max_episodes", int(value)
             ),
@@ -99,3 +105,37 @@ class TrainSettings(tk.LabelFrame):
             font=("Arial", 12),
         )
         subtitle.pack(side=tk.LEFT, padx=5)
+
+    def __get_list_of_models(self) -> list[str]:
+        # TODO change to constant
+        models_path = "../models"
+
+        if not path.exists(models_path):
+            return []
+
+        return [
+            file_name.split(".")[0]
+            for file_name in listdir(models_path)
+            if file_name.endswith(".json")
+        ]
+
+    def __render_import_model_dropdown(self) -> None:
+        frame = tk.Frame(self)
+        frame.pack(fill=tk.X, padx=10, pady=10)
+
+        label = tk.Label(frame, text="Import existing model")
+        label.pack(side=tk.LEFT, padx=5)
+
+        models = self.__get_list_of_models()
+        options = [DEFAULT_EXISTING_MODEL] + sorted(models, reverse=True)
+
+        dropdown = tk.OptionMenu(
+            frame,
+            self.__existing_model,
+            *[option for option in options],
+            command=lambda value: self.__store_setting_in_file(
+                "existing_model",
+                value if value != DEFAULT_EXISTING_MODEL else None,
+            ),
+        )
+        dropdown.pack(side=tk.LEFT, padx=5)
