@@ -130,7 +130,7 @@ def render_train_mode(root: Root):
         )
 
         if current_episode >= max_episodes:
-            agent.save_training_data_to_file()
+            agent.save_training_data_to_file(current_episode)
             print("Training completed.")
             root.quit()
             return
@@ -149,7 +149,11 @@ def render_train_mode(root: Root):
             head_pos=game_handler.head_pos,
         )
 
-        agent.train(replaced_block, prev_context, intended_direction)
+        agent.train(
+            replaced_block,
+            prev_context,
+            intended_direction,
+        )
 
         root.frames["train"].game_data.update_data(
             moves=game_handler.moves,

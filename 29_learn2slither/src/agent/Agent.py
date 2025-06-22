@@ -61,7 +61,12 @@ class Agent:
         if new_block is None:
             return
 
-        self.__training.train(new_block, prev_context, self.__context, move)
+        self.__training.train(
+            new_block,
+            prev_context,
+            self.__context,
+            move,
+        )
 
-    def save_training_data_to_file(self) -> None:
-        self.__training.save_training_data_to_file()
+    def save_training_data_to_file(self, episodes=None) -> None:
+        self.__training.save_training_data_to_file(episodes)

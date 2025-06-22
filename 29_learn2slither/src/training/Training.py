@@ -27,6 +27,7 @@ class Training:
             else {}
         )
 
+        self.__prev_episodes = training_data.get("episodes", None)
         self.__q_table = training_data.get("q_table", {})
         self.__learning_rate = training_data.get("learning_rate", 0.05)
         self.__discount_factor = training_data.get("discount_factor", 0.98)
@@ -41,7 +42,6 @@ class Training:
             SnakeDirection.LEFT.value,
         ]
 
-        self.save_training_data_to_file()
         schedule.every(15).seconds.do(self.save_training_data_to_file)
 
     def __import_training_data(self, model_id: str | None) -> None:
@@ -53,6 +53,7 @@ class Training:
             with open(path, "r", encoding="utf-8") as file:
                 body = json.load(file)
 
+            training_data["episodes"] = body.get("episodes", None)
             training_data["learning_rate"] = body.get("learning_rate", None)
             training_data["discount_factor"] = body.get(
                 "discount_factor", None
@@ -152,7 +153,7 @@ class Training:
         return self.__next_move
 
     # TODO improve this
-    def save_training_data_to_file(self) -> None:
+    def save_training_data_to_file(self, episodes=None) -> None:
         print("Saving Q-table to file...")
 
         entries = []
@@ -164,7 +165,10 @@ class Training:
                 }
             )
 
+        prev_episodes = self.__prev_episodes or 0
+        episodes = episodes or 0
         body = {
+            "episodes": prev_episodes + episodes,
             "learning_rate": self.__learning_rate,
             "discount_factor": self.__discount_factor,
             "exploration_rate": self.__exploration_rate,
