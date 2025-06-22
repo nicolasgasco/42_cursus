@@ -129,6 +129,7 @@ class TrainSettings(tk.LabelFrame):
         models = self.__get_list_of_models()
         options = [DEFAULT_EXISTING_MODEL] + sorted(models, reverse=True)
 
+        self.__store_setting_in_file("existing_model", None)
         dropdown = tk.OptionMenu(
             frame,
             self.__existing_model,

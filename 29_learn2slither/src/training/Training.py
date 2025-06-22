@@ -41,6 +41,7 @@ class Training:
             SnakeDirection.LEFT.value,
         ]
 
+        self.save_training_data_to_file()
         schedule.every(15).seconds.do(self.save_training_data_to_file)
 
     def __import_training_data(self, model_id: str | None) -> None:
@@ -174,7 +175,7 @@ class Training:
         filename = (
             f"{self.__existing_model}.json"
             if self.__existing_model
-            else f"model_{timestamp}.json"
+            else f"{timestamp}.json"
         )
         path = "../models/" + filename
         with open(path, "w", encoding="utf-8") as file:
