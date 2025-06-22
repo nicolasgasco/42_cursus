@@ -1,5 +1,6 @@
 import json
 from random import random
+import time as time
 
 import schedule as schedule
 
@@ -35,6 +36,7 @@ class Training:
 
     def __import_training_data(self) -> None:
         training_data = {}
+        # TODO change name to timestamp
         try:
             filename = "training_data.json"
             path = "../models/" + filename
@@ -60,6 +62,7 @@ class Training:
                     SnakeDirection.LEFT.value: actions[3],
                 }
 
+            print(f"Training data imported from {path}")
             return training_data
         except FileNotFoundError:
             return training_data
@@ -158,7 +161,8 @@ class Training:
             "entries": entries,
         }
 
-        filename = "training_data.json"
+        timestamp = int(time.time())
+        filename = f"{timestamp}.json"
         path = "../models/" + filename
         with open(path, "w", encoding="utf-8") as file:
             json.dump(body, file, indent=2, ensure_ascii=False)
