@@ -171,7 +171,11 @@ class Training:
         }
 
         timestamp = int(time.time())
-        filename = f"{timestamp}.json"
+        filename = (
+            f"{self.__existing_model}.json"
+            if self.__existing_model
+            else f"model_{timestamp}.json"
+        )
         path = "../models/" + filename
         with open(path, "w", encoding="utf-8") as file:
             json.dump(body, file, indent=2, ensure_ascii=False)
