@@ -1,11 +1,11 @@
 import json as json
 import tkinter as tk
-from os import path, listdir
+from os import listdir, path
 
 from constants import (
+    DEFAULT_EXISTING_MODEL,
     DEFAULT_MAX_EPISODES,
     SETTINGS_DIR_PATH,
-    DEFAULT_EXISTING_MODEL,
     TRAIN_SETTINGS_FILE_NAME,
 )
 
