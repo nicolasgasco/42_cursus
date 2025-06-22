@@ -1,5 +1,5 @@
 from gui import Root
-from loop import (
+from pages import (
     render_game_mode,
     render_landing,
     render_train_mode,
