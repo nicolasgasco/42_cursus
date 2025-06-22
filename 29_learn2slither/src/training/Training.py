@@ -1,6 +1,6 @@
 import json
-from random import random
 import time as time
+from random import random
 
 import schedule as schedule
 
@@ -12,11 +12,20 @@ from constants import (
     BoardBlockSymbol,
     SnakeDirection,
 )
+from settings_parser import SettingsParser
 
 
 class Training:
     def __init__(self):
-        training_data = self.__import_training_data()
+        self.__existing_model = SettingsParser("train").settings[
+            "existing_model"
+        ]
+
+        training_data = (
+            self.__import_training_data(self.__existing_model)
+            if self.__existing_model
+            else {}
+        )
 
         self.__q_table = training_data.get("q_table", {})
         self.__learning_rate = training_data.get("learning_rate", 0.05)
@@ -34,11 +43,11 @@ class Training:
 
         schedule.every(15).seconds.do(self.save_training_data_to_file)
 
-    def __import_training_data(self) -> None:
+    def __import_training_data(self, model_id: str | None) -> None:
         training_data = {}
         # TODO change name to timestamp
         try:
-            filename = "training_data.json"
+            filename = f"{model_id}.json"
             path = "../models/" + filename
             with open(path, "r", encoding="utf-8") as file:
                 body = json.load(file)
@@ -62,7 +71,7 @@ class Training:
                     SnakeDirection.LEFT.value: actions[3],
                 }
 
-            print(f"Training data imported from {path}")
+            print(f"Training data imported from {filename}")
             return training_data
         except FileNotFoundError:
             return training_data
