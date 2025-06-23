@@ -62,7 +62,8 @@ def render_train_mode(root: Root):
     start = t.time()
 
     train_settings = SettingsParser("train").settings
-    interactive_mode = train_settings["interactive_mode"]
+    interactive_mode = bool(train_settings["interactive_mode"])
+    benchmark_mode = bool(train_settings["benchmark_mode"])
     max_episodes = train_settings["max_episodes"]
 
     agent = Agent()
@@ -130,8 +131,9 @@ def render_train_mode(root: Root):
         )
 
         if current_episode >= max_episodes:
-            agent.save_training_data_to_file(current_episode)
-            print("Training completed.")
+            if not benchmark_mode:
+                agent.save_training_data_to_file(current_episode)
+                print("Training completed.")
             root.quit()
             return
 
@@ -149,11 +151,12 @@ def render_train_mode(root: Root):
             head_pos=game_handler.head_pos,
         )
 
-        agent.train(
-            replaced_block,
-            prev_context,
-            intended_direction,
-        )
+        if not benchmark_mode:
+            agent.train(
+                replaced_block,
+                prev_context,
+                intended_direction,
+            )
 
         root.frames["train"].game_data.update_data(
             moves=game_handler.moves,
