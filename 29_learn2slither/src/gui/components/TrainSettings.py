@@ -23,10 +23,12 @@ class TrainSettings(tk.LabelFrame):
         self.__max_episodes = tk.StringVar(value=DEFAULT_MAX_EPISODES)
         self.__existing_model = tk.StringVar(value=DEFAULT_EXISTING_MODEL)
         self.__interactive_mode = tk.BooleanVar(value=True)
+        self.__benchmark_mode = tk.BooleanVar(value=False)
 
         self.__render_max_episodes_dropdown()
         self.__render_import_model_dropdown()
         self.__render_interactive_mode_toggle()
+        self.__render_benchmark_mode_toggle()
 
     def __render_max_episodes_dropdown(self) -> None:
         frame = tk.Frame(self)
@@ -140,3 +142,31 @@ class TrainSettings(tk.LabelFrame):
             ),
         )
         dropdown.pack(side=tk.LEFT, padx=5)
+
+    def __render_benchmark_mode_toggle(self) -> None:
+        frame = tk.Frame(self)
+        frame.pack(fill=tk.X, padx=10, pady=10)
+
+        label = tk.Label(frame, text="Benchmark mode")
+        label.pack(side=tk.LEFT, padx=5)
+
+        self.__store_setting_in_file("benchmark_mode", False)
+        checkbox = tk.Checkbutton(
+            frame,
+            variable=self.__benchmark_mode,
+            command=lambda: self.__store_setting_in_file(
+                "benchmark_mode", bool(self.__benchmark_mode.get())
+            ),
+            onvalue=True,
+            offvalue=False,
+        )
+        checkbox.pack(side=tk.LEFT, padx=5)
+
+        subtitle = tk.Label(
+            frame,
+            text=(
+                "(active to measure the performance of the agent (no training)"
+            ),
+            font=("Arial", 12),
+        )
+        subtitle.pack(side=tk.LEFT, padx=5)
