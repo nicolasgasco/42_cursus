@@ -63,7 +63,7 @@ class Training:
             )
             training_data["q_table"] = {}
             for entry in body["entries"]:
-                state = entry["state"]
+                state = tuple(tuple(state) for state in entry["state"])
                 actions = entry["actions"]
 
                 training_data["q_table"][state] = {
@@ -105,15 +105,15 @@ class Training:
 
         return tuple(direction_props)
 
-    def __is_random_action(self) -> bool:
-        is_random_action = random() < self.__exploration_rate
+    def __is_exploration_action(self) -> bool:
+        is_exploration_action = random() < self.__exploration_rate
 
         self.__exploration_rate = max(
             EXPLORATION_RATE_MIN,
             self.__exploration_rate - EXPLORATION_RATE_DECAY,
         )
 
-        return is_random_action
+        return is_exploration_action
 
     def __pick_highest_q_value_action(
         self, simplified_context: dict
@@ -135,18 +135,19 @@ class Training:
 
         simplified_context = self.simplify_context(context)
 
-        if simplified_context not in self.__q_table:
+        is_known_context = simplified_context in self.__q_table
+        if not is_known_context:
             self.__q_table[simplified_context] = {
                 direction: 0 for direction in self.__directions
             }
 
-        is_random_action = self.__is_random_action()
         random_index = int(random() * len(self.__directions))
 
-        if is_random_action:
+        is_exploration_action = self.__is_exploration_action()
+        if is_exploration_action:
             return self.__directions[random_index]
 
-        if simplified_context in self.__q_table:
+        if is_known_context:
             return self.__pick_highest_q_value_action(simplified_context)
 
         self.__next_move = self.__directions[random_index]
@@ -160,7 +161,7 @@ class Training:
         for state, actions in self.__q_table.items():
             entries.append(
                 {
-                    "state": str(state),
+                    "state": state,
                     "actions": [q_value for q_value in actions.values()],
                 }
             )
