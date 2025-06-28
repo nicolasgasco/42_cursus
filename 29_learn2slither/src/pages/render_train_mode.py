@@ -84,6 +84,7 @@ def render_train_mode(root: Root):
         root,
         games_played=agent.training_stats.games_lost
         + agent.training_stats.games_won,
+        max_games=max_episodes,
         games_won=agent.training_stats.games_won,
         games_lost=agent.training_stats.games_lost,
         elapsed_time=(t.time() - start),
