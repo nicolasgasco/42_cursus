@@ -15,6 +15,7 @@ class TrainPage(tk.Frame):
         self.__controls = None
         self.__game_data = None
         self.__train_data = None
+        self.__agent_data = None
         self.__context_data = None
 
         self.__tick_id = None
@@ -50,6 +51,14 @@ class TrainPage(tk.Frame):
     @train_data.setter
     def train_data(self, data):
         self.__train_data = data
+
+    @property
+    def agent_data(self):
+        return self.__agent_data
+
+    @agent_data.setter
+    def agent_data(self, data):
+        self.__agent_data = data
 
     @property
     def context_data(self):

@@ -24,7 +24,7 @@ class ContextData(tk.LabelFrame):
             pady=DEFAULT_PADDING,
         )
 
-        self.grid(row=2, column=1, sticky="nsew")
+        self.grid(row=1, column=1, sticky="nsew")
 
         self.__blank_map = self.__generate_blank_map()
         self.__map = self.__blank_map

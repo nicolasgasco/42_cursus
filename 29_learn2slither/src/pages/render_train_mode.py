@@ -16,6 +16,7 @@ from gui import (
     Root,
     TrainData,
     TrainPage,
+    AgentData,
 )
 from map import MapGenerator
 from settings_parser import SettingsParser
@@ -88,6 +89,14 @@ def render_train_mode(root: Root):
         games_won=agent.training_stats.games_won,
         games_lost=agent.training_stats.games_lost,
         elapsed_time=(t.time() - start),
+    )
+
+    root.frames["train"].agent_data = AgentData(
+        root,
+        learning_rate=agent.learning_rate,
+        discount_factor=agent.discount_factor,
+        exploration_rate=agent.exploration_rate,
+        q_table_entries=agent.q_table_entries,
     )
 
     intended_direction = DEFAULT_SNAKE_DIRECTION
@@ -174,6 +183,13 @@ def render_train_mode(root: Root):
                 prev_context,
                 intended_direction,
             )
+
+        root.frames["train"].agent_data.update_data(
+            learning_rate=agent.learning_rate,
+            discount_factor=agent.discount_factor,
+            exploration_rate=agent.exploration_rate,
+            q_table_entries=agent.q_table_entries,
+        )
 
         if not is_max_speed:
             root.frames["train"].game_data.update_data(

@@ -44,6 +44,22 @@ class Training:
 
         schedule.every(15).seconds.do(self.save_training_data_to_file)
 
+    @property
+    def learning_rate(self) -> float:
+        return self.__learning_rate
+
+    @property
+    def discount_factor(self) -> float:
+        return self.__discount_factor
+
+    @property
+    def exploration_rate(self) -> float:
+        return self.__exploration_rate
+
+    @property
+    def q_table_entries(self) -> int:
+        return len(self.__q_table)
+
     def __import_training_data(self, model_id: str | None) -> None:
         training_data = {}
         # TODO change name to timestamp

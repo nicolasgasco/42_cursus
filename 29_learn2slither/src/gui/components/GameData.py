@@ -28,7 +28,7 @@ class GameData(tk.LabelFrame):
             pady=DEFAULT_PADDING,
         )
 
-        self.grid(row=1, column=1, sticky="nsew")
+        self.grid(row=1, column=2, sticky="nsew")
 
         self.__moves = DataFrame(self, label="Moves", value=str(moves))
         self.__length = DataFrame(self, label="Length", value=str(length))

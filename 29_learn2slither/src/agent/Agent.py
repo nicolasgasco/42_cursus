@@ -25,6 +25,22 @@ class Agent:
     def context(self) -> dict:
         return self.__context
 
+    @property
+    def learning_rate(self) -> float:
+        return self.__training.learning_rate
+
+    @property
+    def discount_factor(self) -> float:
+        return self.__training.discount_factor
+
+    @property
+    def exploration_rate(self) -> float:
+        return self.__training.exploration_rate
+
+    @property
+    def q_table_entries(self) -> int:
+        return self.__training.q_table_entries
+
     def update_context(
         self, map: list[list[str]], head_pos: tuple[int, int]
     ) -> None:
