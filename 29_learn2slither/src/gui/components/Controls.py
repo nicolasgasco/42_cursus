@@ -1,4 +1,5 @@
 import tkinter as tk
+import sys as sys
 
 from constants import (
     BLACK,
@@ -57,21 +58,18 @@ class Controls(tk.LabelFrame):
         self.speed.set(DEFAULT_SPEED)
 
         speeds = [
-            "1",
-            DEFAULT_SPEED,
-            "20",
-            "1000",
-            "5000",
-            "10000",
-            "50000",
+            ("Normal", 1),
+            ("Fast", DEFAULT_SPEED),
+            ("Faster", 20),
+            ("Turbo", 50000),
         ]
 
-        for speed in speeds:
+        for label, value in speeds:
             radio = tk.Radiobutton(
                 frame,
-                text=f"{speed}x",
+                text=label,
                 variable=self.speed,
-                value=speed,
+                value=value,
                 bg=self["bg"],
                 fg=self["fg"],
                 font=("Arial", 12),
@@ -110,7 +108,7 @@ class Controls(tk.LabelFrame):
             frame,
             text="⏹︎ Stop",
             bg=self["bg"],
-            command=lambda: print("Stop button clicked!"),
+            command=lambda: sys.exit(0),
             font=("Arial", 20),
             borderwidth=0,
             padx=10,
