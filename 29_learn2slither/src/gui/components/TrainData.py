@@ -1,10 +1,6 @@
 import tkinter as tk
 
-from constants import (
-    BLACK,
-    DEFAULT_PADDING,
-    LIGHT_GREY,
-)
+from constants import BG, DEFAULT_PADDING, WHITE
 
 from .DataFrame import DataFrame
 
@@ -20,9 +16,9 @@ class TrainData(tk.LabelFrame):
     ):
         super().__init__(
             parent,
-            bg=LIGHT_GREY,
+            bg=BG,
             text="Training data",
-            fg=BLACK,
+            fg=WHITE,
             font=("Arial", 20, "bold"),
             padx=DEFAULT_PADDING,
             pady=DEFAULT_PADDING,

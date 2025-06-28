@@ -1,11 +1,5 @@
 import tkinter as tk
 
-from constants import (
-    BLACK,
-    LIGHT_GREY,
-    PRIMARY,
-)
-
 
 class DataFrame(tk.Frame):
     def __init__(self, parent: tk.Tk, value: str | int, label: str = None):
@@ -31,8 +25,7 @@ class DataFrame(tk.Frame):
             label = tk.Label(
                 self,
                 text=self.__label + " " * padding,
-                bg=LIGHT_GREY,
-                fg=BLACK,
+                bg=self["bg"],
                 font=("Arial", 18),
                 anchor="w",
             )
@@ -41,8 +34,7 @@ class DataFrame(tk.Frame):
         self.__value_label = tk.Label(
             self,
             text=value,
-            bg=LIGHT_GREY,
-            fg=PRIMARY,
+            bg=self["bg"],
             font=("Arial", 18),
             anchor="e",
         )

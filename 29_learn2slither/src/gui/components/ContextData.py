@@ -1,10 +1,10 @@
 import tkinter as tk
 
 from constants import (
-    BLACK,
+    BG,
     BLANK_CHARACTER,
     DEFAULT_PADDING,
-    LIGHT_GREY,
+    WHITE,
     BoardBlockSymbol,
 )
 from settings_parser import SettingsParser
@@ -16,9 +16,9 @@ class ContextData(tk.LabelFrame):
     def __init__(self, parent: tk.Tk):
         super().__init__(
             parent,
-            bg=LIGHT_GREY,
+            bg=BG,
             text="Context data",
-            fg=BLACK,
+            fg=WHITE,
             font=("Arial", 20, "bold"),
             padx=DEFAULT_PADDING,
             pady=DEFAULT_PADDING,

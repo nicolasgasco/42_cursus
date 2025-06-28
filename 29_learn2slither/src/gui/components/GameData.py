@@ -1,9 +1,9 @@
 import tkinter as tk
 
 from constants import (
-    BLACK,
+    BG,
     DEFAULT_PADDING,
-    LIGHT_GREY,
+    WHITE,
 )
 
 from .DataFrame import DataFrame
@@ -20,9 +20,9 @@ class GameData(tk.LabelFrame):
     ):
         super().__init__(
             parent,
-            bg=LIGHT_GREY,
+            bg=BG,
             text="Game data",
-            fg=BLACK,
+            fg=WHITE,
             font=("Arial", 20, "bold"),
             padx=DEFAULT_PADDING,
             pady=DEFAULT_PADDING,

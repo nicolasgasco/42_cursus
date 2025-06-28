@@ -33,6 +33,10 @@ class PlayPage(tk.Frame):
     def game_data(self, data):
         self.__game_data = data
 
+    @property
+    def is_paused(self) -> bool:
+        return self.__is_paused
+
     def toggle_pause(self) -> None:
         self.__is_paused = not self.__is_paused
 

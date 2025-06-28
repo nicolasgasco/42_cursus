@@ -1,12 +1,13 @@
-import tkinter as tk
 import sys as sys
+import tkinter as tk
 
 from constants import (
+    BG,
     BLACK,
     DEFAULT_PADDING,
     DEFAULT_SPEED,
-    LIGHT_GREY,
     PRIMARY,
+    WHITE,
 )
 from settings_parser import SettingsParser
 
@@ -15,9 +16,9 @@ class Controls(tk.LabelFrame):
     def __init__(self, parent: tk.Tk):
         super().__init__(
             parent,
-            bg=LIGHT_GREY,
+            bg=BG,
             text="Controls",
-            fg=BLACK,
+            fg=WHITE,
             font=("Arial", 20, "bold"),
             padx=DEFAULT_PADDING,
             pady=DEFAULT_PADDING,
@@ -92,11 +93,24 @@ class Controls(tk.LabelFrame):
             pady=DEFAULT_PADDING,
         )
 
+        PAUSE_LABEL = "⏸︎ Pause"
+        RESUME_LABEL = "▶︎ Resume"
         pause_button = tk.Button(
             frame,
-            text="⏸︎ Pause",
-            bg=self["bg"],
-            command=lambda: self.__parent.frames["train"].toggle_pause(),
+            text=PAUSE_LABEL,
+            bg=PRIMARY,
+            highlightbackground=PRIMARY,
+            fg=BLACK,
+            command=lambda: [
+                self.__parent.frames["train"].toggle_pause(),
+                pause_button.config(
+                    text=(
+                        RESUME_LABEL
+                        if self.__parent.frames["train"].is_paused
+                        else PAUSE_LABEL
+                    )
+                ),
+            ],
             font=("Arial", 20),
             borderwidth=0,
             padx=10,
