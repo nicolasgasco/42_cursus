@@ -13,7 +13,9 @@ from .BoardBlock import BoardBlock
 
 
 class Board(tk.Frame):
-    def __init__(self, parent: tk.Tk, *, map: list) -> None:
+    def __init__(
+        self, parent: tk.Tk, *, map: list, should_fill: bool = True
+    ) -> None:
         super().__init__(
             parent,
             bg=BLACK,
@@ -25,7 +27,8 @@ class Board(tk.Frame):
         self.grid(row=1, column=0, rowspan=2, sticky="nsew")
 
         self.__map = map if map.all() else self.__parse_board_from_file()
-        self.first_fill()
+        if should_fill:
+            self.first_fill()
 
         settings = SettingsParser("map").settings
         self.__victory_length = settings["victory_length"]

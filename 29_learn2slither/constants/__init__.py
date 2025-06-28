@@ -1,5 +1,10 @@
 from .board import BLANK_CHARACTER, BoardBlockSymbol
-from .game import DEFAULT_SNAKE_DIRECTION, DEFAULT_SPEED, SnakeDirection
+from .game import (
+    DEFAULT_SNAKE_DIRECTION,
+    DEFAULT_SPEED,
+    SnakeDirection,
+    MAX_SPEED,
+)
 from .palette import BLACK, GREY, LIGHT_GREY, PRIMARY, BG, WHITE
 from .path import (
     CONSTANTS_DIR_PATH,
@@ -50,4 +55,5 @@ __all__ = [
     "DEFAULT_EXISTING_MODEL",
     "BG",
     "WHITE",
+    "MAX_SPEED",
 ]

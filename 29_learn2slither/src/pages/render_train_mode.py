@@ -1,7 +1,12 @@
 import time as t
 
 from agent import Agent, TrainStats
-from constants import DEFAULT_SNAKE_DIRECTION, INTERACTIVE_ACTION
+from constants import (
+    DEFAULT_SNAKE_DIRECTION,
+    DEFAULT_SPEED,
+    INTERACTIVE_ACTION,
+    MAX_SPEED,
+)
 from game_logic import Game
 from gui import (
     Board,
@@ -16,11 +21,13 @@ from map import MapGenerator
 from settings_parser import SettingsParser
 
 
-def init_interface(root: Root, agent: Agent):
+def init_interface(root: Root, agent: Agent, is_max_speed: bool = False):
     map_generator = MapGenerator()
     map_generator.generate_map()
 
-    root.frames["train"].board = Board(root, map=map_generator.map)
+    root.frames["train"].board = Board(
+        root, map=map_generator.map, should_fill=(not is_max_speed)
+    )
 
     game_handler = Game(root.frames["train"].board.raw_map)
 
@@ -38,10 +45,12 @@ def init_interface(root: Root, agent: Agent):
     )
 
     root.frames["train"].context_data = ContextData(root)
-    root.frames["train"].context_data.update_data(
-        context=agent.context,
-        head_pos=game_handler.head_pos,
-    )
+
+    if not is_max_speed:
+        root.frames["train"].context_data.update_data(
+            context=agent.context,
+            head_pos=game_handler.head_pos,
+        )
 
     return game_handler
 
@@ -102,6 +111,13 @@ def render_train_mode(root: Root):
         nonlocal intended_direction
         nonlocal game_handler
 
+        speed = (
+            root.frames["train"].controls.speed.get()
+            if not interactive_mode
+            else DEFAULT_SPEED
+        )
+        is_max_speed = int(speed) == int(MAX_SPEED)
+
         if game_handler.game_over or game_handler.has_won:
             if game_handler.has_won:
                 print("✅ Game won")
@@ -122,7 +138,7 @@ def render_train_mode(root: Root):
             prev_direction = DEFAULT_SNAKE_DIRECTION
 
             destroy_interface(root)
-            game_handler = init_interface(root, agent)
+            game_handler = init_interface(root, agent, is_max_speed)
 
             return
 
@@ -158,21 +174,22 @@ def render_train_mode(root: Root):
                 intended_direction,
             )
 
-        root.frames["train"].game_data.update_data(
-            moves=game_handler.moves,
-            length=game_handler.length,
-            red_apples=game_handler.apples_red,
-            green_apples=game_handler.apples_green,
-        )
+        if not is_max_speed:
+            root.frames["train"].game_data.update_data(
+                moves=game_handler.moves,
+                length=game_handler.length,
+                red_apples=game_handler.apples_red,
+                green_apples=game_handler.apples_green,
+            )
 
-        root.frames["train"].context_data.update_data(
-            context=agent.context,
-            head_pos=game_handler.head_pos,
-        )
+            root.frames["train"].context_data.update_data(
+                context=agent.context,
+                head_pos=game_handler.head_pos,
+            )
 
-        root.frames["train"].board.fill(
-            game_handler.blocks_to_update, game_handler.length
-        )
+            root.frames["train"].board.fill(
+                game_handler.blocks_to_update, game_handler.length
+            )
 
     if not interactive_mode:
         root.frames["train"].tick(on_tick)

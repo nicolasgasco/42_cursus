@@ -11,3 +11,4 @@ class SnakeDirection(Enum):
 DEFAULT_SNAKE_DIRECTION = SnakeDirection.LEFT.value
 
 DEFAULT_SPEED = "10"
+MAX_SPEED = "100000"

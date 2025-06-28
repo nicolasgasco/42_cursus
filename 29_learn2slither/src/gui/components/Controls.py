@@ -6,6 +6,7 @@ from constants import (
     BLACK,
     DEFAULT_PADDING,
     DEFAULT_SPEED,
+    MAX_SPEED,
     PRIMARY,
     WHITE,
 )
@@ -59,10 +60,10 @@ class Controls(tk.LabelFrame):
         self.speed.set(DEFAULT_SPEED)
 
         speeds = [
-            ("Normal", 1),
+            ("Normal", "1"),
             ("Fast", DEFAULT_SPEED),
-            ("Faster", 20),
-            ("Turbo", 50000),
+            ("Faster", "20"),
+            ("Turbo", MAX_SPEED),
         ]
 
         for label, value in speeds:
