@@ -220,7 +220,11 @@ class Training:
             if BoardBlockSymbol.RED_APPLE.value in direction_context:
                 return -100
             if BoardBlockSymbol.GREEN_APPLE.value in direction_context:
-                return 50
+                return 250
+            if BoardBlockSymbol.WALL.value in direction_context:
+                return -10
+            if BoardBlockSymbol.BODY.value in direction_context:
+                return -10
 
         return REWARDS.get(new_block, 0)
 
