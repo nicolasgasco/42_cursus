@@ -48,6 +48,7 @@ class TrainSettings(tk.LabelFrame):
             20_000,
             50_000,
             100_000,
+            1_000_000,
         ]
 
         self.__store_setting_in_file("max_episodes", DEFAULT_MAX_EPISODES)
