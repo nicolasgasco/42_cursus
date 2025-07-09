@@ -53,7 +53,7 @@ def render_game_mode(
         if game_handler.game_over or game_handler.has_won:
             messagebox.showinfo(
                 title="Game Over",
-                message="You won!" if game_handler.has_won else "You lost!",
+                message="You won!" if game_handler.has_won else "Game over!",
                 icon=messagebox.INFO,
                 parent=root,
             )
