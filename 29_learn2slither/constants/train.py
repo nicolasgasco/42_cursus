@@ -13,7 +13,7 @@ EXPLORATION_RATE_MIN = 0.01
 EXPLORATION_RATE_MAX = 1.0
 
 REWARDS = {
-    BoardBlockSymbol.EMPTY.value: -10,
+    BoardBlockSymbol.EMPTY.value: -1,
     BoardBlockSymbol.BODY.value: -1000,
     BoardBlockSymbol.GREEN_APPLE.value: 500,
     BoardBlockSymbol.RED_APPLE.value: -250,
