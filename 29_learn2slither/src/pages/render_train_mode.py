@@ -9,6 +9,7 @@ from constants import (
 )
 from game_logic import Game
 from gui import (
+    AgentData,
     Board,
     ContextData,
     Controls,
@@ -16,7 +17,6 @@ from gui import (
     Root,
     TrainData,
     TrainPage,
-    AgentData,
 )
 from map import MapGenerator
 from settings_parser import SettingsParser

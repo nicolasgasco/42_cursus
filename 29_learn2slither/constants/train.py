@@ -1,4 +1,4 @@
-from constants import BoardBlockSymbol
+from constants import BoardBlockSymbol, SnakeDirection
 
 
 class INTERACTIVE_ACTION:
@@ -18,4 +18,18 @@ REWARDS = {
     BoardBlockSymbol.GREEN_APPLE.value: 500,
     BoardBlockSymbol.RED_APPLE.value: -250,
     BoardBlockSymbol.WALL.value: -1000,
+}
+
+DIRECTIONS = [
+    SnakeDirection.UP.value,
+    SnakeDirection.RIGHT.value,
+    SnakeDirection.DOWN.value,
+    SnakeDirection.LEFT.value,
+]
+
+DIRECTION_SYMBOLS = {
+    SnakeDirection.UP.value: "⬆️",
+    SnakeDirection.RIGHT.value: "➡️",
+    SnakeDirection.DOWN.value: "⬇️",
+    SnakeDirection.LEFT.value: "⬅️",
 }

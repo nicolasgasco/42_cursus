@@ -5,6 +5,8 @@ from random import random
 import schedule as schedule
 
 from constants import (
+    DIRECTION_SYMBOLS,
+    DIRECTIONS,
     EXPLORATION_RATE_DECAY,
     EXPLORATION_RATE_MAX,
     EXPLORATION_RATE_MIN,
@@ -35,13 +37,6 @@ class Training:
             "exploration_rate", EXPLORATION_RATE_MAX
         )
         self.__next_move_str = ""
-
-        self.__directions = [
-            SnakeDirection.UP.value,
-            SnakeDirection.RIGHT.value,
-            SnakeDirection.DOWN.value,
-            SnakeDirection.LEFT.value,
-        ]
 
         schedule.every(15).seconds.do(self.save_training_data_to_file)
 
@@ -159,24 +154,20 @@ class Training:
         is_known_context = simplified_context in self.__q_table
         if not is_known_context and not benchmark_mode:
             self.__q_table[simplified_context] = {
-                direction: 0 for direction in self.__directions
+                direction: 0 for direction in DIRECTIONS
             }
 
-        random_index = int(random() * len(self.__directions))
+        random_index = int(random() * len(DIRECTIONS))
 
         is_exploration_action = self.__is_exploration_action()
         if is_exploration_action:
-            next_move = self.__directions[random_index]
-            self.__next_move_str = f"Exploration: {next_move}"
-            return next_move
-
-        if is_known_context:
+            next_move = DIRECTIONS[random_index]
+        elif is_known_context:
             next_move = self.__pick_highest_q_value_action(simplified_context)
-            self.__next_move_str = f"In context: {next_move}"
-            return next_move
+        else:
+            next_move = DIRECTIONS[random_index]
 
-        next_move = self.__directions[random_index]
-        self.__next_move_str = f"Not in context: {next_move}"
+        self.__next_move_str = DIRECTION_SYMBOLS[next_move]
         return next_move
 
     # TODO improve this
@@ -250,7 +241,7 @@ class Training:
         context = self.simplify_context(context)
         if context not in self.__q_table:
             self.__q_table[context] = {
-                direction: 0 for direction in self.__directions
+                direction: 0 for direction in DIRECTIONS
             }
 
         reward = self.__calc_reward(new_block, prev_context, move)

@@ -25,6 +25,8 @@ from .train import (
     EXPLORATION_RATE_MIN,
     INTERACTIVE_ACTION,
     REWARDS,
+    DIRECTION_SYMBOLS,
+    DIRECTIONS,
 )
 from .ui import DEFAULT_PADDING
 
@@ -56,4 +58,6 @@ __all__ = [
     "BG",
     "WHITE",
     "MAX_SPEED",
+    "DIRECTIONS",
+    "DIRECTION_SYMBOLS",
 ]
