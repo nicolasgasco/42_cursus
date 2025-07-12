@@ -218,13 +218,22 @@ class Training:
             index = DIRECTION_INDEX[move]
             direction_context = prev_context[index]
 
-            if BoardBlockSymbol.RED_APPLE.value in direction_context:
+            non_empty_blocks = [
+                block
+                for block in direction_context
+                if block != BoardBlockSymbol.EMPTY.value
+            ]
+            next_non_empty_block = (
+                non_empty_blocks[0] if non_empty_blocks else None
+            )
+
+            if next_non_empty_block == BoardBlockSymbol.RED_APPLE.value:
                 return -100
-            if BoardBlockSymbol.GREEN_APPLE.value in direction_context:
+            if next_non_empty_block == BoardBlockSymbol.GREEN_APPLE.value:
                 return 250
-            if BoardBlockSymbol.WALL.value in direction_context:
+            if next_non_empty_block == BoardBlockSymbol.WALL.value:
                 return -10
-            if BoardBlockSymbol.BODY.value in direction_context:
+            if next_non_empty_block == BoardBlockSymbol.BODY.value:
                 return -10
 
         return REWARDS.get(new_block, 0)
