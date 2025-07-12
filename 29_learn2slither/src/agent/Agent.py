@@ -41,6 +41,10 @@ class Agent:
     def q_table_entries(self) -> int:
         return self.__training.q_table_entries
 
+    @property
+    def next_move_str(self) -> str:
+        return self.__training.next_move_str
+
     def update_context(
         self, map: list[list[str]], head_pos: tuple[int, int]
     ) -> None:

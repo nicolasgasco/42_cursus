@@ -204,6 +204,7 @@ def render_train_mode(root: Root):
             root.frames["train"].context_data.update_data(
                 context=agent.context,
                 head_pos=game_handler.head_pos,
+                next_move_str=agent.next_move_str,
             )
 
             root.frames["train"].board.fill(

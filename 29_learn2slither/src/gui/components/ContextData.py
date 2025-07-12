@@ -34,6 +34,12 @@ class ContextData(tk.LabelFrame):
             value=self.__map,
         )
 
+        self.__next_move = DataFrame(
+            self,
+            label="Next move",
+            value="-",
+        )
+
     def __generate_blank_map(self) -> str:
         settings = SettingsParser("map").settings
         map_width = settings["width"]
@@ -47,7 +53,10 @@ class ContextData(tk.LabelFrame):
         self,
         context: dict,
         head_pos: tuple[int, int],
+        next_move_str: str = "",
     ) -> None:
+        self.__next_move.update(next_move_str)
+
         contexts = [context for context in context.values()]
 
         map = [list(row) for row in self.__blank_map.split("\n")]

@@ -34,6 +34,7 @@ class Training:
         self.__exploration_rate = training_data.get(
             "exploration_rate", EXPLORATION_RATE_MAX
         )
+        self.__next_move_str = ""
 
         self.__directions = [
             SnakeDirection.UP.value,
@@ -59,6 +60,10 @@ class Training:
     @property
     def q_table_entries(self) -> int:
         return len(self.__q_table)
+
+    @property
+    def next_move_str(self) -> str:
+        return self.__next_move_str
 
     def __import_training_data(self, model_id: str | None) -> None:
         training_data = {}
@@ -149,8 +154,6 @@ class Training:
     def pick_next_move(
         self, context: dict, benchmark_mode: bool
     ) -> SnakeDirection:
-        self.__next_move = None
-
         simplified_context = self.simplify_context(context)
 
         is_known_context = simplified_context in self.__q_table
@@ -163,13 +166,18 @@ class Training:
 
         is_exploration_action = self.__is_exploration_action()
         if is_exploration_action:
-            return self.__directions[random_index]
+            next_move = self.__directions[random_index]
+            self.__next_move_str = f"Exploration: {next_move}"
+            return next_move
 
         if is_known_context:
-            return self.__pick_highest_q_value_action(simplified_context)
+            next_move = self.__pick_highest_q_value_action(simplified_context)
+            self.__next_move_str = f"In context: {next_move}"
+            return next_move
 
-        self.__next_move = self.__directions[random_index]
-        return self.__next_move
+        next_move = self.__directions[random_index]
+        self.__next_move_str = f"Not in context: {next_move}"
+        return next_move
 
     # TODO improve this
     def save_training_data_to_file(self, episodes=None) -> None:
