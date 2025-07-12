@@ -146,13 +146,15 @@ class Training:
 
         return best_action
 
-    def pick_next_move(self, context: dict) -> SnakeDirection:
+    def pick_next_move(
+        self, context: dict, benchmark_mode: bool
+    ) -> SnakeDirection:
         self.__next_move = None
 
         simplified_context = self.simplify_context(context)
 
         is_known_context = simplified_context in self.__q_table
-        if not is_known_context:
+        if not is_known_context and not benchmark_mode:
             self.__q_table[simplified_context] = {
                 direction: 0 for direction in self.__directions
             }

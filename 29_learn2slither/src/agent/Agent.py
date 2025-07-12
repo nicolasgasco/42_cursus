@@ -63,8 +63,10 @@ class Agent:
             for x in range(0, head_x)[::-1]  # so that wall is last
         ]
 
-    def pick_next_move(self) -> str:
-        pick_next_move = self.__training.pick_next_move(self.__context)
+    def pick_next_move(self, benchmark_mode: bool) -> str:
+        pick_next_move = self.__training.pick_next_move(
+            context=self.__context, benchmark_mode=benchmark_mode
+        )
 
         return pick_next_move
 

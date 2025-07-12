@@ -163,7 +163,9 @@ def render_train_mode(root: Root):
             root.quit()
             return
 
-        intended_direction = agent.pick_next_move()
+        intended_direction = agent.pick_next_move(
+            benchmark_mode=benchmark_mode
+        )
         replaced_block = game_handler.move_snake(intended_direction)
 
         if game_handler.has_moved:
