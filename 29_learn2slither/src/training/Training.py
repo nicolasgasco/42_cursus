@@ -228,12 +228,12 @@ class Training:
             )
 
             if next_non_empty_block == BoardBlockSymbol.RED_APPLE.value:
-                return -100
-            if next_non_empty_block == BoardBlockSymbol.GREEN_APPLE.value:
+                return -20
+            elif next_non_empty_block == BoardBlockSymbol.GREEN_APPLE.value:
                 return 250
-            if next_non_empty_block == BoardBlockSymbol.WALL.value:
+            elif next_non_empty_block == BoardBlockSymbol.WALL.value:
                 return -10
-            if next_non_empty_block == BoardBlockSymbol.BODY.value:
+            elif next_non_empty_block == BoardBlockSymbol.BODY.value:
                 return -10
 
         return REWARDS.get(new_block, 0)
