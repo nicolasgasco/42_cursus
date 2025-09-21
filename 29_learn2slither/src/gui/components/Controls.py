@@ -35,7 +35,7 @@ class Controls(tk.LabelFrame):
             "interactive_mode", False
         )
 
-        self.__create_buttons()
+        self.__create_buttons(is_interactive_mode)
         if not is_interactive_mode:
             self.__create_speed_radio()
 
@@ -79,7 +79,7 @@ class Controls(tk.LabelFrame):
             )
             radio.pack(side=tk.LEFT, padx=DEFAULT_PADDING)
 
-    def __create_buttons(self) -> None:
+    def __create_buttons(self, is_interactive_mode: bool) -> None:
         frame = tk.Frame(
             self,
             bg=self["bg"],
@@ -94,34 +94,35 @@ class Controls(tk.LabelFrame):
             pady=DEFAULT_PADDING,
         )
 
-        PAUSE_LABEL = "⏸︎ Pause"
-        RESUME_LABEL = "▶︎ Resume"
-        pause_button = tk.Button(
-            frame,
-            text=PAUSE_LABEL,
-            bg=PRIMARY,
-            highlightbackground=PRIMARY,
-            fg=BLACK,
-            command=lambda: [
-                self.__parent.frames["train"].toggle_pause(),
-                pause_button.config(
-                    text=(
-                        RESUME_LABEL
-                        if self.__parent.frames["train"].is_paused
-                        else PAUSE_LABEL
-                    )
-                ),
-            ],
-            font=("Arial", 20),
-            borderwidth=0,
-            padx=10,
-            pady=5,
-        )
-        pause_button.pack(side=tk.LEFT, padx=DEFAULT_PADDING)
+        if not is_interactive_mode:
+            PAUSE_LABEL = "⏸︎ Pause"
+            RESUME_LABEL = "▶︎ Resume"
+            pause_button = tk.Button(
+                frame,
+                text=PAUSE_LABEL,
+                bg=PRIMARY,
+                highlightbackground=PRIMARY,
+                fg=BLACK,
+                command=lambda: [
+                    self.__parent.frames["train"].toggle_pause(),
+                    pause_button.config(
+                        text=(
+                            RESUME_LABEL
+                            if self.__parent.frames["train"].is_paused
+                            else PAUSE_LABEL
+                        )
+                    ),
+                ],
+                font=("Arial", 20),
+                borderwidth=0,
+                padx=10,
+                pady=5,
+            )
+            pause_button.pack(side=tk.LEFT, padx=DEFAULT_PADDING)
 
         stop_button = tk.Button(
             frame,
-            text="⏹︎ Stop",
+            text="⏏ Exit",
             bg=self["bg"],
             command=lambda: sys.exit(0),
             font=("Arial", 20),
