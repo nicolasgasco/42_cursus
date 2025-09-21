@@ -22,27 +22,16 @@ class LandingPage(tk.Frame):
         return self.__train_button
 
     def __init_header(self):
-        frame = tk.Frame(
-            self,
-            bg=self["bg"],
-        )
+        frame = tk.Frame(self, bg=self["bg"])
         frame.pack(pady=10)
 
         title = tk.Label(
             frame,
-            text="🐍 Welcome to learn2slither! 🐍",
+            text="🐍 Welcome to my learn2slither project! 🐍",
             font=("Arial", 28, "bold"),
             bg=self["bg"],
         )
         title.pack(pady=10)
-
-        subtitle = tk.Label(
-            frame,
-            text="Choose one of the following options:",
-            font=("Arial", 16),
-            bg=self["bg"],
-        )
-        subtitle.pack(pady=10)
 
     def __init_actions(self):
         frame = tk.Frame(

@@ -101,10 +101,7 @@ class TrainSettings(tk.LabelFrame):
 
         subtitle = tk.Label(
             frame,
-            text=(
-                "(if activated, you will be able to control the agent "
-                "during training)"
-            ),
+            text=("activate to control agent during training"),
             font=("Arial", 12),
         )
         subtitle.pack(side=tk.LEFT, padx=5)
@@ -165,9 +162,7 @@ class TrainSettings(tk.LabelFrame):
 
         subtitle = tk.Label(
             frame,
-            text=(
-                "(active to measure the performance of the agent (no training)"
-            ),
+            text=("agent does not train, activate to monitor performance"),
             font=("Arial", 12),
         )
         subtitle.pack(side=tk.LEFT, padx=5)
