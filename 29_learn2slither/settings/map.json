@@ -2,7 +2,7 @@
   "file_name": "2025-05-09_W12_H12_map",
   "green_apples": 2,
   "height": 12,
-  "randomized": true,
+  "randomized": false,
   "red_apples": 1,
   "snake_length": 3,
   "width": 12,
