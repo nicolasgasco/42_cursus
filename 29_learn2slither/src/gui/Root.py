@@ -19,6 +19,8 @@ class Root(tk.Tk):
         self.bind("<Escape>", lambda _: self.quit())
         self.bind("<p>", lambda _: self.pause())
 
+        self.attributes("-fullscreen", True)
+
     @property
     def frames(self):
         return self.__frames
