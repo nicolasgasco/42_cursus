@@ -56,12 +56,3 @@ Training can be configured in the UI or in the `settings/train.json` file:
   "max_episodes": 200000 # The maximum number of training rounds
 }
 ```
-
-### Try out the game
-
-If you want to play as if you were the agent:
-
-```shell
-cd src/
-python3 loop.py --play
-```
