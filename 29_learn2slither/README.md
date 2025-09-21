@@ -49,7 +49,7 @@ cd src/
 python3 loop.py
 ```
 
-Training can be configured in `settings/train.json`:
+Training can be configured in the UI or in the `settings/train.json` file:
 
 ```json
 {
