@@ -22,7 +22,7 @@ class TrainSettings(tk.LabelFrame):
 
         self.__max_episodes = tk.StringVar(value=DEFAULT_MAX_EPISODES)
         self.__existing_model = tk.StringVar(value=DEFAULT_EXISTING_MODEL)
-        self.__interactive_mode = tk.BooleanVar(value=True)
+        self.__interactive_mode = tk.BooleanVar(value=False)
         self.__benchmark_mode = tk.BooleanVar(value=False)
 
         self.__render_max_episodes_dropdown()
