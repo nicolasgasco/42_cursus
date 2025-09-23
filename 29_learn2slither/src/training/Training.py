@@ -38,7 +38,7 @@ class Training:
         )
         self.__next_move_str = ""
 
-        schedule.every(15).seconds.do(self.save_training_data_to_file)
+        schedule.every(30).seconds.do(self.save_training_data_to_file)
 
     @property
     def learning_rate(self) -> float:
