@@ -1,9 +1,0 @@
-- Rewards should be assigned dynamically
-  - Game can be roughly divided into two parts:
-    - Growing: eating a green apple is desirable
-    - Surviving: once minimum length is achieve, eating green apple is not desirable
-- q-values should be stored for each cell and each unique state
-- if agent has to choose among equivalent q-values, it can choose randomly
-- Exploitation vs Exploration:
-  - epsilon-greedy: small percentage of times, agent doesn't choose the highest q-value, but a random one
-  - optimistic starting values: all q-values are initialized with values higher than the highest reward
