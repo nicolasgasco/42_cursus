@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+
+	"github.com/nicolasgasco/42_cursus/30_computorv1/internal/parser"
 )
 
 func validateArgs(args []string) error {
@@ -20,5 +22,11 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("Arguments: %v\n", os.Args[1:])
+	parsed, err := parser.Parse(os.Args[1])
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+
+	fmt.Printf("Parsed expression: %s\n", parsed)
 }
