@@ -1,0 +1,5 @@
+package parser
+
+const (
+	EqualSign = "="
+)
