@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
     "os"
+	"parser"
 )
 
 func main() {
@@ -15,5 +16,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Println("Input: ", args[0])
+	input := args[0]
+	Parser(input)
 }
