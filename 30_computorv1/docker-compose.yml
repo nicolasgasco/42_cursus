@@ -1,0 +1,9 @@
+services:
+  app:
+    image: "golang:1.27.0"
+    command: ["tail", "-f", "/dev/null"]
+    volumes:
+      - type: bind
+        source: ./
+        target: /computorv1
+    

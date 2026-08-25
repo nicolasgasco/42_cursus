@@ -5,3 +5,10 @@ This project aims to make you code a simple equation solving program. It will ta
 The idea is to get you (back) in touch with the manipulation of elementary mathematic
 tools you will be able to use in seveal 42 subjects. The idea is not to "just make maths".
 This exercise will allow you to approach exercises that will require these skills and knowledge with a restful mind.
+
+
+## Execute
+
+```
+$ docker exec -it -w /computorv1 30_computorv1-app-1 bash
+```
