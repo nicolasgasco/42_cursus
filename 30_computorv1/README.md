@@ -6,9 +6,9 @@ The idea is to get you (back) in touch with the manipulation of elementary mathe
 tools you will be able to use in seveal 42 subjects. The idea is not to "just make maths".
 This exercise will allow you to approach exercises that will require these skills and knowledge with a restful mind.
 
-
 ## Execute
 
 ```
+$ docker compose up -d
 $ docker exec -it -w /computorv1 30_computorv1-app-1 bash
 ```

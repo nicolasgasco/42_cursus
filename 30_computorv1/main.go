@@ -3,12 +3,13 @@ package main
 import (
 	"fmt"
 	"log"
-    "os"
-	"parser"
+	"os"
+
+	"computorv1/internal/parser"
 )
 
 func main() {
-    args := os.Args[1:]
+	args := os.Args[1:]
 	argsLen := len(args)
 
 	if argsLen != 1 {
@@ -17,5 +18,11 @@ func main() {
 	}
 
 	input := args[0]
-	Parser(input)
+	parsingChunks, err := parser.Parser(input)
+	if err != nil {
+		log.Fatal(err)
+		os.Exit(1)
+	}
+
+	fmt.Println("Parsing chunks: ", parsingChunks)
 }
