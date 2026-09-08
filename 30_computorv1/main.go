@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"computorv1/internal/parser"
+	"computorv1/internal/reducer"
 )
 
 func main() {
@@ -14,15 +15,18 @@ func main() {
 
 	if argsLen != 1 {
 		log.Fatal("Please enter exactly 1 argument")
-		os.Exit(1)
 	}
 
 	input := args[0]
 	parsingChunks, err := parser.Parser(input)
 	if err != nil {
 		log.Fatal(err)
-		os.Exit(1)
 	}
 
-	fmt.Println("Parsing chunks: ", parsingChunks)
+	reduced, err := reducer.Reducer(parsingChunks)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("reduced", reduced)
 }
