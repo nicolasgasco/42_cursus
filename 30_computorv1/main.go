@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"computorv1/internal/parser"
+	"computorv1/internal/printer"
 	"computorv1/internal/reducer"
 )
 
@@ -28,5 +29,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("reduced", reduced)
+	output := printer.Print(reduced)
+	fmt.Println(output)
 }

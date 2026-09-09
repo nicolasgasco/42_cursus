@@ -19,6 +19,13 @@ func Parser(input string) ([]model.ParsingChunk, error) {
 
 	for i, half := range halves {
 		isRightHandSide := i != 0
+
+		if isRightHandSide {
+			parsedHalf, err := strconv.Atoi(strings.TrimSpace(half))
+			if err != nil || parsedHalf == 0 {
+				continue
+			}
+		}
 		halfChunks, err := parseHalf(half, isRightHandSide)
 		if err != nil {
 			return nil, err

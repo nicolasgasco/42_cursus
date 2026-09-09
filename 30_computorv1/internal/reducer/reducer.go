@@ -2,6 +2,7 @@ package reducer
 
 import (
 	"computorv1/internal/model"
+	"sort"
 )
 
 func Reducer(input []model.ParsingChunk) ([]model.ParsingChunk, error) {
@@ -13,15 +14,15 @@ func Reducer(input []model.ParsingChunk) ([]model.ParsingChunk, error) {
 
 	reduced := make([]model.ParsingChunk, 0, len(byExponent))
 	for exponent, coefficient := range byExponent {
-		if exponent == 0 {
-			continue
-		}
-
 		reduced = append(reduced, model.ParsingChunk{
 			Coefficient: coefficient,
 			Exponent:    exponent,
 		})
 	}
+
+	sort.Slice(reduced, func(i, j int) bool {
+		return reduced[i].Exponent < reduced[j].Exponent
+	})
 
 	return reduced, nil
 }
