@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"os"
@@ -14,11 +15,29 @@ func main() {
 	args := os.Args[1:]
 	argsLen := len(args)
 
-	if argsLen != 1 {
+	var input string
+
+	switch argsLen {
+	case 0:
+		scanner := bufio.NewScanner(os.Stdin)
+		if !scanner.Scan() {
+			if err := scanner.Err(); err != nil {
+				log.Fatal(err)
+			}
+			log.Fatal("Please enter an equation")
+		}
+
+		input = scanner.Text()
+		if input == "" {
+			log.Fatal("Please enter an equation")
+
+		}
+	case 1:
+		input = args[0]
+	default:
 		log.Fatal("Please enter exactly 1 argument")
 	}
 
-	input := args[0]
 	parsingChunks, err := parser.Parser(input)
 	if err != nil {
 		log.Fatal(err)
