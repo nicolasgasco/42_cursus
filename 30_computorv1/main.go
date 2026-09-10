@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 
+	"computorv1/internal/computer"
 	"computorv1/internal/parser"
 	"computorv1/internal/printer"
 	"computorv1/internal/reducer"
@@ -51,6 +52,16 @@ func main() {
 
 	errors := validator.Validator(reduced)
 
-	output := printer.Print(reduced, errors)
+	var results []float64
+
+	noErrors := len(errors) == 0
+	if noErrors {
+		results, err = computer.Computer(reduced)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	output := printer.Print(reduced, errors, results)
 	fmt.Println(output)
 }

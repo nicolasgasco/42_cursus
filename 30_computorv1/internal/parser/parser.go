@@ -20,12 +20,10 @@ func Parser(input string) ([]model.ParsingChunk, error) {
 	for i, half := range halves {
 		isRightHandSide := i != 0
 
-		if isRightHandSide {
-			parsedHalf, err := strconv.Atoi(strings.TrimSpace(half))
-			if err != nil || parsedHalf == 0 {
-				continue
-			}
+		if isZeroRightHandSide := isRightHandSide && strings.TrimSpace(half) == "0"; isZeroRightHandSide {
+			continue
 		}
+
 		halfChunks, err := parseHalf(half, isRightHandSide)
 		if err != nil {
 			return nil, err
@@ -41,7 +39,8 @@ func parseHalf(input string, isRightHandSide bool) ([]model.ParsingChunk, error)
 
 	start := 0
 	for i, char := range input {
-		if char == '+' || char == '-' {
+		mathSignFound := char == '+' || char == '-'
+		if mathSignFound {
 			rawChunk := strings.Trim(input[start:i], " ")
 			chunk, err := parseChunk(rawChunk)
 			if err != nil {
@@ -52,7 +51,8 @@ func parseHalf(input string, isRightHandSide bool) ([]model.ParsingChunk, error)
 			start = i
 		}
 
-		if i == len(input)-1 {
+		isEndOfString := i == len(input)-1
+		if isEndOfString {
 			rawChunk := strings.Trim(input[start:i+1], " ")
 			chunk, err := parseChunk(rawChunk)
 			if isRightHandSide {

@@ -3,10 +3,11 @@ package printer
 import (
 	"computorv1/internal/model"
 	"fmt"
+	"math"
 	"strings"
 )
 
-func Print(input []model.ParsingChunk, errors []model.ValidationError) string {
+func Print(input []model.ParsingChunk, errors []model.ValidationError, results []float64) string {
 	reducedFormOutput := buildReducedFormOutput(input)
 
 	totalOutput := reducedFormOutput
@@ -16,13 +17,33 @@ func Print(input []model.ParsingChunk, errors []model.ValidationError) string {
 
 	if len(errors) > 0 {
 		totalOutput += buildErrorOutput(errors)
+	} else {
+		totalOutput += buildResultOutput(results)
 	}
 
 	return totalOutput
 }
 
+func buildResultOutput(results []float64) string {
+	var builder strings.Builder
+
+	for _, result := range results {
+		if math.IsInf(result, 1) {
+			builder.WriteString("Any real number is the solution.")
+		} else if math.IsInf(result, -1) {
+			builder.WriteString("No solution.")
+		} else {
+			builder.WriteString("Not implemented yet.")
+		}
+	}
+	builder.WriteString("\n")
+
+	return builder.String()
+}
+
 func buildErrorOutput(errors []model.ValidationError) string {
 	var builder strings.Builder
+
 	builder.WriteString("Error: ")
 	for _, error := range errors {
 		switch error {
