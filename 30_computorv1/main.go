@@ -9,6 +9,7 @@ import (
 	"computorv1/internal/parser"
 	"computorv1/internal/printer"
 	"computorv1/internal/reducer"
+	"computorv1/internal/validator"
 )
 
 func main() {
@@ -48,6 +49,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	output := printer.Print(reduced)
+	errors := validator.Validator(reduced)
+
+	output := printer.Print(reduced, errors)
 	fmt.Println(output)
 }

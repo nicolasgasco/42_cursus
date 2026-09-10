@@ -6,13 +6,35 @@ import (
 	"strings"
 )
 
-func Print(input []model.ParsingChunk) string {
+func Print(input []model.ParsingChunk, errors []model.ValidationError) string {
 	reducedFormOutput := buildReducedFormOutput(input)
-	polynomialDegreeOutput := buildPolynomialDegreeOutput(input)
 
-	totalOutput := reducedFormOutput + polynomialDegreeOutput
+	totalOutput := reducedFormOutput
+
+	polynomialDegreeOutput := buildPolynomialDegreeOutput(input)
+	totalOutput += polynomialDegreeOutput
+
+	if len(errors) > 0 {
+		totalOutput += buildErrorOutput(errors)
+	}
 
 	return totalOutput
+}
+
+func buildErrorOutput(errors []model.ValidationError) string {
+	var builder strings.Builder
+	builder.WriteString("Error: ")
+	for _, error := range errors {
+		switch error {
+		case model.ValidationOverDegreeMax:
+			builder.WriteString("invalid polynomial degree")
+		default:
+			builder.WriteString("unknown error")
+		}
+	}
+
+	builder.WriteString("\n")
+	return builder.String()
 }
 
 func buildReducedFormOutput(input []model.ParsingChunk) string {
