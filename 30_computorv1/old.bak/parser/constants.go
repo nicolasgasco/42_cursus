@@ -1,5 +1,0 @@
-package parser
-
-const (
-	EqualSign = "="
-)
