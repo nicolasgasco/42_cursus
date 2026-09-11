@@ -15,12 +15,33 @@ func Computer(input []model.ParsingChunk) ([]float64, error) {
 	switch degree {
 	case 0:
 		if len(input) != 1 {
-			return nil, errors.New("computing: unsupported function")
+			return nil, errors.New("computing: malformed function")
 		}
 
-		return []float64{solveZeroDegree(input[0])}, nil
+		result := solveZeroDegree(input[0])
+		return []float64{result}, nil
+	case 1:
+		if len(input) != 2 {
+			return nil, errors.New("computing: malformed function")
+		}
+
+		result := solveFirstDegree(input)
+		return []float64{result}, nil
 	default:
-		return nil, errors.New("computing: unsupported degree")
+		return nil, errors.New("computing: not implemented yet")
+	}
+}
+
+func solveFirstDegree(chunks []model.ParsingChunk) float64 {
+	a0 := chunks[0].Coefficient
+	a1 := chunks[1].Coefficient
+
+	if a0 != 0 && a1 == 0 {
+		return math.Inf(-1)
+	} else if a0 == 0 && a1 == 0 {
+		return math.Inf(1)
+	} else {
+		return -1 * a0 / a1
 	}
 }
 

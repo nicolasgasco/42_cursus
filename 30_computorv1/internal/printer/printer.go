@@ -27,13 +27,18 @@ func Print(input []model.ParsingChunk, errors []model.ValidationError, results [
 func buildResultOutput(results []float64) string {
 	var builder strings.Builder
 
-	for _, result := range results {
+	builder.WriteString("Solution: ")
+	for i, result := range results {
 		if math.IsInf(result, 1) {
-			builder.WriteString("Any real number is the solution.")
+			builder.WriteString("any real number.")
 		} else if math.IsInf(result, -1) {
-			builder.WriteString("No solution.")
+			builder.WriteString("no solution.")
 		} else {
-			builder.WriteString("Not implemented yet.")
+			if i != 0 {
+				builder.WriteString(", ")
+			}
+
+			fmt.Fprintf(&builder, "%v", result)
 		}
 	}
 	builder.WriteString("\n")
