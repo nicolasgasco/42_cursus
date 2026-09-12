@@ -70,6 +70,90 @@ func TestComputer(t *testing.T) {
 			},
 			want: []complex128{complex(math.Inf(-1), 0)},
 		},
+		{
+			name: "cubic terms cancel to a linear equation",
+			input: []model.ParsingChunk{
+				{Coefficient: 8, Exponent: 0},
+				{Coefficient: -6, Exponent: 1},
+				{Coefficient: 0, Exponent: 2},
+				{Coefficient: 0, Exponent: 3},
+			},
+			want: []complex128{complex(4.0/3.0, 0)},
+		},
+		{
+			name: "cubic terms cancel to a quadratic equation",
+			input: []model.ParsingChunk{
+				{Coefficient: 8, Exponent: 0},
+				{Coefficient: -6, Exponent: 1},
+				{Coefficient: 1, Exponent: 2},
+				{Coefficient: 0, Exponent: 3},
+			},
+			want: []complex128{
+				complex(4, 0),
+				complex(2, 0),
+			},
+		},
+		{
+			name: "all zero quadratic",
+			input: []model.ParsingChunk{
+				{Coefficient: 0, Exponent: 0},
+				{Coefficient: 0, Exponent: 1},
+				{Coefficient: 0, Exponent: 2},
+			},
+			want: []complex128{complex(math.Inf(1), 0)},
+		},
+		{
+			name: "constant with zero higher-degree terms",
+			input: []model.ParsingChunk{
+				{Coefficient: 5, Exponent: 0},
+				{Coefficient: 0, Exponent: 1},
+				{Coefficient: 0, Exponent: 2},
+			},
+			want: []complex128{complex(math.Inf(-1), 0)},
+		},
+		{
+			name: "linear with zero quadratic term",
+			input: []model.ParsingChunk{
+				{Coefficient: 5, Exponent: 0},
+				{Coefficient: 4, Exponent: 1},
+				{Coefficient: 0, Exponent: 2},
+			},
+			want: []complex128{complex(-1.25, 0)},
+		},
+		{
+			name: "quadratic with zero linear term",
+			input: []model.ParsingChunk{
+				{Coefficient: 5, Exponent: 0},
+				{Coefficient: 0, Exponent: 1},
+				{Coefficient: 1, Exponent: 2},
+			},
+			want: []complex128{
+				complex(0, 2.23606797749979),
+				complex(0, -2.23606797749979),
+			},
+		},
+		{
+			name: "all zero cubic reduced to a constant",
+			input: []model.ParsingChunk{
+				{Coefficient: 0, Exponent: 0},
+				{Coefficient: 0, Exponent: 1},
+				{Coefficient: 0, Exponent: 2},
+				{Coefficient: 0, Exponent: 3},
+			},
+			want: []complex128{complex(math.Inf(1), 0)},
+		},
+		{
+			name: "near-zero positive discriminant",
+			input: []model.ParsingChunk{
+				{Coefficient: 0.9999999999999999, Exponent: 0},
+				{Coefficient: 2, Exponent: 1},
+				{Coefficient: 1, Exponent: 2},
+			},
+			want: []complex128{
+				complex(-0.9999999894632878, 0),
+				complex(-1.0000000105367122, 0),
+			},
+		},
 	}
 
 	for _, test := range tests {

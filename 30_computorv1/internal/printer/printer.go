@@ -40,7 +40,7 @@ func buildResultOutput(results []complex128, degree int) string {
 					if len(results) > 1 {
 						builder.WriteString("Discriminant is positive and results are: ")
 					} else {
-						builder.WriteString("Disciminant is zero and result is: ")
+						builder.WriteString("Discriminant is zero and result is: ")
 					}
 				}
 			}
@@ -120,11 +120,9 @@ func buildPolynomialDegreeOutput(input []model.ParsingChunk) (string, int) {
 
 	degree := 0
 	for _, chunk := range input {
-		degree = max(degree, chunk.Exponent)
-	}
-
-	if degree == 0 {
-		return "", 0
+		if chunk.Coefficient != 0 {
+			degree = max(degree, chunk.Exponent)
+		}
 	}
 
 	fmt.Fprintf(&builder, "Polynomial degree: %v\n", degree)

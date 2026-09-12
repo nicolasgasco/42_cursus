@@ -9,26 +9,28 @@ import (
 func Computer(input []model.ParsingChunk) ([]complex128, error) {
 	degree := 0
 	for _, chunk := range input {
-		degree = max(degree, chunk.Exponent)
+		if chunk.Coefficient != 0 {
+			degree = max(degree, chunk.Exponent)
+		}
 	}
 
 	switch degree {
 	case 0:
-		if len(input) != 1 {
+		if len(input) < 1 {
 			return nil, errors.New("computing: malformed function")
 		}
 
 		result := solveZeroDegree(input[0])
 		return []complex128{complex(result, 0)}, nil
 	case 1:
-		if len(input) != 2 {
+		if len(input) < 2 {
 			return nil, errors.New("computing: malformed function")
 		}
 
 		result := solveFirstDegree(input)
 		return []complex128{complex(result, 0)}, nil
 	case 2:
-		if len(input) != 3 {
+		if len(input) < 3 {
 			return nil, errors.New("computing: malformed function")
 		}
 

@@ -130,6 +130,102 @@ func TestParser(t *testing.T) {
 				{Coefficient: -2, Exponent: 0},
 			},
 		},
+		{
+			name:  "cubic terms cancel leaving a linear equation",
+			input: "8 * X^0 - 6 * X^1 + 0 * X^2 + 3 * X^3 = 3 * X^3",
+			want: []model.ParsingChunk{
+				{Coefficient: 8, Exponent: 0},
+				{Coefficient: -6, Exponent: 1},
+				{Coefficient: 0, Exponent: 2},
+				{Coefficient: 3, Exponent: 3},
+				{Coefficient: -3, Exponent: 3},
+			},
+		},
+		{
+			name:  "cubic terms cancel leaving a quadratic equation",
+			input: "8 * X^0 - 6 * X^1 + 1 * X^2 + 3 * X^3 = 3 * X^3",
+			want: []model.ParsingChunk{
+				{Coefficient: 8, Exponent: 0},
+				{Coefficient: -6, Exponent: 1},
+				{Coefficient: 1, Exponent: 2},
+				{Coefficient: 3, Exponent: 3},
+				{Coefficient: -3, Exponent: 3},
+			},
+		},
+		{
+			name:  "zero constant and quadratic coefficients",
+			input: "0 * X^0 + 4 * X^1 + 0 * X^2 = 0",
+			want: []model.ParsingChunk{
+				{Coefficient: 0, Exponent: 0},
+				{Coefficient: 4, Exponent: 1},
+				{Coefficient: 0, Exponent: 2},
+			},
+		},
+		{
+			name:  "all zero quadratic",
+			input: "0 * X^0 + 0 * X^1 + 0 * X^2 = 0",
+			want: []model.ParsingChunk{
+				{Coefficient: 0, Exponent: 0},
+				{Coefficient: 0, Exponent: 1},
+				{Coefficient: 0, Exponent: 2},
+			},
+		},
+		{
+			name:  "all zero cubic",
+			input: "0 * X^0 + 0 * X^1 + 0 * X^2 + 0 * X^3 = 0",
+			want: []model.ParsingChunk{
+				{Coefficient: 0, Exponent: 0},
+				{Coefficient: 0, Exponent: 1},
+				{Coefficient: 0, Exponent: 2},
+				{Coefficient: 0, Exponent: 3},
+			},
+		},
+		{
+			name:  "constant with zero higher-degree terms",
+			input: "5 * X^0 + 0 * X^1 + 0 * X^2 = 0",
+			want: []model.ParsingChunk{
+				{Coefficient: 5, Exponent: 0},
+				{Coefficient: 0, Exponent: 1},
+				{Coefficient: 0, Exponent: 2},
+			},
+		},
+		{
+			name:  "linear with zero quadratic term",
+			input: "5 * X^0 + 4 * X^1 + 0 * X^2 = 0",
+			want: []model.ParsingChunk{
+				{Coefficient: 5, Exponent: 0},
+				{Coefficient: 4, Exponent: 1},
+				{Coefficient: 0, Exponent: 2},
+			},
+		},
+		{
+			name:  "quadratic with zero linear term",
+			input: "5 * X^0 + 0 * X^1 + 1 * X^2 = 0",
+			want: []model.ParsingChunk{
+				{Coefficient: 5, Exponent: 0},
+				{Coefficient: 0, Exponent: 1},
+				{Coefficient: 1, Exponent: 2},
+			},
+		},
+		{
+			name:  "terms in descending order",
+			input: "0 * X^2 + 4 * X^1 + 5 * X^0 = 0",
+			want: []model.ParsingChunk{
+				{Coefficient: 0, Exponent: 2},
+				{Coefficient: 4, Exponent: 1},
+				{Coefficient: 5, Exponent: 0},
+			},
+		},
+		{
+			name:  "unsupported cubic with nonzero coefficient",
+			input: "1 * X^0 + 2 * X^1 + 0 * X^2 + 4 * X^3 = 0",
+			want: []model.ParsingChunk{
+				{Coefficient: 1, Exponent: 0},
+				{Coefficient: 2, Exponent: 1},
+				{Coefficient: 0, Exponent: 2},
+				{Coefficient: 4, Exponent: 3},
+			},
+		},
 	}
 
 	for _, test := range tests {

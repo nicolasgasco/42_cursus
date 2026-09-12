@@ -17,7 +17,9 @@ func Validator(input []model.ParsingChunk) []model.ValidationError {
 func isDegreeValid(input []model.ParsingChunk) bool {
 	maxDegree := 0
 	for _, chunk := range input {
-		maxDegree = max(maxDegree, chunk.Exponent)
+		if chunk.Coefficient != 0 {
+			maxDegree = max(maxDegree, chunk.Exponent)
+		}
 	}
 
 	return maxDegree <= 2
