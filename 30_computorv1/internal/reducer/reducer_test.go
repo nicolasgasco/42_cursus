@@ -211,3 +211,14 @@ func TestReducer(t *testing.T) {
 		})
 	}
 }
+
+func TestReducerEmptyInput(t *testing.T) {
+	got, err := Reducer(nil)
+	if err != nil {
+		t.Fatalf("Reducer(nil) returned an unexpected error: %v", err)
+	}
+
+	if len(got) != 0 {
+		t.Fatalf("Reducer(nil) returned %+v, want an empty result", got)
+	}
+}

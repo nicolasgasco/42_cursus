@@ -226,6 +226,30 @@ func TestParser(t *testing.T) {
 				{Coefficient: 4, Exponent: 3},
 			},
 		},
+		{
+			name:  "multi-digit exponent",
+			input: "1 * X^10 = 0",
+			want: []model.ParsingChunk{
+				{Coefficient: 1, Exponent: 10},
+			},
+		},
+		{
+			name:  "multi-digit exponent with other terms",
+			input: "2 * X^123 - 4 * X^10 + 1 * X^0 = 0",
+			want: []model.ParsingChunk{
+				{Coefficient: 2, Exponent: 123},
+				{Coefficient: -4, Exponent: 10},
+				{Coefficient: 1, Exponent: 0},
+			},
+		},
+		{
+			name:  "sparse quadratic",
+			input: "5 * X^0 + 1 * X^2 = 0",
+			want: []model.ParsingChunk{
+				{Coefficient: 5, Exponent: 0},
+				{Coefficient: 1, Exponent: 2},
+			},
+		},
 	}
 
 	for _, test := range tests {
@@ -266,6 +290,22 @@ func TestParserMalformedInput(t *testing.T) {
 		{
 			name:  "missing exponent",
 			input: "5 * X^ = 0",
+		},
+		{
+			name:  "missing multiplication",
+			input: "5 X^2 = 0",
+		},
+		{
+			name:  "missing variable",
+			input: "5 * ^2 = 0",
+		},
+		{
+			name:  "invalid variable",
+			input: "5 * Y^2 = 0",
+		},
+		{
+			name:  "extra exponent operator",
+			input: "5 * X^2^3 = 0",
 		},
 	}
 

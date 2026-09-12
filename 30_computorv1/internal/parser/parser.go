@@ -80,6 +80,9 @@ func parseChunk(input string) (model.ParsingChunk, error) {
 	chunk := model.ParsingChunk{}
 
 	chunks := strings.Split(input, "*")
+	if len(chunks) != 2 {
+		return model.ParsingChunk{}, errors.New("parsing: malformed chunk")
+	}
 
 	coefficientString := chunks[0]
 	coefficient, err := strconv.ParseFloat(coefficientString, 64)
@@ -88,7 +91,17 @@ func parseChunk(input string) (model.ParsingChunk, error) {
 	}
 	chunk.Coefficient = coefficient
 
-	exponentString := chunks[1][len(chunks[1])-1:]
+	exponentChunk := chunks[1]
+	caretIndex := strings.Index(exponentChunk, "^")
+	if caretIndex == -1 || exponentChunk[:caretIndex] != "X" {
+		return model.ParsingChunk{}, errors.New("parsing: missing caret symbol")
+	}
+
+	exponentString := exponentChunk[caretIndex+1:]
+	if exponentString == "" {
+		return model.ParsingChunk{}, errors.New("parsing: missing exponent")
+	}
+
 	exponent, err := strconv.ParseInt(exponentString, 10, 32)
 	if err != nil {
 		return model.ParsingChunk{}, errors.New("parsing: invalid exponent: " + exponentString)
