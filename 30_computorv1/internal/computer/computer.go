@@ -6,7 +6,7 @@ import (
 	"math"
 )
 
-func Computer(input []model.ParsingChunk) ([]float64, error) {
+func Computer(input []model.ParsingChunk) ([]complex128, error) {
 	degree := 0
 	for _, chunk := range input {
 		degree = max(degree, chunk.Exponent)
@@ -19,16 +19,62 @@ func Computer(input []model.ParsingChunk) ([]float64, error) {
 		}
 
 		result := solveZeroDegree(input[0])
-		return []float64{result}, nil
+		return []complex128{complex(result, 0)}, nil
 	case 1:
 		if len(input) != 2 {
 			return nil, errors.New("computing: malformed function")
 		}
 
 		result := solveFirstDegree(input)
-		return []float64{result}, nil
+		return []complex128{complex(result, 0)}, nil
+	case 2:
+		if len(input) != 3 {
+			return nil, errors.New("computing: malformed function")
+		}
+
+		results := solveSecondDegree(input)
+		return results, nil
 	default:
 		return nil, errors.New("computing: not implemented yet")
+	}
+}
+
+func solveSecondDegree(chunks []model.ParsingChunk) []complex128 {
+	a0 := chunks[0].Coefficient
+	a1 := chunks[1].Coefficient
+	a2 := chunks[2].Coefficient
+
+	if a1 != 0 && a2 == 0 {
+		firstDegreeChunks := chunks[:2]
+		result := solveFirstDegree(firstDegreeChunks)
+		return []complex128{complex(result, 0)}
+	} else if a0 != 0 && a1 == 0 && a2 == 0 {
+		return []complex128{complex(math.Inf(-1), 0)}
+	} else if a0 == 0 && a1 == 0 && a2 == 0 {
+		return []complex128{complex(math.Inf(1), 0)}
+	} else {
+		a := a2
+		b := a1
+		c := a0
+
+		delta := b*b - 4*a*c
+
+		isComplexNumber := delta < 0
+		if isComplexNumber {
+			realPart := -b / (2 * a)
+			imaginaryPart := sqrt(-delta) / (2 * a)
+
+			x1 := complex(realPart, imaginaryPart)
+			x2 := complex(realPart, -imaginaryPart)
+
+			return []complex128{x1, x2}
+		}
+
+		xPos := (b*-1 + sqrt(delta)) / (2 * a)
+		xNeg := (b*-1 - sqrt(delta)) / (2 * a)
+
+		solutions := []complex128{complex(xPos, 0), complex(xNeg, 0)}
+		return solutions
 	}
 }
 

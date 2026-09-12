@@ -52,7 +52,7 @@ func main() {
 
 	errors := validator.Validator(reduced)
 
-	var results []float64
+	var results []complex128
 
 	noErrors := len(errors) == 0
 	if noErrors {

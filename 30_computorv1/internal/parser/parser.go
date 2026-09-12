@@ -47,6 +47,10 @@ func parseHalf(input string, isRightHandSide bool) ([]model.ParsingChunk, error)
 				return nil, err
 			}
 
+			if isRightHandSide {
+				chunk.Coefficient *= -1
+			}
+
 			chunks = append(chunks, chunk)
 			start = i
 		}
@@ -55,12 +59,12 @@ func parseHalf(input string, isRightHandSide bool) ([]model.ParsingChunk, error)
 		if isEndOfString {
 			rawChunk := strings.Trim(input[start:i+1], " ")
 			chunk, err := parseChunk(rawChunk)
-			if isRightHandSide {
-				chunk.Coefficient *= -1
-			}
-
 			if err != nil {
 				return nil, err
+			}
+
+			if isRightHandSide {
+				chunk.Coefficient *= -1
 			}
 
 			chunks = append(chunks, chunk)

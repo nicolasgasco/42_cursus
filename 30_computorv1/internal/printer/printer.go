@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func Print(input []model.ParsingChunk, errors []model.ValidationError, results []float64) string {
+func Print(input []model.ParsingChunk, errors []model.ValidationError, results []complex128) string {
 	reducedFormOutput := buildReducedFormOutput(input)
 
 	totalOutput := reducedFormOutput
@@ -24,15 +24,27 @@ func Print(input []model.ParsingChunk, errors []model.ValidationError, results [
 	return totalOutput
 }
 
-func buildResultOutput(results []float64) string {
+func buildResultOutput(results []complex128) string {
 	var builder strings.Builder
 
 	builder.WriteString("Solution: ")
 	for i, result := range results {
-		if math.IsInf(result, 1) {
-			builder.WriteString("any real number.")
-		} else if math.IsInf(result, -1) {
-			builder.WriteString("no solution.")
+		realPart := real(result)
+		imaginaryPart := imag(result)
+
+		isNotComplex := imaginaryPart == 0
+		if isNotComplex {
+			if math.IsInf(realPart, 1) {
+				builder.WriteString("any real number.")
+			} else if math.IsInf(realPart, -1) {
+				builder.WriteString("no solution.")
+			} else {
+				if i != 0 {
+					builder.WriteString(", ")
+				}
+
+				fmt.Fprintf(&builder, "%v", realPart)
+			}
 		} else {
 			if i != 0 {
 				builder.WriteString(", ")
