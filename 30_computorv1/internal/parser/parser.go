@@ -18,6 +18,7 @@ func Parser(input string) ([]model.ParsingChunk, error) {
 	chunks := make([]model.ParsingChunk, 0)
 
 	for i, half := range halves {
+		strings.Trim(half, "\"")
 		isRightHandSide := i != 0
 
 		if isZeroRightHandSide := isRightHandSide && strings.TrimSpace(half) == "0"; isZeroRightHandSide {
