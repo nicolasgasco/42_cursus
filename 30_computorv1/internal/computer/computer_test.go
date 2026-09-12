@@ -150,8 +150,29 @@ func TestComputer(t *testing.T) {
 				{Coefficient: 1, Exponent: 2},
 			},
 			want: []complex128{
-				complex(-0.9999999894632878, 0),
-				complex(-1.0000000105367122, 0),
+				complex(-1, 0),
+			},
+		},
+		{
+			name: "near-zero quadratic coefficient reduces to linear",
+			input: []model.ParsingChunk{
+				{Coefficient: 5, Exponent: 0},
+				{Coefficient: 4, Exponent: 1},
+				{Coefficient: 1e-13, Exponent: 2},
+			},
+			want: []complex128{
+				complex(-1.25, 0),
+			},
+		},
+		{
+			name: "near-zero discriminant from decimal coefficients",
+			input: []model.ParsingChunk{
+				{Coefficient: 1e-13, Exponent: 0},
+				{Coefficient: -1e-13, Exponent: 1},
+				{Coefficient: 1, Exponent: 2},
+			},
+			want: []complex128{
+				complex(5e-14, 0),
 			},
 		},
 	}

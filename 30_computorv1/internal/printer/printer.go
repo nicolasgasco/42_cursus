@@ -2,6 +2,7 @@ package printer
 
 import (
 	"computorv1/internal/model"
+	"computorv1/internal/util"
 	"fmt"
 	"math"
 	"strings"
@@ -120,7 +121,7 @@ func buildPolynomialDegreeOutput(input []model.ParsingChunk) (string, int) {
 
 	degree := 0
 	for _, chunk := range input {
-		if chunk.Coefficient != 0 {
+		if !util.IsZero(chunk.Coefficient) {
 			degree = max(degree, chunk.Exponent)
 		}
 	}

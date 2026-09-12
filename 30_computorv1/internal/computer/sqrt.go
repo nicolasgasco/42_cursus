@@ -1,5 +1,7 @@
 package computer
 
+import "computorv1/internal/util"
+
 func sqrt(value float64) float64 {
 	if value < 0 {
 		panic("sqrt: negative number")
@@ -16,7 +18,7 @@ func sqrt(value float64) float64 {
 	for i := 0; i < 100; i++ {
 		next := (guess + value/guess) / 2
 
-		if abs(next-guess) < 1e-12 {
+		if util.Abs(next-guess) < util.Epsilon {
 			return next
 		}
 
@@ -24,11 +26,4 @@ func sqrt(value float64) float64 {
 	}
 
 	return guess
-}
-
-func abs(value float64) float64 {
-	if value < 0 {
-		return -value
-	}
-	return value
 }

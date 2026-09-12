@@ -2,6 +2,7 @@ package validator
 
 import (
 	"computorv1/internal/model"
+	"computorv1/internal/util"
 )
 
 func Validator(input []model.ParsingChunk) []model.ValidationError {
@@ -17,7 +18,7 @@ func Validator(input []model.ParsingChunk) []model.ValidationError {
 func isDegreeValid(input []model.ParsingChunk) bool {
 	maxDegree := 0
 	for _, chunk := range input {
-		if chunk.Coefficient != 0 {
+		if !util.IsZero(chunk.Coefficient) {
 			maxDegree = max(maxDegree, chunk.Exponent)
 		}
 	}

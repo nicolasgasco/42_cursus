@@ -2,6 +2,7 @@ package computer
 
 import (
 	"computorv1/internal/model"
+	"computorv1/internal/util"
 	"errors"
 	"math"
 )
@@ -9,7 +10,7 @@ import (
 func Computer(input []model.ParsingChunk) ([]complex128, error) {
 	degree := 0
 	for _, chunk := range input {
-		if chunk.Coefficient != 0 {
+		if !util.IsZero(chunk.Coefficient) {
 			degree = max(degree, chunk.Exponent)
 		}
 	}
@@ -46,13 +47,13 @@ func solveSecondDegree(chunks []model.ParsingChunk) []complex128 {
 	a1 := chunks[1].Coefficient
 	a2 := chunks[2].Coefficient
 
-	if a1 != 0 && a2 == 0 {
+	if !util.IsZero(a1) && util.IsZero(a2) {
 		firstDegreeChunks := chunks[:2]
 		result := solveFirstDegree(firstDegreeChunks)
 		return []complex128{complex(result, 0)}
-	} else if a0 != 0 && a1 == 0 && a2 == 0 {
+	} else if !util.IsZero(a0) && util.IsZero(a1) && util.IsZero(a2) {
 		return []complex128{complex(math.Inf(-1), 0)}
-	} else if a0 == 0 && a1 == 0 && a2 == 0 {
+	} else if util.IsZero(a0) && util.IsZero(a1) && util.IsZero(a2) {
 		return []complex128{complex(math.Inf(1), 0)}
 	} else {
 		a := a2
@@ -60,6 +61,10 @@ func solveSecondDegree(chunks []model.ParsingChunk) []complex128 {
 		c := a0
 
 		delta := b*b - 4*a*c
+
+		if util.IsZero(delta) {
+			delta = 0
+		}
 
 		isComplexNumber := delta < 0
 		if isComplexNumber {
@@ -87,9 +92,9 @@ func solveFirstDegree(chunks []model.ParsingChunk) float64 {
 	a0 := chunks[0].Coefficient
 	a1 := chunks[1].Coefficient
 
-	if a0 != 0 && a1 == 0 {
+	if !util.IsZero(a0) && util.IsZero(a1) {
 		return math.Inf(-1)
-	} else if a0 == 0 && a1 == 0 {
+	} else if util.IsZero(a0) && util.IsZero(a1) {
 		return math.Inf(1)
 	} else {
 		return -1 * a0 / a1
@@ -97,7 +102,7 @@ func solveFirstDegree(chunks []model.ParsingChunk) float64 {
 }
 
 func solveZeroDegree(chunk model.ParsingChunk) float64 {
-	if chunk.Coefficient == 0 {
+	if util.IsZero(chunk.Coefficient) {
 		return math.Inf(1)
 	}
 
