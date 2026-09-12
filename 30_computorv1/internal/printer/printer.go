@@ -12,28 +12,39 @@ func Print(input []model.ParsingChunk, errors []model.ValidationError, results [
 
 	totalOutput := reducedFormOutput
 
-	polynomialDegreeOutput := buildPolynomialDegreeOutput(input)
+	polynomialDegreeOutput, degree := buildPolynomialDegreeOutput(input)
 	totalOutput += polynomialDegreeOutput
 
 	if len(errors) > 0 {
 		totalOutput += buildErrorOutput(errors)
 	} else {
-		totalOutput += buildResultOutput(results)
+		totalOutput += buildResultOutput(results, degree)
 	}
 
 	return totalOutput
 }
 
-func buildResultOutput(results []complex128) string {
+func buildResultOutput(results []complex128, degree int) string {
 	var builder strings.Builder
 
-	builder.WriteString("Solution: ")
 	for i, result := range results {
 		realPart := real(result)
 		imaginaryPart := imag(result)
 
 		isNotComplex := imaginaryPart == 0
 		if isNotComplex {
+			if i == 0 {
+				if degree != 2 {
+					builder.WriteString("Solution: ")
+				} else {
+					if len(results) > 1 {
+						builder.WriteString("Discriminant is positive and results are: ")
+					} else {
+						builder.WriteString("Disciminant is zero and result is: ")
+					}
+				}
+			}
+
 			if math.IsInf(realPart, 1) {
 				builder.WriteString("any real number.")
 			} else if math.IsInf(realPart, -1) {
@@ -46,7 +57,9 @@ func buildResultOutput(results []complex128) string {
 				fmt.Fprintf(&builder, "%v", realPart)
 			}
 		} else {
-			if i != 0 {
+			if i == 0 {
+				builder.WriteString("Discrimant is negative and results are: ")
+			} else {
 				builder.WriteString(", ")
 			}
 
@@ -102,7 +115,7 @@ func buildReducedFormOutput(input []model.ParsingChunk) string {
 	return builder.String()
 }
 
-func buildPolynomialDegreeOutput(input []model.ParsingChunk) string {
+func buildPolynomialDegreeOutput(input []model.ParsingChunk) (string, int) {
 	var builder strings.Builder
 
 	degree := 0
@@ -111,9 +124,9 @@ func buildPolynomialDegreeOutput(input []model.ParsingChunk) string {
 	}
 
 	if degree == 0 {
-		return ""
+		return "", 0
 	}
 
 	fmt.Fprintf(&builder, "Polynomial degree: %v\n", degree)
-	return builder.String()
+	return builder.String(), degree
 }

@@ -73,8 +73,11 @@ func solveSecondDegree(chunks []model.ParsingChunk) []complex128 {
 		xPos := (b*-1 + sqrt(delta)) / (2 * a)
 		xNeg := (b*-1 - sqrt(delta)) / (2 * a)
 
-		solutions := []complex128{complex(xPos, 0), complex(xNeg, 0)}
-		return solutions
+		if xPos == xNeg {
+			return []complex128{complex(xPos, 0)}
+		}
+
+		return []complex128{complex(xPos, 0), complex(xNeg, 0)}
 	}
 }
 
