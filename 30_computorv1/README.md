@@ -11,4 +11,8 @@ This exercise will allow you to approach exercises that will require these skill
 ```
 $ docker compose up -d
 $ docker exec -it -w /computorv1 30_computorv1-app-1 bash
+$ make
+$ ./computor
 ```
+
+## Example prompts
