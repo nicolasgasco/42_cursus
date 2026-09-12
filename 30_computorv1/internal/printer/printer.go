@@ -92,8 +92,14 @@ func buildErrorOutput(errors []model.ValidationError) string {
 func buildReducedFormOutput(input []model.ParsingChunk) string {
 	var builder strings.Builder
 
+	lastNotZero := len(input)
+	for lastNotZero > 1 && input[lastNotZero-1].Coefficient == 0 {
+		lastNotZero--
+	}
+	filtered := input[:lastNotZero]
+
 	fmt.Fprint(&builder, "Reduced form: ")
-	for i, chunk := range input {
+	for i, chunk := range filtered {
 		if i > 0 {
 			builder.WriteString(" ")
 		}
