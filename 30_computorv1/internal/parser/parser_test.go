@@ -33,6 +33,14 @@ func TestParser(t *testing.T) {
 			},
 		},
 		{
+			name:  "negative leading coefficient on right-hand side",
+			input: "1 * X^0 = -1 * X^1",
+			want: []model.ParsingChunk{
+				{Coefficient: 1, Exponent: 0},
+				{Coefficient: 1, Exponent: 1},
+			},
+		},
+		{
 			name:  "degree greater than two",
 			input: "8 * X^0 - 6 * X^1 + 0 * X^2 - 5.6 * X^3 = 3 * X^0",
 			want: []model.ParsingChunk{

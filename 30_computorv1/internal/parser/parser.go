@@ -41,7 +41,8 @@ func parseHalf(input string, isRightHandSide bool) ([]model.ParsingChunk, error)
 	start := 0
 	for i, char := range input {
 		mathSignFound := char == '+' || char == '-'
-		if mathSignFound {
+		isLeadingSign := strings.TrimSpace(input[start:i]) == ""
+		if mathSignFound && !isLeadingSign {
 			rawChunk := strings.Trim(input[start:i], " ")
 			chunk, err := parseChunk(rawChunk)
 			if err != nil {
